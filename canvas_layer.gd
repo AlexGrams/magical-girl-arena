@@ -1,0 +1,29 @@
+extends CanvasLayer
+
+var textures:Array
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	textures.append($Abilities/Panel/TextureRect)
+	textures.append($Abilities/Panel2/TextureRect)
+	textures.append($Abilities/Panel3/TextureRect)
+	textures.append($Abilities/Panel4/TextureRect)
+	textures.append($Abilities/Panel5/TextureRect)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _on_character_body_2d_gained_experience(experience, level) -> void:
+	$ExperienceLabel.text = "Experience: " + str(experience)
+	$LevelLabel.text = "Level: " + str(level)
+
+func _on_character_body_2d_took_damage(health) -> void:
+	$HealthLabel.text = "Health: " + str(health)
+
+
+func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
+	for i in range(0, 5):
+		if textures[i].texture == null:
+			textures[i].texture = sprite
+			return

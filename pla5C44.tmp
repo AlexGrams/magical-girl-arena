@@ -1,0 +1,240 @@
+[gd_scene load_steps=12 format=3 uid="uid://cckpww61jlguj"]
+
+[ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_6klt4"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_n5gmq"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="2_frw8m"]
+[ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="3_ns5gp"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="5_sxomx"]
+[ext_resource type="Script" path="res://powerup.gd" id="5_x52sc"]
+[ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="6_mxnju"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmys3"]
+size = Vector2(128, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nc2e"]
+size = Vector2(128, 129)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sha0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[node name="Playground" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -572.0
+offset_right = 1428.0
+offset_bottom = 2000.0
+scale = Vector2(1.48, 1)
+texture = ExtResource("1_6klt4")
+expand_mode = 1
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+z_index = 1
+position = Vector2(1116, 1072)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("2_frw8m")
+level_exp_needed = [15, 20, 25, 30, 35, 40]
+level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
+
+[node name="Line2D" type="Line2D" parent="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_n5gmq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_r7kh5")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_tmys3")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_ns5gp")]
+position = Vector2(554, 330)
+rate = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Powerup" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(284, 1288)
+script = ExtResource("5_x52sc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Powerup"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_mxnju")
+
+[node name="Area2D" type="Area2D" parent="Powerup"]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup/Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6nc2e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_sxomx")
+
+[node name="ExperienceLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "Experience: 0"
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -47.0
+offset_right = 103.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "Level: 1"
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Health: 100"
+
+[node name="Abilities" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -60.0
+offset_right = 165.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Abilities/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Abilities/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Abilities/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Abilities/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Panel5" type="Panel" parent="CanvasLayer/Abilities"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Abilities/Panel5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[connection signal="gained_experience" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_gained_experience"]
+[connection signal="took_damage" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_took_damage"]
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]
+[connection signal="picked_up_powerup" from="Powerup" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
+[connection signal="area_entered" from="Powerup/Area2D" to="Powerup" method="_on_area_2d_area_entered"]
