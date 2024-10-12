@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsmrsq1fwptsw"]
+[gd_scene load_steps=5 format=3 uid="uid://dsmrsq1fwptsw"]
 
 [ext_resource type="Script" path="res://bullet.gd" id="1_u38u2"]
 [ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_hd53n"]
+[ext_resource type="Script" path="res://BulletHitbox.gd" id="3_404gu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
@@ -15,6 +16,8 @@ texture = ExtResource("2_hd53n")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
+script = ExtResource("3_404gu")
+damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")

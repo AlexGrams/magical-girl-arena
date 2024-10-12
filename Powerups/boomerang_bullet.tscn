@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bibemdm2ideu"]
+[gd_scene load_steps=5 format=3 uid="uid://bibemdm2ideu"]
 
 [ext_resource type="Script" path="res://Powerups/boomerang_bullet.gd" id="1_j62nq"]
 [ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="2_awwga"]
+[ext_resource type="Script" path="res://BulletHitbox.gd" id="3_agwup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
@@ -17,6 +18,8 @@ texture = ExtResource("2_awwga")
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 monitoring = false
+script = ExtResource("3_agwup")
+damage = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
