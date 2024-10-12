@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://eo3cwv53lvfa"]
+
+[ext_resource type="Script" path="res://Powerups/orbit_bullet.gd" id="1_vq7vf"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_k30hb"]
+[ext_resource type="Script" path="res://BulletHitbox.gd" id="3_sgpxh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(38, 38)
+
+[node name="OrbitBullet" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_vq7vf")
+
+[node name="BulletOffset" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="BulletOffset"]
+scale = Vector2(0.087, 0.087)
+texture = ExtResource("2_k30hb")
+
+[node name="Area2D" type="Area2D" parent="BulletOffset"]
+collision_mask = 2
+script = ExtResource("3_sgpxh")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/Area2D"]
+shape = SubResource("RectangleShape2D_tg1bm")
