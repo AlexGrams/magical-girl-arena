@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=19 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_6klt4"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_n5gmq"]
@@ -9,11 +9,74 @@
 [ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="6_mxnju"]
 [ext_resource type="Script" path="res://Powerups/boomerang_powerup.gd" id="7_h63ox"]
 [ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="8_31fch"]
+[ext_resource type="Script" path="res://Powerups/orbit_powerup.gd" id="9_b0o7r"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="9_xykps"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmys3"]
 size = Vector2(128, 127)
+
+[sub_resource type="Animation" id="Animation_4u4gq"]
+resource_name = "took_damage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.243137, 0.505882, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_et2e4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3geqs"]
+_data = {
+"RESET": SubResource("Animation_et2e4"),
+"took_damage": SubResource("Animation_4u4gq")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nc2e"]
 size = Vector2(128, 129)
@@ -63,6 +126,11 @@ collision_mask = 6
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_tmys3")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_3geqs")
+}
+
 [node name="EnemySpawner" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(554, 330)
 rate = 1.0
@@ -71,37 +139,70 @@ rate = 1.0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Powerup" type="Sprite2D" parent="."]
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_ns5gp")]
+position = Vector2(1856, 359)
+rate = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("3_ns5gp")]
+position = Vector2(1707, 1572)
+rate = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RevolvingPowerup" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 0, 1)
 position = Vector2(284, 1288)
 script = ExtResource("5_x52sc")
 
-[node name="Sprite2D" type="Sprite2D" parent="Powerup"]
+[node name="Sprite2D" type="Sprite2D" parent="RevolvingPowerup"]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_mxnju")
 
-[node name="Area2D" type="Area2D" parent="Powerup"]
+[node name="Area2D" type="Area2D" parent="RevolvingPowerup"]
 collision_layer = 16
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RevolvingPowerup/Area2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_6nc2e")
 
-[node name="Powerup2" type="Sprite2D" parent="."]
+[node name="BoomerangPowerup" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 0, 1)
 position = Vector2(286, 1040)
 script = ExtResource("7_h63ox")
 
-[node name="Sprite2D" type="Sprite2D" parent="Powerup2"]
-scale = Vector2(0.3, 0.3)
+[node name="Sprite2D" type="Sprite2D" parent="BoomerangPowerup"]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_31fch")
 
-[node name="Area2D" type="Area2D" parent="Powerup2"]
+[node name="Area2D" type="Area2D" parent="BoomerangPowerup"]
 collision_layer = 16
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerup2/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoomerangPowerup/Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_6nc2e")
+
+[node name="OrbitPowerup" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+position = Vector2(462, 1162)
+script = ExtResource("9_b0o7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="OrbitPowerup"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_xykps")
+
+[node name="Area2D" type="Area2D" parent="OrbitPowerup"]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OrbitPowerup/Area2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_6nc2e")
 
@@ -255,7 +356,9 @@ expand_mode = 1
 [connection signal="gained_experience" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_gained_experience"]
 [connection signal="took_damage" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_took_damage"]
 [connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]
-[connection signal="picked_up_powerup" from="Powerup" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
-[connection signal="area_entered" from="Powerup/Area2D" to="Powerup" method="_on_area_2d_area_entered"]
-[connection signal="picked_up_powerup" from="Powerup2" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
-[connection signal="area_entered" from="Powerup2/Area2D" to="Powerup2" method="_on_area_2d_area_entered"]
+[connection signal="picked_up_powerup" from="RevolvingPowerup" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
+[connection signal="area_entered" from="RevolvingPowerup/Area2D" to="RevolvingPowerup" method="_on_area_2d_area_entered"]
+[connection signal="picked_up_powerup" from="BoomerangPowerup" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
+[connection signal="area_entered" from="BoomerangPowerup/Area2D" to="BoomerangPowerup" method="_on_area_2d_area_entered"]
+[connection signal="picked_up_powerup" from="OrbitPowerup" to="CanvasLayer" method="_on_powerup_picked_up_powerup"]
+[connection signal="area_entered" from="OrbitPowerup/Area2D" to="OrbitPowerup" method="_on_area_2d_area_entered"]

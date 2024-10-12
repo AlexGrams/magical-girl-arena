@@ -38,7 +38,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(2): #If Enemy
 		health -= 10
 		took_damage.emit(health)
-		if health < 0:
+		$AnimationPlayer.play("took_damage")
+		if health <= 0:
 			get_tree().paused = true
 			$".".hide()
 	elif area.get_collision_layer_value(3): #If EXP Orb
