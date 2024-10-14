@@ -48,5 +48,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			experience = 0
 			level += 1
 			shoot_interval = level_shoot_intervals[level]
+			for child in get_children():
+				if child is Powerup:
+					child.level_up()
 		gained_experience.emit(experience, level)
 		area.get_parent().queue_free()

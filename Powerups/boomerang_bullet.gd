@@ -40,3 +40,6 @@ func _process(delta: float) -> void:
 				is_returning = true
 		else:
 			is_returning = true
+
+func set_damage(damage:float):
+	$Area2D.damage = damage

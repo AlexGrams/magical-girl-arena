@@ -10,3 +10,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	rotate(speed * delta)
+
+func set_damage(damage:float):
+	$BulletOffset/Area2D.damage = damage

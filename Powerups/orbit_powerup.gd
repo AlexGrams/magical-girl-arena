@@ -1,17 +1,14 @@
-extends Sprite2D
+extends Powerup
 
 var bullet_scene = preload("res://Powerups/orbit_bullet.tscn")
 var sprite = preload("res://Coconut.png")
 var is_on:bool = false
+var bullet
 
 signal picked_up_powerup(sprite)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	damage_levels = [20, 25, 25, 25, 100]
 
 func hide_sprite():
 	$Sprite2D.hide()
@@ -27,6 +24,10 @@ func reparent_and_add_bullet(area):
 	position = Vector2(0, 0)
 	hide_sprite()
 	
-	var bullet = bullet_scene.instantiate()
+	bullet = bullet_scene.instantiate()
 	bullet.radius = 74
 	add_child(bullet)
+
+func level_up():
+	current_level += 1
+	bullet.set_damage(damage_levels[min(4, current_level)])
