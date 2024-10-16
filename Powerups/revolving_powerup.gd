@@ -7,6 +7,7 @@ var is_on:bool = false
 var shoot_timer = 0
 var direction = Vector2.RIGHT
 var bullet_damage
+var powerup_name = "Revolving"
 
 signal picked_up_powerup(sprite)
 # Called when the node enters the scene tree for the first time.
@@ -33,13 +34,10 @@ func _process(delta: float) -> void:
 func hide_sprite():
 	hide()
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if not is_on:
-		reparent.call_deferred(area.get_parent(), false)
-		position = Vector2(0, 0)
-		hide_sprite()
-		is_on = true
-		picked_up_powerup.emit(sprite)
+func activate_powerup():
+	position = Vector2(0, 0)
+	is_on = true
+	picked_up_powerup.emit(sprite)
 
 func level_up():
 	current_level += 1

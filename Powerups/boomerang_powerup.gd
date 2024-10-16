@@ -4,6 +4,7 @@ var bullet_scene = preload("res://Powerups/boomerang_bullet.tscn")
 var sprite = preload("res://Peach.png")
 var is_on:bool = false
 var bullet
+var powerup_name = "Boomerang"
 
 signal picked_up_powerup(sprite)
 
@@ -12,12 +13,18 @@ func _ready():
 	
 func hide_sprite():
 	$Sprite2D.hide()
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if not is_on:
-		is_on = true
-		reparent_and_add_bullet.call_deferred(area)
-		picked_up_powerup.emit(sprite)
+	
+func activate_powerup():
+	position = Vector2(0, 0)
+	
+	bullet = bullet_scene.instantiate()
+	bullet.set_damage(damage_levels[min(4, current_level)])
+	bullet.direction = Vector2.UP
+	bullet.player = $"."
+	bullet.global_position = global_position
+	get_tree().root.add_child(bullet)
+	
+	picked_up_powerup.emit(sprite)
 
 func reparent_and_add_bullet(area):
 	reparent(area.get_parent(), false)

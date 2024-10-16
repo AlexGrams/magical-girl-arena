@@ -13,6 +13,32 @@ var level = 1
 signal took_damage(health)
 signal gained_experience(experience, level)
 
+func _ready():
+	# Should redo this in the future prob?
+	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+
+func _on_upgrade_chosen(powerup_name):
+	var powerup_found = false
+	for child in get_children():
+		if child is Powerup and child.powerup_name == powerup_name:
+			child.level_up()
+			powerup_found = true
+			break
+	if !powerup_found:
+		var powerup_to_add
+		match powerup_name:
+			"Boomerang":
+				powerup_to_add = load("res://Powerups/boomerang_powerup.tscn").instantiate()
+			"Revolving":
+				powerup_to_add = load("res://Powerups/revolving_powerup.tscn").instantiate()
+			"Orbit":
+				powerup_to_add = load("res://Powerups/orbit_powerup.tscn").instantiate()
+		add_child(powerup_to_add)
+		powerup_to_add.activate_powerup()
+		
+	$"../CanvasLayer/UpgradeScreenPanel".hide()
+	get_tree().paused = false
+
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_direction * speed
@@ -48,8 +74,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			experience = 0
 			level += 1
 			shoot_interval = level_shoot_intervals[level]
-			for child in get_children():
-				if child is Powerup:
-					child.level_up()
+			
+			# Show upgrade screen
+			get_tree().paused = true
+			$"../CanvasLayer/UpgradeScreenPanel".show()
 		gained_experience.emit(experience, level)
 		area.get_parent().queue_free()
