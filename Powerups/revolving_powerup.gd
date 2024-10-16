@@ -31,11 +31,7 @@ func _process(delta: float) -> void:
 			get_tree().root.add_child(bullet)
 			shoot_timer = 0
 
-func hide_sprite():
-	hide()
-
 func activate_powerup():
-	position = Vector2(0, 0)
 	is_on = true
 	picked_up_powerup.emit(sprite)
 

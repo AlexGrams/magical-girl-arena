@@ -1,26 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyq0c1f3w0cap"]
+[gd_scene load_steps=2 format=3 uid="uid://dyq0c1f3w0cap"]
 
 [ext_resource type="Script" path="res://Powerups/revolving_powerup.gd" id="1_w1l0c"]
-[ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="2_w8dv4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nc2e"]
-size = Vector2(128, 129)
 
 [node name="RevolvingPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
-position = Vector2(284, 1288)
 script = ExtResource("1_w1l0c")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_w8dv4")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_6nc2e")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,26 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://djo8kggrhm1l0"]
+[gd_scene load_steps=2 format=3 uid="uid://djo8kggrhm1l0"]
 
 [ext_resource type="Script" path="res://Powerups/boomerang_powerup.gd" id="1_wufpq"]
-[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="2_pbx2i"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nc2e"]
-size = Vector2(128, 129)
 
 [node name="BoomerangPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
-position = Vector2(286, 1040)
 script = ExtResource("1_wufpq")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_pbx2i")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_6nc2e")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
