@@ -20,8 +20,9 @@ func _on_character_body_2d_gained_experience(experience: float, level: int) -> v
 	$ExperienceBar.value = experience
 	$LevelLabel.text = "Level: " + str(level)
 
-func _on_character_body_2d_took_damage(health) -> void:
-	$HealthLabel.text = "Health: " + str(health)
+func _on_character_body_2d_took_damage(health:int, health_max:int) -> void:
+	$HealthBar/HealthLabel.text = str(health) + "/" + str(health_max)
+	$HealthBar.value = float(health) / health_max
 
 
 func _on_powerup_picked_up_powerup(sprite: Variant) -> void:

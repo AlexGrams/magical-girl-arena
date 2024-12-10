@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=14 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_6klt4"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_n5gmq"]
@@ -72,6 +72,9 @@ _data = {
 "RESET": SubResource("Animation_et2e4"),
 "took_damage": SubResource("Animation_4u4gq")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sha0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -173,18 +176,34 @@ offset_bottom = -29.0
 grow_vertical = 0
 text = "Level: 1"
 
-[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+self_modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -52.0
-offset_bottom = -29.0
+offset_left = -288.0
+offset_top = -94.0
+offset_bottom = -28.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Health: 100"
+theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="CanvasLayer/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Abilities" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7

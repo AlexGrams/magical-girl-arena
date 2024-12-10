@@ -7,15 +7,18 @@ extends CharacterBody2D
 var shoot_timer = 0
 var shoot_interval = 1
 var experience = 0
-var health = 100
+var health_max = 100
+var health = health_max
 var level = 1
 
-signal took_damage(health)
+signal took_damage(health:int, health_max:int)
 signal gained_experience(experience: float, level: int)
 
 func _ready():
 	# Should redo this in the future prob?
 	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+	
+	took_damage.emit(health, health_max)
 
 func _on_upgrade_chosen(powerup_name):
 	var powerup_found = false
@@ -63,7 +66,7 @@ func _physics_process(delta):
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(2): #If Enemy
 		health -= 10
-		took_damage.emit(health)
+		took_damage.emit(health, health_max)
 		$AnimationPlayer.play("took_damage")
 		if health <= 0:
 			get_tree().paused = true
