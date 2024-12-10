@@ -9,13 +9,15 @@ func _ready() -> void:
 	textures.append($Abilities/Panel3/TextureRect)
 	textures.append($Abilities/Panel4/TextureRect)
 	textures.append($Abilities/Panel5/TextureRect)
+	
+	$ExperienceBar.value = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func _on_character_body_2d_gained_experience(experience, level) -> void:
-	$ExperienceLabel.text = "Experience: " + str(experience)
+func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
+	$ExperienceBar.value = experience
 	$LevelLabel.text = "Level: " + str(level)
 
 func _on_character_body_2d_took_damage(health) -> void:

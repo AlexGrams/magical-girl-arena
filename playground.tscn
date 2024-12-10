@@ -97,7 +97,7 @@ position = Vector2(1116, 1072)
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("2_frw8m")
-level_exp_needed = [1, 1, 1, 1, 1, 1]
+level_exp_needed = [10, 10, 10, 10, 10, 10]
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
 
 [node name="Line2D" type="Line2D" parent="CharacterBody2D"]
@@ -150,22 +150,26 @@ offset_bottom = 40.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("5_sxomx")
 
-[node name="ExperienceLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 2
+[node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(0.00402517, 0.17334, 0.76886, 1)
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
+offset_top = -27.0
+grow_horizontal = 2
 grow_vertical = 0
-text = "Experience: 0"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+max_value = 1.0
+value = 0.5
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -47.0
+offset_top = -52.0
 offset_right = 103.0
-offset_bottom = -24.0
+offset_bottom = -29.0
 grow_vertical = 0
 text = "Level: 1"
 
@@ -175,8 +179,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
+offset_left = -88.0
+offset_top = -52.0
+offset_bottom = -29.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Health: 100"
@@ -188,8 +193,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -165.0
-offset_top = -60.0
+offset_top = -88.0
 offset_right = 165.0
+offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1

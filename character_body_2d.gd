@@ -11,7 +11,7 @@ var health = 100
 var level = 1
 
 signal took_damage(health)
-signal gained_experience(experience, level)
+signal gained_experience(experience: float, level: int)
 
 func _ready():
 	# Should redo this in the future prob?
@@ -70,13 +70,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			$".".hide()
 	elif area.get_collision_layer_value(3): #If EXP Orb
 		experience += 1
-		if level < 6 and experience >= level_exp_needed[level-1]:
-			experience = 0
+		if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
+			experience -= level_exp_needed[level-1]
 			level += 1
 			shoot_interval = level_shoot_intervals[level]
 			
 			# Show upgrade screen
 			get_tree().paused = true
 			$"../CanvasLayer/UpgradeScreenPanel".show()
-		gained_experience.emit(experience, level)
+		gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
 		area.get_parent().queue_free()
