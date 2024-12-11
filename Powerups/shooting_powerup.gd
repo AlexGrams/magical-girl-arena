@@ -1,0 +1,38 @@
+extends Powerup
+
+@export var shoot_interval = 1.0
+var bullet_scene = preload("res://bullet.tscn")
+var is_on:bool = false
+var shoot_timer = 0
+var direction = Vector2.RIGHT
+var bullet_damage = 100.0
+var powerup_name = "Shooting"
+
+signal picked_up_powerup(sprite)
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	shoot_timer += delta
+	if shoot_timer > shoot_interval:
+		var bullet = bullet_scene.instantiate()
+		var direction = get_global_mouse_position() - self.global_position
+		var direction_normal = direction.normalized()
+		bullet.set_damage(bullet_damage)
+		bullet.direction = direction_normal
+		bullet.position = self.global_position + (direction_normal * 100)
+		get_tree().root.add_child(bullet)
+		shoot_timer = 0
+
+func activate_powerup():
+	is_on = true
+	picked_up_powerup.emit()
+
+func level_up():
+	pass
+	#current_level += 1
+	#bullet_damage = damage_levels[min(4, current_level)]

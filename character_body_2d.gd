@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var level_shoot_intervals:Array
 @export var speed = 400
 @onready var bullet_scene = preload("res://bullet.tscn")
+var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 var shoot_timer = 0
 var shoot_interval = 1
 var experience = 0
@@ -19,6 +20,11 @@ func _ready():
 	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
 	
 	took_damage.emit(health, health_max)
+	
+	# Give the player the basic shoot powerup
+	var shoot_powerup = load(shoot_powerup_path).instantiate()
+	add_child(shoot_powerup)
+	shoot_powerup.activate_powerup()
 
 func _on_upgrade_chosen(powerup_name):
 	var powerup_found = false
@@ -51,13 +57,13 @@ func _process(delta: float) -> void:
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
 	
-	shoot_timer += delta
-	if shoot_timer > shoot_interval:
-		var bullet = bullet_scene.instantiate()
-		bullet.direction = direction_normal
-		bullet.position = position + (direction_normal * 100)
-		get_tree().root.add_child(bullet)
-		shoot_timer = 0
+	#shoot_timer += delta
+	#if shoot_timer > shoot_interval:
+		#var bullet = bullet_scene.instantiate()
+		#bullet.direction = direction_normal
+		#bullet.position = position + (direction_normal * 100)
+		#get_tree().root.add_child(bullet)
+		#shoot_timer = 0
 
 func _physics_process(delta):
 	get_input()

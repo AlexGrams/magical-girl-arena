@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bowbgv1jw2mul"]
+
+[ext_resource type="Script" path="res://Powerups/shooting_powerup.gd" id="1_a0uoa"]
+
+[node name="ShootingPowerup" type="Node2D"]
+script = ExtResource("1_a0uoa")
