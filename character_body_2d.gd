@@ -56,14 +56,6 @@ func _process(delta: float) -> void:
 	var direction = get_global_mouse_position() - $Sprite2D.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
-	
-	#shoot_timer += delta
-	#if shoot_timer > shoot_interval:
-		#var bullet = bullet_scene.instantiate()
-		#bullet.direction = direction_normal
-		#bullet.position = position + (direction_normal * 100)
-		#get_tree().root.add_child(bullet)
-		#shoot_timer = 0
 
 func _physics_process(delta):
 	get_input()
@@ -89,3 +81,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			$"../CanvasLayer/UpgradeScreenPanel".show()
 		gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
 		area.get_parent().queue_free()
+
+# TODO: Disabled. Code solution if physics solution doesn't work out.
+# Causes EXP orbs to gravitate towards the player when they enter this area.
+#func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
+	#if area.get_collision_layer_value(3):
+		#area.get_parent().set_player(self)
