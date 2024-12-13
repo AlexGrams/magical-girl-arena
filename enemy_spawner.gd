@@ -1,13 +1,13 @@
 extends Node2D
 
-@export var rate:float
-@onready var enemy_scene = preload("res://enemy.tscn")
+@export var rate: float
+@export var enemy_scene: PackedScene = preload("res://enemy.tscn")
 var spawn_timer:float = 0
 var is_on:bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	load(enemy_scene.to_string())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
