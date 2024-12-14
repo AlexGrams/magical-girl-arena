@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx43gaa0rr7q1"]
+[gd_scene load_steps=8 format=3 uid="uid://dx43gaa0rr7q1"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_ranged.gd" id="1_yjg42"]
+[ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://Projectiles/bullet_enemy_ranged.tscn" id="2_4ww20"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_e2a22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_macuq"]
@@ -69,7 +70,8 @@ _data = {
 
 [node name="Enemy_Ranged" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_yjg42")
-max_range = 500.0
+max_range = 400.0
+bullet_scene = ExtResource("2_4ww20")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)

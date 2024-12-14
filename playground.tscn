@@ -118,7 +118,7 @@ shape = SubResource("RectangleShape2D_r7kh5")
 
 [node name="Area2D" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
 position = Vector2(0, 0.5)
@@ -130,7 +130,7 @@ libraries = {
 }
 
 [node name="ExpPickupArea2D" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 4
 gravity_space_override = 3
 gravity_point = true
@@ -146,7 +146,7 @@ shape = SubResource("CircleShape2D_75ctg")
 [node name="EnemySpawner" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(554, 330)
 rate = 1.0
-enemy_scene = null
+enemy_scene = ExtResource("5_wwwfp")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
@@ -155,7 +155,7 @@ offset_bottom = 40.0
 [node name="EnemySpawner2" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(1856, 359)
 rate = 1.0
-enemy_scene = null
+enemy_scene = ExtResource("5_wwwfp")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
 offset_right = 40.0
@@ -164,7 +164,7 @@ offset_bottom = 40.0
 [node name="EnemySpawner3" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(1707, 1572)
 rate = 1.0
-enemy_scene = null
+enemy_scene = ExtResource("5_wwwfp")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
 offset_right = 40.0
@@ -342,9 +342,6 @@ expand_mode = 1
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("12_plm8v")]
 process_mode = 2
 visible = false
-
-[node name="Enemy_Ranged" parent="." instance=ExtResource("5_wwwfp")]
-position = Vector2(627, 1358)
 
 [connection signal="gained_experience" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_gained_experience"]
 [connection signal="took_damage" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_took_damage"]

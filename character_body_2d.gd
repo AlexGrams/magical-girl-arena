@@ -60,15 +60,21 @@ func _process(delta: float) -> void:
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	
+# Deal damage to the player
+func take_damage(damage: float) -> void:
+	health -= damage
+	took_damage.emit(health, health_max)
+	$AnimationPlayer.play("took_damage")
+	if health <= 0:
+		get_tree().paused = true
+		$".".hide()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(2): #If Enemy
-		health -= 10
-		took_damage.emit(health, health_max)
-		$AnimationPlayer.play("took_damage")
-		if health <= 0:
-			get_tree().paused = true
-			$".".hide()
+		take_damage(10)
+	elif area.get_collision_layer_value(6): #If Enemy Bullet:
+		take_damage(area.damage)
 	elif area.get_collision_layer_value(3): #If EXP Orb
 		experience += 1
 		if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:

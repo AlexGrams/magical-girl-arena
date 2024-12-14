@@ -4,7 +4,6 @@ extends Powerup
 var bullet_scene = preload("res://bullet.tscn")
 var is_on:bool = false
 var shoot_timer = 0
-var direction = Vector2.RIGHT
 var bullet_damage = 100.0
 var powerup_name = "Shooting"
 
