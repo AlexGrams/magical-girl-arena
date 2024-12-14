@@ -1,9 +1,10 @@
 extends Node2D
 
+# Time in seconds between enemy spawns
 @export var rate: float
 @export var enemy_scene: PackedScene = preload("res://enemy.tscn")
-var spawn_timer:float = 0
-var is_on:bool = true
+var spawn_timer: float = 0
+var is_on: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,3 +23,18 @@ func _process(delta: float) -> void:
 		enemy.global_position = spawn_pos
 		get_tree().root.add_child(enemy)
 		spawn_timer = 0
+
+func set_enemy_type(new_enemy: PackedScene) -> void:
+	enemy_scene = new_enemy
+
+# Set time in seconds between enemy spawns
+func set_spawn_rate(new_rate: float) -> void:
+	rate = new_rate
+	
+# Enable or disable this spawner
+func set_on(new_is_on: bool) -> void:
+	is_on = new_is_on
+	
+# Toggle this spawner
+func toggle_on() -> void:
+	is_on = !is_on
