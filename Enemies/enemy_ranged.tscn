@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfy5r3rayhatg"]
+[gd_scene load_steps=7 format=3 uid="uid://dx43gaa0rr7q1"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_mwxyx"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_bo1ru"]
+[ext_resource type="Script" path="res://Enemies/enemy_ranged.gd" id="1_yjg42"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_e2a22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_macuq"]
 size = Vector2(128, 128)
@@ -67,12 +67,13 @@ _data = {
 "take_damage": SubResource("Animation_xsep2")
 }
 
-[node name="Enemy" type="Node2D" groups=["enemy"]]
-script = ExtResource("1_mwxyx")
+[node name="Enemy_Ranged" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_yjg42")
+max_range = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_bo1ru")
+texture = ExtResource("2_e2a22")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

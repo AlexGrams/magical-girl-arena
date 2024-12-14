@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=16 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_6klt4"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_n5gmq"]
 [ext_resource type="Script" path="res://character_body_2d.gd" id="2_frw8m"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="3_ns5gp"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="5_sxomx"]
+[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_wwwfp"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="12_plm8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
@@ -145,6 +146,7 @@ shape = SubResource("CircleShape2D_75ctg")
 [node name="EnemySpawner" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(554, 330)
 rate = 1.0
+enemy_scene = null
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
@@ -153,6 +155,7 @@ offset_bottom = 40.0
 [node name="EnemySpawner2" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(1856, 359)
 rate = 1.0
+enemy_scene = null
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
 offset_right = 40.0
@@ -161,6 +164,7 @@ offset_bottom = 40.0
 [node name="EnemySpawner3" parent="." instance=ExtResource("3_ns5gp")]
 position = Vector2(1707, 1572)
 rate = 1.0
+enemy_scene = null
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
 offset_right = 40.0
@@ -338,6 +342,9 @@ expand_mode = 1
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("12_plm8v")]
 process_mode = 2
 visible = false
+
+[node name="Enemy_Ranged" parent="." instance=ExtResource("5_wwwfp")]
+position = Vector2(627, 1358)
 
 [connection signal="gained_experience" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_gained_experience"]
 [connection signal="took_damage" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_took_damage"]

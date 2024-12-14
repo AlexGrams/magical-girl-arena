@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Enemy
+
 var player:Node2D
 var speed:float = 100
 var max_health = 100
