@@ -1,12 +1,12 @@
 [gd_scene load_steps=16 format=3 uid="uid://cckpww61jlguj"]
 
-[ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_6klt4"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_n5gmq"]
-[ext_resource type="Script" path="res://character_body_2d.gd" id="2_frw8m"]
-[ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="3_ns5gp"]
-[ext_resource type="Script" path="res://canvas_layer.gd" id="5_sxomx"]
-[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_wwwfp"]
-[ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="12_plm8v"]
+[ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="2_5pdix"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="3_ca75j"]
+[ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="4_4ivfi"]
+[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="6_b2lbv"]
+[ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
 
@@ -94,7 +94,7 @@ offset_left = -572.0
 offset_right = 1428.0
 offset_bottom = 2000.0
 scale = Vector2(1.48, 1)
-texture = ExtResource("1_6klt4")
+texture = ExtResource("1_v8j4q")
 expand_mode = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -102,14 +102,14 @@ z_index = 1
 position = Vector2(1116, 1072)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("2_frw8m")
+script = ExtResource("2_5pdix")
 level_exp_needed = [10, 10, 10, 10, 10, 10]
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
 
 [node name="Line2D" type="Line2D" parent="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_n5gmq")
+texture = ExtResource("3_ca75j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_r7kh5")
@@ -143,35 +143,35 @@ gravity = 100000.0
 scale = Vector2(50, 50)
 shape = SubResource("CircleShape2D_75ctg")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("3_ns5gp")]
+[node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
 rate = 1.0
-enemy_scene = ExtResource("5_wwwfp")
+enemy_scene = ExtResource("5_6byrv")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="EnemySpawner2" parent="." instance=ExtResource("3_ns5gp")]
+[node name="EnemySpawner2" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1856, 359)
 rate = 1.0
-enemy_scene = ExtResource("5_wwwfp")
+enemy_scene = ExtResource("5_6byrv")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="EnemySpawner3" parent="." instance=ExtResource("3_ns5gp")]
+[node name="EnemySpawner3" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1707, 1572)
 rate = 1.0
-enemy_scene = ExtResource("5_wwwfp")
+enemy_scene = ExtResource("5_6byrv")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("5_sxomx")
+script = ExtResource("6_b2lbv")
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(0.00402517, 0.17334, 0.76886, 1)
@@ -339,7 +339,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("12_plm8v")]
+[node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
 

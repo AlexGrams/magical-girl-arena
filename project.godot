@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Magical Girl Arena"
-run/main_scene="res://playground.tscn"
+run/main_scene="res://Levels/playground.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
