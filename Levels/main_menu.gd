@@ -13,3 +13,8 @@ func _on_start_button_button_down() -> void:
 
 func _on_quit_button_button_down() -> void:
 	get_tree().quit()
+
+
+func _on_lobby_button_button_down() -> void:
+	$Main.visible = false
+	$Lobby.visible = true

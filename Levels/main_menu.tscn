@@ -8,9 +8,9 @@
 script = ExtResource("1_f3ir0")
 start_game_scene = ExtResource("2_603jh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="BackgroundTexture" type="TextureRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,7 +19,9 @@ grow_vertical = 2
 texture = ExtResource("1_hldg4")
 expand_mode = 3
 
-[node name="StartButton" type="Button" parent="CanvasLayer"]
+[node name="Main" type="CanvasLayer" parent="."]
+
+[node name="LobbyButton" type="Button" parent="Main"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -35,7 +37,7 @@ pivot_offset = Vector2(100, 96)
 theme_override_font_sizes/font_size = 48
 text = "Start"
 
-[node name="QuitButton" type="Button" parent="CanvasLayer"]
+[node name="QuitButton" type="Button" parent="Main"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -51,7 +53,7 @@ pivot_offset = Vector2(100, 96)
 theme_override_font_sizes/font_size = 48
 text = "Quit"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Main"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 112.0
@@ -61,5 +63,35 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Magical Girl Arena[/center]"
 
-[connection signal="button_down" from="CanvasLayer/StartButton" to="." method="_on_start_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_button_down"]
+[node name="Lobby" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 112.0
+offset_bottom = 187.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Lobby[/center]"
+
+[node name="StartButton" type="Button" parent="Lobby"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -201.0
+offset_right = 102.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 96)
+theme_override_font_sizes/font_size = 48
+text = "Start"
+
+[connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="Lobby/StartButton" to="." method="_on_start_button_button_down"]
