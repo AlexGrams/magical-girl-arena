@@ -36,7 +36,9 @@ func _on_join_button_button_down() -> void:
 # Called when this player is hosting and a client connects to it.
 func _on_peer_connected(id: int) -> void:
 	player_ids[id] = null
-	GameState.start_game()
+	
+	if multiplayer.get_unique_id() == 1:
+		GameState.start_game()
 
 
 # Called when this player is hosting and a client disconnects from it.
