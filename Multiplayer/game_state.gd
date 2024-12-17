@@ -3,7 +3,8 @@ extends Node
 # Manager class for the overall state of the game scene. 
 # Controls spawning players and related functionality. 
 
-var start_game_scene := "res://Levels/playground.tscn"
+const start_game_scene := "res://Levels/playground.tscn"
+const player_scene := "res://Player/player_character_body.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +20,11 @@ func _process(_delta: float) -> void:
 func start_game():
 	assert(multiplayer.is_server())
 	load_game.rpc()
+	
+	var player_resource := load(player_scene)
+	
+	for peer_id in multiplayer.get_peers():
+		print(peer_id)
 
 
 # Load the main game scene.

@@ -1,80 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=8 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
-[ext_resource type="Script" path="res://character_body_2d.gd" id="2_5pdix"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="3_ca75j"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmys3"]
-size = Vector2(128, 127)
-
-[sub_resource type="Animation" id="Animation_et2e4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4u4gq"]
-resource_name = "took_damage"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.243137, 0.505882, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3geqs"]
-_data = {
-"RESET": SubResource("Animation_et2e4"),
-"took_damage": SubResource("Animation_4u4gq")
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_75ctg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(1, 1, 1, 1)
@@ -96,52 +26,6 @@ offset_bottom = 2000.0
 scale = Vector2(1.48, 1)
 texture = ExtResource("1_v8j4q")
 expand_mode = 1
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-z_index = 1
-position = Vector2(1116, 1072)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("2_5pdix")
-level_exp_needed = [10, 10, 10, 10, 10, 10]
-level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
-
-[node name="Line2D" type="Line2D" parent="CharacterBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("3_ca75j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_r7kh5")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-
-[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 38
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_tmys3")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
-libraries = {
-"": SubResource("AnimationLibrary_3geqs")
-}
-
-[node name="ExpPickupArea2D" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 4
-gravity_space_override = 3
-gravity_point = true
-gravity_point_unit_distance = 50.0
-gravity_point_center = Vector2(0, 0)
-gravity_direction = Vector2(0, 0)
-gravity = 100000.0
-
-[node name="ExpPickupCollisionShape" type="CollisionShape2D" parent="CharacterBody2D/ExpPickupArea2D"]
-scale = Vector2(50, 50)
-shape = SubResource("CircleShape2D_75ctg")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
@@ -342,8 +226,3 @@ expand_mode = 1
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
-
-[connection signal="gained_experience" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_gained_experience"]
-[connection signal="took_damage" from="CharacterBody2D" to="CanvasLayer" method="_on_character_body_2d_took_damage"]
-[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D" method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="CharacterBody2D/ExpPickupArea2D" to="CharacterBody2D" method="_on_exp_pickup_area_2d_area_entered"]

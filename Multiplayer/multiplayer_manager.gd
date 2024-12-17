@@ -10,6 +10,8 @@ const PORT_NUMBER: int = 34229
 const MAX_PLAYERS: int = 4
 
 var peer: MultiplayerPeer = null
+# Map of connected players to their data
+var player_ids = {}
 
 # Emitted after a peer is created
 signal peer_created()
@@ -18,7 +20,8 @@ signal host_created()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -42,12 +45,24 @@ func create_client():
 	var create_client_result = peer.create_client("localhost", PORT_NUMBER)
 	multiplayer.multiplayer_peer = peer
 	
-	print(create_client_result)
+	if create_client_result != OK:
+		print("Error when creating client: " + str(create_client_result))
+		return
+	
+	#player_ids
 	
 	peer_created.emit()
 	print("Clienting!")
 
-# Test function to see if server connection is working.
-@rpc("any_peer", "call_local", "reliable")
-func test_rpc():
-	print("RPC has fired!")
+
+# Called on all players when a client connects.
+func _on_peer_connected(id: int) -> void:
+	player_ids[id] = null
+	
+	if multiplayer.get_unique_id() == 1:
+		GameState.start_game()
+
+
+# Called on all players when a client disconnects.
+func _on_peer_disconnected(id: int) -> void:
+	player_ids.erase(id)
