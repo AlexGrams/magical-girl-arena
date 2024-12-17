@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=3 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
-[ext_resource type="PackedScene" uid="uid://cckpww61jlguj" path="res://Levels/playground.tscn" id="2_603jh"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_f3ir0")
-start_game_scene = ExtResource("2_603jh")
 
 [node name="Background" type="CanvasLayer" parent="."]
 

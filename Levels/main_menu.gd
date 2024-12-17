@@ -1,7 +1,5 @@
 extends Node2D
 
-@export var start_game_scene: PackedScene
-
 var timer = -1.0
 # Map of connected players to their data
 var player_ids = {}
@@ -11,6 +9,7 @@ var player_ids = {}
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	multiplayer.connected_to_server
 
 
 func _process(_delta: float) -> void:
@@ -37,15 +36,9 @@ func _on_join_button_button_down() -> void:
 # Called when this player is hosting and a client connects to it.
 func _on_peer_connected(id: int) -> void:
 	player_ids[id] = null
-	start_game.rpc()
+	GameState.start_game()
 
 
 # Called when this player is hosting and a client disconnects from it.
 func _on_peer_disconnected(id: int) -> void:
 	player_ids.erase(id)
-
-
-# Load the main game scene.
-@rpc("authority", "call_local", "reliable")
-func start_game():
-	get_tree().change_scene_to_packed(start_game_scene)
