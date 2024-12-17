@@ -8,12 +8,8 @@ var timer = -1.0
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _process(delta: float) -> void:
-	if timer >= 0.0:
-		timer += delta
-		if timer >= 1.0:
-			MultiplayerManager.test_rpc.rpc()
-			timer = -1.0
+func _process(_delta: float) -> void:
+	pass
 
 func _on_quit_button_button_down() -> void:
 	get_tree().quit()
@@ -27,8 +23,17 @@ func _on_lobby_button_button_down() -> void:
 func _on_host_button_button_down() -> void:
 	MultiplayerManager.create_server()
 	#get_tree().change_scene_to_packed(start_game_scene)
+	
+	multiplayer.multiplayer_peer.peer_connected.connect(on_peer_connected)
 
 
 func _on_join_button_button_down() -> void:
 	MultiplayerManager.create_client()
-	timer = 0.0
+
+func on_peer_connected(id: int) -> void:
+	say_something.rpc()
+
+# Test function to see if server connection is working.
+@rpc("any_peer", "call_local", "reliable")
+func say_something():
+	print("A peer was connected")
