@@ -8,10 +8,8 @@ var is_on: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# TODO: Fix this check or something. 
-	# Doing .to_string() doesn't work for getting the path
 	if enemy_scene != null:
-		load(enemy_scene.to_string())
+		load(enemy_scene.resource_path)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

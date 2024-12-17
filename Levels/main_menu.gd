@@ -9,7 +9,6 @@ var player_ids = {}
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	multiplayer.connected_to_server
 
 
 func _process(_delta: float) -> void:
