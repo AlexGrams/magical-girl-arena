@@ -23,11 +23,6 @@ func _ready():
 	
 	took_damage.emit(health, health_max)
 	
-	# Give the player the basic shoot powerup
-	var shoot_powerup = load(shoot_powerup_path).instantiate()
-	add_child(shoot_powerup)
-	shoot_powerup.activate_powerup()
-	
 	# Each player tells the local GameState that it has spawned in
 	GameState.add_player_character(self)
 
@@ -103,6 +98,21 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			$"../CanvasLayer/UpgradeScreenPanel".show()
 		gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
 		area.get_parent().queue_free()
+
+
+# Sets up this character on this game instance after it is spawned.
+# Should be called only once, like with _ready().
+@rpc("any_peer", "call_local")
+func ready_local_player() -> void:
+	# Should not be called on characters that are not owned by this game instance.
+	if not is_multiplayer_authority():
+		return
+		
+	# Give the player the basic shoot powerup.
+	# Only the character that this player controls is given the ability. 
+	var shoot_powerup = load(shoot_powerup_path).instantiate()
+	add_child(shoot_powerup)
+	shoot_powerup.activate_powerup()
 
 
 @rpc("any_peer", "call_local")
