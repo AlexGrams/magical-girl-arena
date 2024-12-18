@@ -1,11 +1,11 @@
 extends Powerup
 
 @export var shoot_interval = 1.0
-var bullet_scene = preload("res://bullet.tscn")
+var bullet_scene := "res://bullet.tscn"
 var is_on:bool = false
-var shoot_timer = 0
-var bullet_damage = 100.0
-var powerup_name = "Shooting"
+var shoot_timer: float = 0
+var bullet_damage: float = 100.0
+var powerup_name := "Shooting"
 
 signal picked_up_powerup(sprite)
 
@@ -18,13 +18,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
-		var bullet = bullet_scene.instantiate()
-		var direction = get_global_mouse_position() - self.global_position
-		var direction_normal = direction.normalized()
-		bullet.set_damage(bullet_damage)
-		bullet.direction = direction_normal
-		bullet.position = self.global_position + (direction_normal * 100)
-		get_tree().root.add_child(bullet)
+		var direction = (get_global_mouse_position() - self.global_position).normalized()
+		var bullet_position = self.global_position + (direction * 100)
+		
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [bullet_scene, bullet_position, direction, bullet_damage]
+		)
+		
 		shoot_timer = 0
 
 func activate_powerup():

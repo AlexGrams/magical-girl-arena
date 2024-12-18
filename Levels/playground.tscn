@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=9 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="6_b2lbv"]
+[ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
@@ -255,3 +256,8 @@ visible = false
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://enemy.tscn", "res://Enemies/enemy_ranged.tscn")
 spawn_path = NodePath("..")
+
+[node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://bullet.tscn")
+spawn_path = NodePath("..")
+script = ExtResource("6_rscnf")
