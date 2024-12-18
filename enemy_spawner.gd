@@ -14,12 +14,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Only the server controls spawning
+	if not multiplayer.is_server():
+		return
+	
 	spawn_timer += delta
 	if spawn_timer > rate and enabled and enemy_scene != null:
 		var enemy = enemy_scene.instantiate()
 		var spawn_pos = global_position + Vector2(randf_range(-500, 500), randf_range(-10, 10))
 		enemy.global_position = spawn_pos
-		get_tree().root.add_child(enemy)
+		get_node("..").add_child(enemy, true)
 		spawn_timer = 0
 
 func set_enemy_type(new_enemy: PackedScene) -> void:

@@ -2,10 +2,11 @@ extends Node2D
 
 class_name Enemy
 
+@export var max_health: float = 100
+@export var health: float = 100
+
 var player: Node2D = null
 var speed: float = 100
-var max_health: float = 100
-var health: float = 100
 @onready var exp_scene = preload("res://exp_orb.tscn")
 
 func _ready() -> void:
