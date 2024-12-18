@@ -6,6 +6,10 @@ extends Node
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 
+# Unordered list of instantiated player characters in the game
+var player_characters = []
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -29,7 +33,6 @@ func start_game():
 		var player: CharacterBody2D	 = player_resource.instantiate()
 		player.set_label_name(str(player_id))
 		get_tree().root.get_node("Playground").add_child(player, true)
-		print("Spawned " + str(player_id))
 		
 		# Get the player's view to only follow this character
 		player.set_camera_current.rpc_id(player_id)
@@ -51,3 +54,8 @@ func load_game():
 	get_tree().get_root().get_node("MainMenu").hide()
 
 	get_tree().set_pause(false) 
+
+
+# Add a player character to local list of spawned characters
+func add_player_character(new_player: CharacterBody2D) -> void:
+	player_characters.append(new_player)

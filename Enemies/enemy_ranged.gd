@@ -40,3 +40,6 @@ func _process(delta: float) -> void:
 				bullet.position = self.global_position + (direction_normal * 100)
 				get_tree().root.add_child(bullet)
 				fire_timer = 0.0
+	else:
+		player = get_nearest_player_character()
+		print(player.name)

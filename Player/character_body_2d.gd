@@ -1,3 +1,4 @@
+class_name PlayerCharacterBody2D
 extends CharacterBody2D
 
 @export var level_exp_needed:Array
@@ -26,6 +27,9 @@ func _ready():
 	var shoot_powerup = load(shoot_powerup_path).instantiate()
 	add_child(shoot_powerup)
 	shoot_powerup.activate_powerup()
+	
+	# Each player tells the local GameState that it has spawned in
+	GameState.add_player_character(self)
 
 
 func _on_upgrade_chosen(powerup_name):
@@ -78,8 +82,8 @@ func take_damage(damage: float) -> void:
 		$".".hide()
 
 
-func set_label_name(name: String) -> void:
-	$Label.text = name
+func set_label_name(new_name: String) -> void:
+	$Label.text = new_name
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

@@ -54,7 +54,6 @@ position = Vector2(1173, 1203)
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
 rate = 1.0
-enemy_scene = ExtResource("5_6byrv")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
@@ -64,6 +63,7 @@ offset_bottom = 40.0
 position = Vector2(1856, 359)
 rate = 1.0
 enemy_scene = ExtResource("5_6byrv")
+enabled = false
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
 offset_right = 40.0
@@ -73,6 +73,7 @@ offset_bottom = 40.0
 position = Vector2(1707, 1572)
 rate = 1.0
 enemy_scene = ExtResource("5_6byrv")
+enabled = false
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
 offset_right = 40.0
