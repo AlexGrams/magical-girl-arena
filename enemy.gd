@@ -9,7 +9,7 @@ var health = 100
 @onready var exp_scene = preload("res://exp_orb.tscn")
 
 func _ready() -> void:
-	player = get_tree().root.get_node("Playground/CharacterBody2D")
+	player = get_tree().root.get_node("PlayerCharacterBody")
 
 func _process(delta: float) -> void:
 	if player != null:

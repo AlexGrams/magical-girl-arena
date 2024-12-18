@@ -15,9 +15,10 @@ var level = 1
 signal took_damage(health:int, health_max:int)
 signal gained_experience(experience: float, level: int)
 
+
 func _ready():
 	# Should redo this in the future prob?
-	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+	$"../Playground/CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
 	
 	took_damage.emit(health, health_max)
 	
@@ -25,6 +26,7 @@ func _ready():
 	var shoot_powerup = load(shoot_powerup_path).instantiate()
 	add_child(shoot_powerup)
 	shoot_powerup.activate_powerup()
+
 
 func _on_upgrade_chosen(powerup_name):
 	var powerup_found = false
@@ -48,19 +50,23 @@ func _on_upgrade_chosen(powerup_name):
 	$"../CanvasLayer/UpgradeScreenPanel".hide()
 	get_tree().paused = false
 
+
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_direction * speed
-	
+
+
 func _process(_delta: float) -> void:
 	var direction = get_global_mouse_position() - $Sprite2D.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
 
+
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
-	
+
+
 # Deal damage to the player
 func take_damage(damage: float) -> void:
 	health -= damage
@@ -69,6 +75,7 @@ func take_damage(damage: float) -> void:
 	if health <= 0:
 		get_tree().paused = true
 		$".".hide()
+
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(2): #If Enemy
@@ -87,6 +94,16 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			$"../CanvasLayer/UpgradeScreenPanel".show()
 		gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
 		area.get_parent().queue_free()
+
+
+@rpc("any_peer", "call_local")
+func teleport(new_position : Vector2) -> void:
+	self.position = new_position
+
+
+@rpc("any_peer", "call_local")
+func set_authority(id : int) -> void:
+	set_multiplayer_authority(id)
 
 # TODO: Disabled. Code solution if physics solution doesn't work out.
 # Causes EXP orbs to gravitate towards the player when they enter this area.

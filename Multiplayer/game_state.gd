@@ -23,11 +23,26 @@ func start_game():
 	
 	var player_resource := load(player_scene)
 	
-	for peer_id in multiplayer.get_peers():
-		print(peer_id)
+	# Spawn each player at a spawn point.
+	var spawn_point_index = 0
+	for player_id in MultiplayerManager.player_ids:
+		var player: CharacterBody2D	 = player_resource.instantiate()
+		get_tree().root.add_child(player)
+		print("Spawned " + str(player_id))
+		
+		# Players need to be given authority over their characters
+		player.set_authority.rpc(player_id)
+		
+		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
+		player.teleport.rpc_id(player_id, spawn_point)
+		spawn_point_index += 1
 
 
-# Load the main game scene.
+# Load the main game scene and hide the menu.
 @rpc("authority", "call_local", "reliable")
 func load_game():
-	get_tree().change_scene_to_file(start_game_scene)
+	var world = load(start_game_scene).instantiate()
+	get_tree().get_root().add_child(world)
+	get_tree().get_root().get_node("MainMenu").hide()
+
+	get_tree().set_pause(false) 

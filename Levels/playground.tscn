@@ -27,6 +27,20 @@ scale = Vector2(1.48, 1)
 texture = ExtResource("1_v8j4q")
 expand_mode = 1
 
+[node name="PlayerSpawnPoints" type="Node2D" parent="."]
+
+[node name="PlayerSpawnPoint1" type="Node2D" parent="PlayerSpawnPoints"]
+position = Vector2(915, 983)
+
+[node name="PlayerSpawnPoint2" type="Node2D" parent="PlayerSpawnPoints"]
+position = Vector2(1169, 985)
+
+[node name="PlayerSpawnPoint3" type="Node2D" parent="PlayerSpawnPoints"]
+position = Vector2(919, 1201)
+
+[node name="PlayerSpawnPoint4" type="Node2D" parent="PlayerSpawnPoints"]
+position = Vector2(1173, 1203)
+
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
 rate = 1.0

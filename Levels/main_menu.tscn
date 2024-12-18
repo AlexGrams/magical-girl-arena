@@ -3,12 +3,25 @@
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_f3ir0")
 
-[node name="Background" type="CanvasLayer" parent="."]
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BackgroundTexture" type="TextureRect" parent="Background"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,9 +30,16 @@ grow_vertical = 2
 texture = ExtResource("1_hldg4")
 expand_mode = 3
 
-[node name="Main" type="CanvasLayer" parent="."]
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LobbyButton" type="Button" parent="Main"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -36,6 +56,7 @@ theme_override_font_sizes/font_size = 48
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="Main"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -52,6 +73,7 @@ theme_override_font_sizes/font_size = 48
 text = "Quit"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Main"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 112.0
@@ -61,10 +83,17 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Magical Girl Arena[/center]"
 
-[node name="Lobby" type="CanvasLayer" parent="."]
+[node name="Lobby" type="Control" parent="."]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 112.0
@@ -75,6 +104,7 @@ bbcode_enabled = true
 text = "[center]Lobby[/center]"
 
 [node name="HostButton" type="Button" parent="Lobby"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -91,6 +121,7 @@ theme_override_font_sizes/font_size = 48
 text = "Host"
 
 [node name="JoinButton" type="Button" parent="Lobby"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

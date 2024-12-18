@@ -33,7 +33,11 @@ func create_server():
 	var create_server_result = peer.create_server(PORT_NUMBER, MAX_PLAYERS)
 	multiplayer.multiplayer_peer = peer
 	
-	print(str(create_server_result))
+	if create_server_result != OK:
+		print("Error when creating server: " + str(create_server_result))
+		return
+	
+	player_ids[1] = null
 	
 	host_created.emit()
 	print("Giga hosting!")
@@ -48,8 +52,6 @@ func create_client():
 	if create_client_result != OK:
 		print("Error when creating client: " + str(create_client_result))
 		return
-	
-	#player_ids
 	
 	peer_created.emit()
 	print("Clienting!")
