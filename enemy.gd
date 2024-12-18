@@ -37,17 +37,18 @@ func get_nearest_player_character() -> Node2D:
 func take_damage(damage: float) -> void:
 	health -= damage
 	$AnimationPlayer.play("take_damage")
-	if health <= 0:
-		die()
-
-
-func die() -> void:
-	var exp_orb = exp_scene.instantiate()
-	exp_orb.global_position = global_position
-	get_tree().root.call_deferred("add_child", exp_orb)
-	queue_free()
+	if health <= 0 and is_multiplayer_authority():
+		die.rpc_id(1)
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
 		take_damage(area.damage)
+
+
+@rpc("any_peer", "call_local")
+func die() -> void:
+	var exp_orb = exp_scene.instantiate()
+	exp_orb.global_position = global_position
+	get_tree().root.call_deferred("add_child", exp_orb)
+	queue_free()
