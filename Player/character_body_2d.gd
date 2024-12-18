@@ -111,6 +111,12 @@ func teleport(new_position : Vector2) -> void:
 func set_authority(id : int) -> void:
 	set_multiplayer_authority(id)
 
+
+# Makes this player's view follow this character.
+@rpc("authority", "call_local")
+func set_camera_current() -> void:
+	$Camera2D.make_current()
+
 # TODO: Disabled. Code solution if physics solution doesn't work out.
 # Causes EXP orbs to gravitate towards the player when they enter this area.
 #func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:

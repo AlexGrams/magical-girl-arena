@@ -31,6 +31,9 @@ func start_game():
 		get_tree().root.get_node("Playground").add_child(player, true)
 		print("Spawned " + str(player_id))
 		
+		# Get the player's view to only follow this character
+		player.set_camera_current.rpc_id(player_id)
+		
 		# Players need to be given authority over their characters, and other players
 		# need to have authority set locally for each remote player.
 		player.set_authority.rpc(player_id)
