@@ -27,10 +27,12 @@ func start_game():
 	var spawn_point_index = 0
 	for player_id in MultiplayerManager.player_ids:
 		var player: CharacterBody2D	 = player_resource.instantiate()
-		get_tree().root.add_child(player)
+		player.set_label_name(str(player_id))
+		get_tree().root.get_node("Playground").add_child(player, true)
 		print("Spawned " + str(player_id))
 		
-		# Players need to be given authority over their characters
+		# Players need to be given authority over their characters, and other players
+		# need to have authority set locally for each remote player.
 		player.set_authority.rpc(player_id)
 		
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=10 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_6303d"]
@@ -71,6 +71,14 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75ctg"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vfgy6"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="PlayerCharacterBody" type="CharacterBody2D"]
 z_index = 1
 position = Vector2(1116, 1072)
@@ -116,6 +124,18 @@ gravity = 100000.0
 [node name="ExpPickupCollisionShape" type="CollisionShape2D" parent="ExpPickupArea2D"]
 scale = Vector2(50, 50)
 shape = SubResource("CircleShape2D_75ctg")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -107.0
+offset_top = -117.0
+offset_right = 105.0
+offset_bottom = -40.0
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vfgy6")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="ExpPickupArea2D" to="." method="_on_exp_pickup_area_2d_area_entered"]

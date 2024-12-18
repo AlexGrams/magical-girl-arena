@@ -18,7 +18,7 @@ signal gained_experience(experience: float, level: int)
 
 func _ready():
 	# Should redo this in the future prob?
-	$"../Playground/CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
 	
 	took_damage.emit(health, health_max)
 	
@@ -63,8 +63,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta):
-	get_input()
-	move_and_slide()
+	if is_multiplayer_authority():
+		get_input()
+		move_and_slide()
 
 
 # Deal damage to the player
@@ -75,6 +76,10 @@ func take_damage(damage: float) -> void:
 	if health <= 0:
 		get_tree().paused = true
 		$".".hide()
+
+
+func set_label_name(name: String) -> void:
+	$Label.text = name
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -98,6 +103,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 @rpc("any_peer", "call_local")
 func teleport(new_position : Vector2) -> void:
+	print(str(multiplayer.get_unique_id()) + " " + str(new_position))
 	self.position = new_position
 
 
