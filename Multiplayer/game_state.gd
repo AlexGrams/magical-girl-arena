@@ -5,9 +5,14 @@ extends Node
 
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
+const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # Unordered list of instantiated player characters in the game
 var player_characters = []
+# Experience to next level
+var experience: float = 0.0
+# Current level
+var level: int = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -47,6 +52,11 @@ func start_game():
 		spawn_point_index += 1
 
 
+# Add a player character to local list of spawned characters
+func add_player_character(new_player: CharacterBody2D) -> void:
+	player_characters.append(new_player)
+
+
 # Load the main game scene and hide the menu.
 @rpc("authority", "call_local", "reliable")
 func load_game():
@@ -57,6 +67,20 @@ func load_game():
 	get_tree().set_pause(false) 
 
 
-# Add a player character to local list of spawned characters
-func add_player_character(new_player: CharacterBody2D) -> void:
-	player_characters.append(new_player)
+# Add exp to all players. Only call on the server.
+@rpc("any_peer", "call_local")
+func collect_exp() -> void:
+	print(str(multiplayer.get_unique_id()))
+	experience += 1
+	if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
+		experience -= level_exp_needed[level-1]
+		level += 1
+		# TODO: Do something about replicating shoot interval
+		#shoot_interval = level_shoot_intervals[level]
+		
+		# Show upgrade screen
+		get_tree().paused = true
+		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").show()
+	
+	for player in player_characters:
+		player.emit_gained_experience(experience, level)

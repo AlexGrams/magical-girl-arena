@@ -18,9 +18,6 @@ signal gained_experience(experience: float, level: int)
 
 
 func _ready():
-	# Should redo this in the future prob?
-	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
-	
 	took_damage.emit(health, health_max)
 	
 	# Each player tells the local GameState that it has spawned in
@@ -88,7 +85,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		take_damage(area.damage)
 	elif area.get_collision_layer_value(3): #If EXP Orb
 		if is_multiplayer_authority():
-			collect_exp.rpc_id(1)
+			GameState.collect_exp.rpc()
+			#collect_exp.rpc_id(1)
 			area.get_parent().destroy.rpc_id(1)
 
 
@@ -99,7 +97,12 @@ func ready_local_player() -> void:
 	# Should not be called on characters that are not owned by this game instance.
 	if not is_multiplayer_authority():
 		return
-		
+	
+	gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
+	
+	# Should redo this in the future prob?
+	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+	
 	# Give the player the basic shoot powerup.
 	# Only the character that this player controls is given the ability. 
 	var shoot_powerup = load(shoot_powerup_path).instantiate()
@@ -109,7 +112,6 @@ func ready_local_player() -> void:
 
 @rpc("any_peer", "call_local")
 func teleport(new_position: Vector2) -> void:
-	print(str(multiplayer.get_unique_id()) + " " + str(new_position))
 	self.position = new_position
 
 
@@ -124,18 +126,15 @@ func set_camera_current() -> void:
 	$Camera2D.make_current()
 
 
-# Add exp to all players. Only call on the server.
+# Emits the signal for gaining experience on all clients.
 @rpc("any_peer", "call_local")
-func collect_exp() -> void:
-	experience += 1
-	if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
-		experience -= level_exp_needed[level-1]
-		level += 1
-		shoot_interval = level_shoot_intervals[level]
-		
-		# Show upgrade screen
-		get_tree().paused = true
-		$"../CanvasLayer/UpgradeScreenPanel".show()
+func emit_gained_experience(new_experience: float, new_level: int):
+	if not is_multiplayer_authority():
+		return
+	
+	experience = new_experience
+	level = new_level
+	
 	gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
 
 
