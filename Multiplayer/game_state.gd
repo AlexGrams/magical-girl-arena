@@ -70,7 +70,6 @@ func load_game():
 # Add exp to all players. Only call on the server.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
-	print(str(multiplayer.get_unique_id()))
 	experience += 1
 	if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
 		experience -= level_exp_needed[level-1]

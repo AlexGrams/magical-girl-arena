@@ -86,8 +86,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.get_collision_layer_value(3): #If EXP Orb
 		if is_multiplayer_authority():
 			GameState.collect_exp.rpc()
-			#collect_exp.rpc_id(1)
-			area.get_parent().destroy.rpc_id(1)
+			if area.get_parent() != null:
+				area.get_parent().destroy.rpc_id(1)
 
 
 # Sets up this character on this game instance after it is spawned.
