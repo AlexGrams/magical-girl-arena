@@ -13,6 +13,7 @@ var player_characters = []
 var experience: float = 0.0
 # Current level
 var level: int = 1
+var players_selecting_upgrades: int = -1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,7 +68,7 @@ func load_game():
 	get_tree().set_pause(false) 
 
 
-# Add exp to all players. Only call on the server.
+# Add exp to this player.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
 	experience += 1
@@ -80,6 +81,28 @@ func collect_exp() -> void:
 		# Show upgrade screen
 		get_tree().paused = true
 		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").show()
+		
+		if multiplayer.is_server():
+			players_selecting_upgrades = player_characters.size()
 	
 	for player in player_characters:
 		player.emit_gained_experience(experience, level)
+
+
+# Resumes game when all players have finished selecting upgrades. Only call on server. 
+@rpc("any_peer", "call_local")
+func player_selected_upgrade() -> void:
+	if not multiplayer.is_server():
+		return
+	
+	players_selecting_upgrades -= 1
+	print(players_selecting_upgrades)
+	
+	if players_selecting_upgrades <= 0:
+		resume_game.rpc()
+
+
+# Continues the game
+@rpc("any_peer", "call_local")
+func resume_game() -> void:
+	get_tree().paused = false

@@ -44,7 +44,7 @@ func _on_upgrade_chosen(powerup_name):
 		powerup_to_add.activate_powerup()
 		
 	$"../CanvasLayer/UpgradeScreenPanel".hide()
-	get_tree().paused = false
+	GameState.player_selected_upgrade.rpc_id(1)
 
 
 func get_input():
