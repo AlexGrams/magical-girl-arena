@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2i6skhjx0ne1"]
+[gd_scene load_steps=5 format=3 uid="uid://d2i6skhjx0ne1"]
 
+[ext_resource type="Script" path="res://Pickups/exp_orb.gd" id="1_olgk7"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_tyobt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
@@ -13,6 +14,7 @@ properties/0/replication_mode = 1
 [node name="ExpOrb" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("1_olgk7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 0.894118, 1)

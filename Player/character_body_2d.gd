@@ -87,17 +87,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage(area.damage)
 	elif area.get_collision_layer_value(3): #If EXP Orb
-		experience += 1
-		if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
-			experience -= level_exp_needed[level-1]
-			level += 1
-			shoot_interval = level_shoot_intervals[level]
-			
-			# Show upgrade screen
-			get_tree().paused = true
-			$"../CanvasLayer/UpgradeScreenPanel".show()
-		gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
-		area.get_parent().queue_free()
+		if is_multiplayer_authority():
+			collect_exp.rpc_id(1)
+			area.get_parent().destroy.rpc_id(1)
 
 
 # Sets up this character on this game instance after it is spawned.
@@ -116,13 +108,13 @@ func ready_local_player() -> void:
 
 
 @rpc("any_peer", "call_local")
-func teleport(new_position : Vector2) -> void:
+func teleport(new_position: Vector2) -> void:
 	print(str(multiplayer.get_unique_id()) + " " + str(new_position))
 	self.position = new_position
 
 
 @rpc("any_peer", "call_local")
-func set_authority(id : int) -> void:
+func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)
 
 
@@ -130,6 +122,22 @@ func set_authority(id : int) -> void:
 @rpc("authority", "call_local")
 func set_camera_current() -> void:
 	$Camera2D.make_current()
+
+
+# Add exp to all players. Only call on the server.
+@rpc("any_peer", "call_local")
+func collect_exp() -> void:
+	experience += 1
+	if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
+		experience -= level_exp_needed[level-1]
+		level += 1
+		shoot_interval = level_shoot_intervals[level]
+		
+		# Show upgrade screen
+		get_tree().paused = true
+		$"../CanvasLayer/UpgradeScreenPanel".show()
+	gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
+
 
 # TODO: Disabled. Code solution if physics solution doesn't work out.
 # Causes EXP orbs to gravitate towards the player when they enter this area.
