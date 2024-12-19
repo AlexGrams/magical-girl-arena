@@ -254,7 +254,7 @@ process_mode = 2
 visible = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://enemy.tscn", "res://Enemies/enemy_ranged.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://enemy.tscn", "res://Enemies/enemy_ranged.tscn", "res://exp_orb.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
