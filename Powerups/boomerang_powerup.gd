@@ -24,6 +24,7 @@ func activate_powerup():
 	
 	picked_up_powerup.emit(sprite)
 
+
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, damage_levels[min(damage_levels.size() - 1, current_level)])

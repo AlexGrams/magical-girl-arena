@@ -1,10 +1,15 @@
 extends Node2D
 
-@export var speed = 800
-var direction:Vector2
-var player:Node2D
-var closest_enemy
-var is_returning = true
+@export var speed: float = 800.0
+
+# The bullet object is replicated on all clients.
+# This player is the client's replicated version of the character that owns this bullet.
+# This is not necessarily the client's own character.
+var player: Node2D
+
+var direction: Vector2
+var closest_enemy: Node
+var is_returning := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,10 +56,14 @@ func setup_bullet(data: Array) -> void:
 		return
 	
 	player = get_tree().root.get_node(data[0])
-	#if data[0] is EncodedObjectAsID:
-		#player = instance_from_id(data[0].object_id)
-	#else:
-		#player = data[0]
+	
+	# When the player levels up this powerup, notify all clients about the level up.
+	var boomerang_powerup := player.get_node_or_null("BoomerangPowerup")
+	# The Powerup child is not replicated, so only the client which owns this character has it.
+	if boomerang_powerup != null:
+		boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
+			level_up.rpc(new_level, new_damage)
+		)
 
 
 func set_damage(damage:float):
@@ -62,5 +71,6 @@ func set_damage(damage:float):
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
+@rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
 	$Area2D.damage = new_damage

@@ -24,7 +24,6 @@ func _spawn_bullet(data):
 	bullet.position = data[1]
 	bullet.direction = data[2]
 	bullet.set_damage(data[3])
-	#$"..".add_child(bullet, true)
 	
 	#if data[4] != null:
 		#data[4].connect(bullet.level_up)
