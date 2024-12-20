@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 					global_position, 
 					direction, 
 					bullet_damage, 
-					powerup_level_up,
 					[]
 				]
 			)

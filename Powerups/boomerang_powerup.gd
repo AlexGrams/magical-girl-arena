@@ -18,7 +18,6 @@ func activate_powerup():
 			global_position, 
 			Vector2.UP, 
 			damage_levels[min(4, current_level)], 
-			powerup_level_up,
 			[$"..".get_path()]
 		]
 	)

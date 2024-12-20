@@ -9,14 +9,12 @@ func _init():
 # Spawns a bullet replicated for all clients. Returns the new bullet.
 func _spawn_bullet(data):
 	if (
-		data.size() != 6
+		data.size() != 5
 		or typeof(data[0]) != TYPE_STRING	# Path to bullet scene
 		or typeof(data[1]) != TYPE_VECTOR2	# Position
 		or typeof(data[2]) != TYPE_VECTOR2	# Direction
 		or typeof(data[3]) != TYPE_FLOAT	# Damage
-		or (typeof(data[4]) != TYPE_SIGNAL	# Powerup level up signal
-			and typeof(data[4]) != TYPE_NIL)
-		or typeof(data[5]) != TYPE_ARRAY	# Bullet setup parameters
+		or typeof(data[4]) != TYPE_ARRAY	# Bullet setup parameters
 	):
 		return null
 	
@@ -25,11 +23,8 @@ func _spawn_bullet(data):
 	bullet.direction = data[2]
 	bullet.set_damage(data[3])
 	
-	#if data[4] != null:
-		#data[4].connect(bullet.level_up)
-	
 	bullet.tree_entered.connect(func():
-		bullet.setup_bullet(data[5])
+		bullet.setup_bullet(data[4])
 	)
 	
 	return bullet
