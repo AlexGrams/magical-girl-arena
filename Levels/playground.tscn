@@ -258,6 +258,6 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://bullet.tscn")
+_spawnable_scenes = PackedStringArray("res://bullet.tscn", "res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")

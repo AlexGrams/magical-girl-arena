@@ -1,7 +1,6 @@
 class_name PlayerCharacterBody2D
 extends CharacterBody2D
 
-@export var level_exp_needed:Array
 @export var level_shoot_intervals:Array
 @export var speed = 400
 @onready var bullet_scene = preload("res://bullet.tscn")
@@ -135,7 +134,7 @@ func emit_gained_experience(new_experience: float, new_level: int):
 	experience = new_experience
 	level = new_level
 	
-	gained_experience.emit(float(experience) / level_exp_needed[level-1], level)
+	gained_experience.emit(float(experience) / GameState.level_exp_needed[level-1], level)
 
 
 # TODO: Disabled. Code solution if physics solution doesn't work out.

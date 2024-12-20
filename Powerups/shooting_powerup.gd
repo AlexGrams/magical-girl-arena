@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 		var bullet_position = self.global_position + (direction * 100)
 		
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [bullet_scene, bullet_position, direction, bullet_damage]
+			1, [bullet_scene, bullet_position, direction, bullet_damage, null, []]
 		)
 		
 		shoot_timer = 0

@@ -41,5 +41,26 @@ func _process(delta: float) -> void:
 		else:
 			is_returning = true
 
+
+# Set up other properties for this bullet
+func setup_bullet(data: Array) -> void:
+	if (
+		data.size() != 1
+		or typeof(data[0]) != TYPE_NODE_PATH	# Owning player 
+	):
+		return
+	
+	player = get_tree().root.get_node(data[0])
+	#if data[0] is EncodedObjectAsID:
+		#player = instance_from_id(data[0].object_id)
+	#else:
+		#player = data[0]
+
+
 func set_damage(damage:float):
 	$Area2D.damage = damage
+
+
+# This bullet's owner has leveled up this bullet's corresponding powerup
+func level_up(_new_level: int, new_damage: float):
+	$Area2D.damage = new_damage

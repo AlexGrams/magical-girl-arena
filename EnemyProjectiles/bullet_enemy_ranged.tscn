@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqs0gqki5rmlg"]
 
-[ext_resource type="Script" path="res://Projectiles/bullet_enemy_ranged.gd" id="1_nsgiu"]
+[ext_resource type="Script" path="res://EnemyProjectiles/bullet_enemy_ranged.gd" id="1_nsgiu"]
 [ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_dxnhe"]
 [ext_resource type="Script" path="res://BulletHitbox.gd" id="3_4umrk"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dx43gaa0rr7q1"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_ranged.gd" id="1_yjg42"]
-[ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://Projectiles/bullet_enemy_ranged.tscn" id="2_4ww20"]
+[ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://EnemyProjectiles/bullet_enemy_ranged.tscn" id="2_4ww20"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_e2a22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_macuq"]
