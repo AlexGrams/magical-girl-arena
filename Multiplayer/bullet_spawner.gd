@@ -16,16 +16,22 @@ func _spawn_bullet(data):
 		or typeof(data[3]) != TYPE_FLOAT	# Damage
 		or typeof(data[4]) != TYPE_ARRAY	# Bullet setup parameters
 	):
+		push_error("Bullet could not be instantiated because of malformed 'data' parameter.")
 		return null
 	
 	var bullet = load(data[0]).instantiate()
+	
+	if bullet == null:
+		push_error("Bullet could not be instantiated from path: " + str(data[0]))
+	
 	bullet.position = data[1]
 	bullet.direction = data[2]
 	bullet.set_damage(data[3])
 	
+	# Call the setup function on the bullet once it is added to the scene, but only once.
 	bullet.tree_entered.connect(func():
 		bullet.setup_bullet(data[4])
-	)
+	, CONNECT_ONE_SHOT)
 	
 	return bullet
 

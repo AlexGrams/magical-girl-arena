@@ -7,11 +7,14 @@ func set_damage(damage:float):
 	$BulletOffset/Area2D.damage = damage
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$BulletOffset.position.y = radius
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	rotate(speed * delta)
+
+
+# Set up other properties for this bullet
+func setup_bullet(_data: Array) -> void:
+	$BulletOffset.position.y = radius

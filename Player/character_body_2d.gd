@@ -39,6 +39,7 @@ func _on_upgrade_chosen(powerup_name):
 				powerup_to_add = load("res://Powerups/revolving_powerup.tscn").instantiate()
 			"Orbit":
 				powerup_to_add = load("res://Powerups/orbit_powerup.tscn").instantiate()
+		powerup_to_add.set_authority(multiplayer.get_unique_id())
 		add_child(powerup_to_add)
 		powerup_to_add.activate_powerup()
 		

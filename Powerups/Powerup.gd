@@ -13,5 +13,11 @@ func level_up():
 	powerup_level_up.emit(0, 0)
 	print("Powerup.level_up(): THIS SHOULD NOT BE ACTIVATING.")
 
+
 func activate_powerup():
 	print("Powerup.activate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
+
+
+# Set the multiplayer authority for this powerup
+func set_authority(id: int) -> void:
+	set_multiplayer_authority(id)

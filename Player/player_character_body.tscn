@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=11 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_6303d"]
+[ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
 
@@ -135,6 +136,11 @@ vertical_alignment = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vfgy6")
+
+[node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn")
+spawn_path = NodePath("..")
+script = ExtResource("3_q0m3g")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="ExpPickupArea2D" to="." method="_on_exp_pickup_area_2d_area_entered"]

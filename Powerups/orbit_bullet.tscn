@@ -10,6 +10,7 @@ size = Vector2(38, 38)
 [node name="OrbitBullet" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_vq7vf")
+radius = 74
 
 [node name="BulletOffset" type="Node2D" parent="."]
 
