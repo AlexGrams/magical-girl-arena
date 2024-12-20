@@ -8,6 +8,7 @@
 size = Vector2(38, 38)
 
 [node name="RevolvingBullet" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_42fto")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -10,7 +10,8 @@ signal picked_up_powerup(sprite)
 
 func _ready():
 	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
-	
+
+
 func activate_powerup():
 	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 		1, [bullet_scene, 
