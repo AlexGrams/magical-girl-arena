@@ -10,6 +10,7 @@ size = Vector2(38, 38)
 [node name="BoomerangBullet" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_j62nq")
+speed = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.23, 0.23)

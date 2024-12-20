@@ -1,13 +1,10 @@
-extends Node2D
-
-@export var speed: float = 800.0
+extends Bullet
 
 # The bullet object is replicated on all clients.
 # This player is the client's replicated version of the character that owns this bullet.
 # This is not necessarily the client's own character.
 var player: Node2D
 
-var direction: Vector2
 var closest_enemy: Node
 var is_returning := true
 

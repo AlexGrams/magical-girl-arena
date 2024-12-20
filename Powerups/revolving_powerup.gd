@@ -15,6 +15,7 @@ func _ready() -> void:
 	damage_levels = [25, 25, 50, 50, 100]
 	bullet_damage = damage_levels[min(4, current_level)]
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_on:
@@ -31,9 +32,11 @@ func _process(delta: float) -> void:
 			get_tree().root.add_child(bullet)
 			shoot_timer = 0
 
+
 func activate_powerup():
 	is_on = true
 	picked_up_powerup.emit(sprite)
+
 
 func level_up():
 	current_level += 1

@@ -1,6 +1,6 @@
-extends Node2D
-
 class_name Powerup
+extends Node2D
+## Abstract class for abilities granted to the player. 
 
 var current_level:int
 var damage_levels:Array

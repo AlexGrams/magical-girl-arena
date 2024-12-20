@@ -1,16 +1,24 @@
+class_name Bullet
 extends Node2D
+## A projectile that damages characters it touches.
+## Replicated across clients.
+## Default behavior is to move forward for some time
 
-@export var speed = 5
-@export var lifetime = 2
-var direction:Vector2
-var death_timer = 0
 
-# Called when the node enters the scene tree for the first time.
+@export var speed: float = 5
+@export var lifetime: float = 2
+var direction: Vector2
+var death_timer: float = 0
+
+
+func set_damage(damage:float):
+	$Area2D.damage = damage
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	pass 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position += direction * speed
 	
@@ -27,7 +35,3 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 # Set up other properties for this bullet
 func setup_bullet(_data: Array) -> void:
 	pass
-
-
-func set_damage(damage:float):
-	$Area2D.damage = damage

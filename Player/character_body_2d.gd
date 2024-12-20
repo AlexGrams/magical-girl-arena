@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
-@onready var bullet_scene = preload("res://bullet.tscn")
+@onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 var shoot_timer = 0
 var shoot_interval = 1

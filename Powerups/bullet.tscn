@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsmrsq1fwptsw"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_u38u2"]
+[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_u38u2"]
 [ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_hd53n"]
 [ext_resource type="Script" path="res://BulletHitbox.gd" id="3_404gu"]
 
