@@ -7,7 +7,7 @@ class_name Enemy
 
 var player: Node2D = null
 var speed: float = 100
-@onready var exp_scene = preload("res://exp_orb.tscn")
+@onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 
 func _ready() -> void:
 	pass

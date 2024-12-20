@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://EnemyProjectiles/bullet_enemy_ranged.gd" id="1_nsgiu"]
 [ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_dxnhe"]
-[ext_resource type="Script" path="res://BulletHitbox.gd" id="3_4umrk"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_4umrk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)

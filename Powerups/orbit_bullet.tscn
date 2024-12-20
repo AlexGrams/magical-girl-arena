@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/orbit_bullet.gd" id="1_vq7vf"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_k30hb"]
-[ext_resource type="Script" path="res://BulletHitbox.gd" id="3_sgpxh"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_sgpxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)

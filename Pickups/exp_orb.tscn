@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2i6skhjx0ne1"]
 
-[ext_resource type="Script" path="res://Pickups/exp_orb.gd" id="1_olgk7"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_tyobt"]
+[ext_resource type="Script" path="res://Pickups/exp_orb.gd" id="1_whsa2"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_tbero"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
 size = Vector2(26, 26)
@@ -14,12 +14,12 @@ properties/0/replication_mode = 1
 [node name="ExpOrb" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_olgk7")
+script = ExtResource("1_whsa2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 0.894118, 1)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_tyobt")
+texture = ExtResource("2_tbero")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f7oyy")

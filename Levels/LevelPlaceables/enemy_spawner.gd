@@ -2,7 +2,7 @@ extends Node2D
 
 # Time in seconds between enemy spawns
 @export var rate: float
-@export var enemy_scene: PackedScene = preload("res://enemy.tscn")
+@export var enemy_scene: PackedScene = preload("res://Enemies/enemy.tscn")
 @export var enabled: bool = true
 var spawn_timer: float = 0
 
