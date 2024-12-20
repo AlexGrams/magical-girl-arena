@@ -17,8 +17,6 @@ signal gained_experience(experience: float, level: int)
 
 
 func _ready():
-	took_damage.emit(health, health_max)
-	
 	# Each player tells the local GameState that it has spawned in
 	GameState.add_player_character(self)
 
@@ -98,7 +96,12 @@ func ready_local_player() -> void:
 	if not is_multiplayer_authority():
 		return
 	
+	# Signal for experience changes
 	gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
+	
+	# Signal for health changes
+	took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
+	took_damage.emit(health, health_max)
 	
 	# Should redo this in the future prob?
 	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
