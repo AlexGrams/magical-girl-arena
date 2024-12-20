@@ -42,4 +42,3 @@ func _process(delta: float) -> void:
 				fire_timer = 0.0
 	else:
 		player = get_nearest_player_character()
-		print(player.name)
