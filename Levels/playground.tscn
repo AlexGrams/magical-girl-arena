@@ -55,7 +55,6 @@ position = Vector2(1173, 1203)
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
 rate = 1.0
-enemy_scene = ExtResource("5_6byrv")
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
