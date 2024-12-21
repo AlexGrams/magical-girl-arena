@@ -49,6 +49,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 # Delete this enemy and spawn EXP orbs. Only call on the server.
 @rpc("any_peer", "call_local")
 func die() -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	var exp_orb = exp_scene.instantiate()
 	exp_orb.global_position = global_position
 	get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
