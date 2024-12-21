@@ -138,6 +138,6 @@ func emit_gained_experience(new_experience: float, new_level: int):
 
 # TODO: Disabled. Code solution if physics solution doesn't work out.
 # Causes EXP orbs to gravitate towards the player when they enter this area.
-#func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
-	#if area.get_collision_layer_value(3):
-		#area.get_parent().set_player(self)
+func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
+	if multiplayer.is_server() and area.get_collision_layer_value(3):
+		area.get_parent().set_player.rpc(self.get_path())

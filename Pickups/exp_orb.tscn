@@ -9,20 +9,15 @@ size = Vector2(26, 26)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5u73p"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 0
 
-[node name="ExpOrb" type="RigidBody2D"]
-collision_layer = 4
-collision_mask = 0
+[node name="ExpOrb" type="Node2D"]
 script = ExtResource("1_whsa2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 1, 0.894118, 1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_tbero")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f7oyy")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
