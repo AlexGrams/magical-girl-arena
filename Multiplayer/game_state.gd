@@ -5,7 +5,7 @@ extends Node
 
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
-const level_exp_needed: Array = [10000, 10, 10, 10, 10, 10]
+const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # Unordered list of instantiated player characters in the game
 var player_characters = []
