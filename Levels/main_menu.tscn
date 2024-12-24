@@ -31,6 +31,7 @@ texture = ExtResource("1_hldg4")
 expand_mode = 3
 
 [node name="Main" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +85,6 @@ bbcode_enabled = true
 text = "[center]Magical Girl Arena[/center]"
 
 [node name="Lobby" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,9 +110,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -98.0
+offset_left = -458.0
 offset_top = -347.0
-offset_right = 102.0
+offset_right = -258.0
 offset_bottom = -251.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -127,15 +127,32 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -96.0
+offset_left = -456.0
 offset_top = -197.0
-offset_right = 104.0
+offset_right = -256.0
 offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(100, 96)
 theme_override_font_sizes/font_size = 48
 text = "Join"
+
+[node name="LobbiesScrollContainer" type="ScrollContainer" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -758.0
+offset_top = -419.0
+offset_right = -36.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LobbiesList" type="VBoxContainer" parent="Lobby/LobbiesScrollContainer"]
+layout_mode = 2
 
 [connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
