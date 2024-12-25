@@ -1,9 +1,14 @@
 extends Control
 
+# Will be spawned in the Lobby screen. Clicking allows the player to join a lobby
+const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
+
+@export var lobbies_list: VBoxContainer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	setup_lobby_screen()
 
 
 func _process(_delta: float) -> void:
@@ -25,3 +30,27 @@ func _on_host_button_button_down() -> void:
 
 func _on_join_button_button_down() -> void:
 	MultiplayerManager.create_client()
+
+
+# Adds list of joinable lobbies to the lobby screen.
+func setup_lobby_screen() -> void:
+	# TODO: Maybe make the region a setting? This current one is the most restrictive.
+	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_CLOSE)
+	
+	Steam.lobby_match_list.connect(
+		# lobbies: Array[int] (lobby IDs) - All lobbies in the specified region for this game.
+		func(lobbies: Array):
+			for lobby in lobbies:
+				var lobby_name: String = Steam.getLobbyData(lobby, "Name")
+				var player_count: int = Steam.getNumLobbyMembers(lobby)
+				var lobby_button: Button = lobby_button_scene.instantiate()
+				
+				# Set up the button for this lobby
+				lobby_button.set_text(str(lobby_name, ": ", player_count, " players"))
+				lobbies_list.add_child(lobby_button)
+				lobby_button.pressed.connect(
+					func():
+						# Join the lobby
+						pass
+				)
+	)

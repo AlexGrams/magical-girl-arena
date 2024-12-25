@@ -3,6 +3,8 @@ extends Node
 # Manager class for the overall state of the game scene. 
 # Controls spawning players and related functionality. 
 
+# Should only be false in debugging builds.
+const USING_GODOT_STEAM := true
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
@@ -18,7 +20,18 @@ var players_selecting_upgrades: int = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if OS.has_feature("release") and not USING_GODOT_STEAM:
+		push_error("Steam support is turned off! Ensure game_state.USING_GODOT_STEAM is true before making release build.")
+		return
+	
+	# Set up Steam functionality
+	if USING_GODOT_STEAM:
+		Steam.steamInitEx(true, 480)
+		
+		if OS.has_feature("release") and Steam.getAppID() == 480:
+			push_error("Release app ID was not changed from the testing value of 480! 
+						Change it in game_state or make this a debug build.")
+			return
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
