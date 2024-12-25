@@ -32,6 +32,10 @@ func _on_join_button_button_down() -> void:
 	MultiplayerManager.create_client()
 
 
+func _on_refresh_button_button_down() -> void:
+	pass
+
+
 # Adds list of joinable lobbies to the lobby screen.
 func setup_lobby_screen() -> void:
 	# TODO: Maybe make the region a setting? This current one is the most restrictive.
