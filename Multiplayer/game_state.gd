@@ -36,7 +36,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	Steam.run_callbacks()
 
 
 # Set up the shooting portion of the game. Switches the scene and loads the players.
@@ -109,7 +109,6 @@ func player_selected_upgrade() -> void:
 		return
 	
 	players_selecting_upgrades -= 1
-	print(players_selecting_upgrades)
 	
 	if players_selecting_upgrades <= 0:
 		resume_game.rpc()

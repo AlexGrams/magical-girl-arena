@@ -32,8 +32,11 @@ func _on_join_button_button_down() -> void:
 	MultiplayerManager.create_client()
 
 
-func _on_refresh_button_button_down() -> void:
-	pass
+func request_lobby_list() -> void:
+	for button in lobbies_list.get_children():
+		button.queue_free()
+	
+	Steam.requestLobbyList()
 
 
 # Adds list of joinable lobbies to the lobby screen.
@@ -58,3 +61,5 @@ func setup_lobby_screen() -> void:
 						pass
 				)
 	)
+	
+	request_lobby_list()

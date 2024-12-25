@@ -162,18 +162,19 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -758.0
-offset_top = -419.0
-offset_right = -36.0
-offset_bottom = -27.0
+offset_left = -769.0
+offset_top = -429.0
+offset_right = -47.0
+offset_bottom = -37.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="LobbiesList" type="VBoxContainer" parent="Lobby/LobbiesScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="button_down" from="Lobby/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="Lobby/JoinButton" to="." method="_on_join_button_button_down"]
-[connection signal="button_down" from="Lobby/RefreshButton" to="." method="_on_refresh_button_button_down"]
+[connection signal="button_down" from="Lobby/RefreshButton" to="." method="request_lobby_list"]
