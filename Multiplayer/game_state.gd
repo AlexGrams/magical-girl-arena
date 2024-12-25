@@ -5,17 +5,26 @@ extends Node
 
 # Should only be false in debugging builds.
 const USING_GODOT_STEAM := true
+# Max number of players. I believe this includes the server.
+const MAX_PLAYERS: int = 4
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
+# The local player's name.
+var player_name: String = ""
+# TODO: Deprecate
 # Unordered list of instantiated player characters in the game
 var player_characters = []
+# Map of player IDs to their names.
+var players = {}
 # Experience to next level
 var experience: float = 0.0
 # Current level
 var level: int = 1
 var players_selecting_upgrades: int = -1
+# TODO: Figure out what this is for. Related to Godot Steam.
+var peer: SteamMultiplayerPeer = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,11 +41,37 @@ func _ready() -> void:
 			push_error("Release app ID was not changed from the testing value of 480! 
 						Change it in game_state or make this a debug build.")
 			return
+		
+		# If lobby creation is successful, set the name of the lobby and create the 
+		# multiplayer socket.
+		Steam.lobby_created.connect(
+			func(status: int, new_lobby_id: int):
+				if status == 1:
+					Steam.setLobbyData(new_lobby_id, "name", 
+						str(Steam.getPersonaName(), "'s MGA Lobby"))
+					create_steam_socket()
+				else:
+					push_error("Error on create lobby!")
+		)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
+
+
+func create_steam_socket():
+	peer = SteamMultiplayerPeer.new()
+	peer.create_host(0)
+	multiplayer.set_multiplayer_peer(peer)
+
+
+# Create a new public multiplayer lobby.
+func host_lobby(host_player_name: String) -> void:
+	if USING_GODOT_STEAM:
+		player_name = host_player_name
+		players[1] = host_player_name
+		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
 
 
 # Set up the shooting portion of the game. Switches the scene and loads the players.

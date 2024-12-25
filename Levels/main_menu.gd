@@ -25,7 +25,13 @@ func _on_lobby_button_button_down() -> void:
 
 
 func _on_host_button_button_down() -> void:
-	MultiplayerManager.create_server()
+	if GameState.USING_GODOT_STEAM:
+		# TODO: Toggle lobby scrollbox visibility.
+		GameState.host_lobby(Steam.getPersonaName())
+		# TODO: Figure out what this does, then port functionality over if it is useful.
+		#refresh_lobby()
+	else:
+		MultiplayerManager.create_server()
 
 
 func _on_join_button_button_down() -> void:

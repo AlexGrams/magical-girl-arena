@@ -6,9 +6,6 @@ class_name MGAMultiplayerManager
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const PORT_NUMBER: int = 34229
 
-# Max number of players. I believe this includes the server.
-const MAX_PLAYERS: int = 4
-
 var peer: MultiplayerPeer = null
 # Map of connected players to their data
 var player_ids = {}
@@ -30,7 +27,7 @@ func _process(_delta: float) -> void:
 # Create the server for the multiplayer game
 func create_server():
 	peer = ENetMultiplayerPeer.new()
-	var create_server_result = peer.create_server(PORT_NUMBER, MAX_PLAYERS)
+	var create_server_result = peer.create_server(PORT_NUMBER, GameState.MAX_PLAYERS)
 	multiplayer.multiplayer_peer = peer
 	
 	if create_server_result != OK:
@@ -40,7 +37,7 @@ func create_server():
 	player_ids[1] = null
 	
 	host_created.emit()
-	print("Giga hosting!")
+
 
 # Create a client for the multiplayer game
 func create_client():
@@ -54,7 +51,6 @@ func create_client():
 		return
 	
 	peer_created.emit()
-	print("Clienting!")
 
 
 # Called on all players when a client connects.
