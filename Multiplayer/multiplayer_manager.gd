@@ -57,8 +57,9 @@ func create_client():
 func _on_peer_connected(id: int) -> void:
 	player_ids[id] = null
 	
-	if multiplayer.get_unique_id() == 1:
-		GameState.start_game()
+	# TODO: Disabled for trying to get Lobby joining working.
+	#if multiplayer.get_unique_id() == 1:
+		#GameState.start_game()
 
 
 # Called on all players when a client disconnects.
