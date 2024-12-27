@@ -62,10 +62,15 @@ func _ready() -> void:
 					push_error("Error on create lobby!")
 		)
 		
-		# When another client joins this server.
+		# When this client connects to a server. Includes when the client's own server.
 		Steam.lobby_joined.connect(
-			func(_new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
-				register_player.rpc(player_name)
+			func(new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
+				# If the client is not the server, tell the server that we are connected to it.
+				var id = Steam.getLobbyOwner(new_lobby_id)
+				if id != Steam.getSteamID():
+					connect_steam_socket(id)
+					register_player.rpc(player_name)
+					players[multiplayer.get_unique_id()] = player_name
 		)
 
 
@@ -74,9 +79,17 @@ func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 
 
+# Set this client up as a game server through Steam.
 func create_steam_socket():
 	peer = SteamMultiplayerPeer.new()
 	peer.create_host(0)
+	multiplayer.set_multiplayer_peer(peer)
+
+
+# Connect as a client to a Steam server.
+func connect_steam_socket(steam_id : int):
+	peer = SteamMultiplayerPeer.new()
+	peer.create_client(steam_id, 0)
 	multiplayer.set_multiplayer_peer(peer)
 
 

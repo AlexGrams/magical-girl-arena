@@ -71,7 +71,6 @@ func setup_lobby_screen() -> void:
 				lobby_button.pressed.connect(
 					func():
 						# Join the lobby
-						# TODO: Hide "Join Lobby" screen, show the individual "Lobby" screen.
 						$LobbyList.hide()
 						lobby.show()
 						
