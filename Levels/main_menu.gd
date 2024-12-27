@@ -3,9 +3,15 @@ extends Control
 # Will be spawned in the Lobby screen. Clicking allows the player to join a lobby
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
-@export var lobbies_list: VBoxContainer
+## The first screen shown when the game is started.
+@export var main_menu: Control
+## The screen to host or join a lobby.
+@export var lobby_list: Control
+## The scroll box showing lobbies available to join.
+@export var lobbies_list_container: VBoxContainer
+## The screen showing players in the current lobby.
 @export var lobby: Control
-# Contains the UI elements for displaying the players in the lobby
+## Contains the UI elements for displaying the players in the lobby
 @export var players_holder: BoxContainer
 
 
@@ -25,8 +31,8 @@ func _on_quit_button_button_down() -> void:
 
 
 func _on_lobby_button_button_down() -> void:
-	$Main.visible = false
-	$LobbyList.visible = true
+	main_menu.hide()
+	lobby_list.show()
 
 
 func _on_host_button_button_down() -> void:
@@ -34,7 +40,7 @@ func _on_host_button_button_down() -> void:
 		GameState.host_lobby(Steam.getPersonaName())
 		
 		# Show the lobby that you're in after clicking the "Host" button.
-		$LobbyList.hide()
+		lobby_list.hide()
 		lobby.show()
 		refresh_lobby()
 	else:
@@ -46,7 +52,7 @@ func _on_join_button_button_down() -> void:
 
 
 func request_lobby_list() -> void:
-	for button in lobbies_list.get_children():
+	for button in lobbies_list_container.get_children():
 		button.queue_free()
 	
 	Steam.requestLobbyList()
@@ -67,7 +73,7 @@ func setup_lobby_screen() -> void:
 				
 				# Set up the button for this lobby
 				lobby_button.set_text(str(lobby_name, ": ", player_count, " players"))
-				lobbies_list.add_child(lobby_button)
+				lobbies_list_container.add_child(lobby_button)
 				lobby_button.pressed.connect(
 					func():
 						# Join the lobby
@@ -90,3 +96,8 @@ func refresh_lobby() -> void:
 		players_holder.get_child(i).get_node("ID").text = str(player_id)
 		players_holder.get_child(i).get_node("Username").text = GameState.players[player_id]
 		i += 1
+
+
+func _on_lobby_list_back_button_button_down() -> void:
+	lobby_list.hide()
+	main_menu.show()
