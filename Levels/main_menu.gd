@@ -28,7 +28,8 @@ func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
 		# TODO: Toggle lobby scrollbox visibility.
 		GameState.host_lobby(Steam.getPersonaName())
-		# TODO: Figure out what this does, then port functionality over if it is useful.
+		
+		# Show the lobby that you're in after clicking the "Host" button.
 		#refresh_lobby()
 	else:
 		MultiplayerManager.create_server()
@@ -53,9 +54,9 @@ func setup_lobby_screen() -> void:
 	Steam.lobby_match_list.connect(
 		# lobbies: Array[int] (lobby IDs) - All lobbies in the specified region for this game.
 		func(lobbies: Array):
-			for lobby in lobbies:
-				var lobby_name: String = Steam.getLobbyData(lobby, "Name")
-				var player_count: int = Steam.getNumLobbyMembers(lobby)
+			for lobby_id: int in lobbies:
+				var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
+				var player_count: int = Steam.getNumLobbyMembers(lobby_id)
 				var lobby_button: Button = lobby_button_scene.instantiate()
 				
 				# Set up the button for this lobby
@@ -64,7 +65,10 @@ func setup_lobby_screen() -> void:
 				lobby_button.pressed.connect(
 					func():
 						# Join the lobby
-						pass
+						# TODO: Hide "Join Lobby" screen, show the individual "Lobby" screen.
+						GameState.join_lobby(
+							lobby_id,
+							Steam.getPersonaName())
 				)
 	)
 	

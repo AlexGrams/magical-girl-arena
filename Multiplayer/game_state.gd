@@ -74,6 +74,12 @@ func host_lobby(host_player_name: String) -> void:
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
 
 
+# Join an existing multiplayer lobby
+func join_lobby(lobby_id : int, new_player_name : String):
+	player_name = new_player_name
+	Steam.joinLobby(lobby_id)
+
+
 # Set up the shooting portion of the game. Switches the scene and loads the players.
 func start_game():
 	assert(multiplayer.is_server())
