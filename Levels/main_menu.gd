@@ -4,6 +4,7 @@ extends Control
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
 @export var lobbies_list: VBoxContainer
+@export var lobby: Control
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,15 +22,16 @@ func _on_quit_button_button_down() -> void:
 
 func _on_lobby_button_button_down() -> void:
 	$Main.visible = false
-	$Lobby.visible = true
+	$LobbyList.visible = true
 
 
 func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
-		# TODO: Toggle lobby scrollbox visibility.
 		GameState.host_lobby(Steam.getPersonaName())
 		
 		# Show the lobby that you're in after clicking the "Host" button.
+		$LobbyList.hide()
+		lobby.show()
 		#refresh_lobby()
 	else:
 		MultiplayerManager.create_server()
@@ -66,6 +68,9 @@ func setup_lobby_screen() -> void:
 					func():
 						# Join the lobby
 						# TODO: Hide "Join Lobby" screen, show the individual "Lobby" screen.
+						$LobbyList.hide()
+						lobby.show()
+						
 						GameState.join_lobby(
 							lobby_id,
 							Steam.getPersonaName())

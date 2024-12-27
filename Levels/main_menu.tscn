@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("lobbies_list")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("lobbies_list", "lobby")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f3ir0")
-lobbies_list = NodePath("Lobby/LobbiesScrollContainer/LobbiesList")
+lobbies_list = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList")
+lobby = NodePath("Lobby")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1
@@ -84,6 +85,95 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Magical Girl Arena[/center]"
 
+[node name="LobbyList" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 112.0
+offset_bottom = 187.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Lobby[/center]"
+
+[node name="HostButton" type="Button" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -458.0
+offset_top = -367.0
+offset_right = -258.0
+offset_bottom = -271.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 96)
+theme_override_font_sizes/font_size = 48
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -456.0
+offset_top = -256.0
+offset_right = -256.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 96)
+theme_override_font_sizes/font_size = 48
+text = "Join"
+
+[node name="RefreshButton" type="Button" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -456.0
+offset_top = -142.0
+offset_right = -256.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(100, 96)
+theme_override_font_sizes/font_size = 48
+text = "Refresh"
+
+[node name="LobbiesScrollContainer" type="ScrollContainer" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -769.0
+offset_top = -429.0
+offset_right = -47.0
+offset_bottom = -37.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LobbiesList" type="VBoxContainer" parent="LobbyList/LobbiesScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Lobby" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -104,77 +194,80 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Lobby[/center]"
 
-[node name="HostButton" type="Button" parent="Lobby"]
+[node name="Players" type="HBoxContainer" parent="Lobby"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -458.0
-offset_top = -367.0
-offset_right = -258.0
-offset_bottom = -271.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Host"
-
-[node name="JoinButton" type="Button" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -456.0
-offset_top = -256.0
-offset_right = -256.0
-offset_bottom = -160.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Join"
-
-[node name="RefreshButton" type="Button" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -456.0
-offset_top = -142.0
-offset_right = -256.0
-offset_bottom = -46.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Refresh"
-
-[node name="LobbiesScrollContainer" type="ScrollContainer" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -769.0
-offset_top = -429.0
-offset_right = -47.0
-offset_bottom = -37.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 37.0
+offset_top = 213.0
+offset_right = -49.0
+offset_bottom = 482.0
+grow_horizontal = 2
+theme_override_constants/separation = 30
+alignment = 1
 
-[node name="LobbiesList" type="VBoxContainer" parent="Lobby/LobbiesScrollContainer"]
+[node name="Player1" type="VBoxContainer" parent="Lobby/Players"]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="ID" type="Label" parent="Lobby/Players/Player1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ID Goes here"
+horizontal_alignment = 1
+
+[node name="Username" type="Label" parent="Lobby/Players/Player1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Username goes here"
+horizontal_alignment = 1
+
+[node name="Player2" type="VBoxContainer" parent="Lobby/Players"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="Lobby/Players/Player2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ID Goes here"
+horizontal_alignment = 1
+
+[node name="Username" type="Label" parent="Lobby/Players/Player2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Username goes here"
+horizontal_alignment = 1
+
+[node name="Player3" type="VBoxContainer" parent="Lobby/Players"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="Lobby/Players/Player3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ID Goes here"
+horizontal_alignment = 1
+
+[node name="Username" type="Label" parent="Lobby/Players/Player3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Username goes here"
+horizontal_alignment = 1
+
+[node name="Player4" type="VBoxContainer" parent="Lobby/Players"]
+layout_mode = 2
+
+[node name="ID" type="Label" parent="Lobby/Players/Player4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ID Goes here"
+horizontal_alignment = 1
+
+[node name="Username" type="Label" parent="Lobby/Players/Player4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Username goes here"
+horizontal_alignment = 1
 
 [connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
-[connection signal="button_down" from="Lobby/HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="Lobby/JoinButton" to="." method="_on_join_button_button_down"]
-[connection signal="button_down" from="Lobby/RefreshButton" to="." method="request_lobby_list"]
+[connection signal="button_down" from="LobbyList/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="LobbyList/JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="button_down" from="LobbyList/RefreshButton" to="." method="request_lobby_list"]
