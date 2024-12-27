@@ -26,6 +26,8 @@ var players_selecting_upgrades: int = -1
 # TODO: Figure out what this is for. Related to Godot Steam.
 var peer: SteamMultiplayerPeer = null
 
+signal player_list_changed()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +44,12 @@ func _ready() -> void:
 						Change it in game_state or make this a debug build.")
 			return
 		
+		multiplayer.peer_connected.connect(
+			func(id : int):
+				# Tell the connected peer that we have also joined
+				register_player.rpc_id(id, player_name)
+		)
+		
 		# If lobby creation is successful, set the name of the lobby and create the 
 		# multiplayer socket.
 		Steam.lobby_created.connect(
@@ -52,6 +60,12 @@ func _ready() -> void:
 					create_steam_socket()
 				else:
 					push_error("Error on create lobby!")
+		)
+		
+		# When another client joins this server.
+		Steam.lobby_joined.connect(
+			func(_new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
+				register_player.rpc(player_name)
 		)
 
 
@@ -110,6 +124,14 @@ func start_game():
 # Add a player character to local list of spawned characters
 func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
+
+
+# Called when a new player enters the lobby
+@rpc("any_peer", "call_local")
+func register_player(new_player_name: String):
+	var id = multiplayer.get_remote_sender_id()
+	players[id] = new_player_name
+	player_list_changed.emit()
 
 
 # Load the main game scene and hide the menu.

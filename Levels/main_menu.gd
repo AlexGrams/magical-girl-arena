@@ -5,10 +5,14 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
 @export var lobbies_list: VBoxContainer
 @export var lobby: Control
+# Contains the UI elements for displaying the players in the lobby
+@export var players_holder: BoxContainer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameState.player_list_changed.connect(self.refresh_lobby)
+	
 	setup_lobby_screen()
 
 
@@ -32,7 +36,7 @@ func _on_host_button_button_down() -> void:
 		# Show the lobby that you're in after clicking the "Host" button.
 		$LobbyList.hide()
 		lobby.show()
-		#refresh_lobby()
+		refresh_lobby()
 	else:
 		MultiplayerManager.create_server()
 
@@ -78,3 +82,12 @@ func setup_lobby_screen() -> void:
 	)
 	
 	request_lobby_list()
+
+
+# Updates the lobby view to show the players that are connected
+func refresh_lobby() -> void:
+	var i = 0
+	for player_id in GameState.players:
+		players_holder.get_child(i).get_node("ID").text = str(player_id)
+		players_holder.get_child(i).get_node("Username").text = GameState.players[player_id]
+		i += 1
