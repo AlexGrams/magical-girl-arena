@@ -116,7 +116,7 @@ func start_game():
 	
 	# Spawn each player at a spawn point.
 	var spawn_point_index = 0
-	for player_id in MultiplayerManager.player_ids:
+	for player_id in players.keys():
 		var player: CharacterBody2D	 = player_resource.instantiate()
 		player.set_label_name(str(player_id))
 		get_tree().root.get_node("Playground").add_child(player, true)
