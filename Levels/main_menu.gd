@@ -11,8 +11,10 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
 @export var lobby: Control
-## Contains the UI elements for displaying the players in the lobby
+## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: BoxContainer
+## The button to begin the actual game. Disabled for clients that are not the host.
+@export var start_game_button: Button
 
 
 # Called when the node enters the scene tree for the first time.
@@ -77,8 +79,9 @@ func setup_lobby_screen() -> void:
 				lobby_button.pressed.connect(
 					func():
 						# Join the lobby
-						$LobbyList.hide()
+						lobby_list.hide()
 						lobby.show()
+						start_game_button.hide()
 						
 						GameState.join_lobby(
 							lobby_id,
@@ -101,3 +104,8 @@ func refresh_lobby() -> void:
 func _on_lobby_list_back_button_button_down() -> void:
 	lobby_list.hide()
 	main_menu.show()
+
+
+# The button that only the lobby host can press to begin the shooting part of the game.
+func _on_start_game_button_down() -> void:
+	GameState.start_game()
