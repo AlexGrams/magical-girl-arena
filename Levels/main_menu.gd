@@ -50,7 +50,8 @@ func _on_host_button_button_down() -> void:
 
 
 func _on_join_button_button_down() -> void:
-	MultiplayerManager.create_client()
+	if not GameState.USING_GODOT_STEAM:
+		MultiplayerManager.create_client()	
 
 
 func request_lobby_list() -> void:

@@ -35,6 +35,7 @@ func create_server():
 		return
 	
 	player_ids[1] = null
+	GameState.players[1] = "Host"
 	
 	host_created.emit()
 
@@ -55,11 +56,13 @@ func create_client():
 
 # Called on all players when a client connects.
 func _on_peer_connected(id: int) -> void:
+	GameState.players[id] = "Client"
 	player_ids[id] = null
 	
-	# TODO: Disabled for trying to get Lobby joining working.
-	#if multiplayer.get_unique_id() == 1:
-		#GameState.start_game()
+	# If using ENet for testing, start the game as soon as one client connects.
+	if not GameState.USING_GODOT_STEAM:
+		if multiplayer.get_unique_id() == 1:
+			GameState.start_game()
 
 
 # Called on all players when a client disconnects.
