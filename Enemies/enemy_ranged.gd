@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			global_position = global_position.move_toward(player.global_position, delta*speed)
 		else:
 			# Shoot at the player
-			if fire_timer >= fire_interval:
+			if is_multiplayer_authority() and fire_timer >= fire_interval:
 				var bullet = bullet_scene.instantiate()
 				var direction = player.global_position - self.global_position
 				var direction_normal = direction.normalized()
