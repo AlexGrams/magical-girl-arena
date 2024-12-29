@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 				bullet.set_damage(bullet_damage)
 				bullet.direction = direction_normal
 				bullet.position = self.global_position + (direction_normal * 100)
-				get_tree().root.add_child(bullet)
+				get_node("..").add_child(bullet, true)
 				fire_timer = 0.0
 	else:
 		player = get_nearest_player_character()
