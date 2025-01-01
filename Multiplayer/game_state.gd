@@ -182,17 +182,17 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 func disconnect_local_player():
 	if lobby_id != 0:
 		Steam.leaveLobby(lobby_id)
-		
 		lobby_id = 0
-		players.clear()
 
-		# TODO: See if unused. Likely so becuase we're not explicitly setting up P2P connections.
-		## Close session with all users
-		#for this_member in lobby_members:
-			## Make sure this isn't your Steam ID
-			#if this_member['steam_id'] != steam_id:
-				## Close the P2P session
-				#Steam.closeP2PSessionWithUser(this_member['steam_id'])
+		# Close session with all users
+		for this_member in players:
+			print(this_member, Steam.getSteamID())
+			# Make sure this isn't your Steam ID
+			if this_member != Steam.getSteamID():
+				# Close the P2P session
+				Steam.closeP2PSessionWithUser(this_member)
+				
+		players.clear()
 
 
 # Called when a new player enters the lobby
