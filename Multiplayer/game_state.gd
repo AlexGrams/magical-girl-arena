@@ -140,9 +140,9 @@ func host_lobby(host_player_name: String) -> void:
 
 
 # Join an existing multiplayer lobby
-func join_lobby(lobby_id : int, new_player_name : String):
+func join_lobby(new_lobby_id : int, new_player_name : String):
 	player_name = new_player_name
-	Steam.joinLobby(lobby_id)
+	Steam.joinLobby(new_lobby_id)
 
 
 # Set up the shooting portion of the game. Switches the scene and loads the players.
@@ -204,6 +204,7 @@ func register_player(new_player_name: String):
 
 
 # Remove a player from our map of registered players.
+@rpc("any_peer", "call_local")
 func unregister_player(id: int):
 	players.erase(id)
 	player_list_changed.emit()
