@@ -181,9 +181,6 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 # all clients if we are the server.
 func disconnect_local_player():
 	if lobby_id != 0:
-		Steam.leaveLobby(lobby_id)
-		lobby_id = 0
-
 		# Close session with all users
 		var local_player_steam_id: int = Steam.getSteamID()
 		for player_index: int in range(Steam.getNumLobbyMembers(lobby_id)):
@@ -195,7 +192,10 @@ func disconnect_local_player():
 			if player_steam_id != local_player_steam_id:
 				# Close the P2P session
 				Steam.closeP2PSessionWithUser(player_steam_id)
-				
+		
+		# Leave the lobby and reset variables.
+		Steam.leaveLobby(lobby_id)
+		lobby_id = 0
 		players.clear()
 
 
