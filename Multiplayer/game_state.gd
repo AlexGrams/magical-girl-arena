@@ -61,7 +61,7 @@ func _ready() -> void:
 		
 		# TODO: See if we can use this or get it to work, don't know.
 		multiplayer.peer_disconnected.connect(
-			func(id : int):
+			func(_id : int):
 				if false:#is_game_in_progress():
 					# TODO: Handle disconnecting while in a game
 					pass
@@ -120,16 +120,10 @@ func _ready() -> void:
 		)
 		
 		Steam.lobby_chat_update.connect(
-			func(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int):
-				print(lobby_id)
-				print(changed_id)
-				print(making_change_id)
-				print(chat_state)
-				
+			func(_updated_lobby_id: int, changed_id: int, _making_change_id: int, chat_state: int):
 				# chat_state is a bitfield indicating what the Steam user changed_id has done
 				# More: https://partner.steamgames.com/doc/api/ISteamMatchmaking#LobbyChatUpdate_t 
 				if chat_state & 2:
-					print("User has left")
 					unregister_player_by_steam_id(changed_id)
 		)
 

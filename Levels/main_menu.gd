@@ -122,3 +122,9 @@ func refresh_lobby() -> void:
 		players_holder.get_child(i).get_node("ID").text = str(player_id)
 		players_holder.get_child(i).get_node("Username").text = GameState.players[player_id]
 		i += 1
+	
+	# Reset the remaining holders
+	while i < GameState.MAX_PLAYERS:
+		players_holder.get_child(i).get_node("ID").text = "Player ID left"
+		players_holder.get_child(i).get_node("Username").text = "Player name left"
+		i += 1
