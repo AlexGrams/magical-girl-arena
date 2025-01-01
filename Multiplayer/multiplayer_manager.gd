@@ -36,6 +36,7 @@ func create_server():
 	
 	player_ids[1] = null
 	GameState.players[1] = "Host"
+	GameState.steam_ids[GameState.local_player_steam_id] = 1
 	
 	host_created.emit()
 
@@ -57,6 +58,7 @@ func create_client():
 # Called on all players when a client connects.
 func _on_peer_connected(id: int) -> void:
 	GameState.players[id] = "Client"
+	GameState.steam_ids[GameState.local_player_steam_id] = id
 	player_ids[id] = null
 	
 	# If using ENet for testing, start the game as soon as one client connects.

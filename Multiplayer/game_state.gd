@@ -62,16 +62,7 @@ func _ready() -> void:
 		# TODO: See if we can use this or get it to work, don't know.
 		multiplayer.peer_disconnected.connect(
 			func(_id : int):
-				if false:#is_game_in_progress():
-					# TODO: Handle disconnecting while in a game
-					pass
-					#if multiplayer.is_server():
-						#game_error.emit("Player " + players[id] + " disconnected")
-						#end_game()
-				else:
-					pass
-					# Player disconnected while on the lobby screen.
-					#unregister_player(id)
+				pass
 		)
 		
 		# TODO: Possibly do something for the following three events.
@@ -158,6 +149,7 @@ func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM:
 		player_name = host_player_name
 		players[1] = host_player_name
+		steam_ids[local_player_steam_id]
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
 
 
@@ -236,7 +228,12 @@ func register_player(args: Array):
 @rpc("any_peer", "call_local")
 func unregister_player(id: int):
 	players.erase(id)
-	# TODO: Need to update to also remove from "steam_ids"
+	# Hack to remove from steam_ids as well
+	for steam_id in steam_ids:
+		if steam_ids[steam_id] == id:
+			steam_ids.erase(steam_id)
+			break
+	
 	player_list_changed.emit()
 
 
