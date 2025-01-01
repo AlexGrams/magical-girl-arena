@@ -56,7 +56,7 @@ func _ready() -> void:
 		multiplayer.peer_connected.connect(
 			func(id : int):
 				# Tell the connected peer that we have also joined
-				register_player.rpc_id(id, player_name, local_player_steam_id)
+				register_player.rpc_id(id, [player_name, local_player_steam_id])
 		)
 		
 		# TODO: See if we can use this or get it to work, don't know.
@@ -116,7 +116,7 @@ func _ready() -> void:
 				var id = Steam.getLobbyOwner(new_lobby_id)
 				if id != local_player_steam_id:
 					connect_steam_socket(id)
-					register_player.rpc(player_name, local_player_steam_id)
+					register_player.rpc([player_name, local_player_steam_id])
 		)
 		
 		Steam.lobby_chat_update.connect(
@@ -216,8 +216,11 @@ func disconnect_local_player():
 
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
-func register_player(new_player_name: String, new_steam_id: int):
+func register_player(args: Array):
+	var new_player_name: String = args[0]
+	var new_steam_id: int = args[1]
 	var id = multiplayer.get_remote_sender_id()
+	
 	players[id] = new_player_name
 	steam_ids[new_steam_id] = id
 	player_list_changed.emit()
