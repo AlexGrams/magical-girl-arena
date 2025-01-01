@@ -123,7 +123,11 @@ func _ready() -> void:
 			func(_updated_lobby_id: int, changed_id: int, _making_change_id: int, chat_state: int):
 				# chat_state is a bitfield indicating what the Steam user changed_id has done
 				# More: https://partner.steamgames.com/doc/api/ISteamMatchmaking#LobbyChatUpdate_t 
-				if chat_state & 2:
+				if chat_state & 1:
+					# Player joined a lobby
+					register_player.rpc([player_name, local_player_steam_id])
+				elif chat_state & 2:
+					# Player left a lobby
 					unregister_player_by_steam_id(changed_id)
 		)
 
@@ -131,6 +135,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
+	
+	player_list_changed.emit()
 
 
 # Set this client up as a game server through Steam.
