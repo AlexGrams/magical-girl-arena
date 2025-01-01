@@ -114,9 +114,9 @@ func _ready() -> void:
 				lobby_id = new_lobby_id
 				# If the client is not the server, tell the server that we are connected to it.
 				var id = Steam.getLobbyOwner(new_lobby_id)
-				if id != Steam.getSteamID():
+				if id != local_player_steam_id:
 					connect_steam_socket(id)
-					register_player.rpc(player_name, Steam.getSteamID())
+					register_player.rpc(player_name, local_player_steam_id)
 		)
 		
 		Steam.lobby_chat_update.connect(
