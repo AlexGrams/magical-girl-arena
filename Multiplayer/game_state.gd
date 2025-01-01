@@ -185,12 +185,13 @@ func disconnect_local_player():
 		lobby_id = 0
 
 		# Close session with all users
-		for this_member in players:
-			print(this_member, Steam.getSteamID())
+		var local_player_steam_id: int = Steam.getSteamID()
+		for player_index: int in range(len(players)):
 			# Make sure this isn't your Steam ID
-			if this_member != Steam.getSteamID():
+			var player_steam_id = Steam.getLobbyMemberByIndex(lobby_id, player_index)
+			if player_steam_id != local_player_steam_id:
 				# Close the P2P session
-				Steam.closeP2PSessionWithUser(this_member)
+				Steam.closeP2PSessionWithUser(player_steam_id)
 				
 		players.clear()
 
