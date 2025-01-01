@@ -18,6 +18,11 @@ var player_name: String = ""
 var player_characters = []
 # Map of player IDs to their names.
 var players = {}
+# TODO: Can probably combine with "players" above.
+# Map of Steam IDs to player IDs.
+var steam_ids = {}
+# This client's Steam ID
+var local_player_steam_id: int = 0
 # The Steam lobby ID of the lobby that this player is in.
 var lobby_id: int = 0
 # Experience to next level
@@ -46,12 +51,15 @@ func _ready() -> void:
 						Change it in game_state or make this a debug build.")
 			return
 		
+		local_player_steam_id = Steam.getSteamID()
+		
 		multiplayer.peer_connected.connect(
 			func(id : int):
 				# Tell the connected peer that we have also joined
-				register_player.rpc_id(id, player_name)
+				register_player.rpc_id(id, player_name, local_player_steam_id)
 		)
 		
+		# TODO: See if we can use this or get it to work, don't know.
 		multiplayer.peer_disconnected.connect(
 			func(id : int):
 				if false:#is_game_in_progress():
@@ -61,8 +69,9 @@ func _ready() -> void:
 						#game_error.emit("Player " + players[id] + " disconnected")
 						#end_game()
 				else:
+					pass
 					# Player disconnected while on the lobby screen.
-					unregister_player(id)
+					#unregister_player(id)
 		)
 		
 		# TODO: Possibly do something for the following three events.
@@ -107,8 +116,21 @@ func _ready() -> void:
 				var id = Steam.getLobbyOwner(new_lobby_id)
 				if id != Steam.getSteamID():
 					connect_steam_socket(id)
-					register_player.rpc(player_name)
-					players[multiplayer.get_unique_id()] = player_name
+					register_player.rpc(player_name, Steam.getSteamID())
+		)
+		
+		Steam.lobby_chat_update.connect(
+			func(lobby_id: int, changed_id: int, making_change_id: int, chat_state: int):
+				print(lobby_id)
+				print(changed_id)
+				print(making_change_id)
+				print(chat_state)
+				
+				# chat_state is a bitfield indicating what the Steam user changed_id has done
+				# More: https://partner.steamgames.com/doc/api/ISteamMatchmaking#LobbyChatUpdate_t 
+				if chat_state & 2:
+					print("User has left")
+					unregister_player_by_steam_id(changed_id)
 		)
 
 
@@ -182,7 +204,6 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 func disconnect_local_player():
 	if lobby_id != 0:
 		# Close session with all users
-		var local_player_steam_id: int = Steam.getSteamID()
 		for player_index: int in range(Steam.getNumLobbyMembers(lobby_id)):
 			# Make sure this isn't your Steam ID
 			
@@ -201,9 +222,10 @@ func disconnect_local_player():
 
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
-func register_player(new_player_name: String):
+func register_player(new_player_name: String, new_steam_id: int):
 	var id = multiplayer.get_remote_sender_id()
 	players[id] = new_player_name
+	steam_ids[new_steam_id] = id
 	player_list_changed.emit()
 
 
@@ -211,6 +233,14 @@ func register_player(new_player_name: String):
 @rpc("any_peer", "call_local")
 func unregister_player(id: int):
 	players.erase(id)
+	# TODO: Need to update to also remove from "steam_ids"
+	player_list_changed.emit()
+
+
+# Remove a player's variables using their unique Steam ID.
+func unregister_player_by_steam_id(steam_id: int):
+	players.erase(steam_ids[steam_id])
+	steam_ids.erase(steam_id)
 	player_list_changed.emit()
 
 
