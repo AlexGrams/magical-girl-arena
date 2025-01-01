@@ -28,15 +28,18 @@ func _process(_delta: float) -> void:
 	pass
 
 
+# Exit the game.
 func _on_quit_button_button_down() -> void:
 	get_tree().quit()
 
 
+# Go from the main menu to the lobby list.
 func _on_lobby_button_button_down() -> void:
 	main_menu.hide()
 	lobby_list.show()
 
 
+# Start a new lobby.
 func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
 		GameState.host_lobby(Steam.getPersonaName())
@@ -49,9 +52,28 @@ func _on_host_button_button_down() -> void:
 		MultiplayerManager.create_server()
 
 
+# NOTE: For testing. Join a local ENet lobby.
 func _on_join_button_button_down() -> void:
 	if not GameState.USING_GODOT_STEAM:
 		MultiplayerManager.create_client()	
+
+
+# Go from the lobby list to the main menu.
+func _on_lobby_list_back_button_button_down() -> void:
+	lobby_list.hide()
+	main_menu.show()
+
+
+# The button that only the lobby host can press to begin the shooting part of the game.
+func _on_start_game_button_down() -> void:
+	GameState.start_game()
+
+
+# Leave a game lobby. Goes back to the lobby list.
+func _on_leave_button_down() -> void:
+	GameState.disconnect_local_player()
+	lobby.hide()
+	lobby_list.show()
 
 
 func request_lobby_list() -> void:
@@ -100,13 +122,3 @@ func refresh_lobby() -> void:
 		players_holder.get_child(i).get_node("ID").text = str(player_id)
 		players_holder.get_child(i).get_node("Username").text = GameState.players[player_id]
 		i += 1
-
-
-func _on_lobby_list_back_button_button_down() -> void:
-	lobby_list.hide()
-	main_menu.show()
-
-
-# The button that only the lobby host can press to begin the shooting part of the game.
-func _on_start_game_button_down() -> void:
-	GameState.start_game()

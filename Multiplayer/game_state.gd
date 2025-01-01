@@ -18,6 +18,8 @@ var player_name: String = ""
 var player_characters = []
 # Map of player IDs to their names.
 var players = {}
+# The Steam lobby ID of the lobby that this player is in.
+var lobby_id: int = 0
 # Experience to next level
 var experience: float = 0.0
 # Current level
@@ -50,10 +52,45 @@ func _ready() -> void:
 				register_player.rpc_id(id, player_name)
 		)
 		
+		multiplayer.peer_disconnected.connect(
+			func(id : int):
+				if false:#is_game_in_progress():
+					# TODO: Handle disconnecting while in a game
+					pass
+					#if multiplayer.is_server():
+						#game_error.emit("Player " + players[id] + " disconnected")
+						#end_game()
+				else:
+					# Player disconnected while on the lobby screen.
+					unregister_player(id)
+		)
+		
+		# TODO: Possibly do something for the following three events.
+		multiplayer.connected_to_server.connect(
+			func():
+				pass
+				#connection_succeeded.emit()	
+		)
+		
+		multiplayer.connection_failed.connect(
+			func():
+				pass
+				multiplayer.multiplayer_peer = null
+				#connection_failed.emit()
+		)
+		
+		multiplayer.server_disconnected.connect(
+			func():
+				pass
+				#game_error.emit("Server disconnected")
+				#end_game()
+		)
+		
 		# If lobby creation is successful, set the name of the lobby and create the 
 		# multiplayer socket.
 		Steam.lobby_created.connect(
 			func(status: int, new_lobby_id: int):
+				lobby_id = new_lobby_id
 				if status == 1:
 					Steam.setLobbyData(new_lobby_id, "name", 
 						str(Steam.getPersonaName(), "'s MGA Lobby"))
@@ -65,6 +102,7 @@ func _ready() -> void:
 		# When this client connects to a server. Includes when the client's own server.
 		Steam.lobby_joined.connect(
 			func(new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
+				lobby_id = new_lobby_id
 				# If the client is not the server, tell the server that we are connected to it.
 				var id = Steam.getLobbyOwner(new_lobby_id)
 				if id != Steam.getSteamID():
@@ -139,11 +177,35 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
 
 
+# Stops the connection between this player and the server if we are a client, or between
+# all clients if we are the server.
+func disconnect_local_player():
+	if lobby_id != 0:
+		Steam.leaveLobby(lobby_id)
+		
+		lobby_id = 0
+		players.clear()
+
+		# TODO: See if unused. Likely so becuase we're not explicitly setting up P2P connections.
+		## Close session with all users
+		#for this_member in lobby_members:
+			## Make sure this isn't your Steam ID
+			#if this_member['steam_id'] != steam_id:
+				## Close the P2P session
+				#Steam.closeP2PSessionWithUser(this_member['steam_id'])
+
+
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
 func register_player(new_player_name: String):
 	var id = multiplayer.get_remote_sender_id()
 	players[id] = new_player_name
+	player_list_changed.emit()
+
+
+# Remove a player from our map of registered players.
+func unregister_player(id: int):
+	players.erase(id)
 	player_list_changed.emit()
 
 
