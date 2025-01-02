@@ -34,6 +34,8 @@ var players_selecting_upgrades: int = -1
 var peer: SteamMultiplayerPeer = null
 
 signal player_list_changed()
+# Called when the host leaves the lobby.
+signal lobby_closed()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -186,9 +188,16 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
 
 
+# Closes notifies this client that the lobby closed and disconnects the client.
+# Should only be called by the lobby host.
+@rpc("any_peer", "call_remote")
+func lobby_host_left():
+	disconnect_local_player()
+	lobby_closed.emit()
+
+
 # Stops the connection between this player and the server if we are a client, or between
 # all clients if we are the server.
-@rpc("any_peer", "call_remote")
 func disconnect_local_player():
 	if lobby_id != 0:
 		# Close session with all users
@@ -206,7 +215,7 @@ func disconnect_local_player():
 		if multiplayer.get_unique_id() == 1:
 			for player: int in players:
 				if player != 1:
-					disconnect_local_player.rpc_id(player)
+					lobby_host_left.rpc_id(player)
 		
 		# Leave the lobby and reset variables.
 		Steam.leaveLobby(lobby_id)

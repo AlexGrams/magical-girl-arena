@@ -20,6 +20,12 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameState.player_list_changed.connect(self.refresh_lobby)
+	GameState.lobby_closed.connect(
+		func():
+			# Does the same thing as leaving the lobby by clicking the "Leave" button.
+			lobby.hide()
+			lobby_list.show()
+	)
 	
 	setup_lobby_screen()
 
