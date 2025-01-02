@@ -188,6 +188,7 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 
 # Stops the connection between this player and the server if we are a client, or between
 # all clients if we are the server.
+@rpc("any_peer", "call_remote")
 func disconnect_local_player():
 	if lobby_id != 0:
 		# Close session with all users
@@ -200,6 +201,12 @@ func disconnect_local_player():
 			if player_steam_id != local_player_steam_id:
 				# Close the P2P session
 				Steam.closeP2PSessionWithUser(player_steam_id)
+		
+		# If this client was the host, also disconnect the other players
+		if multiplayer.get_unique_id() == 1:
+			for player: int in players:
+				if player != 1:
+					disconnect_local_player.rpc_id(player)
 		
 		# Leave the lobby and reset variables.
 		Steam.leaveLobby(lobby_id)
