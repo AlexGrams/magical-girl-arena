@@ -56,7 +56,7 @@ func _ready() -> void:
 		multiplayer.peer_connected.connect(
 			func(id : int):
 				# Tell the connected peer that this client is in the lobby.
-				register_player.rpc_id(id, [player_name, local_player_steam_id])
+				register_player.rpc_id(id, player_name, local_player_steam_id)
 		)
 		
 		# TODO: See if we can use this or get it to work, don't know.
@@ -69,7 +69,7 @@ func _ready() -> void:
 		multiplayer.connected_to_server.connect(
 			func():
 				# Tell all clients (including the local one) this client's information.
-				register_player.rpc([player_name, local_player_steam_id])
+				register_player.rpc(player_name, local_player_steam_id)
 				#connection_succeeded.emit()	
 		)
 		
@@ -114,10 +114,7 @@ func _ready() -> void:
 			func(_updated_lobby_id: int, changed_id: int, _making_change_id: int, chat_state: int):
 				# chat_state is a bitfield indicating what the Steam user changed_id has done
 				# More: https://partner.steamgames.com/doc/api/ISteamMatchmaking#LobbyChatUpdate_t 
-				if chat_state & 1:
-					# Player joined a lobby
-					register_player.rpc([player_name, local_player_steam_id])
-				elif chat_state & 2:
+				if chat_state & 2:
 					# Player left a lobby
 					unregister_player_by_steam_id(changed_id)
 		)
@@ -212,10 +209,7 @@ func disconnect_local_player():
 
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
-func register_player(args: Array):
-	# TODO: Now that it's working properly, see if we can call an RPC with multiple parameters.
-	var new_player_name: String = args[0]
-	var new_steam_id: int = args[1]
+func register_player(new_player_name: String, new_steam_id: int):
 	var id = multiplayer.get_remote_sender_id()
 	
 	players[id] = new_player_name
