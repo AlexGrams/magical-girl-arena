@@ -104,7 +104,7 @@ func _ready() -> void:
 		Steam.lobby_joined.connect(
 			func(new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
 				lobby_id = new_lobby_id
-				# If the client is not the server, tell the server that we are connected to it.
+				# If the client is not the server, create a Steam socket connection.
 				var id = Steam.getLobbyOwner(new_lobby_id)
 				if id != local_player_steam_id:
 					connect_steam_socket(id)
@@ -213,6 +213,7 @@ func disconnect_local_player():
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
 func register_player(args: Array):
+	# TODO: Now that it's working properly, see if we can call an RPC with multiple parameters.
 	var new_player_name: String = args[0]
 	var new_steam_id: int = args[1]
 	var id = multiplayer.get_remote_sender_id()
