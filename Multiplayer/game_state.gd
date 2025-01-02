@@ -68,7 +68,8 @@ func _ready() -> void:
 		# TODO: Possibly do something for the following three events.
 		multiplayer.connected_to_server.connect(
 			func():
-				pass
+				# Tell all clients (including the local one) this client's information.
+				register_player.rpc([player_name, local_player_steam_id])
 				#connection_succeeded.emit()	
 		)
 		
@@ -107,9 +108,6 @@ func _ready() -> void:
 				var id = Steam.getLobbyOwner(new_lobby_id)
 				if id != local_player_steam_id:
 					connect_steam_socket(id)
-					register_player.rpc([player_name, local_player_steam_id])
-					# TODO: Testing hack to ensure that the RPC gets called locally
-					register_player.rpc_id(multiplayer.get_unique_id(), [player_name, local_player_steam_id])
 		)
 		
 		Steam.lobby_chat_update.connect(
