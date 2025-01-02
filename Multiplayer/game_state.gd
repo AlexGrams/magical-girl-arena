@@ -55,7 +55,7 @@ func _ready() -> void:
 		
 		multiplayer.peer_connected.connect(
 			func(id : int):
-				# Tell the connected peer that we have also joined
+				# Tell the connected peer that this client is in the lobby.
 				register_player.rpc_id(id, [player_name, local_player_steam_id])
 		)
 		
@@ -108,6 +108,8 @@ func _ready() -> void:
 				if id != local_player_steam_id:
 					connect_steam_socket(id)
 					register_player.rpc([player_name, local_player_steam_id])
+					# TODO: Testing hack to ensure that the RPC gets called locally
+					register_player.rpc_id(multiplayer.get_unique_id(), [player_name, local_player_steam_id])
 		)
 		
 		Steam.lobby_chat_update.connect(
@@ -126,8 +128,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
-	
-	player_list_changed.emit()
 
 
 # Set this client up as a game server through Steam.
