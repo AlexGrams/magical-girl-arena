@@ -149,7 +149,7 @@ func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM:
 		player_name = host_player_name
 		players[1] = host_player_name
-		steam_ids[local_player_steam_id]
+		steam_ids[local_player_steam_id] = 1
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
 
 
