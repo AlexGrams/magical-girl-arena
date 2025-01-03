@@ -25,6 +25,7 @@ func _ready() -> void:
 			# Does the same thing as leaving the lobby by clicking the "Leave" button.
 			lobby.hide()
 			lobby_list.show()
+			request_lobby_list()
 	)
 	
 	setup_lobby_screen()
@@ -43,6 +44,7 @@ func _on_quit_button_button_down() -> void:
 func _on_lobby_button_button_down() -> void:
 	main_menu.hide()
 	lobby_list.show()
+	request_lobby_list()
 
 
 # Start a new lobby.
@@ -80,6 +82,7 @@ func _on_leave_button_down() -> void:
 	GameState.disconnect_local_player()
 	lobby.hide()
 	lobby_list.show()
+	request_lobby_list()
 
 
 func request_lobby_list() -> void:
