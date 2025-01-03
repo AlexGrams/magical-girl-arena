@@ -211,6 +211,10 @@ func disconnect_local_player():
 				# Close the P2P session
 				Steam.closeP2PSessionWithUser(player_steam_id)
 		
+		# TODO: Check if multiplayer connection is still going on before calling "multiplayer"
+		# members. If the host leaves, the connection is closed before this code is run
+		# on the clients, causing this to error.
+		
 		# If this client was the host, also disconnect the other players
 		if multiplayer.get_unique_id() == 1:
 			for player: int in players:
