@@ -216,7 +216,7 @@ func disconnect_local_player():
 		# on the clients, causing this to error.
 		
 		# If this client was the host, also disconnect the other players
-		if multiplayer.get_unique_id() == 1:
+		if multiplayer.has_multiplayer_peer() and multiplayer.get_unique_id() == 1:
 			for player: int in players:
 				if player != 1:
 					lobby_host_left.rpc_id(player)
