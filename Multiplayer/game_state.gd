@@ -7,6 +7,9 @@ extends Node
 const USING_GODOT_STEAM := true
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
+# The time in seconds that the host will wait for all clients to disconnect from it before
+# closing its network connection when the host shuts down the lobby.
+const HOST_CLOSE_RPC_TIMEOUT = 5.0
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
@@ -37,6 +40,9 @@ signal player_list_changed()
 # Called when the host leaves the lobby.
 signal lobby_closed()
 
+# Emitted after the last client disconnects from the host, or enough time passes.
+signal _no_clients_connected_or_timeout()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,7 +70,8 @@ func _ready() -> void:
 		# TODO: See if we can use this or get it to work, don't know.
 		multiplayer.peer_disconnected.connect(
 			func(_id : int):
-				pass
+				if len(multiplayer.get_peers()) == 0:
+					_no_clients_connected_or_timeout.emit()
 		)
 		
 		# TODO: Possibly do something for the following three events.
@@ -220,6 +227,15 @@ func disconnect_local_player():
 			for player: int in players:
 				if player != 1:
 					lobby_host_left.rpc_id(player)
+			
+			# Sort of a hack. We need to ensure that the RPCs are sent to the other clients
+			# before closing the connection. To do so, until all the other clients have left.
+			var timeout_func = func():
+				await get_tree().create_timer(HOST_CLOSE_RPC_TIMEOUT).timeout
+				_no_clients_connected_or_timeout.emit()
+			timeout_func.call()
+			
+			await _no_clients_connected_or_timeout
 		
 		# Leave the lobby and reset variables.
 		Steam.leaveLobby(lobby_id)
