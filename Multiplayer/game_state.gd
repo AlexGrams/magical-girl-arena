@@ -30,7 +30,7 @@ var experience: float = 0.0
 # Current level
 var level: int = 1
 var players_selecting_upgrades: int = -1
-# TODO: Figure out what this is for. Related to Godot Steam.
+# The multiplayer peer for the local player.
 var peer: SteamMultiplayerPeer = null
 
 signal player_list_changed()
@@ -221,6 +221,8 @@ func disconnect_local_player():
 		Steam.leaveLobby(lobby_id)
 		lobby_id = 0
 		players.clear()
+		peer.close()
+		peer = null
 
 
 # Called when a new player enters the lobby
