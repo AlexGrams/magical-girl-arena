@@ -40,6 +40,10 @@ func activate_powerup():
 	picked_up_powerup.emit(sprite)
 
 
+func deactivate_powerup():
+	is_on = false
+
+
 func level_up():
 	current_level += 1
 	bullet_damage = damage_levels[min(damage_levels.size() - 1, current_level)]

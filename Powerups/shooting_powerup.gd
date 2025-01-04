@@ -16,6 +16,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not is_on:
+		return
+	
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
 		var direction = (get_global_mouse_position() - self.global_position).normalized()
@@ -32,9 +35,16 @@ func _process(delta: float) -> void:
 		
 		shoot_timer = 0
 
+
 func activate_powerup():
 	is_on = true
 	picked_up_powerup.emit()
+
+
+func deactivate_powerup():
+	is_on = false
+	shoot_timer = 0.0
+
 
 func level_up():
 	pass

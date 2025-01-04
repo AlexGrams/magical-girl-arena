@@ -11,11 +11,15 @@ signal powerup_level_up(new_level: int, new_damage: float)
 # Meant to be overridden
 func level_up():
 	powerup_level_up.emit(0, 0)
-	print("Powerup.level_up(): THIS SHOULD NOT BE ACTIVATING.")
+	push_error("Powerup.level_up(): THIS SHOULD NOT BE ACTIVATING.")
 
 
 func activate_powerup():
-	print("Powerup.activate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
+	push_error("Powerup.activate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
+
+
+func deactivate_powerup():
+	push_error("Powerup.deactivate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
 
 
 # Set the multiplayer authority for this powerup

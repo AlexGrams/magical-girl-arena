@@ -85,7 +85,21 @@ func add_powerup(powerup: Powerup):
 	powerup.set_authority(multiplayer.get_unique_id())
 	add_child(powerup)
 	powerups.append(powerup)
-	powerup.activate_powerup()
+	
+	if not is_down:
+		powerup.activate_powerup()
+
+
+# Enable all equipped powerups.
+func enable_powerups():
+	for powerup: Powerup in powerups:
+		powerup.activate_powerup()
+
+
+# Deactivate all equipped powerups.
+func disable_powerups():
+	for powerup: Powerup in powerups:
+		powerup.deactivate_powerup()
 
 
 # Deal damage to the player
@@ -104,11 +118,13 @@ func die():
 	is_down = true
 	down_timer = 0.0
 	revive_timer = 0.0
+	disable_powerups()
 
 
 # The player has been picked back up by another player.
 func revive():
 	is_down = false
+	enable_powerups()
 
 
 func set_label_name(new_name: String) -> void:

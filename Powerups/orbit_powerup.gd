@@ -13,7 +13,6 @@ func _ready() -> void:
 
 
 func activate_powerup():
-	#get_tree().root.get_node("Playground/BulletSpawner")
 	get_parent().get_node("BulletSpawner").request_spawn_bullet.rpc_id(
 		multiplayer.get_unique_id(),
 		[
@@ -26,6 +25,10 @@ func activate_powerup():
 	)
 	
 	picked_up_powerup.emit(sprite)
+
+
+func deactivate_powerup():
+	pass
 
 
 func level_up():
