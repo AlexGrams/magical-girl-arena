@@ -10,6 +10,8 @@ const TIME_TO_REVIVE: float = 3.0
 @export var speed = 400
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
+# Array of Powerup types; All powerups that this player has.
+var powerups := []
 var shoot_timer = 0
 var shoot_interval = 1
 var experience = 0
@@ -47,9 +49,7 @@ func _on_upgrade_chosen(powerup_name):
 				powerup_to_add = load("res://Powerups/revolving_powerup.tscn").instantiate()
 			"Orbit":
 				powerup_to_add = load("res://Powerups/orbit_powerup.tscn").instantiate()
-		powerup_to_add.set_authority(multiplayer.get_unique_id())
-		add_child(powerup_to_add)
-		powerup_to_add.activate_powerup()
+		add_powerup(powerup_to_add)
 		
 	$"../CanvasLayer/UpgradeScreenPanel".hide()
 	GameState.player_selected_upgrade.rpc_id(1)
@@ -78,6 +78,14 @@ func _physics_process(_delta):
 	if is_multiplayer_authority():
 		get_input()
 		move_and_slide()
+
+
+# Gives this player a new powerup.
+func add_powerup(powerup: Powerup):
+	powerup.set_authority(multiplayer.get_unique_id())
+	add_child(powerup)
+	powerups.append(powerup)
+	powerup.activate_powerup()
 
 
 # Deal damage to the player
@@ -135,8 +143,7 @@ func ready_local_player() -> void:
 	# Give the player the basic shoot powerup.
 	# Only the character that this player controls is given the ability. 
 	var shoot_powerup = load(shoot_powerup_path).instantiate()
-	add_child(shoot_powerup)
-	shoot_powerup.activate_powerup()
+	add_powerup(shoot_powerup)
 
 
 @rpc("any_peer", "call_local")
