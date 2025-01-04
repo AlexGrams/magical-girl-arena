@@ -1,6 +1,11 @@
 class_name PlayerCharacterBody2D
 extends CharacterBody2D
 
+# How long this player has to wait before being able to be revived.
+const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
+# How long another player must spend reviving this player.
+const TIME_TO_REVIVE: float = 3.0
+
 @export var level_shoot_intervals:Array
 @export var speed = 400
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
@@ -10,6 +15,11 @@ var shoot_interval = 1
 var experience = 0
 var health_max = 100
 var health = health_max
+# True when the player is incapacitated.
+var is_down := false
+# How long the player has been downed for. When time is up, this player can be revived.
+var down_timer: float = 0.0
+var revive_timer: float = 0.0
 var level = 1
 
 signal took_damage(health:int, health_max:int)
@@ -50,10 +60,18 @@ func get_input():
 	velocity = input_direction * speed
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var direction = get_global_mouse_position() - $Sprite2D.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
+	
+	# Death and reviving
+	if is_down:
+		if down_timer < TIME_BEFORE_PLAYER_CAN_BE_REVIVED:
+			down_timer += delta
+		else:
+			if revive_timer >= TIME_TO_REVIVE:
+				revive()
 
 
 func _physics_process(_delta):
@@ -68,8 +86,21 @@ func take_damage(damage: float) -> void:
 	took_damage.emit(health, health_max)
 	$AnimationPlayer.play("took_damage")
 	if health <= 0:
-		get_tree().paused = true
-		$".".hide()
+		die()
+
+
+# The player becomes incapacitated. Their abilities no longer work, and they must wait some
+# time before being able to be revived by another player. If no players remain, then the
+# game is over.
+func die():
+	is_down = true
+	down_timer = 0.0
+	revive_timer = 0.0
+
+
+# The player has been picked back up by another player.
+func revive():
+	is_down = false
 
 
 func set_label_name(new_name: String) -> void:
