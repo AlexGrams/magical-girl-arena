@@ -26,6 +26,8 @@ var level = 1
 
 signal took_damage(health:int, health_max:int)
 signal gained_experience(experience: float, level: int)
+signal died()
+signal revived()
 
 
 func _ready():
@@ -102,7 +104,7 @@ func disable_powerups():
 		powerup.deactivate_powerup()
 
 
-# Deal damage to the player
+# Deal damage to the player. Occurs on both the client and the server for every player.
 func take_damage(damage: float) -> void:
 	health -= damage
 	took_damage.emit(health, health_max)
@@ -119,12 +121,14 @@ func die():
 	down_timer = 0.0
 	revive_timer = 0.0
 	disable_powerups()
+	died.emit()
 
 
 # The player has been picked back up by another player.
 func revive():
 	is_down = false
 	enable_powerups()
+	revived.emit()
 
 
 func set_label_name(new_name: String) -> void:
@@ -190,7 +194,6 @@ func emit_gained_experience(new_experience: float, new_level: int):
 	gained_experience.emit(float(experience) / GameState.level_exp_needed[level-1], level)
 
 
-# TODO: Disabled. Code solution if physics solution doesn't work out.
 # Causes EXP orbs to gravitate towards the player when they enter this area.
 func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
 	if multiplayer.is_server() and area.get_collision_layer_value(3):

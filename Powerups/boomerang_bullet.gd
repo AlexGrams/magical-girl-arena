@@ -3,7 +3,7 @@ extends Bullet
 # The bullet object is replicated on all clients.
 # This player is the client's replicated version of the character that owns this bullet.
 # This is not necessarily the client's own character.
-var player: Node2D
+var player: PlayerCharacterBody2D
 
 var closest_enemy: Node
 var is_returning := true
@@ -61,6 +61,11 @@ func setup_bullet(data: Array) -> void:
 		boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
 		)
+	
+	# When the player goes down, destroy this bullet
+	player.died.connect(func():
+		queue_free()
+	)
 
 
 func set_damage(damage:float):

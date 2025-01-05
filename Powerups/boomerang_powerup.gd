@@ -25,6 +25,7 @@ func activate_powerup():
 	picked_up_powerup.emit(sprite)
 
 
+# Does nothing. The bullet destroys itself based off of the player's "died" signal.
 func deactivate_powerup():
 	pass
 
