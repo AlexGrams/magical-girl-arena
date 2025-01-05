@@ -106,7 +106,7 @@ func disable_powerups():
 
 # Deal damage to the player. Occurs on both the client and the server for every player.
 func take_damage(damage: float) -> void:
-	health -= damage
+	health = max(health - damage, 0)
 	took_damage.emit(health, health_max)
 	$AnimationPlayer.play("took_damage")
 	if health <= 0:
