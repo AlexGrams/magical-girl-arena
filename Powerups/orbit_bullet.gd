@@ -18,3 +18,8 @@ func _process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(_data: Array) -> void:
 	$BulletOffset.position.y = radius
+	
+	# This bullet is parented to the player and destroys itself when the player dies.
+	$"..".died.connect(func(): 
+		queue_free()
+	)
