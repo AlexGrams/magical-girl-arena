@@ -18,12 +18,15 @@ const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 var player_name: String = ""
 # TODO: Deprecate
 # Unordered list of instantiated player characters in the game
-var player_characters = []
+var player_characters := []
+# Count of how many players are in the game. Can be different from len(players) because players
+# can disconnect in the middle of a game.
+var connected_players: int = 0
 # Map of player IDs to their names.
-var players = {}
+var players := {}
 # TODO: Can probably combine with "players" above.
 # Map of Steam IDs to player IDs.
-var steam_ids = {}
+var steam_ids := {}
 # This client's Steam ID
 var local_player_steam_id: int = 0
 # The Steam lobby ID of the lobby that this player is in.
@@ -33,6 +36,8 @@ var experience: float = 0.0
 # Current level
 var level: int = 1
 var players_selecting_upgrades: int = -1
+# How many players are currently dead.
+var players_down: int = 0
 # The multiplayer peer for the local player.
 var peer: SteamMultiplayerPeer = null
 
@@ -173,9 +178,12 @@ func start_game():
 	# Spawn each player at a spawn point.
 	var spawn_point_index = 0
 	for player_id in players.keys():
-		var player: CharacterBody2D	 = player_resource.instantiate()
+		var player: PlayerCharacterBody2D = player_resource.instantiate()
 		player.set_label_name(str(player_id))
 		get_tree().root.get_node("Playground").add_child(player, true)
+		
+		player.died.connect(_on_player_died)
+		player.revived.connect(_on_player_revived)
 		
 		# Get the player's view to only follow this character
 		player.set_camera_current.rpc_id(player_id)
@@ -188,11 +196,23 @@ func start_game():
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
 		spawn_point_index += 1
+	connected_players = len(players)
 
 
 # Add a player character to local list of spawned characters
 func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
+
+
+# Keep track of how many players are still alive, and end the game if there are none.
+func _on_player_died():
+	players_down += 1
+	if players_down >= connected_players:
+		print("Game over!!!")
+
+
+func _on_player_revived():
+	players_down -= 1
 
 
 # Closes notifies this client that the lobby closed and disconnects the client.
