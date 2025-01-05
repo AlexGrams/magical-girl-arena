@@ -80,8 +80,9 @@ enabled = false
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen")]
 script = ExtResource("6_b2lbv")
+_game_over_screen = NodePath("GameOverScreen")
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(0.00402517, 0.17334, 0.76886, 1)
@@ -253,6 +254,71 @@ expand_mode = 1
 process_mode = 2
 visible = false
 
+[node name="GameOverScreen" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.286275)
+
+[node name="GameOver" type="Label" parent="CanvasLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 176.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 90
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/GameOverScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = -264.0
+offset_right = 159.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 7
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Retry"
+
+[node name="LobbyButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Back to Lobby
+"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit to Main Menu
+"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn")
 spawn_path = NodePath("..")
@@ -261,3 +327,7 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
+
+[connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_down"]
+[connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
+[connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer" method="_on_quit_button_down"]

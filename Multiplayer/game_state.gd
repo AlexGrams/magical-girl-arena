@@ -44,6 +44,8 @@ var peer: SteamMultiplayerPeer = null
 signal player_list_changed()
 # Called when the host leaves the lobby.
 signal lobby_closed()
+# Emitted when all players are down
+signal game_over()
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
@@ -182,8 +184,12 @@ func start_game():
 		player.set_label_name(str(player_id))
 		get_tree().root.get_node("Playground").add_child(player, true)
 		
-		player.died.connect(_on_player_died)
-		player.revived.connect(_on_player_revived)
+		player.died.connect(func():
+			_on_player_died.rpc()
+		)
+		player.revived.connect(func():
+			_on_player_revived.rpc()
+		)
 		
 		# Get the player's view to only follow this character
 		player.set_camera_current.rpc_id(player_id)
@@ -205,12 +211,14 @@ func add_player_character(new_player: CharacterBody2D) -> void:
 
 
 # Keep track of how many players are still alive, and end the game if there are none.
+@rpc("any_peer", "call_local")
 func _on_player_died():
 	players_down += 1
 	if players_down >= connected_players:
-		print("Game over!!!")
+		game_over.emit()
 
 
+@rpc("any_peer", "call_local")
 func _on_player_revived():
 	players_down -= 1
 
