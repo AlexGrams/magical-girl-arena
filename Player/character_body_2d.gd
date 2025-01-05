@@ -124,11 +124,13 @@ func take_damage(damage: float) -> void:
 	if is_down:
 		return
 	
-	health = max(health - damage, 0)
+	health = clamp(health - damage, 0, health_max)
 	took_damage.emit(health, health_max)
-	$AnimationPlayer.play("took_damage")
-	if health <= 0:
-		die()
+	
+	if damage > 0:
+		$AnimationPlayer.play("took_damage")
+		if health <= 0:
+			die()
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
@@ -150,6 +152,7 @@ func revive():
 	is_down = false
 	_revive_collision_area.hide()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
+	take_damage(-health_max)
 	
 	enable_powerups()
 	revived.emit()
