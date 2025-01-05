@@ -41,4 +41,4 @@ func _process(delta: float) -> void:
 				get_node("..").add_child(bullet, true)
 				fire_timer = 0.0
 	else:
-		player = get_nearest_player_character()
+		_find_new_target()
