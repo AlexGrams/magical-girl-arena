@@ -45,11 +45,15 @@ func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
 
 func _on_retry_button_down() -> void:
 	print("Go again")
+	# TODO: RPC to server for a vote. When all vote for this, restart the level.
 
 
 func _on_lobby_button_down() -> void:
 	print("Go to lobby")
+	# TODO: RPC all players. Unload the current map and show the lobby screen.
 
 
 func _on_quit_button_down() -> void:
 	print("Go to main menu")
+	# TODO: RPC all other players. Unload the current map and show the lobby.
+	# This player is shown the main menu and disconnects from the lobby.
