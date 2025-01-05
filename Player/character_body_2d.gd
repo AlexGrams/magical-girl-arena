@@ -8,6 +8,7 @@ const TIME_TO_REVIVE: float = 3.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
+@export var _revive_area: Area2D = null
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 # Array of Powerup types; All powerups that this player has.
@@ -31,6 +32,8 @@ signal revived()
 
 
 func _ready():
+	_revive_area.hide()
+	
 	# Each player tells the local GameState that it has spawned in
 	GameState.add_player_character(self)
 
@@ -77,7 +80,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta):
-	if is_multiplayer_authority():
+	if not is_down and is_multiplayer_authority():
 		get_input()
 		move_and_slide()
 
@@ -120,6 +123,8 @@ func die():
 	is_down = true
 	down_timer = 0.0
 	revive_timer = 0.0
+	_revive_area.show()
+	
 	disable_powerups()
 	died.emit()
 
@@ -127,6 +132,8 @@ func die():
 # The player has been picked back up by another player.
 func revive():
 	is_down = false
+	_revive_area.hide()
+	
 	enable_powerups()
 	revived.emit()
 
