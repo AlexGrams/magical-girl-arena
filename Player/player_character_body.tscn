@@ -83,14 +83,16 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_revive_area")]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_revive_collision_area", "_revive_progress_bar")]
 z_index = 1
 position = Vector2(1116, 1072)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_b2ljt")
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
-_revive_area = NodePath("ReviveArea2D")
+_player_collision_area = NodePath("Area2D")
+_revive_collision_area = NodePath("ReviveArea2D")
+_revive_progress_bar = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgressBar")
 
 [node name="Line2D" type="Line2D" parent="."]
 
@@ -135,7 +137,7 @@ scale = Vector2(30, 30)
 shape = SubResource("CircleShape2D_75ctg")
 debug_color = Color(1, 1, 1, 0.42)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="ReviveArea2D/ReviveCollisionShape"]
+[node name="ReviveProgressBar" type="TextureProgressBar" parent="ReviveArea2D/ReviveCollisionShape"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -149,7 +151,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.045, 0.045)
 pivot_offset = Vector2(220, 220)
-value = 33.0
+max_value = 1.0
+step = 0.01
+value = 0.5
 fill_mode = 4
 texture_under = ExtResource("2_1y4go")
 texture_progress = ExtResource("2_1y4go")

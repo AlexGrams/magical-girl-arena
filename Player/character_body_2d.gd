@@ -5,10 +5,14 @@ extends CharacterBody2D
 const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
 # How long another player must spend reviving this player.
 const TIME_TO_REVIVE: float = 3.0
+# Index of the collision layer for players.
+const PLAYER_COLLISION_LAYER: int = 4
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
-@export var _revive_area: Area2D = null
+@export var _player_collision_area: Area2D = null
+@export var _revive_collision_area: Area2D = null
+@export var _revive_progress_bar: TextureProgressBar = null
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 # Array of Powerup types; All powerups that this player has.
@@ -32,7 +36,7 @@ signal revived()
 
 
 func _ready():
-	_revive_area.hide()
+	_revive_collision_area.hide()
 	
 	# Each player tells the local GameState that it has spawned in
 	GameState.add_player_character(self)
@@ -74,7 +78,15 @@ func _process(delta: float) -> void:
 	if is_down:
 		if down_timer < TIME_BEFORE_PLAYER_CAN_BE_REVIVED:
 			down_timer += delta
-		else:
+			
+			if down_timer >= TIME_BEFORE_PLAYER_CAN_BE_REVIVED:
+				_revive_progress_bar.value = 0.0
+			else:
+				_revive_progress_bar.value = down_timer / TIME_BEFORE_PLAYER_CAN_BE_REVIVED
+		elif revive_timer < TIME_TO_REVIVE and _revive_collision_area.has_overlapping_areas():
+			revive_timer += delta
+			
+			_revive_progress_bar.value = revive_timer / TIME_TO_REVIVE
 			if revive_timer >= TIME_TO_REVIVE:
 				revive()
 
@@ -109,6 +121,9 @@ func disable_powerups():
 
 # Deal damage to the player. Occurs on both the client and the server for every player.
 func take_damage(damage: float) -> void:
+	if is_down:
+		return
+	
 	health = max(health - damage, 0)
 	took_damage.emit(health, health_max)
 	$AnimationPlayer.play("took_damage")
@@ -123,7 +138,8 @@ func die():
 	is_down = true
 	down_timer = 0.0
 	revive_timer = 0.0
-	_revive_area.show()
+	_revive_collision_area.show()
+	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
 	
 	disable_powerups()
 	died.emit()
@@ -132,7 +148,8 @@ func die():
 # The player has been picked back up by another player.
 func revive():
 	is_down = false
-	_revive_area.hide()
+	_revive_collision_area.hide()
+	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
 	
 	enable_powerups()
 	revived.emit()
