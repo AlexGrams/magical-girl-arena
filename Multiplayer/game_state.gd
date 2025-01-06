@@ -210,18 +210,22 @@ func start_game():
 # Reloads the level and resets all players.
 @rpc("any_peer", "call_local")
 func restart_game():
-	# Reset variables that are modified during the game.
+	reset_game_variables()
+	
+	if multiplayer.is_server():
+		# TODO: Maybe only call this whole function on the server?
+		if world != null:
+			world.free()
+		start_game()
+	world = null
+
+
+# Only affects variables related to gameplay. Multiplayer properties are not changed.
+func reset_game_variables():
 	player_characters.clear()
 	players_down = 0
 	level = 1
 	experience = 0
-	
-	if multiplayer.is_server():
-		# TODO: Maybe only call this whole function on the server?
-		world.free()
-		world = null
-		
-		start_game()
 
 
 # Add a player character to local list of spawned characters
