@@ -89,37 +89,39 @@ func request_lobby_list() -> void:
 	for button in lobbies_list_container.get_children():
 		button.queue_free()
 	
-	Steam.requestLobbyList()
+	if GameState.USING_GODOT_STEAM:
+		Steam.requestLobbyList()
 
 
 # Adds list of joinable lobbies to the lobby screen.
 func setup_lobby_screen() -> void:
-	# TODO: Maybe make the region a setting? This current one is the most restrictive.
-	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_CLOSE)
-	
-	Steam.lobby_match_list.connect(
-		# lobbies: Array[int] (lobby IDs) - All lobbies in the specified region for this game.
-		func(lobbies: Array):
-			for lobby_id: int in lobbies:
-				var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
-				var player_count: int = Steam.getNumLobbyMembers(lobby_id)
-				var lobby_button: Button = lobby_button_scene.instantiate()
-				
-				# Set up the button for this lobby
-				lobby_button.set_text(str(lobby_name, ": ", player_count, " players"))
-				lobbies_list_container.add_child(lobby_button)
-				lobby_button.pressed.connect(
-					func():
-						# Join the lobby
-						lobby_list.hide()
-						lobby.show()
-						start_game_button.hide()
-						
-						GameState.join_lobby(
-							lobby_id,
-							Steam.getPersonaName())
-				)
-	)
+	if GameState.USING_GODOT_STEAM:
+		# TODO: Maybe make the region a setting? This current one is the most restrictive.
+		Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_CLOSE)
+		
+		Steam.lobby_match_list.connect(
+			# lobbies: Array[int] (lobby IDs) - All lobbies in the specified region for this game.
+			func(lobbies: Array):
+				for lobby_id: int in lobbies:
+					var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
+					var player_count: int = Steam.getNumLobbyMembers(lobby_id)
+					var lobby_button: Button = lobby_button_scene.instantiate()
+					
+					# Set up the button for this lobby
+					lobby_button.set_text(str(lobby_name, ": ", player_count, " players"))
+					lobbies_list_container.add_child(lobby_button)
+					lobby_button.pressed.connect(
+						func():
+							# Join the lobby
+							lobby_list.hide()
+							lobby.show()
+							start_game_button.hide()
+							
+							GameState.join_lobby(
+								lobby_id,
+								Steam.getPersonaName())
+					)
+		)
 	
 	request_lobby_list()
 
