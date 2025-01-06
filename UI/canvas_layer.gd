@@ -77,3 +77,4 @@ func _update_retry_votes(voting_retry: bool) -> void:
 			GameState.restart_game.rpc()
 	else:
 		votes_to_retry = max(0, votes_to_retry - 1)
+	print(votes_to_retry, GameState.connected_players)

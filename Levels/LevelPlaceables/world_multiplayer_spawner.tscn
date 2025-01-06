@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://pxrcrvlcovcs"]
+
+[node name="WorldMultiplayerSpawner" type="MultiplayerSpawner"]
+_spawnable_scenes = PackedStringArray("res://Levels/playground.tscn")
+spawn_path = NodePath("..")

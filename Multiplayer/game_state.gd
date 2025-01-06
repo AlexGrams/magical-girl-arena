@@ -29,8 +29,13 @@ var players := {}
 var steam_ids := {}
 # This client's Steam ID
 var local_player_steam_id: int = 0
+# The multiplayer peer for the local player.
+var peer: SteamMultiplayerPeer = null
 # The Steam lobby ID of the lobby that this player is in.
 var lobby_id: int = 0
+
+# The parent node of all objects in the main portion of the game.
+var world: Node = null
 # Experience to next level
 var experience: float = 0.0
 # Current level
@@ -38,8 +43,6 @@ var level: int = 1
 var players_selecting_upgrades: int = -1
 # How many players are currently dead.
 var players_down: int = 0
-# The multiplayer peer for the local player.
-var peer: SteamMultiplayerPeer = null
 
 signal player_list_changed()
 # Called when the host leaves the lobby.
@@ -207,13 +210,30 @@ func start_game():
 # Reloads the level and resets all players.
 @rpc("any_peer", "call_local")
 func restart_game():
-	print("Restarting!")
+	# Reset variables that are modified during the game.
+	player_characters.clear()
+	players_down = 0
+	
+	if multiplayer.is_server():
+		# TODO: Maybe only call this whole function on the server?
+		world.free()
+		world = null
+		
+		start_game()
 
 
 # Add a player character to local list of spawned characters
 func add_player_character(new_player: CharacterBody2D) -> void:
+	if new_player == null:
+		return
+	
 	player_characters.append(new_player)
+	
+	# Update our count of player character nodes when they are added and removed from the scene.
 	connected_players += 1
+	new_player.tree_exiting.connect(func():
+		connected_players -= 1
+	)
 
 
 # Keep track of how many players are still alive, and end the game if there are none.
@@ -311,8 +331,11 @@ func unregister_player_by_steam_id(steam_id: int):
 # Load the main game scene and hide the menu.
 @rpc("authority", "call_local", "reliable")
 func load_game():
-	var world = load(start_game_scene).instantiate()
-	get_tree().get_root().add_child(world)
+	if not multiplayer.is_server():
+		return
+	
+	world = load(start_game_scene).instantiate()
+	get_tree().get_root().add_child(world, true)
 	get_tree().get_root().get_node("MainMenu").hide()
 
 	get_tree().set_pause(false) 
