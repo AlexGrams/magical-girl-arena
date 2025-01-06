@@ -202,12 +202,12 @@ func start_game():
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
 		spawn_point_index += 1
-	connected_players = len(players)
 
 
 # Add a player character to local list of spawned characters
 func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
+	connected_players += 1
 
 
 # Keep track of how many players are still alive, and end the game if there are none.

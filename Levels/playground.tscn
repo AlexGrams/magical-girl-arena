@@ -305,6 +305,7 @@ theme_override_constants/separation = 7
 [node name="RetryButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
+toggle_mode = true
 text = "Retry"
 
 [node name="LobbyButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
