@@ -213,6 +213,8 @@ func restart_game():
 	# Reset variables that are modified during the game.
 	player_characters.clear()
 	players_down = 0
+	level = 1
+	experience = 0
 	
 	if multiplayer.is_server():
 		# TODO: Maybe only call this whole function on the server?
