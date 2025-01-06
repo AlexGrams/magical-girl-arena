@@ -164,7 +164,7 @@ func set_label_name(new_name: String) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_collision_layer_value(2): #If Enemy
-		take_damage(10)
+		take_damage(100)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage(area.damage)
 

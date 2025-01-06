@@ -329,6 +329,6 @@ _spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "r
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 
-[connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_down"]
+[connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer" method="_on_quit_button_down"]

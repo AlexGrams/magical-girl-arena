@@ -204,6 +204,12 @@ func start_game():
 		spawn_point_index += 1
 
 
+# Reloads the level and resets all players.
+@rpc("any_peer", "call_local")
+func restart_game():
+	print("Restarting!")
+
+
 # Add a player character to local list of spawned characters
 func add_player_character(new_player: CharacterBody2D) -> void:
 	player_characters.append(new_player)
