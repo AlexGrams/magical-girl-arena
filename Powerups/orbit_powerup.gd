@@ -13,8 +13,20 @@ func _ready() -> void:
 
 
 func activate_powerup():
+	# TODO: Fix jank with how the orbit bullet is spawned.
+	# What's unique about this bullet is that it is parented to a player instead of
+	# the Playground.
+	# What will be done instead:
+	# 1. Spawning using the same bullet spawner as everyone else.
+	# 2. It will instead manually calculate the orbit by setting its center position to
+	#    that of the player instead of using parenting.
+	# 3. The bullet needs to know which player character to orbit. Therefore we will
+	#    use the args array to pass the owner's unique ID. The server then maps the ID
+	#    to a character instance. We will need a new object on GameState that maps
+	#    player unique ID to character. Make sure to reset this variable as well on game
+	#    reset.
 	get_parent().get_node("BulletSpawner").request_spawn_bullet.rpc_id(
-		multiplayer.get_unique_id(),
+		1,
 		[
 			bullet_scene, 
 			Vector2.ZERO, 

@@ -20,15 +20,18 @@ func setup_bullet(_data: Array) -> void:
 	$BulletOffset.position.y = radius
 	# TODO: This function is called on the client and the server, but the "died" signal
 	# Is only called once on the client. Why does it error then?
+	print("Setting up bullet:", str(multiplayer.get_unique_id()))
 	
 	# This bullet is parented to the player and destroys itself when the player dies.
-	$"..".died.connect(func():
-		print(get_multiplayer_authority())
-		if is_multiplayer_authority():
+	if is_multiplayer_authority():
+		$"..".died.connect(func():
+			print("Died:", str(multiplayer.get_unique_id()))
 			queue_free()
-		else:
-			destroy_orbit_bullet.rpc_id(1)
-	)
+			#if is_multiplayer_authority():
+				#queue_free()
+			#else:
+				#destroy_orbit_bullet.rpc_id(1)
+		)
 
 
 # Must be done through RPC because clients run functionality to spawn the bullet, but bullets'
