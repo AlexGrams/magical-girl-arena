@@ -1,3 +1,4 @@
+class_name MainMenu
 extends Control
 
 # Will be spawned in the Lobby screen. Clicking allows the player to join a lobby

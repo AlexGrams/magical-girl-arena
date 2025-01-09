@@ -12,6 +12,8 @@ const MAX_PLAYERS: int = 4
 const HOST_CLOSE_RPC_TIMEOUT = 5.0
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
+# Path from the root, not the path in the file system.
+const main_menu_node_path := "MainMenu"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # The local player's name.
@@ -217,7 +219,7 @@ func end_game():
 	if multiplayer.is_server():
 		# TODO: Maybe only call this whole function on the server?
 		if world != null:
-			world.free()
+			world.queue_free()
 	world = null
 
 
@@ -343,7 +345,7 @@ func load_game():
 	
 	world = load(start_game_scene).instantiate()
 	get_tree().get_root().add_child(world, true)
-	get_tree().get_root().get_node("MainMenu").hide()
+	get_tree().get_root().get_node(main_menu_node_path).hide()
 
 	get_tree().set_pause(false) 
 

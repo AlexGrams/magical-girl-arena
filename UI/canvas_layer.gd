@@ -44,6 +44,7 @@ func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
 			return
 
 
+# This player is voting to retry the game.
 func _on_retry_button_toggled(toggled_on: bool) -> void:
 	if not multiplayer.is_server():
 		_update_retry_votes.rpc_id(1, toggled_on)
@@ -51,9 +52,9 @@ func _on_retry_button_toggled(toggled_on: bool) -> void:
 		_update_retry_votes(toggled_on)
 
 
+# If any person goes back to the lobby, then all players are taken back.
 func _on_lobby_button_down() -> void:
-	print("Go to lobby")
-	# TODO: RPC all players. Unload the current map and show the lobby screen.
+	_return_to_lobby.rpc()
 
 
 func _on_quit_button_down() -> void:
@@ -81,3 +82,14 @@ func _update_retry_votes(voting_retry: bool) -> void:
 	else:
 		votes_to_retry = max(0, votes_to_retry - 1)
 	print(votes_to_retry, GameState.connected_players)
+
+
+# Unloads the Playground and shows the lobby.
+@rpc("any_peer", "call_local")
+func _return_to_lobby():
+	# TODO: RPC all players. Unload the current map and show the lobby screen.
+	var main_menu: MainMenu = get_tree().get_root().get_node(GameState.main_menu_node_path)
+	
+	GameState.end_game()
+	main_menu.show()
+	main_menu.refresh_lobby()
