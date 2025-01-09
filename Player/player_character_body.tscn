@@ -181,7 +181,6 @@ vertical_alignment = 1
 replication_config = SubResource("SceneReplicationConfig_vfgy6")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("3_q0m3g")
 

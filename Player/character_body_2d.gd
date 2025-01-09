@@ -37,9 +37,6 @@ signal revived()
 
 func _ready():
 	_revive_collision_area.hide()
-	
-	# Each player tells the local GameState that it has spawned in
-	GameState.add_player_character(self)
 
 
 func _on_upgrade_chosen(powerup_name):
@@ -66,7 +63,8 @@ func _on_upgrade_chosen(powerup_name):
 
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = input_direction * speed
+	if input_direction != null:
+		velocity = input_direction * speed
 
 
 func _process(delta: float) -> void:
@@ -167,6 +165,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		take_damage(100)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage(area.damage)
+
+
+# Tells this client's GameState which ID goes with which local player node instance.
+@rpc("any_peer", "call_local")
+func register_with_game_state(owning_player_id: int) -> void:
+	GameState.add_player_character(owning_player_id, self)
 
 
 # Sets up this character on this game instance after it is spawned.

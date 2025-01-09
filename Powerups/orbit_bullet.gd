@@ -1,6 +1,7 @@
 extends Bullet
 
 @export var radius = 2
+var owning_player: PlayerCharacterBody2D = null
 
 
 func set_damage(damage:float):
@@ -12,25 +13,31 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	global_position = owning_player.global_position
 	rotate(speed * delta)
 
 
 # Set up other properties for this bullet
-func setup_bullet(_data: Array) -> void:
-	$BulletOffset.position.y = radius
-	# TODO: This function is called on the client and the server, but the "died" signal
-	# Is only called once on the client. Why does it error then?
-	print("Setting up bullet:", str(multiplayer.get_unique_id()))
+func setup_bullet(data: Array) -> void:
+	if (
+		data.size() != 1
+		or typeof(data[0]) != TYPE_INT	# Owning ID 
+	):
+		return
+		
+	owning_player = GameState.player_characters.get(data[0])
 	
-	# This bullet is parented to the player and destroys itself when the player dies.
+	if owning_player == null:
+		push_error("Orbit bullet has a null owner. Player ID ", str(data[0]), 
+			" was not found in GameState.player_characters.")
+		return
+	
+	$BulletOffset.position.y = radius
+	
+	# This bullet destroys itself when the player dies.
 	if is_multiplayer_authority():
-		$"..".died.connect(func():
-			print("Died:", str(multiplayer.get_unique_id()))
+		owning_player.died.connect(func():
 			queue_free()
-			#if is_multiplayer_authority():
-				#queue_free()
-			#else:
-				#destroy_orbit_bullet.rpc_id(1)
 		)
 
 

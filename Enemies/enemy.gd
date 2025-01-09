@@ -35,7 +35,7 @@ func get_nearest_player_character() -> PlayerCharacterBody2D:
 	var nearestDist: float = -1.0
 	var currentDist: float = 0.0
 	
-	for player_character: PlayerCharacterBody2D in GameState.player_characters:
+	for player_character: PlayerCharacterBody2D in GameState.player_characters.values():
 		if player_character != null and not player_character.is_down:
 			currentDist = global_position.distance_squared_to(player_character.global_position)
 			if currentDist < nearestDist or nearestDist < -0.5:

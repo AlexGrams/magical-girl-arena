@@ -16,9 +16,9 @@ const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # The local player's name.
 var player_name: String = ""
-# TODO: Deprecate
-# Unordered list of instantiated player characters in the game
-var player_characters := []
+# TODO: Combine with "players" variables in some sort of map struct object.
+# Map of player IDs to instantiated player characters in the game
+var player_characters := {}
 # Count of how many players are in the game. Can be different from len(players) because players
 # can disconnect in the middle of a game.
 var connected_players: int = 0
@@ -197,6 +197,8 @@ func start_game():
 		# Get the player's view to only follow this character
 		player.set_camera_current.rpc_id(player_id)
 		
+		player.register_with_game_state.rpc(player_id)
+		
 		# Players need to be given authority over their characters, and other players
 		# need to have authority set locally for each remote player.
 		player.set_authority.rpc(player_id)
@@ -229,15 +231,15 @@ func reset_game_variables():
 
 
 # Add a player character to local list of spawned characters
-func add_player_character(new_player: CharacterBody2D) -> void:
-	if new_player == null:
+func add_player_character(player_id: int, player_character: CharacterBody2D) -> void:
+	if player_character == null:
 		return
 	
-	player_characters.append(new_player)
+	player_characters[player_id] = player_character
 	
 	# Update our count of player character nodes when they are added and removed from the scene.
 	connected_players += 1
-	new_player.tree_exiting.connect(func():
+	player_character.tree_exiting.connect(func():
 		connected_players -= 1
 	)
 
@@ -364,7 +366,7 @@ func collect_exp() -> void:
 		if multiplayer.is_server():
 			players_selecting_upgrades = player_characters.size()
 	
-	for player in player_characters:
+	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
 
 
