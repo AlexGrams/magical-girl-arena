@@ -74,7 +74,10 @@ func _update_retry_votes(voting_retry: bool) -> void:
 		votes_to_retry += 1
 		if votes_to_retry >= GameState.connected_players:
 			votes_to_retry = 0
-			GameState.restart_game.rpc()
+			
+			GameState.end_game.rpc()
+			# start_game calls its own RPCs on all players so that they load the game as well.
+			GameState.start_game()
 	else:
 		votes_to_retry = max(0, votes_to_retry - 1)
 	print(votes_to_retry, GameState.connected_players)

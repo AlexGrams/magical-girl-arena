@@ -209,16 +209,15 @@ func start_game():
 		spawn_point_index += 1
 
 
-# Reloads the level and resets all players.
+# Stops the main gameplay segment by deleting the world and resetting state variables.
 @rpc("any_peer", "call_local")
-func restart_game():
+func end_game():
 	reset_game_variables()
 	
 	if multiplayer.is_server():
 		# TODO: Maybe only call this whole function on the server?
 		if world != null:
 			world.free()
-		start_game()
 	world = null
 
 
