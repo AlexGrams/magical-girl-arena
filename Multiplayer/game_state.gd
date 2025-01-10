@@ -209,6 +209,16 @@ func start_game():
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
 		spawn_point_index += 1
+	
+	## TODO: Testing: Close the game without spawning the players
+	#await get_tree().create_timer(3.0).timeout
+	#
+	#end_game.rpc()
+	#var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
+	#main_menu.show()
+	#main_menu.refresh_lobby()
+	#
+	#return
 
 
 # Stops the main gameplay segment by deleting the world and resetting state variables.
@@ -219,12 +229,13 @@ func end_game():
 	if multiplayer.is_server():
 		# TODO: Maybe only call this whole function on the server?
 		if world != null:
-			world.queue_free()
+			world.free()
 	world = null
 
 
 # Only affects variables related to gameplay. Multiplayer properties are not changed.
 func reset_game_variables():
+	print(player_characters)
 	player_characters.clear()
 	players_down = 0
 	level = 1

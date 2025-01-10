@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=10 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
+[ext_resource type="PackedScene" uid="uid://26bmot5318wn" path="res://Levels/Testing/kill_zone.tscn" id="7_x4n5t"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
@@ -55,6 +56,7 @@ position = Vector2(1173, 1203)
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
 rate = 1.0
+enabled = false
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
@@ -328,6 +330,9 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
+
+[node name="KillZone" parent="." instance=ExtResource("7_x4n5t")]
+position = Vector2(1061, 777)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

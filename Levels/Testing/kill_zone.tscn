@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://26bmot5318wn"]
+
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_k85sp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ed5k"]
+size = Vector2(128, 128)
+
+[node name="KillZone" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.774013, 0.372304, 1.92523e-07, 1)
+texture = ExtResource("1_k85sp")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2ed5k")

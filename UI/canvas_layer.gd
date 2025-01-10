@@ -54,6 +54,11 @@ func _on_retry_button_toggled(toggled_on: bool) -> void:
 
 # If any person goes back to the lobby, then all players are taken back.
 func _on_lobby_button_down() -> void:
+	# Wait for the next frame before quitting the game. Otherwise, an error is caused by
+	# calling the "button down" signal on the same frame that the Playground is freed
+	# (the Playground is an ancestor of the button).
+	await get_tree().process_frame
+	
 	_return_to_lobby.rpc()
 
 
