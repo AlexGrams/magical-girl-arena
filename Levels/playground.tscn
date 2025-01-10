@@ -332,7 +332,7 @@ spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 
 [node name="KillZone" parent="." instance=ExtResource("7_x4n5t")]
-position = Vector2(1061, 777)
+position = Vector2(1050, 1578)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

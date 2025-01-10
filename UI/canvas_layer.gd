@@ -81,7 +81,10 @@ func _update_retry_votes(voting_retry: bool) -> void:
 		if votes_to_retry >= GameState.connected_players:
 			votes_to_retry = 0
 			
+			var world_tree_exited: Signal = GameState.world.tree_exited
 			GameState.end_game.rpc()
+			await world_tree_exited
+			
 			# start_game calls its own RPCs on all players so that they load the game as well.
 			GameState.start_game()
 	else:
