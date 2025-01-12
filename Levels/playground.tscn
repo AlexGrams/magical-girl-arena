@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=11 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
 [ext_resource type="PackedScene" uid="uid://26bmot5318wn" path="res://Levels/Testing/kill_zone.tscn" id="7_x4n5t"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
+[ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(1, 1, 1, 1)
@@ -333,6 +334,24 @@ script = ExtResource("6_rscnf")
 
 [node name="KillZone" parent="." instance=ExtResource("7_x4n5t")]
 position = Vector2(1050, 1578)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("8_0gogc")]
+position = Vector2(-647, 1031)
+scale = Vector2(1.185, 18.025)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("8_0gogc")]
+position = Vector2(2466, 994)
+scale = Vector2(1.185, 18.025)
+
+[node name="Wall3" parent="Walls" instance=ExtResource("8_0gogc")]
+position = Vector2(916, 2061)
+scale = Vector2(23.32, 0.945)
+
+[node name="Wall4" parent="Walls" instance=ExtResource("8_0gogc")]
+position = Vector2(908, -61)
+scale = Vector2(23.32, 0.945)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

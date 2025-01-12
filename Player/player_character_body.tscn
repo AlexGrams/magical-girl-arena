@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
+size = Vector2(128, 127)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmys3"]
 size = Vector2(128, 127)
@@ -97,6 +98,7 @@ _revive_progress_bar = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgres
 [node name="Line2D" type="Line2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_r7kh5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
