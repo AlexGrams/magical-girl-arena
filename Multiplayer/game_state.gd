@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -14,6 +14,8 @@ const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.
 const main_menu_node_path := "MainMenu"
+const lobby_list_path := "MainMenu/LobbyList"
+const lobby_path := "MainMenu/Lobby"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # The local player's name.
@@ -245,19 +247,6 @@ func add_player_character(player_id: int, player_character: CharacterBody2D) -> 
 	)
 
 
-# Keep track of how many players are still alive, and end the game if there are none.
-@rpc("any_peer", "call_local")
-func _on_player_died():
-	players_down += 1
-	if players_down >= connected_players:
-		game_over.emit()
-
-
-@rpc("any_peer", "call_local")
-func _on_player_revived():
-	players_down -= 1
-
-
 # Closes notifies this client that the lobby closed and disconnects the client.
 # Should only be called by the lobby host.
 @rpc("any_peer", "call_remote")
@@ -337,6 +326,25 @@ func unregister_player_by_steam_id(steam_id: int):
 	player_list_changed.emit()
 
 
+# Disconnect the local player and return everyone else to the lobby screen.
+# Called by the player that presses the "Quit" button on the game over screen.
+@rpc("any_peer", "call_local")
+func quit_game(quitting_player: int):
+	var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
+	var lobby: Control = get_tree().get_root().get_node(lobby_path)
+	
+	end_game()
+	main_menu.show()
+	if multiplayer.get_unique_id() == quitting_player:
+		var lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
+		disconnect_local_player()
+		lobby.hide()
+		lobby_list.show()
+	else:
+		# TODO: Maybe something different needs to happen if the host presses "Quit"
+		main_menu.refresh_lobby()
+
+
 # Load the main game scene and hide the menu.
 @rpc("authority", "call_local", "reliable")
 func load_game():
@@ -387,3 +395,16 @@ func player_selected_upgrade() -> void:
 @rpc("any_peer", "call_local")
 func resume_game() -> void:
 	get_tree().paused = false
+
+
+# Keep track of how many players are still alive, and end the game if there are none.
+@rpc("any_peer", "call_local")
+func _on_player_died():
+	players_down += 1
+	if players_down >= connected_players:
+		game_over.emit()
+
+
+@rpc("any_peer", "call_local")
+func _on_player_revived():
+	players_down -= 1

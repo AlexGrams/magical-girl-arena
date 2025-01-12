@@ -66,6 +66,7 @@ func _on_quit_button_down() -> void:
 	print("Go to main menu")
 	# TODO: RPC all other players. Unload the current map and show the lobby.
 	# This player is shown the main menu and disconnects from the lobby.
+	GameState.quit_game.rpc(multiplayer.get_unique_id())
 
 
 # Only call on the server. Update count of how many players want to restart the game. 
@@ -95,7 +96,6 @@ func _update_retry_votes(voting_retry: bool) -> void:
 # Unloads the Playground and shows the lobby.
 @rpc("any_peer", "call_local")
 func _return_to_lobby():
-	# TODO: RPC all players. Unload the current map and show the lobby screen.
 	var main_menu: MainMenu = get_tree().get_root().get_node(GameState.main_menu_node_path)
 	
 	GameState.end_game()
