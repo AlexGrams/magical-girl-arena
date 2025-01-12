@@ -328,7 +328,7 @@ func unregister_player_by_steam_id(steam_id: int):
 
 # Disconnect the local player and return everyone else to the lobby screen.
 # Called by the player that presses the "Quit" button on the game over screen.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func quit_game(quitting_player: int):
 	var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
 	var lobby: Control = get_tree().get_root().get_node(lobby_path)
