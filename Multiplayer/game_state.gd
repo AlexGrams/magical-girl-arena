@@ -340,6 +340,7 @@ func quit_game(quitting_player: int):
 		# quit_game is sent to all clients. Otherwise, quit_game is not called on 
 		# other players as the sender (this client) is disconnected before the RPC goes out.
 		await get_tree().process_frame
+		await get_tree().process_frame
 		
 		var lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
 		disconnect_local_player()
