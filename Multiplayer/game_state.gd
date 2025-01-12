@@ -336,6 +336,11 @@ func quit_game(quitting_player: int):
 	end_game()
 	main_menu.show()
 	if multiplayer.get_unique_id() == quitting_player:
+		# We wait for one frame before disconnecting the client to ensure the RPC to 
+		# quit_game is sent to all clients. Otherwise, quit_game is not called on 
+		# other players as the sender (this client) is disconnected before the RPC goes out.
+		await get_tree().process_frame
+		
 		var lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
 		disconnect_local_player()
 		lobby.hide()
