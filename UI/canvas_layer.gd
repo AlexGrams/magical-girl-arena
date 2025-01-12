@@ -63,9 +63,6 @@ func _on_lobby_button_down() -> void:
 
 
 func _on_quit_button_down() -> void:
-	print("Go to main menu")
-	# TODO: RPC all other players. Unload the current map and show the lobby.
-	# This player is shown the main menu and disconnects from the lobby.
 	GameState.quit_game.rpc(multiplayer.get_unique_id())
 
 
