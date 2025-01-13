@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=10 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
-[ext_resource type="PackedScene" uid="uid://26bmot5318wn" path="res://Levels/Testing/kill_zone.tscn" id="7_x4n5t"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
 
@@ -56,8 +55,7 @@ position = Vector2(1173, 1203)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(554, 330)
-rate = 1.0
-enabled = false
+rate = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
 offset_right = 40.0
@@ -65,9 +63,7 @@ offset_bottom = 40.0
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1856, 359)
-rate = 1.0
-enemy_scene = ExtResource("5_6byrv")
-enabled = false
+rate = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
 offset_right = 40.0
@@ -75,9 +71,8 @@ offset_bottom = 40.0
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1707, 1572)
-rate = 1.0
+rate = 0.5
 enemy_scene = ExtResource("5_6byrv")
-enabled = false
 
 [node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
 offset_right = 40.0
@@ -345,9 +340,6 @@ spawn_path = NodePath("..")
 _spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
-
-[node name="KillZone" parent="." instance=ExtResource("7_x4n5t")]
-position = Vector2(1050, 1578)
 
 [node name="Walls" type="Node2D" parent="."]
 
