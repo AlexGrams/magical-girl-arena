@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var _game_over_screen: Control = null
+@export var _timer_text: Label = null
 var textures: Array
 var votes_to_retry: int = 0
 
@@ -24,7 +25,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	_timer_text.text = (
+		"%02d:%02d" % [int(GameState.time / 60.0), int(GameState.time) % 60]
+		#str(int)
+		#+ ":"
+		#+ str(int()
+	)
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:

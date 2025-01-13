@@ -45,6 +45,9 @@ var experience: float = 0.0
 # Current level
 var level: int = 1
 var players_selecting_upgrades: int = -1
+var game_running := false
+# How long the game has been going for
+var time: float = 0.0
 # How many players are currently dead.
 var players_down: int = 0
 
@@ -56,6 +59,11 @@ signal game_over()
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
+
+
+@rpc("any_peer", "call_local")
+func set_game_running(value: bool):
+	game_running = value
 
 
 # Called when the node enters the scene tree for the first time.
@@ -144,8 +152,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	Steam.run_callbacks()
+	
+	if game_running:
+		time += delta
 
 
 # Set this client up as a game server through Steam.
@@ -177,14 +188,15 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 	Steam.joinLobby(new_lobby_id)
 
 
-# Set up the shooting portion of the game. Switches the scene and loads the players.
+# Entry point for setting up the shooting portion of the game. 
+# Switches the scene and loads the players.
 func start_game():
 	assert(multiplayer.is_server())
-	load_game.rpc()
 	
-	var player_resource := load(player_scene)
+	load_game()
 	
 	# Spawn each player at a spawn point.
+	var player_resource := load(player_scene)
 	var spawn_point_index = 0
 	for player_id in players.keys():
 		var player: PlayerCharacterBody2D = player_resource.instantiate()
@@ -211,6 +223,8 @@ func start_game():
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
 		spawn_point_index += 1
+	
+	set_game_running.rpc(true)
 
 
 # Stops the main gameplay segment by deleting the world and resetting state variables.
@@ -231,6 +245,8 @@ func reset_game_variables():
 	players_down = 0
 	level = 1
 	experience = 0
+	time = 0.0
+	game_running = false
 
 
 # Add a player character to local list of spawned characters
