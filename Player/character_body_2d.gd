@@ -117,7 +117,8 @@ func disable_powerups():
 		powerup.deactivate_powerup()
 
 
-# Deal damage to the player. Occurs on both the client and the server for every player.
+# Deal damage to the player. Should be RPC'd on everyone.
+@rpc("authority", "call_local")
 func take_damage(damage: float) -> void:
 	if is_down:
 		return
@@ -161,10 +162,25 @@ func set_label_name(new_name: String) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if not is_multiplayer_authority():
+		return
+	
+	# NOTE: Only clients have authority over when they take damage.
+	# The client takes damage only when they see themselves hit an enemy on their screen.
+	# This means the server doesn't have authority over when anyone else takes damage.
+	# take_damage needs to be RPC'd on all clients to help synchronize living/dead state.
+	# Some side effects include:
+	# - Multiple players can take damage from the same projectile if it isn't destroyed
+	#   on time.
+	# - Clients can see another player not take damage from an enemy, despite them
+	#   on their screen. This is because the other player didn't hit the enemy from their
+	#   POV, so the collision didn't happen.
+	
 	if area.get_collision_layer_value(2): #If Enemy
-		take_damage(10)
+		take_damage.rpc(10)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
-		take_damage(area.damage)
+		take_damage.rpc(area.damage)
+		area.get_parent().request_delete.rpc_id(1)
 
 
 # Tells this client's GameState which ID goes with which local player node instance.
