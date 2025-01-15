@@ -6,7 +6,7 @@ func _ready() -> void:
 	scale = Vector2(0.125, 0.125)
 
 func _physics_process(_delta: float) -> void:
-	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	#var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	# Prioritizes direction that was just pressed
 	if Input.is_action_just_pressed("move_up"):
