@@ -3,7 +3,7 @@ extends Sprite2D
 var last_direction = "move_right"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	scale = Vector2(0.125, 0.125)
+	scale = Vector2(0.5, 0.5)
 
 func _physics_process(_delta: float) -> void:
 	### This section is for 2-way sprites
