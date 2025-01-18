@@ -337,6 +337,8 @@ func unregister_player(id: int):
 
 # Remove a player's variables using their unique Steam ID.
 func unregister_player_by_steam_id(steam_id: int):
+	# TODO: steam_ids attempts to access not good value when a player disconnects.
+	# Debug and see if steam_ids even has elements when this function gets called.
 	players.erase(steam_ids[steam_id])
 	steam_ids.erase(steam_id)
 	player_list_changed.emit()
