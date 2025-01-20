@@ -81,12 +81,15 @@ func _process(delta: float) -> void:
 				_revive_progress_bar.value = 0.0
 			else:
 				_revive_progress_bar.value = down_timer / TIME_BEFORE_PLAYER_CAN_BE_REVIVED
-		elif revive_timer < TIME_TO_REVIVE and _revive_collision_area.has_overlapping_areas():
-			revive_timer += delta
+		elif revive_timer < TIME_TO_REVIVE:
+			if _revive_collision_area.has_overlapping_areas():
+				revive_timer += delta
+				if revive_timer >= TIME_TO_REVIVE:
+					revive()
+			else:
+				revive_timer = max(revive_timer - delta, 0.0)
 			
 			_revive_progress_bar.value = revive_timer / TIME_TO_REVIVE
-			if revive_timer >= TIME_TO_REVIVE:
-				revive()
 
 
 func _physics_process(_delta):
