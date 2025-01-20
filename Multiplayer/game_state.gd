@@ -234,6 +234,10 @@ func end_game():
 	
 	if multiplayer.is_server():
 		# TODO: Maybe only call this whole function on the server?
+		# TODO: Destroying the world attempts to free some stuff that is owned by the client.
+		# Possibly fix this by unparenting other players (presumably the thing being 
+		# illegally freed) from the world, then freeing the world. Each player frees
+		# their own character or whatever it is that the server doesn't have authority over.
 		if world != null:
 			world.queue_free()
 	world = null
@@ -337,8 +341,12 @@ func unregister_player(id: int):
 
 # Remove a player's variables using their unique Steam ID.
 func unregister_player_by_steam_id(steam_id: int):
-	# TODO: steam_ids attempts to access not good value when a player disconnects.
-	# Debug and see if steam_ids even has elements when this function gets called.
+	if not steam_ids.has(steam_id):
+		push_error("Attempted to erase a player's Steam ID that wasn't being stored in steam_ids." +
+			"\nsteam_ids: " + str(steam_ids) + 
+			"\nID to delete: " + str(steam_id)
+		)
+	
 	players.erase(steam_ids[steam_id])
 	steam_ids.erase(steam_id)
 	player_list_changed.emit()
