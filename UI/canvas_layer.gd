@@ -26,10 +26,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_timer_text.text = (
-		"%02d:%02d" % [int(GameState.time / 60.0), int(GameState.time) % 60]
-		#str(int)
-		#+ ":"
-		#+ str(int()
+		"%02d:%02d" % [int(ceil(GameState.time)) / 60.0, int(ceil(GameState.time)) % 60]
 	)
 
 

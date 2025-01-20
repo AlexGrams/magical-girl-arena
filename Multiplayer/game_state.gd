@@ -4,12 +4,14 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
 # closing its network connection when the host shuts down the lobby.
-const HOST_CLOSE_RPC_TIMEOUT = 5.0
+const HOST_CLOSE_RPC_TIMEOUT := 5.0
+# Most time in seconds that a game takes.
+const MAX_TIME := 15.0 * 60.0
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.
@@ -46,8 +48,8 @@ var experience: float = 0.0
 var level: int = 1
 var players_selecting_upgrades: int = -1
 var game_running := false
-# How long the game has been going for
-var time: float = 0.0
+# The time remaining in the game.
+var time: float = MAX_TIME
 # How many players are currently dead.
 var players_down: int = 0
 
@@ -155,8 +157,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
 	
-	if game_running:
-		time += delta
+	if game_running and time > 0.0:
+		time = max(time - delta, 0.0)
+		
 
 
 # Set this client up as a game server through Steam.
@@ -249,7 +252,7 @@ func reset_game_variables():
 	players_down = 0
 	level = 1
 	experience = 0
-	time = 0.0
+	time = MAX_TIME
 	game_running = false
 
 
