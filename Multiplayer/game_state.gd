@@ -18,6 +18,7 @@ const player_scene := "res://Player/player_character_body.tscn"
 const main_menu_node_path := "MainMenu"
 const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
+const spawn_rate_curve_path := "res://Curves/spawn_rate.tres"
 const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
 
 # The local player's name.
@@ -50,6 +51,8 @@ var players_selecting_upgrades: int = -1
 var game_running := false
 # The time remaining in the game.
 var time: float = MAX_TIME
+# Describes time interval between spawns given how long the game has progressed.
+var spawn_rate_curve: Curve = null
 # How many players are currently dead.
 var players_down: int = 0
 
@@ -63,6 +66,16 @@ signal game_over()
 signal _no_clients_connected_or_timeout()
 
 
+# Returns the time in seconds between enemy spawns at the current game progress time.
+func get_spawn_interval() -> float:
+	var rate = spawn_rate_curve.sample((MAX_TIME - time) / MAX_TIME)
+	if rate > 0.0:
+		return 1.0 / rate
+	else:
+		push_error("spawn_rate_curve has a value of 0 at time " + str((MAX_TIME - time) / MAX_TIME))
+		return 1.0
+
+
 @rpc("any_peer", "call_local")
 func set_game_running(value: bool):
 	game_running = value
@@ -73,6 +86,8 @@ func _ready() -> void:
 	if OS.has_feature("release") and not USING_GODOT_STEAM:
 		push_error("Steam support is turned off! Ensure game_state.USING_GODOT_STEAM is true before making release build.")
 		return
+	
+	spawn_rate_curve = load(spawn_rate_curve_path)
 	
 	# Set up Steam functionality
 	if USING_GODOT_STEAM:
