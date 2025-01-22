@@ -241,7 +241,7 @@ func emit_gained_experience(new_experience: float, new_level: int):
 	experience = new_experience
 	level = new_level
 	
-	gained_experience.emit(float(experience) / GameState.level_exp_needed[level-1], level)
+	gained_experience.emit(float(experience) / GameState.exp_for_next_level, level)
 
 
 # Causes EXP orbs to gravitate towards the player when they enter this area.

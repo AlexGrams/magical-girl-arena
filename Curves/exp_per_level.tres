@@ -1,0 +1,8 @@
+[gd_resource type="Curve" format=3 uid="uid://cu4m3xnyyvp85"]
+
+[resource]
+resource_name = "ExpPerLevel"
+min_value = 10.0
+max_value = 250.0
+_data = [Vector2(0, 10), 0.0, 240.0, 0, 1, Vector2(1, 250), 240.0, 0.0, 1, 0]
+point_count = 2

@@ -12,6 +12,8 @@ const MAX_PLAYERS: int = 4
 const HOST_CLOSE_RPC_TIMEOUT := 5.0
 # Most time in seconds that a game takes.
 const MAX_TIME := 15.0 * 60.0
+# The highest level that players can be in the game.
+const MAX_LEVEL: int = 50
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.
@@ -19,7 +21,7 @@ const main_menu_node_path := "MainMenu"
 const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
 const spawn_rate_curve_path := "res://Curves/spawn_rate.tres"
-const level_exp_needed: Array = [10, 10, 10, 10, 10, 10]
+const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 
 # The local player's name.
 var player_name: String = ""
@@ -45,6 +47,8 @@ var lobby_id: int = 0
 var world: Node = null
 # Experience to next level
 var experience: float = 0.0
+var exp_for_next_level: float = 0.0
+var exp_per_level_curve: Curve = null
 # Current level
 var level: int = 1
 var players_selecting_upgrades: int = -1
@@ -88,6 +92,8 @@ func _ready() -> void:
 		return
 	
 	spawn_rate_curve = load(spawn_rate_curve_path)
+	exp_per_level_curve = load(exp_per_level_curve_path)
+	_update_exp_for_next_level()
 	
 	# Set up Steam functionality
 	if USING_GODOT_STEAM:
@@ -267,6 +273,7 @@ func reset_game_variables():
 	players_down = 0
 	level = 1
 	experience = 0
+	_update_exp_for_next_level()
 	time = MAX_TIME
 	game_running = false
 
@@ -412,9 +419,10 @@ func load_game():
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
 	experience += 1
-	if level < level_exp_needed.size() and experience >= level_exp_needed[level-1]:
-		experience -= level_exp_needed[level-1]
+	if level < MAX_LEVEL and experience >= exp_for_next_level:
+		experience -= exp_for_next_level
 		level += 1
+		_update_exp_for_next_level()
 		# TODO: Do something about replicating shoot interval
 		#shoot_interval = level_shoot_intervals[level]
 		
@@ -427,6 +435,10 @@ func collect_exp() -> void:
 	
 	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
+
+
+func _update_exp_for_next_level() -> void:
+	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL))
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
