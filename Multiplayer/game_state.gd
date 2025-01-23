@@ -70,6 +70,14 @@ signal game_over()
 signal _no_clients_connected_or_timeout()
 
 
+# Returns this client's instanced player character.
+func get_local_player() -> PlayerCharacterBody2D:
+	if multiplayer.get_unique_id() not in player_characters:
+		return null
+	
+	return player_characters[multiplayer.get_unique_id()]
+
+
 # Returns the time in seconds between enemy spawns at the current game progress time.
 func get_spawn_interval() -> float:
 	var rate = spawn_rate_curve.sample((MAX_TIME - time) / MAX_TIME)
@@ -418,7 +426,7 @@ func load_game():
 # Add exp to this player.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
-	experience += 1
+	experience += 10
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
 		experience -= exp_for_next_level
 		level += 1

@@ -7,7 +7,6 @@ var is_on := false
 var shoot_timer: float = 0
 var direction := Vector2.RIGHT
 var bullet_damage: float
-var powerup_name := "Revolving"
 
 signal picked_up_powerup(sprite)
 
@@ -15,6 +14,7 @@ signal picked_up_powerup(sprite)
 func _ready() -> void:
 	damage_levels = [25, 25, 50, 50, 100]
 	bullet_damage = damage_levels[min(4, current_level)]
+	powerup_name = "Revolving"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -7,6 +7,8 @@ const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
 const TIME_TO_REVIVE: float = 3.0
 # Index of the collision layer for players.
 const PLAYER_COLLISION_LAYER: int = 4
+# The most number of different powerups that this player can have
+const MAX_POWERUPS = 3
 
 @export var level_shoot_intervals:Array
 @export var speed = 400

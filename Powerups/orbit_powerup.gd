@@ -3,13 +3,13 @@ extends Powerup
 var bullet_scene := "res://Powerups/orbit_bullet.tscn"
 var sprite = preload("res://Coconut.png")
 var bullet
-var powerup_name := "Orbit"
 
 signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
 	damage_levels = [20.0, 25.0, 25.0, 25.0, 100.0]
+	powerup_name = "Orbit"
 
 
 func activate_powerup():

@@ -6,6 +6,7 @@ var current_level: int = 0
 # The highest level that this powerup can be upgraded to.
 var max_level: int = 0
 var damage_levels: Array
+var powerup_name := ""
 
 # Emitted after increasing this Powerup's level
 signal powerup_level_up(new_level: int, new_damage: float)
