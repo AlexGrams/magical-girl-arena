@@ -8,6 +8,7 @@ class_name Enemy
 var player: PlayerCharacterBody2D = null
 var speed: float = 100
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
+@onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
 
 func _ready() -> void:
 	pass
@@ -46,6 +47,11 @@ func get_nearest_player_character() -> PlayerCharacterBody2D:
 
 
 func take_damage(damage: float) -> void:
+	var damage_indicator = damage_indicator_scene.instantiate()
+	damage_indicator.global_position = global_position
+	damage_indicator.text = str(damage)
+	get_tree().root.get_node("Playground").add_child(damage_indicator)
+	
 	health -= damage
 	$AnimationPlayer.play("take_damage")
 	if health <= 0 and is_multiplayer_authority():
