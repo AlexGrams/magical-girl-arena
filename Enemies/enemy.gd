@@ -46,7 +46,6 @@ func get_nearest_player_character() -> PlayerCharacterBody2D:
 
 
 func take_damage(damage: float) -> void:
-	print((multiplayer.get_unique_id()), str(damage))
 	health -= damage
 	$AnimationPlayer.play("take_damage")
 	if health <= 0 and is_multiplayer_authority():

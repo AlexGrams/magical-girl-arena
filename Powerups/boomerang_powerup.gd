@@ -22,7 +22,7 @@ func activate_powerup():
 		1, [bullet_scene, 
 			global_position, 
 			Vector2.UP, 
-			damage_levels[min(4, current_level)], 
+			upgrade_curve.sample(float(current_level) / max_level), 
 			[$"..".get_path()]
 		]
 	)

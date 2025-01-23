@@ -100,5 +100,4 @@ func _show_random_upgrade_choices(upgrade_data: Array) -> void:
 
 
 func on_upgrade_chosen(title):
-	print("CHOSEN UPGRADE: " + str(title))
 	upgrade_chosen.emit(title)
