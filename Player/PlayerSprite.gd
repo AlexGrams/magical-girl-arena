@@ -6,6 +6,14 @@ func _ready() -> void:
 	scale = Vector2(0.5, 0.5)
 
 func _physics_process(_delta: float) -> void:
+	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if input_direction != Vector2.ZERO:
+		$Live2D_AnimationPlayer.play("Walking")
+		$Live2D_AnimationPlayer.speed_scale = 2
+	else:
+		$Live2D_AnimationPlayer.play("Breathing")
+		$Live2D_AnimationPlayer.speed_scale = 1
+		
 	### This section is for 2-way sprites
 	if Input.is_action_just_pressed("move_left"):
 		flip_h = true
