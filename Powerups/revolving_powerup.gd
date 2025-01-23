@@ -7,12 +7,15 @@ var is_on := false
 var shoot_timer: float = 0
 var direction := Vector2.RIGHT
 var bullet_damage: float
-var powerup_name := "Revolving"
 
 signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
+	max_level = 15
+	powerup_name = "Revolving"
+	upgrade_curve = load("res://Curves/upgrade_revolving.tres")
+	
 	damage_levels = [25, 25, 50, 50, 100]
 	bullet_damage = damage_levels[min(4, current_level)]
 
@@ -46,5 +49,5 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	bullet_damage = damage_levels[min(damage_levels.size() - 1, current_level)]
+	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
 	powerup_level_up.emit(current_level, bullet_damage)

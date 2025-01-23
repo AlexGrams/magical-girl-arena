@@ -13,7 +13,7 @@ const HOST_CLOSE_RPC_TIMEOUT := 5.0
 # Most time in seconds that a game takes.
 const MAX_TIME := 15.0 * 60.0
 # The highest level that players can be in the game.
-const MAX_LEVEL: int = 50
+const MAX_LEVEL: int = 30
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.
@@ -68,6 +68,14 @@ signal game_over()
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
+
+
+# Returns this client's instanced player character.
+func get_local_player() -> PlayerCharacterBody2D:
+	if multiplayer.get_unique_id() not in player_characters:
+		return null
+	
+	return player_characters[multiplayer.get_unique_id()]
 
 
 # Returns the time in seconds between enemy spawns at the current game progress time.
@@ -418,7 +426,7 @@ func load_game():
 # Add exp to this player.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
-	experience += 1
+	experience += 10
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
 		experience -= exp_for_next_level
 		level += 1

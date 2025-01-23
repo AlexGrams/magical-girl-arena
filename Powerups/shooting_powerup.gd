@@ -5,13 +5,13 @@ extends Powerup
 @export var bullet_scene := "res://Powerups/bullet.tscn"
 var is_on:bool = false
 var shoot_timer: float = 0
-var powerup_name := "Shooting"
 
 signal picked_up_powerup(sprite)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	powerup_name = "Shooting"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
