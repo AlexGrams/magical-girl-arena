@@ -4,7 +4,8 @@ extends Bullet
 var owning_player: PlayerCharacterBody2D = null
 
 
-func set_damage(damage:float):
+func set_damage(damage: float):
+	print(str(damage))
 	$BulletOffset/Area2D.damage = damage
 
 
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 func setup_bullet(data: Array) -> void:
 	if (
 		data.size() != 1
-		or typeof(data[0]) != TYPE_INT	# Owning ID 
+		or typeof(data[0]) != TYPE_INT		# Owning ID
 	):
 		return
 		
@@ -33,6 +34,13 @@ func setup_bullet(data: Array) -> void:
 		return
 	
 	$BulletOffset.position.y = radius
+	var orbit_powerup := owning_player.get_node_or_null("OrbitPowerup")
+	# The Powerup child is not replicated, so only the client which owns this character has it.
+	if orbit_powerup != null:
+		orbit_powerup.powerup_level_up.connect(
+			func(new_level, new_damage):
+				set_damage(new_damage)
+		)
 	
 	# This bullet destroys itself when the player dies.
 	if is_multiplayer_authority():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://eo3cwv53lvfa"]
+[gd_scene load_steps=6 format=3 uid="uid://eo3cwv53lvfa"]
 
 [ext_resource type="Script" path="res://Powerups/orbit_bullet.gd" id="1_vq7vf"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_k30hb"]
@@ -6,6 +6,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_80qi6"]
+properties/0/path = NodePath("BulletOffset/Area2D:damage")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="OrbitBullet" type="Node2D"]
 scale = Vector2(2, 2)
@@ -25,3 +30,6 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_80qi6")
