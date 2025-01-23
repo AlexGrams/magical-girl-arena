@@ -1,0 +1,62 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "Head"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "Arm_Left"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "Arm_Right"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "",
+			"Name": "Skirt_Sway"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "",
+			"Name": "Bow"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "",
+			"Name": "Hairloop1"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "",
+			"Name": "Hairloop1_Full"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "",
+			"Name": "Hairloop2"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "",
+			"Name": "Hairloop2_Full"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "",
+			"Name": "Breathing"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": [
+		{
+			"Id": "Part",
+			"Name": "GothVector.psd (Corresponding layer not found)"
+		}
+	]
+}
