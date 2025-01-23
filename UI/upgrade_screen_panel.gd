@@ -36,12 +36,23 @@ func _ready() -> void:
 func setup():
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
 	
-	# If the player is maxed out on the number of unique powerups they can have, then 
-	# choose some amount (3 in this case) to upgrade randomly.
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
-		print("Powerups are maxed out")
-	# Otherwise, choose randomly from the whole pool up abilities.
+		# If the player is maxed out on the number of unique powerups they can have, then 
+		# choose some amount (3 in this case) to upgrade randomly.
+		var upgrade_choices = []
+		var random_powerups = []
+		
+		for powerup: Powerup in player_character.powerups:
+			if powerup.current_level < powerup.max_level:
+				upgrade_choices.append(powerup.powerup_name)
+		
+		for powerup in all_upgrades:
+			if powerup[0] in upgrade_choices:
+				random_powerups.append(powerup)
+		
+		_show_random_upgrade_choices(random_powerups)
 	else:
+		# Otherwise, choose randomly from the whole pool up abilities.
 		var random_powerup_list = all_upgrades.duplicate()
 
 		# Remove powerups from the random list that can't be upgraded anymore.
@@ -58,22 +69,34 @@ func setup():
 				i += 1
 		
 		# Choose some powerups at random to show to the player
-		random_powerup_list.shuffle()
-		var i = 0
-		while i < len(upgrade_panels) and i < len(random_powerup_list):
-			upgrade_panels[i].set_powerup(
-				random_powerup_list[i][0],
-				random_powerup_list[i][1],
-				random_powerup_list[i][2]
-			)
-			upgrade_panels[i].show()
-			i += 1
-		# Hide remaining panels
-		while i < len(upgrade_panels):
-			upgrade_panels[i].hide()
-			i += 1
+		_show_random_upgrade_choices(random_powerup_list)
 	
 	show()
+
+
+# Display a random selection of upgrades for the player to choose from.
+# upgrade_data must contain valid upgrade possibilities. 
+func _show_random_upgrade_choices(upgrade_data: Array) -> void:
+	upgrade_data.shuffle()
+	var i = 0
+	while i < len(upgrade_panels) and i < len(upgrade_data):
+		upgrade_panels[i].set_powerup(
+			upgrade_data[i][0],
+			upgrade_data[i][1],
+			upgrade_data[i][2]
+		)
+		upgrade_panels[i].show()
+		i += 1
+	
+	# Hide remaining panels
+	if i == 0:
+		push_error("There were no valid powerups to upgrade!")
+		on_upgrade_chosen("")
+		return
+	
+	while i < len(upgrade_panels):
+		upgrade_panels[i].hide()
+		i += 1
 
 
 func on_upgrade_chosen(title):

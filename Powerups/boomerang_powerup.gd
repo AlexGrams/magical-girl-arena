@@ -1,8 +1,6 @@
 extends Powerup
 
 
-const BOOMERANG_MAX_LEVEL: int = 1
-
 var bullet_scene := "res://Powerups/boomerang_bullet.tscn"
 var sprite = preload("res://Peach.png")
 # The single bullet instance used by this Powerup. The boomerang is never destroyed.
@@ -12,9 +10,10 @@ signal picked_up_powerup(sprite)
 
 
 func _ready():
-	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
-	max_level = BOOMERANG_MAX_LEVEL
+	max_level = 15
 	powerup_name = "Boomerang"
+	
+	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
 
 
 func activate_powerup():

@@ -13,7 +13,7 @@ const HOST_CLOSE_RPC_TIMEOUT := 5.0
 # Most time in seconds that a game takes.
 const MAX_TIME := 15.0 * 60.0
 # The highest level that players can be in the game.
-const MAX_LEVEL: int = 50
+const MAX_LEVEL: int = 30
 const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.

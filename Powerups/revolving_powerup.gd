@@ -12,9 +12,11 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
+	max_level = 15
+	powerup_name = "Revolving"
+	
 	damage_levels = [25, 25, 50, 50, 100]
 	bullet_damage = damage_levels[min(4, current_level)]
-	powerup_name = "Revolving"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
