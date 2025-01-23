@@ -426,9 +426,9 @@ func collect_exp() -> void:
 		# TODO: Do something about replicating shoot interval
 		#shoot_interval = level_shoot_intervals[level]
 		
-		# Show upgrade screen
+		# Show and set up the upgrade screen
 		get_tree().paused = true
-		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").show()
+		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").setup()
 		
 		if multiplayer.is_server():
 			players_selecting_upgrades = player_characters.size()
