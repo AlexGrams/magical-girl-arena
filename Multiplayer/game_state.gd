@@ -426,7 +426,7 @@ func load_game():
 # Add exp to this player.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
-	experience += 10
+	experience += 1
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
 		experience -= exp_for_next_level
 		level += 1
