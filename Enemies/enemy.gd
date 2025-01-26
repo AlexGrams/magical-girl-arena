@@ -5,8 +5,8 @@ class_name Enemy
 const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
 # Max health is set based off of the current time when this enemy spawns.
-var max_health: float = 0
-var health: float = 0
+var max_health: int = 0
+var health: int = 0
 var player: PlayerCharacterBody2D = null
 var speed: float = 100
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
@@ -16,7 +16,6 @@ var speed: float = 100
 func _ready() -> void:
 	max_health = snapped(curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
 	health = max_health
-	print(max_health)
 
 
 func _process(delta: float) -> void:
@@ -58,7 +57,7 @@ func take_damage(damage: float) -> void:
 	damage_indicator.text = str(damage)
 	get_tree().root.get_node("Playground").add_child(damage_indicator)
 	
-	health -= damage
+	health -= snapped(damage, 1)
 	$AnimationPlayer.play("take_damage")
 	if health <= 0 and is_multiplayer_authority():
 		die.rpc_id(1)
