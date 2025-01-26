@@ -43,11 +43,15 @@ func _ready():
 
 func _on_upgrade_chosen(powerup_name):
 	var powerup_found = false
+	
+	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
 		if child is Powerup and child.powerup_name == powerup_name:
 			child.level_up()
 			powerup_found = true
 			break
+	
+	# If we don't have the chosen powerup, then add it to the player.
 	if !powerup_found:
 		var powerup_to_add
 		match powerup_name:
@@ -58,9 +62,6 @@ func _on_upgrade_chosen(powerup_name):
 			"Orbit":
 				powerup_to_add = load("res://Powerups/orbit_powerup.tscn").instantiate()
 		add_powerup(powerup_to_add)
-		
-	$"../CanvasLayer/UpgradeScreenPanel".hide()
-	GameState.player_selected_upgrade.rpc_id(1)
 
 
 func get_input():

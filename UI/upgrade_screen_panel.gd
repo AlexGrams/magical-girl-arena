@@ -3,6 +3,8 @@ extends Panel
 
 # Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
+# Window that shows up saying how many players are still choosing upgrades.
+@export var players_selecting_upgrades_window: Control = null
 
 # All upgrades that the player can acquire in the game. Chosen from at random when upgrading.
 # Contains Array of [PowerupName, Sprite, UpgradeDescription]
@@ -11,6 +13,8 @@ var upgrade_panels: Array = []
 var boomerang_sprite = preload("res://Peach.png")
 var revolving_sprite = preload("res://Orange.png")
 var orbit_sprite = preload("res://Coconut.png")
+# How many players are currently still choosing upgrades.
+var players_selecting_upgrades: int = 0
 
 signal upgrade_chosen(title)
 
@@ -29,12 +33,70 @@ func _ready() -> void:
 	all_upgrades.append(["Orbit", orbit_sprite, "Increase damage"])
 	
 	for child in $HBoxContainer.get_children():
-		child.upgrade_chosen.connect(on_upgrade_chosen)
+		child.upgrade_chosen.connect(_on_upgrade_chosen)
+
+
+# Display a random selection of upgrades for the player to choose from.
+# upgrade_data must contain valid upgrade possibilities. 
+func _show_random_upgrade_choices(upgrade_data: Array) -> void:
+	upgrade_data.shuffle()
+	var i = 0
+	while i < len(upgrade_panels) and i < len(upgrade_data):
+		upgrade_panels[i].set_powerup(
+			upgrade_data[i][0],
+			upgrade_data[i][1],
+			upgrade_data[i][2]
+		)
+		upgrade_panels[i].show()
+		i += 1
+	
+	# Hide remaining panels
+	if i == 0:
+		push_error("There were no valid powerups to upgrade!")
+		_on_upgrade_chosen("")
+		return
+	
+	while i < len(upgrade_panels):
+		upgrade_panels[i].hide()
+		i += 1
+
+
+# Notify relevant systems that this player has selected an upgrade.
+# Called after one of the upgrade panels has been clicked.
+func _on_upgrade_chosen(title):
+	# This signal is connected to the player's function for adding or upgrading the powerup.
+	upgrade_chosen.emit(title)
+	GameState.player_selected_upgrade.rpc_id(1)
+	
+	# Set up and show the screen saying how many players are still choosing their upgrades.
+	upgrade_panels_holder.hide()
+	increment_players_selecting_upgrades.rpc()
+	players_selecting_upgrades_window.show()
+	
+	# TODO: For showing a screen when others are selecting abilities:
+	# - Emit from upgrade_chosen.
+	# - Player is connected to that signal, so it is notified to add the powerup
+	# - Server is notified that this player has selected their upgrade
+	# - Notify everyone that this player has selected their upgrade
+	# -- This and the previous might be able to be combined into one RPC. But on who?
+	# -- No, make them separate. GameState needs to do something, and the UpgradeScreenPanel
+	#    needs to do something.
+	# - Once everyone has their upgrade, hide the UpgradeScreenPanel
+
+
+# Update the displayed count of how many players are still selecting their upgrades.
+@rpc("any_peer", "call_local")
+func increment_players_selecting_upgrades() -> void:
+	players_selecting_upgrades += 1
+	# TODO: Update the number of indicators that are lit up
 
 
 # Show the upgrade screen and set up the options provided to the player.
 func setup():
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
+	players_selecting_upgrades = 0
+	players_selecting_upgrades_window.hide()
+	upgrade_panels_holder.show()
 	
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
@@ -72,32 +134,3 @@ func setup():
 		_show_random_upgrade_choices(random_powerup_list)
 	
 	show()
-
-
-# Display a random selection of upgrades for the player to choose from.
-# upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array) -> void:
-	upgrade_data.shuffle()
-	var i = 0
-	while i < len(upgrade_panels) and i < len(upgrade_data):
-		upgrade_panels[i].set_powerup(
-			upgrade_data[i][0],
-			upgrade_data[i][1],
-			upgrade_data[i][2]
-		)
-		upgrade_panels[i].show()
-		i += 1
-	
-	# Hide remaining panels
-	if i == 0:
-		push_error("There were no valid powerups to upgrade!")
-		on_upgrade_chosen("")
-		return
-	
-	while i < len(upgrade_panels):
-		upgrade_panels[i].hide()
-		i += 1
-
-
-func on_upgrade_chosen(title):
-	upgrade_chosen.emit(title)

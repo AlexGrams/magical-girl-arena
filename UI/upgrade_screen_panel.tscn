@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=5 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
+[ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="3_2mijq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
 
-[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder")]
+[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "players_selecting_upgrades_window")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +16,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
 upgrade_panels_holder = NodePath("HBoxContainer")
+players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -40,3 +42,62 @@ layout_mode = 2
 
 [node name="IndividualUpgradePanel3" parent="HBoxContainer" instance=ExtResource("1_0s0gu")]
 layout_mode = 2
+
+[node name="PlayersSelectingUpgrades" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PlayersSelectingUpgrades"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.5
+offset_top = 82.0
+offset_right = 180.5
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Waiting for other players to choose upgrades..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReadyIndicatorContainer" type="HBoxContainer" parent="PlayersSelectingUpgrades"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -250.0
+offset_right = 139.0
+offset_bottom = -163.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="PlayerReadyIndicator" parent="PlayersSelectingUpgrades/ReadyIndicatorContainer" instance=ExtResource("3_2mijq")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PlayerReadyIndicator2" parent="PlayersSelectingUpgrades/ReadyIndicatorContainer" instance=ExtResource("3_2mijq")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PlayerReadyIndicator3" parent="PlayersSelectingUpgrades/ReadyIndicatorContainer" instance=ExtResource("3_2mijq")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PlayerReadyIndicator4" parent="PlayersSelectingUpgrades/ReadyIndicatorContainer" instance=ExtResource("3_2mijq")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
