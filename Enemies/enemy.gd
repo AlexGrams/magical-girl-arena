@@ -2,16 +2,22 @@ extends Node2D
 
 class_name Enemy
 
-@export var max_health: float = 100
-@export var health: float = 100
+const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
+# Max health is set based off of the current time when this enemy spawns.
+var max_health: float = 0
+var health: float = 0
 var player: PlayerCharacterBody2D = null
 var speed: float = 100
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 @onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
 
+
 func _ready() -> void:
-	pass
+	max_health = snapped(curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
+	health = max_health
+	print(max_health)
+
 
 func _process(delta: float) -> void:
 	if player != null:

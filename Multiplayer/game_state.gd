@@ -80,12 +80,17 @@ func get_local_player() -> PlayerCharacterBody2D:
 
 # Returns the time in seconds between enemy spawns at the current game progress time.
 func get_spawn_interval() -> float:
-	var rate = spawn_rate_curve.sample((MAX_TIME - time) / MAX_TIME)
+	var rate = spawn_rate_curve.sample(get_game_progress_as_fraction())
 	if rate > 0.0:
 		return 1.0 / rate
 	else:
-		push_error("spawn_rate_curve has a value of 0 at time " + str((MAX_TIME - time) / MAX_TIME))
+		push_error("spawn_rate_curve has a value of 0 at fraction " + str(get_game_progress_as_fraction()))
 		return 1.0
+
+
+# Returns the current percentage of MAX_TIME elapsed / 100.
+func get_game_progress_as_fraction() -> float:
+	return (MAX_TIME - time) / MAX_TIME
 
 
 @rpc("any_peer", "call_local")
