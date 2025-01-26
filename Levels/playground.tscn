@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=11 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
+[ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="6_blcs8"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
@@ -75,9 +76,10 @@ enemy_scene = ExtResource("5_6byrv")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_timer_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
+_retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
@@ -251,7 +253,6 @@ process_mode = 2
 visible = false
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -303,6 +304,32 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Retry"
+
+[node name="RetryVotesContainer" type="HBoxContainer" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -20.0
+offset_right = 181.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PlayerReadyIndicator" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer" instance=ExtResource("6_blcs8")]
+layout_mode = 2
+
+[node name="PlayerReadyIndicator2" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer" instance=ExtResource("6_blcs8")]
+layout_mode = 2
+
+[node name="PlayerReadyIndicator3" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer" instance=ExtResource("6_blcs8")]
+layout_mode = 2
+
+[node name="PlayerReadyIndicator4" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer" instance=ExtResource("6_blcs8")]
+layout_mode = 2
 
 [node name="LobbyButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
 layout_mode = 2

@@ -1,9 +1,12 @@
 extends CanvasLayer
 
 @export var _game_over_screen: Control = null
+# Parent of PlayerReadyIndicators representing how many players are ready to Retry.
+@export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
 var textures: Array
-var votes_to_retry: int = 0
+var _votes_to_retry: int = 0
+var _retry_indicators: Array[PlayerReadyIndicator]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,9 +19,21 @@ func _ready() -> void:
 	
 	$ExperienceBar.value = 0.0
 	
+	for retry_indicator in _retry_votes_container.get_children():
+		_retry_indicators.append(retry_indicator)
+	
 	# Game over screen visibility
 	GameState.game_over.connect(func():
 		_game_over_screen.show()
+		
+		# Initialize the retry indicators
+		var i = 0
+		while i < GameState.connected_players:
+			_retry_indicators[i].set_is_ready(false)
+			i += 1
+		while i < GameState.MAX_PLAYERS:
+			_retry_indicators[i].hide()
+			i += 1
 	)
 	_game_over_screen.hide()
 
@@ -49,10 +64,7 @@ func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
 
 # This player is voting to retry the game.
 func _on_retry_button_toggled(toggled_on: bool) -> void:
-	if not multiplayer.is_server():
-		_update_retry_votes.rpc_id(1, toggled_on)
-	else:
-		_update_retry_votes(toggled_on)
+	_update_retry_votes.rpc(toggled_on)
 
 
 # If any person goes back to the lobby, then all players are taken back.
@@ -69,18 +81,14 @@ func _on_quit_button_down() -> void:
 	GameState.quit_game.rpc(multiplayer.get_unique_id())
 
 
-# Only call on the server. Update count of how many players want to restart the game. 
+# Update count of how many players want to restart the game. 
 # Reloads as soon as everyone votes to start again.
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_local")
 func _update_retry_votes(voting_retry: bool) -> void:
-	# TODO: Add counter showing how many votes there are
-	if multiplayer.get_unique_id() != 1:
-		return
-	
 	if voting_retry:
-		votes_to_retry += 1
-		if votes_to_retry >= GameState.connected_players:
-			votes_to_retry = 0
+		_votes_to_retry += 1
+		if multiplayer.get_unique_id() == 1 and _votes_to_retry >= GameState.connected_players:
+			_votes_to_retry = 0
 			
 			var world_tree_exited: Signal = GameState.world.tree_exited
 			GameState.end_game.rpc()
@@ -89,8 +97,19 @@ func _update_retry_votes(voting_retry: bool) -> void:
 			# start_game calls its own RPCs on all players so that they load the game as well.
 			GameState.start_game()
 	else:
-		votes_to_retry = max(0, votes_to_retry - 1)
-	print(votes_to_retry, GameState.connected_players)
+		_votes_to_retry = max(0, _votes_to_retry - 1)
+	
+	# Update the indicators to display how many players want to retry.
+	var i = 0
+	while i < _votes_to_retry:
+		_retry_indicators[i].set_is_ready(true)
+		i += 1
+	while i < GameState.connected_players:
+		_retry_indicators[i].set_is_ready(false)
+		i += 1
+	while i < GameState.MAX_PLAYERS:
+		_retry_indicators[i].hide()
+		i += 1
 
 
 # Unloads the Playground and shows the lobby.
