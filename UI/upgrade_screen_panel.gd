@@ -5,16 +5,19 @@ extends Panel
 @export var upgrade_panels_holder: Control = null
 # Window that shows up saying how many players are still choosing upgrades.
 @export var players_selecting_upgrades_window: Control = null
+# Parent of the PlayReadyIndicators
+@export var player_ready_indicator_holder: Control = null
 
 # All upgrades that the player can acquire in the game. Chosen from at random when upgrading.
 # Contains Array of [PowerupName, Sprite, UpgradeDescription]
 var all_upgrades: Array = []
 var upgrade_panels: Array = []
+var ready_indicators: Array = []
 var boomerang_sprite = preload("res://Peach.png")
 var revolving_sprite = preload("res://Orange.png")
 var orbit_sprite = preload("res://Coconut.png")
-# How many players are currently still choosing upgrades.
-var players_selecting_upgrades: int = 0
+# How many players are done choosing upgrades.
+var players_done_selecting_upgrades: int = 0
 
 signal upgrade_chosen(title)
 
@@ -23,6 +26,8 @@ signal upgrade_chosen(title)
 func _ready() -> void:
 	for child in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
+	for child in player_ready_indicator_holder.get_children():
+		ready_indicators.append(child)
 	
 	$HBoxContainer/IndividualUpgradePanel.set_powerup("Boomerang", boomerang_sprite, "Increase damage")
 	$HBoxContainer/IndividualUpgradePanel2.set_powerup("Revolving", revolving_sprite, "Increase damage")
@@ -87,14 +92,32 @@ func _on_upgrade_chosen(title):
 # Update the displayed count of how many players are still selecting their upgrades.
 @rpc("any_peer", "call_local")
 func increment_players_selecting_upgrades() -> void:
-	players_selecting_upgrades += 1
-	# TODO: Update the number of indicators that are lit up
+	players_done_selecting_upgrades += 1
+	
+	if players_done_selecting_upgrades >= GameState.connected_players:
+		hide()
+	
+	var i = 0
+	# Ready players
+	while i < players_done_selecting_upgrades:
+		ready_indicators[i].show()
+		ready_indicators[i].set_is_ready(true)
+		i += 1
+	# Not ready players
+	while i < GameState.connected_players:
+		ready_indicators[i].show()
+		ready_indicators[i].set_is_ready(false)
+		i += 1
+	# Hide remaining indicators
+	while i < GameState.MAX_PLAYERS:
+		ready_indicators[i].hide()
+		i += 1
 
 
 # Show the upgrade screen and set up the options provided to the player.
 func setup():
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
-	players_selecting_upgrades = 0
+	players_done_selecting_upgrades = 0
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
 	

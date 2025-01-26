@@ -248,6 +248,7 @@ expand_mode = 1
 
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
+visible = false
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer"]
 visible = false
