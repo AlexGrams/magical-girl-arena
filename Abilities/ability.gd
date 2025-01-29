@@ -20,6 +20,11 @@ func get_can_activate() -> bool:
 	return currentCooldownTime <= 0.0
 
 
+# Set the multiplayer authority for this ability
+func set_authority(id: int) -> void:
+	set_multiplayer_authority(id)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

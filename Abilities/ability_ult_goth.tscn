@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5y3tgnyr235e"]
+
+[ext_resource type="Script" path="res://Abilities/ability_ult_goth.gd" id="1_8t0ch"]
+
+[node name="AbilityUltGoth" type="Node2D"]
+script = ExtResource("1_8t0ch")

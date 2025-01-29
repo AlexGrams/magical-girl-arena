@@ -17,8 +17,10 @@ const MAX_POWERUPS = 4
 @export var _revive_progress_bar: TextureProgressBar = null
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
-# Array of Powerup types; All powerups that this player has.
-var powerups := []
+# All powerups that this player has.
+var powerups: Array[Powerup] = []
+# All Abilities that this player has.
+var abilities: Array[Ability] = []
 var shoot_timer = 0
 var shoot_interval = 1
 var experience = 0
@@ -39,6 +41,13 @@ signal revived()
 
 func _ready():
 	_revive_collision_area.hide()
+	
+	# TODO: Testing abilities and ultimate
+	if is_multiplayer_authority():
+		var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
+		ult.set_authority(multiplayer.get_unique_id())
+		add_child(ult)
+		abilities.append(ult)
 
 
 func _on_upgrade_chosen(powerup_name):
