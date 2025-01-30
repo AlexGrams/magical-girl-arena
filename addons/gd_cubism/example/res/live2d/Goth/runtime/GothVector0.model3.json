@@ -1,11 +1,11 @@
 {
 	"Version": 3,
 	"FileReferences": {
-		"Moc": "GothVector.moc3",
+		"Moc": "GothVector0.moc3",
 		"Textures": [
-			"GothVector.1024/texture_00.png"
+			"GothVector0.1024/texture_00.png"
 		],
-		"DisplayInfo": "GothVector.cdi3.json"
+		"DisplayInfo": "GothVector0.cdi3.json"
 	},
 	"Groups": [
 		{
