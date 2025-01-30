@@ -5,6 +5,10 @@ extends Ability
 # your location.
 
 
+@export var bullet_scene_path := "res://Abilities/bullet_ult_goth.tscn"
+@export var damage: float = 100.0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -18,4 +22,12 @@ func _process(delta: float) -> void:
 func activate() -> void:
 	super()
 	
-	print("Goth ult")
+	# Spawn the large special damage volume at parent's location.
+	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+	1, [bullet_scene_path, 
+		get_parent().global_position, 
+		Vector2.ZERO, 
+		damage, 
+		[]
+	]
+)

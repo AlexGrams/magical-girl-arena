@@ -111,7 +111,7 @@ func _input(event: InputEvent) -> void:
 	if is_down:
 		return
 	
-	if event.is_action_pressed("ability_ultimate"):
+	if event.is_action_pressed("ability_ultimate") and abilities[0].get_can_activate():
 		abilities[0].activate()
 
 
