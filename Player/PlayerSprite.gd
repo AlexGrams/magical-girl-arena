@@ -4,6 +4,7 @@ var last_direction = "move_right"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scale = Vector2(0.5, 0.5)
+	$Blinking_AnimationPlayer.play("Blinking")
 
 func _physics_process(_delta: float) -> void:
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
