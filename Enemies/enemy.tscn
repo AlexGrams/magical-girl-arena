@@ -22,7 +22,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("Sprite2D:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -75,8 +75,10 @@ properties/1/path = NodePath(".:health")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy" type="Node2D" groups=["enemy"]]
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 script = ExtResource("1_mwxyx")
+collider_area = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)
