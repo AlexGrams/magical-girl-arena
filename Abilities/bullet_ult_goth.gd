@@ -1,9 +1,22 @@
 extends Bullet
 ## An ability that damages enemies in a large area and turns them into allies if they
-## are killed by this attack.
+## are killed by this attack. A function is called on the Enemy to convert them to allies,
+## so the Enemy object isn't destroyed if killed.
+##
+## NOTE: Enemies usually take damage by seeing when they overlap a BulletHitbox then 
+## calling take_damage on themselves. Since we may want to convert Enemies, BulletHitbox
+## isn't used by this bullet, and take_damage is called by this script on overlap.
 
 @export var hitbox: BulletHitbox = null
+# Time in seconds that Enemies made allies by this attack last
+@export var ally_lifetime: float = 0.0
+# How much damage Enemies turned into allies do.
+@export var ally_damage: float = 0.0
 var damage: float = 0.0
+
+
+func set_damage(new_damage: float):
+	damage = new_damage
 
 
 func _ready() -> void:
@@ -17,8 +30,18 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func _on_area_2d_area_entered(_area: Area2D) -> void:
-	print("Someone got hit by the ult")
+# See if this attack will kill this enemy. If so, convert that enemy into an ally.
+# Otherwise, deal damage to that enemy.
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if not is_multiplayer_authority():
+		return
+	
+	var enemy: Enemy = area.get_parent()
+	if enemy.health - damage > 0.0:
+		enemy.take_damage(damage)
+	else:
+		# This attack kills this enemy, so make it an ally
+		enemy.make_ally.rpc(ally_lifetime, ally_damage)
 
 
 # Set up other properties for this bullet

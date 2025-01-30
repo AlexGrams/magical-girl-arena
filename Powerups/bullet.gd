@@ -11,7 +11,7 @@ var direction: Vector2
 var death_timer: float = 0
 
 
-func set_damage(damage:float):
+func set_damage(damage: float):
 	$Area2D.damage = damage
 
 

@@ -76,10 +76,12 @@ properties/1/path = NodePath(".:health")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy_Ranged" type="Node2D" groups=["enemy"]]
+[node name="Enemy_Ranged" type="Node2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 script = ExtResource("1_yjg42")
 max_range = 400.0
 bullet_scene = ExtResource("2_4ww20")
+collider_area = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)

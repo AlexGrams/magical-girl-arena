@@ -4,13 +4,25 @@ class_name Enemy
 
 const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
+# Parent of this Enemy's collider
+@export var collider_area: Area2D = null
+@export var sprite: Sprite2D = null
+
+@onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
+@onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
+
 # Max health is set based off of the current time when this enemy spawns.
 var max_health: int = 0
 var health: int = 0
-var player: PlayerCharacterBody2D = null
+# The character that this Enemy is trying to attack.
+var target: Node2D = null
 var speed: float = 100
-@onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
-@onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
+# True if it tries to harm Enemies instead of players.
+var is_ally := false
+# How long this Enemy lasts as an ally before being destroyed
+var lifetime: float = 0.0
+# Damage this Enemy does to other Enemies when it is an ally.
+var ally_damage: float = 0.0
 
 
 func _ready() -> void:
@@ -19,20 +31,29 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if player != null:
-		global_position = global_position.move_toward(player.global_position, delta*speed)
+	if target != null:
+		global_position = global_position.move_toward(target.global_position, delta*speed)
 	else:
 		_find_new_target()
+	
+	if is_ally:
+		lifetime -= delta
+		if lifetime <= 0.0:
+			take_damage(health)
 
 
-# Set player that this enemy is trying to attack. 
+# Set target that this enemy is trying to attack. 
 # Makes sure to find a new target if the current one dies.
 func _find_new_target() -> void:
-	player = get_nearest_player_character()
-	if player != null:
-		player.died.connect(func():
-			player = null
-		)
+	if not is_ally:
+		target = get_nearest_player_character()
+		if target != null:
+			target.died.connect(func():
+				target = null
+			)
+	else:
+		# Alternate behavior, for when this Enemy attacks other Enemies.
+		target = get_nearest_hostile_enemy()
 
 
 # Find the player that is closest to this enemy 
@@ -51,6 +72,26 @@ func get_nearest_player_character() -> PlayerCharacterBody2D:
 	return nearest_player
 
 
+# Find the nearest Enemy that is not an ally.
+func get_nearest_hostile_enemy() -> Enemy:
+	# TODO: Doesn't wokr exactly because it doesn't find a new enemy target when
+	# 1. Target dies
+	# 2. Target becoems an ally
+	# Would need to solve this by making new signals and binding to them.
+	var nearest_enemy: Enemy = null
+	var nearestDist: float = -1.0
+	var currentDist: float = 0.0
+	
+	for enemy: Enemy in get_tree().get_nodes_in_group("enemy"):
+		if not enemy.is_ally:
+			currentDist = global_position.distance_squared_to(enemy.global_position)
+			if currentDist < nearestDist or nearestDist < -0.5:
+				nearestDist = currentDist
+				nearest_enemy = enemy
+	
+	return nearest_enemy
+
+
 func take_damage(damage: float) -> void:
 	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.global_position = global_position
@@ -66,6 +107,36 @@ func take_damage(damage: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
 		take_damage(area.damage)
+		return
+	
+	# When allied, deal damage to other Enemies.
+	var other = area.get_parent()
+	if is_ally and other is Enemy and not other.is_ally:
+		other.take_damage(ally_damage)
+
+
+# Turn this Enemy into an ally of the player. Will instead try to damage Enemies that 
+# are not allies.
+@rpc("any_peer", "call_local")
+func make_ally(new_lifetime: float, new_damage: float) -> void:
+	is_ally = true
+	lifetime = new_lifetime
+	ally_damage = new_damage
+	collider_area.collision_mask = 2
+	# We will now treat this Enemy as a player bullet.
+	collider_area.collision_layer = 0
+	
+	# Stop color animation so that we can apply this "ally" color.
+	$AnimationPlayer.stop()
+	sprite.self_modulate = Color("00cc7e")
+	
+	# Since this Enemy essentially died, spawn EXP from it
+	if is_multiplayer_authority():
+		var exp_orb = exp_scene.instantiate()
+		exp_orb.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+	
+	_find_new_target()
 
 
 # Delete this enemy and spawn EXP orbs. Only call on the server.
@@ -74,7 +145,9 @@ func die() -> void:
 	if not is_multiplayer_authority():
 		return
 	
-	var exp_orb = exp_scene.instantiate()
-	exp_orb.global_position = global_position
-	get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+	if not is_ally:
+		var exp_orb = exp_scene.instantiate()
+		exp_orb.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+	
 	queue_free()
