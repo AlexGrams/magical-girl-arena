@@ -20,6 +20,7 @@ var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 # All powerups that this player has.
 var powerups: Array[Powerup] = []
 # All Abilities that this player has.
+# Index 0 is the ultimate, and higher indicies are the regular abilities.
 var abilities: Array[Ability] = []
 var shoot_timer = 0
 var shoot_interval = 1
@@ -41,13 +42,6 @@ signal revived()
 
 func _ready():
 	_revive_collision_area.hide()
-	
-	# TODO: Testing abilities and ultimate
-	if is_multiplayer_authority():
-		var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
-		ult.set_authority(multiplayer.get_unique_id())
-		add_child(ult)
-		abilities.append(ult)
 
 
 func _on_upgrade_chosen(powerup_name):
@@ -108,6 +102,17 @@ func _physics_process(_delta):
 	if not is_down and is_multiplayer_authority():
 		get_input()
 		move_and_slide()
+
+
+func _input(event: InputEvent) -> void:
+	if not is_multiplayer_authority():
+		return
+	
+	if is_down:
+		return
+	
+	if event.is_action_pressed("ability_ultimate"):
+		abilities[0].activate()
 
 
 # Gives this player a new powerup.
@@ -226,6 +231,13 @@ func ready_local_player() -> void:
 	# Only the character that this player controls is given the ability. 
 	var shoot_powerup = load(shoot_powerup_path).instantiate()
 	add_powerup(shoot_powerup)
+	
+	# Set up ultimate ability
+	# TODO: Testing ults using Goth ult only.
+	var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
+	ult.set_authority(multiplayer.get_unique_id())
+	add_child(ult)
+	abilities.append(ult)
 
 
 @rpc("any_peer", "call_local")
