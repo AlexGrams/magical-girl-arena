@@ -25,6 +25,12 @@ var lifetime: float = 0.0
 var ally_damage: float = 0.0
 
 
+# Emitted when this Enemy dies.
+signal died(enemy: Enemy)
+# Emitted when this Enemy is converted to an ally.
+signal allied(enemy: Enemy)
+
+
 func _ready() -> void:
 	max_health = snapped(curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
 	health = max_health
@@ -54,19 +60,31 @@ func _find_new_target() -> void:
 	else:
 		# Alternate behavior, for when this Enemy attacks other Enemies.
 		target = get_nearest_hostile_enemy()
+	
+		if target != null:
+			# Bind death and allied events.
+			# NOTE: There is a slight bug where the "died" signal will still be bound 
+			# if the Enemy switches target due to the "allied" signal being called.
+			# Shouldn't make much of a difference.
+			target.died.connect(func(_enemy: Enemy):
+				_find_new_target()
+			, CONNECT_ONE_SHOT)
+			target.allied.connect(func(_enemy: Enemy):
+				_find_new_target()
+			, CONNECT_ONE_SHOT)
 
 
 # Find the player that is closest to this enemy 
 func get_nearest_player_character() -> PlayerCharacterBody2D:
 	var nearest_player: PlayerCharacterBody2D = null
-	var nearestDist: float = -1.0
-	var currentDist: float = 0.0
+	var nearest_dist: float = -1.0
+	var current_dist: float = 0.0
 	
 	for player_character: PlayerCharacterBody2D in GameState.player_characters.values():
 		if player_character != null and not player_character.is_down:
-			currentDist = global_position.distance_squared_to(player_character.global_position)
-			if currentDist < nearestDist or nearestDist < -0.5:
-				nearestDist = currentDist
+			current_dist = global_position.distance_squared_to(player_character.global_position)
+			if current_dist < nearest_dist or nearest_dist < -0.5:
+				nearest_dist = current_dist
 				nearest_player = player_character
 	
 	return nearest_player
@@ -79,14 +97,14 @@ func get_nearest_hostile_enemy() -> Enemy:
 	# 2. Target becoems an ally
 	# Would need to solve this by making new signals and binding to them.
 	var nearest_enemy: Enemy = null
-	var nearestDist: float = -1.0
-	var currentDist: float = 0.0
+	var nearest_dist: float = -1.0
+	var current_dist: float = 0.0
 	
 	for enemy: Enemy in get_tree().get_nodes_in_group("enemy"):
 		if not enemy.is_ally:
-			currentDist = global_position.distance_squared_to(enemy.global_position)
-			if currentDist < nearestDist or nearestDist < -0.5:
-				nearestDist = currentDist
+			current_dist = global_position.distance_squared_to(enemy.global_position)
+			if current_dist < nearest_dist or nearest_dist < -0.5:
+				nearest_dist = current_dist
 				nearest_enemy = enemy
 	
 	return nearest_enemy
@@ -136,6 +154,7 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 		exp_orb.global_position = global_position
 		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
 	
+	allied.emit(self)
 	_find_new_target()
 
 
@@ -144,10 +163,11 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 func die() -> void:
 	if not is_multiplayer_authority():
 		return
-	
+
 	if not is_ally:
 		var exp_orb = exp_scene.instantiate()
 		exp_orb.global_position = global_position
 		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
 	
+	died.emit(self)
 	queue_free()
