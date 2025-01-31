@@ -6,6 +6,7 @@ extends Enemy
 # Time in seconds between shots.
 @export var fire_interval: float = 1.0
 @export var bullet_scene: PackedScene
+@export var allied_bullet_scene_path := "res://Powerups/bullet.tscn"
 
 # Used for faster distance calculation
 var squared_max_range: float
@@ -31,13 +32,31 @@ func _process(delta: float) -> void:
 		else:
 			# Shoot at the target
 			if is_multiplayer_authority() and fire_timer >= fire_interval:
-				var bullet = bullet_scene.instantiate()
 				var direction = target.global_position - self.global_position
 				var direction_normal = direction.normalized()
-				bullet.set_damage(bullet_damage)
-				bullet.direction = direction_normal
-				bullet.position = self.global_position + (direction_normal * 100)
-				get_node("..").add_child(bullet, true)
+				if not is_ally:
+					var bullet = bullet_scene.instantiate()
+					bullet.set_damage(bullet_damage)
+					bullet.direction = direction_normal
+					bullet.position = self.global_position + (direction_normal * 100)
+					get_node("..").add_child(bullet, true)
+				else:
+					# Alternate attack behavior for when this Enemy is an ally
+					get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+						1, [allied_bullet_scene_path, 
+							self.global_position + (direction_normal * 100), 
+							direction_normal, 
+							bullet_damage, 
+							[]
+						]
+					)
+				
 				fire_timer = 0.0
 	else:
 		_find_new_target()
+	
+	# Allied lifetime check
+	if is_ally:
+		lifetime -= delta
+		if lifetime <= 0.0:
+			take_damage(health)
