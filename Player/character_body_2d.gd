@@ -192,12 +192,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	# Some side effects include:
 	# - Multiple players can take damage from the same projectile if it isn't destroyed
 	#   on time.
-	# - Clients can see another player not take damage from an enemy, despite them
+	# - Clients can see another player not take damage from an enemy, despite them touching
 	#   on their screen. This is because the other player didn't hit the enemy from their
 	#   POV, so the collision didn't happen.
 	
 	if area.get_collision_layer_value(2): #If Enemy
-		take_damage.rpc(10)
+		pass
+		#take_damage.rpc(10)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage.rpc(area.damage)
 		area.get_parent().request_delete.rpc_id(1)

@@ -7,6 +7,10 @@ const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 # Parent of this Enemy's collider
 @export var collider_area: Area2D = null
 @export var sprite: Sprite2D = null
+# Time in seconds between when this Enemy can attack
+@export var attack_interval: float = 1.0
+@export var attack_damage = 10.0
+
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 @onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
@@ -16,6 +20,11 @@ var max_health: int = 0
 var health: int = 0
 # The character that this Enemy is trying to attack.
 var target: Node2D = null
+# All Objects that this Enemy can damage that it is touching right now.
+var colliding_targets: Array[Node2D] = []
+# How long until this Enemy can attack again
+var _attack_timer: float = 0.0
+# Movement speed of this Enemy
 var speed: float = 100
 # True if it tries to harm Enemies instead of players.
 var is_ally := false
@@ -41,6 +50,19 @@ func _process(delta: float) -> void:
 		global_position = global_position.move_toward(target.global_position, delta*speed)
 	else:
 		_find_new_target()
+	
+	# Attack if possible
+	if _attack_timer > 0:
+		_attack_timer -= delta
+	elif len(colliding_targets) > 0:
+		if not is_ally:
+			for node: PlayerCharacterBody2D in colliding_targets:
+				node.take_damage.rpc(attack_damage)
+		else:
+			for node: Enemy in colliding_targets:
+				node.take_damage(ally_damage)
+		
+		_attack_timer = attack_interval
 	
 	if is_ally:
 		lifetime -= delta
@@ -127,10 +149,30 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		take_damage(area.damage)
 		return
 	
-	# When allied, deal damage to other Enemies.
 	var other = area.get_parent()
-	if is_ally and other is Enemy and not other.is_ally:
-		other.take_damage(ally_damage)
+	if (not is_ally and 
+		other is PlayerCharacterBody2D and 
+		multiplayer.get_unique_id() == other.get_multiplayer_authority()
+	):
+		# Enemy is colliding with a player. Only consider damaging the local player.
+		colliding_targets.append(other)
+	elif other is Enemy and not other.is_ally:
+		# When allied, deal damage to other Enemies.
+		colliding_targets.append(other)
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	# Remove objects from our track of targets when they stop colliding with this Enemy.
+	if not is_ally:
+		if area.get_collision_layer_value(4):
+			var node: Node2D = area.get_parent()
+			if node is PlayerCharacterBody2D and node in colliding_targets:
+				colliding_targets.remove_at(colliding_targets.find(node))
+	else:
+		if area.get_collision_layer_value(2):
+			var node: Node2D = area.get_parent()
+			if node is Enemy and node in colliding_targets:
+				colliding_targets.remove_at(colliding_targets.find(node))
 
 
 # Turn this Enemy into an ally of the player. Will instead try to damage Enemies that 
@@ -140,6 +182,7 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 	is_ally = true
 	lifetime = new_lifetime
 	ally_damage = new_damage
+	colliding_targets.clear()
 	collider_area.collision_mask = 2
 	# We will now treat this Enemy as a player bullet.
 	collider_area.collision_layer = 0
