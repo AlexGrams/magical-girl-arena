@@ -37,11 +37,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		return
 	
 	var enemy: Enemy = area.get_parent()
-	if enemy.health - damage > 0.0:
-		enemy.take_damage(damage)
-	else:
-		# This attack kills this enemy, so make it an ally
-		enemy.make_ally.rpc(ally_lifetime, ally_damage)
+	if not enemy.is_ally:
+		if enemy.health - damage > 0.0:
+			enemy.take_damage(damage)
+		else:
+			# This attack kills this enemy, so make it an ally
+			enemy.make_ally.rpc(ally_lifetime, ally_damage)
 
 
 # Set up other properties for this bullet
