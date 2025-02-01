@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4rurp8wei1rp"]
+[gd_scene load_steps=3 format=3 uid="uid://b4rurp8wei1rp"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/enemy_spawner.gd" id="1_ojikn"]
 
-[node name="EnemySpawner" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0c5s"]
+
+[node name="EnemySpawner" type="Node2D" node_paths=PackedStringArray("spawn_area")]
 script = ExtResource("1_ojikn")
+spawn_area = NodePath("Area2D/SpawnArea")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="SpawnArea" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_w0c5s")
+debug_color = Color(0.989583, 0.00256571, 0.00140677, 0.419608)

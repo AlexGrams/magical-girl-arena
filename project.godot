@@ -68,6 +68,7 @@ ability_ultimate={
 2d_physics/layer_4="player"
 2d_physics/layer_5="powerup"
 2d_physics/layer_6="enemy_bullet"
+2d_physics/layer_7="Walls"
 
 [physics]
 

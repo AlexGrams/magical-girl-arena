@@ -55,26 +55,22 @@ position = Vector2(919, 1201)
 position = Vector2(1173, 1203)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
-position = Vector2(554, 330)
-
-[node name="ColorRect" type="ColorRect" parent="EnemySpawner"]
-offset_right = 40.0
-offset_bottom = 40.0
+position = Vector2(-787, 999)
+scale = Vector2(8, 100)
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("4_4ivfi")]
-position = Vector2(1856, 359)
-
-[node name="ColorRect" type="ColorRect" parent="EnemySpawner2"]
-offset_right = 40.0
-offset_bottom = 40.0
+position = Vector2(932, -196)
+scale = Vector2(150, 8)
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_4ivfi")]
-position = Vector2(1707, 1572)
+position = Vector2(2626, 997)
+scale = Vector2(8, 100)
 enemy_scene = ExtResource("5_6byrv")
+enabled = false
 
-[node name="ColorRect" type="ColorRect" parent="EnemySpawner3"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="EnemySpawner4" parent="." instance=ExtResource("4_4ivfi")]
+position = Vector2(932, 2206)
+scale = Vector2(150, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text")]
 script = ExtResource("6_b2lbv")

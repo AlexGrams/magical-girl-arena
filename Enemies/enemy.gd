@@ -59,8 +59,9 @@ func _process(delta: float) -> void:
 			for node: PlayerCharacterBody2D in colliding_targets:
 				node.take_damage.rpc(attack_damage)
 		else:
-			for node: Enemy in colliding_targets:
-				node.take_damage(ally_damage)
+			for node in colliding_targets:
+				if node != null and not node.is_queued_for_deletion():
+					node.take_damage(ally_damage)
 		
 		_attack_timer = attack_interval
 	
