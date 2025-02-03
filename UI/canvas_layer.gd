@@ -4,7 +4,7 @@ extends CanvasLayer
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
-@export var _pointer: TextureRect = null
+@export var _pointer_parent: Control = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -12,6 +12,7 @@ var fraction: float = 0.0
 var textures: Array
 var _votes_to_retry: int = 0
 var _retry_indicators: Array[PlayerReadyIndicator]
+var _pointers: Array[TextureRect] = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,9 @@ func _ready() -> void:
 	
 	for retry_indicator in _retry_votes_container.get_children():
 		_retry_indicators.append(retry_indicator)
+	
+	for pointer in _pointer_parent.get_children():
+		_pointers.append(pointer)
 	
 	# Game over screen visibility
 	GameState.game_over.connect(func():
@@ -49,15 +53,21 @@ func _process(_delta: float) -> void:
 		"%02d:%02d" % [int(ceil(GameState.time)) / 60.0, int(ceil(GameState.time)) % 60]
 	)
 	
-	fraction += _delta
-	if fraction > 1.0:
-		fraction = 0.0
-	#_pointer.set_global_position(Vector2(get_viewport().get_size().x * fraction * (1.0 / get_window().content_scale_factor), 0))
-	#_pointer.set_global_position(Vector2(get_viewport().get_visible_rect().size.x * fraction, 0))
+	# Update pointers that indicate the direction of players not on the screen.
+	var used_pointers: int = 0
 	for id: int in GameState.player_characters:
 		var node: Node2D = GameState.player_characters[id]
-		if id == multiplayer.get_unique_id() or node == null or GameState.get_local_player() == null:
+		if (
+			id == multiplayer.get_unique_id() or 
+			node == null or 
+			GameState.get_local_player() == null or 
+			node.find_child("VisibleOnScreenNotifier2D").is_on_screen()
+		):
 			continue
+		
+		var _pointer = _pointers[used_pointers]
+		_pointer.show()
+		used_pointers += 1
 		
 		# The angle in radians from the local player to the other player character
 		var angle_to_other_player: float = (
@@ -83,11 +93,24 @@ func _process(_delta: float) -> void:
 			))
 		
 		_pointer.rotation = angle_to_other_player + PI / 2
-		
-		if multiplayer.is_server():
-			pass
-			#print((0.5 * screen_y) * tan(angle_to_other_player) + (0.5 * screen_x))
-			print(angle_to_other_player)
+	
+	while used_pointers < len(_pointers):
+		_pointers[used_pointers].hide()
+		used_pointers += 1
+
+
+# TODO: Maybe make this event-based rather than checking every frame. Would then need a way to
+# keep track of the object that each pointer is pointing to.
+# Connects events to enable or disable arrows to offscreen players.
+func add_character_to_point_to(notifier: VisibleOnScreenNotifier2D) -> void:
+	notifier.screen_entered.connect(func():
+		#notifier.is_on_screen()
+		pass
+	)
+	
+	notifier.screen_exited.connect(func():
+		pass
+	)
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:

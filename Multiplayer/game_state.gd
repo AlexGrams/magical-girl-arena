@@ -255,7 +255,7 @@ func start_game():
 		# Players need to be given authority over their characters, and other players
 		# need to have authority set locally for each remote player.
 		player.set_authority.rpc(player_id)
-		player.ready_local_player.rpc_id(player_id)
+		player.ready_player_character.rpc()
 		
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)

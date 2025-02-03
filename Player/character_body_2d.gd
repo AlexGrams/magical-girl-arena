@@ -15,6 +15,7 @@ const MAX_POWERUPS = 4
 @export var _player_collision_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
 @export var _revive_progress_bar: TextureProgressBar = null
+@export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 # All powerups that this player has.
@@ -210,35 +211,38 @@ func register_with_game_state(owning_player_id: int) -> void:
 	GameState.add_player_character(owning_player_id, self)
 
 
-# Sets up this character on this game instance after it is spawned.
+# Sets up this character after it is spawned. Has different behavior depending on if this
+# function is called on the character this client controls. 
 # Should be called only once, like with _ready().
 @rpc("any_peer", "call_local")
-func ready_local_player() -> void:
+func ready_player_character() -> void:
 	# Should not be called on characters that are not owned by this game instance.
-	if not is_multiplayer_authority():
-		return
-	
-	# Signal for experience changes
-	gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
-	
-	# Signal for health changes
-	took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
-	took_damage.emit(health, health_max)
-	
-	# Should redo this in the future prob?
-	$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
-	
-	# Give the player the basic shoot powerup.
-	# Only the character that this player controls is given the ability. 
-	var shoot_powerup = load(shoot_powerup_path).instantiate()
-	add_powerup(shoot_powerup)
-	
-	# Set up ultimate ability
-	# TODO: Testing ults using Goth ult only.
-	var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
-	ult.set_authority(multiplayer.get_unique_id())
-	add_child(ult)
-	abilities.append(ult)
+	if is_multiplayer_authority():
+		# Signal for experience changes
+		gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
+		
+		# Signal for health changes
+		took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
+		took_damage.emit(health, health_max)
+		
+		# Should redo this in the future prob?
+		$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+		
+		# Give the player the basic shoot powerup.
+		# Only the character that this player controls is given the ability. 
+		var shoot_powerup = load(shoot_powerup_path).instantiate()
+		add_powerup(shoot_powerup)
+		
+		# Set up ultimate ability
+		# TODO: Testing ults using Goth ult only.
+		var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
+		ult.set_authority(multiplayer.get_unique_id())
+		add_child(ult)
+		abilities.append(ult)
+	else:
+		# This client does not own this PlayerCharacter. Connect events to show the
+		# pointer to this character when it goes off screen for the local client.
+		get_tree().root.get_node("Playground/CanvasLayer").add_character_to_point_to(_on_screen_notifier)
 
 
 @rpc("any_peer", "call_local")

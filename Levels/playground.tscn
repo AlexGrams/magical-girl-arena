@@ -72,12 +72,12 @@ enemy_scene = ExtResource("5_6byrv")
 position = Vector2(932, 2206)
 scale = Vector2(150, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
-_pointer = NodePath("PlayerPointers/Pointer1")
+_pointer_parent = NodePath("PlayerPointers")
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -88,6 +88,29 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Pointer1" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 103.0
+offset_bottom = 146.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("7_gsdoh")
+expand_mode = 1
+
+[node name="Pointer2" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 103.0
+offset_bottom = 146.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("7_gsdoh")
+expand_mode = 1
+
+[node name="Pointer3" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
+visible = false
 layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
