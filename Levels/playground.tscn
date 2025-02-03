@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=12 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_v8j4q"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="6_blcs8"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="7_gsdoh"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
 
@@ -71,11 +72,12 @@ enemy_scene = ExtResource("5_6byrv")
 position = Vector2(932, 2206)
 scale = Vector2(150, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
+_pointer = NodePath("PlayerPointers/Pointer1")
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(0.00402517, 0.17334, 0.76886, 1)
@@ -350,6 +352,24 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 46
 text = "00:00"
 horizontal_alignment = 1
+
+[node name="PlayerPointers" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pointer1" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 103.0
+offset_bottom = 146.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("7_gsdoh")
+expand_mode = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn")

@@ -4,6 +4,11 @@ extends CanvasLayer
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
+@export var _pointer: TextureRect = null
+
+# TODO: Testing
+var fraction: float = 0.0
+
 var textures: Array
 var _votes_to_retry: int = 0
 var _retry_indicators: Array[PlayerReadyIndicator]
@@ -43,6 +48,28 @@ func _process(_delta: float) -> void:
 	_timer_text.text = (
 		"%02d:%02d" % [int(ceil(GameState.time)) / 60.0, int(ceil(GameState.time)) % 60]
 	)
+	
+	fraction += _delta
+	if fraction > 1.0:
+		fraction = 0.0
+	#_pointer.set_global_position(Vector2(get_viewport().get_size().x * fraction * (1.0 / get_window().content_scale_factor), 0))
+	#_pointer.set_global_position(Vector2(get_viewport().get_visible_rect().size.x * fraction, 0))
+	for id: int in GameState.player_characters:
+		var node: Node2D = GameState.player_characters[id]
+		if id == multiplayer.get_unique_id():
+			continue
+		
+		# The angle in radians from the local player to the other player character
+		var angle_to_other_player: float = (
+			(node.position - GameState.get_local_player().position).angle() + PI / 2.0
+		)
+		
+		_pointer.set_position(Vector2(
+			get_viewport().get_visible_rect().size.x * 0.5,
+			get_viewport().get_visible_rect().size.y * 0.25
+		))
+		
+		_pointer.rotation = angle_to_other_player
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
