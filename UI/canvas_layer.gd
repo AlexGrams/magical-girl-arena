@@ -61,15 +61,33 @@ func _process(_delta: float) -> void:
 		
 		# The angle in radians from the local player to the other player character
 		var angle_to_other_player: float = (
-			(node.position - GameState.get_local_player().position).angle() + PI / 2.0
+			(node.position - GameState.get_local_player().position).angle()
 		)
 		
-		_pointer.set_position(Vector2(
-			get_viewport().get_visible_rect().size.x * 0.5,
-			get_viewport().get_visible_rect().size.y * 0.25
-		))
+		var screen_x = get_viewport().get_visible_rect().size.x
+		var screen_y = get_viewport().get_visible_rect().size.y
+		var pointer_size_x = _pointer.size.x
+		var pointer_size_y = _pointer.size.y
 		
-		_pointer.rotation = angle_to_other_player
+		# Since the tangent function used to calculate the arrow's position is discontinuous at 
+		# +/- PI/2, we need two different equations for setting the y-position of the pointer.
+		if angle_to_other_player >= -PI / 2 and angle_to_other_player <= PI / 2:
+			_pointer.set_position(Vector2(
+				clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
+				clamp((0.5 * screen_x) * tan(angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
+			))
+		else:
+			_pointer.set_position(Vector2(
+				clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
+				clamp((0.5 * screen_x) * tan(PI - angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
+			))
+		
+		_pointer.rotation = angle_to_other_player + PI / 2
+		
+		if multiplayer.is_server():
+			pass
+			#print((0.5 * screen_y) * tan(angle_to_other_player) + (0.5 * screen_x))
+			print(angle_to_other_player)
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
