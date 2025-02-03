@@ -56,7 +56,7 @@ func _process(_delta: float) -> void:
 	#_pointer.set_global_position(Vector2(get_viewport().get_visible_rect().size.x * fraction, 0))
 	for id: int in GameState.player_characters:
 		var node: Node2D = GameState.player_characters[id]
-		if id == multiplayer.get_unique_id():
+		if id == multiplayer.get_unique_id() or node == null or GameState.get_local_player() == null:
 			continue
 		
 		# The angle in radians from the local player to the other player character
