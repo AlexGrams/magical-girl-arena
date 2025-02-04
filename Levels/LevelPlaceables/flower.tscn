@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://3wfdmknchrwr"]
+
+[ext_resource type="Texture2D" uid="uid://c1157ouj5jlbd" path="res://Flower.png" id="1_6nx0p"]
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/flower.gd" id="2_768n0"]
+
+[sub_resource type="Animation" id="Animation_lai5g"]
+resource_name = "FlowerRotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_l2ddv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lobbp"]
+_data = {
+"FlowerRotate": SubResource("Animation_lai5g"),
+"RESET": SubResource("Animation_l2ddv")
+}
+
+[node name="Flower" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -927.0
+offset_bottom = -507.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("1_6nx0p")
+stretch_mode = 2
+script = ExtResource("2_768n0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lobbp")
+}
+speed_scale = 0.15
