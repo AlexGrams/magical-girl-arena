@@ -1,6 +1,5 @@
-extends Node2D
-
 class_name Enemy
+extends CharacterBody2D
 
 const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
@@ -46,11 +45,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if target != null:
-		global_position = global_position.move_toward(target.global_position, delta*speed)
-	else:
-		_find_new_target()
-	
 	# Attack if possible
 	if _attack_timer > 0:
 		_attack_timer -= delta
@@ -69,6 +63,14 @@ func _process(delta: float) -> void:
 		lifetime -= delta
 		if lifetime <= 0.0:
 			take_damage(health)
+
+
+func _physics_process(_delta: float) -> void:
+	if target != null:
+		velocity = (target.global_position - global_position).normalized() * speed
+		move_and_slide()
+	else:
+		_find_new_target()
 
 
 # Set target that this enemy is trying to attack. 

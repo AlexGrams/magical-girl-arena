@@ -26,9 +26,18 @@ func _process(delta: float) -> void:
 	if fire_timer < fire_interval:
 		fire_timer += delta
 	
+	# Allied lifetime check
+	if is_ally:
+		lifetime -= delta
+		if lifetime <= 0.0:
+			take_damage(health)
+
+
+func _physics_process(delta: float) -> void:
 	if target != null:
 		if global_position.distance_squared_to(target.global_position) > squared_max_range:
-			global_position = global_position.move_toward(target.global_position, delta*speed)
+			velocity = (target.global_position - global_position).normalized() * speed
+			move_and_slide()
 		else:
 			# Shoot at the target
 			if is_multiplayer_authority() and fire_timer >= fire_interval:
@@ -54,9 +63,3 @@ func _process(delta: float) -> void:
 				fire_timer = 0.0
 	else:
 		_find_new_target()
-	
-	# Allied lifetime check
-	if is_ally:
-		lifetime -= delta
-		if lifetime <= 0.0:
-			take_damage(health)

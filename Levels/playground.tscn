@@ -88,6 +88,21 @@ _data = {
 "Wave3": SubResource("Animation_ca5bf")
 }
 
+[sub_resource type="Animation" id="Animation_r5yvg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-125, 164)]
+}
+
 [sub_resource type="Animation" id="Animation_iojvc"]
 resource_name = "Wave2"
 loop_mode = 1
@@ -104,25 +119,25 @@ tracks/0/keys = {
 "values": [Vector2(-125, 164), Vector2(611, 164)]
 }
 
-[sub_resource type="Animation" id="Animation_r5yvg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w43eo"]
+_data = {
+"RESET": SubResource("Animation_r5yvg"),
+"Wave2": SubResource("Animation_iojvc")
+}
+
+[sub_resource type="Animation" id="Animation_piy0s"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines2:position")
+tracks/0/path = NodePath("WaterLines:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-125, 164)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w43eo"]
-_data = {
-"RESET": SubResource("Animation_r5yvg"),
-"Wave2": SubResource("Animation_iojvc")
+"values": [Vector2(-88, 247)]
 }
 
 [sub_resource type="Animation" id="Animation_lhp4o"]
@@ -139,21 +154,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-88, 247), Vector2(611, 245)]
-}
-
-[sub_resource type="Animation" id="Animation_piy0s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-88, 247)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hlw47"]
@@ -4939,20 +4939,20 @@ position = Vector2(1173, 1203)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(-1904, 1799)
-scale = Vector2(8, 100)
+scale = Vector2(8, 280)
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1072, -1098)
-scale = Vector2(150, 8)
+scale = Vector2(280, 8)
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(3985, 1924)
-scale = Vector2(8, 100)
+scale = Vector2(8, 280)
 enemy_scene = ExtResource("5_6byrv")
 
 [node name="EnemySpawner4" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1072, 4746)
-scale = Vector2(150, 8)
+scale = Vector2(280, 8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent")]
 script = ExtResource("6_b2lbv")
