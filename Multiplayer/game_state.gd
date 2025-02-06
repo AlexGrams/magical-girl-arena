@@ -45,6 +45,10 @@ var lobby_id: int = 0
 
 # The parent node of all objects in the main portion of the game.
 var world: Node = null
+# All the gold the player has.
+var _gold: int = 0
+# How much gold the player has gotten this round. Added to their total gold after the game ends.
+var _gold_this_game: int = 0
 # Experience to next level
 var experience: float = 0.0
 var exp_for_next_level: float = 0.0
@@ -91,6 +95,14 @@ func get_spawn_interval() -> float:
 # Returns the current percentage of MAX_TIME elapsed / 100.
 func get_game_progress_as_fraction() -> float:
 	return (MAX_TIME - time) / MAX_TIME
+
+
+func get_gold() -> int:
+	return _gold
+
+
+func set_gold(new_gold: int) -> void:
+	_gold = new_gold
 
 
 @rpc("any_peer", "call_local")
@@ -185,6 +197,8 @@ func _ready() -> void:
 					# Player left a lobby
 					unregister_player_by_steam_id(changed_id)
 		)
+	
+	SaveManager.load_game()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -264,6 +278,14 @@ func start_game():
 	set_game_running.rpc(true)
 
 
+# Called when the game ends, either by the players winning or losing
+func _game_over():
+	_gold += _gold_this_game
+	SaveManager.save_game()
+	
+	game_over.emit()
+
+
 # Stops the main gameplay segment by deleting the world and resetting state variables.
 @rpc("any_peer", "call_local")
 func end_game():
@@ -284,6 +306,7 @@ func end_game():
 func reset_game_variables():
 	player_characters.clear()
 	players_down = 0
+	_gold_this_game = 0
 	level = 1
 	experience = 0
 	_update_exp_for_next_level()
@@ -452,7 +475,7 @@ func collect_exp() -> void:
 # Add gold to all players.
 @rpc("any_peer", "call_local")
 func collect_gold() -> void:
-	pass
+	_gold_this_game += 1
 
 
 func _update_exp_for_next_level() -> void:
@@ -482,7 +505,7 @@ func resume_game() -> void:
 func _on_player_died():
 	players_down += 1
 	if players_down >= connected_players:
-		game_over.emit()
+		_game_over()
 
 
 @rpc("any_peer", "call_local")
