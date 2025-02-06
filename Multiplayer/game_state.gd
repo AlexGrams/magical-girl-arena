@@ -452,7 +452,7 @@ func collect_exp() -> void:
 # Add gold to all players.
 @rpc("any_peer", "call_local")
 func collect_gold() -> void:
-	print("You got gold!")
+	pass
 
 
 func _update_exp_for_next_level() -> void:

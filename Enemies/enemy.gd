@@ -37,6 +37,9 @@ var ally_damage: float = 0.0
 
 # How long until this Enemy can attack again
 var _attack_timer: float = 0.0
+# Thresholds used for randomly determining what an enemy drops. 
+var _threshold_exp: float = 0.0
+var _threshold_gold: float = 0.0
 
 # Emitted when this Enemy dies.
 signal died(enemy: Enemy)
@@ -47,6 +50,11 @@ signal allied(enemy: Enemy)
 func _ready() -> void:
 	max_health = snapped(curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
 	health = max_health
+	
+	# Random loot generation
+	var total := drop_weight_exp + drop_weight_gold + drop_weight_nothing
+	_threshold_exp = drop_weight_exp / total
+	_threshold_gold = drop_weight_gold / total + _threshold_exp
 
 
 func _process(delta: float) -> void:
@@ -222,6 +230,15 @@ func die() -> void:
 
 # Randomly spawns EXP, gold, or nothing from this Enemy. Call after it dies.
 func _spawn_loot() -> void:
-	var exp_orb = exp_scene.instantiate()
-	exp_orb.global_position = global_position
-	get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+	var random_value := randf()
+	if random_value <= _threshold_exp:
+		var exp_orb = exp_scene.instantiate()
+		exp_orb.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+	elif random_value <= _threshold_gold:
+		var gold := gold_scene.instantiate()
+		gold.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
+	else:
+		# Nothing rewarded
+		pass

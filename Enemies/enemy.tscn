@@ -82,6 +82,8 @@ collision_mask = 128
 script = ExtResource("1_mwxyx")
 collider_area = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+drop_weight_exp = 15.0
+drop_weight_gold = 4.0
 
 [node name="AtomSprite" parent="." instance=ExtResource("2_plv55")]
 
