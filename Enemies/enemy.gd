@@ -16,6 +16,7 @@ const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
+@onready var gold_scene = preload("res://Pickups/gold.tscn")
 @onready var damage_indicator_scene = preload("res://UI/damage_indicator.tscn")
 
 # Max health is set based off of the current time when this enemy spawns.

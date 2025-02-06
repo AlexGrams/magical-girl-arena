@@ -1,3 +1,4 @@
+class_name EXPOrb
 extends Node2D
 
 

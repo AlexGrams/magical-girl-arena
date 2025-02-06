@@ -449,6 +449,11 @@ func collect_exp() -> void:
 	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
 
+# Add gold to all players.
+@rpc("any_peer", "call_local")
+func collect_gold() -> void:
+	print("You got gold!")
+
 
 func _update_exp_for_next_level() -> void:
 	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL))

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqcar2b10ptof"]
+
+[ext_resource type="Script" path="res://Pickups/gold.gd" id="1_34ytc"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_0smm1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
+size = Vector2(26, 26)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5u73p"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[node name="Gold" type="Node2D"]
+script = ExtResource("1_34ytc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.844255, 0.451341, 9.62615e-07, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_0smm1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_f7oyy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5u73p")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

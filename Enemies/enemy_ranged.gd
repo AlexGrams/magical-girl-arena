@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 			take_damage(health)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target != null:
 		if global_position.distance_squared_to(target.global_position) > squared_max_range:
 			velocity = (target.global_position - global_position).normalized() * speed
