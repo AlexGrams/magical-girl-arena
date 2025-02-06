@@ -8,7 +8,11 @@ const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 @export var sprite: Sprite2D = null
 # Time in seconds between when this Enemy can attack
 @export var attack_interval: float = 1.0
-@export var attack_damage = 10.0
+@export var attack_damage: float = 10.0
+# The relative liklihoods of dropping EXP, gold, or nothing when this Enemy dies.
+@export var drop_weight_exp: float = 1.0
+@export var drop_weight_gold: float = 1.0
+@export var drop_weight_nothing: float = 1.0
 
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
@@ -21,8 +25,6 @@ var health: int = 0
 var target: Node2D = null
 # All Objects that this Enemy can damage that it is touching right now.
 var colliding_targets: Array[Node2D] = []
-# How long until this Enemy can attack again
-var _attack_timer: float = 0.0
 # Movement speed of this Enemy
 var speed: float = 100
 # True if it tries to harm Enemies instead of players.
@@ -32,6 +34,8 @@ var lifetime: float = 0.0
 # Damage this Enemy does to other Enemies when it is an ally.
 var ally_damage: float = 0.0
 
+# How long until this Enemy can attack again
+var _attack_timer: float = 0.0
 
 # Emitted when this Enemy dies.
 signal died(enemy: Enemy)
@@ -196,9 +200,7 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 	
 	# Since this Enemy essentially died, spawn EXP from it
 	if is_multiplayer_authority():
-		var exp_orb = exp_scene.instantiate()
-		exp_orb.global_position = global_position
-		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+		_spawn_loot()
 	
 	allied.emit(self)
 	_find_new_target()
@@ -211,9 +213,14 @@ func die() -> void:
 		return
 
 	if not is_ally:
-		var exp_orb = exp_scene.instantiate()
-		exp_orb.global_position = global_position
-		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+		_spawn_loot()
 	
 	died.emit(self)
 	queue_free()
+
+
+# Randomly spawns EXP, gold, or nothing from this Enemy. Call after it dies.
+func _spawn_loot() -> void:
+	var exp_orb = exp_scene.instantiate()
+	exp_orb.global_position = global_position
+	get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
