@@ -1,12 +1,27 @@
 extends Sprite2D
 
 var last_direction = "move_right"
+
+# True if this sprite changes state depending on local user input.
+var _read_input := true
+
+
+func set_read_input(new_val: bool) -> void:
+	_read_input = new_val
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	scale = Vector2(0.5, 0.5)
 	$Blinking_AnimationPlayer.play("Blinking")
 
+
 func _physics_process(_delta: float) -> void:
+	# Simple animation if we don't care about user input.
+	if not _read_input:
+		$Live2D_AnimationPlayer.play("Breathing")
+		$Live2D_AnimationPlayer.speed_scale = 1
+		return
+	
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_direction != Vector2.ZERO:
 		$Live2D_AnimationPlayer.play("Walking")

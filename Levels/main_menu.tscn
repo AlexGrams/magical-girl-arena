@@ -196,31 +196,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 112.0
-offset_bottom = 187.0
-grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Lobby[/center]"
-
-[node name="PlayersHolder" type="HBoxContainer" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 37.0
-offset_top = 213.0
-offset_right = -49.0
-offset_bottom = 482.0
-grow_horizontal = 2
-theme_override_constants/separation = 30
-alignment = 1
+[node name="PlayersHolder" type="Control" parent="Lobby"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Player1" type="VBoxContainer" parent="Lobby/PlayersHolder"]
 layout_mode = 2
+offset_left = 413.0
+offset_top = 213.0
+offset_right = 688.0
+offset_bottom = 552.0
 
 [node name="ID" type="Label" parent="Lobby/PlayersHolder/Player1"]
 layout_mode = 2
@@ -234,8 +220,23 @@ theme_override_font_sizes/font_size = 20
 text = "Username goes here"
 horizontal_alignment = 1
 
+[node name="Spacer" type="Control" parent="Lobby/PlayersHolder/Player1"]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="CharacterSpriteLocation" type="Control" parent="Lobby/PlayersHolder/Player1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
 [node name="Player2" type="VBoxContainer" parent="Lobby/PlayersHolder"]
 layout_mode = 2
+offset_left = 739.0
+offset_top = 213.0
+offset_right = 939.0
+offset_bottom = 482.0
 
 [node name="ID" type="Label" parent="Lobby/PlayersHolder/Player2"]
 layout_mode = 2
@@ -251,6 +252,10 @@ horizontal_alignment = 1
 
 [node name="Player3" type="VBoxContainer" parent="Lobby/PlayersHolder"]
 layout_mode = 2
+offset_left = 969.0
+offset_top = 213.0
+offset_right = 1169.0
+offset_bottom = 482.0
 
 [node name="ID" type="Label" parent="Lobby/PlayersHolder/Player3"]
 layout_mode = 2
@@ -266,6 +271,10 @@ horizontal_alignment = 1
 
 [node name="Player4" type="VBoxContainer" parent="Lobby/PlayersHolder"]
 layout_mode = 2
+offset_left = 1199.0
+offset_top = 213.0
+offset_right = 1399.0
+offset_bottom = 482.0
 
 [node name="ID" type="Label" parent="Lobby/PlayersHolder/Player4"]
 layout_mode = 2
@@ -278,6 +287,17 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Username goes here"
 horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 112.0
+offset_bottom = 187.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Lobby[/center]"
 
 [node name="StartGameButton" type="Button" parent="Lobby"]
 layout_mode = 1

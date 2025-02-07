@@ -3,6 +3,7 @@ extends Control
 
 # Will be spawned in the Lobby screen. Clicking allows the player to join a lobby
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
+const character_animated_sprite: Resource = preload("res://UI/character_animated_sprite.tscn")
 
 ## The first screen shown when the game is started.
 @export var main_menu: Control
@@ -13,7 +14,7 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## The screen showing players in the current lobby.
 @export var lobby: Control
 ## Contains the UI elements for displaying the players in the lobby.
-@export var players_holder: BoxContainer
+@export var players_holder: Control
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_button: Button
 
@@ -27,6 +28,13 @@ func _ready() -> void:
 			lobby.hide()
 			lobby_list.show()
 			request_lobby_list()
+	)
+	var sprite: Sprite2D = character_animated_sprite.instantiate()
+	get_tree().root.add_child.call_deferred(sprite)
+	sprite.tree_entered.connect(func():
+		sprite.global_position = $Lobby/PlayersHolder/Player1/CharacterSpriteLocation.global_position
+		sprite.set_read_input(false)
+		, CONNECT_ONE_SHOT
 	)
 	
 	setup_lobby_screen()
