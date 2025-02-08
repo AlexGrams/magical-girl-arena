@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://j115lnwcarmj"]
+
+[ext_resource type="Script" path="res://UI/lobby_player_character_container.gd" id="1_j20e6"]
+
+[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("id", "username", "character_sprite_location")]
+offset_left = 413.0
+offset_top = 213.0
+offset_right = 688.0
+offset_bottom = 552.0
+script = ExtResource("1_j20e6")
+id = NodePath("ID")
+username = NodePath("Username")
+character_sprite_location = NodePath("CharacterSpriteLocation")
+
+[node name="ID" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "ID Goes here"
+horizontal_alignment = 1
+
+[node name="Username" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Username goes here"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="CharacterSpriteLocation" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0

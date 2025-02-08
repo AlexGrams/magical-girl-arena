@@ -3,7 +3,6 @@ extends Control
 
 # Will be spawned in the Lobby screen. Clicking allows the player to join a lobby
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
-const character_animated_sprite: Resource = preload("res://UI/character_animated_sprite.tscn")
 
 ## The first screen shown when the game is started.
 @export var main_menu: Control
@@ -19,6 +18,9 @@ const character_animated_sprite: Resource = preload("res://UI/character_animated
 @export var start_game_button: Button
 
 
+var _player_containers: Array[LobbyPlayerCharacterContainer] = []
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameState.player_list_changed.connect(self.refresh_lobby)
@@ -29,13 +31,10 @@ func _ready() -> void:
 			lobby_list.show()
 			request_lobby_list()
 	)
-	var sprite: Sprite2D = character_animated_sprite.instantiate()
-	get_tree().root.add_child.call_deferred(sprite)
-	sprite.tree_entered.connect(func():
-		sprite.global_position = $Lobby/PlayersHolder/Player1/CharacterSpriteLocation.global_position
-		sprite.set_read_input(false)
-		, CONNECT_ONE_SHOT
-	)
+	
+	for container in players_holder.get_children():
+		_player_containers.append(container)
+		container.set_properties("Hello", "World", Constants.Character.GOTH)
 	
 	setup_lobby_screen()
 
@@ -44,6 +43,7 @@ func _process(_delta: float) -> void:
 	pass
 
 
+#region main
 # Exit the game.
 func _on_quit_button_button_down() -> void:
 	get_tree().quit()
@@ -54,8 +54,9 @@ func _on_lobby_button_button_down() -> void:
 	main_menu.hide()
 	lobby_list.show()
 	request_lobby_list()
+#endregion
 
-
+#region lobby_list
 # Start a new lobby.
 func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
@@ -81,19 +82,7 @@ func _on_lobby_list_back_button_button_down() -> void:
 	main_menu.show()
 
 
-# The button that only the lobby host can press to begin the shooting part of the game.
-func _on_start_game_button_down() -> void:
-	GameState.start_game()
-
-
-# Leave a game lobby. Goes back to the lobby list.
-func _on_leave_button_down() -> void:
-	GameState.disconnect_local_player()
-	lobby.hide()
-	lobby_list.show()
-	request_lobby_list()
-
-
+# Refresh the lobby list
 func request_lobby_list() -> void:
 	for button in lobbies_list_container.get_children():
 		button.queue_free()
@@ -133,18 +122,35 @@ func setup_lobby_screen() -> void:
 		)
 	
 	request_lobby_list()
+#endregion
+
+#region lobby
+# The button that only the lobby host can press to begin the shooting part of the game.
+func _on_start_game_button_down() -> void:
+	GameState.start_game()
+
+
+# Leave a game lobby. Goes back to the lobby list.
+func _on_leave_button_down() -> void:
+	GameState.disconnect_local_player()
+	lobby.hide()
+	lobby_list.show()
+	request_lobby_list()
 
 
 # Updates the lobby view to show the players that are connected
 func refresh_lobby() -> void:
 	var i = 0
 	for player_id in GameState.players:
-		players_holder.get_child(i).get_node("ID").text = str(player_id)
-		players_holder.get_child(i).get_node("Username").text = GameState.players[player_id]
+		_player_containers[i].set_properties(
+			GameState.players[player_id], 
+			str(player_id),
+			Constants.Character.GOTH # TODO: Get the character
+		)
 		i += 1
 	
 	# Reset the remaining holders
 	while i < GameState.MAX_PLAYERS:
-		players_holder.get_child(i).get_node("ID").text = "Player ID left"
-		players_holder.get_child(i).get_node("Username").text = "Player name left"
+		_player_containers[i].clear_properties()
 		i += 1
+#endregion
