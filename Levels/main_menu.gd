@@ -143,7 +143,7 @@ func refresh_lobby() -> void:
 	var i = 0
 	for player_id in GameState.players:
 		_player_containers[i].set_properties(
-			GameState.players[player_id], 
+			GameState.players[player_id]["name"], 
 			str(player_id),
 			Constants.Character.GOTH # TODO: Get the character
 		)

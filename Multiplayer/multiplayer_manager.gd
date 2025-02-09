@@ -35,13 +35,12 @@ func create_server():
 		return
 	
 	player_ids[1] = null
-	GameState.players[1] = "Host"
-	GameState.steam_ids[GameState.local_player_steam_id] = 1
+	GameState.register_player(multiplayer.get_unique_id(), "Host", GameState.local_player_steam_id)
 	
 	host_created.emit()
 
 
-# Create a client for the multiplayer game
+# ENet only. Create a client for the multiplayer game
 func create_client():
 	peer = ENetMultiplayerPeer.new()
 	# NOTE: For testing, I'll only be trying to connect to the localhost
@@ -56,9 +55,9 @@ func create_client():
 
 
 # Called on all players when a client connects.
+# id = unique id of the client that connected
 func _on_peer_connected(id: int) -> void:
-	GameState.players[id] = "Client"
-	GameState.steam_ids[GameState.local_player_steam_id] = id
+	GameState.register_player(id, "Client", GameState.local_player_steam_id)
 	player_ids[id] = null
 	
 	# If using ENet for testing, start the game as soon as one client connects.

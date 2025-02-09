@@ -31,7 +31,9 @@ var player_characters := {}
 # Count of how many players are in the game. Can be different from len(players) because players
 # can disconnect in the middle of a game.
 var connected_players: int = 0
-# Map of player IDs to their names.
+# Map of player IDs to their information. Structure:
+# "name": String
+# "character": Constants.Character
 var players := {}
 # TODO: Can probably combine with "players" above.
 # Map of Steam IDs to player IDs.
@@ -134,7 +136,7 @@ func _ready() -> void:
 		multiplayer.peer_connected.connect(
 			func(id : int):
 				# Tell the connected peer that this client is in the lobby.
-				register_player.rpc_id(id, player_name, local_player_steam_id)
+				register_player.rpc_id(id, multiplayer.get_unique_id(), player_name, local_player_steam_id)
 		)
 		
 		# TODO: See if we can use this or get it to work, don't know.
@@ -148,7 +150,7 @@ func _ready() -> void:
 		multiplayer.connected_to_server.connect(
 			func():
 				# Tell all clients (including the local one) this client's information.
-				register_player.rpc(player_name, local_player_steam_id)
+				register_player.rpc(multiplayer.get_unique_id(), player_name, local_player_steam_id)
 				#connection_succeeded.emit()	
 		)
 		
@@ -228,8 +230,7 @@ func connect_steam_socket(steam_id : int):
 func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM:
 		player_name = host_player_name
-		players[1] = host_player_name
-		steam_ids[local_player_steam_id] = 1
+		register_player(multiplayer.get_unique_id(), host_player_name, 1)
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
 
 
@@ -379,10 +380,11 @@ func disconnect_local_player():
 
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local")
-func register_player(new_player_name: String, new_steam_id: int):
-	var id = multiplayer.get_remote_sender_id()
-	
-	players[id] = new_player_name
+func register_player(id:int, new_player_name: String, new_steam_id: int):
+	players[id] = {
+		"name" = new_player_name,
+		"character" = Constants.Character.GOTH
+	} 
 	steam_ids[new_steam_id] = id
 	player_list_changed.emit()
 
