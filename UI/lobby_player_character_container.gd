@@ -8,6 +8,8 @@ const character_animated_sprite: Resource = preload("res://UI/character_animated
 @export var username: Label = null
 @export var character_sprite_location: Control = null
 
+# The multiplayer ID of the player that this container represents
+var player_id: int = 0
 var sprite: Sprite2D = null
 
 
@@ -22,12 +24,13 @@ func _ready() -> void:
 # Set up this character container
 func set_properties(
 	new_username: String, 
-	new_player_id: String, 
+	new_player_id: int, 
 	character: Constants.Character
 ) -> void:
 	
 	username.text = new_username
-	id.text = new_player_id
+	id.text = str(new_player_id)
+	player_id = new_player_id
 	
 	# TODO: Set the sprite based off the character chosen
 	if sprite != null and not sprite.is_queued_for_deletion():

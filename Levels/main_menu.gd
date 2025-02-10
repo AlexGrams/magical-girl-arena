@@ -37,7 +37,6 @@ func _ready() -> void:
 	
 	for container in players_holder.get_children():
 		_player_containers.append(container)
-		container.set_properties("Hello", "World", Constants.Character.GOTH)
 	
 	# TODO: Bind events to each button to change the character when button is pressed.
 	for button: Button in character_select_button_holder.get_children():
@@ -155,7 +154,7 @@ func refresh_lobby() -> void:
 	for player_id in GameState.players:
 		_player_containers[i].set_properties(
 			GameState.players[player_id]["name"], 
-			str(player_id),
+			player_id,
 			GameState.players[player_id]["character"]
 		)
 		i += 1
@@ -166,8 +165,21 @@ func refresh_lobby() -> void:
 		i += 1
 
 
+# Updates the displayed sprite to represent the player's currently selected character.
+# Called after that player changes their character.
+@rpc("any_peer", "call_local")
+func refresh_player_sprite(player_id: int) -> void:
+	for container: LobbyPlayerCharacterContainer in _player_containers:
+		if container.player_id == player_id:
+			container.set_properties(
+				GameState.players[player_id]["name"], 
+				player_id,
+				GameState.players[player_id]["character"]
+			)
+
+
 # Changes the client's selected character.
-func _on_character_select_button_pressed(button: CharacterSelectButton):
+func _on_character_select_button_pressed(button: CharacterSelectButton) -> void:
 	GameState.set_character.rpc(multiplayer.get_unique_id(), button.character)
-	refresh_lobby.rpc()
+	refresh_player_sprite.rpc(multiplayer.get_unique_id())
 #endregion
