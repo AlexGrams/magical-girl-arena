@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjrntg5ql7pse"]
+
+[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="1_7rv1g"]
+[ext_resource type="Script" path="res://UI/character_select_button.gd" id="1_yax61"]
+
+[node name="CharacterSelectButton" type="Button"]
+offset_right = 37.0
+offset_bottom = 37.0
+size_flags_horizontal = 3
+script = ExtResource("1_yax61")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7rv1g")
+expand_mode = 4

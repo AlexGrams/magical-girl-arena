@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -101,6 +101,15 @@ func get_game_progress_as_fraction() -> float:
 
 func get_gold() -> int:
 	return _gold
+
+
+@rpc("any_peer", "call_local")
+func set_character(id: int, new_character: Constants.Character):
+	if id not in players:
+		push_error("Player id " + str(id) + " not in GameState.players")
+		return
+	
+	players[id]["character"] = new_character
 
 
 func set_gold(new_gold: int) -> void:

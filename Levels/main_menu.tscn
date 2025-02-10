@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=5 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="3_bm35d"]
+[ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "start_game_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "start_game_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +18,7 @@ lobby_list = NodePath("LobbyList")
 lobbies_list_container = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList")
 lobby = NodePath("Lobby")
 players_holder = NodePath("Lobby/PlayersHolder")
+character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
 start_game_button = NodePath("Lobby/StartGameButton")
 
 [node name="Background" type="Control" parent="."]
@@ -229,6 +231,25 @@ offset_left = 1272.0
 offset_top = 275.0
 offset_right = 1547.0
 offset_bottom = 614.0
+
+[node name="CharacterSelectContainer" type="HBoxContainer" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = -249.0
+offset_right = 491.0
+offset_bottom = -132.0
+grow_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="CharacterSelectButton" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
+layout_mode = 2
+
+[node name="CharacterSelectButton2" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
+layout_mode = 2
+character = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
 layout_mode = 1

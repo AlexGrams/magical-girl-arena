@@ -14,11 +14,14 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var lobby: Control
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
+## Contains buttons for selecting a character
+@export var character_select_button_holder: Control
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_button: Button
 
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
+var _character_select_buttons: Array[CharacterSelectButton] = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +38,13 @@ func _ready() -> void:
 	for container in players_holder.get_children():
 		_player_containers.append(container)
 		container.set_properties("Hello", "World", Constants.Character.GOTH)
+	
+	# TODO: Bind events to each button to change the character when button is pressed.
+	for button: Button in character_select_button_holder.get_children():
+		_character_select_buttons.append(button)
+		button.pressed.connect(func():
+			_on_character_select_button_pressed(button)
+		)
 	
 	setup_lobby_screen()
 
@@ -139,13 +149,14 @@ func _on_leave_button_down() -> void:
 
 
 # Updates the lobby view to show the players that are connected
+@rpc("any_peer", "call_local")
 func refresh_lobby() -> void:
 	var i = 0
 	for player_id in GameState.players:
 		_player_containers[i].set_properties(
 			GameState.players[player_id]["name"], 
 			str(player_id),
-			Constants.Character.GOTH # TODO: Get the character
+			GameState.players[player_id]["character"]
 		)
 		i += 1
 	
@@ -153,4 +164,10 @@ func refresh_lobby() -> void:
 	while i < GameState.MAX_PLAYERS:
 		_player_containers[i].clear_properties()
 		i += 1
+
+
+# Changes the client's selected character.
+func _on_character_select_button_pressed(button: CharacterSelectButton):
+	GameState.set_character.rpc(multiplayer.get_unique_id(), button.character)
+	refresh_lobby.rpc()
 #endregion
