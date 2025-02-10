@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -262,7 +262,6 @@ func start_game():
 	for player_id in players.keys():
 		var player: PlayerCharacterBody2D = player_resource.instantiate()
 		player.set_label_name(str(player_id))
-		get_tree().root.get_node("Playground").add_child(player, true)
 		
 		player.died.connect(func():
 			_on_player_died.rpc()
@@ -271,18 +270,14 @@ func start_game():
 			_on_player_revived.rpc()
 		)
 		
-		# Get the player's view to only follow this character
-		player.set_camera_current.rpc_id(player_id)
+		get_tree().root.get_node("Playground").add_child(player, true)
 		
+		player.setup_authority.rpc(player_id, players[player_id]["character"])
 		player.register_with_game_state.rpc(player_id)
-		
-		# Players need to be given authority over their characters, and other players
-		# need to have authority set locally for each remote player.
-		player.set_authority.rpc(player_id)
-		player.ready_player_character.rpc()
 		
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
+		
 		spawn_point_index += 1
 	
 	set_game_running.rpc(true)

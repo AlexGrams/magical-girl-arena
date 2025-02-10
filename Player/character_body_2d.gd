@@ -215,7 +215,7 @@ func register_with_game_state(owning_player_id: int) -> void:
 # function is called on the character this client controls. 
 # Should be called only once, like with _ready().
 @rpc("any_peer", "call_local")
-func ready_player_character() -> void:
+func ready_player_character(character: Constants.Character) -> void:
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
 		# Signal for experience changes
@@ -243,6 +243,9 @@ func ready_player_character() -> void:
 		# This client does not own this PlayerCharacter. Connect events to show the
 		# pointer to this character when it goes off screen for the local client.
 		get_tree().root.get_node("Playground/CanvasLayer").add_character_to_point_to(_on_screen_notifier)
+	
+	# Set the character's appearance
+	print(character)
 
 
 @rpc("any_peer", "call_local")
@@ -250,15 +253,17 @@ func teleport(new_position: Vector2) -> void:
 	self.position = new_position
 
 
+# Sets multiplayer authority and other values for this character.
 @rpc("any_peer", "call_local")
-func set_authority(id: int) -> void:
+func setup_authority(id: int, character: Constants.Character) -> void:
+	# TODO: There might be a bug that happens if this funciton is called before the character enters
+	# the tree. Need to test.
 	set_multiplayer_authority(id)
-
-
-# Makes this player's view follow this character.
-@rpc("authority", "call_local")
-func set_camera_current() -> void:
-	$Camera2D.make_current()
+	ready_player_character(character)
+	
+	# Extra functionality if this client is being given authority to its own character.
+	if id == multiplayer.get_unique_id():
+		$Camera2D.make_current()
 
 
 # Emits the signal for gaining experience on all clients.
