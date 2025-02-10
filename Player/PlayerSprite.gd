@@ -1,4 +1,11 @@
+class_name CharacterAnimatedSprite2D
 extends Sprite2D
+# An animated sprite for displaying selected characters outside of the Playground.
+
+@export var gdcubism_user_model:GDCubismUserModel
+
+const GOTH := "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+const SWEET := "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
 
 var last_direction = "move_right"
 
@@ -8,6 +15,14 @@ var _read_input := true
 
 func set_read_input(new_val: bool) -> void:
 	_read_input = new_val
+
+
+func set_sprite(sprite: Constants.Character) -> void:
+	match sprite:
+		Constants.Character.GOTH:
+			gdcubism_user_model.set_assets(GOTH)
+		Constants.Character.SWEET:
+			gdcubism_user_model.set_assets(SWEET)
 
 
 # Called when the node enters the scene tree for the first time.

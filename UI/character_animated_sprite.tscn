@@ -351,9 +351,10 @@ _data = {
 "RESET": SubResource("Animation_yhmns")
 }
 
-[node name="CharacterAnimatedSprite" type="Sprite2D"]
+[node name="CharacterAnimatedSprite" type="Sprite2D" node_paths=PackedStringArray("gdcubism_user_model")]
 texture = SubResource("ViewportTexture_hhwuh")
 script = ExtResource("1_yo24w")
+gdcubism_user_model = NodePath("GDCubismUserModel")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
 assets = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
