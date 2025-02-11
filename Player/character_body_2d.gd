@@ -12,10 +12,14 @@ const MAX_POWERUPS = 4
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
+# Maps string name of character to their CharacterData resource file
+@export var _character_data: Dictionary = {}
 @export var _player_collision_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
 @export var _revive_progress_bar: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
+@export var _gdcubism_user_model: GDCubismUserModel = null
+
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 # All powerups that this player has.
@@ -245,7 +249,14 @@ func ready_player_character(character: Constants.Character) -> void:
 		get_tree().root.get_node("Playground/CanvasLayer").add_character_to_point_to(_on_screen_notifier)
 	
 	# Set the character's appearance
-	print(character)
+	var character_data: CharacterData = null
+	match character:
+		Constants.Character.GOTH:
+			character_data = _character_data["Goth"]
+		Constants.Character.SWEET:
+			character_data = _character_data["Sweet"]
+	
+	_gdcubism_user_model.set_assets(character_data.model_file_path)
 
 
 @rpc("any_peer", "call_local")

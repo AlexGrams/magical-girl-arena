@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://b38ynnwxhfxpe"]
+
+[ext_resource type="Script" path="res://Player/character_data.gd" id="1_ai8rd"]
+
+[resource]
+script = ExtResource("1_ai8rd")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+base_powerup = "res://Powerups/orbit_powerup.tscn"
