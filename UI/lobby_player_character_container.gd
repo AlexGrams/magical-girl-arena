@@ -52,4 +52,5 @@ func clear_properties() -> void:
 
 
 func _on_hidden() -> void:
-	sprite.queue_free()
+	if sprite != null and not sprite.is_queued_for_deletion():
+		sprite.queue_free()
