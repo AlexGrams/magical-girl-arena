@@ -220,6 +220,16 @@ func register_with_game_state(owning_player_id: int) -> void:
 # Should be called only once, like with _ready().
 @rpc("any_peer", "call_local")
 func ready_player_character(character: Constants.Character) -> void:
+	# Set the character's appearance
+	var character_data: CharacterData = null
+	match character:
+		Constants.Character.GOTH:
+			character_data = _character_data["Goth"]
+		Constants.Character.SWEET:
+			character_data = _character_data["Sweet"]
+	
+	_gdcubism_user_model.set_assets(character_data.model_file_path)
+	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
 		# Signal for experience changes
@@ -234,8 +244,8 @@ func ready_player_character(character: Constants.Character) -> void:
 		
 		# Give the player the basic shoot powerup.
 		# Only the character that this player controls is given the ability. 
-		var shoot_powerup = load(shoot_powerup_path).instantiate()
-		add_powerup(shoot_powerup)
+		var base_powerup = load(character_data.base_powerup).instantiate()
+		add_powerup(base_powerup)
 		
 		# Set up ultimate ability
 		# TODO: Testing ults using Goth ult only.
@@ -247,16 +257,6 @@ func ready_player_character(character: Constants.Character) -> void:
 		# This client does not own this PlayerCharacter. Connect events to show the
 		# pointer to this character when it goes off screen for the local client.
 		get_tree().root.get_node("Playground/CanvasLayer").add_character_to_point_to(_on_screen_notifier)
-	
-	# Set the character's appearance
-	var character_data: CharacterData = null
-	match character:
-		Constants.Character.GOTH:
-			character_data = _character_data["Goth"]
-		Constants.Character.SWEET:
-			character_data = _character_data["Sweet"]
-	
-	_gdcubism_user_model.set_assets(character_data.model_file_path)
 
 
 @rpc("any_peer", "call_local")

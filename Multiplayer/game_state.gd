@@ -272,8 +272,8 @@ func start_game():
 		
 		get_tree().root.get_node("Playground").add_child(player, true)
 		
-		player.setup_authority.rpc(player_id, players[player_id]["character"])
 		player.register_with_game_state.rpc(player_id)
+		player.setup_authority.rpc(player_id, players[player_id]["character"])
 		
 		var spawn_point: Vector2 = get_tree().root.get_node("Playground/PlayerSpawnPoints").get_child(spawn_point_index).position
 		player.teleport.rpc_id(player_id, spawn_point)
