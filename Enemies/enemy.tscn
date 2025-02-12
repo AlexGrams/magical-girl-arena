@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfy5r3rayhatg"]
+[gd_scene load_steps=9 format=3 uid="uid://cfy5r3rayhatg"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_mwxyx"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_bo1ru"]
 [ext_resource type="PackedScene" uid="uid://4ximlipujsuo" path="res://Sprites/AtomEnemy/atom_sprite.tscn" id="2_plv55"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
@@ -12,58 +11,10 @@ radius = 40.0
 
 [sub_resource type="Animation" id="Animation_u5q41"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_xsep2"]
 resource_name = "take_damage"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(0.419608, 0, 0, 1), Color(1, 0, 0, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lewke"]
 _data = {
@@ -84,16 +35,11 @@ collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_mwxyx")
 collider_area = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
 [node name="AtomSprite" parent="." instance=ExtResource("2_plv55")]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_bo1ru")
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
