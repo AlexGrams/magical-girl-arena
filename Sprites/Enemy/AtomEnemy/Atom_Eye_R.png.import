@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctk8isrtey8da"
-path="res://.godot/imported/Atom_RedSpikes.png-0b1455ff67f821025c368de392423f23.ctex"
+uid="uid://ccbjq7mocc1bx"
+path="res://.godot/imported/Atom_Eye_R.png-5a66e500f7ab84cc56e1bab83c848335.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Atom_RedSpikes.png"
-dest_files=["res://.godot/imported/Atom_RedSpikes.png-0b1455ff67f821025c368de392423f23.ctex"]
+source_file="res://Sprites/Enemy/AtomEnemy/Atom_Eye_R.png"
+dest_files=["res://.godot/imported/Atom_Eye_R.png-5a66e500f7ab84cc56e1bab83c848335.ctex"]
 
 [params]
 

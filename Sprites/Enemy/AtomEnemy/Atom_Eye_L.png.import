@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvalfjhacvq74"
-path="res://.godot/imported/Pulsar_Head_Fill.png-8f3e8dd3d38cfa917ae3694587644cd1.ctex"
+uid="uid://deypfqw2cy7w0"
+path="res://.godot/imported/Atom_Eye_L.png-91fb1ce7171c938ba37049d33d70d8f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/PulsarEnemy/Pulsar_Head_Fill.png"
-dest_files=["res://.godot/imported/Pulsar_Head_Fill.png-8f3e8dd3d38cfa917ae3694587644cd1.ctex"]
+source_file="res://Sprites/Enemy/AtomEnemy/Atom_Eye_L.png"
+dest_files=["res://.godot/imported/Atom_Eye_L.png-91fb1ce7171c938ba37049d33d70d8f5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3d6p4idwygrn"
-path="res://.godot/imported/Atom_Head.png-4a347269374ad84c0a539cd4f6458267.ctex"
+uid="uid://onognmsl4k2t"
+path="res://.godot/imported/Atom_Mouth.png-e08f9fff34714f39d9b47bb0f5807534.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Atom_Head.png"
-dest_files=["res://.godot/imported/Atom_Head.png-4a347269374ad84c0a539cd4f6458267.ctex"]
+source_file="res://Sprites/Enemy/AtomEnemy/Atom_Mouth.png"
+dest_files=["res://.godot/imported/Atom_Mouth.png-e08f9fff34714f39d9b47bb0f5807534.ctex"]
 
 [params]
 

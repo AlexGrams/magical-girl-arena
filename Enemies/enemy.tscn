@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cfy5r3rayhatg"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_mwxyx"]
-[ext_resource type="PackedScene" uid="uid://4ximlipujsuo" path="res://Sprites/AtomEnemy/atom_sprite.tscn" id="2_plv55"]
+[ext_resource type="PackedScene" uid="uid://4ximlipujsuo" path="res://Sprites/Enemy/AtomEnemy/atom_sprite.tscn" id="2_plv55"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
 radius = 40.0

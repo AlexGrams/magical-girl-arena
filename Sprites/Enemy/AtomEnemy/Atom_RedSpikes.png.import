@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkyhawpfbpxop"
-path="res://.godot/imported/Atom_Aura.png-1f42b986c84adbad9592842f36f96b8f.ctex"
+uid="uid://ctk8isrtey8da"
+path="res://.godot/imported/Atom_RedSpikes.png-d25e700ba2b26e77409ae98c44477b3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Atom_Aura.png"
-dest_files=["res://.godot/imported/Atom_Aura.png-1f42b986c84adbad9592842f36f96b8f.ctex"]
+source_file="res://Sprites/Enemy/AtomEnemy/Atom_RedSpikes.png"
+dest_files=["res://.godot/imported/Atom_RedSpikes.png-d25e700ba2b26e77409ae98c44477b3b.ctex"]
 
 [params]
 

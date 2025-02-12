@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj3jl266fxft7"
-path="res://.godot/imported/Pulsar_Eye_L.png-2c67f3a08c97a5ae270da8be34dbeefc.ctex"
+uid="uid://doi5mclrfg4fl"
+path="res://.godot/imported/Pulsar_Head_Stroke.png-3ad1197c8428a38d88f0b4a9a1b77dba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/PulsarEnemy/Pulsar_Eye_L.png"
-dest_files=["res://.godot/imported/Pulsar_Eye_L.png-2c67f3a08c97a5ae270da8be34dbeefc.ctex"]
+source_file="res://Sprites/Enemy/PulsarEnemy/Pulsar_Head_Stroke.png"
+dest_files=["res://.godot/imported/Pulsar_Head_Stroke.png-3ad1197c8428a38d88f0b4a9a1b77dba.ctex"]
 
 [params]
 

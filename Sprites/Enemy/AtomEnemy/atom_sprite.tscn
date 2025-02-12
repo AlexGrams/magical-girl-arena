@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://4ximlipujsuo"]
 
-[ext_resource type="Texture2D" uid="uid://dkyhawpfbpxop" path="res://Sprites/AtomEnemy/Atom_Aura.png" id="1_ybikw"]
-[ext_resource type="Texture2D" uid="uid://deoxnldwo8g1m" path="res://Sprites/AtomEnemy/Atom_OrangeSpikes.png" id="2_lqkfh"]
-[ext_resource type="Texture2D" uid="uid://ctk8isrtey8da" path="res://Sprites/AtomEnemy/Atom_RedSpikes.png" id="3_4v3ij"]
-[ext_resource type="Texture2D" uid="uid://3d6p4idwygrn" path="res://Sprites/AtomEnemy/Atom_Head.png" id="4_a2p0m"]
-[ext_resource type="Texture2D" uid="uid://onognmsl4k2t" path="res://Sprites/AtomEnemy/Atom_Mouth.png" id="5_4xl7d"]
-[ext_resource type="Texture2D" uid="uid://deypfqw2cy7w0" path="res://Sprites/AtomEnemy/Atom_Eye_L.png" id="6_3ywrs"]
-[ext_resource type="Texture2D" uid="uid://ccbjq7mocc1bx" path="res://Sprites/AtomEnemy/Atom_Eye_R.png" id="7_r464i"]
+[ext_resource type="Texture2D" uid="uid://dkyhawpfbpxop" path="res://Sprites/Enemy/AtomEnemy/Atom_Aura.png" id="1_ybikw"]
+[ext_resource type="Texture2D" uid="uid://deoxnldwo8g1m" path="res://Sprites/Enemy/AtomEnemy/Atom_OrangeSpikes.png" id="2_lqkfh"]
+[ext_resource type="Texture2D" uid="uid://ctk8isrtey8da" path="res://Sprites/Enemy/AtomEnemy/Atom_RedSpikes.png" id="3_4v3ij"]
+[ext_resource type="Texture2D" uid="uid://3d6p4idwygrn" path="res://Sprites/Enemy/AtomEnemy/Atom_Head.png" id="4_a2p0m"]
+[ext_resource type="Texture2D" uid="uid://onognmsl4k2t" path="res://Sprites/Enemy/AtomEnemy/Atom_Mouth.png" id="5_4xl7d"]
+[ext_resource type="Texture2D" uid="uid://deypfqw2cy7w0" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_L.png" id="6_3ywrs"]
+[ext_resource type="Texture2D" uid="uid://ccbjq7mocc1bx" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_R.png" id="7_r464i"]
 
 [sub_resource type="Animation" id="Animation_q2gjs"]
 length = 0.001

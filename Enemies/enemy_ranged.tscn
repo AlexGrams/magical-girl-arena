@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/enemy_ranged.gd" id="1_yjg42"]
 [ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://EnemyProjectiles/bullet_enemy_ranged.tscn" id="2_4ww20"]
-[ext_resource type="PackedScene" uid="uid://s3dd1qt4daat" path="res://Sprites/PulsarEnemy/pulsar_sprite.tscn" id="3_40ect"]
+[ext_resource type="PackedScene" uid="uid://s3dd1qt4daat" path="res://Sprites/Enemy/PulsarEnemy/pulsar_sprite.tscn" id="3_40ect"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ni4om"]
 radius = 50.0
