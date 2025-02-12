@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://EnemyProjectiles/bullet_enemy_ranged.tscn" id="2_4ww20"]
 [ext_resource type="PackedScene" uid="uid://s3dd1qt4daat" path="res://Sprites/PulsarEnemy/pulsar_sprite.tscn" id="3_40ect"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fv0d5"]
-size = Vector2(80, 80)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ni4om"]
+radius = 50.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_macuq"]
-size = Vector2(128, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdfpn"]
+radius = 50.0
 
 [sub_resource type="Animation" id="Animation_u5q41"]
 length = 0.001
@@ -31,27 +31,25 @@ properties/1/path = NodePath(".:health")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy_Ranged" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
+[node name="Enemy_Ranged" type="CharacterBody2D" node_paths=PackedStringArray("collider_area") groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_yjg42")
 max_range = 400.0
 bullet_scene = ExtResource("2_4ww20")
 collider_area = NodePath("Area2D")
-sprite = NodePath("")
 
 [node name="PulsarSprite" parent="." instance=ExtResource("3_40ect")]
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_fv0d5")
+shape = SubResource("CircleShape2D_ni4om")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_macuq")
+shape = SubResource("CircleShape2D_jdfpn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
