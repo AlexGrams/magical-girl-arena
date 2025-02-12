@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqjidaeme8qyk"
-path="res://.godot/imported/Enemy_Head.png-c649fed4efb5daf5b1a2ad12f89766c6.ctex"
+uid="uid://ctk8isrtey8da"
+path="res://.godot/imported/Atom_RedSpikes.png-0b1455ff67f821025c368de392423f23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Enemy_Head.png"
-dest_files=["res://.godot/imported/Enemy_Head.png-c649fed4efb5daf5b1a2ad12f89766c6.ctex"]
+source_file="res://Sprites/AtomEnemy/Atom_RedSpikes.png"
+dest_files=["res://.godot/imported/Atom_RedSpikes.png-0b1455ff67f821025c368de392423f23.ctex"]
 
 [params]
 

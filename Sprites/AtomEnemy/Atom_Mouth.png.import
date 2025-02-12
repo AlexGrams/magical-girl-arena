@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhcewpvvd4dai"
-path="res://.godot/imported/Enemy_Mouth.png-34b43b343c57fb1b8e10ca0491594ba3.ctex"
+uid="uid://onognmsl4k2t"
+path="res://.godot/imported/Atom_Mouth.png-1d2c85a719437091edf2231d12ed6821.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Enemy_Mouth.png"
-dest_files=["res://.godot/imported/Enemy_Mouth.png-34b43b343c57fb1b8e10ca0491594ba3.ctex"]
+source_file="res://Sprites/AtomEnemy/Atom_Mouth.png"
+dest_files=["res://.godot/imported/Atom_Mouth.png-1d2c85a719437091edf2231d12ed6821.ctex"]
 
 [params]
 

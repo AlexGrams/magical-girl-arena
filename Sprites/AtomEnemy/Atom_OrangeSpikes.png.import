@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnnbv4a72r4uh"
-path="res://.godot/imported/Enemy_Eye_L.png-c7805ac7fb3fae88b1913b9747428344.ctex"
+uid="uid://deoxnldwo8g1m"
+path="res://.godot/imported/Atom_OrangeSpikes.png-e4bfaa41d452fac65a4d31eefbe5dedb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Enemy_Eye_L.png"
-dest_files=["res://.godot/imported/Enemy_Eye_L.png-c7805ac7fb3fae88b1913b9747428344.ctex"]
+source_file="res://Sprites/AtomEnemy/Atom_OrangeSpikes.png"
+dest_files=["res://.godot/imported/Atom_OrangeSpikes.png-e4bfaa41d452fac65a4d31eefbe5dedb.ctex"]
 
 [params]
 

@@ -1,11 +1,111 @@
-[gd_scene load_steps=10 format=3 uid="uid://4ximlipujsuo"]
+[gd_scene load_steps=11 format=3 uid="uid://4ximlipujsuo"]
 
-[ext_resource type="Texture2D" uid="uid://daxds7dgnufdv" path="res://Sprites/AtomEnemy/Enemy_OrangeSpikes.png" id="1_pdw44"]
-[ext_resource type="Texture2D" uid="uid://cog5xdq58wu3" path="res://Sprites/AtomEnemy/Enemy_RedSpikes.png" id="2_elyqj"]
-[ext_resource type="Texture2D" uid="uid://cqjidaeme8qyk" path="res://Sprites/AtomEnemy/Enemy_Head.png" id="3_bil7y"]
-[ext_resource type="Texture2D" uid="uid://dhcewpvvd4dai" path="res://Sprites/AtomEnemy/Enemy_Mouth.png" id="4_lick1"]
-[ext_resource type="Texture2D" uid="uid://cnnbv4a72r4uh" path="res://Sprites/AtomEnemy/Enemy_Eye_L.png" id="5_jhtqs"]
-[ext_resource type="Texture2D" uid="uid://djoejoe35wyeu" path="res://Sprites/AtomEnemy/Enemy_Eye_R.png" id="6_u3cg2"]
+[ext_resource type="Texture2D" uid="uid://dkyhawpfbpxop" path="res://Sprites/AtomEnemy/Atom_Aura.png" id="1_ybikw"]
+[ext_resource type="Texture2D" uid="uid://deoxnldwo8g1m" path="res://Sprites/AtomEnemy/Atom_OrangeSpikes.png" id="2_lqkfh"]
+[ext_resource type="Texture2D" uid="uid://ctk8isrtey8da" path="res://Sprites/AtomEnemy/Atom_RedSpikes.png" id="3_4v3ij"]
+[ext_resource type="Texture2D" uid="uid://3d6p4idwygrn" path="res://Sprites/AtomEnemy/Atom_Head.png" id="4_a2p0m"]
+[ext_resource type="Texture2D" uid="uid://onognmsl4k2t" path="res://Sprites/AtomEnemy/Atom_Mouth.png" id="5_4xl7d"]
+[ext_resource type="Texture2D" uid="uid://deypfqw2cy7w0" path="res://Sprites/AtomEnemy/Atom_Eye_L.png" id="6_3ywrs"]
+[ext_resource type="Texture2D" uid="uid://ccbjq7mocc1bx" path="res://Sprites/AtomEnemy/Atom_Eye_R.png" id="7_r464i"]
+
+[sub_resource type="Animation" id="Animation_q2gjs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OrangeSpikes:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OrangeSpikes:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RedSpikes:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RedSpikes:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Mouth:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Eye_L:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Eye_R:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Aura:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_l3nj6"]
 resource_name = "atom_sprite"
@@ -94,92 +194,17 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.6), Vector2(1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_q2gjs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OrangeSpikes:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Aura:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(2, 0.5, 0.5),
 "update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OrangeSpikes:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RedSpikes:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("RedSpikes:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Mouth:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Eye_L:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Eye_R:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1mcid"]
@@ -190,26 +215,29 @@ _data = {
 
 [node name="AtomSprite" type="Node2D"]
 
+[node name="Aura" type="Sprite2D" parent="."]
+texture = ExtResource("1_ybikw")
+
 [node name="OrangeSpikes" type="Sprite2D" parent="."]
-texture = ExtResource("1_pdw44")
+texture = ExtResource("2_lqkfh")
 
 [node name="RedSpikes" type="Sprite2D" parent="."]
-texture = ExtResource("2_elyqj")
+texture = ExtResource("3_4v3ij")
 
 [node name="Head" type="Sprite2D" parent="."]
-texture = ExtResource("3_bil7y")
+texture = ExtResource("4_a2p0m")
 
 [node name="Mouth" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
-texture = ExtResource("4_lick1")
+texture = ExtResource("5_4xl7d")
 
 [node name="Eye_L" type="Sprite2D" parent="."]
 position = Vector2(-9, -6)
-texture = ExtResource("5_jhtqs")
+texture = ExtResource("6_3ywrs")
 
 [node name="Eye_R" type="Sprite2D" parent="."]
 position = Vector2(9, -6)
-texture = ExtResource("6_u3cg2")
+texture = ExtResource("7_r464i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

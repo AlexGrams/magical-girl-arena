@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djoejoe35wyeu"
-path="res://.godot/imported/Enemy_Eye_R.png-a4aee828dd8cb28aedc179d0b2cd33f2.ctex"
+uid="uid://ccbjq7mocc1bx"
+path="res://.godot/imported/Atom_Eye_R.png-3df4483c1c810d1fe16b90bb0d7e2ba1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AtomEnemy/Enemy_Eye_R.png"
-dest_files=["res://.godot/imported/Enemy_Eye_R.png-a4aee828dd8cb28aedc179d0b2cd33f2.ctex"]
+source_file="res://Sprites/AtomEnemy/Atom_Eye_R.png"
+dest_files=["res://.godot/imported/Atom_Eye_R.png-3df4483c1c810d1fe16b90bb0d7e2ba1.ctex"]
 
 [params]
 
