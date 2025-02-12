@@ -34,7 +34,8 @@ func _process(delta: float) -> void:
 				]
 			)
 			
-			direction = direction.rotated(1).normalized()
+			direction = direction.rotated(deg_to_rad(30)).normalized()
+			
 			shoot_timer = 0
 
 
