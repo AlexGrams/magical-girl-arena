@@ -30,12 +30,11 @@ properties/1/path = NodePath(".:health")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area") groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_mwxyx")
 collider_area = NodePath("Area2D")
-sprite = NodePath("")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 

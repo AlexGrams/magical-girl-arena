@@ -205,7 +205,8 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 	
 	# Stop color animation so that we can apply this "ally" color.
 	$AnimationPlayer.stop()
-	sprite.self_modulate = Color("00cc7e")
+	if sprite != null and not sprite.is_queued_for_deletion():
+		sprite.self_modulate = Color("00cc7e")
 	
 	# Since this Enemy essentially died, spawn EXP from it
 	if is_multiplayer_authority():
