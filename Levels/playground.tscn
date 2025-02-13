@@ -641,6 +641,924 @@ offset_bottom = 684.0
 texture = ExtResource("1_gtrpj")
 stretch_mode = 2
 
+[node name="Grasses2" type="Node2D" parent="Background"]
+position = Vector2(126, 624)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2737.0
+offset_top = 1803.0
+offset_right = 2784.0
+offset_bottom = 1843.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3458.0
+offset_top = 2275.0
+offset_right = 3505.0
+offset_bottom = 2315.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1963.0
+offset_top = 2403.0
+offset_right = 2010.0
+offset_bottom = 2443.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2692.0
+offset_top = 2192.0
+offset_right = 2739.0
+offset_bottom = 2232.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2069.0
+offset_top = 1818.0
+offset_right = 2116.0
+offset_bottom = 1858.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1503.0
+offset_top = 2116.0
+offset_right = 1550.0
+offset_bottom = 2156.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1560.0
+offset_top = 1433.0
+offset_right = 1607.0
+offset_bottom = 1473.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3550.0
+offset_top = 1792.0
+offset_right = 3597.0
+offset_bottom = 1832.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3169.0
+offset_top = 1331.0
+offset_right = 3216.0
+offset_bottom = 1371.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2301.0
+offset_top = 1293.0
+offset_right = 2348.0
+offset_bottom = 1333.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3071.0
+offset_top = 2652.0
+offset_right = 3118.0
+offset_bottom = 2692.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3747.0
+offset_top = 2735.0
+offset_right = 3794.0
+offset_bottom = 2775.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2373.0
+offset_top = 2724.0
+offset_right = 2420.0
+offset_bottom = 2764.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1557.0
+offset_top = 2664.0
+offset_right = 1604.0
+offset_bottom = 2704.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1387.0
+offset_top = 1135.0
+offset_right = 1434.0
+offset_bottom = 1175.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3788.0
+offset_top = 1214.0
+offset_right = 3835.0
+offset_bottom = 1254.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2610.0
+offset_top = 1512.0
+offset_right = 2657.0
+offset_bottom = 1552.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2719.0
+offset_top = 1063.0
+offset_right = 2766.0
+offset_bottom = 1103.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4484.0
+offset_top = 3167.0
+offset_right = 4531.0
+offset_bottom = 3207.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3160.0
+offset_top = 3314.0
+offset_right = 3207.0
+offset_bottom = 3354.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3748.0
+offset_top = 3733.0
+offset_right = 3795.0
+offset_bottom = 3773.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4687.0
+offset_top = 4095.0
+offset_right = 4734.0
+offset_bottom = 4135.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3929.0
+offset_top = 4355.0
+offset_right = 3976.0
+offset_bottom = 4395.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4517.0
+offset_top = 4808.0
+offset_right = 4564.0
+offset_bottom = 4848.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3725.0
+offset_top = 5046.0
+offset_right = 3772.0
+offset_bottom = 5086.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3465.0
+offset_top = 4548.0
+offset_right = 3512.0
+offset_bottom = 4588.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2413.0
+offset_top = 4525.0
+offset_right = 2460.0
+offset_bottom = 4565.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2730.0
+offset_top = 4932.0
+offset_right = 2777.0
+offset_bottom = 4972.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1463.0
+offset_top = 4989.0
+offset_right = 1510.0
+offset_bottom = 5029.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1225.0
+offset_top = 4378.0
+offset_right = 1272.0
+offset_bottom = 4418.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 399.0
+offset_top = 4921.0
+offset_right = 446.0
+offset_bottom = 4961.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 535.0
+offset_top = 3937.0
+offset_right = 582.0
+offset_bottom = 3977.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2032.0
+offset_top = 3773.0
+offset_right = 2079.0
+offset_bottom = 3813.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2903.0
+offset_top = 3954.0
+offset_right = 2950.0
+offset_bottom = 3994.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1225.0
+offset_top = 3468.0
+offset_right = 1272.0
+offset_bottom = 3508.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 582.0
+offset_top = 3118.0
+offset_right = 629.0
+offset_bottom = 3158.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 514.0
+offset_top = 2292.0
+offset_right = 561.0
+offset_bottom = 2332.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 706.0
+offset_top = 1059.0
+offset_right = 753.0
+offset_bottom = 1099.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 399.0
+offset_top = 380.0
+offset_right = 446.0
+offset_bottom = 420.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1960.0
+offset_top = 369.0
+offset_right = 2007.0
+offset_bottom = 409.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3247.0
+offset_top = 409.0
+offset_right = 3294.0
+offset_bottom = 449.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4265.0
+offset_top = 432.0
+offset_right = 4312.0
+offset_bottom = 472.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4797.0
+offset_top = 941.0
+offset_right = 4844.0
+offset_bottom = 981.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 5148.0
+offset_top = 1823.0
+offset_right = 5195.0
+offset_bottom = 1863.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4424.0
+offset_top = 2355.0
+offset_right = 4471.0
+offset_bottom = 2395.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2547.0
+offset_top = 3422.0
+offset_right = 2594.0
+offset_bottom = 3462.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1731.0
+offset_top = 3173.0
+offset_right = 1778.0
+offset_bottom = 3213.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 991.0
+offset_top = 2614.0
+offset_right = 1038.0
+offset_bottom = 2654.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass51" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 938.0
+offset_top = 1625.0
+offset_right = 985.0
+offset_bottom = 1665.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass52" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4721.0
+offset_top = 1338.0
+offset_right = 4768.0
+offset_bottom = 1378.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass53" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 4064.0
+offset_top = 1935.0
+offset_right = 4111.0
+offset_bottom = 1975.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass54" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 3890.0
+offset_top = 3196.0
+offset_right = 3937.0
+offset_bottom = 3236.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass55" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1277.0
+offset_top = 561.0
+offset_right = 1324.0
+offset_bottom = 601.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass56" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 1994.0
+offset_top = 855.0
+offset_right = 2041.0
+offset_bottom = 895.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass57" type="TextureRect" parent="Background/Grasses2"]
+offset_left = 2666.0
+offset_top = 644.0
+offset_right = 2713.0
+offset_bottom = 684.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grasses3" type="Node2D" parent="Background"]
+position = Vector2(1383, 332)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2737.0
+offset_top = 1803.0
+offset_right = 2784.0
+offset_bottom = 1843.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3458.0
+offset_top = 2275.0
+offset_right = 3505.0
+offset_bottom = 2315.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1963.0
+offset_top = 2403.0
+offset_right = 2010.0
+offset_bottom = 2443.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2692.0
+offset_top = 2192.0
+offset_right = 2739.0
+offset_bottom = 2232.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2069.0
+offset_top = 1818.0
+offset_right = 2116.0
+offset_bottom = 1858.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1503.0
+offset_top = 2116.0
+offset_right = 1550.0
+offset_bottom = 2156.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1560.0
+offset_top = 1433.0
+offset_right = 1607.0
+offset_bottom = 1473.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3550.0
+offset_top = 1792.0
+offset_right = 3597.0
+offset_bottom = 1832.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3169.0
+offset_top = 1331.0
+offset_right = 3216.0
+offset_bottom = 1371.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2301.0
+offset_top = 1293.0
+offset_right = 2348.0
+offset_bottom = 1333.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3071.0
+offset_top = 2652.0
+offset_right = 3118.0
+offset_bottom = 2692.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3747.0
+offset_top = 2735.0
+offset_right = 3794.0
+offset_bottom = 2775.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2373.0
+offset_top = 2724.0
+offset_right = 2420.0
+offset_bottom = 2764.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1557.0
+offset_top = 2664.0
+offset_right = 1604.0
+offset_bottom = 2704.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1387.0
+offset_top = 1135.0
+offset_right = 1434.0
+offset_bottom = 1175.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3788.0
+offset_top = 1214.0
+offset_right = 3835.0
+offset_bottom = 1254.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2610.0
+offset_top = 1512.0
+offset_right = 2657.0
+offset_bottom = 1552.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2719.0
+offset_top = 1063.0
+offset_right = 2766.0
+offset_bottom = 1103.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4484.0
+offset_top = 3167.0
+offset_right = 4531.0
+offset_bottom = 3207.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3160.0
+offset_top = 3314.0
+offset_right = 3207.0
+offset_bottom = 3354.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3748.0
+offset_top = 3733.0
+offset_right = 3795.0
+offset_bottom = 3773.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4687.0
+offset_top = 4095.0
+offset_right = 4734.0
+offset_bottom = 4135.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3929.0
+offset_top = 4355.0
+offset_right = 3976.0
+offset_bottom = 4395.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4517.0
+offset_top = 4808.0
+offset_right = 4564.0
+offset_bottom = 4848.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3725.0
+offset_top = 5046.0
+offset_right = 3772.0
+offset_bottom = 5086.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3465.0
+offset_top = 4548.0
+offset_right = 3512.0
+offset_bottom = 4588.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2413.0
+offset_top = 4525.0
+offset_right = 2460.0
+offset_bottom = 4565.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2730.0
+offset_top = 4932.0
+offset_right = 2777.0
+offset_bottom = 4972.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1463.0
+offset_top = 4989.0
+offset_right = 1510.0
+offset_bottom = 5029.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1225.0
+offset_top = 4378.0
+offset_right = 1272.0
+offset_bottom = 4418.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 399.0
+offset_top = 4921.0
+offset_right = 446.0
+offset_bottom = 4961.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 535.0
+offset_top = 3937.0
+offset_right = 582.0
+offset_bottom = 3977.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2032.0
+offset_top = 3773.0
+offset_right = 2079.0
+offset_bottom = 3813.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2903.0
+offset_top = 3954.0
+offset_right = 2950.0
+offset_bottom = 3994.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1225.0
+offset_top = 3468.0
+offset_right = 1272.0
+offset_bottom = 3508.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 582.0
+offset_top = 3118.0
+offset_right = 629.0
+offset_bottom = 3158.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 514.0
+offset_top = 2292.0
+offset_right = 561.0
+offset_bottom = 2332.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 706.0
+offset_top = 1059.0
+offset_right = 753.0
+offset_bottom = 1099.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 399.0
+offset_top = 380.0
+offset_right = 446.0
+offset_bottom = 420.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1960.0
+offset_top = 369.0
+offset_right = 2007.0
+offset_bottom = 409.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3247.0
+offset_top = 409.0
+offset_right = 3294.0
+offset_bottom = 449.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4265.0
+offset_top = 432.0
+offset_right = 4312.0
+offset_bottom = 472.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4797.0
+offset_top = 941.0
+offset_right = 4844.0
+offset_bottom = 981.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 5148.0
+offset_top = 1823.0
+offset_right = 5195.0
+offset_bottom = 1863.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4424.0
+offset_top = 2355.0
+offset_right = 4471.0
+offset_bottom = 2395.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2547.0
+offset_top = 3422.0
+offset_right = 2594.0
+offset_bottom = 3462.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1731.0
+offset_top = 3173.0
+offset_right = 1778.0
+offset_bottom = 3213.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 991.0
+offset_top = 2614.0
+offset_right = 1038.0
+offset_bottom = 2654.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass51" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 938.0
+offset_top = 1625.0
+offset_right = 985.0
+offset_bottom = 1665.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass52" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4721.0
+offset_top = 1338.0
+offset_right = 4768.0
+offset_bottom = 1378.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass53" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 4064.0
+offset_top = 1935.0
+offset_right = 4111.0
+offset_bottom = 1975.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass54" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 3890.0
+offset_top = 3196.0
+offset_right = 3937.0
+offset_bottom = 3236.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass55" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1277.0
+offset_top = 561.0
+offset_right = 1324.0
+offset_bottom = 601.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass56" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 1994.0
+offset_top = 855.0
+offset_right = 2041.0
+offset_bottom = 895.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
+[node name="Grass57" type="TextureRect" parent="Background/Grasses3"]
+offset_left = 2666.0
+offset_top = 644.0
+offset_right = 2713.0
+offset_bottom = 684.0
+texture = ExtResource("1_gtrpj")
+stretch_mode = 2
+
 [node name="Grasses (Type2)" type="Node2D" parent="Background"]
 
 [node name="Grass" type="TextureRect" parent="Background/Grasses (Type2)"]
@@ -1042,6 +1960,1544 @@ offset_right = 3114.0
 offset_bottom = 5351.0
 texture = ExtResource("2_xpmpc")
 stretch_mode = 2
+
+[node name="Grasses (Type2)2" type="Node2D" parent="Background"]
+position = Vector2(-727, 713)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2886.0
+offset_top = 1781.0
+offset_right = 2929.0
+offset_bottom = 1803.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1773.0
+offset_top = 1286.0
+offset_right = 1816.0
+offset_bottom = 1308.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3172.0
+offset_top = 1229.0
+offset_right = 3215.0
+offset_bottom = 1251.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2392.0
+offset_top = 867.0
+offset_right = 2435.0
+offset_bottom = 889.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4285.0
+offset_top = 1409.0
+offset_right = 4328.0
+offset_bottom = 1431.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4865.0
+offset_top = 1009.0
+offset_right = 4908.0
+offset_bottom = 1031.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5417.0
+offset_top = 1542.0
+offset_right = 5460.0
+offset_bottom = 1564.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4598.0
+offset_top = 1701.0
+offset_right = 4641.0
+offset_bottom = 1723.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5347.0
+offset_top = 2006.0
+offset_right = 5390.0
+offset_bottom = 2028.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 6230.0
+offset_top = 1269.0
+offset_right = 6273.0
+offset_bottom = 1291.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5722.0
+offset_top = 971.0
+offset_right = 5765.0
+offset_bottom = 993.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5493.0
+offset_top = 2349.0
+offset_right = 5536.0
+offset_bottom = 2371.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4318.0
+offset_top = 2292.0
+offset_right = 4361.0
+offset_bottom = 2314.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2813.0
+offset_top = 2362.0
+offset_right = 2856.0
+offset_bottom = 2384.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1638.0
+offset_top = 2032.0
+offset_right = 1681.0
+offset_bottom = 2054.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2286.0
+offset_top = 2007.0
+offset_right = 2329.0
+offset_bottom = 2029.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1981.0
+offset_top = 2598.0
+offset_right = 2024.0
+offset_bottom = 2620.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2292.0
+offset_top = 2896.0
+offset_right = 2335.0
+offset_bottom = 2918.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1663.0
+offset_top = 3283.0
+offset_right = 1706.0
+offset_bottom = 3305.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2336.0
+offset_top = 3658.0
+offset_right = 2379.0
+offset_bottom = 3680.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3149.0
+offset_top = 3398.0
+offset_right = 3192.0
+offset_bottom = 3420.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3416.0
+offset_top = 3030.0
+offset_right = 3459.0
+offset_bottom = 3052.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3905.0
+offset_top = 3582.0
+offset_right = 3948.0
+offset_bottom = 3604.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4197.0
+offset_top = 3036.0
+offset_right = 4240.0
+offset_bottom = 3058.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5118.0
+offset_top = 3138.0
+offset_right = 5161.0
+offset_bottom = 3160.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4939.0
+offset_top = 2814.0
+offset_right = 4982.0
+offset_bottom = 2836.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 6114.0
+offset_top = 2827.0
+offset_right = 6157.0
+offset_bottom = 2849.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 6133.0
+offset_top = 3348.0
+offset_right = 6176.0
+offset_bottom = 3370.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5454.0
+offset_top = 3411.0
+offset_right = 5497.0
+offset_bottom = 3433.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 6172.0
+offset_top = 2065.0
+offset_right = 6215.0
+offset_bottom = 2087.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5004.0
+offset_top = 1354.0
+offset_right = 5047.0
+offset_bottom = 1376.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3448.0
+offset_top = 1659.0
+offset_right = 3491.0
+offset_bottom = 1681.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1937.0
+offset_top = 3862.0
+offset_right = 1980.0
+offset_bottom = 3884.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2072.0
+offset_top = 4511.0
+offset_right = 2115.0
+offset_bottom = 4533.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 1616.0
+offset_top = 5067.0
+offset_right = 1659.0
+offset_bottom = 5089.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2072.0
+offset_top = 5580.0
+offset_right = 2115.0
+offset_bottom = 5602.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2906.0
+offset_top = 4682.0
+offset_right = 2949.0
+offset_bottom = 4704.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 2977.0
+offset_top = 4083.0
+offset_right = 3020.0
+offset_bottom = 4105.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3626.0
+offset_top = 4368.0
+offset_right = 3669.0
+offset_bottom = 4390.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4460.0
+offset_top = 4254.0
+offset_right = 4503.0
+offset_bottom = 4276.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4598.0
+offset_top = 4759.0
+offset_right = 4641.0
+offset_bottom = 4781.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5204.0
+offset_top = 4609.0
+offset_right = 5247.0
+offset_bottom = 4631.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5311.0
+offset_top = 3903.0
+offset_right = 5354.0
+offset_bottom = 3925.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5874.0
+offset_top = 4202.0
+offset_right = 5917.0
+offset_bottom = 4224.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5487.0
+offset_top = 5045.0
+offset_right = 5530.0
+offset_bottom = 5067.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 6150.0
+offset_top = 5558.0
+offset_right = 6193.0
+offset_bottom = 5580.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 5074.0
+offset_top = 5330.0
+offset_right = 5117.0
+offset_bottom = 5352.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 4376.0
+offset_top = 5522.0
+offset_right = 4419.0
+offset_bottom = 5544.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3941.0
+offset_top = 4916.0
+offset_right = 3984.0
+offset_bottom = 4938.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses (Type2)2"]
+offset_left = 3071.0
+offset_top = 5329.0
+offset_right = 3114.0
+offset_bottom = 5351.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grasses (Type2)3" type="Node2D" parent="Background"]
+position = Vector2(670, 1326)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2886.0
+offset_top = 1781.0
+offset_right = 2929.0
+offset_bottom = 1803.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1773.0
+offset_top = 1286.0
+offset_right = 1816.0
+offset_bottom = 1308.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3172.0
+offset_top = 1229.0
+offset_right = 3215.0
+offset_bottom = 1251.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2392.0
+offset_top = 867.0
+offset_right = 2435.0
+offset_bottom = 889.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4285.0
+offset_top = 1409.0
+offset_right = 4328.0
+offset_bottom = 1431.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4865.0
+offset_top = 1009.0
+offset_right = 4908.0
+offset_bottom = 1031.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5417.0
+offset_top = 1542.0
+offset_right = 5460.0
+offset_bottom = 1564.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4598.0
+offset_top = 1701.0
+offset_right = 4641.0
+offset_bottom = 1723.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5347.0
+offset_top = 2006.0
+offset_right = 5390.0
+offset_bottom = 2028.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 6230.0
+offset_top = 1269.0
+offset_right = 6273.0
+offset_bottom = 1291.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5722.0
+offset_top = 971.0
+offset_right = 5765.0
+offset_bottom = 993.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5493.0
+offset_top = 2349.0
+offset_right = 5536.0
+offset_bottom = 2371.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4318.0
+offset_top = 2292.0
+offset_right = 4361.0
+offset_bottom = 2314.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2813.0
+offset_top = 2362.0
+offset_right = 2856.0
+offset_bottom = 2384.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1638.0
+offset_top = 2032.0
+offset_right = 1681.0
+offset_bottom = 2054.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2286.0
+offset_top = 2007.0
+offset_right = 2329.0
+offset_bottom = 2029.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1981.0
+offset_top = 2598.0
+offset_right = 2024.0
+offset_bottom = 2620.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2292.0
+offset_top = 2896.0
+offset_right = 2335.0
+offset_bottom = 2918.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1663.0
+offset_top = 3283.0
+offset_right = 1706.0
+offset_bottom = 3305.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2336.0
+offset_top = 3658.0
+offset_right = 2379.0
+offset_bottom = 3680.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3149.0
+offset_top = 3398.0
+offset_right = 3192.0
+offset_bottom = 3420.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3416.0
+offset_top = 3030.0
+offset_right = 3459.0
+offset_bottom = 3052.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3905.0
+offset_top = 3582.0
+offset_right = 3948.0
+offset_bottom = 3604.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4197.0
+offset_top = 3036.0
+offset_right = 4240.0
+offset_bottom = 3058.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5118.0
+offset_top = 3138.0
+offset_right = 5161.0
+offset_bottom = 3160.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4939.0
+offset_top = 2814.0
+offset_right = 4982.0
+offset_bottom = 2836.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 6114.0
+offset_top = 2827.0
+offset_right = 6157.0
+offset_bottom = 2849.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 6133.0
+offset_top = 3348.0
+offset_right = 6176.0
+offset_bottom = 3370.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5454.0
+offset_top = 3411.0
+offset_right = 5497.0
+offset_bottom = 3433.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 6172.0
+offset_top = 2065.0
+offset_right = 6215.0
+offset_bottom = 2087.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5004.0
+offset_top = 1354.0
+offset_right = 5047.0
+offset_bottom = 1376.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3448.0
+offset_top = 1659.0
+offset_right = 3491.0
+offset_bottom = 1681.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1937.0
+offset_top = 3862.0
+offset_right = 1980.0
+offset_bottom = 3884.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2072.0
+offset_top = 4511.0
+offset_right = 2115.0
+offset_bottom = 4533.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 1616.0
+offset_top = 5067.0
+offset_right = 1659.0
+offset_bottom = 5089.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2072.0
+offset_top = 5580.0
+offset_right = 2115.0
+offset_bottom = 5602.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2906.0
+offset_top = 4682.0
+offset_right = 2949.0
+offset_bottom = 4704.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 2977.0
+offset_top = 4083.0
+offset_right = 3020.0
+offset_bottom = 4105.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3626.0
+offset_top = 4368.0
+offset_right = 3669.0
+offset_bottom = 4390.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4460.0
+offset_top = 4254.0
+offset_right = 4503.0
+offset_bottom = 4276.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4598.0
+offset_top = 4759.0
+offset_right = 4641.0
+offset_bottom = 4781.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5204.0
+offset_top = 4609.0
+offset_right = 5247.0
+offset_bottom = 4631.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5311.0
+offset_top = 3903.0
+offset_right = 5354.0
+offset_bottom = 3925.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5874.0
+offset_top = 4202.0
+offset_right = 5917.0
+offset_bottom = 4224.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5487.0
+offset_top = 5045.0
+offset_right = 5530.0
+offset_bottom = 5067.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 6150.0
+offset_top = 5558.0
+offset_right = 6193.0
+offset_bottom = 5580.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 5074.0
+offset_top = 5330.0
+offset_right = 5117.0
+offset_bottom = 5352.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 4376.0
+offset_top = 5522.0
+offset_right = 4419.0
+offset_bottom = 5544.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3941.0
+offset_top = 4916.0
+offset_right = 3984.0
+offset_bottom = 4938.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses (Type2)3"]
+offset_left = 3071.0
+offset_top = 5329.0
+offset_right = 3114.0
+offset_bottom = 5351.0
+texture = ExtResource("2_xpmpc")
+stretch_mode = 2
+
+[node name="Flowers" type="Node2D" parent="Background"]
+position = Vector2(1104, 624)
+
+[node name="Flower" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2329.0
+offset_top = 1618.0
+offset_right = 2362.0
+offset_bottom = 1651.0
+
+[node name="Flower2" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 1355.0
+offset_top = 1906.0
+offset_right = 1388.0
+offset_bottom = 1939.0
+
+[node name="Flower3" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 1658.0
+offset_top = 1262.0
+offset_right = 1691.0
+offset_bottom = 1295.0
+
+[node name="Flower4" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2953.0
+offset_top = 1175.0
+offset_right = 2986.0
+offset_bottom = 1208.0
+
+[node name="Flower5" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3783.0
+offset_top = 1520.0
+offset_right = 3816.0
+offset_bottom = 1553.0
+
+[node name="Flower6" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3247.0
+offset_top = 2023.0
+offset_right = 3280.0
+offset_bottom = 2056.0
+
+[node name="Flower7" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3412.0
+offset_top = 2601.0
+offset_right = 3445.0
+offset_bottom = 2634.0
+
+[node name="Flower8" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2678.0
+offset_top = 2442.0
+offset_right = 2711.0
+offset_bottom = 2475.0
+
+[node name="Flower9" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2106.0
+offset_top = 2097.0
+offset_right = 2139.0
+offset_bottom = 2130.0
+
+[node name="Flower10" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 1701.0
+offset_top = 2499.0
+offset_right = 1734.0
+offset_bottom = 2532.0
+
+[node name="Flower11" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2210.0
+offset_top = 3042.0
+offset_right = 2243.0
+offset_bottom = 3075.0
+
+[node name="Flower12" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 1429.0
+offset_top = 3857.0
+offset_right = 1462.0
+offset_bottom = 3890.0
+
+[node name="Flower13" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2504.0
+offset_top = 4083.0
+offset_right = 2537.0
+offset_bottom = 4116.0
+
+[node name="Flower14" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 1882.0
+offset_top = 4388.0
+offset_right = 1915.0
+offset_bottom = 4421.0
+
+[node name="Flower15" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2301.0
+offset_top = 4920.0
+offset_right = 2334.0
+offset_bottom = 4953.0
+
+[node name="Flower16" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3048.0
+offset_top = 4434.0
+offset_right = 3081.0
+offset_bottom = 4467.0
+
+[node name="Flower17" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4265.0
+offset_top = 4972.0
+offset_right = 4298.0
+offset_bottom = 5005.0
+
+[node name="Flower18" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4844.0
+offset_top = 4355.0
+offset_right = 4877.0
+offset_bottom = 4388.0
+
+[node name="Flower19" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4301.0
+offset_top = 3654.0
+offset_right = 4334.0
+offset_bottom = 3687.0
+
+[node name="Flower20" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4734.0
+offset_top = 2907.0
+offset_right = 4767.0
+offset_bottom = 2940.0
+
+[node name="Flower21" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3376.0
+offset_top = 3246.0
+offset_right = 3409.0
+offset_bottom = 3279.0
+
+[node name="Flower22" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 615.0
+offset_top = 3574.0
+offset_right = 648.0
+offset_bottom = 3607.0
+
+[node name="Flower23" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 773.0
+offset_top = 4739.0
+offset_right = 806.0
+offset_bottom = 4772.0
+
+[node name="Flower24" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 434.0
+offset_top = 1956.0
+offset_right = 467.0
+offset_bottom = 1989.0
+
+[node name="Flower25" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 672.0
+offset_top = 417.0
+offset_right = 705.0
+offset_bottom = 450.0
+
+[node name="Flower26" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 2516.0
+offset_top = 326.0
+offset_right = 2549.0
+offset_bottom = 359.0
+
+[node name="Flower27" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4835.0
+offset_top = 496.0
+offset_right = 4868.0
+offset_bottom = 529.0
+
+[node name="Flower28" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 4677.0
+offset_top = 1865.0
+offset_right = 4710.0
+offset_bottom = 1898.0
+
+[node name="Flower29" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 3704.0
+offset_top = 835.0
+offset_right = 3737.0
+offset_bottom = 868.0
+
+[node name="Flower30" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
+offset_left = 898.0
+offset_top = 1084.0
+offset_right = 931.0
+offset_bottom = 1117.0
+
+[node name="Flowers2" type="Node2D" parent="Background"]
+position = Vector2(961, 1094)
+
+[node name="Flower" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2329.0
+offset_top = 1618.0
+offset_right = 2362.0
+offset_bottom = 1651.0
+
+[node name="Flower2" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 1355.0
+offset_top = 1906.0
+offset_right = 1388.0
+offset_bottom = 1939.0
+
+[node name="Flower3" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 1658.0
+offset_top = 1262.0
+offset_right = 1691.0
+offset_bottom = 1295.0
+
+[node name="Flower4" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2953.0
+offset_top = 1175.0
+offset_right = 2986.0
+offset_bottom = 1208.0
+
+[node name="Flower5" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3783.0
+offset_top = 1520.0
+offset_right = 3816.0
+offset_bottom = 1553.0
+
+[node name="Flower6" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3247.0
+offset_top = 2023.0
+offset_right = 3280.0
+offset_bottom = 2056.0
+
+[node name="Flower7" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3412.0
+offset_top = 2601.0
+offset_right = 3445.0
+offset_bottom = 2634.0
+
+[node name="Flower8" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2678.0
+offset_top = 2442.0
+offset_right = 2711.0
+offset_bottom = 2475.0
+
+[node name="Flower9" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2106.0
+offset_top = 2097.0
+offset_right = 2139.0
+offset_bottom = 2130.0
+
+[node name="Flower10" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 1701.0
+offset_top = 2499.0
+offset_right = 1734.0
+offset_bottom = 2532.0
+
+[node name="Flower11" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2210.0
+offset_top = 3042.0
+offset_right = 2243.0
+offset_bottom = 3075.0
+
+[node name="Flower12" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 1429.0
+offset_top = 3857.0
+offset_right = 1462.0
+offset_bottom = 3890.0
+
+[node name="Flower13" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2504.0
+offset_top = 4083.0
+offset_right = 2537.0
+offset_bottom = 4116.0
+
+[node name="Flower14" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 1882.0
+offset_top = 4388.0
+offset_right = 1915.0
+offset_bottom = 4421.0
+
+[node name="Flower15" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2301.0
+offset_top = 4920.0
+offset_right = 2334.0
+offset_bottom = 4953.0
+
+[node name="Flower16" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3048.0
+offset_top = 4434.0
+offset_right = 3081.0
+offset_bottom = 4467.0
+
+[node name="Flower17" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4265.0
+offset_top = 4972.0
+offset_right = 4298.0
+offset_bottom = 5005.0
+
+[node name="Flower18" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4844.0
+offset_top = 4355.0
+offset_right = 4877.0
+offset_bottom = 4388.0
+
+[node name="Flower19" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4301.0
+offset_top = 3654.0
+offset_right = 4334.0
+offset_bottom = 3687.0
+
+[node name="Flower20" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4734.0
+offset_top = 2907.0
+offset_right = 4767.0
+offset_bottom = 2940.0
+
+[node name="Flower21" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3376.0
+offset_top = 3246.0
+offset_right = 3409.0
+offset_bottom = 3279.0
+
+[node name="Flower22" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 615.0
+offset_top = 3574.0
+offset_right = 648.0
+offset_bottom = 3607.0
+
+[node name="Flower23" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 773.0
+offset_top = 4739.0
+offset_right = 806.0
+offset_bottom = 4772.0
+
+[node name="Flower24" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 434.0
+offset_top = 1956.0
+offset_right = 467.0
+offset_bottom = 1989.0
+
+[node name="Flower25" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 672.0
+offset_top = 417.0
+offset_right = 705.0
+offset_bottom = 450.0
+
+[node name="Flower26" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 2516.0
+offset_top = 326.0
+offset_right = 2549.0
+offset_bottom = 359.0
+
+[node name="Flower27" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4835.0
+offset_top = 496.0
+offset_right = 4868.0
+offset_bottom = 529.0
+
+[node name="Flower28" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 4677.0
+offset_top = 1865.0
+offset_right = 4710.0
+offset_bottom = 1898.0
+
+[node name="Flower29" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 3704.0
+offset_top = 835.0
+offset_right = 3737.0
+offset_bottom = 868.0
+
+[node name="Flower30" parent="Background/Flowers2" instance=ExtResource("2_70ojb")]
+offset_left = 898.0
+offset_top = 1084.0
+offset_right = 931.0
+offset_bottom = 1117.0
+
+[node name="Flowers3" type="Node2D" parent="Background"]
+position = Vector2(691, 1165)
+
+[node name="Flower" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2329.0
+offset_top = 1618.0
+offset_right = 2362.0
+offset_bottom = 1651.0
+
+[node name="Flower2" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 1355.0
+offset_top = 1906.0
+offset_right = 1388.0
+offset_bottom = 1939.0
+
+[node name="Flower3" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 1658.0
+offset_top = 1262.0
+offset_right = 1691.0
+offset_bottom = 1295.0
+
+[node name="Flower4" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2953.0
+offset_top = 1175.0
+offset_right = 2986.0
+offset_bottom = 1208.0
+
+[node name="Flower5" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3783.0
+offset_top = 1520.0
+offset_right = 3816.0
+offset_bottom = 1553.0
+
+[node name="Flower6" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3247.0
+offset_top = 2023.0
+offset_right = 3280.0
+offset_bottom = 2056.0
+
+[node name="Flower7" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3412.0
+offset_top = 2601.0
+offset_right = 3445.0
+offset_bottom = 2634.0
+
+[node name="Flower8" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2678.0
+offset_top = 2442.0
+offset_right = 2711.0
+offset_bottom = 2475.0
+
+[node name="Flower9" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2106.0
+offset_top = 2097.0
+offset_right = 2139.0
+offset_bottom = 2130.0
+
+[node name="Flower10" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 1701.0
+offset_top = 2499.0
+offset_right = 1734.0
+offset_bottom = 2532.0
+
+[node name="Flower11" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2210.0
+offset_top = 3042.0
+offset_right = 2243.0
+offset_bottom = 3075.0
+
+[node name="Flower12" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 1429.0
+offset_top = 3857.0
+offset_right = 1462.0
+offset_bottom = 3890.0
+
+[node name="Flower13" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2504.0
+offset_top = 4083.0
+offset_right = 2537.0
+offset_bottom = 4116.0
+
+[node name="Flower14" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 1882.0
+offset_top = 4388.0
+offset_right = 1915.0
+offset_bottom = 4421.0
+
+[node name="Flower15" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2301.0
+offset_top = 4920.0
+offset_right = 2334.0
+offset_bottom = 4953.0
+
+[node name="Flower16" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3048.0
+offset_top = 4434.0
+offset_right = 3081.0
+offset_bottom = 4467.0
+
+[node name="Flower17" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4265.0
+offset_top = 4972.0
+offset_right = 4298.0
+offset_bottom = 5005.0
+
+[node name="Flower18" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4844.0
+offset_top = 4355.0
+offset_right = 4877.0
+offset_bottom = 4388.0
+
+[node name="Flower19" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4301.0
+offset_top = 3654.0
+offset_right = 4334.0
+offset_bottom = 3687.0
+
+[node name="Flower20" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4734.0
+offset_top = 2907.0
+offset_right = 4767.0
+offset_bottom = 2940.0
+
+[node name="Flower21" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3376.0
+offset_top = 3246.0
+offset_right = 3409.0
+offset_bottom = 3279.0
+
+[node name="Flower22" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 615.0
+offset_top = 3574.0
+offset_right = 648.0
+offset_bottom = 3607.0
+
+[node name="Flower23" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 773.0
+offset_top = 4739.0
+offset_right = 806.0
+offset_bottom = 4772.0
+
+[node name="Flower24" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 434.0
+offset_top = 1956.0
+offset_right = 467.0
+offset_bottom = 1989.0
+
+[node name="Flower25" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 672.0
+offset_top = 417.0
+offset_right = 705.0
+offset_bottom = 450.0
+
+[node name="Flower26" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 2516.0
+offset_top = 326.0
+offset_right = 2549.0
+offset_bottom = 359.0
+
+[node name="Flower27" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4835.0
+offset_top = 496.0
+offset_right = 4868.0
+offset_bottom = 529.0
+
+[node name="Flower28" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 4677.0
+offset_top = 1865.0
+offset_right = 4710.0
+offset_bottom = 1898.0
+
+[node name="Flower29" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 3704.0
+offset_top = 835.0
+offset_right = 3737.0
+offset_bottom = 868.0
+
+[node name="Flower30" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
+offset_left = 898.0
+offset_top = 1084.0
+offset_right = 931.0
+offset_bottom = 1117.0
+
+[node name="Flowers4" type="Node2D" parent="Background"]
+position = Vector2(1190, -2698)
+
+[node name="Flower" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2329.0
+offset_top = 1618.0
+offset_right = 2362.0
+offset_bottom = 1651.0
+
+[node name="Flower2" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 1355.0
+offset_top = 1906.0
+offset_right = 1388.0
+offset_bottom = 1939.0
+
+[node name="Flower3" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 1658.0
+offset_top = 1262.0
+offset_right = 1691.0
+offset_bottom = 1295.0
+
+[node name="Flower4" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2953.0
+offset_top = 1175.0
+offset_right = 2986.0
+offset_bottom = 1208.0
+
+[node name="Flower5" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3783.0
+offset_top = 1520.0
+offset_right = 3816.0
+offset_bottom = 1553.0
+
+[node name="Flower6" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3247.0
+offset_top = 2023.0
+offset_right = 3280.0
+offset_bottom = 2056.0
+
+[node name="Flower7" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3412.0
+offset_top = 2601.0
+offset_right = 3445.0
+offset_bottom = 2634.0
+
+[node name="Flower8" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2678.0
+offset_top = 2442.0
+offset_right = 2711.0
+offset_bottom = 2475.0
+
+[node name="Flower9" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2106.0
+offset_top = 2097.0
+offset_right = 2139.0
+offset_bottom = 2130.0
+
+[node name="Flower10" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 1701.0
+offset_top = 2499.0
+offset_right = 1734.0
+offset_bottom = 2532.0
+
+[node name="Flower11" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2210.0
+offset_top = 3042.0
+offset_right = 2243.0
+offset_bottom = 3075.0
+
+[node name="Flower12" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 1429.0
+offset_top = 3857.0
+offset_right = 1462.0
+offset_bottom = 3890.0
+
+[node name="Flower13" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2504.0
+offset_top = 4083.0
+offset_right = 2537.0
+offset_bottom = 4116.0
+
+[node name="Flower14" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 1882.0
+offset_top = 4388.0
+offset_right = 1915.0
+offset_bottom = 4421.0
+
+[node name="Flower15" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2301.0
+offset_top = 4920.0
+offset_right = 2334.0
+offset_bottom = 4953.0
+
+[node name="Flower16" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3048.0
+offset_top = 4434.0
+offset_right = 3081.0
+offset_bottom = 4467.0
+
+[node name="Flower17" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4265.0
+offset_top = 4972.0
+offset_right = 4298.0
+offset_bottom = 5005.0
+
+[node name="Flower18" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4844.0
+offset_top = 4355.0
+offset_right = 4877.0
+offset_bottom = 4388.0
+
+[node name="Flower19" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4301.0
+offset_top = 3654.0
+offset_right = 4334.0
+offset_bottom = 3687.0
+
+[node name="Flower20" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4734.0
+offset_top = 2907.0
+offset_right = 4767.0
+offset_bottom = 2940.0
+
+[node name="Flower21" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3376.0
+offset_top = 3246.0
+offset_right = 3409.0
+offset_bottom = 3279.0
+
+[node name="Flower22" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 615.0
+offset_top = 3574.0
+offset_right = 648.0
+offset_bottom = 3607.0
+
+[node name="Flower23" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 773.0
+offset_top = 4739.0
+offset_right = 806.0
+offset_bottom = 4772.0
+
+[node name="Flower24" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 434.0
+offset_top = 1956.0
+offset_right = 467.0
+offset_bottom = 1989.0
+
+[node name="Flower25" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 672.0
+offset_top = 417.0
+offset_right = 705.0
+offset_bottom = 450.0
+
+[node name="Flower26" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 2516.0
+offset_top = 326.0
+offset_right = 2549.0
+offset_bottom = 359.0
+
+[node name="Flower27" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4835.0
+offset_top = 496.0
+offset_right = 4868.0
+offset_bottom = 529.0
+
+[node name="Flower28" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 4677.0
+offset_top = 1865.0
+offset_right = 4710.0
+offset_bottom = 1898.0
+
+[node name="Flower29" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 3704.0
+offset_top = 835.0
+offset_right = 3737.0
+offset_bottom = 868.0
+
+[node name="Flower30" parent="Background/Flowers4" instance=ExtResource("2_70ojb")]
+offset_left = 898.0
+offset_top = 1084.0
+offset_right = 931.0
+offset_bottom = 1117.0
 
 [node name="TopLeftTrees" type="Node2D" parent="Background"]
 position = Vector2(131, -6055)
@@ -4662,189 +7118,6 @@ offset_right = 1202.0
 offset_bottom = 6736.0
 texture = ExtResource("3_no5jd")
 stretch_mode = 2
-
-[node name="Flowers" type="Node2D" parent="Background"]
-position = Vector2(1104, 624)
-
-[node name="Flower" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2329.0
-offset_top = 1618.0
-offset_right = 2362.0
-offset_bottom = 1651.0
-
-[node name="Flower2" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 1355.0
-offset_top = 1906.0
-offset_right = 1388.0
-offset_bottom = 1939.0
-
-[node name="Flower3" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 1658.0
-offset_top = 1262.0
-offset_right = 1691.0
-offset_bottom = 1295.0
-
-[node name="Flower4" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2953.0
-offset_top = 1175.0
-offset_right = 2986.0
-offset_bottom = 1208.0
-
-[node name="Flower5" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3783.0
-offset_top = 1520.0
-offset_right = 3816.0
-offset_bottom = 1553.0
-
-[node name="Flower6" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3247.0
-offset_top = 2023.0
-offset_right = 3280.0
-offset_bottom = 2056.0
-
-[node name="Flower7" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3412.0
-offset_top = 2601.0
-offset_right = 3445.0
-offset_bottom = 2634.0
-
-[node name="Flower8" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2678.0
-offset_top = 2442.0
-offset_right = 2711.0
-offset_bottom = 2475.0
-
-[node name="Flower9" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2106.0
-offset_top = 2097.0
-offset_right = 2139.0
-offset_bottom = 2130.0
-
-[node name="Flower10" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 1701.0
-offset_top = 2499.0
-offset_right = 1734.0
-offset_bottom = 2532.0
-
-[node name="Flower11" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2210.0
-offset_top = 3042.0
-offset_right = 2243.0
-offset_bottom = 3075.0
-
-[node name="Flower12" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 1429.0
-offset_top = 3857.0
-offset_right = 1462.0
-offset_bottom = 3890.0
-
-[node name="Flower13" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2504.0
-offset_top = 4083.0
-offset_right = 2537.0
-offset_bottom = 4116.0
-
-[node name="Flower14" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 1882.0
-offset_top = 4388.0
-offset_right = 1915.0
-offset_bottom = 4421.0
-
-[node name="Flower15" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2301.0
-offset_top = 4920.0
-offset_right = 2334.0
-offset_bottom = 4953.0
-
-[node name="Flower16" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3048.0
-offset_top = 4434.0
-offset_right = 3081.0
-offset_bottom = 4467.0
-
-[node name="Flower17" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4265.0
-offset_top = 4972.0
-offset_right = 4298.0
-offset_bottom = 5005.0
-
-[node name="Flower18" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4844.0
-offset_top = 4355.0
-offset_right = 4877.0
-offset_bottom = 4388.0
-
-[node name="Flower19" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4301.0
-offset_top = 3654.0
-offset_right = 4334.0
-offset_bottom = 3687.0
-
-[node name="Flower20" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4734.0
-offset_top = 2907.0
-offset_right = 4767.0
-offset_bottom = 2940.0
-
-[node name="Flower21" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3376.0
-offset_top = 3246.0
-offset_right = 3409.0
-offset_bottom = 3279.0
-
-[node name="Flower22" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 615.0
-offset_top = 3574.0
-offset_right = 648.0
-offset_bottom = 3607.0
-
-[node name="Flower23" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 773.0
-offset_top = 4739.0
-offset_right = 806.0
-offset_bottom = 4772.0
-
-[node name="Flower24" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 434.0
-offset_top = 1956.0
-offset_right = 467.0
-offset_bottom = 1989.0
-
-[node name="Flower25" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 672.0
-offset_top = 417.0
-offset_right = 705.0
-offset_bottom = 450.0
-
-[node name="Flower26" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 2516.0
-offset_top = 326.0
-offset_right = 2549.0
-offset_bottom = 359.0
-
-[node name="Flower27" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4835.0
-offset_top = 496.0
-offset_right = 4868.0
-offset_bottom = 529.0
-
-[node name="Flower28" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 4677.0
-offset_top = 1865.0
-offset_right = 4710.0
-offset_bottom = 1898.0
-
-[node name="Flower29" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 3704.0
-offset_top = 835.0
-offset_right = 3737.0
-offset_bottom = 868.0
-
-[node name="Flower30" parent="Background/Flowers" instance=ExtResource("2_70ojb")]
-offset_left = 898.0
-offset_top = 1084.0
-offset_right = 931.0
-offset_bottom = 1117.0
 
 [node name="Lake" type="TextureRect" parent="Background"]
 clip_children = 2
