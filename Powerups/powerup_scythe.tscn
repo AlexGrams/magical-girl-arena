@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvn71xmabs5eo"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_scythe.gd" id="1_v2b6r"]
+
+[node name="PowerupScythe" type="Sprite2D"]
+self_modulate = Color(1, 1, 0, 1)
+script = ExtResource("1_v2b6r")
