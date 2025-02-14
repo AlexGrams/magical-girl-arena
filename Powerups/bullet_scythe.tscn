@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://t1q84a6q5ip7"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_scythe.gd" id="1_73noj"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_4x3n5"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_eudj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(38, 79.25)
+
+[node name="BulletScythe" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_73noj")
+lifetime = 1.0
+
+[node name="BulletOffset" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="BulletOffset"]
+position = Vector2(0.5, 0.160001)
+scale = Vector2(0.087, 0.180273)
+texture = ExtResource("2_4x3n5")
+
+[node name="Area2D" type="Area2D" parent="BulletOffset"]
+collision_mask = 2
+script = ExtResource("3_eudj7")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/Area2D"]
+shape = SubResource("RectangleShape2D_tg1bm")
