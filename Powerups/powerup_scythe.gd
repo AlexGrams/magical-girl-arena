@@ -1,8 +1,12 @@
 extends Powerup
 
-# Time in seconds between creating a bullet.
+## Time in seconds between creating bullets.
 @export var shoot_interval = 1.0
+## Path to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
+## Path to the curve describing how this powerup upgrades.
+@export var upgrade_curve_path := ""
+
 # TODO: Do we even need this? If so, it should probably go in Powerup and not here.
 #@export var sprite: Resource = null
 var bullet
@@ -11,9 +15,9 @@ var shoot_timer: float = 0.0
 
 
 func _ready() -> void:
-	max_level = 15
+	max_level = 5
 	powerup_name = "Scythe"
-	upgrade_curve = load("res://Curves/upgrade_orbit.tres")
+	upgrade_curve = load(upgrade_curve_path)
 
 
 func _process(delta: float) -> void:

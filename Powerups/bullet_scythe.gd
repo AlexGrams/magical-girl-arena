@@ -1,7 +1,12 @@
 extends Bullet
 
-@export var radius = 2
-var owning_player: PlayerCharacterBody2D = null
+## How far the center of the hitbox is from the character
+@export var radius: float = 100
+## Rotation in degrees that the scythe moves through in one sweep. 360 is a full rotation around the character.
+@export var arc_length: float = 120
+
+var _owning_player: PlayerCharacterBody2D = null
+var _half_lifetime: float = 0.0
 
 
 func set_damage(damage: float):
@@ -10,13 +15,19 @@ func set_damage(damage: float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Calculate the speed in radians per second that the scythe moves in order to complete two swipes
+	# in its lifetime.
+	speed = ((arc_length * PI) / 180.0) * 2 / lifetime
+	_half_lifetime = lifetime / 2.0
 
 
 func _process(delta: float) -> void:
-	# TODO: Go back and forth with this one
-	global_position = owning_player.global_position
-	rotate(speed * delta)
+	global_position = _owning_player.global_position
+	
+	if death_timer < _half_lifetime:
+		rotate(speed * delta)
+	else:
+		rotate(-speed * delta)
 	
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():
@@ -31,11 +42,13 @@ func setup_bullet(data: Array) -> void:
 	):
 		return
 		
-	owning_player = GameState.player_characters.get(data[0])
+	_owning_player = GameState.player_characters.get(data[0])
 	
-	if owning_player == null:
+	if _owning_player == null:
 		push_error("Scythe bullet has a null owner. Player ID ", str(data[0]), 
 			" was not found in GameState.player_characters.")
 		return
 	
 	$BulletOffset.position.y = radius
+	# Make it so that the angle of the starting direction is the midpoint of the scythe sweeps.
+	rotation = direction.angle() - PI / 2 - (((arc_length * PI) / 180.0) / 2)

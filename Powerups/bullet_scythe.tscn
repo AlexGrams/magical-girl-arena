@@ -10,7 +10,7 @@ size = Vector2(38, 79.25)
 [node name="BulletScythe" type="Node2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
-lifetime = 1.0
+lifetime = 0.75
 
 [node name="BulletOffset" type="Node2D" parent="."]
 
