@@ -42,25 +42,31 @@ func _physics_process(_delta: float) -> void:
 		else:
 			# Shoot at the target
 			if is_multiplayer_authority() and fire_timer >= fire_interval:
-				var direction = target.global_position - self.global_position
-				var direction_normal = direction.normalized()
-				if not is_ally:
-					var bullet = bullet_scene.instantiate()
-					bullet.set_damage(bullet_damage)
-					bullet.direction = direction_normal
-					bullet.position = self.global_position + (direction_normal * 100)
-					get_node("..").add_child(bullet, true)
-				else:
-					# Alternate attack behavior for when this Enemy is an ally
-					get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-						1, [allied_bullet_scene_path, 
-							self.global_position + (direction_normal * 100), 
-							direction_normal, 
-							bullet_damage, 
-							[]
-						]
-					)
-				
+				shoot()
 				fire_timer = 0.0
 	else:
 		_find_new_target()
+
+
+# Perform a ranged attack by spawning a bullet.
+func shoot() -> void:
+	var direction = target.global_position - self.global_position
+	var direction_normal = direction.normalized()
+	if not is_ally:
+		# TODO: Probably need to convert enemies shooting to use the bullet spawner 
+		# and request_spawn_bullet
+		var bullet = bullet_scene.instantiate()
+		bullet.set_damage(bullet_damage)
+		bullet.direction = direction_normal
+		bullet.position = self.global_position + (direction_normal * 100)
+		get_node("..").add_child(bullet, true)
+	else:
+		# Alternate attack behavior for when this Enemy is an ally
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [allied_bullet_scene_path, 
+				self.global_position + (direction_normal * 100), 
+				direction_normal, 
+				bullet_damage, 
+				[]
+			]
+		)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://byntc2n136ytr"]
 
-[ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_r7tca"]
+[ext_resource type="Script" path="res://Enemies/enemy_corrupted_goth.gd" id="1_30rx0"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_hq6a4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
@@ -382,7 +382,10 @@ properties/1/replication_mode = 1
 [node name="EnemyCorruptedGoth" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
-script = ExtResource("1_r7tca")
+script = ExtResource("1_30rx0")
+scythe_bullet_scene_path = "res://Powerups/bullet_scythe.tscn"
+max_range = 200.0
+allied_bullet_scene_path = ""
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
