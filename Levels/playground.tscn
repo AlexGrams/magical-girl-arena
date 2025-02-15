@@ -7581,9 +7581,10 @@ visible = false
 position = Vector2(1073, 4504)
 scale = Vector2(46.8, 0.945)
 
-[node name="EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
+[node name="TEMP_EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1036, 1218)
 enemy_scene = ExtResource("17_bwtrb")
+one_shot = true
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

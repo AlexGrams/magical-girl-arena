@@ -2,6 +2,8 @@ extends Node2D
 
 @export var enemy_scene: PackedScene = preload("res://Enemies/enemy.tscn")
 @export var enabled: bool = true
+## For testing: Only spawn from here one time
+@export var one_shot := false
 # The rectangular shape for the area in which enemies will spawn in 
 @export var spawn_area: CollisionShape2D = null
 
@@ -12,7 +14,8 @@ var _spawn_x_min: float = 0
 var _spawn_x_max: float = 0
 var _spawn_y_min: float = 0
 var _spawn_y_max: float = 0
-
+# true if this spawner is a one-shot spawner and it has already spawned.
+var _has_spawned_one_shot := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +36,9 @@ func _process(delta: float) -> void:
 		or not multiplayer.is_server()):
 		return
 	
+	if one_shot and _has_spawned_one_shot:
+		return
+	
 	spawn_timer -= delta
 	if spawn_timer <= 0.0 and enabled and enemy_scene != null:
 		var enemy = enemy_scene.instantiate()
@@ -43,6 +49,9 @@ func _process(delta: float) -> void:
 		enemy.global_position = spawn_pos
 		get_node("..").add_child(enemy, true)
 		spawn_timer = GameState.get_spawn_interval()
+		
+		if one_shot:
+			_has_spawned_one_shot = true
 
 
 func set_enemy_type(new_enemy: PackedScene) -> void:
