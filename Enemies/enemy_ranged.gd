@@ -1,3 +1,4 @@
+class_name EnemyRanged
 extends Enemy
 
 # At most how far the enemy can be from the player before trying to shoot at them.
@@ -17,7 +18,7 @@ func _ready() -> void:
 	super()
 	squared_max_range = max_range * max_range
 	
-	if ResourceLoader.exists(bullet_scene.to_string()):
+	if bullet_scene != null and ResourceLoader.exists(bullet_scene.to_string()):
 		load(bullet_scene.to_string())
 
 

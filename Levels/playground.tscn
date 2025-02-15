@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=31 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://c11b5wqp1lqo4" path="res://GrassTuft.png" id="1_gtrpj"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="7_jfhpd"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
+[ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_bwtrb"]
 
 [sub_resource type="Animation" id="Animation_i77v7"]
 length = 0.001
@@ -7550,7 +7551,7 @@ text = "00:00"
 horizontal_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Pickups/gold.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
@@ -7579,6 +7580,10 @@ scale = Vector2(46.8, 0.945)
 visible = false
 position = Vector2(1073, 4504)
 scale = Vector2(46.8, 0.945)
+
+[node name="EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
+position = Vector2(1036, 1218)
+enemy_scene = ExtResource("17_bwtrb")
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

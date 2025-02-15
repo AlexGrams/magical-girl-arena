@@ -1,0 +1,444 @@
+[gd_scene load_steps=17 format=3 uid="uid://byntc2n136ytr"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_r7tca"]
+[ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_hq6a4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
+viewport_path = NodePath("Sprite2D/GDCubismUserModel")
+
+[sub_resource type="Animation" id="Animation_l0yci"]
+resource_name = "Breathing"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Param10")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 5, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [15.0, 30.0, 30.0, 0.0, 0.0, 14.9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Param2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Param3")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Param4")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Param5")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Param6")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GDCubismUserModel:Breathing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2, 3, 6, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GDCubismUserModel:Walking")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_63lcr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Param10")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Param2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Param4")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Param5")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Param6")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Param3")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GDCubismUserModel:Breathing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GDCubismUserModel:Walking")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_kylk1"]
+resource_name = "Walking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Param2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-3, -3, 1),
+"update": 0,
+"values": [3.0, 18.0, 3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Param3")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-3, -3, 1),
+"update": 0,
+"values": [3.0, 18.0, 3.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Param4")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.0, 13.0, 18.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Param5")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.0, 12.0, 18.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Param6")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.0, 12.0, 18.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Param8")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.0, 12.0, 18.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GDCubismUserModel:Param10")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.0, 12.0, 18.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GDCubismUserModel:Walking")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g5ukv"]
+_data = {
+"Breathing": SubResource("Animation_l0yci"),
+"RESET": SubResource("Animation_63lcr"),
+"Walking": SubResource("Animation_kylk1")
+}
+
+[sub_resource type="Animation" id="Animation_6o6nj"]
+resource_name = "Blinking"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Blink")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.6, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.1]
+}
+
+[sub_resource type="Animation" id="Animation_yhmns"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Blink")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3kvwg"]
+_data = {
+"Blinking": SubResource("Animation_6o6nj"),
+"RESET": SubResource("Animation_yhmns")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifklo"]
+size = Vector2(101, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beu2y"]
+size = Vector2(101, 125)
+
+[sub_resource type="Animation" id="Animation_u5q41"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_xsep2"]
+resource_name = "take_damage"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lewke"]
+_data = {
+"RESET": SubResource("Animation_u5q41"),
+"take_damage": SubResource("Animation_xsep2")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_orunc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="EnemyCorruptedGoth" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("1_r7tca")
+drop_weight_exp = 15.0
+drop_weight_gold = 4.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("gdcubism_user_model")]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("ViewportTexture_f8erj")
+script = ExtResource("2_hq6a4")
+gdcubism_user_model = NodePath("GDCubismUserModel")
+
+[node name="GDCubismUserModel" type="GDCubismUserModel" parent="Sprite2D"]
+assets = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+parameter_mode = 1
+auto_scale = false
+anim_loop = false
+anim_loop_fade_in = true
+anim_expression = "exp_01"
+anim_motion = "Idle_0"
+Breathing = 0.0
+Walking = 1.0
+Part = 1.0
+disable_3d = true
+transparent_bg = true
+gui_disable_input = true
+size = Vector2i(275, 275)
+render_target_update_mode = 4
+
+[node name="Live2D_AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_g5ukv")
+}
+playback_default_blend_time = 5.0
+
+[node name="Blinking_AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_3kvwg")
+}
+
+[node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_ifklo")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_beu2y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lewke")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_orunc")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
