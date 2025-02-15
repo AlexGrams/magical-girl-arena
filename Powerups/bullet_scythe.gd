@@ -5,7 +5,7 @@ extends Bullet
 ## Rotation in degrees that the scythe moves through in one sweep. 360 is a full rotation around the character.
 @export var arc_length: float = 120
 
-var _owning_player: PlayerCharacterBody2D = null
+var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
 
 
@@ -22,7 +22,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	global_position = _owning_player.global_position
+	if _owning_player != null:
+		global_position = _owning_player.global_position
 	
 	if death_timer < _half_lifetime:
 		rotate(speed * delta)
@@ -38,11 +39,17 @@ func _process(delta: float) -> void:
 func setup_bullet(data: Array) -> void:
 	if (
 		data.size() != 1
-		or typeof(data[0]) != TYPE_INT		# Owning ID
+		or (typeof(data[0]) != TYPE_INT				# Owning ID
+			and typeof(data[0]) != TYPE_NODE_PATH)	# Path to owning node
 	):
+		push_error("Malformed bullet setup data Array.")
 		return
-		
-	_owning_player = GameState.player_characters.get(data[0])
+	
+	if typeof(data[0]) == TYPE_INT:
+		_owning_player = GameState.player_characters.get(data[0])
+	else:
+		print("Called setup on it")
+		_owning_player = get_node(data[0])
 	
 	if _owning_player == null:
 		push_error("Scythe bullet has a null owner. Player ID ", str(data[0]), 

@@ -19,7 +19,7 @@ func _spawn_bullet(data):
 		push_error("Bullet could not be instantiated because of malformed 'data' parameter.")
 		return null
 	
-	var bullet = load(data[0]).instantiate()
+	var bullet: Bullet = load(data[0]).instantiate()
 	
 	if bullet == null:
 		push_error("Bullet could not be instantiated from path: " + str(data[0]))

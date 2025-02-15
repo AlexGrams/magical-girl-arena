@@ -14,6 +14,6 @@ func shoot() -> void:
 			Vector2.ZERO, 
 			direction, 
 			bullet_damage, 
-			[1]
+			[get_path()]
 		]
 	)
