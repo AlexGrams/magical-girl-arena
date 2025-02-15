@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 79.25)
 
-[node name="BulletScythe" type="Node2D"]
+[node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("collider")]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
+collider = NodePath("BulletOffset/Area2D")
 lifetime = 0.75
 
 [node name="BulletOffset" type="Node2D" parent="."]

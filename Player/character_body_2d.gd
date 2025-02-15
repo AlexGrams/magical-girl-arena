@@ -206,7 +206,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		#take_damage.rpc(10)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage.rpc(area.damage)
-		area.get_parent().request_delete.rpc_id(1)
+		if area.get_parent().has_method("request_delete"):
+			area.get_parent().request_delete.rpc_id(1)
 
 
 # Tells this client's GameState which ID goes with which local player node instance.
