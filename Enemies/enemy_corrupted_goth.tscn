@@ -384,6 +384,7 @@ collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_30rx0")
 scythe_bullet_scene_path = "res://Powerups/bullet_scythe.tscn"
+corrupted_lifetime = 10.0
 max_range = 200.0
 allied_bullet_scene_path = ""
 drop_weight_exp = 15.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=31 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://c11b5wqp1lqo4" path="res://GrassTuft.png" id="1_gtrpj"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="7_jfhpd"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
+[ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
 
 [sub_resource type="Animation" id="Animation_i77v7"]
 length = 0.001
@@ -7579,6 +7580,12 @@ scale = Vector2(46.8, 0.945)
 visible = false
 position = Vector2(1073, 4504)
 scale = Vector2(46.8, 0.945)
+
+[node name="TEMP_EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
+position = Vector2(1090, 1283)
+scale = Vector2(5, 5)
+enemy_scene = ExtResource("17_xfem1")
+one_shot = true
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]

@@ -2,9 +2,25 @@ class_name EnemyCorrupted
 extends EnemyRanged
 # A corrupted magical girl enemy. Can use powerups and abilities like the player.
 
+## How long this corrupted enemy stays in the game before leaving. Doesn't drop loot if time runs out.
+@export var corrupted_lifetime: float = 0.0
+
+# How much time this corrupted enemy has left in the game.
+var current_lifetime: float = 0.0
+
 
 func _ready() -> void:
 	super()
+	
+	current_lifetime = corrupted_lifetime
+
+
+func _process(delta: float) -> void:
+	super(delta)
+	
+	current_lifetime -= delta
+	if current_lifetime <= 0.0 and is_multiplayer_authority():
+		_leave()
 
 
 func _physics_process(delta: float) -> void:
@@ -23,3 +39,12 @@ func shoot() -> void:
 			[]
 		]
 	)
+
+
+# Despawn the corrupted enemy. Different from dying as it doesn't drop loot.
+@rpc("any_peer", "call_local")
+func _leave() -> void:
+	if not is_multiplayer_authority():
+		return
+	
+	queue_free()
