@@ -2,6 +2,8 @@ extends Powerup
 
 @export var shoot_interval: float  = 0.25
 @export var bullet_scene := "res://Powerups/revolving_bullet.tscn"
+
+# TODO: Might not be used anymore
 var sprite = preload("res://Orange.png")
 var is_on := false
 var shoot_timer: float = 0
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 					global_position, 
 					direction, 
 					bullet_damage, 
-					[]
+					[_is_owned_by_player]
 				]
 			)
 			

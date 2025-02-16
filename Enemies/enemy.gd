@@ -96,6 +96,7 @@ func _add_powerup(powerup_scene_path: String) -> void:
 	powerup.set_authority(get_multiplayer_authority())
 	add_child(powerup)
 	powerup.activate_powerup()
+	powerup.set_is_owned_by_player(false)
 
 
 # Set target that this enemy is trying to attack. 

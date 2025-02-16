@@ -1,15 +1,9 @@
 extends Bullet
 
-# Collision properties for this bullet to be able to damage players instead of enemies.
-const ENEMY_BULLET_COLLISION_LAYER: int = 6
-const ENEMY_BULLET_COLLISION_MASK: int = 4
-
 ## How far the center of the hitbox is from the character
 @export var radius: float = 100
 ## Rotation in degrees that the scythe moves through in one sweep. 360 is a full rotation around the character.
 @export var arc_length: float = 120
-## The bullet's collider that damages when it touches enemies or players.
-@export var collider: Area2D = null
 
 var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
@@ -67,8 +61,8 @@ func setup_bullet(data: Array) -> void:
 		if collider != null:
 			collider.collision_layer = 0
 			collider.collision_mask = 0
-			collider.set_collision_layer_value(ENEMY_BULLET_COLLISION_LAYER, true)
-			collider.set_collision_mask_value(ENEMY_BULLET_COLLISION_MASK, true)
+			collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
+			collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
 	
 	$BulletOffset.position.y = radius
 	# Make it so that the angle of the starting direction is the midpoint of the scythe sweeps.

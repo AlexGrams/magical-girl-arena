@@ -13,8 +13,16 @@ var powerup_name := ""
 # Curve describing how this powerup's main stat changes as it is upgraded.
 var upgrade_curve: Curve = null
 
+# True when this powerup harms enemies, false when it harms players.
+var _is_owned_by_player := true
+
 # Emitted after increasing this Powerup's level
 signal powerup_level_up(new_level: int, new_damage: float)
+
+
+func set_is_owned_by_player(value: bool) -> void:
+	_is_owned_by_player = value
+
 
 # Meant to be overridden
 func level_up():

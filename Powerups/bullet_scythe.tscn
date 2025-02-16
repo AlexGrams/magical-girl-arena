@@ -10,8 +10,8 @@ size = Vector2(38, 79.25)
 [node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("collider")]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
-collider = NodePath("BulletOffset/Area2D")
 lifetime = 0.75
+collider = NodePath("BulletOffset/Area2D")
 
 [node name="BulletOffset" type="Node2D" parent="."]
 

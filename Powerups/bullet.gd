@@ -7,6 +7,9 @@ extends Node2D
 
 @export var speed: float = 5
 @export var lifetime: float = 2
+## The bullet's collider that damages when it touches enemies or players.
+@export var collider: Area2D = null
+
 var direction: Vector2
 var death_timer: float = 0
 
@@ -33,5 +36,12 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 
 
 # Set up other properties for this bullet
-func setup_bullet(_data: Array) -> void:
-	pass
+func setup_bullet(data: Array) -> void:
+	# Make the bullet hurt players
+	if len(data) >= 1 and typeof(data[0]) == TYPE_BOOL:
+		if not data[0]:
+			if collider != null:
+				collider.collision_layer = 0
+				collider.collision_mask = 0
+				collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
+				collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
