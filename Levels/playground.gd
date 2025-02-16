@@ -6,6 +6,9 @@ extends Node2D
 ## time and the total game time, at which the corrupted magical girl enemy spawns. 0.0 is at the 
 ## start of the game, and 1.0 is at the end of the game timer.
 @export var corrupted_enemy_spawn_time_fraction: float = 0.0
+@export var corrupted_enemy_scene: PackedScene = null
+## The EnemySpawner for spawning the corrupted magical girl.
+@export var corrupted_enemy_spawner: EnemySpawner = null
 
 var _has_corrupted_enemy_spawned := false
 
@@ -16,7 +19,7 @@ func _ready() -> void:
 
 
 # Only process on the server.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 	
@@ -28,4 +31,6 @@ func _process(delta: float) -> void:
 # Spawn the corrupted magical girl enemy.
 func _spawn_corrupted_enemy() -> void:
 	_has_corrupted_enemy_spawned = true
-	print("Spawn")
+	if corrupted_enemy_spawner != null and corrupted_enemy_scene != null:
+		corrupted_enemy_spawner.spawn(corrupted_enemy_scene)
+	print("Spawn it in")

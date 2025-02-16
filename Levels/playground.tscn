@@ -175,9 +175,11 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="Playground" type="Node2D"]
+[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner")]
 script = ExtResource("1_s3iet")
 corrupted_enemy_spawn_time_fraction = 0.003
+corrupted_enemy_scene = ExtResource("17_xfem1")
+corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -2815.0
@@ -7588,7 +7590,7 @@ scale = Vector2(46.8, 0.945)
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
 enemy_scene = ExtResource("17_xfem1")
-one_shot = true
+automatic_spawning = false
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
