@@ -86,6 +86,18 @@ func _physics_process(_delta: float) -> void:
 		_find_new_target()
 
 
+# Spawn in and add a Powerup to this Enemy. The Powerup may need extra functionality to 
+# account for it not being on the Player. Only call on the server.
+func _add_powerup(powerup_scene_path: String) -> void:
+	if not multiplayer.is_server():
+		return
+	
+	var powerup: Powerup = load(powerup_scene_path).instantiate()
+	powerup.set_authority(get_multiplayer_authority())
+	add_child(powerup)
+	powerup.activate_powerup()
+
+
 # Set target that this enemy is trying to attack. 
 # Makes sure to find a new target if the current one dies.
 func _find_new_target() -> void:

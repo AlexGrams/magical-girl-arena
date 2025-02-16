@@ -1,6 +1,9 @@
 class_name Powerup
 extends Node2D
 ## Abstract class for abilities granted to the player. 
+## Powerups are not replicated, but their effects are. The powerup scene only exists on the 
+## server, but stuff like spawning bullets or applying buffs should be done using RPCs so that
+## this Powerup's functionality is seen on all clients.
 
 var current_level: int = 0
 # The highest level that this powerup can be upgraded to.
