@@ -33,4 +33,3 @@ func _spawn_corrupted_enemy() -> void:
 	_has_corrupted_enemy_spawned = true
 	if corrupted_enemy_spawner != null and corrupted_enemy_scene != null:
 		corrupted_enemy_spawner.spawn(corrupted_enemy_scene)
-	print("Spawn it in")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=33 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://c11b5wqp1lqo4" path="res://GrassTuft.png" id="1_gtrpj"]
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
+[ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="2_v45ga"]
 [ext_resource type="Texture2D" uid="uid://bamumqh0h00gj" path="res://GrassTuft2.png" id="2_xpmpc"]
 [ext_resource type="Texture2D" uid="uid://dnrrauox6iyqg" path="res://Tree.png" id="3_no5jd"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
@@ -178,7 +179,7 @@ border_color = Color(0, 0, 0, 1)
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner")]
 script = ExtResource("1_s3iet")
 corrupted_enemy_spawn_time_fraction = 0.003
-corrupted_enemy_scene = ExtResource("17_xfem1")
+corrupted_enemy_scene = ExtResource("2_v45ga")
 corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -7556,7 +7557,7 @@ text = "00:00"
 horizontal_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
