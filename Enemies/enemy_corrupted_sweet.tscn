@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cwxh1lqgmuu3q"]
 
-[ext_resource type="Script" path="res://Enemies/enemy_corrupted_goth.gd" id="1_whyon"]
+[ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_akkuy"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_jpoov"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
@@ -382,7 +382,7 @@ properties/1/replication_mode = 1
 [node name="EnemyCorruptedSweet" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
-script = ExtResource("1_whyon")
+script = ExtResource("1_akkuy")
 corrupted_lifetime = 10.0
 default_powerup = "res://Powerups/revolving_powerup.tscn"
 max_range = 200.0
