@@ -130,8 +130,22 @@ func _ready() -> void:
 	spawn_rate_curve = load(spawn_rate_curve_path)
 	exp_per_level_curve = load(exp_per_level_curve_path)
 	_update_exp_for_next_level()
+		
+	multiplayer.peer_connected.connect(
+		func(id : int):
+			# Tell the connected peer that this client is in the lobby.
+			register_player.rpc_id(id, multiplayer.get_unique_id(), player_name, local_player_steam_id)
+	)
 	
-	# Set up Steam functionality
+	# TODO: Possibly do something for the following three events.
+	multiplayer.connected_to_server.connect(
+		func():
+			# Tell all clients (including the local one) this client's information.
+			register_player.rpc(multiplayer.get_unique_id(), player_name, local_player_steam_id)
+			#connection_succeeded.emit()	
+	)
+	
+	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM:
 		Steam.steamInitEx(true, 480)
 		
@@ -142,25 +156,11 @@ func _ready() -> void:
 		
 		local_player_steam_id = Steam.getSteamID()
 		
-		multiplayer.peer_connected.connect(
-			func(id : int):
-				# Tell the connected peer that this client is in the lobby.
-				register_player.rpc_id(id, multiplayer.get_unique_id(), player_name, local_player_steam_id)
-		)
-		
 		# TODO: See if we can use this or get it to work, don't know.
 		multiplayer.peer_disconnected.connect(
 			func(_id : int):
 				if len(multiplayer.get_peers()) == 0:
 					_no_clients_connected_or_timeout.emit()
-		)
-		
-		# TODO: Possibly do something for the following three events.
-		multiplayer.connected_to_server.connect(
-			func():
-				# Tell all clients (including the local one) this client's information.
-				register_player.rpc(multiplayer.get_unique_id(), player_name, local_player_steam_id)
-				#connection_succeeded.emit()	
 		)
 		
 		multiplayer.connection_failed.connect(

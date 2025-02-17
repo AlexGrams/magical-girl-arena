@@ -70,13 +70,15 @@ func _on_lobby_button_button_down() -> void:
 func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
 		GameState.host_lobby(Steam.getPersonaName())
-		
-		# Show the lobby that you're in after clicking the "Host" button.
-		lobby_list.hide()
-		lobby.show()
-		refresh_lobby()
 	else:
 		MultiplayerManager.join_multiplayer_lobby_using_enet()
+		if not multiplayer.is_server():
+			start_game_button.hide()
+	
+	# Show the lobby that you're in after clicking the "Host" button.
+	lobby_list.hide()
+	lobby.show()
+	refresh_lobby()
 
 
 # Go from the lobby list to the main menu.

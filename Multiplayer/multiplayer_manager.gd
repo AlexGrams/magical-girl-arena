@@ -59,11 +59,6 @@ func join_multiplayer_lobby_using_enet():
 func _on_peer_connected(id: int) -> void:
 	GameState.register_player(id, "Client", GameState.local_player_steam_id)
 	player_ids[id] = null
-	
-	# If using ENet for testing, start the game as soon as one client connects.
-	if not GameState.USING_GODOT_STEAM:
-		if multiplayer.get_unique_id() == 1:
-			GameState.start_game()
 
 
 # Called on all players when a client disconnects.
