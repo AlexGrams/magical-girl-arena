@@ -59,7 +59,6 @@ func setup_bullet(data: Array) -> void:
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	if boomerang_powerup != null:
 		boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
-			print(str(new_damage))
 			level_up.rpc(new_level, new_damage)
 		)
 	

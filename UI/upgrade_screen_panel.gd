@@ -10,16 +10,13 @@ extends Panel
 # Parent of the PlayReadyIndicators
 @export var player_ready_indicator_holder: Control = null
 
-# All upgrades that the player can acquire in the game. Chosen from at random when upgrading.
-# Contains Array of [PowerupName, Sprite, UpgradeDescription]
-var all_upgrades: Array = []
 var upgrade_panels: Array = []
 var ready_indicators: Array = []
-var boomerang_sprite = preload("res://Peach.png")
-var revolving_sprite = preload("res://Orange.png")
-var orbit_sprite = preload("res://Coconut.png")
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
+
+# Map of String to PowerupData
+var _powerup_name_to_powerupdata := {}
 
 signal upgrade_chosen(title)
 
@@ -31,28 +28,72 @@ func _ready() -> void:
 	for child in player_ready_indicator_holder.get_children():
 		ready_indicators.append(child)
 	
-	$HBoxContainer/IndividualUpgradePanel.set_powerup("Boomerang", boomerang_sprite, "Increase damage")
-	$HBoxContainer/IndividualUpgradePanel2.set_powerup("Revolving", revolving_sprite, "Increase damage")
-	$HBoxContainer/IndividualUpgradePanel3.set_powerup("Orbit", orbit_sprite, "Increase damage")
+	#$HBoxContainer/IndividualUpgradePanel.set_powerup("Boomerang", boomerang_sprite, "Increase damage")
+	#$HBoxContainer/IndividualUpgradePanel2.set_powerup("Revolving", revolving_sprite, "Increase damage")
+	#$HBoxContainer/IndividualUpgradePanel3.set_powerup("Orbit", orbit_sprite, "Increase damage")
+	#
+	#all_upgrades.append(["Boomerang", boomerang_sprite, "Increase damage"])
+	#all_upgrades.append(["Revolving", revolving_sprite, "Increase damage"])
+	#all_upgrades.append(["Orbit", orbit_sprite, "Increase damage"])
 	
-	all_upgrades.append(["Boomerang", boomerang_sprite, "Increase damage"])
-	all_upgrades.append(["Revolving", revolving_sprite, "Increase damage"])
-	all_upgrades.append(["Orbit", orbit_sprite, "Increase damage"])
+	# Set up the powerup name to PowerupData map
+	for powerupdata: PowerupData in all_powerup_data:
+		_powerup_name_to_powerupdata[powerupdata.name] = powerupdata
 	
 	for child in $HBoxContainer.get_children():
 		child.upgrade_chosen.connect(_on_upgrade_chosen)
 
 
+# Show the upgrade screen and set up the options provided to the player.
+func setup():
+	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
+	players_done_selecting_upgrades = 0
+	players_selecting_upgrades_window.hide()
+	upgrade_panels_holder.show()
+	
+	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
+		# If the player is maxed out on the number of unique powerups they can have, then 
+		# choose some amount (3 in this case) to upgrade randomly.
+		var random_upgrade_choices: Array[PowerupData] = []
+		
+		for powerup: Powerup in player_character.powerups:
+			if powerup.current_level < powerup.max_level:
+				random_upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
+		
+		_show_random_upgrade_choices(random_upgrade_choices)
+	else:
+		# Otherwise, choose randomly from the whole pool up abilities.
+		var random_powerup_list = all_powerup_data.duplicate()
+
+		# Remove powerups from the random list that can't be upgraded anymore.
+		var powerups_to_remove = []
+		for powerup: Powerup in player_character.powerups:
+			if powerup.current_level >= powerup.max_level:
+				powerups_to_remove.append(powerup.powerup_name)
+		if len(powerups_to_remove) > 0:
+			var i = 0
+			while i < len(random_powerup_list):
+				if random_powerup_list.name in powerups_to_remove:
+					random_powerup_list.remove_at(i)
+					i -= 1
+				i += 1
+		
+		# Choose some powerups at random to show to the player
+		_show_random_upgrade_choices(random_powerup_list)
+	
+	show()
+
+
 # Display a random selection of upgrades for the player to choose from.
 # upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array) -> void:
+func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
 	upgrade_data.shuffle()
 	var i = 0
 	while i < len(upgrade_panels) and i < len(upgrade_data):
 		upgrade_panels[i].set_powerup(
-			upgrade_data[i][0],
-			upgrade_data[i][1],
-			upgrade_data[i][2]
+			upgrade_data[i].name,
+			upgrade_data[i].sprite,
+			"TEMP: Upgrade description"
 		)
 		upgrade_panels[i].show()
 		i += 1
@@ -114,48 +155,3 @@ func increment_players_selecting_upgrades() -> void:
 	while i < GameState.MAX_PLAYERS:
 		ready_indicators[i].hide()
 		i += 1
-
-
-# Show the upgrade screen and set up the options provided to the player.
-func setup():
-	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
-	players_done_selecting_upgrades = 0
-	players_selecting_upgrades_window.hide()
-	upgrade_panels_holder.show()
-	
-	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
-		# If the player is maxed out on the number of unique powerups they can have, then 
-		# choose some amount (3 in this case) to upgrade randomly.
-		var upgrade_choices: Array[String] = []
-		var random_powerups = []
-		
-		for powerup: Powerup in player_character.powerups:
-			if powerup.current_level < powerup.max_level:
-				upgrade_choices.append(powerup.powerup_name)
-		
-		for powerup in all_upgrades:
-			if powerup[0] in upgrade_choices:
-				random_powerups.append(powerup)
-		
-		_show_random_upgrade_choices(random_powerups)
-	else:
-		# Otherwise, choose randomly from the whole pool up abilities.
-		var random_powerup_list = all_upgrades.duplicate()
-
-		# Remove powerups from the random list that can't be upgraded anymore.
-		var powerups_to_remove = []
-		for powerup: Powerup in player_character.powerups:
-			if powerup.current_level >= powerup.max_level:
-				powerups_to_remove.append(powerup.powerup_name)
-		if len(powerups_to_remove) > 0:
-			var i = 0
-			while i < len(random_powerup_list):
-				if random_powerup_list[i][0] in powerups_to_remove:
-					random_powerup_list.remove_at(i)
-					i -= 1
-				i += 1
-		
-		# Choose some powerups at random to show to the player
-		_show_random_upgrade_choices(random_powerup_list)
-	
-	show()
