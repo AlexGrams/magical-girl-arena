@@ -73,7 +73,7 @@ func setup():
 		if len(powerups_to_remove) > 0:
 			var i = 0
 			while i < len(random_powerup_list):
-				if random_powerup_list.name in powerups_to_remove:
+				if random_powerup_list[i].name in powerups_to_remove:
 					random_powerup_list.remove_at(i)
 					i -= 1
 				i += 1
