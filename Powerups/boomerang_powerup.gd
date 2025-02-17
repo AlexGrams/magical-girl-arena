@@ -11,7 +11,6 @@ signal picked_up_powerup(sprite)
 
 func _ready():
 	powerup_name = "Boomerang"
-	upgrade_curve = load("res://Curves/upgrade_boomerang.tres")
 	
 	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
 
