@@ -1,9 +1,10 @@
 extends Powerup
 
-@export var shoot_interval = 1.0
+@export var shoot_interval: float = 1.0
 @export var bullet_damage: float = 50.0
 @export var bullet_scene := "res://Powerups/bullet.tscn"
-var is_on:bool = false
+
+var is_on: bool = false
 var shoot_timer: float = 0
 
 signal picked_up_powerup(sprite)

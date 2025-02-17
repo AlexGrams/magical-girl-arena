@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyq0c1f3w0cap"]
+[gd_scene load_steps=3 format=3 uid="uid://dyq0c1f3w0cap"]
 
 [ext_resource type="Script" path="res://Powerups/revolving_powerup.gd" id="1_w1l0c"]
+[ext_resource type="Curve" uid="uid://c77roqvpd6lbh" path="res://Curves/upgrade_revolving.tres" id="2_8orb2"]
 
 [node name="RevolvingPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_w1l0c")
+upgrade_curve = ExtResource("2_8orb2")

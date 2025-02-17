@@ -14,9 +14,7 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
-	max_level = 15
 	powerup_name = "Revolving"
-	upgrade_curve = load("res://Curves/upgrade_revolving.tres")
 	
 	damage_levels = [25, 25, 50, 50, 100]
 	bullet_damage = damage_levels[min(4, current_level)]

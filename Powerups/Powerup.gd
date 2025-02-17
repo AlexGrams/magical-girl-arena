@@ -8,13 +8,15 @@ extends Node2D
 ## its properties.
 ## TODO: Maybe also change the script name to match capitalization scheme.
 
+## The highest level that this powerup can be upgraded to.
+const max_level: int = 5
+
+## Curve describing how this powerup's main stat changes as it is upgraded.
+@export var upgrade_curve: Curve = null
+
 var current_level: int = 0
-# The highest level that this powerup can be upgraded to.
-var max_level: int = 0
 var damage_levels: Array
 var powerup_name := ""
-# Curve describing how this powerup's main stat changes as it is upgraded.
-var upgrade_curve: Curve = null
 
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true

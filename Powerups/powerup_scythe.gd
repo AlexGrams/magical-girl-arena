@@ -15,7 +15,6 @@ var shoot_timer: float = 0.0
 
 
 func _ready() -> void:
-	max_level = 5
 	powerup_name = "Scythe"
 	upgrade_curve = load(upgrade_curve_path)
 

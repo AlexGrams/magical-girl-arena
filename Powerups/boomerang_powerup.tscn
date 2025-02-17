@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://djo8kggrhm1l0"]
+[gd_scene load_steps=3 format=3 uid="uid://djo8kggrhm1l0"]
 
 [ext_resource type="Script" path="res://Powerups/boomerang_powerup.gd" id="1_wufpq"]
+[ext_resource type="Curve" uid="uid://bud5qyymvtq7v" path="res://Curves/upgrade_boomerang.tres" id="2_v3lod"]
 
 [node name="BoomerangPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_wufpq")
+upgrade_curve = ExtResource("2_v3lod")

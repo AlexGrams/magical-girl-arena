@@ -10,7 +10,6 @@ signal picked_up_powerup(sprite)
 
 
 func _ready():
-	max_level = 15
 	powerup_name = "Boomerang"
 	upgrade_curve = load("res://Curves/upgrade_boomerang.tres")
 	

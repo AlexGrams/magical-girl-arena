@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhnrvoa0bq8ke"]
+[gd_scene load_steps=3 format=3 uid="uid://dhnrvoa0bq8ke"]
 
 [ext_resource type="Script" path="res://Powerups/orbit_powerup.gd" id="1_gq2cx"]
+[ext_resource type="Curve" uid="uid://dumfra0rgtbpj" path="res://Curves/upgrade_orbit.tres" id="2_1tqwt"]
 
 [node name="OrbitPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_gq2cx")
+upgrade_curve = ExtResource("2_1tqwt")

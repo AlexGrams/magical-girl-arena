@@ -8,9 +8,7 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
-	max_level = 15
 	powerup_name = "Orbit"
-	upgrade_curve = load("res://Curves/upgrade_orbit.tres")
 	
 	damage_levels = [20.0, 25.0, 25.0, 25.0, 100.0]
 
