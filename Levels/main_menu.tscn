@@ -129,23 +129,6 @@ pivot_offset = Vector2(100, 96)
 theme_override_font_sizes/font_size = 48
 text = "Host"
 
-[node name="JoinButton" type="Button" parent="LobbyList"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -456.0
-offset_top = -256.0
-offset_right = -256.0
-offset_bottom = -160.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Join"
-
 [node name="RefreshButton" type="Button" parent="LobbyList"]
 layout_mode = 1
 anchors_preset = 7
@@ -292,7 +275,6 @@ text = "Leave"
 [connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="button_down" from="LobbyList/HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="LobbyList/JoinButton" to="." method="_on_join_button_button_down"]
 [connection signal="button_down" from="LobbyList/RefreshButton" to="." method="request_lobby_list"]
 [connection signal="button_down" from="LobbyList/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
 [connection signal="button_down" from="Lobby/StartGameButton" to="." method="_on_start_game_button_down"]

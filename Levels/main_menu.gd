@@ -76,13 +76,7 @@ func _on_host_button_button_down() -> void:
 		lobby.show()
 		refresh_lobby()
 	else:
-		MultiplayerManager.create_server()
-
-
-# NOTE: For testing. Join a local ENet lobby.
-func _on_join_button_button_down() -> void:
-	if not GameState.USING_GODOT_STEAM:
-		MultiplayerManager.create_client()	
+		MultiplayerManager.join_multiplayer_lobby_using_enet()
 
 
 # Go from the lobby list to the main menu.
