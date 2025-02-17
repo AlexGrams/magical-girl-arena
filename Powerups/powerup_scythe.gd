@@ -35,18 +35,6 @@ func _process(delta: float) -> void:
 				]
 			)
 		else:
-			# Enemy scythe functionality
-			#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				#1,
-				#[
-					#bullet_scene, 
-					#Vector2.ZERO, 
-					#direction, 
-					#upgrade_curve.sample(float(current_level) / max_level), 
-					#[multiplayer.get_unique_id()]
-				#]
-			#)
-			
 			var owning_enemy: Node2D = get_parent()
 			var direction = owning_enemy.target.global_position - self.global_position
 			direction = direction.normalized()

@@ -47,14 +47,17 @@ func setup_bullet(data: Array) -> void:
 		return
 	
 	if typeof(data[0]) == TYPE_INT:
+		# Player bullet
 		_owning_player = GameState.player_characters.get(data[0])
 	else:
+		# Enemy bullet
 		_owning_player = get_node_or_null(data[0])
 	
 	if _owning_player == null:
 		push_error("Scythe bullet has a null owner. Player ID ", str(data[0]), 
 			" was not found in GameState.player_characters.")
 		return
+	global_position = _owning_player.global_position
 	
 	if data.size() >= 2 and not data[1]:
 		# This bullet harms enemies by default, but can be modified to harm players instead.
