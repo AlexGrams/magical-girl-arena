@@ -457,7 +457,7 @@ func load_game():
 	get_tree().set_pause(false) 
 
 
-# Add exp to this player.
+# Add exp to this player. Offer Powerups when leveling up.
 @rpc("any_peer", "call_local")
 func collect_exp() -> void:
 	experience += 1

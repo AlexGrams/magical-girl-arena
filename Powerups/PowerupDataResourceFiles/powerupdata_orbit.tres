@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=3 format=3 uid="uid://cq1s8jwavt8ep"]
+
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_pq7hf"]
+[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="2_wfj0y"]
+
+[resource]
+script = ExtResource("1_pq7hf")
+name = "Boomerang"
+sprite = ExtResource("2_wfj0y")

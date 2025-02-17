@@ -1,6 +1,8 @@
 extends Panel
 
 
+## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
+@export var all_powerup_data: Array[PowerupData] = []
 # Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
 # Window that shows up saying how many players are still choosing upgrades.
@@ -124,7 +126,7 @@ func setup():
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
 		# choose some amount (3 in this case) to upgrade randomly.
-		var upgrade_choices = []
+		var upgrade_choices: Array[String] = []
 		var random_powerups = []
 		
 		for powerup: Powerup in player_character.powerups:

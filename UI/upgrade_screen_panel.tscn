@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=10 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_3ofe6"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="3_2mijq"]
+[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="3_3uka7"]
+[ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="4_g814s"]
+[ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="5_17hfx"]
+[ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="6_b5on6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
@@ -15,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
+all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6")])
 upgrade_panels_holder = NodePath("HBoxContainer")
 players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 player_ready_indicator_holder = NodePath("PlayersSelectingUpgrades/ReadyIndicatorContainer")

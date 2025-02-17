@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=3 format=3 uid="uid://ccoa7j7mlp0jc"]
+
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_6ihao"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_atsqs"]
+
+[resource]
+script = ExtResource("1_6ihao")
+name = "Scythe"
+sprite = ExtResource("2_atsqs")

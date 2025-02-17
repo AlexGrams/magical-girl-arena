@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=3 format=3 uid="uid://cwsbyqniccvqj"]
+
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_k3h05"]
+[ext_resource type="Texture2D" uid="uid://buaarsvaugyyu" path="res://Sprites/Powerups/SweetTarotCard.png" id="2_d18it"]
+
+[resource]
+script = ExtResource("1_k3h05")
+name = "Revolving"
+sprite = ExtResource("2_d18it")
