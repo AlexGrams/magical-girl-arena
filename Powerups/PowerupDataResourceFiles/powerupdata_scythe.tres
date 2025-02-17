@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="PowerupData" load_steps=3 format=3 uid="uid://lc2cobp8qm3y"]
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://lc2cobp8qm3y"]
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_ikas7"]
+[ext_resource type="PackedScene" uid="uid://bvn71xmabs5eo" path="res://Powerups/powerup_scythe.tscn" id="1_rmw23"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_brtc2"]
 
 [resource]
 script = ExtResource("1_ikas7")
+scene = ExtResource("1_rmw23")
 name = "Scythe"
 sprite = ExtResource("2_brtc2")

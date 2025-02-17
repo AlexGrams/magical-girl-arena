@@ -10,7 +10,7 @@ extends Panel
 # Parent of the PlayReadyIndicators
 @export var player_ready_indicator_holder: Control = null
 
-var upgrade_panels: Array = []
+var upgrade_panels: Array[UpgradePanel] = []
 var ready_indicators: Array = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
@@ -90,18 +90,13 @@ func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
 	upgrade_data.shuffle()
 	var i = 0
 	while i < len(upgrade_panels) and i < len(upgrade_data):
-		upgrade_panels[i].set_powerup(
-			upgrade_data[i].name,
-			upgrade_data[i].sprite,
-			"TEMP: Upgrade description"
-		)
+		upgrade_panels[i].set_powerup(upgrade_data[i])
 		upgrade_panels[i].show()
 		i += 1
 	
 	# Hide remaining panels
 	if i == 0:
 		push_error("There were no valid powerups to upgrade!")
-		_on_upgrade_chosen("")
 		return
 	
 	while i < len(upgrade_panels):
@@ -111,9 +106,9 @@ func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
 
 # Notify relevant systems that this player has selected an upgrade.
 # Called after one of the upgrade panels has been clicked.
-func _on_upgrade_chosen(title):
+func _on_upgrade_chosen(powerupdata: PowerupData):
 	# This signal is connected to the player's function for adding or upgrading the powerup.
-	upgrade_chosen.emit(title)
+	upgrade_chosen.emit(powerupdata)
 	GameState.player_selected_upgrade.rpc_id(1)
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.

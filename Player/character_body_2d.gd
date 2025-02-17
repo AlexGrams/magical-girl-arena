@@ -49,26 +49,19 @@ func _ready():
 	_revive_collision_area.hide()
 
 
-func _on_upgrade_chosen(powerup_name):
+func _on_upgrade_chosen(powerupdata: PowerupData):
 	var powerup_found = false
 	
 	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
-		if child is Powerup and child.powerup_name == powerup_name:
+		if child is Powerup and child.powerup_name == powerupdata.name:
 			child.level_up()
 			powerup_found = true
 			break
 	
 	# If we don't have the chosen powerup, then add it to the player.
 	if !powerup_found:
-		var powerup_to_add
-		match powerup_name:
-			"Boomerang":
-				powerup_to_add = load("res://Powerups/boomerang_powerup.tscn").instantiate()
-			"Revolving":
-				powerup_to_add = load("res://Powerups/revolving_powerup.tscn").instantiate()
-			"Orbit":
-				powerup_to_add = load("res://Powerups/orbit_powerup.tscn").instantiate()
+		var powerup_to_add: Powerup = powerupdata.scene.instantiate() #load(powerupdata.scene).instantiate()
 		add_powerup(powerup_to_add)
 
 

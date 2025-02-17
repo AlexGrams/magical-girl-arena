@@ -1,10 +1,18 @@
+class_name UpgradePanel
 extends Panel
 
-signal upgrade_chosen(powerup_name)
-func set_powerup(title, sprite:Variant, desc):
-	$VBoxContainer/Label.text = title
-	$VBoxContainer/TextureRect.texture = sprite
-	$VBoxContainer/Label2.text = desc
+## PowerData for this button's currently associated Powerup. 
+var _powerupdata: PowerupData = null
+
+signal upgrade_chosen(powerupdata: PowerupData)
+
+
+func set_powerup(powerupdata: PowerupData) -> void:
+	_powerupdata = powerupdata
+	$VBoxContainer/Label.text = powerupdata.name
+	$VBoxContainer/TextureRect.texture = powerupdata.sprite
+	$VBoxContainer/Label2.text = "TEMP: Upgrade description"
+
 
 func _on_button_pressed() -> void:
-	upgrade_chosen.emit($VBoxContainer/Label.text)
+	upgrade_chosen.emit(_powerupdata)

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="PowerupData" load_steps=3 format=3 uid="uid://cwsbyqniccvqj"]
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://cwsbyqniccvqj"]
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_k3h05"]
+[ext_resource type="PackedScene" uid="uid://dyq0c1f3w0cap" path="res://Powerups/revolving_powerup.tscn" id="1_uifdx"]
 [ext_resource type="Texture2D" uid="uid://buaarsvaugyyu" path="res://Sprites/Powerups/SweetTarotCard.png" id="2_d18it"]
 
 [resource]
 script = ExtResource("1_k3h05")
+scene = ExtResource("1_uifdx")
 name = "Revolving"
 sprite = ExtResource("2_d18it")
