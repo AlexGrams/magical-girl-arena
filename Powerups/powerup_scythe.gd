@@ -26,23 +26,56 @@ func _process(delta: float) -> void:
 	
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
-		var direction = (get_global_mouse_position() - self.global_position).normalized()
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1,
-			[
-				bullet_scene, 
-				Vector2.ZERO, 
-				direction, 
-				upgrade_curve.sample(float(current_level) / max_level), 
-				[multiplayer.get_unique_id()]
-			]
-		)
+		if _is_owned_by_player:
+			var direction = (get_global_mouse_position() - self.global_position).normalized()
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1,
+				[
+					bullet_scene, 
+					Vector2.ZERO, 
+					direction, 
+					upgrade_curve.sample(float(current_level) / max_level), 
+					[multiplayer.get_unique_id()]
+				]
+			)
+		else:
+			# Enemy scythe functionality
+			#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				#1,
+				#[
+					#bullet_scene, 
+					#Vector2.ZERO, 
+					#direction, 
+					#upgrade_curve.sample(float(current_level) / max_level), 
+					#[multiplayer.get_unique_id()]
+				#]
+			#)
+			
+			var owning_enemy: Node2D = get_parent()
+			var direction = owning_enemy.target.global_position - self.global_position
+			direction = direction.normalized()
+			
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1, 
+				[
+					bullet_scene, 
+					Vector2.ZERO, 
+					direction, 
+					owning_enemy.bullet_damage, 
+					[owning_enemy.get_path(), false]
+				]
+			)
 		
 		shoot_timer = 0
 
 
 func activate_powerup():
 	is_on = true
+
+
+func activate_powerup_for_enemy():
+	_is_owned_by_player = false
+	activate_powerup()
 
 
 func deactivate_powerup():

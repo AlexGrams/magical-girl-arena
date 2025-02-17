@@ -34,6 +34,12 @@ func activate_powerup():
 	push_error("Powerup.activate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
 
 
+# For when adding this powerup to an Enemy when it is usually added to a Player.
+func activate_powerup_for_enemy():
+	_is_owned_by_player = false
+	activate_powerup()
+
+
 func deactivate_powerup():
 	push_error("Powerup.deactivate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
 

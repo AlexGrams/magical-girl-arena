@@ -49,7 +49,7 @@ func setup_bullet(data: Array) -> void:
 	if typeof(data[0]) == TYPE_INT:
 		_owning_player = GameState.player_characters.get(data[0])
 	else:
-		_owning_player = get_node(data[0])
+		_owning_player = get_node_or_null(data[0])
 	
 	if _owning_player == null:
 		push_error("Scythe bullet has a null owner. Player ID ", str(data[0]), 

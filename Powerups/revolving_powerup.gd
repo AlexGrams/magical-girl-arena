@@ -46,6 +46,11 @@ func activate_powerup():
 	picked_up_powerup.emit(sprite)
 
 
+func activate_powerup_for_enemy():
+	_is_owned_by_player = false
+	activate_powerup()
+
+
 func deactivate_powerup():
 	is_on = false
 

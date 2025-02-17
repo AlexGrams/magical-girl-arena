@@ -1,16 +1,6 @@
 extends EnemyCorrupted
 
 
-## Corrupted Goth's Scythe bullet
-@export var scythe_bullet_scene_path := ""
-
-
-func _ready() -> void:
-	super()
-	
-	_add_powerup("res://Powerups/revolving_powerup.tscn")
-
-
 func shoot() -> void:
 	pass
 	#var direction = target.global_position - self.global_position
