@@ -6,7 +6,8 @@ extends Node2D
 ## time and the total game time, at which the corrupted magical girl enemy spawns. 0.0 is at the 
 ## start of the game, and 1.0 is at the end of the game timer.
 @export var corrupted_enemy_spawn_time_fraction: float = 0.0
-@export var corrupted_enemy_scene: PackedScene = null
+## Maps character name to the resource file of that character's corrupted Enemy object.
+@export var corrupted_enemy_choices := {} 
 ## The EnemySpawner for spawning the corrupted magical girl.
 @export var corrupted_enemy_spawner: EnemySpawner = null
 
@@ -30,6 +31,18 @@ func _process(_delta: float) -> void:
 
 # Spawn the corrupted magical girl enemy.
 func _spawn_corrupted_enemy() -> void:
+	# Choose a character at random to spawn that wasn't picked by any of the players.
+	# If all characters have been picked, then choose at random from all options.
+	var valid_choices := corrupted_enemy_choices.duplicate()
+	
+	for key in GameState.players:
+		var character_name: String = Constants.Character.keys()[GameState.players[key]["character"]].to_lower()
+		if character_name in valid_choices:
+			valid_choices.erase(character_name)
+	if len(valid_choices) == 0:
+		valid_choices = corrupted_enemy_choices.duplicate()
+	var corrupted_enemy_scene: PackedScene = valid_choices.values().pick_random()
+	
 	_has_corrupted_enemy_spawned = true
 	if corrupted_enemy_spawner != null and corrupted_enemy_scene != null:
 		corrupted_enemy_spawner.spawn(corrupted_enemy_scene)

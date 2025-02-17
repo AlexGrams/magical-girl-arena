@@ -179,7 +179,10 @@ border_color = Color(0, 0, 0, 1)
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner")]
 script = ExtResource("1_s3iet")
 corrupted_enemy_spawn_time_fraction = 0.003
-corrupted_enemy_scene = ExtResource("2_v45ga")
+corrupted_enemy_choices = {
+"goth": ExtResource("17_xfem1"),
+"sweet": ExtResource("2_v45ga")
+}
 corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 
 [node name="Background" type="ColorRect" parent="."]
