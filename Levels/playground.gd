@@ -10,8 +10,11 @@ extends Node2D
 @export var corrupted_enemy_choices := {} 
 ## The EnemySpawner for spawning the corrupted magical girl.
 @export var corrupted_enemy_spawner: EnemySpawner = null
+## List of possible EnemyBoss scenes that can spawn at the end of the game.
+@export var boss_choices: Array[PackedScene] = []
 
 var _has_corrupted_enemy_spawned := false
+var _has_boss_spawned := false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +30,9 @@ func _process(_delta: float) -> void:
 	if not _has_corrupted_enemy_spawned:
 		if GameState.get_game_progress_as_fraction() >= corrupted_enemy_spawn_time_fraction:
 			_spawn_corrupted_enemy()
+	elif not _has_boss_spawned:
+		if GameState.get_game_progress_as_fraction() >= 1.0:
+			_spawn_boss()
 
 
 # Spawn the corrupted magical girl enemy.
@@ -46,3 +52,12 @@ func _spawn_corrupted_enemy() -> void:
 	_has_corrupted_enemy_spawned = true
 	if corrupted_enemy_spawner != null and corrupted_enemy_scene != null:
 		corrupted_enemy_spawner.spawn(corrupted_enemy_scene)
+
+
+# Spawn the boss enemy. The game ends when it is defeated.
+func _spawn_boss() -> void:
+	var boss_to_spawn: PackedScene = boss_choices.pick_random()
+	
+	_has_boss_spawned = true
+	if corrupted_enemy_spawner != null and boss_to_spawn != null:
+		corrupted_enemy_spawner.spawn(boss_to_spawn)

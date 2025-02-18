@@ -217,7 +217,7 @@ func _process(delta: float) -> void:
 	Steam.run_callbacks()
 	
 	if game_running and time > 0.0:
-		time = max(time - delta, 0.0)
+		time = max(time - delta * 300, 0.0)
 		
 
 
