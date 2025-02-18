@@ -71,13 +71,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
 			)
+	
+		# When the owner goes down, destroy this bullet
+		boomerang_owner.died.connect(func():
+			queue_free()
+		)
 	else:
 		_modify_collider_to_harm_players()
-	
-	# When the owner goes down, destroy this bullet
-	boomerang_owner.died.connect(func():
-		queue_free()
-	)
+		
+		# Destroy bullet when owning Enemy dies
+		if is_multiplayer_authority():
+			boomerang_owner.died.connect(func(_enemy: Enemy):
+				queue_free()
+			)
 
 
 func set_damage(damage:float):

@@ -31,8 +31,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	if is_owned_by_player:
 		owning_player = GameState.player_characters.get(data[0])
+	
+		# This bullet destroys itself when the player dies.
+		if is_multiplayer_authority():
+			owning_player.died.connect(func():
+				queue_free()
+			)
 	else:
 		owning_player = get_node_or_null(data[0])
+		
+		if is_multiplayer_authority():
+			owning_player.died.connect(func(_enemy: Enemy):
+				queue_free()
+			)
 	
 	if owning_player == null:
 		push_error("Orbit bullet has a null owner. Player ID ", str(data[0]), 
@@ -47,12 +58,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		orbit_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
-		)
-	
-	# This bullet destroys itself when the player dies.
-	if is_multiplayer_authority():
-		owning_player.died.connect(func():
-			queue_free()
 		)
 
 
