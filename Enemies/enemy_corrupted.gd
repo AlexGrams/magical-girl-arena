@@ -5,7 +5,7 @@ extends EnemyRanged
 ## How long this corrupted enemy stays in the game before leaving. Doesn't drop loot if time runs out.
 @export var corrupted_lifetime: float = 0.0
 ## Scene for the Powerup to give to this enemy when it spawns.
-@export var default_powerup := ""
+@export var default_powerup: PackedScene = null
 
 # How much time this corrupted enemy has left in the game.
 var current_lifetime: float = 0.0
@@ -16,7 +16,7 @@ func _ready() -> void:
 	
 	current_lifetime = corrupted_lifetime
 	
-	if default_powerup != "":
+	if default_powerup != null:
 		_add_powerup(default_powerup)
 
 
