@@ -388,7 +388,7 @@ properties/1/replication_mode = 1
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_te4ea")
-powerups_to_add = Array[PackedScene]([ExtResource("2_nxb35"), ExtResource("3_o3xfy"), ExtResource("4_jcg60"), ExtResource("5_jxtym"), ExtResource("6_htfgq")])
+powerups_to_add = Array[PackedScene]([ExtResource("5_jxtym"), ExtResource("2_nxb35"), ExtResource("3_o3xfy"), ExtResource("4_jcg60"), ExtResource("6_htfgq")])
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 

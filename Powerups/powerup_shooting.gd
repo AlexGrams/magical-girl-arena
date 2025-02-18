@@ -23,8 +23,14 @@ func _process(delta: float) -> void:
 	
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
-		var direction = (get_global_mouse_position() - self.global_position).normalized()
-		var bullet_position = self.global_position + (direction * 100)
+		var direction := Vector2.ZERO
+		if _is_owned_by_player:
+			# Player bullet moves in direction of cursor.
+			direction = (get_global_mouse_position() - self.global_position).normalized()
+		else:
+			# Enemy bullet moves in direction of Enemy's desired velocity.
+			direction = get_parent().velocity.normalized()
+		var bullet_position := self.global_position + (direction * 100)
 		
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, [bullet_scene, 
