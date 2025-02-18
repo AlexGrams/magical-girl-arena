@@ -38,7 +38,10 @@ func _process(delta: float) -> void:
 		else:
 			var owning_enemy: Node2D = get_parent()
 			
-			if owning_enemy != null and not owning_enemy.is_queued_for_deletion():
+			if (owning_enemy != null 
+				and not owning_enemy.is_queued_for_deletion() 
+				and owning_enemy.target != null
+			):
 				var direction = owning_enemy.target.global_position - self.global_position
 				direction = direction.normalized()
 				

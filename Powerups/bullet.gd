@@ -49,3 +49,5 @@ func _modify_collider_to_harm_players() -> void:
 		collider.collision_mask = 0
 		collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
 		collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
+	else:
+		push_error("Attempting to modify collider when no collider is set for this Bullet")
