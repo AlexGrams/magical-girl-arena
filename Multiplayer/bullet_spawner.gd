@@ -9,12 +9,13 @@ func _init():
 # Spawns a bullet replicated for all clients. Returns the new bullet.
 func _spawn_bullet(data):
 	if (
-		data.size() != 5
+		data.size() != 6
 		or typeof(data[0]) != TYPE_STRING	# Path to bullet scene
 		or typeof(data[1]) != TYPE_VECTOR2	# Position
 		or typeof(data[2]) != TYPE_VECTOR2	# Direction
 		or typeof(data[3]) != TYPE_FLOAT	# Damage
-		or typeof(data[4]) != TYPE_ARRAY	# Bullet setup parameters
+		or typeof(data[4]) != TYPE_BOOL		# Is owned by player
+		or typeof(data[5]) != TYPE_ARRAY	# Bullet setup parameters
 	):
 		push_error("Bullet could not be instantiated because of malformed 'data' parameter.")
 		return null
@@ -30,7 +31,7 @@ func _spawn_bullet(data):
 	
 	# Call the setup function on the bullet once it is added to the scene, but only once.
 	bullet.tree_entered.connect(func():
-		bullet.setup_bullet(data[4])
+		bullet.setup_bullet(data[4], data[5])
 	, CONNECT_ONE_SHOT)
 	
 	return bullet

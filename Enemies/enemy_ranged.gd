@@ -67,6 +67,7 @@ func shoot() -> void:
 				self.global_position + (direction_normal * 100), 
 				direction_normal, 
 				bullet_damage, 
+				true,
 				[]
 			]
 		)

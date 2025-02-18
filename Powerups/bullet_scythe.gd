@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 
 
 # Set up other properties for this bullet
-func setup_bullet(data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
 		(data.size() != 1 and data.size() != 2)
 		or (typeof(data[0]) != TYPE_INT				# Owning ID
@@ -46,26 +46,19 @@ func setup_bullet(data: Array) -> void:
 		push_error("Malformed bullet setup data Array.")
 		return
 	
-	if typeof(data[0]) == TYPE_INT:
+	if is_owned_by_player:
 		# Player bullet
 		_owning_player = GameState.player_characters.get(data[0])
 	else:
 		# Enemy bullet
 		_owning_player = get_node_or_null(data[0])
+		_modify_collider_to_harm_players()
 	
 	if _owning_player == null:
 		push_error("Scythe bullet has a null owner. Player ID ", str(data[0]), 
 			" was not found in GameState.player_characters.")
 		return
 	global_position = _owning_player.global_position
-	
-	if data.size() >= 2 and not data[1]:
-		# This bullet harms enemies by default, but can be modified to harm players instead.
-		if collider != null:
-			collider.collision_layer = 0
-			collider.collision_mask = 0
-			collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
-			collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
 	
 	$BulletOffset.position.y = radius
 	# Make it so that the angle of the starting direction is the midpoint of the scythe sweeps.

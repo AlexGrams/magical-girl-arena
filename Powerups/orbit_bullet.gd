@@ -1,7 +1,7 @@
 extends Bullet
 
 @export var radius = 2
-var owning_player: PlayerCharacterBody2D = null
+var owning_player: Node2D = null
 
 
 func set_damage(damage: float):
@@ -13,19 +13,26 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if owning_player == null or owning_player.is_queued_for_deletion():
+		return
+	
 	global_position = owning_player.global_position
 	rotate(speed * delta)
 
 
 # Set up other properties for this bullet
-func setup_bullet(data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
 		data.size() != 1
-		or typeof(data[0]) != TYPE_INT		# Owning ID
+		or (typeof(data[0]) != TYPE_INT				# Owning ID
+			and typeof(data[0]) != TYPE_NODE_PATH)	# Owning enemy
 	):
 		return
-		
-	owning_player = GameState.player_characters.get(data[0])
+	
+	if is_owned_by_player:
+		owning_player = GameState.player_characters.get(data[0])
+	else:
+		owning_player = get_node_or_null(data[0])
 	
 	if owning_player == null:
 		push_error("Orbit bullet has a null owner. Player ID ", str(data[0]), 

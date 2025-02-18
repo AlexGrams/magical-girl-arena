@@ -16,14 +16,26 @@ func _ready():
 
 
 func activate_powerup():
-	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		1, [bullet_scene, 
-			global_position, 
-			Vector2.UP, 
-			upgrade_curve.sample(float(current_level) / max_level), 
-			[$"..".get_path()]
-		]
-	)
+	if _is_owned_by_player:
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [bullet_scene, 
+				global_position, 
+				Vector2.UP, 
+				upgrade_curve.sample(float(current_level) / max_level), 
+				_is_owned_by_player,
+				[$"..".get_path()]
+			]
+		)
+	else:
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [bullet_scene, 
+				global_position, 
+				Vector2.UP, 
+				upgrade_curve.sample(float(current_level) / max_level), 
+				_is_owned_by_player,
+				[$"..".get_path()]
+			]
+		)
 	
 	picked_up_powerup.emit(sprite)
 

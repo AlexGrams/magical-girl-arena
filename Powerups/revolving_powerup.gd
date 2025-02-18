@@ -28,7 +28,8 @@ func _process(delta: float) -> void:
 					global_position, 
 					direction, 
 					bullet_damage, 
-					[_is_owned_by_player]
+					_is_owned_by_player,
+					[]
 				]
 			)
 			

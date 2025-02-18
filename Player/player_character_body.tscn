@@ -435,7 +435,7 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_revive_collision_area", "_revive_progress_bar", "_on_screen_notifier", "_gdcubism_user_model")]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_revive_collision_area", "_revive_progress_bar", "_on_screen_notifier", "_gdcubism_user_model") groups=["player"]]
 z_index = 1
 position = Vector2(1116, 1072)
 collision_layer = 0

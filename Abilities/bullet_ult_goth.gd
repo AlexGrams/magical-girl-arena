@@ -46,5 +46,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 # Set up other properties for this bullet
-func setup_bullet(_data: Array) -> void:
+func setup_bullet(_is_owned_by_player: bool, _data: Array) -> void:
 	pass

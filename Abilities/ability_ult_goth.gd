@@ -28,6 +28,7 @@ func activate() -> void:
 		get_parent().global_position, 
 		Vector2.ZERO, 
 		damage, 
+		true,
 		[]
 	]
 )

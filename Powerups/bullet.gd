@@ -36,12 +36,16 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 
 
 # Set up other properties for this bullet
-func setup_bullet(data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 	# Make the bullet hurt players
-	if len(data) >= 1 and typeof(data[0]) == TYPE_BOOL:
-		if not data[0]:
-			if collider != null:
-				collider.collision_layer = 0
-				collider.collision_mask = 0
-				collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
-				collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
+	if not is_owned_by_player:
+		_modify_collider_to_harm_players()
+
+
+# Change the collision layer and mask values so that this bullet damages Players instead of Enemies.
+func _modify_collider_to_harm_players() -> void:
+	if collider != null:
+		collider.collision_layer = 0
+		collider.collision_mask = 0
+		collider.set_collision_layer_value(Constants.ENEMY_BULLET_COLLISION_LAYER, true)
+		collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)

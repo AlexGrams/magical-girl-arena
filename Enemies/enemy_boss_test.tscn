@@ -1,7 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://ch7sjmtttp01p"]
+[gd_scene load_steps=22 format=3 uid="uid://ch7sjmtttp01p"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_boss_test.gd" id="1_te4ea"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_kksbc"]
+[ext_resource type="PackedScene" uid="uid://djo8kggrhm1l0" path="res://Powerups/boomerang_powerup.tscn" id="2_nxb35"]
+[ext_resource type="PackedScene" uid="uid://bvn71xmabs5eo" path="res://Powerups/powerup_scythe.tscn" id="3_o3xfy"]
+[ext_resource type="PackedScene" uid="uid://dhnrvoa0bq8ke" path="res://Powerups/orbit_powerup.tscn" id="4_jcg60"]
+[ext_resource type="PackedScene" uid="uid://bowbgv1jw2mul" path="res://Powerups/powerup_shooting.tscn" id="5_jxtym"]
+[ext_resource type="PackedScene" uid="uid://dyq0c1f3w0cap" path="res://Powerups/revolving_powerup.tscn" id="6_htfgq"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
 viewport_path = NodePath("Sprite2D/GDCubismUserModel")
@@ -383,6 +388,7 @@ properties/1/replication_mode = 1
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_te4ea")
+powerups_to_add = Array[PackedScene]([ExtResource("2_nxb35"), ExtResource("3_o3xfy"), ExtResource("4_jcg60"), ExtResource("5_jxtym"), ExtResource("6_htfgq")])
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
