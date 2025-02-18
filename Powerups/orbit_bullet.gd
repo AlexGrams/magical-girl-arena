@@ -38,6 +38,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 				queue_free()
 			)
 	else:
+		_modify_collider_to_harm_players()
 		owning_player = get_node_or_null(data[0])
 		
 		if is_multiplayer_authority():
