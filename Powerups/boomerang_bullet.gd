@@ -1,12 +1,19 @@
 extends Bullet
 
+## How close the Boomerang needs to get to its destination before switching directions.
+const touching_distance_threshold: float = 30
+
 # The bullet object is replicated on all clients.
 # This owner is the client's replicated version of the character that owns this bullet.
 var boomerang_owner: Node2D = null
 
 var closest_enemy: Node
 var is_returning := true
+
 var _is_owned_by_player := true
+## When owned by an Enemy, the location that the bullet to moving towards away from its owner. 
+var _target_location := Vector2.ZERO
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +30,7 @@ func _process(delta: float) -> void:
 		
 		# If close enough to player, send out again
 		if (boomerang_owner.global_position - global_position).length() <= 30:
-			# Get next nearest enemy to attack
+			# Get next nearest character to attack
 			var enemies: Array[Node] = [] 
 			if _is_owned_by_player:
 				enemies = get_tree().get_nodes_in_group("enemy")
@@ -39,17 +46,27 @@ func _process(delta: float) -> void:
 						closest_enemy = enemy
 						closest_distance = distance
 			
+			# An Enemy Boomerang moves towards a static location instead of chasing the Player.
+			if not _is_owned_by_player:
+				_target_location = closest_enemy.global_position
+			
 			# Stop returning and start moving out
 			is_returning = false
 	else:
-		# If the closest enemy still exists, move towards them
-		# Otherwise return to player
-		if closest_enemy != null:
-			global_position += (closest_enemy.global_position - global_position).normalized() * speed * delta
-			if (closest_enemy.global_position - global_position).length() <= 30:
+		if _is_owned_by_player:
+			# If the closest enemy still exists, move towards them
+			# Otherwise return to player
+			if closest_enemy != null:
+				global_position += (closest_enemy.global_position - global_position).normalized() * speed * delta
+				if (closest_enemy.global_position - global_position).length() <= touching_distance_threshold:
+					is_returning = true
+			else:
 				is_returning = true
 		else:
-			is_returning = true
+			# Enemy Boomerang behavior
+			global_position += (_target_location - global_position).normalized() * speed * delta
+			if (_target_location - global_position).length() <= touching_distance_threshold:
+				is_returning = true
 
 
 # Set up other properties for this bullet
