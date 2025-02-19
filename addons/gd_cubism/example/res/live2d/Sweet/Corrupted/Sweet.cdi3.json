@@ -1,0 +1,27 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Blink",
+			"GroupId": "",
+			"Name": "Blink"
+		},
+		{
+			"Id": "Breathing",
+			"GroupId": "",
+			"Name": "Breathing"
+		},
+		{
+			"Id": "Walking",
+			"GroupId": "",
+			"Name": "Walking"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": [
+		{
+			"Id": "Part",
+			"Name": "Sweet.psd (Corresponding layer not found)"
+		}
+	]
+}
