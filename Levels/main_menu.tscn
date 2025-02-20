@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=6 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="3_bm35d"]
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "start_game_button")]
 layout_mode = 3
@@ -234,7 +235,7 @@ layout_mode = 2
 layout_mode = 2
 character = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Lobby"]
+[node name="TitleText" type="RichTextLabel" parent="Lobby"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -271,6 +272,84 @@ offset_bottom = 182.0
 pivot_offset = Vector2(100, 96)
 theme_override_font_sizes/font_size = 48
 text = "Leave"
+
+[node name="CharacterInformationContainer" type="VBoxContainer" parent="Lobby"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 213.0
+offset_right = 659.0
+offset_bottom = 800.0
+
+[node name="Name" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]Character Name[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="PowerupInformationContainer" type="HBoxContainer" parent="Lobby/CharacterInformationContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PowerupImage" type="TextureRect" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("5_1w6cg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PowerupDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="UltimateInformation" type="HBoxContainer" parent="Lobby/CharacterInformationContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="UltimateImage" type="TextureRect" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("5_1w6cg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+fit_content = true
 
 [connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
