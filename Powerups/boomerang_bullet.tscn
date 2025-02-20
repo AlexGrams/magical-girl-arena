@@ -7,11 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
 
-[node name="BoomerangBullet" type="Node2D" node_paths=PackedStringArray("collider")]
+[node name="BoomerangBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_j62nq")
 speed = 800.0
 collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.23, 0.23)

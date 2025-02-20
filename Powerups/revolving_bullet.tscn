@@ -26,11 +26,12 @@ scale_min = 0.0
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_qvbcj")
 
-[node name="RevolvingBullet" type="Node2D" node_paths=PackedStringArray("collider")]
+[node name="RevolvingBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_42fto")
 speed = 8.0
 collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.087, 0.087)
