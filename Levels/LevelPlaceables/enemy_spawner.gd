@@ -50,13 +50,13 @@ func _process(delta: float) -> void:
 		
 		if spawn_timer_melee <= 0.0 and enemy_melee_scene != null:
 			spawn(enemy_melee_scene)
-			spawn_timer_melee = GameState.get_spawn_interval()
+			spawn_timer_melee = GameState.get_melee_spawn_interval()
 		if spawn_timer_ranged <= 0.0 and enemy_ranged_scene != null:
 			spawn(enemy_ranged_scene)
-			spawn_timer_melee = GameState.get_spawn_interval()
+			spawn_timer_ranged = GameState.get_ranged_spawn_interval()
 
 
-func set_enemy_type(new_enemy: PackedScene) -> void:
+func set_enemy_type(_new_enemy: PackedScene) -> void:
 	push_error("DEPRECATED: May want to change how setting spawner types works.")
 	#enemy_scene_ = new_enemy
 
