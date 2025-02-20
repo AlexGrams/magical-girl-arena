@@ -397,7 +397,7 @@ script = ExtResource("2_jpoov")
 gdcubism_user_model = NodePath("GDCubismUserModel")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="Sprite2D"]
-assets = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
+assets = "res://addons/gd_cubism/example/res/live2d/Sweet/Corrupted/Sweet.model3.json"
 parameter_mode = 1
 auto_scale = false
 anim_loop = false

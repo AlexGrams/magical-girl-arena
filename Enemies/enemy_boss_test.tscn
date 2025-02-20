@@ -398,7 +398,7 @@ script = ExtResource("2_kksbc")
 gdcubism_user_model = NodePath("GDCubismUserModel")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="Sprite2D"]
-assets = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+assets = "res://addons/gd_cubism/example/res/live2d/Goth/Corrupted/Goth_Corrupted.model3.json"
 parameter_mode = 1
 auto_scale = false
 anim_loop = false

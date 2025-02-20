@@ -31,8 +31,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Only the server controls spawning
-	if (multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED 
-		or not multiplayer.is_server()):
+	if (not multiplayer.is_server()
+		or multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED):
 		return
 	
 	if automatic_spawning:
