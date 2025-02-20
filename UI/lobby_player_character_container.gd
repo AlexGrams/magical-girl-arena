@@ -21,6 +21,13 @@ func _ready() -> void:
 	)
 
 
+func _process(_delta) -> void:
+	# Something could happen where the character_sprite_location isn't at the right spot when
+	# the sprite is added to the tree, so do this to ensure the sprite is where it should be.
+	if sprite != null:
+		sprite.global_position = character_sprite_location.global_position
+
+
 # Set up this character container
 func set_properties(
 	new_username: String, 
