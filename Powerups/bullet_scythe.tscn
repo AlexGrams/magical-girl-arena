@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://t1q84a6q5ip7"]
+[gd_scene load_steps=7 format=3 uid="uid://t1q84a6q5ip7"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_scythe.gd" id="1_73noj"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_4x3n5"]
+[ext_resource type="Script" path="res://Sprites/Powerups/GothScytheAfterimage.gd" id="2_64wyv"]
+[ext_resource type="Texture2D" uid="uid://dv8nqu4t5ekgf" path="res://Sprites/Powerups/GothScythe.png" id="2_ryc7v"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_eudj7"]
+[ext_resource type="PackedScene" uid="uid://dlfjygn2v2dby" path="res://Sprites/Powerups/GothScytheSprite.tscn" id="3_vyapk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 79.25)
@@ -14,11 +16,15 @@ lifetime = 0.75
 collider = NodePath("BulletOffset/Area2D")
 
 [node name="BulletOffset" type="Node2D" parent="."]
+z_index = 1
+script = ExtResource("2_64wyv")
+scythe_sprite = ExtResource("3_vyapk")
 
-[node name="Sprite2D" type="Sprite2D" parent="BulletOffset"]
-position = Vector2(0.5, 0.160001)
-scale = Vector2(0.087, 0.180273)
-texture = ExtResource("2_4x3n5")
+[node name="ScytheSprite" type="Sprite2D" parent="BulletOffset"]
+position = Vector2(3.75, 3.8594e-06)
+rotation = 3.14159
+scale = Vector2(0.45, 0.398)
+texture = ExtResource("2_ryc7v")
 
 [node name="Area2D" type="Area2D" parent="BulletOffset"]
 collision_mask = 2
