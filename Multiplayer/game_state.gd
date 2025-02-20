@@ -20,7 +20,8 @@ const player_scene := "res://Player/player_character_body.tscn"
 const main_menu_node_path := "MainMenu"
 const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
-const spawn_rate_curve_path := "res://Curves/spawn_rate.tres"
+const spawn_rate_melee_curve_path := "res://Curves/spawn_rate_melee.tres"
+const spawn_rate_ranged_curve_path := "res://Curves/spawn_rate_ranged.tres"
 const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 
 # The local player's name.
@@ -62,7 +63,8 @@ var game_running := false
 # The time remaining in the game.
 var time: float = MAX_TIME
 # Describes time interval between spawns given how long the game has progressed.
-var spawn_rate_curve: Curve = null
+var spawn_rate_melee_curve: Curve = null
+var spawn_rate_ranged_curve: Curve = null
 # How many players are currently dead.
 var players_down: int = 0
 
@@ -84,13 +86,23 @@ func get_local_player() -> PlayerCharacterBody2D:
 	return player_characters[multiplayer.get_unique_id()]
 
 
-# Returns the time in seconds between enemy spawns at the current game progress time.
-func get_spawn_interval() -> float:
-	var rate = spawn_rate_curve.sample(get_game_progress_as_fraction())
+# Returns the time in seconds between melee enemy spawns at the current game progress time.
+func get_melee_spawn_interval() -> float:
+	var rate = spawn_rate_melee_curve.sample(get_game_progress_as_fraction())
 	if rate > 0.0:
 		return 1.0 / rate
 	else:
-		push_error("spawn_rate_curve has a value of 0 at fraction " + str(get_game_progress_as_fraction()))
+		push_error("spawn rate curve has a value of 0 at fraction " + str(get_game_progress_as_fraction()))
+		return 1.0
+
+
+# Returns the time in seconds between ranged enemy spawns at the current game progress time.
+func get_ranged_spawn_interval() -> float:
+	var rate = spawn_rate_ranged_curve.sample(get_game_progress_as_fraction())
+	if rate > 0.0:
+		return 1.0 / rate
+	else:
+		push_error("spawn rate curve has a value of 0 at fraction " + str(get_game_progress_as_fraction()))
 		return 1.0
 
 
@@ -127,7 +139,8 @@ func _ready() -> void:
 		push_error("Steam support is turned off! Ensure game_state.USING_GODOT_STEAM is true before making release build.")
 		return
 	
-	spawn_rate_curve = load(spawn_rate_curve_path)
+	spawn_rate_melee_curve = load(spawn_rate_melee_curve_path)
+	spawn_rate_ranged_curve = load(spawn_rate_ranged_curve_path)
 	exp_per_level_curve = load(exp_per_level_curve_path)
 	_update_exp_for_next_level()
 		

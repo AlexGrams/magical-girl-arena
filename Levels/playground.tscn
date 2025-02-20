@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=33 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://c11b5wqp1lqo4" path="res://GrassTuft.png" id="1_gtrpj"]
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dnrrauox6iyqg" path="res://Tree.png" id="3_no5jd"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_test.tscn" id="4_8t8qx"]
-[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="5_6byrv"]
 [ext_resource type="Texture2D" uid="uid://1oe0cest0wrj" path="res://Lake.png" id="5_c50gu"]
 [ext_resource type="Script" path="res://Levels/LakeAnimation.gd" id="6_ad32h"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
@@ -7233,7 +7232,6 @@ scale = Vector2(280, 8)
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(3985, 1924)
 scale = Vector2(8, 280)
-enemy_scene = ExtResource("5_6byrv")
 
 [node name="EnemySpawner4" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1072, 4746)
@@ -7595,7 +7593,6 @@ scale = Vector2(46.8, 0.945)
 [node name="TEMP_EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
-enemy_scene = ExtResource("17_xfem1")
 automatic_spawning = false
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]

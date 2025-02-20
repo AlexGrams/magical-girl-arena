@@ -9,6 +9,8 @@ extends Node2D
 @export var lifetime: float = 2
 ## The bullet's collider that damages when it touches enemies or players.
 @export var collider: Area2D = null
+## The rendered part of the bullet. Used to change its color when Enemies shoot it.
+@export var sprite: Sprite2D = null
 
 var direction: Vector2
 var death_timer: float = 0
@@ -51,3 +53,6 @@ func _modify_collider_to_harm_players() -> void:
 		collider.set_collision_mask_value(Constants.ENEMY_BULLET_COLLISION_MASK, true)
 	else:
 		push_error("Attempting to modify collider when no collider is set for this Bullet")
+	
+	if sprite != null:
+		sprite.self_modulate = Color.RED
