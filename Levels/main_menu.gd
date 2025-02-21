@@ -16,6 +16,13 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var players_holder: Control
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
+## Components for displaying selected character information on the Lobby screen.
+@export var information_name: RichTextLabel
+@export var information_description: RichTextLabel
+@export var information_powerup_texture: TextureRect
+@export var information_powerup_description: RichTextLabel
+@export var information_ult_texture: TextureRect
+@export var information_ult_description: RichTextLabel
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_button: Button
 
@@ -79,6 +86,7 @@ func _on_host_button_button_down() -> void:
 	lobby_list.hide()
 	lobby.show()
 	refresh_lobby()
+	update_character_description()
 
 
 # Go from the lobby list to the main menu.
@@ -178,4 +186,27 @@ func refresh_player_sprite(player_id: int) -> void:
 func _on_character_select_button_pressed(button: CharacterSelectButton) -> void:
 	GameState.set_character.rpc(multiplayer.get_unique_id(), button.character)
 	refresh_player_sprite.rpc(multiplayer.get_unique_id())
+	update_character_description()
+
+
+# Sets the text and images in the character information panel to match the client's character.
+func update_character_description() -> void:
+	var character: Constants.Character = GameState.players[multiplayer.get_unique_id()]["character"]
+	
+	var data: CharacterData = null
+	match(character):
+		Constants.Character.GOTH:
+			data = load("res://Player/CharacterResourceFiles/character_data_goth.tres")
+		Constants.Character.SWEET:
+			data = load("res://Player/CharacterResourceFiles/character_data_sweet.tres")
+		_:
+			print("uh oh")
+	
+	information_name.text = "[center]" + data.name + "[/center]"
+	information_description.text = data.description
+	information_powerup_texture.texture = data.base_powerup_texture
+	information_powerup_description.text = data.base_powerup_name
+	information_ult_texture.texture = data.ult_texture
+	information_ult_description.text = data.ult_name
+
 #endregion

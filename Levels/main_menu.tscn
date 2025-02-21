@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "start_game_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +20,12 @@ lobbies_list_container = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList"
 lobby = NodePath("Lobby")
 players_holder = NodePath("Lobby/PlayersHolder")
 character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
+information_name = NodePath("Lobby/CharacterInformationContainer/Name")
+information_description = NodePath("Lobby/CharacterInformationContainer/Description")
+information_powerup_texture = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/PowerupImage")
+information_powerup_description = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/PowerupDescription")
+information_ult_texture = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateImage")
+information_ult_description = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateDescription")
 start_game_button = NodePath("Lobby/StartGameButton")
 
 [node name="Background" type="Control" parent="."]
