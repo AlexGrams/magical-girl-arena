@@ -1,8 +1,16 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://b38ynnwxhfxpe"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://b38ynnwxhfxpe"]
 
 [ext_resource type="Script" path="res://Player/character_data.gd" id="1_ai8rd"]
+[ext_resource type="Texture2D" uid="uid://dv8nqu4t5ekgf" path="res://Sprites/Powerups/GothScythe.png" id="1_m8f0c"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_fi427"]
 
 [resource]
 script = ExtResource("1_ai8rd")
+name = "Goth"
+description = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
+base_powerup_name = "Goth's Scythe"
+base_powerup_texture = ExtResource("1_m8f0c")
+ult_name = "Unleash a powerful attack in a radius around you. Any melee or ranged enemies killed by this attack become your allies for a brief duration. When Goth’s Scythe is at max level, a large and powerful melee ally is also spawned at your location."
+ult_texture = ExtResource("3_fi427")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
 base_powerup = "res://Powerups/powerup_scythe.tscn"

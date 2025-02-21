@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3 uid="uid://cd7raql42kiv0"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://cd7raql42kiv0"]
 
 [ext_resource type="Script" path="res://Player/character_data.gd" id="1_4slxr"]
+[ext_resource type="Texture2D" uid="uid://buaarsvaugyyu" path="res://Sprites/Powerups/SweetTarotCard.png" id="1_dg116"]
 
 [resource]
 script = ExtResource("1_4slxr")
+name = "Sweet"
+description = "Sweet is Goth’s girlfriend and a fortune teller. She uses her tarot cards to both slice down enemies and tell the future."
+base_powerup_name = "Sweet's Tarot Cards"
+base_powerup_texture = ExtResource("1_dg116")
+ult_name = "Sweet grants herself and nearby allies bonus HP. She throws tarot cards in 12 directions, which deal damage and pierce through enemies. Sweet gains +1 reroll."
+ult_texture = ExtResource("1_dg116")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
 base_powerup = "res://Powerups/revolving_powerup.tscn"
