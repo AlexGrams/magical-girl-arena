@@ -1,7 +1,19 @@
 class_name CharacterData
 extends Resource
 
-# Path to the .json file for this character's GDCubism sprite. 
+## Name as it will appear whenever displayed to the player
+@export var name: String
+## The character's lore
+@export var description: String
+## The name of this character's starting powerup.
+@export var base_powerup_name: String
+## Image representing the starting powerup.
+@export var base_powerup_texture: Texture2D
+## The name of this character's ultimate ability.
+@export var ult_name: String
+## Image representing the ultimate ability.
+@export var ult_texture: Texture2D
+## Path to the .json file for this character's GDCubism sprite. 
 @export var model_file_path: String
-# Path to the .tscn file for this character's base powerup.
+## Path to the .tscn file for this character's base powerup.
 @export var base_powerup: String
