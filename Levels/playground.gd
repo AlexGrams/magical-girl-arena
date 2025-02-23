@@ -12,6 +12,8 @@ extends Node2D
 @export var corrupted_enemy_spawner: EnemySpawner = null
 ## List of possible EnemyBoss scenes that can spawn at the end of the game.
 @export var boss_choices: Array[PackedScene] = []
+## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
+@export var spawn_events: Array[EnemySpawnEventData] = []
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
