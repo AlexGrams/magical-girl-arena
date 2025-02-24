@@ -205,8 +205,9 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner")]
+[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners")]
 script = ExtResource("1_s3iet")
+spawn_events = Array[ExtResource("5_b8hlh")]([SubResource("Resource_lbrw2"), SubResource("Resource_p7irf")])
 corrupted_enemy_spawn_time_fraction = 0.5
 corrupted_enemy_choices = {
 "goth": ExtResource("17_xfem1"),
@@ -214,7 +215,7 @@ corrupted_enemy_choices = {
 }
 corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 boss_choices = Array[PackedScene]([ExtResource("4_8t8qx")])
-spawn_events = Array[ExtResource("5_b8hlh")]([SubResource("Resource_lbrw2"), SubResource("Resource_p7irf")])
+regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4")]
 
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -2815.0

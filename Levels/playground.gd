@@ -2,6 +2,8 @@ class_name Playground
 extends Node2D
 ## Script for controlling events that occur during gameplay.
 
+## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
+@export var spawn_events: Array[EnemySpawnEventData] = []
 ## Time in seconds from the start of the game, expressed as a ratio between the elapsed game 
 ## time and the total game time, at which the corrupted magical girl enemy spawns. 0.0 is at the 
 ## start of the game, and 1.0 is at the end of the game timer.
@@ -12,8 +14,8 @@ extends Node2D
 @export var corrupted_enemy_spawner: EnemySpawner = null
 ## List of possible EnemyBoss scenes that can spawn at the end of the game.
 @export var boss_choices: Array[PackedScene] = []
-## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
-@export var spawn_events: Array[EnemySpawnEventData] = []
+## Spawners around the map that create enemies from spawn events. 
+@export var regular_enemy_spawners: Array[EnemySpawner] = []
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
@@ -21,6 +23,9 @@ var _has_boss_spawned := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	# Convert spawn event times from string to int
 	for event: EnemySpawnEventData in spawn_events:
 		var split: int = event.start_time.find(":")
@@ -38,6 +43,11 @@ func _ready() -> void:
 			event.end_time_seconds = event.start_time_seconds
 		print(event.start_time_seconds)
 		print(event.end_time_seconds)
+	
+	# Sort the spawn events by start time.
+	spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
+		return a.start_time_seconds < b.start_time_seconds
+	)
 
 
 # Only process on the server.
