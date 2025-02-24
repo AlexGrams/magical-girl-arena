@@ -1,15 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4rurp8wei1rp"]
+[gd_scene load_steps=3 format=3 uid="uid://b4rurp8wei1rp"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/enemy_spawner.gd" id="1_ojikn"]
-[ext_resource type="PackedScene" uid="uid://cfy5r3rayhatg" path="res://Enemies/enemy.tscn" id="2_qmiuv"]
-[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="3_mfmr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0c5s"]
 
 [node name="EnemySpawner" type="Node2D" node_paths=PackedStringArray("spawn_area")]
 script = ExtResource("1_ojikn")
-enemy_melee_scene = ExtResource("2_qmiuv")
-enemy_ranged_scene = ExtResource("3_mfmr4")
 spawn_area = NodePath("Area2D/SpawnArea")
 
 [node name="Area2D" type="Area2D" parent="."]

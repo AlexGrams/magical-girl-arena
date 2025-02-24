@@ -12107,7 +12107,6 @@ scale = Vector2(46.8, 0.945)
 [node name="TEMP_EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
-automatic_spawning = false
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
