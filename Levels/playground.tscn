@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=42 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Texture2D" uid="uid://c11b5wqp1lqo4" path="res://GrassTuft.png" id="1_gtrpj"]
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
@@ -9,16 +9,23 @@
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_test.tscn" id="4_8t8qx"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="5_b8hlh"]
-[ext_resource type="Texture2D" uid="uid://1oe0cest0wrj" path="res://Lake.png" id="5_c50gu"]
 [ext_resource type="Script" path="res://Levels/LakeAnimation.gd" id="6_ad32h"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="6_blcs8"]
+[ext_resource type="Texture2D" uid="uid://5jne2i7m67kq" path="res://Sprites/Map/Patch_Light_Grass.png" id="6_rdarx"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
-[ext_resource type="Texture2D" uid="uid://cd68xoo0uiqk3" path="res://LakeBorder.png" id="7_def7v"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="7_gsdoh"]
 [ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="7_jfhpd"]
+[ext_resource type="Texture2D" uid="uid://d041byvkp64a5" path="res://Sprites/Map/Patch_Dark_Grass.png" id="7_xnnrg"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
+[ext_resource type="Texture2D" uid="uid://cb67nn1t733oe" path="res://Sprites/Map/Grass_Tuft.png" id="9_5ykcx"]
+[ext_resource type="Texture2D" uid="uid://cuuhl35idsxlb" path="res://Sprites/Map/Tree_Dark.png" id="9_h6ghw"]
+[ext_resource type="Texture2D" uid="uid://dasmhlsnij3bd" path="res://Sprites/Map/Tree_Light.png" id="10_r8iub"]
+[ext_resource type="Texture2D" uid="uid://c0wov7qsfe6v0" path="res://Sprites/Map/Grass_Tuft2.png" id="11_yv3qn"]
+[ext_resource type="Texture2D" uid="uid://coejko4nboanm" path="res://Sprites/Map/Lake_Fill.png" id="12_bxale"]
+[ext_resource type="Texture2D" uid="uid://clf7dd0e1v7fh" path="res://Sprites/Map/Patch_Dirt.png" id="14_op1re"]
+[ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="15_sbn0e"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
 
 [sub_resource type="Resource" id="Resource_lbrw2"]
@@ -203,6 +210,300 @@ offset_top = -1504.0
 offset_right = 4855.0
 offset_bottom = 5308.0
 color = Color(0.2, 0.690196, 0.32549, 1)
+
+[node name="Patches" type="Node2D" parent="Background"]
+
+[node name="Patch" type="TextureRect" parent="Background/Patches"]
+offset_left = 4210.0
+offset_top = 1120.0
+offset_right = 5146.0
+offset_bottom = 1410.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch2" type="TextureRect" parent="Background/Patches"]
+offset_left = 1679.0
+offset_top = 2613.0
+offset_right = 2615.0
+offset_bottom = 2903.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch3" type="TextureRect" parent="Background/Patches"]
+offset_left = 3553.0
+offset_top = 2009.0
+offset_right = 4489.0
+offset_bottom = 2299.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch4" type="TextureRect" parent="Background/Patches"]
+offset_left = 2820.0
+offset_top = 3545.0
+offset_right = 3756.0
+offset_bottom = 3835.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch5" type="TextureRect" parent="Background/Patches"]
+offset_left = 4942.0
+offset_top = 3830.0
+offset_right = 5878.0
+offset_bottom = 4120.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch6" type="TextureRect" parent="Background/Patches"]
+offset_left = 4133.0
+offset_top = 5019.0
+offset_right = 5069.0
+offset_bottom = 5309.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch8" type="TextureRect" parent="Background/Patches"]
+offset_left = 1590.0
+offset_top = 5813.0
+offset_right = 2526.0
+offset_bottom = 6103.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch9" type="TextureRect" parent="Background/Patches"]
+offset_left = 500.0
+offset_top = 3485.0
+offset_right = 1436.0
+offset_bottom = 3775.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch10" type="TextureRect" parent="Background/Patches"]
+offset_left = 6218.0
+offset_top = 3297.0
+offset_right = 7154.0
+offset_bottom = 3587.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch11" type="TextureRect" parent="Background/Patches"]
+offset_left = 6055.0
+offset_top = 2234.0
+offset_right = 6991.0
+offset_bottom = 2524.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch12" type="TextureRect" parent="Background/Patches"]
+offset_left = 6183.0
+offset_top = 579.0
+offset_right = 7119.0
+offset_bottom = 869.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch7" type="TextureRect" parent="Background/Patches"]
+offset_left = 1840.0
+offset_top = 4515.0
+offset_right = 2776.0
+offset_bottom = 4805.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch13" type="TextureRect" parent="Background/Patches"]
+offset_left = 2491.0
+offset_top = 4099.0
+offset_right = 3427.0
+offset_bottom = 4389.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patch14" type="TextureRect" parent="Background/Patches"]
+offset_left = 4958.0
+offset_top = 4526.0
+offset_right = 5894.0
+offset_bottom = 4816.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch15" type="TextureRect" parent="Background/Patches"]
+offset_left = 4488.0
+offset_top = 2540.0
+offset_right = 5424.0
+offset_bottom = 2830.0
+texture = ExtResource("6_rdarx")
+
+[node name="Patch16" type="TextureRect" parent="Background/Patches"]
+offset_left = 3355.0
+offset_top = 1417.0
+offset_right = 4291.0
+offset_bottom = 1707.0
+texture = ExtResource("6_rdarx")
+flip_h = true
+
+[node name="Patches2" type="Node2D" parent="Background"]
+
+[node name="Patch" type="TextureRect" parent="Background/Patches2"]
+offset_left = 5002.0
+offset_top = 1889.0
+offset_right = 5938.0
+offset_bottom = 2179.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch2" type="TextureRect" parent="Background/Patches2"]
+offset_left = 1721.0
+offset_top = 1086.0
+offset_right = 2657.0
+offset_bottom = 1376.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch3" type="TextureRect" parent="Background/Patches2"]
+offset_left = 2570.0
+offset_top = 1754.0
+offset_right = 3506.0
+offset_bottom = 2044.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch4" type="TextureRect" parent="Background/Patches2"]
+offset_left = 4120.0
+offset_top = 3112.0
+offset_right = 5056.0
+offset_bottom = 3402.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch5" type="TextureRect" parent="Background/Patches2"]
+offset_left = 1495.0
+offset_top = 3632.0
+offset_right = 2431.0
+offset_bottom = 3922.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch6" type="TextureRect" parent="Background/Patches2"]
+offset_left = 2728.0
+offset_top = 5306.0
+offset_right = 3664.0
+offset_bottom = 5596.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch7" type="TextureRect" parent="Background/Patches2"]
+offset_left = 5590.0
+offset_top = 5826.0
+offset_right = 6526.0
+offset_bottom = 6116.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch8" type="TextureRect" parent="Background/Patches2"]
+offset_left = 6167.0
+offset_top = 4434.0
+offset_right = 7103.0
+offset_bottom = 4724.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch9" type="TextureRect" parent="Background/Patches2"]
+offset_left = 782.0
+offset_top = 5249.0
+offset_right = 1718.0
+offset_bottom = 5539.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch10" type="TextureRect" parent="Background/Patches2"]
+offset_left = 737.0
+offset_top = 1810.0
+offset_right = 1673.0
+offset_bottom = 2100.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch11" type="TextureRect" parent="Background/Patches2"]
+offset_left = 713.0
+offset_top = 578.0
+offset_right = 1649.0
+offset_bottom = 868.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch12" type="TextureRect" parent="Background/Patches2"]
+offset_left = 3469.0
+offset_top = 4312.0
+offset_right = 4405.0
+offset_bottom = 4602.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch13" type="TextureRect" parent="Background/Patches2"]
+offset_left = 3545.0
+offset_top = 896.0
+offset_right = 4481.0
+offset_bottom = 1186.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch14" type="TextureRect" parent="Background/Patches2"]
+offset_left = 5780.0
+offset_top = 1163.0
+offset_right = 6716.0
+offset_bottom = 1453.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch15" type="TextureRect" parent="Background/Patches2"]
+offset_left = 5412.0
+offset_top = 2814.0
+offset_right = 6348.0
+offset_bottom = 3104.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch16" type="TextureRect" parent="Background/Patches2"]
+offset_left = 4904.0
+offset_top = 5163.0
+offset_right = 5840.0
+offset_bottom = 5453.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch17" type="TextureRect" parent="Background/Patches2"]
+offset_left = 2052.0
+offset_top = 3177.0
+offset_right = 2988.0
+offset_bottom = 3467.0
+texture = ExtResource("7_xnnrg")
+flip_h = true
+
+[node name="Patch18" type="TextureRect" parent="Background/Patches2"]
+offset_left = 3060.0
+offset_top = 2986.0
+offset_right = 3996.0
+offset_bottom = 3276.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch19" type="TextureRect" parent="Background/Patches2"]
+offset_left = 2375.0
+offset_top = 2331.0
+offset_right = 3311.0
+offset_bottom = 2621.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch20" type="TextureRect" parent="Background/Patches2"]
+offset_left = 3847.0
+offset_top = 3742.0
+offset_right = 4783.0
+offset_bottom = 4032.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch21" type="TextureRect" parent="Background/Patches2"]
+offset_left = 2466.0
+offset_top = 4780.0
+offset_right = 3402.0
+offset_bottom = 5070.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch22" type="TextureRect" parent="Background/Patches2"]
+offset_left = 1690.0
+offset_top = 5445.0
+offset_right = 2626.0
+offset_bottom = 5735.0
+texture = ExtResource("7_xnnrg")
+
+[node name="Patch23" type="TextureRect" parent="Background/Patches2"]
+offset_left = 3857.0
+offset_top = 5637.0
+offset_right = 4793.0
+offset_bottom = 5927.0
+texture = ExtResource("7_xnnrg")
 
 [node name="Grasses" type="Node2D" parent="Background"]
 position = Vector2(1104, 624)
@@ -1581,6 +1882,522 @@ offset_bottom = 684.0
 texture = ExtResource("1_gtrpj")
 stretch_mode = 2
 
+[node name="Grasses4" type="Node2D" parent="Background"]
+position = Vector2(567, 1196)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2737.0
+offset_top = 1803.0
+offset_right = 2784.0
+offset_bottom = 1843.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3458.0
+offset_top = 2275.0
+offset_right = 3505.0
+offset_bottom = 2315.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1963.0
+offset_top = 2403.0
+offset_right = 2010.0
+offset_bottom = 2443.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2692.0
+offset_top = 2192.0
+offset_right = 2739.0
+offset_bottom = 2232.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2069.0
+offset_top = 1818.0
+offset_right = 2116.0
+offset_bottom = 1858.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1503.0
+offset_top = 2116.0
+offset_right = 1550.0
+offset_bottom = 2156.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1560.0
+offset_top = 1433.0
+offset_right = 1607.0
+offset_bottom = 1473.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3550.0
+offset_top = 1792.0
+offset_right = 3597.0
+offset_bottom = 1832.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3169.0
+offset_top = 1331.0
+offset_right = 3216.0
+offset_bottom = 1371.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2301.0
+offset_top = 1293.0
+offset_right = 2348.0
+offset_bottom = 1333.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3071.0
+offset_top = 2652.0
+offset_right = 3118.0
+offset_bottom = 2692.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3747.0
+offset_top = 2735.0
+offset_right = 3794.0
+offset_bottom = 2775.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2373.0
+offset_top = 2724.0
+offset_right = 2420.0
+offset_bottom = 2764.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1557.0
+offset_top = 2664.0
+offset_right = 1604.0
+offset_bottom = 2704.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1387.0
+offset_top = 1135.0
+offset_right = 1434.0
+offset_bottom = 1175.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3788.0
+offset_top = 1214.0
+offset_right = 3835.0
+offset_bottom = 1254.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2610.0
+offset_top = 1512.0
+offset_right = 2657.0
+offset_bottom = 1552.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2719.0
+offset_top = 1063.0
+offset_right = 2766.0
+offset_bottom = 1103.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4484.0
+offset_top = 3167.0
+offset_right = 4531.0
+offset_bottom = 3207.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3160.0
+offset_top = 3314.0
+offset_right = 3207.0
+offset_bottom = 3354.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3748.0
+offset_top = 3733.0
+offset_right = 3795.0
+offset_bottom = 3773.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4687.0
+offset_top = 4095.0
+offset_right = 4734.0
+offset_bottom = 4135.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3929.0
+offset_top = 4355.0
+offset_right = 3976.0
+offset_bottom = 4395.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4517.0
+offset_top = 4808.0
+offset_right = 4564.0
+offset_bottom = 4848.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3725.0
+offset_top = 5046.0
+offset_right = 3772.0
+offset_bottom = 5086.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3465.0
+offset_top = 4548.0
+offset_right = 3512.0
+offset_bottom = 4588.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2413.0
+offset_top = 4525.0
+offset_right = 2460.0
+offset_bottom = 4565.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2730.0
+offset_top = 4932.0
+offset_right = 2777.0
+offset_bottom = 4972.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1463.0
+offset_top = 4989.0
+offset_right = 1510.0
+offset_bottom = 5029.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1225.0
+offset_top = 4378.0
+offset_right = 1272.0
+offset_bottom = 4418.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 399.0
+offset_top = 4921.0
+offset_right = 446.0
+offset_bottom = 4961.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 535.0
+offset_top = 3937.0
+offset_right = 582.0
+offset_bottom = 3977.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2032.0
+offset_top = 3773.0
+offset_right = 2079.0
+offset_bottom = 3813.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2903.0
+offset_top = 3954.0
+offset_right = 2950.0
+offset_bottom = 3994.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1225.0
+offset_top = 3468.0
+offset_right = 1272.0
+offset_bottom = 3508.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 582.0
+offset_top = 3118.0
+offset_right = 629.0
+offset_bottom = 3158.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 514.0
+offset_top = 2292.0
+offset_right = 561.0
+offset_bottom = 2332.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 706.0
+offset_top = 1059.0
+offset_right = 753.0
+offset_bottom = 1099.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 399.0
+offset_top = 380.0
+offset_right = 446.0
+offset_bottom = 420.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1960.0
+offset_top = 369.0
+offset_right = 2007.0
+offset_bottom = 409.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3247.0
+offset_top = 409.0
+offset_right = 3294.0
+offset_bottom = 449.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4265.0
+offset_top = 432.0
+offset_right = 4312.0
+offset_bottom = 472.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4797.0
+offset_top = 941.0
+offset_right = 4844.0
+offset_bottom = 981.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5148.0
+offset_top = 1823.0
+offset_right = 5195.0
+offset_bottom = 1863.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4424.0
+offset_top = 2355.0
+offset_right = 4471.0
+offset_bottom = 2395.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5114.0
+offset_top = 3475.0
+offset_right = 5161.0
+offset_bottom = 3515.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2547.0
+offset_top = 3422.0
+offset_right = 2594.0
+offset_bottom = 3462.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1731.0
+offset_top = 3173.0
+offset_right = 1778.0
+offset_bottom = 3213.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 991.0
+offset_top = 2614.0
+offset_right = 1038.0
+offset_bottom = 2654.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass51" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 938.0
+offset_top = 1625.0
+offset_right = 985.0
+offset_bottom = 1665.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass52" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4721.0
+offset_top = 1338.0
+offset_right = 4768.0
+offset_bottom = 1378.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass53" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4064.0
+offset_top = 1935.0
+offset_right = 4111.0
+offset_bottom = 1975.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass54" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3890.0
+offset_top = 3196.0
+offset_right = 3937.0
+offset_bottom = 3236.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass55" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1277.0
+offset_top = 561.0
+offset_right = 1324.0
+offset_bottom = 601.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass56" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1994.0
+offset_top = 855.0
+offset_right = 2041.0
+offset_bottom = 895.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
+[node name="Grass57" type="TextureRect" parent="Background/Grasses4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2666.0
+offset_top = 644.0
+offset_right = 2713.0
+offset_bottom = 684.0
+texture = ExtResource("9_5ykcx")
+stretch_mode = 2
+
 [node name="Grasses (Type2)" type="Node2D" parent="Background"]
 
 [node name="Grass" type="TextureRect" parent="Background/Grasses (Type2)"]
@@ -2789,6 +3606,459 @@ offset_bottom = 5351.0
 texture = ExtResource("2_xpmpc")
 stretch_mode = 2
 
+[node name="Grasses (Type2)4" type="Node2D" parent="Background"]
+position = Vector2(939, 1070)
+
+[node name="Grass" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2886.0
+offset_top = 1781.0
+offset_right = 2929.0
+offset_bottom = 1803.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass2" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1773.0
+offset_top = 1286.0
+offset_right = 1816.0
+offset_bottom = 1308.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass3" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3172.0
+offset_top = 1229.0
+offset_right = 3215.0
+offset_bottom = 1251.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass4" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2392.0
+offset_top = 867.0
+offset_right = 2435.0
+offset_bottom = 889.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass5" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4285.0
+offset_top = 1409.0
+offset_right = 4328.0
+offset_bottom = 1431.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass6" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4865.0
+offset_top = 1009.0
+offset_right = 4908.0
+offset_bottom = 1031.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass7" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5417.0
+offset_top = 1542.0
+offset_right = 5460.0
+offset_bottom = 1564.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass8" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4598.0
+offset_top = 1701.0
+offset_right = 4641.0
+offset_bottom = 1723.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass9" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5347.0
+offset_top = 2006.0
+offset_right = 5390.0
+offset_bottom = 2028.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass10" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 6230.0
+offset_top = 1269.0
+offset_right = 6273.0
+offset_bottom = 1291.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass11" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5722.0
+offset_top = 971.0
+offset_right = 5765.0
+offset_bottom = 993.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass12" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5493.0
+offset_top = 2349.0
+offset_right = 5536.0
+offset_bottom = 2371.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass13" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4318.0
+offset_top = 2292.0
+offset_right = 4361.0
+offset_bottom = 2314.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass14" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2813.0
+offset_top = 2362.0
+offset_right = 2856.0
+offset_bottom = 2384.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass15" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1638.0
+offset_top = 2032.0
+offset_right = 1681.0
+offset_bottom = 2054.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass16" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2286.0
+offset_top = 2007.0
+offset_right = 2329.0
+offset_bottom = 2029.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass17" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1981.0
+offset_top = 2598.0
+offset_right = 2024.0
+offset_bottom = 2620.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass18" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2292.0
+offset_top = 2896.0
+offset_right = 2335.0
+offset_bottom = 2918.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass19" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1663.0
+offset_top = 3283.0
+offset_right = 1706.0
+offset_bottom = 3305.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass20" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2336.0
+offset_top = 3658.0
+offset_right = 2379.0
+offset_bottom = 3680.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass21" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3149.0
+offset_top = 3398.0
+offset_right = 3192.0
+offset_bottom = 3420.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass22" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3416.0
+offset_top = 3030.0
+offset_right = 3459.0
+offset_bottom = 3052.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass23" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3905.0
+offset_top = 3582.0
+offset_right = 3948.0
+offset_bottom = 3604.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass24" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4197.0
+offset_top = 3036.0
+offset_right = 4240.0
+offset_bottom = 3058.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass25" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5118.0
+offset_top = 3138.0
+offset_right = 5161.0
+offset_bottom = 3160.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass26" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4939.0
+offset_top = 2814.0
+offset_right = 4982.0
+offset_bottom = 2836.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass27" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 6114.0
+offset_top = 2827.0
+offset_right = 6157.0
+offset_bottom = 2849.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass28" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 6133.0
+offset_top = 3348.0
+offset_right = 6176.0
+offset_bottom = 3370.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass29" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5454.0
+offset_top = 3411.0
+offset_right = 5497.0
+offset_bottom = 3433.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass30" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 6172.0
+offset_top = 2065.0
+offset_right = 6215.0
+offset_bottom = 2087.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass31" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5004.0
+offset_top = 1354.0
+offset_right = 5047.0
+offset_bottom = 1376.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass32" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3448.0
+offset_top = 1659.0
+offset_right = 3491.0
+offset_bottom = 1681.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass33" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1937.0
+offset_top = 3862.0
+offset_right = 1980.0
+offset_bottom = 3884.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass34" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2072.0
+offset_top = 4511.0
+offset_right = 2115.0
+offset_bottom = 4533.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass35" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 1616.0
+offset_top = 5067.0
+offset_right = 1659.0
+offset_bottom = 5089.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass36" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2072.0
+offset_top = 5580.0
+offset_right = 2115.0
+offset_bottom = 5602.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass37" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2906.0
+offset_top = 4682.0
+offset_right = 2949.0
+offset_bottom = 4704.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass38" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 2977.0
+offset_top = 4083.0
+offset_right = 3020.0
+offset_bottom = 4105.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass39" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3626.0
+offset_top = 4368.0
+offset_right = 3669.0
+offset_bottom = 4390.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass40" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4460.0
+offset_top = 4254.0
+offset_right = 4503.0
+offset_bottom = 4276.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass41" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4598.0
+offset_top = 4759.0
+offset_right = 4641.0
+offset_bottom = 4781.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass42" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5204.0
+offset_top = 4609.0
+offset_right = 5247.0
+offset_bottom = 4631.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass43" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5311.0
+offset_top = 3903.0
+offset_right = 5354.0
+offset_bottom = 3925.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass44" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5874.0
+offset_top = 4202.0
+offset_right = 5917.0
+offset_bottom = 4224.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass45" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5487.0
+offset_top = 5045.0
+offset_right = 5530.0
+offset_bottom = 5067.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass46" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 6150.0
+offset_top = 5558.0
+offset_right = 6193.0
+offset_bottom = 5580.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass47" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 5074.0
+offset_top = 5330.0
+offset_right = 5117.0
+offset_bottom = 5352.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass48" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 4376.0
+offset_top = 5522.0
+offset_right = 4419.0
+offset_bottom = 5544.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass49" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3941.0
+offset_top = 4916.0
+offset_right = 3984.0
+offset_bottom = 4938.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
+[node name="Grass50" type="TextureRect" parent="Background/Grasses (Type2)4"]
+self_modulate = Color(0.247059, 0.788235, 0.345098, 1)
+offset_left = 3071.0
+offset_top = 5329.0
+offset_right = 3114.0
+offset_bottom = 5351.0
+texture = ExtResource("11_yv3qn")
+stretch_mode = 2
+
 [node name="Flowers" type="Node2D" parent="Background"]
 position = Vector2(1104, 624)
 
@@ -3177,10 +4447,10 @@ offset_right = 1691.0
 offset_bottom = 1295.0
 
 [node name="Flower4" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
-offset_left = 2953.0
-offset_top = 1175.0
-offset_right = 2986.0
-offset_bottom = 1208.0
+offset_left = 2824.0
+offset_top = 1203.0
+offset_right = 2857.0
+offset_bottom = 1236.0
 
 [node name="Flower5" parent="Background/Flowers3" instance=ExtResource("2_70ojb")]
 offset_left = 3783.0
@@ -3530,7 +4800,7 @@ offset_left = 742.0
 offset_top = 5816.0
 offset_right = 1072.0
 offset_bottom = 6231.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3539,7 +4809,7 @@ offset_left = 539.0
 offset_top = 5921.0
 offset_right = 869.0
 offset_bottom = 6336.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3557,7 +4827,7 @@ offset_left = 878.0
 offset_top = 6073.0
 offset_right = 1208.0
 offset_bottom = 6488.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree25" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3566,7 +4836,7 @@ offset_left = 640.0
 offset_top = 6111.0
 offset_right = 970.0
 offset_bottom = 6526.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree26" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3584,7 +4854,7 @@ offset_left = 94.0
 offset_top = 6108.0
 offset_right = 424.0
 offset_bottom = 6523.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree28" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3593,7 +4863,7 @@ offset_left = 272.0
 offset_top = 6333.0
 offset_right = 602.0
 offset_bottom = 6748.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree29" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3602,7 +4872,7 @@ offset_left = 567.0
 offset_top = 6343.0
 offset_right = 897.0
 offset_bottom = 6758.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree30" type="TextureRect" parent="Background/TopLeftTrees"]
@@ -3623,7 +4893,7 @@ offset_left = 742.0
 offset_top = 5816.0
 offset_right = 1072.0
 offset_bottom = 6231.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3632,7 +4902,7 @@ offset_left = 539.0
 offset_top = 5921.0
 offset_right = 869.0
 offset_bottom = 6336.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3650,7 +4920,7 @@ offset_left = 878.0
 offset_top = 6073.0
 offset_right = 1208.0
 offset_bottom = 6488.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree25" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3668,7 +4938,7 @@ offset_left = 373.0
 offset_top = 6124.0
 offset_right = 703.0
 offset_bottom = 6539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree27" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3677,7 +4947,7 @@ offset_left = 94.0
 offset_top = 6108.0
 offset_right = 424.0
 offset_bottom = 6523.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree28" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3686,7 +4956,7 @@ offset_left = 272.0
 offset_top = 6333.0
 offset_right = 602.0
 offset_bottom = 6748.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree29" type="TextureRect" parent="Background/TopRightTrees"]
@@ -3715,7 +4985,7 @@ offset_left = 107.0
 offset_top = -342.0
 offset_right = 437.0
 offset_bottom = 73.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree64" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3723,7 +4993,7 @@ offset_left = 305.0
 offset_top = -317.0
 offset_right = 635.0
 offset_bottom = 98.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree65" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3739,7 +5009,7 @@ offset_left = 1356.0
 offset_top = -320.0
 offset_right = 1686.0
 offset_bottom = 95.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree67" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3755,7 +5025,7 @@ offset_left = 2231.0
 offset_top = -326.0
 offset_right = 2561.0
 offset_bottom = 89.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree69" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3763,7 +5033,7 @@ offset_left = 2688.0
 offset_top = -380.0
 offset_right = 3018.0
 offset_bottom = 35.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree70" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3771,7 +5041,7 @@ offset_left = 3132.0
 offset_top = -313.0
 offset_right = 3462.0
 offset_bottom = 102.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree71" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3787,7 +5057,7 @@ offset_left = 3964.0
 offset_top = -316.0
 offset_right = 4294.0
 offset_bottom = 99.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree73" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3795,7 +5065,7 @@ offset_left = 4383.0
 offset_top = -373.0
 offset_right = 4713.0
 offset_bottom = 42.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree74" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3803,7 +5073,7 @@ offset_left = 4797.0
 offset_top = -297.0
 offset_right = 5127.0
 offset_bottom = 118.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree75" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3819,7 +5089,7 @@ offset_left = 5049.0
 offset_top = -299.0
 offset_right = 5379.0
 offset_bottom = 116.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree77" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3835,7 +5105,7 @@ offset_left = 4210.0
 offset_top = -263.0
 offset_right = 4540.0
 offset_bottom = 152.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree79" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3843,7 +5113,7 @@ offset_left = 3736.0
 offset_top = -324.0
 offset_right = 4066.0
 offset_bottom = 91.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree80" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3851,7 +5121,7 @@ offset_left = 3358.0
 offset_top = -284.0
 offset_right = 3688.0
 offset_bottom = 131.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree81" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3875,7 +5145,7 @@ offset_left = 2013.0
 offset_top = -350.0
 offset_right = 2343.0
 offset_bottom = 65.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree84" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3891,7 +5161,7 @@ offset_left = 1193.0
 offset_top = -288.0
 offset_right = 1523.0
 offset_bottom = 127.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree86" type="TextureRect" parent="Background/TopRowTrees3"]
@@ -3915,7 +5185,7 @@ offset_left = 433.0
 offset_top = -261.0
 offset_right = 763.0
 offset_bottom = 154.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="TopRowTrees2" type="Node2D" parent="Background"]
@@ -3926,7 +5196,7 @@ offset_left = 107.0
 offset_top = -342.0
 offset_right = 437.0
 offset_bottom = 73.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree64" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3942,7 +5212,7 @@ offset_left = 826.0
 offset_top = -352.0
 offset_right = 1156.0
 offset_bottom = 63.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree66" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3958,7 +5228,7 @@ offset_left = 1802.0
 offset_top = -365.0
 offset_right = 2132.0
 offset_bottom = 50.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree68" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3974,7 +5244,7 @@ offset_left = 2688.0
 offset_top = -380.0
 offset_right = 3018.0
 offset_bottom = 35.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree70" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3982,7 +5252,7 @@ offset_left = 3132.0
 offset_top = -313.0
 offset_right = 3462.0
 offset_bottom = 102.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree71" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3990,7 +5260,7 @@ offset_left = 3557.0
 offset_top = -368.0
 offset_right = 3887.0
 offset_bottom = 47.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree72" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -3998,7 +5268,7 @@ offset_left = 3964.0
 offset_top = -316.0
 offset_right = 4294.0
 offset_bottom = 99.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree73" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4006,7 +5276,7 @@ offset_left = 4383.0
 offset_top = -373.0
 offset_right = 4713.0
 offset_bottom = 42.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree74" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4014,7 +5284,7 @@ offset_left = 4797.0
 offset_top = -297.0
 offset_right = 5127.0
 offset_bottom = 118.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree75" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4038,7 +5308,7 @@ offset_left = 4590.0
 offset_top = -334.0
 offset_right = 4920.0
 offset_bottom = 81.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree78" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4054,7 +5324,7 @@ offset_left = 3736.0
 offset_top = -324.0
 offset_right = 4066.0
 offset_bottom = 91.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree80" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4070,7 +5340,7 @@ offset_left = 2901.0
 offset_top = -333.0
 offset_right = 3231.0
 offset_bottom = 82.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree82" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4086,7 +5356,7 @@ offset_left = 2013.0
 offset_top = -350.0
 offset_right = 2343.0
 offset_bottom = 65.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree84" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4102,7 +5372,7 @@ offset_left = 1193.0
 offset_top = -288.0
 offset_right = 1523.0
 offset_bottom = 127.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree86" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4110,7 +5380,7 @@ offset_left = 978.0
 offset_top = -268.0
 offset_right = 1308.0
 offset_bottom = 147.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree87" type="TextureRect" parent="Background/TopRowTrees2"]
@@ -4126,7 +5396,7 @@ offset_left = 433.0
 offset_top = -261.0
 offset_right = 763.0
 offset_bottom = 154.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="TopRowTrees" type="Node2D" parent="Background"]
@@ -4137,7 +5407,7 @@ offset_left = 107.0
 offset_top = -342.0
 offset_right = 437.0
 offset_bottom = 73.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree64" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4153,7 +5423,7 @@ offset_left = 826.0
 offset_top = -352.0
 offset_right = 1156.0
 offset_bottom = 63.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree66" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4169,7 +5439,7 @@ offset_left = 1802.0
 offset_top = -365.0
 offset_right = 2132.0
 offset_bottom = 50.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree68" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4177,7 +5447,7 @@ offset_left = 2231.0
 offset_top = -326.0
 offset_right = 2561.0
 offset_bottom = 89.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree69" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4193,7 +5463,7 @@ offset_left = 3132.0
 offset_top = -313.0
 offset_right = 3462.0
 offset_bottom = 102.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree71" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4209,7 +5479,7 @@ offset_left = 3964.0
 offset_top = -316.0
 offset_right = 4294.0
 offset_bottom = 99.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree73" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4217,7 +5487,7 @@ offset_left = 4383.0
 offset_top = -373.0
 offset_right = 4713.0
 offset_bottom = 42.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree74" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4233,7 +5503,7 @@ offset_left = 5261.0
 offset_top = -363.0
 offset_right = 5591.0
 offset_bottom = 52.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree76" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4241,7 +5511,7 @@ offset_left = 5049.0
 offset_top = -299.0
 offset_right = 5379.0
 offset_bottom = 116.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree77" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4265,7 +5535,7 @@ offset_left = 3736.0
 offset_top = -324.0
 offset_right = 4066.0
 offset_bottom = 91.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree80" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4289,7 +5559,7 @@ offset_left = 2465.0
 offset_top = -311.0
 offset_right = 2795.0
 offset_bottom = 104.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree83" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4305,7 +5575,7 @@ offset_left = 1594.0
 offset_top = -310.0
 offset_right = 1924.0
 offset_bottom = 105.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree85" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4313,7 +5583,7 @@ offset_left = 1193.0
 offset_top = -288.0
 offset_right = 1523.0
 offset_bottom = 127.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree86" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4321,7 +5591,7 @@ offset_left = 978.0
 offset_top = -268.0
 offset_right = 1308.0
 offset_bottom = 147.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree87" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4329,7 +5599,7 @@ offset_left = 642.0
 offset_top = -285.0
 offset_right = 972.0
 offset_bottom = 130.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree88" type="TextureRect" parent="Background/TopRowTrees"]
@@ -4337,7 +5607,7 @@ offset_left = 433.0
 offset_top = -261.0
 offset_right = 763.0
 offset_bottom = 154.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="LeftTreeColumn5" type="Node2D" parent="Background"]
@@ -4349,7 +5619,7 @@ offset_left = -138.0
 offset_top = -227.0
 offset_right = 192.0
 offset_bottom = 188.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree2" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4358,7 +5628,7 @@ offset_left = -151.0
 offset_top = 78.0
 offset_right = 179.0
 offset_bottom = 493.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree3" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4385,7 +5655,7 @@ offset_left = -161.0
 offset_top = 900.0
 offset_right = 169.0
 offset_bottom = 1315.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree6" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4412,7 +5682,7 @@ offset_left = -139.0
 offset_top = 1713.0
 offset_right = 191.0
 offset_bottom = 2128.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree9" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4430,7 +5700,7 @@ offset_left = -139.0
 offset_top = 2301.0
 offset_right = 191.0
 offset_bottom = 2716.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree11" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4439,7 +5709,7 @@ offset_left = -145.0
 offset_top = 2618.0
 offset_right = 185.0
 offset_bottom = 3033.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree12" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4457,7 +5727,7 @@ offset_left = -139.0
 offset_top = 3209.0
 offset_right = 191.0
 offset_bottom = 3624.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree14" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4466,7 +5736,7 @@ offset_left = -164.0
 offset_top = 3542.0
 offset_right = 166.0
 offset_bottom = 3957.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree15" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4475,7 +5745,7 @@ offset_left = -123.0
 offset_top = 3799.0
 offset_right = 207.0
 offset_bottom = 4214.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree16" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4484,7 +5754,7 @@ offset_left = -155.0
 offset_top = 4085.0
 offset_right = 175.0
 offset_bottom = 4500.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree17" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4502,7 +5772,7 @@ offset_left = -168.0
 offset_top = 4616.0
 offset_right = 162.0
 offset_bottom = 5031.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree19" type="TextureRect" parent="Background/LeftTreeColumn5"]
@@ -4520,7 +5790,7 @@ offset_left = -143.0
 offset_top = 5124.0
 offset_right = 187.0
 offset_bottom = 5539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="LeftTreeColumn4" type="Node2D" parent="Background"]
@@ -4532,7 +5802,7 @@ offset_left = -138.0
 offset_top = -227.0
 offset_right = 192.0
 offset_bottom = 188.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree2" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4541,7 +5811,7 @@ offset_left = -151.0
 offset_top = 78.0
 offset_right = 179.0
 offset_bottom = 493.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree3" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4550,7 +5820,7 @@ offset_left = -148.0
 offset_top = 275.0
 offset_right = 182.0
 offset_bottom = 690.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree4" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4568,7 +5838,7 @@ offset_left = -161.0
 offset_top = 900.0
 offset_right = 169.0
 offset_bottom = 1315.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree6" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4577,7 +5847,7 @@ offset_left = -142.0
 offset_top = 1205.0
 offset_right = 188.0
 offset_bottom = 1620.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree7" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4595,7 +5865,7 @@ offset_left = -139.0
 offset_top = 1713.0
 offset_right = 191.0
 offset_bottom = 2128.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree9" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4613,7 +5883,7 @@ offset_left = -139.0
 offset_top = 2301.0
 offset_right = 191.0
 offset_bottom = 2716.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree11" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4640,7 +5910,7 @@ offset_left = -139.0
 offset_top = 3209.0
 offset_right = 191.0
 offset_bottom = 3624.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree14" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4658,7 +5928,7 @@ offset_left = -123.0
 offset_top = 3799.0
 offset_right = 207.0
 offset_bottom = 4214.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree16" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4667,7 +5937,7 @@ offset_left = -155.0
 offset_top = 4085.0
 offset_right = 175.0
 offset_bottom = 4500.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree17" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4676,7 +5946,7 @@ offset_left = -136.0
 offset_top = 4387.0
 offset_right = 194.0
 offset_bottom = 4802.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree18" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4694,7 +5964,7 @@ offset_left = -127.0
 offset_top = 4867.0
 offset_right = 203.0
 offset_bottom = 5282.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree20" type="TextureRect" parent="Background/LeftTreeColumn4"]
@@ -4703,7 +5973,7 @@ offset_left = -143.0
 offset_top = 5124.0
 offset_right = 187.0
 offset_bottom = 5539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="LeftTreeColumn3" type="Node2D" parent="Background"]
@@ -4715,7 +5985,7 @@ offset_left = -138.0
 offset_top = -227.0
 offset_right = 192.0
 offset_bottom = 188.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree2" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4724,7 +5994,7 @@ offset_left = -151.0
 offset_top = 78.0
 offset_right = 179.0
 offset_bottom = 493.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree3" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4751,7 +6021,7 @@ offset_left = -161.0
 offset_top = 900.0
 offset_right = 169.0
 offset_bottom = 1315.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree6" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4760,7 +6030,7 @@ offset_left = -142.0
 offset_top = 1205.0
 offset_right = 188.0
 offset_bottom = 1620.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree7" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4778,7 +6048,7 @@ offset_left = -139.0
 offset_top = 1713.0
 offset_right = 191.0
 offset_bottom = 2128.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree9" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4805,7 +6075,7 @@ offset_left = -145.0
 offset_top = 2618.0
 offset_right = 185.0
 offset_bottom = 3033.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree12" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4823,7 +6093,7 @@ offset_left = -139.0
 offset_top = 3209.0
 offset_right = 191.0
 offset_bottom = 3624.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree14" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4832,7 +6102,7 @@ offset_left = -164.0
 offset_top = 3542.0
 offset_right = 166.0
 offset_bottom = 3957.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree15" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4841,7 +6111,7 @@ offset_left = -123.0
 offset_top = 3799.0
 offset_right = 207.0
 offset_bottom = 4214.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree16" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4868,7 +6138,7 @@ offset_left = -168.0
 offset_top = 4616.0
 offset_right = 162.0
 offset_bottom = 5031.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree19" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4877,7 +6147,7 @@ offset_left = -127.0
 offset_top = 4867.0
 offset_right = 203.0
 offset_bottom = 5282.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree20" type="TextureRect" parent="Background/LeftTreeColumn3"]
@@ -4886,7 +6156,7 @@ offset_left = -143.0
 offset_top = 5124.0
 offset_right = 187.0
 offset_bottom = 5539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="LeftTreeColumn2" type="Node2D" parent="Background"]
@@ -4898,7 +6168,7 @@ offset_left = -138.0
 offset_top = -227.0
 offset_right = 192.0
 offset_bottom = 188.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree2" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4907,7 +6177,7 @@ offset_left = -151.0
 offset_top = 78.0
 offset_right = 179.0
 offset_bottom = 493.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree3" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4934,7 +6204,7 @@ offset_left = -161.0
 offset_top = 900.0
 offset_right = 169.0
 offset_bottom = 1315.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree6" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4943,7 +6213,7 @@ offset_left = -142.0
 offset_top = 1205.0
 offset_right = 188.0
 offset_bottom = 1620.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree7" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4961,7 +6231,7 @@ offset_left = -139.0
 offset_top = 1713.0
 offset_right = 191.0
 offset_bottom = 2128.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree9" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4970,7 +6240,7 @@ offset_left = -149.0
 offset_top = 1964.0
 offset_right = 181.0
 offset_bottom = 2379.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree10" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -4988,7 +6258,7 @@ offset_left = -145.0
 offset_top = 2618.0
 offset_right = 185.0
 offset_bottom = 3033.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree12" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -5015,7 +6285,7 @@ offset_left = -164.0
 offset_top = 3542.0
 offset_right = 166.0
 offset_bottom = 3957.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree15" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -5033,7 +6303,7 @@ offset_left = -155.0
 offset_top = 4085.0
 offset_right = 175.0
 offset_bottom = 4500.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree17" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -5042,7 +6312,7 @@ offset_left = -136.0
 offset_top = 4387.0
 offset_right = 194.0
 offset_bottom = 4802.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree18" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -5060,7 +6330,7 @@ offset_left = -127.0
 offset_top = 4867.0
 offset_right = 203.0
 offset_bottom = 5282.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree20" type="TextureRect" parent="Background/LeftTreeColumn2"]
@@ -5081,7 +6351,7 @@ offset_left = -138.0
 offset_top = -227.0
 offset_right = 192.0
 offset_bottom = 188.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree2" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5099,7 +6369,7 @@ offset_left = -148.0
 offset_top = 275.0
 offset_right = 182.0
 offset_bottom = 690.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree4" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5108,7 +6378,7 @@ offset_left = -132.0
 offset_top = 605.0
 offset_right = 198.0
 offset_bottom = 1020.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree5" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5126,7 +6396,7 @@ offset_left = -142.0
 offset_top = 1205.0
 offset_right = 188.0
 offset_bottom = 1620.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree7" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5135,7 +6405,7 @@ offset_left = -158.0
 offset_top = 1529.0
 offset_right = 172.0
 offset_bottom = 1944.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree8" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5153,7 +6423,7 @@ offset_left = -149.0
 offset_top = 1964.0
 offset_right = 181.0
 offset_bottom = 2379.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree10" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5162,7 +6432,7 @@ offset_left = -139.0
 offset_top = 2301.0
 offset_right = 191.0
 offset_bottom = 2716.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree11" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5180,7 +6450,7 @@ offset_left = -155.0
 offset_top = 2882.0
 offset_right = 175.0
 offset_bottom = 3297.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree13" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5207,7 +6477,7 @@ offset_left = -123.0
 offset_top = 3799.0
 offset_right = 207.0
 offset_bottom = 4214.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree16" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5216,7 +6486,7 @@ offset_left = -155.0
 offset_top = 4085.0
 offset_right = 175.0
 offset_bottom = 4500.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree17" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5234,7 +6504,7 @@ offset_left = -168.0
 offset_top = 4616.0
 offset_right = 162.0
 offset_bottom = 5031.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree19" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5243,7 +6513,7 @@ offset_left = -127.0
 offset_top = 4867.0
 offset_right = 203.0
 offset_bottom = 5282.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree20" type="TextureRect" parent="Background/LeftTreeColumn"]
@@ -5252,7 +6522,7 @@ offset_left = -143.0
 offset_top = 5124.0
 offset_right = 187.0
 offset_bottom = 5539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="RightTreeColumn" type="Node2D" parent="Background"]
@@ -5264,7 +6534,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5273,7 +6543,7 @@ offset_left = 5310.0
 offset_top = 163.0
 offset_right = 5640.0
 offset_bottom = 578.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree47" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5291,7 +6561,7 @@ offset_left = 5310.0
 offset_top = 748.0
 offset_right = 5640.0
 offset_bottom = 1163.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree49" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5309,7 +6579,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5327,7 +6597,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5336,7 +6606,7 @@ offset_left = 5291.0
 offset_top = 2380.0
 offset_right = 5621.0
 offset_bottom = 2795.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree54" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5363,7 +6633,7 @@ offset_left = 5325.0
 offset_top = 3248.0
 offset_right = 5655.0
 offset_bottom = 3663.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree57" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5372,7 +6642,7 @@ offset_left = 5302.0
 offset_top = 3554.0
 offset_right = 5632.0
 offset_bottom = 3969.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree58" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5381,7 +6651,7 @@ offset_left = 5325.0
 offset_top = 3890.0
 offset_right = 5655.0
 offset_bottom = 4305.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree59" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5399,7 +6669,7 @@ offset_left = 5348.0
 offset_top = 4366.0
 offset_right = 5678.0
 offset_bottom = 4781.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree61" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5417,7 +6687,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn"]
@@ -5438,7 +6708,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5447,7 +6717,7 @@ offset_left = 5310.0
 offset_top = 163.0
 offset_right = 5640.0
 offset_bottom = 578.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree47" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5456,7 +6726,7 @@ offset_left = 5284.0
 offset_top = 416.0
 offset_right = 5614.0
 offset_bottom = 831.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree48" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5474,7 +6744,7 @@ offset_left = 5288.0
 offset_top = 1081.0
 offset_right = 5618.0
 offset_bottom = 1496.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree50" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5483,7 +6753,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5501,7 +6771,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5519,7 +6789,7 @@ offset_left = 5325.0
 offset_top = 2599.0
 offset_right = 5655.0
 offset_bottom = 3014.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree55" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5537,7 +6807,7 @@ offset_left = 5325.0
 offset_top = 3248.0
 offset_right = 5655.0
 offset_bottom = 3663.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree57" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5546,7 +6816,7 @@ offset_left = 5302.0
 offset_top = 3554.0
 offset_right = 5632.0
 offset_bottom = 3969.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree58" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5573,7 +6843,7 @@ offset_left = 5348.0
 offset_top = 4366.0
 offset_right = 5678.0
 offset_bottom = 4781.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree61" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5582,7 +6852,7 @@ offset_left = 5303.0
 offset_top = 4630.0
 offset_right = 5633.0
 offset_bottom = 5045.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree62" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5591,7 +6861,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn3"]
@@ -5612,7 +6882,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5630,7 +6900,7 @@ offset_left = 5284.0
 offset_top = 416.0
 offset_right = 5614.0
 offset_bottom = 831.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree48" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5639,7 +6909,7 @@ offset_left = 5310.0
 offset_top = 748.0
 offset_right = 5640.0
 offset_bottom = 1163.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree49" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5648,7 +6918,7 @@ offset_left = 5288.0
 offset_top = 1081.0
 offset_right = 5618.0
 offset_bottom = 1496.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree50" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5657,7 +6927,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5675,7 +6945,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5684,7 +6954,7 @@ offset_left = 5291.0
 offset_top = 2380.0
 offset_right = 5621.0
 offset_bottom = 2795.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree54" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5702,7 +6972,7 @@ offset_left = 5314.0
 offset_top = 2946.0
 offset_right = 5644.0
 offset_bottom = 3361.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree56" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5711,7 +6981,7 @@ offset_left = 5325.0
 offset_top = 3248.0
 offset_right = 5655.0
 offset_bottom = 3663.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree57" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5720,7 +6990,7 @@ offset_left = 5302.0
 offset_top = 3554.0
 offset_right = 5632.0
 offset_bottom = 3969.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree58" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5729,7 +6999,7 @@ offset_left = 5325.0
 offset_top = 3890.0
 offset_right = 5655.0
 offset_bottom = 4305.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree59" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5747,7 +7017,7 @@ offset_left = 5348.0
 offset_top = 4366.0
 offset_right = 5678.0
 offset_bottom = 4781.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree61" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5756,7 +7026,7 @@ offset_left = 5303.0
 offset_top = 4630.0
 offset_right = 5633.0
 offset_bottom = 5045.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree62" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5765,7 +7035,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn4"]
@@ -5786,7 +7056,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5804,7 +7074,7 @@ offset_left = 5284.0
 offset_top = 416.0
 offset_right = 5614.0
 offset_bottom = 831.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree48" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5813,7 +7083,7 @@ offset_left = 5310.0
 offset_top = 748.0
 offset_right = 5640.0
 offset_bottom = 1163.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree49" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5831,7 +7101,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5849,7 +7119,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5858,7 +7128,7 @@ offset_left = 5291.0
 offset_top = 2380.0
 offset_right = 5621.0
 offset_bottom = 2795.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree54" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5867,7 +7137,7 @@ offset_left = 5325.0
 offset_top = 2599.0
 offset_right = 5655.0
 offset_bottom = 3014.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree55" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5876,7 +7146,7 @@ offset_left = 5314.0
 offset_top = 2946.0
 offset_right = 5644.0
 offset_bottom = 3361.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree56" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5894,7 +7164,7 @@ offset_left = 5302.0
 offset_top = 3554.0
 offset_right = 5632.0
 offset_bottom = 3969.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree58" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5912,7 +7182,7 @@ offset_left = 5314.0
 offset_top = 4117.0
 offset_right = 5644.0
 offset_bottom = 4532.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree60" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5939,7 +7209,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn5"]
@@ -5960,7 +7230,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -5969,7 +7239,7 @@ offset_left = 5310.0
 offset_top = 163.0
 offset_right = 5640.0
 offset_bottom = 578.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree47" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -5987,7 +7257,7 @@ offset_left = 5310.0
 offset_top = 748.0
 offset_right = 5640.0
 offset_bottom = 1163.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree49" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6005,7 +7275,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6023,7 +7293,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6032,7 +7302,7 @@ offset_left = 5291.0
 offset_top = 2380.0
 offset_right = 5621.0
 offset_bottom = 2795.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree54" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6041,7 +7311,7 @@ offset_left = 5325.0
 offset_top = 2599.0
 offset_right = 5655.0
 offset_bottom = 3014.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree55" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6059,7 +7329,7 @@ offset_left = 5325.0
 offset_top = 3248.0
 offset_right = 5655.0
 offset_bottom = 3663.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree57" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6068,7 +7338,7 @@ offset_left = 5302.0
 offset_top = 3554.0
 offset_right = 5632.0
 offset_bottom = 3969.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree58" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6077,7 +7347,7 @@ offset_left = 5325.0
 offset_top = 3890.0
 offset_right = 5655.0
 offset_bottom = 4305.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree59" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6086,7 +7356,7 @@ offset_left = 5314.0
 offset_top = 4117.0
 offset_right = 5644.0
 offset_bottom = 4532.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree60" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6113,7 +7383,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn6"]
@@ -6134,7 +7404,7 @@ offset_left = 5314.0
 offset_top = -177.0
 offset_right = 5644.0
 offset_bottom = 238.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree46" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6152,7 +7422,7 @@ offset_left = 5284.0
 offset_top = 416.0
 offset_right = 5614.0
 offset_bottom = 831.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree48" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6161,7 +7431,7 @@ offset_left = 5310.0
 offset_top = 748.0
 offset_right = 5640.0
 offset_bottom = 1163.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree49" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6170,7 +7440,7 @@ offset_left = 5288.0
 offset_top = 1081.0
 offset_right = 5618.0
 offset_bottom = 1496.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree50" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6179,7 +7449,7 @@ offset_left = 5318.0
 offset_top = 1398.0
 offset_right = 5648.0
 offset_bottom = 1813.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree51" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6197,7 +7467,7 @@ offset_left = 5314.0
 offset_top = 2097.0
 offset_right = 5644.0
 offset_bottom = 2512.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree53" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6206,7 +7476,7 @@ offset_left = 5291.0
 offset_top = 2380.0
 offset_right = 5621.0
 offset_bottom = 2795.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree54" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6215,7 +7485,7 @@ offset_left = 5325.0
 offset_top = 2599.0
 offset_right = 5655.0
 offset_bottom = 3014.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree55" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6224,7 +7494,7 @@ offset_left = 5314.0
 offset_top = 2946.0
 offset_right = 5644.0
 offset_bottom = 3361.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree56" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6233,7 +7503,7 @@ offset_left = 5325.0
 offset_top = 3248.0
 offset_right = 5655.0
 offset_bottom = 3663.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree57" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6251,7 +7521,7 @@ offset_left = 5325.0
 offset_top = 3890.0
 offset_right = 5655.0
 offset_bottom = 4305.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree59" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6260,7 +7530,7 @@ offset_left = 5314.0
 offset_top = 4117.0
 offset_right = 5644.0
 offset_bottom = 4532.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree60" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6269,7 +7539,7 @@ offset_left = 5348.0
 offset_top = 4366.0
 offset_right = 5678.0
 offset_bottom = 4781.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree61" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6287,7 +7557,7 @@ offset_left = 5333.0
 offset_top = 4898.0
 offset_right = 5663.0
 offset_bottom = 5313.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree63" type="TextureRect" parent="Background/RightTreeColumn2"]
@@ -6308,7 +7578,7 @@ offset_left = 742.0
 offset_top = 5816.0
 offset_right = 1072.0
 offset_bottom = 6231.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6317,7 +7587,7 @@ offset_left = 539.0
 offset_top = 5921.0
 offset_right = 869.0
 offset_bottom = 6336.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6335,7 +7605,7 @@ offset_left = 878.0
 offset_top = 6073.0
 offset_right = 1208.0
 offset_bottom = 6488.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree25" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6344,7 +7614,7 @@ offset_left = 640.0
 offset_top = 6111.0
 offset_right = 970.0
 offset_bottom = 6526.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree26" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6353,7 +7623,7 @@ offset_left = 373.0
 offset_top = 6124.0
 offset_right = 703.0
 offset_bottom = 6539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree27" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6371,7 +7641,7 @@ offset_left = 272.0
 offset_top = 6333.0
 offset_right = 602.0
 offset_bottom = 6748.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree29" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6380,7 +7650,7 @@ offset_left = 567.0
 offset_top = 6343.0
 offset_right = 897.0
 offset_bottom = 6758.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree30" type="TextureRect" parent="Background/BottomRightTrees"]
@@ -6389,7 +7659,7 @@ offset_left = 872.0
 offset_top = 6321.0
 offset_right = 1202.0
 offset_bottom = 6736.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="BottomTreeRow" type="Node2D" parent="Background"]
@@ -6401,7 +7671,7 @@ offset_left = 44.0
 offset_top = 5254.0
 offset_right = 374.0
 offset_bottom = 5669.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6419,7 +7689,7 @@ offset_left = 476.0
 offset_top = 5216.0
 offset_right = 806.0
 offset_bottom = 5631.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree24" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6446,7 +7716,7 @@ offset_left = 1143.0
 offset_top = 5307.0
 offset_right = 1473.0
 offset_bottom = 5722.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree27" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6464,7 +7734,7 @@ offset_left = 1619.0
 offset_top = 5310.0
 offset_right = 1949.0
 offset_bottom = 5725.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree29" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6491,7 +7761,7 @@ offset_left = 2324.0
 offset_top = 5326.0
 offset_right = 2654.0
 offset_bottom = 5741.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree32" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6509,7 +7779,7 @@ offset_left = 2775.0
 offset_top = 5339.0
 offset_right = 3105.0
 offset_bottom = 5754.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree34" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6527,7 +7797,7 @@ offset_left = 3188.0
 offset_top = 5333.0
 offset_right = 3518.0
 offset_bottom = 5748.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree36" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6554,7 +7824,7 @@ offset_left = 3835.0
 offset_top = 5260.0
 offset_right = 4165.0
 offset_bottom = 5675.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree39" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6572,7 +7842,7 @@ offset_left = 4359.0
 offset_top = 5232.0
 offset_right = 4689.0
 offset_bottom = 5647.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree41" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6599,7 +7869,7 @@ offset_left = 5225.0
 offset_top = 5292.0
 offset_right = 5555.0
 offset_bottom = 5707.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree89" type="TextureRect" parent="Background/BottomTreeRow"]
@@ -6620,7 +7890,7 @@ offset_left = 44.0
 offset_top = 5254.0
 offset_right = 374.0
 offset_bottom = 5669.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6629,7 +7899,7 @@ offset_left = 282.0
 offset_top = 5273.0
 offset_right = 612.0
 offset_bottom = 5688.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6647,7 +7917,7 @@ offset_left = 689.0
 offset_top = 5311.0
 offset_right = 1019.0
 offset_bottom = 5726.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree25" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6656,7 +7926,7 @@ offset_left = 924.0
 offset_top = 5209.0
 offset_right = 1254.0
 offset_bottom = 5624.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree26" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6674,7 +7944,7 @@ offset_left = 1400.0
 offset_top = 5215.0
 offset_right = 1730.0
 offset_bottom = 5630.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree28" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6692,7 +7962,7 @@ offset_left = 1860.0
 offset_top = 5250.0
 offset_right = 2190.0
 offset_bottom = 5665.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree30" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6710,7 +7980,7 @@ offset_left = 2324.0
 offset_top = 5326.0
 offset_right = 2654.0
 offset_bottom = 5741.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree32" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6719,7 +7989,7 @@ offset_left = 2553.0
 offset_top = 5202.0
 offset_right = 2883.0
 offset_bottom = 5617.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree33" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6737,7 +8007,7 @@ offset_left = 3026.0
 offset_top = 5231.0
 offset_right = 3356.0
 offset_bottom = 5646.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree35" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6755,7 +8025,7 @@ offset_left = 3410.0
 offset_top = 5339.0
 offset_right = 3740.0
 offset_bottom = 5754.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree37" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6773,7 +8043,7 @@ offset_left = 3835.0
 offset_top = 5260.0
 offset_right = 4165.0
 offset_bottom = 5675.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree39" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6782,7 +8052,7 @@ offset_left = 4114.0
 offset_top = 5314.0
 offset_right = 4444.0
 offset_bottom = 5729.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree40" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6800,7 +8070,7 @@ offset_left = 4540.0
 offset_top = 5365.0
 offset_right = 4870.0
 offset_bottom = 5780.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree42" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6818,7 +8088,7 @@ offset_left = 5225.0
 offset_top = 5292.0
 offset_right = 5555.0
 offset_bottom = 5707.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree89" type="TextureRect" parent="Background/BottomTreeRow2"]
@@ -6827,7 +8097,7 @@ offset_left = 5022.0
 offset_top = 5365.0
 offset_right = 5352.0
 offset_bottom = 5780.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="BottomTreeRow3" type="Node2D" parent="Background"]
@@ -6839,7 +8109,7 @@ offset_left = 44.0
 offset_top = 5254.0
 offset_right = 374.0
 offset_bottom = 5669.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6848,7 +8118,7 @@ offset_left = 282.0
 offset_top = 5273.0
 offset_right = 612.0
 offset_bottom = 5688.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6875,7 +8145,7 @@ offset_left = 924.0
 offset_top = 5209.0
 offset_right = 1254.0
 offset_bottom = 5624.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree26" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6884,7 +8154,7 @@ offset_left = 1143.0
 offset_top = 5307.0
 offset_right = 1473.0
 offset_bottom = 5722.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree27" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6893,7 +8163,7 @@ offset_left = 1400.0
 offset_top = 5215.0
 offset_right = 1730.0
 offset_bottom = 5630.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree28" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6902,7 +8172,7 @@ offset_left = 1619.0
 offset_top = 5310.0
 offset_right = 1949.0
 offset_bottom = 5725.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree29" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6911,7 +8181,7 @@ offset_left = 1860.0
 offset_top = 5250.0
 offset_right = 2190.0
 offset_bottom = 5665.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree30" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6920,7 +8190,7 @@ offset_left = 2076.0
 offset_top = 5212.0
 offset_right = 2406.0
 offset_bottom = 5627.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree31" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6929,7 +8199,7 @@ offset_left = 2324.0
 offset_top = 5326.0
 offset_right = 2654.0
 offset_bottom = 5741.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree32" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6938,7 +8208,7 @@ offset_left = 2553.0
 offset_top = 5202.0
 offset_right = 2883.0
 offset_bottom = 5617.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree33" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6965,7 +8235,7 @@ offset_left = 3188.0
 offset_top = 5333.0
 offset_right = 3518.0
 offset_bottom = 5748.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree36" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6983,7 +8253,7 @@ offset_left = 3610.0
 offset_top = 5339.0
 offset_right = 3940.0
 offset_bottom = 5754.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree38" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -6992,7 +8262,7 @@ offset_left = 3835.0
 offset_top = 5260.0
 offset_right = 4165.0
 offset_bottom = 5675.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree39" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -7001,7 +8271,7 @@ offset_left = 4114.0
 offset_top = 5314.0
 offset_right = 4444.0
 offset_bottom = 5729.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree40" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -7028,7 +8298,7 @@ offset_left = 4781.0
 offset_top = 5279.0
 offset_right = 5111.0
 offset_bottom = 5694.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree44" type="TextureRect" parent="Background/BottomTreeRow3"]
@@ -7057,7 +8327,7 @@ offset_left = 742.0
 offset_top = 5816.0
 offset_right = 1072.0
 offset_bottom = 6231.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree22" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7066,7 +8336,7 @@ offset_left = 539.0
 offset_top = 5921.0
 offset_right = 869.0
 offset_bottom = 6336.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree23" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7075,7 +8345,7 @@ offset_left = 256.0
 offset_top = 5883.0
 offset_right = 586.0
 offset_bottom = 6298.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree24" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7093,7 +8363,7 @@ offset_left = 640.0
 offset_top = 6111.0
 offset_right = 970.0
 offset_bottom = 6526.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree26" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7102,7 +8372,7 @@ offset_left = 373.0
 offset_top = 6124.0
 offset_right = 703.0
 offset_bottom = 6539.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("10_r8iub")
 stretch_mode = 2
 
 [node name="Tree27" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7129,7 +8399,7 @@ offset_left = 567.0
 offset_top = 6343.0
 offset_right = 897.0
 offset_bottom = 6758.0
-texture = ExtResource("3_no5jd")
+texture = ExtResource("9_h6ghw")
 stretch_mode = 2
 
 [node name="Tree30" type="TextureRect" parent="Background/BottomLeftTrees"]
@@ -7141,14 +8411,23 @@ offset_bottom = 6736.0
 texture = ExtResource("3_no5jd")
 stretch_mode = 2
 
+[node name="Dirt_Patches" type="Node2D" parent="Background"]
+
+[node name="Patch" type="TextureRect" parent="Background/Dirt_Patches"]
+offset_left = 3436.0
+offset_top = 2337.0
+offset_right = 4372.0
+offset_bottom = 2627.0
+texture = ExtResource("14_op1re")
+
 [node name="Lake" type="TextureRect" parent="Background"]
 clip_children = 2
 layout_mode = 0
 offset_left = 2353.0
 offset_top = 1360.0
-offset_right = 2977.0
-offset_bottom = 1695.0
-texture = ExtResource("5_c50gu")
+offset_right = 2969.0
+offset_bottom = 1688.0
+texture = ExtResource("12_bxale")
 script = ExtResource("6_ad32h")
 
 [node name="WaterLines" type="TextureRect" parent="Background/Lake"]
@@ -7176,11 +8455,12 @@ offset_bottom = 87.0
 texture = ExtResource("7_jfhpd")
 
 [node name="Border" type="TextureRect" parent="Background/Lake"]
-self_modulate = Color(0.0941176, 0.929412, 0.976471, 1)
 layout_mode = 0
-offset_right = 624.0
-offset_bottom = 335.0
-texture = ExtResource("7_def7v")
+offset_left = -24.0
+offset_top = -2.0
+offset_right = 647.0
+offset_bottom = 333.0
+texture = ExtResource("15_sbn0e")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Background/Lake"]
 visible = false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd68xoo0uiqk3"
-path="res://.godot/imported/LakeBorder.png-404dfc7f6e429835e939cb7eacb54db2.ctex"
+uid="uid://cuuhl35idsxlb"
+path="res://.godot/imported/Tree_Dark.png-c8791d75a2da03c4fdb46b48967e85af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LakeBorder.png"
-dest_files=["res://.godot/imported/LakeBorder.png-404dfc7f6e429835e939cb7eacb54db2.ctex"]
+source_file="res://Sprites/Map/Tree_Dark.png"
+dest_files=["res://.godot/imported/Tree_Dark.png-c8791d75a2da03c4fdb46b48967e85af.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1oe0cest0wrj"
-path="res://.godot/imported/Lake.png-d2e77e36ef6ba7a5b5b2721724a5f6e7.ctex"
+uid="uid://c0wov7qsfe6v0"
+path="res://.godot/imported/Grass_Tuft2.png-bdcfbf301c52eddb3cc203b22039e9ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lake.png"
-dest_files=["res://.godot/imported/Lake.png-d2e77e36ef6ba7a5b5b2721724a5f6e7.ctex"]
+source_file="res://Sprites/Map/Grass_Tuft2.png"
+dest_files=["res://.godot/imported/Grass_Tuft2.png-bdcfbf301c52eddb3cc203b22039e9ed.ctex"]
 
 [params]
 
