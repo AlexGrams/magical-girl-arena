@@ -21,7 +21,23 @@ var _has_boss_spawned := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Convert spawn event times from string to int
+	for event: EnemySpawnEventData in spawn_events:
+		var split: int = event.start_time.find(":")
+		event.start_time_seconds = (
+			int(event.start_time.substr(0, split)) * 60 + 
+			int(event.start_time.substr(split + 1, len(event.start_time) - split))
+		)
+		split = event.end_time.find(":")
+		if split != -1:
+			event.end_time_seconds  = (
+				int(event.end_time.substr(0, split)) * 60 + 
+				int(event.end_time.substr(split + 1, len(event.end_time) - split))
+			)
+		else:
+			event.end_time_seconds = event.start_time_seconds
+		print(event.start_time_seconds)
+		print(event.end_time_seconds)
 
 
 # Only process on the server.
