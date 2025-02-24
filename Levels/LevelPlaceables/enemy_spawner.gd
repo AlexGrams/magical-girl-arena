@@ -39,6 +39,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# TODO: Remove once new spawning is implemented.
+	return
+	
 	# Only the server controls spawning
 	if (not multiplayer.is_server()
 		or multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED):
@@ -81,3 +84,23 @@ func spawn(scene_to_spawn: PackedScene) -> void:
 	)
 	enemy.global_position = spawn_pos
 	get_node("..").add_child(enemy, true)
+
+
+# Asynchronous function to spawn enemies repeatedly from this spawner.
+func spawn_repeating(spawn_event: EnemySpawnEventData, start_time: float = 0.0) -> void:
+	var time_running: float = start_time
+	
+	if start_time > 0.0:
+		await get_tree().create_timer(start_time).timeout
+	
+	while time_running <= spawn_event.start_time_seconds - spawn_event.end_time_seconds:
+		var enemies_to_spawn: int = spawn_event.min_spawn_count
+		if spawn_event.max_spawn_count > spawn_event.min_spawn_count:
+			enemies_to_spawn = randi_range(spawn_event.min_spawn_count, spawn_event.max_spawn_count)
+		
+		for i in range(enemies_to_spawn):
+			spawn(spawn_event.enemy)
+		
+		await get_tree().create_timer(spawn_event.spawn_interval).timeout
+		
+		time_running += spawn_event.spawn_interval

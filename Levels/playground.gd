@@ -19,6 +19,8 @@ extends Node2D
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
+## The upcoming spawn event to process.
+var _current_spawn_event: int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,12 +43,10 @@ func _ready() -> void:
 			)
 		else:
 			event.end_time_seconds = event.start_time_seconds
-		print(event.start_time_seconds)
-		print(event.end_time_seconds)
 	
-	# Sort the spawn events by start time.
+	# Sort the spawn events by decreasing start time.
 	spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
-		return a.start_time_seconds < b.start_time_seconds
+		return a.start_time_seconds > b.start_time_seconds
 	)
 
 
@@ -54,6 +54,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
+	
+	# Process spawn events as they become active.
+	while _current_spawn_event < len(spawn_events) and GameState.time <= spawn_events[_current_spawn_event].start_time_seconds:
+		var spawn_start_time: float = 0.0
+		
+		for spawner: EnemySpawner in regular_enemy_spawners:
+			spawner.spawn_repeating(spawn_events[_current_spawn_event], spawn_start_time)
+			spawn_start_time += spawn_events[_current_spawn_event].spawn_interval_offset
+		
+		_current_spawn_event += 1
 	
 	if not _has_corrupted_enemy_spawned:
 		if GameState.get_game_progress_as_fraction() >= corrupted_enemy_spawn_time_fraction:

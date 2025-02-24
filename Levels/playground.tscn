@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="2_v45ga"]
 [ext_resource type="Texture2D" uid="uid://dnrrauox6iyqg" path="res://Tree.png" id="3_no5jd"]
+[ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="4_2ptoj"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
 [ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_test.tscn" id="4_8t8qx"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="5_b8hlh"]
@@ -13,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="6_blcs8"]
 [ext_resource type="Texture2D" uid="uid://5jne2i7m67kq" path="res://Sprites/Map/Patch_Light_Grass.png" id="6_rdarx"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
-[ext_resource type="PackedScene" uid="uid://bqs0gqki5rmlg" path="res://EnemyProjectiles/bullet_enemy_ranged.tscn" id="7_ew5pr"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="7_gsdoh"]
 [ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="7_jfhpd"]
 [ext_resource type="Texture2D" uid="uid://d041byvkp64a5" path="res://Sprites/Map/Patch_Dark_Grass.png" id="7_xnnrg"]
@@ -41,9 +41,9 @@ max_spawn_count = 2
 
 [sub_resource type="Resource" id="Resource_p7irf"]
 script = ExtResource("5_b8hlh")
-start_time = "14:30"
+start_time = "14:55"
 end_time = ""
-enemy = ExtResource("7_ew5pr")
+enemy = ExtResource("4_2ptoj")
 spawn_interval = 1.0
 spawn_interval_offset = 0.0
 min_spawn_count = 4
