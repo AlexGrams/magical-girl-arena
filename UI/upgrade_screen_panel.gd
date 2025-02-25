@@ -82,6 +82,13 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		
 		# Choose some powerups at random to show to the player
 		_show_random_upgrade_choices(random_powerup_list)
+	
+	# Update the text on the Reroll button
+	reroll_button.text = "Reroll (" + str(player_character.rerolls) + " remaining)"
+	if player_character.rerolls <= 0:
+		reroll_button.disabled = true
+	else:
+		reroll_button.disabled = false
 
 
 # Display a random selection of upgrades for the player to choose from.
@@ -105,6 +112,9 @@ func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
 
 
 func _on_reroll_button_down() -> void:
+	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
+	player_character.rerolls -= 1
+	
 	_generate_and_show_random_upgrade_choices()
 
 

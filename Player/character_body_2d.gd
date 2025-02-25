@@ -7,8 +7,10 @@ const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
 const TIME_TO_REVIVE: float = 3.0
 # Index of the collision layer for players.
 const PLAYER_COLLISION_LAYER: int = 4
-# The most number of different powerups that this player can have INCLUDING the base shooting powerup.
-const MAX_POWERUPS = 4
+# The most number of different powerups that this player can have INCLUDING their base powerup.
+const MAX_POWERUPS: int = 5
+# How many rerolls this player is given at the start of the game.
+const STARTING_REROLLS: int = 3
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
@@ -29,7 +31,10 @@ var powerups: Array[Powerup] = []
 var abilities: Array[Ability] = []
 var shoot_timer = 0
 var shoot_interval = 1
+var level = 1
 var experience = 0
+# Number of remaining powerup rerolls. Not replicated.
+var rerolls: int = STARTING_REROLLS
 var health_max = 100
 var health = health_max
 # True when the player is incapacitated.
@@ -37,7 +42,6 @@ var is_down := false
 # How long the player has been downed for. When time is up, this player can be revived.
 var down_timer: float = 0.0
 var revive_timer: float = 0.0
-var level = 1
 
 signal took_damage(health:int, health_max:int)
 signal gained_experience(experience: float, level: int)
