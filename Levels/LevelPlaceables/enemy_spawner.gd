@@ -12,6 +12,11 @@ var _spawn_x_max: float = 0
 var _spawn_y_min: float = 0
 var _spawn_y_max: float = 0
 
+# All spawn events that are running on this spawner.
+# 0: EnemySpawnEventData - information for this spawn event.
+# 1: float - time until the next activation.
+var _active_spawn_events: Array[Array] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var spawn_rect := spawn_area.get_shape().get_rect()
@@ -31,6 +36,32 @@ func toggle_enabled() -> void:
 	enabled = !enabled
 
 
+func _process(delta: float) -> void:
+	var i: int = 0
+	
+	while i < len(_active_spawn_events):
+		var spawn_event: Array = _active_spawn_events[i]
+		
+		if spawn_event[1] <= 0.0:
+			var enemies_to_spawn: int = spawn_event[0].min_spawn_count
+			if spawn_event[0].max_spawn_count > spawn_event[0].min_spawn_count:
+				enemies_to_spawn = randi_range(spawn_event[0].min_spawn_count, spawn_event[0].max_spawn_count)
+			
+			for j in range(enemies_to_spawn):
+				spawn(spawn_event[0].enemy)
+			
+			# If this event is done repeating, then remove it
+			if GameState.time - spawn_event[0].spawn_interval < spawn_event[0].end_time_seconds:
+				_active_spawn_events.remove_at(i)
+				continue
+			else:
+				_active_spawn_events[i][1] = spawn_event[0].spawn_interval
+			
+		spawn_event[1] -= delta
+		i += 1
+		
+
+
 # Make an enemy of this spawner's type within its designated spawn area. Spawning is
 # done periodically by default, but this function can be called to spawn manually.
 func spawn(scene_to_spawn: PackedScene) -> void:
@@ -45,19 +76,4 @@ func spawn(scene_to_spawn: PackedScene) -> void:
 
 # Asynchronous function to spawn enemies repeatedly from this spawner.
 func spawn_repeating(spawn_event: EnemySpawnEventData, start_time: float = 0.0) -> void:
-	var time_running: float = start_time
-	
-	if start_time > 0.0:
-		await get_tree().create_timer(start_time).timeout
-	
-	while time_running <= spawn_event.start_time_seconds - spawn_event.end_time_seconds:
-		var enemies_to_spawn: int = spawn_event.min_spawn_count
-		if spawn_event.max_spawn_count > spawn_event.min_spawn_count:
-			enemies_to_spawn = randi_range(spawn_event.min_spawn_count, spawn_event.max_spawn_count)
-		
-		for i in range(enemies_to_spawn):
-			spawn(spawn_event.enemy)
-		
-		await get_tree().create_timer(spawn_event.spawn_interval).timeout
-		
-		time_running += spawn_event.spawn_interval
+	_active_spawn_events.append([spawn_event, start_time])
