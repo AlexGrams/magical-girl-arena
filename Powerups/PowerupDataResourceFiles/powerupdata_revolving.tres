@@ -7,5 +7,5 @@
 [resource]
 script = ExtResource("1_k3h05")
 scene = ExtResource("1_uifdx")
-name = "Revolving"
+name = "Tarot Cards"
 sprite = ExtResource("2_d18it")
