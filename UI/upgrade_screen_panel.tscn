@@ -13,7 +13,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
 
-[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
+[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "reroll_button", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,6 +23,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
 all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb")])
 upgrade_panels_holder = NodePath("HBoxContainer")
+reroll_button = NodePath("RerollButton")
 players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 player_ready_indicator_holder = NodePath("PlayersSelectingUpgrades/ReadyIndicatorContainer")
 
@@ -127,3 +128,5 @@ grow_vertical = 0
 pivot_offset = Vector2(200, 35)
 theme_override_font_sizes/font_size = 32
 text = "Reroll (1 remaining)"
+
+[connection signal="button_down" from="RerollButton" to="." method="_on_reroll_button_down"]
