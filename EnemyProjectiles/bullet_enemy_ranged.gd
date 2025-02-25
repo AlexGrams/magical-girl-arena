@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 	
-	global_position += direction * speed
+	global_position += direction * speed * delta
 	
 	death_timer += delta
 	if death_timer >= lifetime:
