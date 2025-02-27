@@ -7,6 +7,8 @@ extends Node2D
 
 @export var speed: float = 5
 @export var lifetime: float = 2
+## If true, this bullet is destroyed the first time it collides with something.
+@export var destroy_on_hit := true
 ## The bullet's collider that damages when it touches enemies or players.
 @export var collider: Area2D = null
 ## The rendered part of the bullet. Used to change its color when Enemies shoot it.
@@ -33,7 +35,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() and destroy_on_hit:
 		queue_free()
 
 
