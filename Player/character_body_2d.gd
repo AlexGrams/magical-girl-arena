@@ -246,8 +246,7 @@ func ready_player_character(character: Constants.Character) -> void:
 		add_powerup(base_powerup)
 		
 		# Set up ultimate ability
-		# TODO: Testing ults using Goth ult only.
-		var ult: Ability = preload("res://Abilities/ability_ult_goth.tscn").instantiate()
+		var ult: Ability = load(character_data.ultimate_ability).instantiate()
 		ult.set_authority(multiplayer.get_unique_id())
 		add_child(ult)
 		abilities.append(ult)

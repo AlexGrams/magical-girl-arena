@@ -191,6 +191,9 @@ func _on_character_select_button_pressed(button: CharacterSelectButton) -> void:
 
 # Sets the text and images in the character information panel to match the client's character.
 func update_character_description() -> void:
+	if multiplayer.get_unique_id() not in GameState.players:
+		await multiplayer.connected_to_server
+	
 	var character: Constants.Character = GameState.players[multiplayer.get_unique_id()]["character"]
 	
 	var data: CharacterData = null

@@ -17,3 +17,5 @@ extends Resource
 @export var model_file_path: String
 ## Path to the .tscn file for this character's base powerup.
 @export var base_powerup: String
+## Path to the .tscn file for this character's ultimate ability.
+@export var ultimate_ability: String

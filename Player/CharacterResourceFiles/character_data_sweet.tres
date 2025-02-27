@@ -13,3 +13,4 @@ ult_name = "Sweet grants herself and nearby allies bonus HP. She throws tarot ca
 ult_texture = ExtResource("1_dg116")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
 base_powerup = "res://Powerups/revolving_powerup.tscn"
+ultimate_ability = "res://Abilities/ability_ult_sweet.tscn"
