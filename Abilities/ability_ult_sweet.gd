@@ -7,6 +7,8 @@ const _NUM_BULLETS := 12
 
 @export var bullet_scene_path := "res://Abilities/bullet_ult_sweet.tscn"
 @export var damage: float = 100.0
+## How much temporary health is granted to nearby players when this Ability is used.
+@export var temp_health_healing: int = 50
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,3 +38,6 @@ func activate() -> void:
 	
 	# Give a temp reroll
 	get_parent().increment_temp_rerolls()
+	
+	# Give temp health in an area
+	get_parent().add_temp_health(temp_health_healing)

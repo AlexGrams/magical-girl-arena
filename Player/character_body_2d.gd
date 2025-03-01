@@ -11,6 +11,8 @@ const PLAYER_COLLISION_LAYER: int = 4
 const MAX_POWERUPS: int = 5
 # How many rerolls this player is given at the start of the game.
 const STARTING_REROLLS: int = 3
+# How long temporary health stays on the player before going away.
+const TEMP_HEALTH_LINGER_TIME: float = 3.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
@@ -34,14 +36,18 @@ var shoot_interval = 1
 var level = 1
 var experience = 0
 
-var health_max = 100
-var health = health_max
+var health_max: int = 100
+var health: int = health_max
 # True when the player is incapacitated.
 var is_down := false
 # How long the player has been downed for. When time is up, this player can be revived.
 var down_timer: float = 0.0
 var revive_timer: float = 0.0
 
+# Temporary HP that goes away after some time
+var _temp_health: int = 0
+# How long until temp HP automatically disappears.
+var _temp_health_timer: float = 0.0
 # Number of remaining powerup rerolls. Not replicated.
 var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
@@ -86,6 +92,12 @@ func _process(delta: float) -> void:
 	var direction = get_global_mouse_position() - $Sprite2D.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
+	
+	# Temporary health
+	if _temp_health_timer > 0.0:
+		_temp_health_timer -= delta
+		if _temp_health_timer <= 0.0:
+			_temp_health = 0.0
 	
 	# Death and reviving
 	if is_down:
@@ -167,6 +179,18 @@ func take_damage(damage: float) -> void:
 	if is_down:
 		return
 	
+	# Deplete temp health before regular health.
+	if _temp_health > 0:
+		_temp_health -= damage
+		
+		if _temp_health < 0:
+			# Temporary health was delepeted
+			damage = abs(_temp_health)
+			_temp_health = 0
+			_temp_health_timer = 0.0
+		else:
+			damage = 0
+	
 	health = clamp(health - damage, 0, health_max)
 	took_damage.emit(health, health_max)
 	
@@ -174,6 +198,16 @@ func take_damage(damage: float) -> void:
 		$AnimationPlayer.play("took_damage")
 		if health <= 0:
 			die()
+
+
+# Add temporary health to the player
+@rpc("any_peer", "call_local")
+func add_temp_health(temp_health_to_add: int) -> void:
+	if is_down: 
+		return
+	
+	_temp_health += temp_health_to_add
+	_temp_health_timer = TEMP_HEALTH_LINGER_TIME
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
