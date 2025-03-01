@@ -33,8 +33,7 @@ var shoot_timer = 0
 var shoot_interval = 1
 var level = 1
 var experience = 0
-# Number of remaining powerup rerolls. Not replicated.
-var rerolls: int = STARTING_REROLLS
+
 var health_max = 100
 var health = health_max
 # True when the player is incapacitated.
@@ -42,6 +41,11 @@ var is_down := false
 # How long the player has been downed for. When time is up, this player can be revived.
 var down_timer: float = 0.0
 var revive_timer: float = 0.0
+
+# Number of remaining powerup rerolls. Not replicated.
+var _rerolls: int = STARTING_REROLLS
+# Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
+var _temp_rerolls: int = 0
 
 signal took_damage(health:int, health_max:int)
 signal gained_experience(experience: float, level: int)
@@ -55,6 +59,9 @@ func _ready():
 
 func _on_upgrade_chosen(powerupdata: PowerupData):
 	var powerup_found = false
+	
+	# Reset temp rerolls in case we have any
+	_temp_rerolls = 0
 	
 	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
@@ -115,6 +122,21 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ability_ultimate") and abilities[0].get_can_activate():
 		abilities[0].activate()
+
+
+func get_rerolls() -> int:
+	return _rerolls + _temp_rerolls
+
+
+func increment_temp_rerolls() -> void:
+	_temp_rerolls += 1
+
+
+func decrement_rerolls() -> void:
+	if _temp_rerolls > 0:
+		_temp_rerolls -= 1
+	else:
+		_rerolls -= 1
 
 
 # Gives this player a new powerup.

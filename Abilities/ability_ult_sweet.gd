@@ -22,8 +22,8 @@ func _process(delta: float) -> void:
 func activate() -> void:
 	super()
 	
+	# Shoot bullets all around
 	var rotation_increment: float = 2 * PI / _NUM_BULLETS
-	
 	for i in range(_NUM_BULLETS):
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 		1, [bullet_scene_path, 
@@ -32,5 +32,7 @@ func activate() -> void:
 			damage, 
 			true,
 			[]
-	]
-)
+	])
+	
+	# Give a temp reroll
+	get_parent().increment_temp_rerolls()

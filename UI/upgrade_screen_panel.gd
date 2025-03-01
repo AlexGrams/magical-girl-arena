@@ -84,8 +84,9 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		_show_random_upgrade_choices(random_powerup_list)
 	
 	# Update the text on the Reroll button
-	reroll_button.text = "Reroll (" + str(player_character.rerolls) + " remaining)"
-	if player_character.rerolls <= 0:
+	var rerolls = player_character.get_rerolls()
+	reroll_button.text = "Reroll (" + str(rerolls) + " remaining)"
+	if rerolls <= 0:
 		reroll_button.disabled = true
 	else:
 		reroll_button.disabled = false
@@ -113,7 +114,7 @@ func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
 
 func _on_reroll_button_down() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
-	player_character.rerolls -= 1
+	player_character.decrement_rerolls()
 	
 	_generate_and_show_random_upgrade_choices()
 
@@ -129,16 +130,6 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	upgrade_panels_holder.hide()
 	increment_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
-	
-	# TODO: For showing a screen when others are selecting abilities:
-	# - Emit from upgrade_chosen.
-	# - Player is connected to that signal, so it is notified to add the powerup
-	# - Server is notified that this player has selected their upgrade
-	# - Notify everyone that this player has selected their upgrade
-	# -- This and the previous might be able to be combined into one RPC. But on who?
-	# -- No, make them separate. GameState needs to do something, and the UpgradeScreenPanel
-	#    needs to do something.
-	# - Once everyone has their upgrade, hide the UpgradeScreenPanel
 
 
 # Update the displayed count of how many players are still selecting their upgrades.
