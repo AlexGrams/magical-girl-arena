@@ -12,7 +12,7 @@ const MAX_POWERUPS: int = 5
 # How many rerolls this player is given at the start of the game.
 const STARTING_REROLLS: int = 3
 # How long temporary health stays on the player before going away.
-const TEMP_HEALTH_LINGER_TIME: float = 3.0
+const TEMP_HEALTH_LINGER_TIME: float = 5.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
@@ -190,6 +190,8 @@ func take_damage(damage: float) -> void:
 			_temp_health_timer = 0.0
 		else:
 			damage = 0
+	
+	print(str(health), " ", str(_temp_health))
 	
 	health = clamp(health - damage, 0, health_max)
 	took_damage.emit(health, health_max)

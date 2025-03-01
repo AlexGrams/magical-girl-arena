@@ -14,7 +14,8 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
-	powerup_name = "Revolving"
+	# TODO: Make these properties read from the PowerupData instead of setting them here.
+	powerup_name = "Tarot Cards"
 	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
 
 

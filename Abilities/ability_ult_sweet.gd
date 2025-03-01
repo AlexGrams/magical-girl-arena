@@ -9,11 +9,17 @@ const _NUM_BULLETS := 12
 @export var damage: float = 100.0
 ## How much temporary health is granted to nearby players when this Ability is used.
 @export var temp_health_healing: int = 50
+## Radius in which nearby players are granted temporary health by this Ability.
+@export var temp_health_range: float = 1000.0
+
+var _temp_health_ranged_squared: float = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	
+	_temp_health_ranged_squared = temp_health_range ** 2
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,4 +46,8 @@ func activate() -> void:
 	get_parent().increment_temp_rerolls()
 	
 	# Give temp health in an area
-	get_parent().add_temp_health(temp_health_healing)
+	var owner_position: Vector2 = get_parent().global_position
+	for player: PlayerCharacterBody2D in get_tree().get_nodes_in_group("player"):
+		if owner_position.distance_squared_to(player.global_position) <= _temp_health_ranged_squared:
+			print("Added temp hp")
+			player.add_temp_health.rpc(temp_health_healing)
