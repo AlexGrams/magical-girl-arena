@@ -2,8 +2,8 @@ class_name Powerup
 extends Node2D
 ## Abstract class for abilities granted to the player. 
 ## Powerups are not replicated, but their effects are. The powerup scene only exists on the 
-## server, but stuff like spawning bullets or applying buffs should be done using RPCs so that
-## this Powerup's functionality is seen on all clients.
+## client that owns the powerup, but stuff like spawning bullets or applying buffs should be done 
+## using RPCs so that this Powerup's functionality is seen on all clients.
 ## TODO: Probably need to make this class utilize the PowerData resource for setting some of
 ## its properties.
 ## TODO: Maybe also change the script name to match capitalization scheme.

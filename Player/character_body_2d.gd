@@ -97,7 +97,7 @@ func _process(delta: float) -> void:
 	if _temp_health_timer > 0.0:
 		_temp_health_timer -= delta
 		if _temp_health_timer <= 0.0:
-			_temp_health = 0.0
+			_temp_health = 0
 	
 	# Death and reviving
 	if is_down:

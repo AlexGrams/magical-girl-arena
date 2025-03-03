@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c46lklcir3voi"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_laser.gd" id="1_mur24"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_tv7hc"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unwy0"]
+size = Vector2(1, 6)
+
+[node name="BulletLaser" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_mur24")
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.004, 0.02)
+texture = ExtResource("2_tv7hc")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_d6neb")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_unwy0")
