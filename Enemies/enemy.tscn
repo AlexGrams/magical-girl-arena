@@ -41,7 +41,6 @@ drop_weight_gold = 4.0
 [node name="AtomSprite" parent="." instance=ExtResource("2_plv55")]
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_mn3v6")
 
 [node name="Area2D" type="Area2D" parent="."]

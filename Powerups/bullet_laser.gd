@@ -23,16 +23,21 @@ func _physics_process(_delta: float) -> void:
 	
 	var space_state = get_world_2d().direct_space_state
 	var end_point: Vector2 = _owning_character.global_position + (get_global_mouse_position() - _owning_character.global_position).normalized() * _max_range
-	var query = PhysicsRayQueryParameters2D.create(
+	var query := PhysicsRayQueryParameters2D.create(
 		_owning_character.global_position, 
 		end_point
 	)
+	query.collide_with_areas = true
+	query.collision_mask = collider.collision_mask
 	var result = space_state.intersect_ray(query)
 	
 	# Position and scale the laser beam
 	if result:
 		# The laser hit something and shouldn't be its full length.
 		end_point = result["position"]
+		
+		var hit_node: Node2D = result["collider"].get_parent()
+	
 	var hit_vector := end_point - _owning_character.global_position
 	global_position = hit_vector / 2.0 + _owning_character.global_position
 	rotation = hit_vector.angle()

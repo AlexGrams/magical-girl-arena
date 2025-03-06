@@ -191,8 +191,6 @@ func take_damage(damage: float) -> void:
 		else:
 			damage = 0
 	
-	print(str(health), " ", str(_temp_health))
-	
 	health = clamp(health - damage, 0, health_max)
 	took_damage.emit(health, health_max)
 	
