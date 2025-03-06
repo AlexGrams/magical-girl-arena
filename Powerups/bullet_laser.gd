@@ -2,6 +2,7 @@ extends Bullet
 
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
+var _is_owned_by_player: bool = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,6 +38,8 @@ func _physics_process(_delta: float) -> void:
 		end_point = result["position"]
 		
 		var hit_node: Node2D = result["collider"].get_parent()
+		if _is_owned_by_player and hit_node is Enemy:
+			hit_node.take_damage($Area2D.damage)
 	
 	var hit_vector := end_point - _owning_character.global_position
 	global_position = hit_vector / 2.0 + _owning_character.global_position
@@ -56,6 +59,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	):
 		return
 	
+	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])#get_tree().get_node
 	
