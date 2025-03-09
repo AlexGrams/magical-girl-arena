@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=51 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -28,6 +28,13 @@
 [ext_resource type="Texture2D" uid="uid://clf7dd0e1v7fh" path="res://Sprites/Map/Patch_Dirt.png" id="14_op1re"]
 [ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="15_sbn0e"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="26_ntkj0"]
+[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="27_vw2yc"]
+[ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
+[ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="29_2x3ae"]
+[ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
+[ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
+[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 
 [sub_resource type="Resource" id="Resource_lbrw2"]
 script = ExtResource("5_b8hlh")
@@ -11968,6 +11975,7 @@ expand_mode = 1
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
+all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh")])
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer"]
 layout_mode = 3
