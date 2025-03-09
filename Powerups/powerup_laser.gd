@@ -43,6 +43,4 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	# TODO: Figure out how to upgrade the laser
-	#bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
-	#powerup_level_up.emit(current_level, bullet_damage)
+	powerup_level_up.emit(current_level, upgrade_curve.sample(float(current_level) / max_level))

@@ -83,9 +83,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var orbit_powerup := _owning_character.get_node_or_null("OrbitPowerup")
-	if orbit_powerup != null:
-		orbit_powerup.powerup_level_up.connect(
+	var laser_powerup := _owning_character.get_node_or_null("PowerupLaser")
+	if laser_powerup != null:
+		laser_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
@@ -96,4 +96,4 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
-	$BulletOffset/Area2D.damage = new_damage
+	$Area2D.damage = new_damage
