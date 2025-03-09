@@ -3,6 +3,7 @@ extends Bullet
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
 var _is_owned_by_player: bool = true
+var _pointer_location: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +16,11 @@ func _process(_delta: float) -> void:
 	pass
 
 
+@rpc("any_peer", "call_local")
+func set_pointer_direction(val: Vector2) -> void:
+	_pointer_location = val
+
+
 func _physics_process(_delta: float) -> void:
 	if (
 		not is_multiplayer_authority()
@@ -23,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	var space_state = get_world_2d().direct_space_state
-	var end_point: Vector2 = _owning_character.global_position + (get_global_mouse_position() - _owning_character.global_position).normalized() * _max_range
+	var end_point: Vector2 = _owning_character.global_position + (_pointer_location - _owning_character.global_position).normalized() * _max_range
 	var query := PhysicsRayQueryParameters2D.create(
 		_owning_character.global_position, 
 		end_point
@@ -45,9 +51,6 @@ func _physics_process(_delta: float) -> void:
 	global_position = hit_vector / 2.0 + _owning_character.global_position
 	rotation = hit_vector.angle()
 	scale.x = hit_vector.length()
-	
-	# TODO: Only do damage if we hit something. See if we can damage the thing that we hit.
-	# TODO: Make it hit enemies
 
 
 # Set up other properties for this bullet
@@ -83,11 +86,17 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var laser_powerup := _owning_character.get_node_or_null("PowerupLaser")
+	var laser_powerup: PowerupLaser = _owning_character.get_node_or_null("PowerupLaser")
 	if laser_powerup != null:
 		laser_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
+		)
+		
+		# Each frame, need to update the owning player's laser direction on all clients.
+		laser_powerup.update_pointer_location.connect(
+			func(new_pointer_location):
+				set_pointer_direction.rpc(new_pointer_location)
 		)
 	
 	_max_range = data[1]

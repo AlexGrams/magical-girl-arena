@@ -1,3 +1,4 @@
+class_name PowerupLaser
 extends Powerup
 
 
@@ -7,6 +8,8 @@ extends Powerup
 # TODO: Promote to a member of Powerup
 var is_on: bool = false
 
+signal update_pointer_location(new_pointer_location: Vector2)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +18,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	update_pointer_location.emit(get_global_mouse_position())
 
 
 func activate_powerup():
