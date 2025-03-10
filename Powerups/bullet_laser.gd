@@ -1,4 +1,10 @@
 extends Bullet
+## A persistent bullet which changes its transform to make it appear like the player is shooting
+## a laser from their body that hits the nearest target.
+## Since the server has authority over all bullets, each player with a laser needs to RPC the 
+## server each frame to notify it of where that player's mouse is. The server uses the mouse
+## position to set the transform of the laser, and the MultiplayerSynchronizer makes sure the
+## new transform is replicated across all clients.
 
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
@@ -22,10 +28,7 @@ func set_pointer_direction(val: Vector2) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if (
-		not is_multiplayer_authority()
-		or _owning_character == null
-	):
+	if _owning_character == null:
 		return
 	
 	var space_state = get_world_2d().direct_space_state
@@ -44,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 		end_point = result["position"]
 		
 		var hit_node: Node2D = result["collider"].get_parent()
-		if _is_owned_by_player and hit_node is Enemy:
+		if is_multiplayer_authority() and _is_owned_by_player and hit_node is Enemy:
 			hit_node.take_damage($Area2D.damage)
 	
 	var hit_vector := end_point - _owning_character.global_position
@@ -64,7 +67,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
-		_owning_character = get_node(data[0])#get_tree().get_node
+		_owning_character = get_node(data[0])
 	
 		# This bullet destroys itself when the player dies.
 		if is_multiplayer_authority():
@@ -93,7 +96,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 				level_up.rpc(new_level, new_damage)
 		)
 		
-		# Each frame, need to update the owning player's laser direction on all clients.
+		# Each frame, need to send the local player's mouse position to the server.
 		laser_powerup.update_pointer_location.connect(
 			func(new_pointer_location):
 				set_pointer_direction.rpc(new_pointer_location)

@@ -13,5 +13,5 @@ base_powerup_texture = ExtResource("1_m8f0c")
 ult_name = "Unleash a powerful attack in a radius around you. Any melee or ranged enemies killed by this attack become your allies for a brief duration. When Goth’s Scythe is at max level, a large and powerful melee ally is also spawned at your location."
 ult_texture = ExtResource("3_fi427")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
-base_powerup = "res://Powerups/powerup_laser.tscn"
+base_powerup = "res://Powerups/powerup_scythe.tscn"
 ultimate_ability = "res://Abilities/ability_ult_goth.tscn"
