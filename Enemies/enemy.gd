@@ -1,19 +1,19 @@
 class_name Enemy
 extends CharacterBody2D
 
-const curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
 
-# Parent of this Enemy's collider
+## Describes how this enemy's health changes as the game time progresses.
+@export var curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
+## Parent of this Enemy's collider
 @export var collider_area: Area2D = null
 @export var sprite: Sprite2D = null
-# Time in seconds between when this Enemy can attack
+## Time in seconds between when this Enemy can attack
 @export var attack_interval: float = 1.0
 @export var attack_damage: float = 10.0
-# The relative liklihoods of dropping EXP, gold, or nothing when this Enemy dies.
+## The relative liklihoods of dropping EXP, gold, or nothing when this Enemy dies.
 @export var drop_weight_exp: float = 1.0
 @export var drop_weight_gold: float = 1.0
 @export var drop_weight_nothing: float = 1.0
-
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 @onready var gold_scene = preload("res://Pickups/gold.tscn")
