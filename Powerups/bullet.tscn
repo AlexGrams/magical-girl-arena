@@ -9,7 +9,8 @@ size = Vector2(38, 38)
 
 [node name="Bullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_u38u2")
-speed = 500.0
+speed = 1000.0
+lifetime = 1.0
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 

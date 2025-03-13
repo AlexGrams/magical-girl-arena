@@ -5,4 +5,5 @@
 
 [node name="PowerupShooting" type="Node2D"]
 script = ExtResource("1_a0uoa")
+shoot_interval = 0.5
 upgrade_curve = ExtResource("2_hnaeg")
