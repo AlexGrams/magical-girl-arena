@@ -1,0 +1,9 @@
+[gd_resource type="Curve" format=3 uid="uid://mowjwr6fnhfi"]
+
+[resource]
+resource_name = "EnemyMaxHealth"
+min_value = 1.0
+max_value = 600.0
+_data = [Vector2(0, 400), 0.0, 0.0, 0, 1, Vector2(0.1, 400), 0.0, 222.222, 1, 1, Vector2(1, 600), 222.222, 0.0, 1, 0]
+point_count = 3
+metadata/_snap_count = 15

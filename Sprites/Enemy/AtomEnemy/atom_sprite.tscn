@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://4ximlipujsuo"]
+[gd_scene load_steps=26 format=3 uid="uid://4ximlipujsuo"]
 
+[ext_resource type="Script" path="res://Sprites/Enemy/enemy_sprite_changer.gd" id="1_r4xnc"]
 [ext_resource type="Texture2D" uid="uid://dkyhawpfbpxop" path="res://Sprites/Enemy/AtomEnemy/Atom_Aura.png" id="1_ybikw"]
 [ext_resource type="Texture2D" uid="uid://deoxnldwo8g1m" path="res://Sprites/Enemy/AtomEnemy/Atom_OrangeSpikes.png" id="2_lqkfh"]
 [ext_resource type="Texture2D" uid="uid://ctk8isrtey8da" path="res://Sprites/Enemy/AtomEnemy/Atom_RedSpikes.png" id="3_4v3ij"]
@@ -7,6 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://onognmsl4k2t" path="res://Sprites/Enemy/AtomEnemy/Atom_Mouth.png" id="5_4xl7d"]
 [ext_resource type="Texture2D" uid="uid://deypfqw2cy7w0" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_L.png" id="6_3ywrs"]
 [ext_resource type="Texture2D" uid="uid://ccbjq7mocc1bx" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_R.png" id="7_r464i"]
+[ext_resource type="Texture2D" uid="uid://c4541i8pid2mx" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Aura.png" id="9_ne64m"]
+[ext_resource type="Texture2D" uid="uid://cbyptou5r72sf" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_OrangeSpikes.png" id="10_jjqpx"]
+[ext_resource type="Texture2D" uid="uid://dlhukndifx37" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_RedSpikes.png" id="11_5h325"]
+[ext_resource type="Texture2D" uid="uid://8tn1156fhm8l" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Head.png" id="12_fi4ur"]
+[ext_resource type="Texture2D" uid="uid://cv27vo5ll15a8" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Mouth.png" id="13_ve6hy"]
+[ext_resource type="Texture2D" uid="uid://df6jm5m7ddat6" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Eye_L.png" id="14_lh4cw"]
+[ext_resource type="Texture2D" uid="uid://cntu7rp1n3tb2" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Eye_R.png" id="15_fxy5d"]
+[ext_resource type="Texture2D" uid="uid://b0y0n4nn31jyr" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Aura.png" id="16_wlax1"]
+[ext_resource type="Texture2D" uid="uid://dfgjsclnh1fvc" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_OrangeSpikes.png" id="17_7wcd0"]
+[ext_resource type="Texture2D" uid="uid://pgxhkywndb4c" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_RedSpikes.png" id="18_2ils5"]
+[ext_resource type="Texture2D" uid="uid://cfej1m18qvjlv" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Head.png" id="19_s1w5x"]
+[ext_resource type="Texture2D" uid="uid://bm3rxqi37bofm" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Mouth.png" id="20_2at51"]
+[ext_resource type="Texture2D" uid="uid://cimvu74oauwjp" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Eye_L.png" id="21_2cawa"]
+[ext_resource type="Texture2D" uid="uid://js7tvmavk1pt" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Eye_R.png" id="22_rov1b"]
 
 [sub_resource type="Animation" id="Animation_q2gjs"]
 length = 0.001
@@ -213,7 +228,12 @@ _data = {
 "atom_sprite": SubResource("Animation_l3nj6")
 }
 
-[node name="AtomSprite" type="Node2D"]
+[node name="AtomSprite" type="Node2D" node_paths=PackedStringArray("sprite_components")]
+script = ExtResource("1_r4xnc")
+sprite_components = [NodePath("Aura"), NodePath("OrangeSpikes"), NodePath("RedSpikes"), NodePath("Head"), NodePath("Mouth"), NodePath("Eye_L"), NodePath("Eye_R")]
+standard_sprites = Array[CompressedTexture2D]([ExtResource("1_ybikw"), ExtResource("2_lqkfh"), ExtResource("3_4v3ij"), ExtResource("4_a2p0m"), ExtResource("5_4xl7d"), ExtResource("6_3ywrs"), ExtResource("7_r464i")])
+special_sprites = Array[CompressedTexture2D]([ExtResource("9_ne64m"), ExtResource("10_jjqpx"), ExtResource("11_5h325"), ExtResource("12_fi4ur"), ExtResource("13_ve6hy"), ExtResource("14_lh4cw"), ExtResource("15_fxy5d")])
+goth_sprites = Array[CompressedTexture2D]([ExtResource("16_wlax1"), ExtResource("17_7wcd0"), ExtResource("18_2ils5"), ExtResource("19_s1w5x"), ExtResource("20_2at51"), ExtResource("21_2cawa"), ExtResource("22_rov1b")])
 
 [node name="Aura" type="Sprite2D" parent="."]
 texture = ExtResource("1_ybikw")

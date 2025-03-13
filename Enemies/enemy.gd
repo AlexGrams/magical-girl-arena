@@ -3,10 +3,10 @@ extends CharacterBody2D
 
 
 ## Describes how this enemy's health changes as the game time progresses.
-@export var curve_max_health: Curve = preload("res://Curves/enemy_max_health.tres")
+@export var curve_max_health: Curve = preload("res://Curves/Enemies/atom_enemy_max_health.tres")
 ## Parent of this Enemy's collider
 @export var collider_area: Area2D = null
-@export var sprite: Sprite2D = null
+@export var sprite: Node2D = null
 ## Time in seconds between when this Enemy can attack
 @export var attack_interval: float = 1.0
 @export var attack_damage: float = 10.0
@@ -218,7 +218,7 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 	# Stop color animation so that we can apply this "ally" color.
 	$AnimationPlayer.stop()
 	if sprite != null and not sprite.is_queued_for_deletion():
-		sprite.self_modulate = Color("00cc7e")
+		sprite.change_color(Constants.EnemySpriteType.GOTH_ALLY)
 	
 	# Since this Enemy essentially died, spawn EXP from it
 	if is_multiplayer_authority():

@@ -11,3 +11,9 @@ enum Character {
 	SWEET,
 	NONE = -1
 }
+
+enum EnemySpriteType {
+	STANDARD,
+	SPECIAL,
+	GOTH_ALLY
+}
