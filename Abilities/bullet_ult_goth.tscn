@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cneff41hw1uy1"]
 
 [ext_resource type="Script" path="res://Abilities/bullet_ult_goth.gd" id="1_2qibd"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_j6u3w"]
+[ext_resource type="Texture2D" uid="uid://d2fpf6k77f8s4" path="res://Sprites/Abilities/Goth_Ultimate.png" id="2_1f683"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdig7"]
-radius = 50.0
+radius = 500.0
 
 [node name="BulletUltGoth" type="Node2D"]
 script = ExtResource("1_2qibd")
@@ -14,14 +14,13 @@ speed = 0.0
 lifetime = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(9.5, 9.5)
-texture = ExtResource("2_j6u3w")
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("2_1f683")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(11.4683, 11.4683)
 shape = SubResource("CircleShape2D_bdig7")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
