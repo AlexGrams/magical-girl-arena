@@ -11837,13 +11837,15 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4746)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
 _pointer_parent = NodePath("PlayerPointers")
 _powerup_container = NodePath("Abilities")
+_ultimate_texture = NodePath("UltimateCooldown/UltimateTextureRect")
+_ultimate_progress_bar = NodePath("UltimateCooldown/UltimateProgressBar")
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -12065,12 +12067,12 @@ offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UltimateCooldown"]
+[node name="UltimateTextureRect" type="TextureRect" parent="CanvasLayer/UltimateCooldown"]
 layout_mode = 2
 texture = ExtResource("26_dibxh")
 expand_mode = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UltimateCooldown"]
+[node name="UltimateProgressBar" type="ProgressBar" parent="CanvasLayer/UltimateCooldown"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 1

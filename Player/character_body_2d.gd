@@ -311,6 +311,7 @@ func ready_player_character(character: Constants.Character) -> void:
 		ult.set_authority(multiplayer.get_unique_id())
 		add_child(ult)
 		abilities.append(ult)
+		$"..".get_hud_canvas_layer().set_up_ultimate_ui(character_data, ult)
 	else:
 		# This client does not own this PlayerCharacter. Connect events to show the
 		# pointer to this character when it goes off screen for the local client.

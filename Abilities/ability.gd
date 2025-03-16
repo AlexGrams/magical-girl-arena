@@ -13,11 +13,14 @@ extends Node2D
 # Time in seconds when this Ability cannot be activated again.
 @export var cooldown: float = 0.0
 
-var currentCooldownTime: float = 0.0
+var current_cooldown_time: float = 0.0
+
+## Emitted every time current_cooldown_time is updated.
+signal cooldown_time_updated(cooldown_time_remaining_fraction: float)
 
 
 func get_can_activate() -> bool:
-	return currentCooldownTime <= 0.0
+	return current_cooldown_time <= 0.0
 
 
 # Set the multiplayer authority for this ability
@@ -27,15 +30,17 @@ func set_authority(id: int) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Start with the ability ready to use.
+	cooldown_time_updated.emit(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if currentCooldownTime > 0.0:
-		currentCooldownTime -= delta
+	if current_cooldown_time > 0.0:
+		current_cooldown_time = clamp(current_cooldown_time - delta, 0.0, cooldown)
+		cooldown_time_updated.emit(current_cooldown_time / cooldown)
 
 
 # Start this Ability's functionality.
 func activate() -> void:
-	currentCooldownTime = cooldown
+	current_cooldown_time = cooldown

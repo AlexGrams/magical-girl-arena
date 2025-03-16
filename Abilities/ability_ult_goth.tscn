@@ -4,3 +4,4 @@
 
 [node name="AbilityUltGoth" type="Node2D"]
 script = ExtResource("1_8t0ch")
+cooldown = 2.0

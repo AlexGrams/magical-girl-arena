@@ -7,6 +7,10 @@ extends CanvasLayer
 @export var _timer_text: Label = null
 @export var _pointer_parent: Control = null
 @export var _powerup_container: Container = null
+## Displays the icon for the player's ultimate ability.
+@export var _ultimate_texture: TextureRect = null
+## Displays the cooldown for the player's ultimate ability.
+@export var _ultimate_progress_bar: ProgressBar = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -181,6 +185,20 @@ func _return_to_lobby():
 ## Returns the Container for dislaying Powerup icons.
 func get_powerup_container() -> Container:
 	return _powerup_container
+
+
+# Sets up the UI for the local player's ultimate ability. The icon updates depending on the ult cooldown.
+func set_up_ultimate_ui(character_data: CharacterData, ultimate: Ability) -> void:
+	_ultimate_texture.texture = character_data.ult_texture
+	# Update progress bar fill percent and visibility.
+	ultimate.cooldown_time_updated.connect(func(cooldown_time_remaining_fraction):
+		_ultimate_progress_bar.value = cooldown_time_remaining_fraction
+		if cooldown_time_remaining_fraction > 0:
+			_ultimate_progress_bar.show()
+		else:
+			_ultimate_progress_bar.hide()
+	)
+	_ultimate_progress_bar.hide()
 
 
 # TODO: Maybe make this event-based rather than checking every frame. Would then need a way to
