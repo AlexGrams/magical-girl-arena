@@ -16,6 +16,8 @@ extends Node2D
 @export var boss_choices: Array[PackedScene] = []
 ## Spawners around the map that create enemies from spawn events. 
 @export var regular_enemy_spawners: Array[EnemySpawner] = []
+## The HUD for the local player
+@export var hud_canvas_layer: HUDCanvasLayer = null
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
@@ -99,3 +101,7 @@ func _spawn_boss() -> void:
 	_has_boss_spawned = true
 	if corrupted_enemy_spawner != null and boss_to_spawn != null:
 		corrupted_enemy_spawner.spawn(boss_to_spawn)
+
+
+func get_hud_canvas_layer() -> HUDCanvasLayer:
+	return hud_canvas_layer

@@ -5,6 +5,8 @@ extends Resource
 @export var name: String
 ## The character's lore
 @export var description: String
+## Path to the PowerupData for this character's base Powerup.
+@export var base_powerup_data: String
 ## The name of this character's starting powerup.
 @export var base_powerup_name: String
 ## Image representing the starting powerup.
@@ -15,7 +17,5 @@ extends Resource
 @export var ult_texture: Texture2D
 ## Path to the .json file for this character's GDCubism sprite. 
 @export var model_file_path: String
-## Path to the .tscn file for this character's base powerup.
-@export var base_powerup: String
 ## Path to the .tscn file for this character's ultimate ability.
 @export var ultimate_ability: String

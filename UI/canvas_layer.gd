@@ -1,3 +1,4 @@
+class_name HUDCanvasLayer
 extends CanvasLayer
 
 @export var _game_over_screen: Control = null
@@ -5,6 +6,7 @@ extends CanvasLayer
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
 @export var _pointer_parent: Control = null
+@export var _powerup_container: Container = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -99,20 +101,6 @@ func _process(_delta: float) -> void:
 		used_pointers += 1
 
 
-# TODO: Maybe make this event-based rather than checking every frame. Would then need a way to
-# keep track of the object that each pointer is pointing to.
-# Connects events to enable or disable arrows to offscreen players.
-func add_character_to_point_to(notifier: VisibleOnScreenNotifier2D) -> void:
-	notifier.screen_entered.connect(func():
-		#notifier.is_on_screen()
-		pass
-	)
-	
-	notifier.screen_exited.connect(func():
-		pass
-	)
-
-
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
 	$ExperienceBar.value = experience
 	$LevelLabel.text = "Level: " + str(level)
@@ -188,3 +176,22 @@ func _return_to_lobby():
 	GameState.end_game()
 	main_menu.show()
 	main_menu.refresh_lobby()
+
+
+## Returns the Container for dislaying Powerup icons.
+func get_powerup_container() -> Container:
+	return _powerup_container
+
+
+# TODO: Maybe make this event-based rather than checking every frame. Would then need a way to
+# keep track of the object that each pointer is pointing to.
+# Connects events to enable or disable arrows to offscreen players.
+func add_character_to_point_to(notifier: VisibleOnScreenNotifier2D) -> void:
+	notifier.screen_entered.connect(func():
+		#notifier.is_on_screen()
+		pass
+	)
+	
+	notifier.screen_exited.connect(func():
+		pass
+	)

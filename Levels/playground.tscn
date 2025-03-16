@@ -283,7 +283,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners")]
+[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer")]
 script = ExtResource("1_s3iet")
 spawn_events = Array[ExtResource("5_b8hlh")]([SubResource("Resource_lbrw2"), SubResource("Resource_p7irf"), SubResource("Resource_0qex3"), SubResource("Resource_g3q43"), SubResource("Resource_jkb70"), SubResource("Resource_hy8bd"), SubResource("Resource_3jn4o"), SubResource("Resource_saixa"), SubResource("Resource_8i8tu")])
 corrupted_enemy_spawn_time_fraction = 0.6
@@ -294,6 +294,7 @@ corrupted_enemy_choices = {
 corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 boss_choices = Array[PackedScene]([ExtResource("4_8t8qx")])
 regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4")]
+hud_canvas_layer = NodePath("CanvasLayer")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -2815.0
@@ -11829,12 +11830,13 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4746)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
 _pointer_parent = NodePath("PlayerPointers")
+_powerup_container = NodePath("Abilities")
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3

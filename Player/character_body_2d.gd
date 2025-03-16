@@ -63,7 +63,7 @@ func _ready():
 	_revive_collision_area.hide()
 
 
-func _on_upgrade_chosen(powerupdata: PowerupData):
+func _on_upgrade_chosen(powerup_data: PowerupData):
 	var powerup_found = false
 	
 	# Reset temp rerolls in case we have any
@@ -71,15 +71,14 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	
 	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
-		if child is Powerup and child.powerup_name == powerupdata.name:
+		if child is Powerup and child.powerup_name == powerup_data.name:
 			child.level_up()
 			powerup_found = true
 			break
 	
 	# If we don't have the chosen powerup, then add it to the player.
 	if !powerup_found:
-		var powerup_to_add: Powerup = powerupdata.scene.instantiate() #load(powerupdata.scene).instantiate()
-		add_powerup(powerup_to_add)
+		add_powerup(powerup_data)
 
 
 func get_input():
@@ -152,10 +151,16 @@ func decrement_rerolls() -> void:
 
 
 # Gives this player a new powerup.
-func add_powerup(powerup: Powerup):
+func add_powerup(powerup_data: PowerupData):
+	var powerup: Powerup = powerup_data.scene.instantiate()
 	powerup.set_authority(multiplayer.get_unique_id())
 	add_child(powerup)
 	powerups.append(powerup)
+	
+	# Show the icon for this powerup on the HUD
+	var powerup_container: Container = $"..".get_hud_canvas_layer().get_powerup_container()
+	var texture_rect: TextureRect = powerup_container.get_child(len(powerups) - 1).find_child("TextureRect")
+	texture_rect.texture = powerup_data.sprite
 	
 	if not is_down:
 		powerup.activate_powerup()
@@ -298,8 +303,8 @@ func ready_player_character(character: Constants.Character) -> void:
 		
 		# Give the player the basic shoot powerup.
 		# Only the character that this player controls is given the ability. 
-		var base_powerup = load(character_data.base_powerup).instantiate()
-		add_powerup(base_powerup)
+		var base_powerup_data: PowerupData = load(character_data.base_powerup_data) 
+		add_powerup(base_powerup_data)
 		
 		# Set up ultimate ability
 		var ult: Ability = load(character_data.ultimate_ability).instantiate()
