@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=62 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://clf7dd0e1v7fh" path="res://Sprites/Map/Patch_Dirt.png" id="14_op1re"]
 [ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="15_sbn0e"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
+[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="26_dibxh"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="26_ntkj0"]
 [ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="27_vw2yc"]
 [ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
@@ -282,6 +283,12 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whxxi"]
+bg_color = Color(1, 1, 1, 0.294118)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moeyb"]
+bg_color = Color(1, 1, 1, 0.505882)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer")]
 script = ExtResource("1_s3iet")
@@ -12044,6 +12051,35 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="UltimateCooldown" type="AspectRatioContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 170.0
+offset_top = -110.0
+offset_right = 250.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UltimateCooldown"]
+layout_mode = 2
+texture = ExtResource("26_dibxh")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UltimateCooldown"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_whxxi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_moeyb")
+max_value = 1.0
+value = 0.79
+fill_mode = 3
+show_percentage = false
 
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
