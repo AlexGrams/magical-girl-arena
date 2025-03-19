@@ -1,7 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
 
-
+# Base health is the starting health before the curve multiplier is added
+@export var base_health: int = 0
 ## Describes how this enemy's health changes as the game time progresses.
 @export var curve_max_health: Curve = preload("res://Curves/Enemies/atom_enemy_max_health.tres")
 ## Parent of this Enemy's collider
@@ -48,7 +49,7 @@ signal allied(enemy: Enemy)
 
 
 func _ready() -> void:
-	max_health = snapped(curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
+	max_health = snapped(base_health * curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
 	health = max_health
 	
 	# Random loot generation
