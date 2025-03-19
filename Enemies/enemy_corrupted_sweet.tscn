@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwxh1lqgmuu3q"]
+[gd_scene load_steps=19 format=3 uid="uid://cwxh1lqgmuu3q"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_akkuy"]
 [ext_resource type="PackedScene" uid="uid://dyq0c1f3w0cap" path="res://Powerups/revolving_powerup.tscn" id="2_4hf13"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_jpoov"]
+[ext_resource type="Curve" uid="uid://clqdnyllenqqn" path="res://Curves/Enemies/corrupted_mg_enemy_max_health.tres" id="3_gb3ax"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
 viewport_path = NodePath("Sprite2D/GDCubismUserModel")
@@ -388,6 +389,7 @@ corrupted_lifetime = 60.0
 default_powerup = ExtResource("2_4hf13")
 max_range = 200.0
 allied_bullet_scene_path = ""
+curve_max_health = ExtResource("3_gb3ax")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
