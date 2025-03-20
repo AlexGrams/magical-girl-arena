@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=66 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -37,6 +37,7 @@
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
+[ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 
 [sub_resource type="Resource" id="Resource_lbrw2"]
 script = ExtResource("5_b8hlh")
@@ -12118,13 +12119,15 @@ process_mode = 2
 visible = false
 all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh")])
 
-[node name="GameOverScreen" type="Control" parent="CanvasLayer"]
+[node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("35_j68h3")
+text = NodePath("GameOver")
 
 [node name="Background" type="ColorRect" parent="CanvasLayer/GameOverScreen"]
 layout_mode = 1

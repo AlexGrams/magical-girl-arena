@@ -67,7 +67,7 @@ signal player_list_changed()
 # Called when the host leaves the lobby.
 signal lobby_closed()
 # Emitted when all players are down
-signal game_over()
+signal game_over(has_won_game: bool)
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
@@ -270,11 +270,12 @@ func start_game():
 
 
 # Called when the game ends, either by the players winning or losing
-func _game_over():
+@rpc("authority", "call_local")
+func _game_over(has_won_game: bool = false):
 	_gold += _gold_this_game
 	SaveManager.save_game()
 	
-	game_over.emit()
+	game_over.emit(has_won_game)
 
 
 # Stops the main gameplay segment by deleting the world and resetting state variables.

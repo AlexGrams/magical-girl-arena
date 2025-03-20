@@ -3,6 +3,14 @@ extends Enemy
 ## A special enemy that ends the game when it is defeated.
 
 
+func _ready() -> void:
+	# Win the game when the boss dies
+	died.connect(func(enemy):
+		if multiplayer.is_server():
+			GameState._game_over.rpc(true)
+	)
+
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 

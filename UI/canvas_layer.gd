@@ -1,7 +1,7 @@
 class_name HUDCanvasLayer
 extends CanvasLayer
 
-@export var _game_over_screen: Control = null
+@export var _game_over_screen: GameOverScreen = null
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
@@ -38,8 +38,8 @@ func _ready() -> void:
 		_pointers.append(pointer)
 	
 	# Game over screen visibility
-	GameState.game_over.connect(func():
-		_game_over_screen.show()
+	GameState.game_over.connect(func(has_won_game):
+		_game_over_screen.set_up(has_won_game)
 		
 		# Initialize the retry indicators
 		var i = 0
