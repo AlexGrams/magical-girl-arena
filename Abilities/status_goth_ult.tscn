@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmonwxh8b3cms"]
+
+[ext_resource type="Script" path="res://Abilities/status_goth_ult.gd" id="1_iu0ef"]
+[ext_resource type="Texture2D" uid="uid://gmw05mw84nou" path="res://Blueberry.png" id="2_pgkcl"]
+
+[node name="StatusGothUlt" type="Node2D"]
+script = ExtResource("1_iu0ef")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -200)
+texture = ExtResource("2_pgkcl")
