@@ -5,7 +5,7 @@ extends Enemy
 
 func _ready() -> void:
 	# Win the game when the boss dies
-	died.connect(func(enemy):
+	died.connect(func(_enemy):
 		if multiplayer.is_server():
 			GameState._game_over.rpc(true)
 	)
