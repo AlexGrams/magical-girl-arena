@@ -7,6 +7,7 @@ extends Ability
 
 @export var bullet_scene_path := "res://Abilities/bullet_ult_goth.tscn"
 @export var damage: float = 100.0
+@export var status_duration: float = 1.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +30,6 @@ func activate() -> void:
 		Vector2.ZERO, 
 		damage, 
 		true,
-		[]
+		[status_duration]
 	]
 )

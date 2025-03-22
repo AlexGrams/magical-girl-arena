@@ -41,6 +41,11 @@ var _attack_timer: float = 0.0
 # Thresholds used for randomly determining what an enemy drops. 
 var _threshold_exp: float = 0.0
 var _threshold_gold: float = 0.0
+## Status to make this Enemy an ally when it dies.
+var _status_goth_ult: bool = false
+## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
+var _goth_ult_allied_lifetime: float = 0.0
+var _goth_ult_allied_damage: float = 0.0
 
 # Emitted when this Enemy dies.
 signal died(enemy: Enemy)
@@ -204,6 +209,15 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 				colliding_targets.remove_at(colliding_targets.find(node))
 
 
+## Apply Goth's Ultimate ability status to this Enemy for a duration
+func apply_status_goth_ult(duration: float, ally_lifetime: float, allied_damage: float) -> void:
+	_status_goth_ult = true
+	_goth_ult_allied_lifetime = ally_lifetime
+	_goth_ult_allied_damage = allied_damage
+	await get_tree().create_timer(duration).timeout
+	_status_goth_ult = false
+
+
 # Turn this Enemy into an ally of the player. Will instead try to damage Enemies that 
 # are not allies.
 @rpc("any_peer", "call_local")
@@ -237,6 +251,10 @@ func die() -> void:
 
 	if not is_ally:
 		_spawn_loot()
+	if _status_goth_ult:
+		# Special case where this Enemy dies while affected by Goth's ult status.
+		make_ally.rpc(_goth_ult_allied_lifetime, _goth_ult_allied_damage)
+		return
 	
 	died.emit(self)
 	queue_free()

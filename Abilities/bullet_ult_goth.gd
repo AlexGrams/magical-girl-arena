@@ -16,7 +16,11 @@ extends Bullet
 @export var status_marker: PackedScene = null
 ## VFX for this ability
 @export var vfx: PackedScene = null
+
 var damage: float = 0.0
+
+## Time in seconds that the Goth Ult status lasts on Enemies.
+var status_duration: float = 0.0
 
 
 func set_damage(new_damage: float):
@@ -45,6 +49,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var enemy: Enemy = area.get_parent()
 	if not enemy.is_ally:
 		if enemy.health - damage > 0.0:
+			enemy.apply_status_goth_ult(status_duration, ally_lifetime, ally_damage)
 			enemy.take_damage(damage)
 			# Apply a status to this Enemy that makes it an ally if it is killed within a time limit.
 			# 1. Need to add variable to enemy that sees if it is under the effect.
@@ -60,12 +65,23 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 ## Create a marker indicating that this enemy is under the effect of this status.
 @rpc("authority", "call_local")
-func _spawn_marker(enemy: NodePath) -> void:
-	var spawned_status_marker: Node2D = status_marker.instantiate()
-	get_node(enemy).add_child(spawned_status_marker, true)
+func _spawn_marker(enemy_path: NodePath) -> void:
+	var enemy: Enemy = get_node(enemy_path)
+	if enemy == null:
+		return
+	
+	var spawned_status_marker: StatusGothUlt = status_marker.instantiate()
+	enemy.add_child(spawned_status_marker, true)
 	spawned_status_marker.position = Vector2.ZERO
+	spawned_status_marker.destroy_after_duration(status_duration)
 
 
 # Set up other properties for this bullet
-func setup_bullet(_is_owned_by_player: bool, _data: Array) -> void:
-	pass
+func setup_bullet(_is_owned_by_player: bool, data: Array) -> void:
+	if (len(data) < 1 
+		or typeof(data[0]) != TYPE_FLOAT	# Status duration
+	):
+		push_error("Malformed data")
+		return
+	
+	status_duration = data[0]

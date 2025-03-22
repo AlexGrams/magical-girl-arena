@@ -12,3 +12,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+## Async function to destroy this marker after the status lifetime has elapsed
+func destroy_after_duration(duration: float) -> void:
+	await get_tree().create_timer(duration).timeout
+	
+	queue_free()
