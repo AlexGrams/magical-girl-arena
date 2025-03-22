@@ -46,9 +46,24 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not enemy.is_ally:
 		if enemy.health - damage > 0.0:
 			enemy.take_damage(damage)
+			# Apply a status to this Enemy that makes it an ally if it is killed within a time limit.
+			# 1. Need to add variable to enemy that sees if it is under the effect.
+			# 2. When it dies, see if the effect is active and do something different if it is.
+			# 3. Probably use a lambda to remove the status after some time.
+			# 4. Status marker should be childed to the Enemy.
+			
+			_spawn_marker.rpc(enemy.get_path())
 		else:
 			# This attack kills this enemy, so make it an ally
 			enemy.make_ally.rpc(ally_lifetime, ally_damage)
+
+
+## Create a marker indicating that this enemy is under the effect of this status.
+@rpc("authority", "call_local")
+func _spawn_marker(enemy: NodePath) -> void:
+	var spawned_status_marker: Node2D = status_marker.instantiate()
+	get_node(enemy).add_child(spawned_status_marker, true)
+	spawned_status_marker.position = Vector2.ZERO
 
 
 # Set up other properties for this bullet
