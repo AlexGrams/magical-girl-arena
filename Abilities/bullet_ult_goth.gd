@@ -48,19 +48,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	
 	var enemy: Enemy = area.get_parent()
 	if not enemy.is_ally:
-		if enemy.health - damage > 0.0:
-			enemy.apply_status_goth_ult(status_duration, ally_lifetime, ally_damage)
-			enemy.take_damage(damage)
-			# Apply a status to this Enemy that makes it an ally if it is killed within a time limit.
-			# 1. Need to add variable to enemy that sees if it is under the effect.
-			# 2. When it dies, see if the effect is active and do something different if it is.
-			# 3. Probably use a lambda to remove the status after some time.
-			# 4. Status marker should be childed to the Enemy.
-			
-			_spawn_marker.rpc(enemy.get_path())
-		else:
-			# This attack kills this enemy, so make it an ally
-			enemy.make_ally.rpc(ally_lifetime, ally_damage)
+		enemy.apply_status_goth_ult(status_duration, ally_lifetime, ally_damage)
+		_spawn_marker.rpc(enemy.get_path())
+		enemy.take_damage(damage)
 
 
 ## Create a marker indicating that this enemy is under the effect of this status.

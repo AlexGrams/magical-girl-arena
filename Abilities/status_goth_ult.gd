@@ -16,6 +16,10 @@ func _process(_delta: float) -> void:
 
 ## Async function to destroy this marker after the status lifetime has elapsed
 func destroy_after_duration(duration: float) -> void:
+	$"..".allied.connect(func(_enemy: Enemy):
+		queue_free()
+	)
+	
 	await get_tree().create_timer(duration).timeout
 	
 	queue_free()

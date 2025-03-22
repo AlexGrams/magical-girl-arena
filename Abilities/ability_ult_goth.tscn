@@ -4,6 +4,5 @@
 
 [node name="AbilityUltGoth" type="Node2D"]
 script = ExtResource("1_8t0ch")
-damage = 50.0
 status_duration = 2.0
 cooldown = 2.0
