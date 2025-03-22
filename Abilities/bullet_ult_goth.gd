@@ -8,10 +8,14 @@ extends Bullet
 ## isn't used by this bullet, and take_damage is called by this script on overlap.
 
 @export var hitbox: BulletHitbox = null
-# Time in seconds that Enemies made allies by this attack last
+## Time in seconds that Enemies made allies by this attack last
 @export var ally_lifetime: float = 0.0
-# How much damage Enemies turned into allies do.
+## How much damage Enemies turned into allies do.
 @export var ally_damage: float = 0.0
+## Attached to Enemies that are affected by the ultimate's status after they are hit by it.
+@export var status_marker: PackedScene = null
+## VFX for this ability
+@export var vfx: PackedScene = null
 var damage: float = 0.0
 
 
@@ -20,7 +24,9 @@ func set_damage(new_damage: float):
 
 
 func _ready() -> void:
-	pass
+	var spawned_vfx: Node2D = vfx.instantiate()
+	get_parent().add_child(spawned_vfx)
+	spawned_vfx.position = global_position
 
 
 func _process(delta: float) -> void:
