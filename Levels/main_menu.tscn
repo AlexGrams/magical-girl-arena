@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=7 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="3_bm35d"]
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
+[ext_resource type="Texture2D" uid="uid://bsylv50x67ts0" path="res://SweetIcon.png" id="5_7g77h"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button")]
 layout_mode = 3
@@ -241,6 +242,9 @@ layout_mode = 2
 layout_mode = 2
 character = 1
 
+[node name="Image" parent="Lobby/CharacterSelectContainer/CharacterSelectButton2" index="0"]
+texture = ExtResource("5_7g77h")
+
 [node name="TitleText" type="RichTextLabel" parent="Lobby"]
 layout_mode = 1
 anchors_preset = 10
@@ -364,3 +368,5 @@ fit_content = true
 [connection signal="button_down" from="LobbyList/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
 [connection signal="button_down" from="Lobby/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="Lobby/LeaveButton" to="." method="_on_leave_button_down"]
+
+[editable path="Lobby/CharacterSelectContainer/CharacterSelectButton2"]
