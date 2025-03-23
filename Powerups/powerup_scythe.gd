@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 					direction, 
 					upgrade_curve.sample(float(current_level) / max_level), 
 					_is_owned_by_player,
-					[multiplayer.get_unique_id()]
+					[multiplayer.get_unique_id(), current_level]
 				]
 			)
 		else:

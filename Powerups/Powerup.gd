@@ -14,7 +14,7 @@ const max_level: int = 5
 ## Curve describing how this powerup's main stat changes as it is upgraded.
 @export var upgrade_curve: Curve = null
 
-var current_level: int = 0
+var current_level: int = 1
 var damage_levels: Array
 var powerup_name := ""
 
