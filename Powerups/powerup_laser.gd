@@ -28,7 +28,7 @@ func activate_powerup():
 				bullet_scene, 
 				Vector2.ZERO, 
 				Vector2.ZERO, 
-				upgrade_curve.sample(float(current_level) / max_level), 
+				_get_damage_from_curve(), 
 				_is_owned_by_player,
 				[get_parent().get_path(), max_range]
 			]
@@ -43,4 +43,4 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	powerup_level_up.emit(current_level, upgrade_curve.sample(float(current_level) / max_level))
+	powerup_level_up.emit(current_level, _get_damage_from_curve())

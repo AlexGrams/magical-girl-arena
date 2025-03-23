@@ -16,6 +16,7 @@ const max_level: int = 5
 ## Name used to uniquely identify this Powerup.
 @export var powerup_name := ""
 
+## What level the powerup is at. Values are [1, max_level].
 var current_level: int = 1
 var damage_levels: Array
 ## True when this Powerup is active, which usually means it is shooting bullets.
@@ -55,3 +56,8 @@ func deactivate_powerup():
 # Set the multiplayer authority for this powerup
 func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)
+
+
+## Calculates this powerup's damage given its current level using the upgrade curve.
+func _get_damage_from_curve() -> float:
+	return upgrade_curve.sample(float(current_level - 1) / (max_level - 1))

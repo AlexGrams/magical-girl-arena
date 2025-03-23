@@ -19,7 +19,7 @@ func activate_powerup():
 			1, [bullet_scene, 
 				global_position, 
 				Vector2.UP, 
-				upgrade_curve.sample(float(current_level) / max_level), 
+				_get_damage_from_curve(), 
 				_is_owned_by_player,
 				[$"..".get_path()]
 			]
@@ -29,7 +29,7 @@ func activate_powerup():
 			1, [bullet_scene, 
 				global_position, 
 				Vector2.UP, 
-				upgrade_curve.sample(float(current_level) / max_level), 
+				_get_damage_from_curve(), 
 				_is_owned_by_player,
 				[$"..".get_path()]
 			]
@@ -45,4 +45,4 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	powerup_level_up.emit(current_level, upgrade_curve.sample(float(current_level) / max_level))
+	powerup_level_up.emit(current_level, _get_damage_from_curve())

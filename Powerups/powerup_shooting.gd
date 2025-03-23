@@ -11,7 +11,7 @@ signal picked_up_powerup(sprite)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
+	bullet_damage = _get_damage_from_curve()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,5 +55,5 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
+	bullet_damage = _get_damage_from_curve()
 	powerup_level_up.emit(current_level, bullet_damage)

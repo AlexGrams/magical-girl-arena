@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://os33i8c1p8ue"]
 
 [ext_resource type="Script" path="res://Powerups/powerup_trail.gd" id="1_ghaqf"]
-[ext_resource type="Curve" uid="uid://dumfra0rgtbpj" path="res://Curves/upgrade_orbit.tres" id="2_f2cko"]
+[ext_resource type="Curve" uid="uid://clsgs6qdi0b0t" path="res://Curves/upgrade_trail.tres" id="2_dlrce"]
 
 [node name="PowerupTrail" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_ghaqf")
 shoot_interval = 0.2
 bullet_scene = "res://Powerups/bullet_trail.tscn"
-upgrade_curve = ExtResource("2_f2cko")
+upgrade_curve = ExtResource("2_dlrce")
 powerup_name = "Trail"

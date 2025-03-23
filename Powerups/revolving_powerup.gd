@@ -22,7 +22,7 @@ signal picked_up_powerup(sprite)
 
 func _ready() -> void:
 	# TODO: Make these properties read from the PowerupData instead of setting them here.
-	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
+	bullet_damage = _get_damage_from_curve()
 	if current_level >= max_level:
 		_rotation = _max_level_rotation
 		shoot_interval = max_level_shoot_interval
@@ -64,7 +64,7 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
+	bullet_damage = _get_damage_from_curve()
 	
 	# Shoot way faster at 5th level
 	if current_level >= max_level:
