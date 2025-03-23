@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://wmeh15cfi3s8"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_trail.gd" id="1_sax0x"]
+[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_0vvxf"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="5_dstiu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(66.5, 67)
+
+[node name="BulletTrail" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_sax0x")
+lifetime = 0.75
+
+[node name="TrailSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_0vvxf")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("5_dstiu")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.25, 0)
+shape = SubResource("RectangleShape2D_tg1bm")
