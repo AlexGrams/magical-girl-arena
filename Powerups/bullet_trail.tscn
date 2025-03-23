@@ -7,10 +7,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(66.5, 67)
 
-[node name="BulletTrail" type="Node2D"]
+[node name="BulletTrail" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_sax0x")
-lifetime = 0.75
+speed = 0.0
+destroy_on_hit = false
+collider = NodePath("Area2D")
+sprite = NodePath("TrailSprite")
 
 [node name="TrailSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
