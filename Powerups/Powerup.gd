@@ -13,10 +13,13 @@ const max_level: int = 5
 
 ## Curve describing how this powerup's main stat changes as it is upgraded.
 @export var upgrade_curve: Curve = null
+## Name used to uniquely identify this Powerup.
+@export var powerup_name := ""
 
 var current_level: int = 1
 var damage_levels: Array
-var powerup_name := ""
+## True when this Powerup is active, which usually means it is shooting bullets.
+var is_on: bool = false
 
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true

@@ -7,3 +7,4 @@
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_w1l0c")
 upgrade_curve = ExtResource("2_8orb2")
+powerup_name = "Tarot Cards"

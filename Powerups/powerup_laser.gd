@@ -5,15 +5,12 @@ extends Powerup
 @export var bullet_scene := "res://Powerups/bullet_laser.tscn"
 @export var max_range: float = 500
 
-# TODO: Promote to a member of Powerup
-var is_on: bool = false
-
 signal update_pointer_location(new_pointer_location: Vector2)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	powerup_name = "Laser"
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -7,3 +7,4 @@
 script = ExtResource("1_a0uoa")
 shoot_interval = 0.5
 upgrade_curve = ExtResource("2_hnaeg")
+powerup_name = "Shooting"

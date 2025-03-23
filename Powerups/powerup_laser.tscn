@@ -7,3 +7,4 @@
 script = ExtResource("1_oytnp")
 max_range = 750.0
 upgrade_curve = ExtResource("2_fptma")
+powerup_name = "Laser"

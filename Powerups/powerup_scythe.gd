@@ -8,12 +8,11 @@ extends Powerup
 # TODO: Do we even need this? If so, it should probably go in Powerup and not here.
 #@export var sprite: Resource = null
 var bullet
-var is_on := false
 var shoot_timer: float = 0.0
 
 
 func _ready() -> void:
-	powerup_name = "Scythe"
+	pass
 
 
 func _process(delta: float) -> void:

@@ -7,3 +7,4 @@
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_gq2cx")
 upgrade_curve = ExtResource("2_1tqwt")
+powerup_name = "Orbit"

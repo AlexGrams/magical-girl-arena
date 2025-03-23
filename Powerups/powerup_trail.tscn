@@ -8,3 +8,4 @@ self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_ghaqf")
 bullet_scene = "res://Powerups/bullet_trail.tscn"
 upgrade_curve = ExtResource("2_f2cko")
+powerup_name = "Trail"

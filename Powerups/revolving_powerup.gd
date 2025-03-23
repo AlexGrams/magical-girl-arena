@@ -8,7 +8,6 @@ extends Powerup
 
 # TODO: Might not be used anymore
 var sprite = preload("res://Orange.png")
-var is_on := false
 var shoot_timer: float = 0
 var direction := Vector2.RIGHT
 var bullet_damage: float
@@ -23,7 +22,6 @@ signal picked_up_powerup(sprite)
 
 func _ready() -> void:
 	# TODO: Make these properties read from the PowerupData instead of setting them here.
-	powerup_name = "Tarot Cards"
 	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
 	if current_level >= max_level:
 		_rotation = _max_level_rotation

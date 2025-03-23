@@ -7,3 +7,4 @@
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_wufpq")
 upgrade_curve = ExtResource("2_v3lod")
+powerup_name = "Boomerang"

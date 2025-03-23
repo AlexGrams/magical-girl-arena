@@ -4,7 +4,6 @@ extends Powerup
 @export var bullet_damage: float = 50.0
 @export var bullet_scene := "res://Powerups/bullet.tscn"
 
-var is_on: bool = false
 var shoot_timer: float = 0
 
 signal picked_up_powerup(sprite)
@@ -12,7 +11,6 @@ signal picked_up_powerup(sprite)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	powerup_name = "Shooting"
 	bullet_damage = upgrade_curve.sample(float(current_level) / max_level)
 
 

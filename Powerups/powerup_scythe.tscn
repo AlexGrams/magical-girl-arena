@@ -9,3 +9,4 @@ script = ExtResource("1_v2b6r")
 shoot_interval = 1.5
 bullet_scene = "res://Powerups/bullet_scythe.tscn"
 upgrade_curve = ExtResource("2_ib1pu")
+powerup_name = "Scythe"

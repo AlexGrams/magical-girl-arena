@@ -8,8 +8,6 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
-	powerup_name = "Orbit"
-	
 	damage_levels = [20.0, 25.0, 25.0, 25.0, 100.0]
 
 

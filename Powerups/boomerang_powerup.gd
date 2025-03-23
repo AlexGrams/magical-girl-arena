@@ -10,8 +10,6 @@ signal picked_up_powerup(sprite)
 
 
 func _ready():
-	powerup_name = "Boomerang"
-	
 	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
 
 

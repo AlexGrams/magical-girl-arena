@@ -5,8 +5,6 @@ extends Powerup
 ## Path to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
 
-var is_on: bool = false
-
 var _shoot_timer: float = 0
 ## How much damage the powerup does at its current level.
 var _damage: float = 0.0
@@ -16,7 +14,6 @@ signal picked_up_powerup(sprite)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	powerup_name = "Trail"
 	_damage = upgrade_curve.sample(float(current_level) / max_level)
 
 
