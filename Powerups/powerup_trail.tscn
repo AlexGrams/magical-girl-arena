@@ -6,6 +6,7 @@
 [node name="PowerupTrail" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_ghaqf")
+shoot_interval = 0.2
 bullet_scene = "res://Powerups/bullet_trail.tscn"
 upgrade_curve = ExtResource("2_f2cko")
 powerup_name = "Trail"
