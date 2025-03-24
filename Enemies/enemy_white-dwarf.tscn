@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfy5r3rayhatg"]
+[gd_scene load_steps=9 format=3 uid="uid://eis110mfrnsd"]
 
-[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_mwxyx"]
-[ext_resource type="PackedScene" uid="uid://4ximlipujsuo" path="res://Sprites/Enemy/AtomEnemy/atom_sprite.tscn" id="2_plv55"]
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_1rx8w"]
+[ext_resource type="PackedScene" uid="uid://pqgx0tpw47qw" path="res://Sprites/Enemy/WhiteDwarf_Enemy/white-dwarf_sprite.tscn" id="2_5ve1m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
-radius = 40.0
+radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q63v7"]
-radius = 40.0
+radius = 24.0
 
 [sub_resource type="Animation" id="Animation_u5q41"]
 length = 0.001
@@ -33,19 +33,20 @@ properties/1/replication_mode = 1
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
-script = ExtResource("1_mwxyx")
-base_health = 200
+script = ExtResource("1_1rx8w")
+base_health = 100
 collider_area = NodePath("Area2D")
-sprite = NodePath("AtomSprite")
+sprite = NodePath("WhiteDwarf_Sprite")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
-[node name="AtomSprite" parent="." instance=ExtResource("2_plv55")]
+[node name="WhiteDwarf_Sprite" parent="." instance=ExtResource("2_5ve1m")]
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mn3v6")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
 collision_layer = 2
 collision_mask = 9
 
