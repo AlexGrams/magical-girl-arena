@@ -1,0 +1,182 @@
+[gd_scene load_steps=20 format=3 uid="uid://k4ucfiuo84ar"]
+
+[ext_resource type="Script" path="res://Sprites/Enemy/enemy_sprite_changer.gd" id="1_cge1t"]
+[ext_resource type="Texture2D" uid="uid://bks2i4rksbh05" path="res://Sprites/Enemy/BrownDwarf_Enemy/BrownDwarf_Stroke.png" id="2_ojj84"]
+[ext_resource type="Texture2D" uid="uid://bt4sp5vtsd1q2" path="res://Sprites/Enemy/BrownDwarf_Enemy/BrownDwarf_Base.png" id="3_ep4av"]
+[ext_resource type="Texture2D" uid="uid://bnfv56gxqsqia" path="res://Sprites/Enemy/BrownDwarf_Enemy/BrownDwarf_Mouth.png" id="4_fo5ig"]
+[ext_resource type="Texture2D" uid="uid://37i7nx316dmt" path="res://Sprites/Enemy/BrownDwarf_Enemy/BrownDwarf_Eye_L.png" id="5_336ug"]
+[ext_resource type="Texture2D" uid="uid://w6asmh5ayjvx" path="res://Sprites/Enemy/BrownDwarf_Enemy/BrownDwarf_Eye_R.png" id="6_meo1g"]
+[ext_resource type="Texture2D" uid="uid://bi8x6gjuh5goy" path="res://Sprites/Enemy/BrownDwarf_Special/BrownDwarf_Special_Stroke.png" id="7_iyjje"]
+[ext_resource type="Texture2D" uid="uid://unbim8i1wrv6" path="res://Sprites/Enemy/BrownDwarf_Special/BrownDwarf_Special_Base.png" id="8_6exmh"]
+[ext_resource type="Texture2D" uid="uid://bj8d526ajqkjk" path="res://Sprites/Enemy/BrownDwarf_Special/BrownDwarf_Special_Mouth.png" id="9_g2dtp"]
+[ext_resource type="Texture2D" uid="uid://dn5l61asoeih1" path="res://Sprites/Enemy/BrownDwarf_Special/BrownDwarf_Special_Eye_L.png" id="10_vgy7m"]
+[ext_resource type="Texture2D" uid="uid://dccr6ilf41td4" path="res://Sprites/Enemy/BrownDwarf_Special/BrownDwarf_Special_Eye_R.png" id="11_eiqlw"]
+[ext_resource type="Texture2D" uid="uid://caa4yo4bref0s" path="res://Sprites/Enemy/Goth_BrownDwarfEnemy/BrownDwarf_Goth_Stroke.png" id="12_oqyey"]
+[ext_resource type="Texture2D" uid="uid://bhngapt38va0y" path="res://Sprites/Enemy/Goth_BrownDwarfEnemy/BrownDwarf_Goth_Base.png" id="13_xhxxd"]
+[ext_resource type="Texture2D" uid="uid://2t38hbl2drwh" path="res://Sprites/Enemy/Goth_BrownDwarfEnemy/BrownDwarf_Goth_Mouth.png" id="14_vminl"]
+[ext_resource type="Texture2D" uid="uid://xccr0wmuqjo3" path="res://Sprites/Enemy/Goth_BrownDwarfEnemy/BrownDwarf_Goth_Eye_L.png" id="15_f8462"]
+[ext_resource type="Texture2D" uid="uid://xl7c4l5gwxg" path="res://Sprites/Enemy/Goth_BrownDwarfEnemy/BrownDwarf_Goth_Eye_R.png" id="16_2a2v0"]
+
+[sub_resource type="Animation" id="Animation_h6u50"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stroke:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stroke:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eye_L:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Eye_R:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Mouth:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gthxm"]
+resource_name = "white_dwarf"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stroke:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stroke:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eye_L:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Eye_R:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Mouth:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ty4de"]
+_data = {
+"RESET": SubResource("Animation_h6u50"),
+"white_dwarf": SubResource("Animation_gthxm")
+}
+
+[node name="BrownDwarf_Sprite" type="Node2D" node_paths=PackedStringArray("sprite_components")]
+script = ExtResource("1_cge1t")
+sprite_components = [NodePath("Stroke"), NodePath("Head"), NodePath("Mouth"), NodePath("Eye_L"), NodePath("Eye_R")]
+standard_sprites = Array[CompressedTexture2D]([ExtResource("2_ojj84"), ExtResource("3_ep4av"), ExtResource("4_fo5ig"), ExtResource("5_336ug"), ExtResource("6_meo1g")])
+special_sprites = Array[CompressedTexture2D]([ExtResource("7_iyjje"), ExtResource("8_6exmh"), ExtResource("9_g2dtp"), ExtResource("10_vgy7m"), ExtResource("11_eiqlw")])
+goth_sprites = Array[CompressedTexture2D]([ExtResource("12_oqyey"), ExtResource("13_xhxxd"), ExtResource("14_vminl"), ExtResource("15_f8462"), ExtResource("16_2a2v0")])
+
+[node name="Head" type="Sprite2D" parent="."]
+texture = ExtResource("3_ep4av")
+
+[node name="Mouth" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("4_fo5ig")
+
+[node name="Eye_L" type="Sprite2D" parent="."]
+position = Vector2(17, -9)
+texture = ExtResource("5_336ug")
+
+[node name="Eye_R" type="Sprite2D" parent="."]
+position = Vector2(-16, -9)
+texture = ExtResource("6_meo1g")
+
+[node name="Stroke" type="Sprite2D" parent="."]
+texture = ExtResource("2_ojj84")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ty4de")
+}
+autoplay = "white_dwarf"

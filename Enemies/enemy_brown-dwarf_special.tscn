@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://hd1w6gql48ji"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_rvvag"]
+[ext_resource type="PackedScene" uid="uid://k4ucfiuo84ar" path="res://Sprites/Enemy/BrownDwarf_Enemy/brown-dwarf_sprite.tscn" id="2_d7ouj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q63v7"]
+radius = 50.0
+
+[sub_resource type="Animation" id="Animation_u5q41"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_xsep2"]
+resource_name = "take_damage"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lewke"]
+_data = {
+"RESET": SubResource("Animation_u5q41"),
+"take_damage": SubResource("Animation_xsep2")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_orunc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
+collision_layer = 0
+collision_mask = 128
+script = ExtResource("1_rvvag")
+base_health = 400
+collider_area = NodePath("Area2D")
+sprite = NodePath("BrownDwarf_Sprite")
+drop_weight_exp = 15.0
+drop_weight_gold = 4.0
+
+[node name="BrownDwarf_Sprite" parent="." instance=ExtResource("2_d7ouj")]
+starting_type = 1
+
+[node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mn3v6")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_q63v7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lewke")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_orunc")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
