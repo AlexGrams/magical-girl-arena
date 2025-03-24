@@ -1,5 +1,10 @@
 extends Bullet
 
+## Characters that this bullet is touching that it will damage each physics tick.
+var _colliding_targets: Array[Node2D] = []
+## How much damage this bullet does.
+var _damage: float = 0.0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,3 +16,38 @@ func _process(delta: float) -> void:
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():
 		queue_free()
+
+
+func _physics_process(_delta: float) -> void:
+	for target: Node2D in _colliding_targets:
+		target.take_damage(_damage)
+
+
+func set_damage(damage: float):
+	_damage = damage
+
+
+# Set up other properties for this bullet
+func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
+	# Make the bullet hurt players
+	if not is_owned_by_player:
+		_modify_collider_to_harm_players()
+	
+	# Disable process and collision signals for non-owners.
+	if not is_multiplayer_authority():
+		set_physics_process(false)
+		set_process(false)
+		collider.area_entered.disconnect(_on_area_2d_entered)
+		collider.area_exited.disconnect(_on_area_2d_exited)
+
+
+func _on_area_2d_entered(area: Area2D) -> void:
+	var other: Node2D = area.get_parent()
+	if other:
+		_colliding_targets.append(other)
+
+
+func _on_area_2d_exited(area: Area2D) -> void:
+	var other: Node2D = area.get_parent()
+	if other:
+		_colliding_targets.remove_at(_colliding_targets.find(other))

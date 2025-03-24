@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://eis110mfrnsd"]
+[gd_scene load_steps=9 format=3 uid="uid://dqw82ihqw3hlq"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_1rx8w"]
 [ext_resource type="PackedScene" uid="uid://pqgx0tpw47qw" path="res://Sprites/Enemy/WhiteDwarf_Enemy/white-dwarf_sprite.tscn" id="2_5ve1m"]
