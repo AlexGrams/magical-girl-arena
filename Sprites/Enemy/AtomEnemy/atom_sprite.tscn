@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://onognmsl4k2t" path="res://Sprites/Enemy/AtomEnemy/Atom_Mouth.png" id="5_4xl7d"]
 [ext_resource type="Texture2D" uid="uid://deypfqw2cy7w0" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_L.png" id="6_3ywrs"]
 [ext_resource type="Texture2D" uid="uid://ccbjq7mocc1bx" path="res://Sprites/Enemy/AtomEnemy/Atom_Eye_R.png" id="7_r464i"]
-[ext_resource type="Texture2D" uid="uid://c4541i8pid2mx" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Aura.png" id="9_ne64m"]
-[ext_resource type="Texture2D" uid="uid://cbyptou5r72sf" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_OrangeSpikes.png" id="10_jjqpx"]
-[ext_resource type="Texture2D" uid="uid://dlhukndifx37" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_RedSpikes.png" id="11_5h325"]
-[ext_resource type="Texture2D" uid="uid://8tn1156fhm8l" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Head.png" id="12_fi4ur"]
-[ext_resource type="Texture2D" uid="uid://cv27vo5ll15a8" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Mouth.png" id="13_ve6hy"]
-[ext_resource type="Texture2D" uid="uid://df6jm5m7ddat6" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Eye_L.png" id="14_lh4cw"]
-[ext_resource type="Texture2D" uid="uid://cntu7rp1n3tb2" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Eye_R.png" id="15_fxy5d"]
+[ext_resource type="Texture2D" uid="uid://cipkufcv1ncgx" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Aura.png" id="9_0c1fc"]
+[ext_resource type="Texture2D" uid="uid://cvftyfdpy2iwq" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_OrangeSpikes.png" id="10_8wudc"]
+[ext_resource type="Texture2D" uid="uid://j5pjsg6emf4c" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_RedSpikes.png" id="11_7c8f3"]
+[ext_resource type="Texture2D" uid="uid://c6ygaoxjtpsdb" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Head.png" id="12_7t8ve"]
+[ext_resource type="Texture2D" uid="uid://1jc1wy8d1g2d" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Mouth.png" id="13_1qqc0"]
+[ext_resource type="Texture2D" uid="uid://csvum2jupd2gv" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Eye_L.png" id="14_ybe7t"]
+[ext_resource type="Texture2D" uid="uid://cq6yehnhf78as" path="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Eye_R.png" id="15_u4aut"]
 [ext_resource type="Texture2D" uid="uid://b0y0n4nn31jyr" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Aura.png" id="16_wlax1"]
 [ext_resource type="Texture2D" uid="uid://dfgjsclnh1fvc" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_OrangeSpikes.png" id="17_7wcd0"]
 [ext_resource type="Texture2D" uid="uid://pgxhkywndb4c" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_RedSpikes.png" id="18_2ils5"]
@@ -232,7 +232,7 @@ _data = {
 script = ExtResource("1_r4xnc")
 sprite_components = [NodePath("Aura"), NodePath("OrangeSpikes"), NodePath("RedSpikes"), NodePath("Head"), NodePath("Mouth"), NodePath("Eye_L"), NodePath("Eye_R")]
 standard_sprites = Array[CompressedTexture2D]([ExtResource("1_ybikw"), ExtResource("2_lqkfh"), ExtResource("3_4v3ij"), ExtResource("4_a2p0m"), ExtResource("5_4xl7d"), ExtResource("6_3ywrs"), ExtResource("7_r464i")])
-special_sprites = Array[CompressedTexture2D]([ExtResource("9_ne64m"), ExtResource("10_jjqpx"), ExtResource("11_5h325"), ExtResource("12_fi4ur"), ExtResource("13_ve6hy"), ExtResource("14_lh4cw"), ExtResource("15_fxy5d")])
+special_sprites = Array[CompressedTexture2D]([ExtResource("9_0c1fc"), ExtResource("10_8wudc"), ExtResource("11_7c8f3"), ExtResource("12_7t8ve"), ExtResource("13_1qqc0"), ExtResource("14_ybe7t"), ExtResource("15_u4aut")])
 goth_sprites = Array[CompressedTexture2D]([ExtResource("16_wlax1"), ExtResource("17_7wcd0"), ExtResource("18_2ils5"), ExtResource("19_s1w5x"), ExtResource("20_2at51"), ExtResource("21_2cawa"), ExtResource("22_rov1b")])
 
 [node name="Aura" type="Sprite2D" parent="."]
@@ -248,15 +248,15 @@ texture = ExtResource("3_4v3ij")
 texture = ExtResource("4_a2p0m")
 
 [node name="Mouth" type="Sprite2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 14)
 texture = ExtResource("5_4xl7d")
 
 [node name="Eye_L" type="Sprite2D" parent="."]
-position = Vector2(-9, -6)
+position = Vector2(15, -9)
 texture = ExtResource("6_3ywrs")
 
 [node name="Eye_R" type="Sprite2D" parent="."]
-position = Vector2(9, -6)
+position = Vector2(-15, -9)
 texture = ExtResource("7_r464i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df6jm5m7ddat6"
-path="res://.godot/imported/Atom_Purple_Eye_L.png-9ea56c8761c701ab5985eae1fd7b5d2f.ctex"
+uid="uid://csvum2jupd2gv"
+path="res://.godot/imported/Atom_Special_Eye_L.png-dc0f808cbbf51e858f3e8dfbeb8c6a52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Purple_Eye_L.png"
-dest_files=["res://.godot/imported/Atom_Purple_Eye_L.png-9ea56c8761c701ab5985eae1fd7b5d2f.ctex"]
+source_file="res://Sprites/Enemy/AtomPurpleEnemy/Atom_Special_Eye_L.png"
+dest_files=["res://.godot/imported/Atom_Special_Eye_L.png-dc0f808cbbf51e858f3e8dfbeb8c6a52.ctex"]
 
 [params]
 
