@@ -11,6 +11,10 @@ extends CanvasLayer
 @export var _ultimate_texture: TextureRect = null
 ## Displays the cooldown for the player's ultimate ability.
 @export var _ultimate_progress_bar: ProgressBar = null
+## Only appears if the player has temp health
+@export var _temp_health_control: Control = null
+## Displays how much temp health the player has
+@export var _temp_health_text: Label = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -110,9 +114,15 @@ func _on_character_body_2d_gained_experience(experience: float, level: int) -> v
 	$LevelLabel.text = "Level: " + str(level)
 
 
-func _on_character_body_2d_took_damage(health:int, health_max:int) -> void:
+func _on_character_body_2d_took_damage(health: int, health_max: int, temp_health: int) -> void:
 	$HealthBar/HealthLabel.text = str(health) + "/" + str(health_max)
 	$HealthBar.value = float(health) / health_max
+	
+	if temp_health > 0:
+		_temp_health_control.show()
+		_temp_health_text.text = str(temp_health)
+	else:
+		_temp_health_control.hide()
 
 
 func _on_powerup_picked_up_powerup(sprite: Variant) -> void:

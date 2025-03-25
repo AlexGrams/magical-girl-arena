@@ -53,7 +53,7 @@ var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
 var _temp_rerolls: int = 0
 
-signal took_damage(health:int, health_max:int)
+signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
 signal died()
 signal revived()
@@ -92,11 +92,12 @@ func _process(delta: float) -> void:
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
 	
-	# Temporary health
+	# Temporary health is reset after some time has passed.
 	if _temp_health_timer > 0.0:
 		_temp_health_timer -= delta
 		if _temp_health_timer <= 0.0:
 			_temp_health = 0
+			took_damage.emit(health, health_max, _temp_health)
 	
 	# Death and reviving
 	if is_down:
@@ -197,7 +198,7 @@ func take_damage(damage: float) -> void:
 			damage = 0
 	
 	health = clamp(health - damage, 0, health_max)
-	took_damage.emit(health, health_max)
+	took_damage.emit(health, health_max, _temp_health)
 	
 	if damage > 0:
 		$AnimationPlayer.play("took_damage")
@@ -213,6 +214,8 @@ func add_temp_health(temp_health_to_add: int) -> void:
 	
 	_temp_health += temp_health_to_add
 	_temp_health_timer = TEMP_HEALTH_LINGER_TIME
+	
+	took_damage.emit(health, health_max, _temp_health)
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
@@ -296,7 +299,7 @@ func ready_player_character(character: Constants.Character) -> void:
 		
 		# Signal for health changes
 		took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
-		took_damage.emit(health, health_max)
+		took_damage.emit(health, health_max, _temp_health)
 		
 		# Should redo this in the future prob?
 		$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)

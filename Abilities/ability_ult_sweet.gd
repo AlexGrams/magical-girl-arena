@@ -49,5 +49,4 @@ func activate() -> void:
 	var owner_position: Vector2 = get_parent().global_position
 	for player: PlayerCharacterBody2D in get_tree().get_nodes_in_group("player"):
 		if owner_position.distance_squared_to(player.global_position) <= _temp_health_ranged_squared:
-			print("Added temp hp")
 			player.add_temp_health.rpc(temp_health_healing)
