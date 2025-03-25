@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=104 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -25,10 +25,15 @@
 [ext_resource type="PackedScene" uid="uid://hd1w6gql48ji" path="res://Enemies/enemy_brown-dwarf_special.tscn" id="8_cyh3x"]
 [ext_resource type="Texture2D" uid="uid://cb67nn1t733oe" path="res://Sprites/Map/Grass_Tuft.png" id="9_5ykcx"]
 [ext_resource type="Texture2D" uid="uid://cuuhl35idsxlb" path="res://Sprites/Map/Tree_Dark.png" id="9_h6ghw"]
+[ext_resource type="PackedScene" uid="uid://b6jpi3c1enqi" path="res://Enemies/enemy_red-giant.tscn" id="9_vi3gl"]
+[ext_resource type="PackedScene" uid="uid://b1ahxs4yuxgjy" path="res://Enemies/enemy_supergiant.tscn" id="10_7pt7b"]
 [ext_resource type="Texture2D" uid="uid://dasmhlsnij3bd" path="res://Sprites/Map/Tree_Light.png" id="10_r8iub"]
+[ext_resource type="PackedScene" uid="uid://da6gm4xliy6e7" path="res://Enemies/enemy_special.tscn" id="11_ogxed"]
 [ext_resource type="Texture2D" uid="uid://c0wov7qsfe6v0" path="res://Sprites/Map/Grass_Tuft2.png" id="11_yv3qn"]
 [ext_resource type="Texture2D" uid="uid://igd106yex1nv" path="res://Sprites/Map/Grass_Tuft3.png" id="12_1q4rg"]
+[ext_resource type="PackedScene" uid="uid://b115cb3mkdhhc" path="res://Enemies/enemy_red-giant_special.tscn" id="12_ari5o"]
 [ext_resource type="Texture2D" uid="uid://coejko4nboanm" path="res://Sprites/Map/Lake_Fill.png" id="12_bxale"]
+[ext_resource type="PackedScene" uid="uid://745psetp0fi1" path="res://Enemies/enemy_supergiant_special.tscn" id="13_eg3m3"]
 [ext_resource type="Texture2D" uid="uid://clf7dd0e1v7fh" path="res://Sprites/Map/Patch_Dirt.png" id="14_op1re"]
 [ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="15_sbn0e"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
@@ -96,7 +101,7 @@ max_spawn_count = 1
 [sub_resource type="Resource" id="Resource_cdwm2"]
 script = ExtResource("5_b8hlh")
 start_time = "13"
-end_time = "13:31"
+end_time = "12:31"
 enemy = ExtResource("3_2ndf6")
 spawn_interval = 30.0
 spawn_interval_offset = 0.0
@@ -188,6 +193,256 @@ script = ExtResource("5_b8hlh")
 start_time = "9"
 end_time = "8"
 enemy = ExtResource("6_5l6y0")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_vldl0"]
+script = ExtResource("5_b8hlh")
+start_time = "8"
+end_time = "7"
+enemy = ExtResource("8_cyh3x")
+spawn_interval = 4.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_6aw3t"]
+script = ExtResource("5_b8hlh")
+start_time = "8"
+end_time = "7:01"
+enemy = ExtResource("3_2ndf6")
+spawn_interval = 30.0
+spawn_interval_offset = 0.0
+min_spawn_count = 20
+max_spawn_count = 20
+
+[sub_resource type="Resource" id="Resource_mfuhu"]
+script = ExtResource("5_b8hlh")
+start_time = "8"
+end_time = "7"
+enemy = ExtResource("4_2ptoj")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_78ycx"]
+script = ExtResource("5_b8hlh")
+start_time = "7"
+end_time = "6"
+enemy = ExtResource("6_5l6y0")
+spawn_interval = 2.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_m52uj"]
+script = ExtResource("5_b8hlh")
+start_time = "7:45"
+end_time = "6"
+enemy = ExtResource("9_vi3gl")
+spawn_interval = 30.0
+spawn_interval_offset = 0.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_adt63"]
+script = ExtResource("5_b8hlh")
+start_time = "7"
+end_time = "6"
+enemy = ExtResource("6_m8bth")
+spawn_interval = 2.0
+spawn_interval_offset = 0.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_0x4hh"]
+script = ExtResource("5_b8hlh")
+start_time = "6"
+end_time = "5"
+enemy = ExtResource("9_vi3gl")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_x61u4"]
+script = ExtResource("5_b8hlh")
+start_time = "6"
+end_time = "5"
+enemy = ExtResource("4_2ptoj")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_rmv4j"]
+script = ExtResource("5_b8hlh")
+start_time = "6"
+end_time = "5"
+enemy = ExtResource("4_bckfe")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_hl8mk"]
+script = ExtResource("5_b8hlh")
+start_time = "5:45"
+end_time = "4"
+enemy = ExtResource("10_7pt7b")
+spawn_interval = 30.0
+spawn_interval_offset = 0.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_6knml"]
+script = ExtResource("5_b8hlh")
+start_time = "5"
+end_time = "4"
+enemy = ExtResource("6_5l6y0")
+spawn_interval = 2.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_8m1bh"]
+script = ExtResource("5_b8hlh")
+start_time = "5"
+end_time = "4"
+enemy = ExtResource("6_m8bth")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_l370t"]
+script = ExtResource("5_b8hlh")
+start_time = "4"
+end_time = "3"
+enemy = ExtResource("11_ogxed")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_urtt0"]
+script = ExtResource("5_b8hlh")
+start_time = "4"
+end_time = "3"
+enemy = ExtResource("6_5l6y0")
+spawn_interval = 2.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_kd2aa"]
+script = ExtResource("5_b8hlh")
+start_time = "4"
+end_time = "3"
+enemy = ExtResource("4_2ptoj")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_e3av4"]
+script = ExtResource("5_b8hlh")
+start_time = "3"
+end_time = "2"
+enemy = ExtResource("9_vi3gl")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_kccnh"]
+script = ExtResource("5_b8hlh")
+start_time = "3"
+end_time = "2"
+enemy = ExtResource("10_7pt7b")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_ewkyv"]
+script = ExtResource("5_b8hlh")
+start_time = "3"
+end_time = "2"
+enemy = ExtResource("12_ari5o")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_6jgps"]
+script = ExtResource("5_b8hlh")
+start_time = "2"
+end_time = "1"
+enemy = ExtResource("9_vi3gl")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_gru2f"]
+script = ExtResource("5_b8hlh")
+start_time = "2"
+end_time = "1"
+enemy = ExtResource("12_ari5o")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_e6ft2"]
+script = ExtResource("5_b8hlh")
+start_time = "2"
+end_time = "1"
+enemy = ExtResource("6_m8bth")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_xg45h"]
+script = ExtResource("5_b8hlh")
+start_time = "1"
+end_time = "0"
+enemy = ExtResource("13_eg3m3")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_g68ak"]
+script = ExtResource("5_b8hlh")
+start_time = "1"
+end_time = "0"
+enemy = ExtResource("10_7pt7b")
+spawn_interval = 8.0
+spawn_interval_offset = 2.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_omxcd"]
+script = ExtResource("5_b8hlh")
+start_time = "1"
+end_time = "0"
+enemy = ExtResource("4_bckfe")
+spawn_interval = 4.0
+spawn_interval_offset = 1.0
+min_spawn_count = 1
+max_spawn_count = 1
+
+[sub_resource type="Resource" id="Resource_r1kj5"]
+script = ExtResource("5_b8hlh")
+start_time = "1"
+end_time = "0"
+enemy = ExtResource("3_2ndf6")
 spawn_interval = 4.0
 spawn_interval_offset = 1.0
 min_spawn_count = 1
@@ -359,8 +614,8 @@ bg_color = Color(1, 1, 1, 0.505882)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer")]
 script = ExtResource("1_s3iet")
-spawn_events = Array[ExtResource("5_b8hlh")]([SubResource("Resource_02unt"), SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n")])
-corrupted_enemy_spawn_time_fraction = 0.6
+spawn_events = Array[ExtResource("5_b8hlh")]([SubResource("Resource_02unt"), SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n"), SubResource("Resource_vldl0"), SubResource("Resource_6aw3t"), SubResource("Resource_mfuhu"), SubResource("Resource_78ycx"), SubResource("Resource_m52uj"), SubResource("Resource_adt63"), SubResource("Resource_0x4hh"), SubResource("Resource_x61u4"), SubResource("Resource_rmv4j"), SubResource("Resource_hl8mk"), SubResource("Resource_6knml"), SubResource("Resource_8m1bh"), SubResource("Resource_l370t"), SubResource("Resource_urtt0"), SubResource("Resource_kd2aa"), SubResource("Resource_e3av4"), SubResource("Resource_kccnh"), SubResource("Resource_ewkyv"), SubResource("Resource_6jgps"), SubResource("Resource_gru2f"), SubResource("Resource_e6ft2"), SubResource("Resource_xg45h"), SubResource("Resource_g68ak"), SubResource("Resource_omxcd"), SubResource("Resource_r1kj5")])
+corrupted_enemy_spawn_time_fraction = 0.4
 corrupted_enemy_choices = {
 "goth": ExtResource("17_xfem1"),
 "sweet": ExtResource("2_v45ga")

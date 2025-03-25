@@ -61,8 +61,6 @@ func _ready() -> void:
 	var total := drop_weight_exp + drop_weight_gold + drop_weight_nothing
 	_threshold_exp = drop_weight_exp / total
 	_threshold_gold = drop_weight_gold / total + _threshold_exp
-	
-	assert(sprite != null)
 
 
 func _process(delta: float) -> void:

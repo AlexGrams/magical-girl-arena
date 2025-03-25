@@ -15,6 +15,7 @@ collider = NodePath("Area2D")
 sprite = NodePath("TrailSprite")
 
 [node name="TrailSprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_0vvxf")
 
