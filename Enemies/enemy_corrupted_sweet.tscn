@@ -380,7 +380,7 @@ properties/1/path = NodePath(".:health")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="EnemyCorruptedSweet" type="CharacterBody2D" groups=["enemy"]]
+[node name="EnemyCorruptedSweet" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 0
 collision_mask = 128
 script = ExtResource("1_akkuy")
@@ -389,6 +389,8 @@ default_powerup = ExtResource("2_4hf13")
 max_range = 200.0
 allied_bullet_scene_path = ""
 base_health = 10000
+collider_area = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
 
