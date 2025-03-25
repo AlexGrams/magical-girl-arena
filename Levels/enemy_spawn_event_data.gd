@@ -2,7 +2,7 @@ class_name EnemySpawnEventData
 extends Resource
 ## Describes how enemies spawn as the game progresses.
 
-## The beginning time of this event. Acceptable formats are [param mm:ss], [param m:ss], [param mm:s], and [param m:s].
+## The beginning time of this event. Acceptable formats are [param mm:ss], [param m:ss], [param mm:s], [param m:s], and [param mm].
 @export var start_time: String = ""
 ## The ending time of this event. If blank, then the event is instantaneous and doesn't repeat.
 @export var end_time: String = ""

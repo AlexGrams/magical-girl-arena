@@ -38,7 +38,7 @@ func _ready() -> void:
 			int(event.start_time.substr(split + 1, len(event.start_time) - split))
 		)
 		split = event.end_time.find(":")
-		if split != -1:
+		if len(event.end_time) != 0:
 			event.end_time_seconds  = (
 				int(event.end_time.substr(0, split)) * 60 + 
 				int(event.end_time.substr(split + 1, len(event.end_time) - split))
