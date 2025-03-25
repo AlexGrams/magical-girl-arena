@@ -8,3 +8,9 @@ extends Resource
 @export var name := ""
 ## The sprite to show representing this powerup.
 @export var sprite: Resource = null
+## Text displayed on the Powerup upgrade screen.
+@export var upgrade_description: String = ""
+
+
+func get_upgrade_description() -> String:
+	return upgrade_description

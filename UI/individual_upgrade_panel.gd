@@ -11,7 +11,7 @@ func set_powerup(powerupdata: PowerupData) -> void:
 	_powerupdata = powerupdata
 	$VBoxContainer/Label.text = powerupdata.name
 	$VBoxContainer/TextureRect.texture = powerupdata.sprite
-	$VBoxContainer/Label2.text = "TEMP: Upgrade description"
+	$VBoxContainer/Label2.text = powerupdata.get_upgrade_description()
 
 
 func _on_button_pressed() -> void:
