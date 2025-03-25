@@ -6,6 +6,7 @@ extends CanvasLayer
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
 @export var _pointer_parent: Control = null
+## Parent of panels displaying each powerup
 @export var _powerup_container: Container = null
 ## Displays the icon for the player's ultimate ability.
 @export var _ultimate_texture: TextureRect = null
@@ -19,19 +20,24 @@ extends CanvasLayer
 # TODO: Testing
 var fraction: float = 0.0
 
-var textures: Array
+## Images indicating each powerup
+var _powerup_textures: Array[TextureRect] = []
+## Text displaying each powerup level
+var _powerup_level_text: Array[Label] = []
 var _votes_to_retry: int = 0
 var _retry_indicators: Array[PlayerReadyIndicator]
 var _pointers: Array[TextureRect] = []
+## Maps Powerup name to which index its UI components are in _powerup_level_text
+## and _powerup_textures.
+var _powerup_display_index = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	textures.append($Abilities/Panel/TextureRect)
-	textures.append($Abilities/Panel2/TextureRect)
-	textures.append($Abilities/Panel3/TextureRect)
-	textures.append($Abilities/Panel4/TextureRect)
-	textures.append($Abilities/Panel5/TextureRect)
+	for powerup_panel: Control in _powerup_container.get_children():
+		_powerup_textures.append(powerup_panel.find_child("TextureRect"))
+		_powerup_level_text.append(powerup_panel.find_child("LevelText"))
+		_powerup_level_text[-1].text = ""
 	
 	$ExperienceBar.value = 0.0
 	
@@ -127,8 +133,8 @@ func _on_character_body_2d_took_damage(health: int, health_max: int, temp_health
 
 func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
 	for i in range(0, 5):
-		if textures[i].texture == null:
-			textures[i].texture = sprite
+		if _powerup_textures[i].texture == null:
+			_powerup_textures[i].texture = sprite
 			return
 
 
@@ -223,3 +229,24 @@ func add_character_to_point_to(notifier: VisibleOnScreenNotifier2D) -> void:
 	notifier.screen_exited.connect(func():
 		pass
 	)
+
+
+## Add a powerup icon and level indicator to the UI
+func add_powerup(powerup_data: PowerupData) -> void:
+	for i in range(len(_powerup_level_text)):
+		if _powerup_level_text[i].text == "":
+			# We consider a Powerup icon with no level to be an unset icon.
+			_powerup_textures[i].texture = powerup_data.sprite
+			_powerup_level_text[i].text = "1"
+			_powerup_display_index[powerup_data.name] = i
+			
+			break
+
+
+## Update the UI display for a Powerup's level
+func update_powerup_level(powerup_data: PowerupData, new_level: int) -> void:
+	if powerup_data.name not in _powerup_display_index:
+		push_error("Powerup display name not stored in index map.")
+		return
+	
+	_powerup_level_text[_powerup_display_index[powerup_data.name]].text = str(new_level)

@@ -12334,6 +12334,27 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
+[node name="LevelText" type="Label" parent="CanvasLayer/Abilities/Panel"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -41.0
+offset_right = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Panel2" type="Panel" parent="CanvasLayer/Abilities"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -12353,6 +12374,27 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="LevelText" type="Label" parent="CanvasLayer/Abilities/Panel2"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -41.0
+offset_right = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Panel3" type="Panel" parent="CanvasLayer/Abilities"]
 layout_mode = 2
@@ -12374,6 +12416,27 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
+[node name="LevelText" type="Label" parent="CanvasLayer/Abilities/Panel3"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -41.0
+offset_right = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Panel4" type="Panel" parent="CanvasLayer/Abilities"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -12394,6 +12457,27 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
+[node name="LevelText" type="Label" parent="CanvasLayer/Abilities/Panel4"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -41.0
+offset_right = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Panel5" type="Panel" parent="CanvasLayer/Abilities"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -12413,6 +12497,27 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="LevelText" type="Label" parent="CanvasLayer/Abilities/Panel5"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -41.0
+offset_right = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="UltimateCooldown" type="AspectRatioContainer" parent="CanvasLayer"]
 anchors_preset = 7

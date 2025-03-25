@@ -73,6 +73,8 @@ func _on_upgrade_chosen(powerup_data: PowerupData):
 	for child in get_children():
 		if child is Powerup and child.powerup_name == powerup_data.name:
 			child.level_up()
+			$"..".get_hud_canvas_layer().update_powerup_level(powerup_data, child.current_level)
+			
 			powerup_found = true
 			break
 	
@@ -159,9 +161,7 @@ func add_powerup(powerup_data: PowerupData):
 	powerups.append(powerup)
 	
 	# Show the icon for this powerup on the HUD
-	var powerup_container: Container = $"..".get_hud_canvas_layer().get_powerup_container()
-	var texture_rect: TextureRect = powerup_container.get_child(len(powerups) - 1).find_child("TextureRect")
-	texture_rect.texture = powerup_data.sprite
+	$"..".get_hud_canvas_layer().add_powerup(powerup_data)
 	
 	if not is_down:
 		powerup.activate_powerup()
