@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=69 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -308,6 +308,8 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wr3nc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sha0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -11970,6 +11972,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 26
 text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempHealthBar" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -94.0
+offset_right = -294.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/TempHealthBar"]
+modulate = Color(0, 0.58041, 0.972094, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_wr3nc")
+
+[node name="Label" type="Label" parent="CanvasLayer/TempHealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
