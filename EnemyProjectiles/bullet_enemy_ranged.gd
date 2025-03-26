@@ -1,9 +1,4 @@
-extends Node2D
-
-@export var speed: float = 5
-@export var lifetime: float = 2
-var direction: Vector2
-var death_timer: float = 0
+extends Bullet
 
 
 # Called when the node enters the scene tree for the first time.

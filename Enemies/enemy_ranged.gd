@@ -6,7 +6,7 @@ extends Enemy
 @export var bullet_damage: float = 10.0
 # Time in seconds between shots.
 @export var fire_interval: float = 1.0
-@export var bullet_scene: PackedScene
+@export var bullet_scene_path: String = ""
 @export var allied_bullet_scene_path := "res://Powerups/bullet.tscn"
 
 # Used for faster distance calculation
@@ -17,9 +17,6 @@ var fire_timer: float = 0.0
 func _ready() -> void:
 	super()
 	squared_max_range = max_range * max_range
-	
-	if bullet_scene != null and ResourceLoader.exists(bullet_scene.to_string()):
-		load(bullet_scene.to_string())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,13 +50,15 @@ func shoot() -> void:
 	var direction = target.global_position - self.global_position
 	var direction_normal = direction.normalized()
 	if not is_ally:
-		# TODO: Probably need to convert enemies shooting to use the bullet spawner 
-		# and request_spawn_bullet
-		var bullet = bullet_scene.instantiate()
-		bullet.set_damage(bullet_damage)
-		bullet.direction = direction_normal
-		bullet.position = self.global_position + (direction_normal * 100)
-		get_node("..").add_child(bullet, true)
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [bullet_scene_path, 
+				self.global_position + (direction_normal * 100), 
+				direction_normal, 
+				bullet_damage, 
+				false,
+				[]
+			]
+		)
 	else:
 		# Alternate attack behavior for when this Enemy is an ally
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
