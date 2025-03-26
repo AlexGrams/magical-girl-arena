@@ -3,8 +3,8 @@ extends Node
 
 ## Collision layer for a bullet to be able to damage players.
 const ENEMY_BULLET_COLLISION_LAYER: int = 6
-## Collision mask for a bullet to be able to damage players.
-const ENEMY_BULLET_COLLISION_MASK: int = 4
+## Collision masks for a bullet to be able to damage players.
+const ENEMY_BULLET_COLLISION_MASK: Array[int] = [1, 4]
 
 enum Character {
 	GOTH,

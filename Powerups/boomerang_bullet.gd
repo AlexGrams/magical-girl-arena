@@ -10,7 +10,6 @@ var boomerang_owner: Node2D = null
 var closest_enemy: Node
 var is_returning := true
 
-var _is_owned_by_player := true
 ## When owned by an Enemy, the location that the bullet to moving towards away from its owner. 
 var _target_location := Vector2.ZERO
 

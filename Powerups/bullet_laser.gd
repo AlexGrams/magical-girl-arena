@@ -8,7 +8,6 @@ extends Bullet
 
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
-var _is_owned_by_player: bool = true
 var _pointer_location: Vector2
 
 
