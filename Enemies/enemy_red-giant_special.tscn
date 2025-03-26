@@ -39,6 +39,7 @@ collider_area = NodePath("Area2D")
 sprite = NodePath("RedGiantSprite")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
+speed = 150.0
 
 [node name="RedGiantSprite" parent="." instance=ExtResource("2_q60or")]
 starting_type = 1

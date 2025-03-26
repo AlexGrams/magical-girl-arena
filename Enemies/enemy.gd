@@ -28,7 +28,7 @@ var target: Node2D = null
 # All Objects that this Enemy can damage that it is touching right now.
 var colliding_targets: Array[Node2D] = []
 # Movement speed of this Enemy
-var speed: float = 100
+@export var speed: float = 100
 # True if it tries to harm Enemies instead of players.
 var is_ally := false
 # How long this Enemy lasts as an ally before being destroyed

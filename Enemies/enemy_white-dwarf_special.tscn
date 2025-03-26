@@ -39,6 +39,7 @@ collider_area = NodePath("Area2D")
 sprite = NodePath("WhiteDwarf_Sprite")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
+speed = 250.0
 
 [node name="WhiteDwarf_Sprite" parent="." instance=ExtResource("2_ldwr2")]
 starting_type = 1
