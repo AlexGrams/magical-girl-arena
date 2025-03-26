@@ -9,3 +9,4 @@ script = ExtResource("1_pq7hf")
 scene = ExtResource("1_0m21i")
 name = "Orbit"
 sprite = ExtResource("3_hi7gf")
+upgrade_description = "A bullet continuously revolves around you"

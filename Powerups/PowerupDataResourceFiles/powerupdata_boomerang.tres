@@ -9,3 +9,4 @@ script = ExtResource("1_6ihao")
 scene = ExtResource("1_fnspg")
 name = "Boomerang"
 sprite = ExtResource("3_ke06d")
+upgrade_description = "Throw a boomerang at the nearest enemy"

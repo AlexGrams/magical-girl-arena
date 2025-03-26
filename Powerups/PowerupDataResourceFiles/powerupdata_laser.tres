@@ -9,3 +9,4 @@ script = ExtResource("2_euh0s")
 scene = ExtResource("1_6ph5d")
 name = "Laser"
 sprite = ExtResource("3_tm8e7")
+upgrade_description = "Point and shoot a continuous laser"

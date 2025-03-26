@@ -9,3 +9,4 @@ script = ExtResource("2_5m6dr")
 scene = ExtResource("1_4uf8l")
 name = "Trail"
 sprite = ExtResource("3_5c0dn")
+upgrade_description = "Leave a damaging pool everywhere you walk"

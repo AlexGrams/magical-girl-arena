@@ -9,3 +9,4 @@ script = ExtResource("1_ikas7")
 scene = ExtResource("1_rmw23")
 name = "Scythe"
 sprite = ExtResource("3_vkh5s")
+upgrade_description = "Slash twice in the direction you aim"
