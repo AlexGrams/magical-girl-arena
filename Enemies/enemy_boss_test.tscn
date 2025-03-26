@@ -385,8 +385,8 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="EnemyBossTest" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 0
-collision_mask = 128
+collision_layer = 256
+collision_mask = 384
 script = ExtResource("1_te4ea")
 powerups_to_add = Array[PackedScene]([ExtResource("5_jxtym"), ExtResource("2_nxb35"), ExtResource("3_o3xfy"), ExtResource("4_jcg60"), ExtResource("6_htfgq")])
 base_health = 100

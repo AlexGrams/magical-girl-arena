@@ -381,8 +381,8 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="EnemyCorruptedSweet" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
-collision_layer = 0
-collision_mask = 128
+collision_layer = 256
+collision_mask = 384
 script = ExtResource("1_akkuy")
 corrupted_lifetime = 60.0
 default_powerup = ExtResource("2_4hf13")

@@ -31,8 +31,8 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
-collision_layer = 0
-collision_mask = 128
+collision_layer = 256
+collision_mask = 384
 script = ExtResource("1_00irv")
 base_health = 200
 collider_area = NodePath("Area2D")

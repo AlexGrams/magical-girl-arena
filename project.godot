@@ -27,6 +27,7 @@ Constants="*res://GameManagement/constants.gd"
 
 window/size/viewport_width=960
 window/size/viewport_height=540
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/scale=0.5
 
@@ -73,6 +74,7 @@ ability_ultimate={
 2d_physics/layer_6="enemy_bullet"
 2d_physics/layer_7="Walls"
 2d_physics/layer_8="obstacle"
+2d_physics/layer_9="enemy_collision"
 
 [physics]
 
