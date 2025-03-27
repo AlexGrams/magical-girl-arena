@@ -40,7 +40,7 @@ func toggle_enabled() -> void:
 
 # Make an object of this spawner's type within its designated spawn area. Spawning is
 # done periodically by default, but this function can be called to spawn manually.
-func spawn(scene_to_spawn: PackedScene) -> void:
+func spawn(scene_to_spawn: PackedScene) -> Node2D:
 	var obj = scene_to_spawn.instantiate()
 	var spawn_pos = Vector2(
 		randf_range(_spawn_x_min, _spawn_x_max), 
@@ -48,3 +48,5 @@ func spawn(scene_to_spawn: PackedScene) -> void:
 	)
 	obj.global_position = spawn_pos
 	get_node("..").add_child(obj, true)
+	
+	return obj

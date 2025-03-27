@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://chlwxentn6pyk"]
+
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="1_d6j4y"]
+[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="2_qtmxc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
+
+[node name="LootBoxSpawner" type="Node2D" node_paths=PackedStringArray("spawn_area")]
+script = ExtResource("1_d6j4y")
+spawn_interval = 10.0
+loot_box_scene = ExtResource("2_qtmxc")
+spawn_area = NodePath("Area2D/SpawnArea")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="SpawnArea" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_y6uu2")
+debug_color = Color(0.989583, 0.00256571, 0.00140677, 0.419608)

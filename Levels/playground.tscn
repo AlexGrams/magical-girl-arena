@@ -47,7 +47,7 @@
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
-[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="48_rmopo"]
+[ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12661,7 +12661,7 @@ text = "00:00"
 horizontal_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_boss_test.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_boss_test.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
@@ -12695,9 +12695,15 @@ scale = Vector2(46.8, 0.945)
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
 
-[node name="LootBox" parent="." instance=ExtResource("48_rmopo")]
-position = Vector2(815, 1285)
+[node name="LootBoxSpawner" parent="." instance=ExtResource("48_2eh24")]
+position = Vector2(1062, 1816)
+scale = Vector2(240, 240)
+
+[node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
+debug_color = Color(0, 0.435294, 0.403922, 0)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer" method="_on_quit_button_down"]
+
+[editable path="LootBoxSpawner"]

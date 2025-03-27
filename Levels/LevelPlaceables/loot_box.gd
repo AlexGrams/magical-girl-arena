@@ -29,6 +29,12 @@ func _ready() -> void:
 	_threshold_gold = drop_weight_gold / total + _threshold_health
 
 
+## Call after spawning to set this LootBox to the correct position on other clients.
+@rpc("authority", "call_local")
+func set_position_for_clients(pos: Vector2) -> void:
+	global_position = pos
+
+
 func _on_area_2d_entered(area: Area2D) -> void:
 	if not is_multiplayer_authority():
 		return
