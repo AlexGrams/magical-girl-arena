@@ -185,17 +185,19 @@ func take_damage(damage: float) -> void:
 	if is_down:
 		return
 	
-	# Deplete temp health before regular health.
-	if _temp_health > 0:
-		_temp_health -= damage
-		
-		if _temp_health < 0:
-			# Temporary health was delepeted
-			damage = abs(_temp_health)
-			_temp_health = 0
-			_temp_health_timer = 0.0
-		else:
-			damage = 0
+	if damage > 0:
+		# Deplete temp health before regular health.
+		# Skip this if the player is gaining health instead.
+		if _temp_health > 0:
+			_temp_health -= damage
+			
+			if _temp_health < 0:
+				# Temporary health was delepeted
+				damage = abs(_temp_health)
+				_temp_health = 0
+				_temp_health_timer = 0.0
+			else:
+				damage = 0
 	
 	health = clamp(health - damage, 0, health_max)
 	took_damage.emit(health, health_max, _temp_health)

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://btvqnd35r2gbw"]
+
+[ext_resource type="Script" path="res://Pickups/health_orb.gd" id="1_p0o6m"]
+[ext_resource type="Texture2D" uid="uid://cna65ys0w5c76" path="res://Sprites/ExperienceOrb.png" id="2_pcbs2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
+size = Vector2(26, 26)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5u73p"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[node name="HealthOrb" type="Node2D"]
+script = ExtResource("1_p0o6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.813116, 0, 1)
+texture = ExtResource("2_pcbs2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_f7oyy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5u73p")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

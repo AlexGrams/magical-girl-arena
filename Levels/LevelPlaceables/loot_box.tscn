@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bvadmsttyp5fc"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box.gd" id="1_spve4"]
-[ext_resource type="PackedScene" uid="uid://d2i6skhjx0ne1" path="res://Pickups/exp_orb.tscn" id="2_f65yo"]
+[ext_resource type="PackedScene" uid="uid://btvqnd35r2gbw" path="res://Pickups/health_orb.tscn" id="2_65y1k"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_qtayj"]
 [ext_resource type="PackedScene" uid="uid://cqcar2b10ptof" path="res://Pickups/gold.tscn" id="3_xby8p"]
 
@@ -15,7 +15,8 @@ size = Vector2(127, 129)
 collision_layer = 2
 script = ExtResource("1_spve4")
 max_health = 75.0
-health_scene = ExtResource("2_f65yo")
+drop_weight_health = 100.0
+health_scene = ExtResource("2_65y1k")
 gold_scene = ExtResource("3_xby8p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
