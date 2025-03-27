@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=105 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -47,6 +47,7 @@
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
+[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="48_rmopo"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12693,6 +12694,9 @@ scale = Vector2(46.8, 0.945)
 [node name="TEMP_EnemySpawner5" parent="." instance=ExtResource("4_4ivfi")]
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
+
+[node name="LootBox" parent="." instance=ExtResource("48_rmopo")]
+position = Vector2(815, 1285)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
