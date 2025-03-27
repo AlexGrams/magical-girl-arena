@@ -5,13 +5,28 @@ extends Node2D
 ## Enemies cannot interact with a LootBox.
 
 @export var max_health: float = 100.0
+## Relative likelihood of dropping a health pickup when destroyed.
+@export var drop_weight_health: float = 1.00
+## Relative likelihood of dropping gold when destroyed.
+@export var drop_weight_gold: float = 1.0
+## Health pickup scene.
+@export var health_scene: Resource = null
+## Gold pickup scene.
+@export var gold_scene: Resource = null
 
 var _health: float = 0.0
+var _threshold_health: float = 1.0
+var _threshold_gold: float = 1.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_health = max_health
+	
+	# Random loot generation
+	var total := drop_weight_health + drop_weight_gold
+	_threshold_health = drop_weight_health / total
+	_threshold_gold = drop_weight_gold / total + _threshold_health
 
 
 func _on_area_2d_entered(area: Area2D) -> void:
@@ -19,11 +34,26 @@ func _on_area_2d_entered(area: Area2D) -> void:
 		return
 	
 	if area is BulletHitbox:
-		_health -= area.damage
-		if _health <= 0.0:
-			_destroy()
-
+		take_damage(area.damage)
 
 ## Break this object and create a pickup. Only call on server.
 func _destroy() -> void:
+	# Spawn random loot
+	var random_value := randf()
+	if random_value <= _threshold_health:
+		var health_pickup: Node2D = health_scene.instantiate()
+		health_pickup.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", health_pickup, true)
+	elif random_value <= _threshold_gold:
+		var gold: Node2D = gold_scene.instantiate()
+		gold.global_position = global_position
+		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
+	
 	queue_free()
+
+
+func take_damage(damage: float) -> void:
+	_health -= damage
+	if _health <= 0.0:
+		_destroy()
+	
