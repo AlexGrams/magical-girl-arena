@@ -51,7 +51,9 @@ func shoot() -> void:
 	var direction_normal = direction.normalized()
 	if not is_ally:
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [bullet_scene_path, 
+			1, 
+			[
+				bullet_scene_path, 
 				self.global_position + (direction_normal * 100), 
 				direction_normal, 
 				bullet_damage, 
@@ -62,7 +64,8 @@ func shoot() -> void:
 	else:
 		# Alternate attack behavior for when this Enemy is an ally
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [allied_bullet_scene_path, 
+			1, [
+				allied_bullet_scene_path, 
 				self.global_position + (direction_normal * 100), 
 				direction_normal, 
 				bullet_damage, 

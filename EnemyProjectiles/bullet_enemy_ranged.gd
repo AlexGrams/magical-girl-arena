@@ -8,14 +8,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
-	
 	global_position += direction * speed * delta
 	
-	death_timer += delta
-	if death_timer >= lifetime:
-		queue_free()
+	if is_multiplayer_authority():
+		death_timer += delta
+		if death_timer >= lifetime:
+			queue_free()
 
 
 # Try to free this bullet remotely. Call from any client when their own character touches 
