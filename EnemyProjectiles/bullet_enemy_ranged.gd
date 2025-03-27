@@ -20,7 +20,8 @@ func _process(delta: float) -> void:
 # this bullet.
 @rpc("any_peer", "call_local")
 func request_delete() -> void:
-	queue_free()
+	if not is_queued_for_deletion():
+		queue_free()
 
 
 func set_damage(damage:float):

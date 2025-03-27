@@ -67,11 +67,12 @@ func _spawn_marker(enemy_path: NodePath) -> void:
 
 
 # Set up other properties for this bullet
-func setup_bullet(_is_owned_by_player: bool, data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (len(data) < 1 
 		or typeof(data[0]) != TYPE_FLOAT	# Status duration
 	):
 		push_error("Malformed data")
 		return
 	
+	_is_owned_by_player = is_owned_by_player
 	status_duration = data[0]

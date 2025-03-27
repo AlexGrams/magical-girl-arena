@@ -43,10 +43,15 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if not is_multiplayer_authority():
 		return
 	
-	if not _is_owned_by_player and area is BulletHitbox:
-		take_damage(area.damage)
-	elif destroy_on_hit:
-		queue_free()
+	if _is_owned_by_player:
+		# Player's bullets should be destroyed when they hit something if applicable.
+		if destroy_on_hit:
+			queue_free()
+	else:
+		# Enemy's bullets should deal damage if they hit a player's bullet.
+		# NOTE: Enemy bullets are deleted when the character that they hit calls an RPC to delete them.
+		if area is BulletHitbox:
+			take_damage(area.damage)
 
 
 # Set up other properties for this bullet
