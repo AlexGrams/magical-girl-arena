@@ -17,3 +17,13 @@ enum EnemySpriteType {
 	SPECIAL,
 	GOTH_ALLY
 }
+
+enum StatUpgrades {
+	HEALTH,
+	HEALTH_REGEN,
+	SPEED,
+	PICKUP_RADIUS,
+	DAMAGE,
+	ULTIMATE_DAMAGE,
+	ULTIMATE_CHARGE_RATE
+}

@@ -83,6 +83,10 @@ func _on_upgrade_chosen(powerup_data: PowerupData):
 		add_powerup(powerup_data)
 
 
+func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
+	print(stat_type)
+
+
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_direction != null:
@@ -303,8 +307,10 @@ func ready_player_character(character: Constants.Character) -> void:
 		took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
 		took_damage.emit(health, health_max, _temp_health)
 		
-		# Should redo this in the future prob?
+		# Powerup upgrade buttons
 		$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
+		# Stat upgrade buttons
+		$"../CanvasLayer/UpgradeScreenPanel".stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
 		
 		# Give the player the basic shoot powerup.
 		# Only the character that this player controls is given the ability. 

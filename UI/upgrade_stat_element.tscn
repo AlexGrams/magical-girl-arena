@@ -1,12 +1,18 @@
-[gd_scene format=3 uid="uid://c7kfc15ug7vuu"]
+[gd_scene load_steps=2 format=3 uid="uid://c7kfc15ug7vuu"]
 
-[node name="UpgradeStatElement" type="HBoxContainer"]
+[ext_resource type="Script" path="res://UI/upgrade_stat_element.gd" id="1_oqd7g"]
+
+[node name="UpgradeStatElement" type="HBoxContainer" node_paths=PackedStringArray("upgrade_button", "stat_name", "stat_level")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
+script = ExtResource("1_oqd7g")
+upgrade_button = NodePath("UpgradeButton")
+stat_name = NodePath("StatName")
+stat_level = NodePath("CurrentLevel")
 
 [node name="StatName" type="Label" parent="."]
 layout_mode = 2
@@ -32,3 +38,5 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+1"
+
+[connection signal="pressed" from="UpgradeButton" to="." method="_on_upgrade_button_pressed"]

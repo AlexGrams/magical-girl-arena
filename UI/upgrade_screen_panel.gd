@@ -5,6 +5,8 @@ extends Panel
 @export var all_powerup_data: Array[PowerupData] = []
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
+## Holds elements for upgrading stats
+@export var stat_upgrades_holder: Control = null
 ## Button for rerolling the provided upgrades.
 @export var reroll_button: Button = null
 ## Window that shows up saying how many players are still choosing upgrades.
@@ -13,6 +15,7 @@ extends Panel
 @export var player_ready_indicator_holder: Control = null
 
 var upgrade_panels: Array[UpgradePanel] = []
+var stat_upgrade_elements: Array[StatUpgradeElement] = []
 var ready_indicators: Array = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
@@ -21,6 +24,7 @@ var players_done_selecting_upgrades: int = 0
 var _powerup_name_to_powerupdata := {}
 
 signal upgrade_chosen(title)
+signal stat_upgrade_chosen(stat_type: Constants.StatUpgrades)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +32,10 @@ func _ready() -> void:
 	for child in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
 		child.upgrade_chosen.connect(_on_upgrade_chosen)
+	for child: StatUpgradeElement in stat_upgrades_holder.get_children():
+		stat_upgrade_elements.append(child)
+		child.setup_stat_upgrade(len(stat_upgrade_elements) - 1)
+		child.stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
 	for child in player_ready_indicator_holder.get_children():
 		ready_indicators.append(child)
 	
@@ -128,6 +136,17 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	upgrade_panels_holder.hide()
 	increment_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
+
+
+## Notify relevant systems that a stat upgrade was chosen, then hide the upgrades menu.
+func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
+	stat_upgrade_chosen.emit(stat_type)
+	#GameState.player_selected_upgrade.rpc_id(1)
+	#
+	## Set up and show the screen saying how many players are still choosing their upgrades.
+	#upgrade_panels_holder.hide()
+	#increment_players_selecting_upgrades.rpc()
+	#players_selecting_upgrades_window.show()
 
 
 # Update the displayed count of how many players are still selecting their upgrades.
