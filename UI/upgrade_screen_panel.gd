@@ -27,15 +27,13 @@ signal upgrade_chosen(title)
 func _ready() -> void:
 	for child in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
+		child.upgrade_chosen.connect(_on_upgrade_chosen)
 	for child in player_ready_indicator_holder.get_children():
 		ready_indicators.append(child)
 	
 	# Set up the powerup name to PowerupData map
 	for powerupdata: PowerupData in all_powerup_data:
 		_powerup_name_to_powerupdata[powerupdata.name] = powerupdata
-	
-	for child in $HBoxContainer.get_children():
-		child.upgrade_chosen.connect(_on_upgrade_chosen)
 
 
 # Show the upgrade screen and set up the options provided to the player.

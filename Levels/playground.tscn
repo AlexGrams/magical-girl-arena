@@ -12555,6 +12555,7 @@ visible = false
 all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps")])
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
