@@ -34,7 +34,6 @@ func _ready() -> void:
 		child.upgrade_chosen.connect(_on_upgrade_chosen)
 	for child: StatUpgradeElement in stat_upgrades_holder.get_children():
 		stat_upgrade_elements.append(child)
-		child.setup_stat_upgrade(len(stat_upgrade_elements) - 1)
 		child.stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
 	for child in player_ready_indicator_holder.get_children():
 		ready_indicators.append(child)
@@ -55,7 +54,7 @@ func setup():
 	show()
 
 
-# Makes a random list of powerups to obtain or upgrade, then displays it.
+## Makes a random list of powerups to obtain or upgrade, and update the stats upgrade panel.
 func _generate_and_show_random_upgrade_choices() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
 	
@@ -96,6 +95,10 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		reroll_button.disabled = true
 	else:
 		reroll_button.disabled = false
+	
+	# Show the current level of each of the player's stats.
+	for stat: int in range(len(Constants.StatUpgrades)):
+		stat_upgrade_elements[stat].setup_stat_upgrade(stat, player_character.get_stat(stat))
 
 
 # Display a random selection of upgrades for the player to choose from.
@@ -141,12 +144,12 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 ## Notify relevant systems that a stat upgrade was chosen, then hide the upgrades menu.
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	stat_upgrade_chosen.emit(stat_type)
-	#GameState.player_selected_upgrade.rpc_id(1)
-	#
-	## Set up and show the screen saying how many players are still choosing their upgrades.
-	#upgrade_panels_holder.hide()
-	#increment_players_selecting_upgrades.rpc()
-	#players_selecting_upgrades_window.show()
+	GameState.player_selected_upgrade.rpc_id(1)
+	
+	# Set up and show the screen saying how many players are still choosing their upgrades.
+	upgrade_panels_holder.hide()
+	increment_players_selecting_upgrades.rpc()
+	players_selecting_upgrades_window.show()
 
 
 # Update the displayed count of how many players are still selecting their upgrades.

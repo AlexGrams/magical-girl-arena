@@ -52,6 +52,14 @@ var _temp_health_timer: float = 0.0
 var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
 var _temp_rerolls: int = 0
+# Stat levels
+var _stat_health: int = 1
+var _stat_health_regen: int = 1
+var _stat_speed: int = 1
+var _stat_pickup_radius: int = 1
+var _stat_damage: int = 1
+var _stat_ultimate_damage: int = 1
+var _stat_ultimate_charge_rate: int = 1
 
 signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
@@ -83,8 +91,51 @@ func _on_upgrade_chosen(powerup_data: PowerupData):
 		add_powerup(powerup_data)
 
 
+## Upgrade stats depending on which upgrade was chosen
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
-	print(stat_type)
+	match stat_type:
+		Constants.StatUpgrades.HEALTH:
+			_stat_health += 1
+			
+			# TODO: Temporary for now. Figure out if we want to do this off a curve or something.
+			health_max += 10
+			take_damage(-10.0)
+		Constants.StatUpgrades.HEALTH_REGEN:
+			_stat_health_regen += 1
+		Constants.StatUpgrades.SPEED:
+			_stat_speed += 1
+		Constants.StatUpgrades.PICKUP_RADIUS:
+			_stat_pickup_radius += 1
+		Constants.StatUpgrades.DAMAGE:
+			_stat_damage += 1
+		Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			_stat_ultimate_damage += 1
+		Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			_stat_ultimate_charge_rate += 1
+		_:
+			push_error("No upgrade functionality for this stat upgrade type")
+
+
+## Returns the current level of a player's stat given the stat enum type.
+func get_stat(stat_type: Constants.StatUpgrades) -> int:
+	match stat_type:
+		Constants.StatUpgrades.HEALTH:
+			return _stat_health
+		Constants.StatUpgrades.HEALTH_REGEN:
+			return _stat_health_regen
+		Constants.StatUpgrades.SPEED:
+			return _stat_speed
+		Constants.StatUpgrades.PICKUP_RADIUS:
+			return _stat_pickup_radius
+		Constants.StatUpgrades.DAMAGE:
+			return _stat_damage
+		Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			return _stat_ultimate_damage
+		Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			return _stat_ultimate_charge_rate
+		_:
+			push_error("No upgrade functionality for this stat upgrade type")
+	return 1
 
 
 func get_input():

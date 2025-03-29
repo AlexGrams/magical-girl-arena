@@ -21,9 +21,9 @@ func _ready() -> void:
 
 
 ## Set which stat this element upgrades.
-func setup_stat_upgrade(stat_type: Constants.StatUpgrades) -> void:
+func setup_stat_upgrade(stat_type: Constants.StatUpgrades, current_level: int) -> void:
 	_stat_type = stat_type
-	stat_level.text = "1"
+	stat_level.text = str(current_level)
 	
 	match _stat_type:
 		Constants.StatUpgrades.HEALTH:
