@@ -265,6 +265,7 @@ func start_game():
 		player.teleport.rpc_id(player_id, spawn_point)
 		
 		spawn_point_index += 1
+	_update_exp_for_next_level.rpc()
 	
 	set_game_running.rpc(true)
 
@@ -471,8 +472,11 @@ func collect_gold() -> void:
 	_gold_this_game += 1
 
 
+## Calculates and updates how much experience is required for the next level accounting for
+## how many players are in the game.
+@rpc("authority", "call_local")
 func _update_exp_for_next_level() -> void:
-	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL))
+	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL)) * len(players)
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
