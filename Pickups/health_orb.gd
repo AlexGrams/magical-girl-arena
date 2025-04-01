@@ -1,3 +1,4 @@
+class_name HealthOrb
 extends EXPOrb
 ## A pickup that adds health to a player.
 
