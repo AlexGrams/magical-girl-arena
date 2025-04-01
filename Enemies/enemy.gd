@@ -191,7 +191,16 @@ func set_target(target_path: NodePath) -> void:
 	target = get_node(target_path)
 
 
+## Wrapper function for RPC modification without making changes everywhere.
 func take_damage(damage: float) -> void:
+	# TODO: Maybe fix all the references to this function.
+	_take_damage.rpc(damage)
+
+
+## Deals damage to this Enemy. Call via RPC to have effects replicated on all clients.
+@rpc("any_peer", "call_local")
+func _take_damage(damage: float) -> void:
+	# Damage indicator
 	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.global_position = global_position
 	damage_indicator.text = str(damage)
@@ -199,8 +208,9 @@ func take_damage(damage: float) -> void:
 	
 	health -= snapped(damage, 1)
 	$AnimationPlayer.play("take_damage")
+	
 	if health <= 0 and is_multiplayer_authority():
-		die.rpc_id(1)
+		die()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
