@@ -46,7 +46,11 @@ func spawn(scene_to_spawn: PackedScene) -> Node2D:
 		randf_range(_spawn_x_min, _spawn_x_max), 
 		randf_range(_spawn_y_min, _spawn_y_max)
 	)
-	obj.global_position = spawn_pos
+	
 	get_node("..").add_child(obj, true)
+	if obj.has_method("teleport"):
+		obj.teleport.rpc(spawn_pos)
+	else:
+		obj.global_position = spawn_pos
 	
 	return obj

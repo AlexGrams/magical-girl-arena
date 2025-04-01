@@ -89,7 +89,18 @@ func _physics_process(_delta: float) -> void:
 		velocity = (target.global_position - global_position).normalized() * speed
 		move_and_slide()
 	else:
-		_find_new_target()
+		if is_multiplayer_authority():
+			_find_new_target()
+		else:
+			# Continue moving in the same direction until we are notified by the server of
+			# the new target
+			move_and_slide()
+
+
+## Move this enemy to a location.
+@rpc("authority", "call_local")
+func teleport(pos: Vector2) -> void:
+	global_position = pos
 
 
 # Spawn in and add a Powerup to this Enemy. The Powerup may need extra functionality to 
@@ -108,11 +119,18 @@ func _add_powerup(powerup_scene: PackedScene) -> void:
 # Makes sure to find a new target if the current one dies.
 func _find_new_target() -> void:
 	if not is_ally:
-		target = get_nearest_player_character()
-		if target != null:
-			target.died.connect(func():
-				target = null
-			)
+		var new_target: Node2D = get_nearest_player_character()
+		
+		if new_target != null:
+			set_target.rpc(new_target.get_path())
+			teleport.rpc(global_position)
+			if target != null:
+				target.died.connect(func():
+					target = null
+				)
+		else:
+			# Could not find a new target player, so do nothing probably.
+			pass
 	else:
 		# Alternate behavior, for when this Enemy attacks other Enemies.
 		target = get_nearest_hostile_enemy()
@@ -164,6 +182,13 @@ func get_nearest_hostile_enemy() -> Enemy:
 				nearest_enemy = enemy
 	
 	return nearest_enemy
+
+
+## Sets this Enemy's target using the target node's path within the tree.
+## Call via RPC to set this Enemy's target on all clients.
+@rpc("authority", "call_local")
+func set_target(target_path: NodePath) -> void:
+	target = get_node(target_path)
 
 
 func take_damage(damage: float) -> void:
