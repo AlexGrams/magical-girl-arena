@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1ahxs4yuxgjy"]
+[gd_scene load_steps=8 format=3 uid="uid://b1ahxs4yuxgjy"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_lq6in"]
 [ext_resource type="PackedScene" uid="uid://c3sidw50jawcj" path="res://Sprites/Enemy/Supergiant_Enemy/supergiant_sprite.tscn" id="2_1ylyk"]
@@ -21,14 +21,6 @@ _data = {
 "RESET": SubResource("Animation_u5q41"),
 "take_damage": SubResource("Animation_xsep2")
 }
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_orunc"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:health")
-properties/1/spawn = true
-properties/1/replication_mode = 1
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
@@ -59,9 +51,6 @@ shape = SubResource("CircleShape2D_q63v7")
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_orunc")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

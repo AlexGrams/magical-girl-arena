@@ -42,7 +42,10 @@ func _physics_process(_delta: float) -> void:
 				shoot()
 				fire_timer = 0.0
 	else:
-		_find_new_target()
+		if is_multiplayer_authority():
+			_find_new_target()
+		else:
+			move_and_slide()
 
 
 # Perform a ranged attack by spawning a bullet.

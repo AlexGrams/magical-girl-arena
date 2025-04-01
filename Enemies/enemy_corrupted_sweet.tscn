@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwxh1lqgmuu3q"]
+[gd_scene load_steps=17 format=3 uid="uid://cwxh1lqgmuu3q"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_akkuy"]
 [ext_resource type="PackedScene" uid="uid://dyq0c1f3w0cap" path="res://Powerups/revolving_powerup.tscn" id="2_4hf13"]
@@ -372,14 +372,6 @@ _data = {
 "take_damage": SubResource("Animation_xsep2")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_orunc"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:health")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [node name="EnemyCorruptedSweet" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
 collision_mask = 384
@@ -445,9 +437,6 @@ shape = SubResource("RectangleShape2D_beu2y")
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_orunc")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

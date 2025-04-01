@@ -23,4 +23,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.LEFT.rotated(_current_rotation) * speed
 		move_and_slide()
 	else:
-		_find_new_target()
+		if is_multiplayer_authority():
+			_find_new_target()
+		else:
+			move_and_slide()
