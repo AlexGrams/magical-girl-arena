@@ -227,7 +227,8 @@ func _damage_effects(damage: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
-		take_damage(area.damage)
+		if is_multiplayer_authority():
+			take_damage(area.damage)
 		return
 	
 	var other = area.get_parent()
