@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 		
 		_attack_timer = attack_interval
 	
-	if is_ally:
+	if is_multiplayer_authority() and is_ally:
 		lifetime -= delta
 		if lifetime <= 0.0:
 			take_damage(health)
@@ -194,23 +194,35 @@ func set_target(target_path: NodePath) -> void:
 ## Wrapper function for RPC modification without making changes everywhere.
 func take_damage(damage: float) -> void:
 	# TODO: Maybe fix all the references to this function.
-	_take_damage.rpc(damage)
+	_take_damage.rpc_id(1, damage)
 
 
 ## Deals damage to this Enemy. Call via RPC to have effects replicated on all clients.
+## Only call on the server
 @rpc("any_peer", "call_local")
 func _take_damage(damage: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	
+	health -= snapped(damage, 1)
+	
+	if health <= 0:
+		die()
+	else:
+		# This enemy is still alive, so replicate the damage effects on all clients.
+		_damage_effects.rpc(damage)
+
+
+@rpc("authority", "call_local")
+func _damage_effects(damage: float) -> void:
 	# Damage indicator
 	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.global_position = global_position
 	damage_indicator.text = str(damage)
 	get_tree().root.get_node("Playground").add_child(damage_indicator)
 	
-	health -= snapped(damage, 1)
+	# Animation
 	$AnimationPlayer.play("take_damage")
-	
-	if health <= 0 and is_multiplayer_authority():
-		die()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
