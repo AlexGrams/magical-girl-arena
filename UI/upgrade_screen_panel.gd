@@ -48,6 +48,8 @@ func setup():
 	players_done_selecting_upgrades = 0
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
+	stat_upgrades_holder.show()
+	reroll_button.show()
 	
 	_generate_and_show_random_upgrade_choices()
 	
@@ -137,6 +139,9 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
+	stat_upgrades_holder.hide()
+	reroll_button.hide()
+	
 	increment_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
@@ -148,6 +153,9 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
+	stat_upgrades_holder.hide()
+	reroll_button.hide()
+	
 	increment_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
