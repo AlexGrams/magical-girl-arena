@@ -13,12 +13,15 @@ const MAX_POWERUPS: int = 5
 const STARTING_REROLLS: int = 3
 # How long temporary health stays on the player before going away.
 const TEMP_HEALTH_LINGER_TIME: float = 5.0
+# Time in seconds between health regen ticks
+const HEALTH_REGEN_INTERVAL: float = 5.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
 # Maps string name of character to their CharacterData resource file
 @export var _character_data: Dictionary = {}
 @export var _player_collision_area: Area2D = null
+@export var _pickup_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
 @export var _revive_progress_bar: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
@@ -48,6 +51,10 @@ var revive_timer: float = 0.0
 var _temp_health: int = 0
 # How long until temp HP automatically disappears.
 var _temp_health_timer: float = 0.0
+# How much health is recovered per health regen tick.
+var _health_regen: float = 0.0
+# How long until the next health regen tick.
+var _health_regen_timer: float = 0.0
 # Number of remaining powerup rerolls. Not replicated.
 var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
@@ -96,16 +103,18 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	match stat_type:
 		Constants.StatUpgrades.HEALTH:
 			_stat_health += 1
-			
 			# TODO: Temporary for now. Figure out if we want to do this off a curve or something.
 			health_max += 10
 			take_damage(-10.0)
 		Constants.StatUpgrades.HEALTH_REGEN:
 			_stat_health_regen += 1
+			_health_regen += 1.0
 		Constants.StatUpgrades.SPEED:
 			_stat_speed += 1
+			speed += 40
 		Constants.StatUpgrades.PICKUP_RADIUS:
 			_stat_pickup_radius += 1
+			_pickup_area.scale += Vector2(0.1, 0.1)
 		Constants.StatUpgrades.DAMAGE:
 			_stat_damage += 1
 		Constants.StatUpgrades.ULTIMATE_DAMAGE:
@@ -148,6 +157,14 @@ func _process(delta: float) -> void:
 	var direction = get_global_mouse_position() - $Sprite2D.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
+	
+	# Health regen - ticks at every interval, but does nothing if it ticks when health is full
+	if _health_regen > 0.0:
+		_health_regen_timer -= delta
+		if _health_regen_timer <= 0.0:
+			# Add health
+			take_damage(-_health_regen)
+			_health_regen_timer = HEALTH_REGEN_INTERVAL
 	
 	# Temporary health is reset after some time has passed.
 	if _temp_health_timer > 0.0:

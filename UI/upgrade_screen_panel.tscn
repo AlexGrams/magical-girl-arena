@@ -104,12 +104,15 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="UpgradeStatElement5" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
+visible = false
 layout_mode = 2
 
 [node name="UpgradeStatElement6" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
+visible = false
 layout_mode = 2
 
 [node name="UpgradeStatElement7" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
+visible = false
 layout_mode = 2
 
 [node name="RerollButton" type="Button" parent="."]
