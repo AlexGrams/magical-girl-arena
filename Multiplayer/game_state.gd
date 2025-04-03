@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -132,7 +132,7 @@ func _ready() -> void:
 	)
 	
 	# Set up Steam-specific functionality
-	if USING_GODOT_STEAM:
+	if USING_GODOT_STEAM or OS.has_feature("release"):
 		Steam.steamInitEx(true, 480)
 		
 		if OS.has_feature("release") and Steam.getAppID() == 480:
@@ -223,7 +223,7 @@ func connect_steam_socket(steam_id : int):
 
 # Create a new public multiplayer lobby.
 func host_lobby(host_player_name: String) -> void:
-	if USING_GODOT_STEAM:
+	if USING_GODOT_STEAM or OS.has_feature("release"):
 		player_name = host_player_name
 		register_player(multiplayer.get_unique_id(), host_player_name, 1)
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
