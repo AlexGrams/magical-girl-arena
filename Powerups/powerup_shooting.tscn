@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bowbgv1jw2mul"]
+[gd_scene load_steps=2 format=3 uid="uid://bowbgv1jw2mul"]
 
 [ext_resource type="Script" path="res://Powerups/powerup_shooting.gd" id="1_a0uoa"]
-[ext_resource type="Curve" uid="uid://co6hauy6vnne6" path="res://Curves/upgrade_shooting.tres" id="2_hnaeg"]
 
 [node name="PowerupShooting" type="Node2D"]
 script = ExtResource("1_a0uoa")
 shoot_interval = 0.5
-upgrade_curve = ExtResource("2_hnaeg")
+damage_levels = Array[float]([50.0, 55.0, 61.0, 67.0, 73.0])
+signature_damage = 73.0
 powerup_name = "Shooting"
