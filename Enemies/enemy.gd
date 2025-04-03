@@ -312,12 +312,20 @@ func die() -> void:
 func _spawn_loot() -> void:
 	var random_value := randf()
 	if random_value <= _threshold_exp:
-		var exp_orb = exp_scene.instantiate()
+		var exp_orb: EXPOrb = exp_scene.instantiate()
 		exp_orb.global_position = global_position
+		exp_orb.tree_entered.connect(
+			func(): exp_orb.teleport.rpc(global_position)
+			, CONNECT_DEFERRED
+		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
 	elif random_value <= _threshold_gold:
 		var gold := gold_scene.instantiate()
 		gold.global_position = global_position
+		gold.tree_entered.connect(
+			func(): gold.teleport.rpc(global_position)
+			, CONNECT_DEFERRED
+		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
 	else:
 		# Nothing rewarded

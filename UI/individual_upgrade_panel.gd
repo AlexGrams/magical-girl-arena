@@ -8,7 +8,7 @@ extends Panel
 ## PowerData for this button's currently associated Powerup. This being null indicates that 
 ## the button upgrades a stat instead.
 var _powerupdata: PowerupData = null
-var _stat: Constants.StatUpgrades = 0
+var _stat: Constants.StatUpgrades = Constants.StatUpgrades.HEALTH
 
 signal upgrade_powerup_chosen(powerupdata: PowerupData)
 signal upgrade_stat_chosen(stat: Constants.StatUpgrades)

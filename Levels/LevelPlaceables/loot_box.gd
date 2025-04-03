@@ -47,12 +47,20 @@ func _destroy() -> void:
 	# Spawn random loot
 	var random_value := randf()
 	if random_value <= _threshold_health:
-		var health_pickup: Node2D = health_scene.instantiate()
+		var health_pickup: HealthOrb = health_scene.instantiate()
 		health_pickup.global_position = global_position
+		health_pickup.tree_entered.connect(
+			func(): health_pickup.teleport.rpc(global_position)
+			, CONNECT_DEFERRED
+		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", health_pickup, true)
 	elif random_value <= _threshold_gold:
 		var gold: Node2D = gold_scene.instantiate()
 		gold.global_position = global_position
+		gold.tree_entered.connect(
+			func(): gold.teleport.rpc(global_position)
+			, CONNECT_DEFERRED
+		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
 	
 	queue_free()

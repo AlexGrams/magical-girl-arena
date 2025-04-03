@@ -33,6 +33,12 @@ func set_player(new_player: NodePath) -> void:
 		player = get_tree().root.get_node(new_player)
 
 
+## Move this orb to a position
+@rpc("authority", "call_local")
+func teleport(pos: Vector2) -> void:
+	global_position = pos
+
+
 # Delete this EXP orb on all clients. Only call on the server.
 @rpc("any_peer", "call_local")
 func destroy() -> void:
