@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=13 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
@@ -11,12 +11,11 @@
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="7_tydhb"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="8_yawss"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="9_dl5oi"]
-[ext_resource type="PackedScene" uid="uid://c7kfc15ug7vuu" path="res://UI/upgrade_stat_element.tscn" id="11_6a08n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
 
-[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "stat_upgrades_holder", "reroll_button", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
+[node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "reroll_button", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,7 +25,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
 all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_dl5oi")])
 upgrade_panels_holder = NodePath("UpgradesContainer/PowerupUpgradesContainer")
-stat_upgrades_holder = NodePath("UpgradesContainer/StatUpgradesContainer")
 reroll_button = NodePath("RerollButton")
 players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 player_ready_indicator_holder = NodePath("PlayersSelectingUpgrades/ReadyIndicatorContainer")
@@ -82,38 +80,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="IndividualUpgradePanel3" parent="UpgradesContainer/PowerupUpgradesContainer" instance=ExtResource("1_0s0gu")]
-layout_mode = 2
-
-[node name="StatUpgradesContainer" type="VBoxContainer" parent="UpgradesContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-theme_override_constants/separation = 7
-alignment = 1
-
-[node name="UpgradeStatElement" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-layout_mode = 2
-
-[node name="UpgradeStatElement2" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-layout_mode = 2
-
-[node name="UpgradeStatElement3" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-layout_mode = 2
-
-[node name="UpgradeStatElement4" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-layout_mode = 2
-
-[node name="UpgradeStatElement5" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-visible = false
-layout_mode = 2
-
-[node name="UpgradeStatElement6" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-visible = false
-layout_mode = 2
-
-[node name="UpgradeStatElement7" parent="UpgradesContainer/StatUpgradesContainer" instance=ExtResource("11_6a08n")]
-visible = false
 layout_mode = 2
 
 [node name="RerollButton" type="Button" parent="."]

@@ -5,8 +5,6 @@ extends Panel
 @export var all_powerup_data: Array[PowerupData] = []
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
-## Holds elements for upgrading stats
-@export var stat_upgrades_holder: Control = null
 ## Button for rerolling the provided upgrades.
 @export var reroll_button: Button = null
 ## Window that shows up saying how many players are still choosing upgrades.
@@ -15,7 +13,6 @@ extends Panel
 @export var player_ready_indicator_holder: Control = null
 
 var upgrade_panels: Array[UpgradePanel] = []
-var stat_upgrade_elements: Array[StatUpgradeElement] = []
 var ready_indicators: Array = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
@@ -33,9 +30,6 @@ func _ready() -> void:
 		upgrade_panels.append(child)
 		child.upgrade_powerup_chosen.connect(_on_upgrade_chosen)
 		child.upgrade_stat_chosen.connect(_on_stat_upgrade_chosen)
-	for child: StatUpgradeElement in stat_upgrades_holder.get_children():
-		stat_upgrade_elements.append(child)
-		child.stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
 	for child in player_ready_indicator_holder.get_children():
 		ready_indicators.append(child)
 	
@@ -49,7 +43,6 @@ func setup():
 	players_done_selecting_upgrades = 0
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
-	stat_upgrades_holder.show()
 	reroll_button.show()
 	
 	_generate_and_show_random_upgrade_choices()
@@ -101,10 +94,6 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		reroll_button.disabled = true
 	else:
 		reroll_button.disabled = false
-	
-	# Show the current level of each of the player's stats.
-	for stat: int in range(len(Constants.StatUpgrades)):
-		stat_upgrade_elements[stat].setup_stat_upgrade(stat, player_character.get_stat(stat))
 
 
 # Display a random selection of upgrades for the player to choose from.
@@ -143,7 +132,6 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
-	stat_upgrades_holder.hide()
 	reroll_button.hide()
 	
 	increment_players_selecting_upgrades.rpc()
@@ -157,7 +145,6 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
-	stat_upgrades_holder.hide()
 	reroll_button.hide()
 	
 	increment_players_selecting_upgrades.rpc()
