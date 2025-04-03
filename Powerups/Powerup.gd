@@ -11,14 +11,17 @@ extends Node2D
 ## The highest level that this powerup can be upgraded to.
 const max_level: int = 5
 
-## Curve describing how this powerup's main stat changes as it is upgraded.
-@export var upgrade_curve: Curve = null
+## How much damage this Powerup does at each level that its upgraded to.
+@export var damage_levels: Array[float] = [0, 0, 0, 0, 0]
+## How much damage this Powerup does at max level as a signature Powerup.
+@export var signature_damage: float = 0.0
 ## Name used to uniquely identify this Powerup.
 @export var powerup_name := ""
 
 ## What level the powerup is at. Values are [1, max_level].
 var current_level: int = 1
-var damage_levels: Array
+## True if the owning player has access to this Powerup's signature behavior when it reaches max level.
+var is_signature: bool = true
 ## True when this Powerup is active, which usually means it is shooting bullets.
 var is_on: bool = false
 
@@ -31,6 +34,10 @@ signal powerup_level_up(new_level: int, new_damage: float)
 
 func set_is_owned_by_player(value: bool) -> void:
 	_is_owned_by_player = value
+
+
+func set_is_signature(value: bool) -> void:
+	is_signature = value
 
 
 # Meant to be overridden
@@ -60,4 +67,10 @@ func set_authority(id: int) -> void:
 
 ## Calculates this powerup's damage given its current level using the upgrade curve.
 func _get_damage_from_curve() -> float:
-	return upgrade_curve.sample(float(current_level - 1) / (max_level - 1))
+	if current_level > len(damage_levels):
+		push_error("Not enough damage levels to get the damage of this powerup")
+		return 0
+	elif current_level == len(damage_levels):
+		return signature_damage
+	else:
+		return damage_levels[current_level - 1]

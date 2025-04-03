@@ -10,7 +10,7 @@ signal picked_up_powerup(sprite)
 
 
 func _ready():
-	damage_levels = [20.0, 25.0, 50.0, 75.0, 100.0]
+	pass
 
 
 func activate_powerup():
