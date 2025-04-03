@@ -1,18 +1,58 @@
 class_name UpgradePanel
 extends Panel
 
-## PowerData for this button's currently associated Powerup. 
+
+## What shows up when upgrading a stat.
+@export var stat_upgrade_texture: Texture2D = null
+
+## PowerData for this button's currently associated Powerup. This being null indicates that 
+## the button upgrades a stat instead.
 var _powerupdata: PowerupData = null
+var _stat: Constants.StatUpgrades = 0
 
-signal upgrade_chosen(powerupdata: PowerupData)
+signal upgrade_powerup_chosen(powerupdata: PowerupData)
+signal upgrade_stat_chosen(stat: Constants.StatUpgrades)
 
 
-func set_powerup(powerupdata: PowerupData) -> void:
-	_powerupdata = powerupdata
-	$VBoxContainer/Label.text = powerupdata.name
-	$VBoxContainer/TextureRect.texture = powerupdata.sprite
-	$VBoxContainer/Label2.text = powerupdata.get_upgrade_description()
+## Displays which Powerup or Stat this button will upgrade when clicked.
+func set_upgrade(upgrade) -> void:
+	if upgrade is PowerupData:
+		_powerupdata = upgrade
+		_set_display(_powerupdata.name, _powerupdata.sprite, _powerupdata.get_upgrade_description())
+	elif upgrade is Constants.StatUpgrades:
+		_stat = upgrade
+		_powerupdata = null
+		
+		match upgrade:
+			Constants.StatUpgrades.HEALTH:
+				_set_display("Health", stat_upgrade_texture, "Increase max health.")
+			Constants.StatUpgrades.HEALTH_REGEN:
+				_set_display("Health Regeneration", stat_upgrade_texture, "Increase occasional health regen.")
+			Constants.StatUpgrades.SPEED:
+				_set_display("Speed", stat_upgrade_texture, "Increase movement speed.")
+			Constants.StatUpgrades.PICKUP_RADIUS:
+				_set_display("Pickup Radius", stat_upgrade_texture, "Increase range for picking up items such as experience and health.")
+			#Constants.StatUpgrades.DAMAGE:
+				#_set_display("Health", stat_upgrade_texture, "Increase max health.")
+			#Constants.StatUpgrades.ULTIMATE_DAMAGE:
+				#_set_display("Health", stat_upgrade_texture, "Increase max health.")
+			#Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+				#_set_display("Health", stat_upgrade_texture, "Increase max health.")
+			_:
+				push_error("No upgrade functionality for this stat upgrade type")
+	else:
+		push_error("No upgrade functionality for this type")
+
+
+## Set up the text and image that appears on this button depending on what it upgrades. 
+func _set_display(upgrade_name: String, texture: Texture2D, description: String):
+	$VBoxContainer/Label.text = upgrade_name
+	$VBoxContainer/TextureRect.texture = texture
+	$VBoxContainer/Label2.text = description
 
 
 func _on_button_pressed() -> void:
-	upgrade_chosen.emit(_powerupdata)
+	if _powerupdata != null:
+		upgrade_powerup_chosen.emit(_powerupdata)
+	else:
+		upgrade_stat_chosen.emit(_stat)

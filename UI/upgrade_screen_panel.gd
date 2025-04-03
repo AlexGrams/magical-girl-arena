@@ -29,9 +29,10 @@ signal stat_upgrade_chosen(stat_type: Constants.StatUpgrades)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for child in upgrade_panels_holder.get_children():
+	for child: UpgradePanel in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
-		child.upgrade_chosen.connect(_on_upgrade_chosen)
+		child.upgrade_powerup_chosen.connect(_on_upgrade_chosen)
+		child.upgrade_stat_chosen.connect(_on_stat_upgrade_chosen)
 	for child: StatUpgradeElement in stat_upgrades_holder.get_children():
 		stat_upgrade_elements.append(child)
 		child.stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
@@ -59,20 +60,20 @@ func setup():
 ## Makes a random list of powerups to obtain or upgrade, and update the stats upgrade panel.
 func _generate_and_show_random_upgrade_choices() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
+	# Mixed array of either PowerupData or Constants.StatUpgrades
+	var upgrade_choices: Array = []
 	
+	# Decide which Powerups can possibly be upgraded
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
 		# choose some amount (3 in this case) to upgrade randomly.
-		var random_upgrade_choices: Array[PowerupData] = []
 		
 		for powerup: Powerup in player_character.powerups:
 			if powerup.current_level < powerup.max_level:
-				random_upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
-		
-		_show_random_upgrade_choices(random_upgrade_choices)
+				upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
 	else:
 		# Otherwise, choose randomly from the whole pool up abilities.
-		var random_powerup_list = all_powerup_data.duplicate()
+		upgrade_choices.append_array(all_powerup_data.duplicate())
 
 		# Remove powerups from the random list that can't be upgraded anymore.
 		var powerups_to_remove = []
@@ -81,14 +82,17 @@ func _generate_and_show_random_upgrade_choices() -> void:
 				powerups_to_remove.append(powerup.powerup_name)
 		if len(powerups_to_remove) > 0:
 			var i = 0
-			while i < len(random_powerup_list):
-				if random_powerup_list[i].name in powerups_to_remove:
-					random_powerup_list.remove_at(i)
+			while i < len(upgrade_choices):
+				if upgrade_choices[i].name in powerups_to_remove:
+					upgrade_choices.remove_at(i)
 					i -= 1
 				i += 1
-		
-		# Choose some powerups at random to show to the player
-		_show_random_upgrade_choices(random_powerup_list)
+	
+	# Decide which stats can be upgraded.
+	for stat_name in range(len(Constants.StatUpgrades)):
+		upgrade_choices.append(stat_name)
+	
+	_show_random_upgrade_choices(upgrade_choices)
 	
 	# Update the text on the Reroll button
 	var rerolls = player_character.get_rerolls()
@@ -105,11 +109,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 
 # Display a random selection of upgrades for the player to choose from.
 # upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array[PowerupData]) -> void:
+func _show_random_upgrade_choices(upgrade_data: Array) -> void:
 	upgrade_data.shuffle()
 	var i = 0
 	while i < len(upgrade_panels) and i < len(upgrade_data):
-		upgrade_panels[i].set_powerup(upgrade_data[i])
+		upgrade_panels[i].set_upgrade(upgrade_data[i])
 		upgrade_panels[i].show()
 		i += 1
 	

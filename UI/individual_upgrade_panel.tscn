@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://14cc171vx3nh"]
+[gd_scene load_steps=4 format=3 uid="uid://14cc171vx3nh"]
 
 [ext_resource type="Script" path="res://UI/individual_upgrade_panel.gd" id="1_if0al"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_ux83s"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_7p8sv"]
 
 [node name="IndividualUpgradePanel" type="Panel"]
 offset_right = 238.0
 offset_bottom = 348.0
 size_flags_horizontal = 3
 script = ExtResource("1_if0al")
+stat_upgrade_texture = ExtResource("2_7p8sv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 z_index = 3

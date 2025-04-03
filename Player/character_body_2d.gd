@@ -115,12 +115,12 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 		Constants.StatUpgrades.PICKUP_RADIUS:
 			_stat_pickup_radius += 1
 			_pickup_area.scale += Vector2(0.1, 0.1)
-		Constants.StatUpgrades.DAMAGE:
-			_stat_damage += 1
-		Constants.StatUpgrades.ULTIMATE_DAMAGE:
-			_stat_ultimate_damage += 1
-		Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
-			_stat_ultimate_charge_rate += 1
+		#Constants.StatUpgrades.DAMAGE:
+			#_stat_damage += 1
+		#Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			#_stat_ultimate_damage += 1
+		#Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			#_stat_ultimate_charge_rate += 1
 		_:
 			push_error("No upgrade functionality for this stat upgrade type")
 
@@ -136,12 +136,12 @@ func get_stat(stat_type: Constants.StatUpgrades) -> int:
 			return _stat_speed
 		Constants.StatUpgrades.PICKUP_RADIUS:
 			return _stat_pickup_radius
-		Constants.StatUpgrades.DAMAGE:
-			return _stat_damage
-		Constants.StatUpgrades.ULTIMATE_DAMAGE:
-			return _stat_ultimate_damage
-		Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
-			return _stat_ultimate_charge_rate
+		#Constants.StatUpgrades.DAMAGE:
+			#return _stat_damage
+		#Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			#return _stat_ultimate_damage
+		#Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			#return _stat_ultimate_charge_rate
 		_:
 			push_error("No upgrade functionality for this stat upgrade type")
 	return 1

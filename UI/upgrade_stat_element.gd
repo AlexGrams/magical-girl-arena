@@ -34,12 +34,12 @@ func setup_stat_upgrade(stat_type: Constants.StatUpgrades, current_level: int) -
 			stat_name.text = "Speed"
 		Constants.StatUpgrades.PICKUP_RADIUS:
 			stat_name.text = "Pickup Range"
-		Constants.StatUpgrades.DAMAGE:
-			stat_name.text = "Damage"
-		Constants.StatUpgrades.ULTIMATE_DAMAGE:
-			stat_name.text = "Ultimate Damage"
-		Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
-			stat_name.text = "Ultimate Charge Rate"
+		#Constants.StatUpgrades.DAMAGE:
+			#stat_name.text = "Damage"
+		#Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			#stat_name.text = "Ultimate Damage"
+		#Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			#stat_name.text = "Ultimate Charge Rate"
 		_:
 			push_error("No functionality for this stat upgrade type")
 
