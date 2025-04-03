@@ -6,4 +6,5 @@
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_w1l0c")
 damage_levels = Array[float]([35.0, 40.0, 46.0, 53.0, 61.0])
+signature_damage = 61.0
 powerup_name = "Tarot Cards"

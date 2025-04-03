@@ -4,4 +4,4 @@
 
 [node name="AbilityUltSweet" type="Node2D"]
 script = ExtResource("1_4xjpe")
-cooldown = 2.0
+cooldown = 60.0
