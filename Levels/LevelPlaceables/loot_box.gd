@@ -19,6 +19,7 @@ extends Node2D
 var _health: float = 0.0
 var _threshold_health: float = 1.0
 var _threshold_gold: float = 1.0
+var _tree: SceneTree = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +30,14 @@ func _ready() -> void:
 	var total := drop_weight_health + drop_weight_gold
 	_threshold_health = drop_weight_health / total
 	_threshold_gold = drop_weight_gold / total + _threshold_health
+	
+	# Show leaves exploding effect when destroyed
+	_tree = get_tree()
+	tree_exited.connect(func():
+		var leaf_explosion: GPUParticles2D = leaf_explosion_scene.instantiate()
+		leaf_explosion.global_position = global_position
+		_tree.root.get_node("Playground").add_child(leaf_explosion)
+	)
 
 
 ## Call after spawning to set this LootBox to the correct position on other clients.
@@ -65,14 +74,6 @@ func _destroy() -> void:
 		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
 	
-	# Show leaves exploding effect
-	var leaf_explosion: GPUParticles2D = leaf_explosion_scene.instantiate()
-	leaf_explosion.global_position = global_position
-	get_tree().root.add_child(leaf_explosion)
-	#leaf_explosion.tree_entered.connect(
-		#func(): leaf_explosion.teleport.rpc(global_position)
-		#, CONNECT_DEFERRED
-	#)
 	queue_free()
 
 
