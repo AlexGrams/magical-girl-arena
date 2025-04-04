@@ -13,6 +13,8 @@ extends Node2D
 @export var health_scene: Resource = null
 ## Gold pickup scene.
 @export var gold_scene: Resource = null
+## Leaf explosion scene.
+@export var leaf_explosion_scene: Resource = null
 
 var _health: float = 0.0
 var _threshold_health: float = 1.0
@@ -63,6 +65,14 @@ func _destroy() -> void:
 		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
 	
+	# Show leaves exploding effect
+	var leaf_explosion: GPUParticles2D = leaf_explosion_scene.instantiate()
+	leaf_explosion.global_position = global_position
+	get_tree().root.add_child(leaf_explosion)
+	#leaf_explosion.tree_entered.connect(
+		#func(): leaf_explosion.teleport.rpc(global_position)
+		#, CONNECT_DEFERRED
+	#)
 	queue_free()
 
 
