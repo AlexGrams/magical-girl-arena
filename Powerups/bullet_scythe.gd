@@ -7,7 +7,7 @@ extends Bullet
 
 var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
-var _level: int = 0
+var _signature_behavior: bool = false
 
 
 func set_damage(damage: float):
@@ -16,13 +16,14 @@ func set_damage(damage: float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if _level < Powerup.max_level:
+	if not _signature_behavior:
+		# Normal behavior: 
 		# Calculate the speed in radians per second that the scythe moves in order to complete two swipes
 		# in its lifetime.
 		speed = ((arc_length * PI) / 180.0) * 2 / lifetime
 		_half_lifetime = lifetime / 2.0
 	else:
-		# Set up to rotate in a complete circle over lifetime
+		# Signature behavior: Set up to rotate in a complete circle over lifetime
 		speed = 2 * PI / lifetime
 
 
@@ -30,8 +31,8 @@ func _process(delta: float) -> void:
 	if _owning_player != null:
 		global_position = _owning_player.global_position
 	
-	if _level < Powerup.max_level:
-		# Wipe back and forth
+	if not _signature_behavior:
+		# Move in an arc
 		if death_timer < _half_lifetime:
 			rotate(speed * delta)
 		else:
@@ -50,7 +51,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (data.size() > 2
 		or (data.size() == 2						# Owned by player
 			and (typeof(data[0]) != TYPE_INT		# Owning player ID
-				 or typeof(data[1]) != TYPE_INT		# Current powerup level
+				 or typeof(data[1]) != TYPE_BOOL	# Is signature behavior active
 			)
 		)
 		or (data.size() == 1						# Owned by enemy
@@ -63,7 +64,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if is_owned_by_player:
 		# Player bullet
 		_owning_player = GameState.player_characters.get(data[0])
-		_level = data[1]
+		_signature_behavior = data[1]
 	else:
 		# Enemy bullet
 		_owning_player = get_node_or_null(data[0])

@@ -21,7 +21,7 @@ const max_level: int = 5
 ## What level the powerup is at. Values are [1, max_level].
 var current_level: int = 1
 ## True if the owning player has access to this Powerup's signature behavior when it reaches max level.
-var is_signature: bool = true
+var is_signature: bool = false
 ## True when this Powerup is active, which usually means it is shooting bullets.
 var is_on: bool = false
 

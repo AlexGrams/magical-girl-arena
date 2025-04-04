@@ -226,9 +226,10 @@ func decrement_rerolls() -> void:
 
 
 # Gives this player a new powerup.
-func add_powerup(powerup_data: PowerupData):
+func add_powerup(powerup_data: PowerupData, is_signature: bool = false):
 	var powerup: Powerup = powerup_data.scene.instantiate()
 	powerup.set_authority(multiplayer.get_unique_id())
+	powerup.is_signature = is_signature
 	add_child(powerup)
 	powerups.append(powerup)
 	
@@ -383,7 +384,7 @@ func ready_player_character(character: Constants.Character) -> void:
 		# Give the player the basic shoot powerup.
 		# Only the character that this player controls is given the ability. 
 		var base_powerup_data: PowerupData = load(character_data.base_powerup_data) 
-		add_powerup(base_powerup_data)
+		add_powerup(base_powerup_data, true)
 		
 		# Set up ultimate ability
 		var ult: Ability = load(character_data.ultimate_ability).instantiate()
