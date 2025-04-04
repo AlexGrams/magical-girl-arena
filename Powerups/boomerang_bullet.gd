@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 				var farthest_distance = 0
 				for enemy in enemies:
 					var distance = global_position.distance_squared_to(enemy.global_position)
-					print(distance)
 					if distance > farthest_distance and distance <= (max_range * max_range):
 						farthest_enemy = enemy
 						farthest_distance = distance
