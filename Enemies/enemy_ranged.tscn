@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://s3dd1qt4daat" path="res://Sprites/Enemy/PulsarEnemy/pulsar_sprite.tscn" id="3_40ect"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ni4om"]
-radius = 50.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdfpn"]
 radius = 50.0

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://4ximlipujsuo" path="res://Sprites/Enemy/AtomEnemy/atom_sprite.tscn" id="2_lh6n5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
-radius = 60.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q63v7"]
 radius = 60.0

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c3sidw50jawcj" path="res://Sprites/Enemy/Supergiant_Enemy/supergiant_sprite.tscn" id="2_1ylyk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn3v6"]
-radius = 90.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q63v7"]
 radius = 90.0
