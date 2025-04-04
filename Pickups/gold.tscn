@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqcar2b10ptof"]
 
 [ext_resource type="Script" path="res://Pickups/gold.gd" id="1_34ytc"]
-[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="2_0smm1"]
+[ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="2_alpiy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
 size = Vector2(26, 26)
@@ -11,8 +11,7 @@ script = ExtResource("1_34ytc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.844255, 0.451341, 9.62615e-07, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_0smm1")
+texture = ExtResource("2_alpiy")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
