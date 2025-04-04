@@ -22,18 +22,34 @@ func _process(delta: float) -> void:
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
 		if _is_owned_by_player:
-			var direction = (get_global_mouse_position() - self.global_position).normalized()
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				1,
-				[
-					bullet_scene, 
-					Vector2.ZERO, 
-					direction, 
-					_get_damage_from_curve(), 
-					_is_owned_by_player,
-					[multiplayer.get_unique_id(), is_signature and current_level == max_level]
-				]
-			)
+			# Get nearest enemy so direction can be set
+			var enemies: Array[Node] = [] 
+			if _is_owned_by_player:
+				enemies = get_tree().get_nodes_in_group("enemy")
+			else:
+				enemies = get_tree().get_nodes_in_group("player")
+			
+			if !enemies.is_empty():
+				var nearest_enemy = enemies[0]
+				var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
+				for enemy in enemies:
+					var distance = global_position.distance_squared_to(enemy.global_position)
+					if distance < nearest_distance:
+						nearest_enemy = enemy
+						nearest_distance = distance
+			
+				var direction = (nearest_enemy.global_position - self.global_position).normalized()
+				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+					1,
+					[
+						bullet_scene, 
+						Vector2.ZERO, 
+						direction, 
+						_get_damage_from_curve(), 
+						_is_owned_by_player,
+						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
+					]
+				)
 		else:
 			var owning_enemy: Node2D = get_parent()
 			
