@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://3wfdmknchrwr"]
 
-[ext_resource type="Texture2D" uid="uid://c1157ouj5jlbd" path="res://Flower.png" id="1_6nx0p"]
+[ext_resource type="Texture2D" uid="uid://cya1qpry8mmdg" path="res://Sprites/Map/Flower_Purple.png" id="1_2qxnu"]
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/flower.gd" id="2_768n0"]
 
 [sub_resource type="Animation" id="Animation_lai5g"]
@@ -49,7 +49,7 @@ offset_bottom = -507.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(16, 16)
-texture = ExtResource("1_6nx0p")
+texture = ExtResource("1_2qxnu")
 stretch_mode = 2
 script = ExtResource("2_768n0")
 
