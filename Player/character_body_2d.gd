@@ -428,7 +428,9 @@ func emit_gained_experience(new_experience: float, new_level: int):
 	gained_experience.emit(float(experience) / GameState.exp_for_next_level, level)
 
 
-# Causes EXP orbs to gravitate towards the player when they enter this area.
+## Causes EXP and Gold orbs to gravitate towards the player when they enter this area.
 func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
 	if multiplayer.is_server() and area.get_collision_layer_value(3):
-		area.get_parent().set_player.rpc(self.get_path())
+		var parent: EXPOrb = area.get_parent()
+		if parent is not HealthOrb:
+			parent.set_player.rpc(self.get_path())
