@@ -22,6 +22,7 @@ GameState="*res://Multiplayer/game_state.gd"
 WorldMultiplayerSpawner="*res://Levels/LevelPlaceables/world_multiplayer_spawner.tscn"
 SaveManager="*res://Saving/save_manager.gd"
 Constants="*res://GameManagement/constants.gd"
+AudioManager="*res://Audio/audio_manager.tscn"
 
 [display]
 

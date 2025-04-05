@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxcjlf0keb0sh"]
+
+[ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
+[ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
+[ext_resource type="AudioStream" uid="uid://elrxpcof47fc" path="res://Audio/SFX/cartoon_wink_magic_sparkle-6896.mp3" id="3_om27q"]
+
+[sub_resource type="Resource" id="Resource_0ckqn"]
+script = ExtResource("2_kdvej")
+limit = 10
+type = 13
+sound_effect = ExtResource("3_om27q")
+volume = 0
+pitch_scale = 0.75
+pitch_randomness = 0.0
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_75te4")
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn")])
