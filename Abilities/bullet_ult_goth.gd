@@ -31,7 +31,7 @@ func _ready() -> void:
 	var spawned_vfx: Node2D = vfx.instantiate()
 	get_parent().add_child(spawned_vfx)
 	spawned_vfx.position = global_position
-
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_GOTH_ULTIMATE)
 
 func _process(delta: float) -> void:
 	# This bullet only lasts for a short time
