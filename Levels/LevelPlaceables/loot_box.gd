@@ -34,9 +34,11 @@ func _ready() -> void:
 	# Show leaves exploding effect when destroyed
 	_tree = get_tree()
 	tree_exited.connect(func():
-		var leaf_explosion: GPUParticles2D = leaf_explosion_scene.instantiate()
-		leaf_explosion.global_position = global_position
-		_tree.root.get_node("Playground").add_child(leaf_explosion)
+		var playground: Node2D = _tree.root.get_node_or_null("Playground")
+		if playground:
+			var leaf_explosion: GPUParticles2D = leaf_explosion_scene.instantiate()
+			leaf_explosion.global_position = global_position
+			playground.add_child(leaf_explosion)
 	)
 
 
