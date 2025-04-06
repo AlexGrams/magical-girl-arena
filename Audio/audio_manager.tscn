@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=10 format=4 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
 [ext_resource type="AudioStream" uid="uid://elrxpcof47fc" path="res://Audio/SFX/cartoon_wink_magic_sparkle-6896.mp3" id="3_om27q"]
+[ext_resource type="AudioStream" uid="uid://hnba74hq3rcf" path="res://Audio/SFX/Powerups/Goth_Scythe.mp3" id="4_2ftce"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 script = ExtResource("2_kdvej")
@@ -34,8 +35,17 @@ volume = 0
 pitch_scale = 1.0
 pitch_randomness = 0.0
 
+[sub_resource type="Resource" id="Resource_wxos4"]
+script = ExtResource("2_kdvej")
+limit = 4
+type = 4
+sound_effect = ExtResource("4_2ftce")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

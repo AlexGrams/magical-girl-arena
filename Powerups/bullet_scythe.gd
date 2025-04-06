@@ -16,6 +16,7 @@ func set_damage(damage: float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.SCYTHE)
 	if not _signature_behavior:
 		# Normal behavior: 
 		# Calculate the speed in radians per second that the scythe moves in order to complete two swipes
@@ -30,6 +31,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _owning_player != null:
 		global_position = _owning_player.global_position
+	
 	
 	if not _signature_behavior:
 		# Move in an arc
