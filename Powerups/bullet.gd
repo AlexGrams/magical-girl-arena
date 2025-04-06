@@ -28,7 +28,7 @@ func set_damage(damage: float):
 
 
 func _ready() -> void:
-	pass 
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.REVOLVING)
 
 
 func _process(delta: float) -> void:
