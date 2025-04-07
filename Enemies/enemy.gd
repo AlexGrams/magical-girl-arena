@@ -192,8 +192,9 @@ func set_target(target_path: NodePath) -> void:
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
-func take_damage(damage: float) -> void:
+func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT) -> void:
 	# TODO: Maybe fix all the references to this function.
+	AudioManager.create_audio_at_location(global_position, damage_type)
 	_take_damage.rpc_id(1, damage)
 
 

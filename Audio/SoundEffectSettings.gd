@@ -16,6 +16,8 @@ enum SOUND_EFFECT_TYPE{
 	# Taking damage
 	ON_ENEMY_DEATH,
 	ON_ENEMY_HIT,
+	ON_LASER_HIT, # for unique laser hit sound
+	ON_TRAIL_HIT, # for unique trail hit sound
 	ON_PLAYER_DEATH,
 	ON_PLAYER_HIT,
 	ON_BUSH_HIT,
