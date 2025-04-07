@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=16 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -7,8 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://hnba74hq3rcf" path="res://Audio/SFX/Powerups/Goth_Scythe.mp3" id="4_2ftce"]
 [ext_resource type="AudioStream" uid="uid://bdb7w4mdyqvj3" path="res://Audio/SFX/Ultimates/Sweet_Ultimate.mp3" id="5_s3017"]
 [ext_resource type="AudioStream" uid="uid://dck2jpcdmgnk" path="res://Audio/SFX/Powerups/Card_Sound.mp3" id="6_axp6t"]
-[ext_resource type="AudioStream" uid="uid://btaol3wme1ojs" path="res://Audio/SFX/On_Enemy_hit.mp3" id="8_pyjrf"]
-[ext_resource type="AudioStream" uid="uid://du03das0lm55h" path="res://Audio/SFX/Powerups/Laser_Hit.mp3" id="9_skmgr"]
+[ext_resource type="AudioStream" uid="uid://d104a52tavg06" path="res://Audio/SFX/Enemy_Hit.wav" id="8_51y8p"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 script = ExtResource("2_kdvej")
@@ -68,31 +67,13 @@ pitch_randomness = 0.0
 script = ExtResource("2_kdvej")
 limit = 1
 type = 10
-sound_effect = ExtResource("8_pyjrf")
+sound_effect = ExtResource("8_51y8p")
 volume = -10
 pitch_scale = 1.0
 pitch_randomness = 0.0
 
-[sub_resource type="Resource" id="Resource_rvbce"]
-script = ExtResource("2_kdvej")
-limit = 2
-type = 11
-sound_effect = ExtResource("9_skmgr")
-volume = -20
-pitch_scale = 1.0
-pitch_randomness = 0.0
-
-[sub_resource type="Resource" id="Resource_aejer"]
-script = ExtResource("2_kdvej")
-limit = 1
-type = 1
-sound_effect = ExtResource("9_skmgr")
-volume = -25
-pitch_scale = 0.9
-pitch_randomness = 0.0
-
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_rvbce"), SubResource("Resource_aejer")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

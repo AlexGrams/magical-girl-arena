@@ -43,12 +43,18 @@ func _physics_process(_delta: float) -> void:
 	# Position and scale the laser beam
 	if result:
 		# The laser hit something and shouldn't be its full length.
+		$AudioStreamPlayer2D.pitch_scale = 0.8
+		$AudioStreamPlayer2D.volume_db = -25
 		end_point = result["position"]
 		
 		var hit_node: Node2D = result["collider"].get_parent()
 		if is_multiplayer_authority() and _is_owned_by_player and hit_node is Enemy:
 			hit_node.take_damage($Area2D.damage)
-	
+	else:
+		# Play passive humming
+		$AudioStreamPlayer2D.pitch_scale = 0.9
+		$AudioStreamPlayer2D.volume_db = -30
+		
 	var hit_vector := end_point - _owning_character.global_position
 	global_position = hit_vector / 2.0 + _owning_character.global_position
 	rotation = hit_vector.angle()
