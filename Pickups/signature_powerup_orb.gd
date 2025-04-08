@@ -2,13 +2,19 @@ class_name SignaturePowerupOrb
 extends EXPOrb
 
 
+## Changes depending on what Powerup this pickup grants.
+@export var sprite: Sprite2D = null
+
+var _pickup_powerup_data: PowerupData = null
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
@@ -28,3 +34,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 @rpc("any_peer", "call_local")
 func set_player(_new_player: NodePath) -> void:
 	pass
+
+
+## Set what Powerup is acquired if this orb is picked up.
+@rpc("authority", "call_local")
+func set_powerup(powerup_data_path: String) -> void:
+	_pickup_powerup_data = load(powerup_data_path)
+	sprite.texture = _pickup_powerup_data.sprite

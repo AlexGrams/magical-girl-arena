@@ -1,14 +1,16 @@
 class_name EnemyCorrupted
 extends EnemyRanged
-# A corrupted magical girl enemy. Can use powerups and abilities like the player.
+## A corrupted magical girl enemy. Can use powerups and abilities like the player.
 
 ## How long this corrupted enemy stays in the game before leaving. Doesn't drop loot if time runs out.
 @export var corrupted_lifetime: float = 0.0
 ## Scene for the Powerup to give to this enemy when it spawns.
-@export var default_powerup: PackedScene = null
+@export var default_powerup_path: String = ""
 
 # How much time this corrupted enemy has left in the game.
 var current_lifetime: float = 0.0
+
+var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
 
 
 func _ready() -> void:
@@ -16,8 +18,9 @@ func _ready() -> void:
 	
 	current_lifetime = corrupted_lifetime
 	
+	var default_powerup: PowerupData = load(default_powerup_path)
 	if default_powerup != null:
-		_add_powerup(default_powerup)
+		_add_powerup(default_powerup.scene)
 
 
 func _process(delta: float) -> void:
@@ -34,6 +37,28 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	pass
+
+
+## Spawns a Powerup Pickup after being defeated if at least one player can use it. 
+## Otherwise, gives a lot of experience.
+func _spawn_loot() -> void:
+	# See if at least one Player can pick up the Powerup
+		# If so, the Pickup and RPC it to make it whatever its supposed to be
+	# Otherwise, spawn the big EXP orb.
+	var signature_powerup_orb: SignaturePowerupOrb = _signature_powerup_orb.instantiate()
+	
+	signature_powerup_orb.global_position = global_position
+	signature_powerup_orb.tree_entered.connect(
+		func(): _set_up_signature_powerup_orb(signature_powerup_orb)
+		, CONNECT_DEFERRED
+	)
+	get_tree().root.get_node("Playground").call_deferred("add_child", signature_powerup_orb, true)
+
+
+## Asynchronously set up the loot orb dropped by this Corrupted Enemy.
+func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb) -> void:
+	signature_powerup_orb.teleport.rpc(global_position)
+	signature_powerup_orb.set_powerup.rpc(default_powerup_path)
 
 
 # Despawn the corrupted enemy. Different from dying as it doesn't drop loot.

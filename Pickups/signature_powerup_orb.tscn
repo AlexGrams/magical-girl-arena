@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
 size = Vector2(26, 26)
 
-[node name="SignaturePowerupOrb" type="Node2D"]
+[node name="SignaturePowerupOrb" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_7fhav")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xkip6")

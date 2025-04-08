@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://cwxh1lqgmuu3q"]
+[gd_scene load_steps=16 format=3 uid="uid://cwxh1lqgmuu3q"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_akkuy"]
-[ext_resource type="PackedScene" uid="uid://dyq0c1f3w0cap" path="res://Powerups/revolving_powerup.tscn" id="2_4hf13"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="2_jpoov"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f8erj"]
@@ -377,7 +376,7 @@ collision_layer = 256
 collision_mask = 384
 script = ExtResource("1_akkuy")
 corrupted_lifetime = 60.0
-default_powerup = ExtResource("2_4hf13")
+default_powerup_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres"
 max_range = 200.0
 allied_bullet_scene_path = ""
 base_health = 10000
