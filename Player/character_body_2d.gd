@@ -78,16 +78,24 @@ func _ready():
 	_revive_collision_area.hide()
 
 
+## Called when a Powerup is selected on the level up screen.
 func _on_upgrade_chosen(powerup_data: PowerupData):
-	var powerup_found = false
-	
 	# Reset temp rerolls in case we have any
 	_temp_rerolls = 0
+	
+	upgrade_or_grant_powerup(powerup_data, false)
+
+
+## Increases the level of a Powerup, or adds it to the player if they don't have it already.
+func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = false) -> void:
+	var powerup_found = false
 	
 	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
 		if child is Powerup and child.powerup_name == powerup_data.name:
 			child.level_up()
+			if is_signature:
+				child.set_is_signature(true)
 			$"..".get_hud_canvas_layer().update_powerup_level(powerup_data, child.current_level)
 			
 			powerup_found = true
@@ -95,11 +103,14 @@ func _on_upgrade_chosen(powerup_data: PowerupData):
 	
 	# If we don't have the chosen powerup, then add it to the player.
 	if !powerup_found:
-		add_powerup(powerup_data)
+		add_powerup(powerup_data, is_signature)
 
 
 ## Upgrade stats depending on which upgrade was chosen
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
+	# Reset temp rerolls in case we have any
+	_temp_rerolls = 0
+	
 	match stat_type:
 		Constants.StatUpgrades.HEALTH:
 			_stat_health += 1

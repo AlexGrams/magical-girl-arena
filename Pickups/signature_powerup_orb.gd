@@ -29,8 +29,25 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		and other is PlayerCharacterBody2D
 	):
 		# Check if player can pick up this upgrade
-		uncollected = false
-		destroy.rpc_id(1) 
+		var player_character: PlayerCharacterBody2D = other 
+		var has_upgradable_powerup = false
+		
+		# Check if they have the Powerup already and it isn't max level and signature
+		for powerup: Powerup in player_character.powerups:
+			if powerup.powerup_name == _pickup_powerup_data.name:
+				if powerup.current_level == powerup.max_level and powerup.is_signature:
+					# Player has the powerup already, it is max level, and is signature, so
+					# they can't get this pickup because it wouldn't give them anything.
+					return
+				has_upgradable_powerup = true
+				break
+		
+		# Alternatively, they can pick this up if they don't have the Powerup already and they are
+		# not maxed out on Powerups.
+		if has_upgradable_powerup or len(player_character.powerups) < PlayerCharacterBody2D.MAX_POWERUPS:
+			player_character.upgrade_or_grant_powerup(_pickup_powerup_data, true)
+			uncollected = false
+			destroy.rpc_id(1) 
 
 
 ## Does nothing to prevent this orb type from gravitating. Should not be called.
