@@ -12160,7 +12160,7 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4746)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_temp_health_control", "_temp_health_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_temp_health_control", "_temp_health_text", "_boss_health_bar", "_boss_health_text")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -12171,6 +12171,8 @@ _ultimate_texture = NodePath("UltimateCooldown/UltimateTextureRect")
 _ultimate_progress_bar = NodePath("UltimateCooldown/UltimateProgressBar")
 _temp_health_control = NodePath("TempHealthBar")
 _temp_health_text = NodePath("TempHealthBar/TempHealthText")
+_boss_health_bar = NodePath("BossHealthBar")
+_boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -12660,6 +12662,35 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 46
 text = "00:00"
 horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="CanvasLayer"]
+self_modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 52.0
+offset_top = 103.71
+offset_right = -52.0
+offset_bottom = 202.71
+grow_horizontal = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="BossHealthLabel" type="Label" parent="CanvasLayer/BossHealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 72
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_boss_test.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn", "res://Pickups/signature_powerup_orb.tscn")

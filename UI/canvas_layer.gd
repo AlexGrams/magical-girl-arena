@@ -16,6 +16,10 @@ extends CanvasLayer
 @export var _temp_health_control: Control = null
 ## Displays how much temp health the player has
 @export var _temp_health_text: Label = null
+## Health bar for bosses.
+@export var _boss_health_bar: ProgressBar = null
+## Text displaying boss health.
+@export var _boss_health_text: Label = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -34,18 +38,17 @@ var _powerup_display_index = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_boss_health_bar.hide()
+	
+	for pointer in _pointer_parent.get_children():
+		_pointers.append(pointer)
+		
 	for powerup_panel: Control in _powerup_container.get_children():
 		_powerup_textures.append(powerup_panel.find_child("TextureRect"))
 		_powerup_level_text.append(powerup_panel.find_child("LevelText"))
 		_powerup_level_text[-1].text = ""
 	
 	$ExperienceBar.value = 0.0
-	
-	for retry_indicator in _retry_votes_container.get_children():
-		_retry_indicators.append(retry_indicator)
-	
-	for pointer in _pointer_parent.get_children():
-		_pointers.append(pointer)
 	
 	# Game over screen visibility
 	GameState.game_over.connect(func(has_won_game):
@@ -61,6 +64,9 @@ func _ready() -> void:
 			i += 1
 	)
 	_game_over_screen.hide()
+	
+	for retry_indicator in _retry_votes_container.get_children():
+		_retry_indicators.append(retry_indicator)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
