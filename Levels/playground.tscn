@@ -12674,6 +12674,7 @@ offset_bottom = 202.71
 grow_horizontal = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
 max_value = 1.0
+step = 0.001
 value = 0.5
 show_percentage = false
 
