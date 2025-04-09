@@ -256,3 +256,23 @@ func update_powerup_level(powerup_data: PowerupData, new_level: int) -> void:
 		return
 	
 	_powerup_level_text[_powerup_display_index[powerup_data.name]].text = str(new_level)
+
+
+## Display the boss health bar. Health percent = [0, 1].
+@rpc("authority", "call_local")
+func show_boss_health_bar(health_percent: float = 1.0) -> void:
+	_boss_health_bar.show()
+	update_boss_health_bar(health_percent)
+
+
+## Hide the boss health bar.
+@rpc("authority", "call_local")
+func hide_boss_health_bar() -> void:
+	_boss_health_bar.hide()
+
+
+## Update fill and value shown on the Boss health bar. Health percent = [0, 1].
+@rpc("authority", "call_local")
+func update_boss_health_bar(health_percent: float) -> void:
+	_boss_health_bar.value = health_percent
+	_boss_health_text.text = str(ceil(health_percent * 100.0)) + "%"
