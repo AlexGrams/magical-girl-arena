@@ -11,6 +11,7 @@ extends EnemyRanged
 var current_lifetime: float = 0.0
 
 var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
+var _big_exp_orb: PackedScene = preload("res://Pickups/exp_orb_big.tscn")
 var _hud_canvas_layer: HUDCanvasLayer = null
 
 

@@ -445,8 +445,8 @@ func load_game():
 
 # Add exp to this player. Offer Powerups when leveling up.
 @rpc("any_peer", "call_local")
-func collect_exp() -> void:
-	experience += 10
+func collect_exp(amount: int = 10) -> void:
+	experience += amount
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
 		experience -= exp_for_next_level
 		level += 1
