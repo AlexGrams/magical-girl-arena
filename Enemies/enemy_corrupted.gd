@@ -10,8 +10,6 @@ extends EnemyRanged
 # How much time this corrupted enemy has left in the game.
 var current_lifetime: float = 0.0
 
-var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
-var _big_exp_orb: PackedScene = preload("res://Pickups/exp_orb_big.tscn")
 var _hud_canvas_layer: HUDCanvasLayer = null
 
 
@@ -44,18 +42,17 @@ func shoot() -> void:
 	pass
 
 
-## Asynchronously set up the loot orb dropped by this Corrupted Enemy.
-func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb) -> void:
-	signature_powerup_orb.teleport.rpc(global_position)
-	signature_powerup_orb.set_powerup.rpc(default_powerup_path)
-
-
 ## Only call on the server. Deals damage to this corrupted enemy. Update health bars on all clients.
 @rpc("any_peer", "call_local")
 func _take_damage(damage: float) -> void:
 	super(damage)
 	
 	_hud_canvas_layer.update_boss_health_bar.rpc(float(health) / max_health)
+
+
+## Does nothing since corrupted Enemies cannot be made into allies.
+func make_ally(_new_lifetime: float, _new_damage: float) -> void:
+	die()
 
 
 ## Delete the corrupted enemy. Only call on the server.
@@ -81,14 +78,4 @@ func _leave() -> void:
 ## Spawns a Powerup Pickup after being defeated if at least one player can use it. 
 ## Otherwise, gives a lot of experience.
 func _spawn_loot() -> void:
-	# See if at least one Player can pick up the Powerup
-		# If so, the Pickup and RPC it to make it whatever its supposed to be
-	# Otherwise, spawn the big EXP orb.
-	var signature_powerup_orb: SignaturePowerupOrb = _signature_powerup_orb.instantiate()
-	
-	signature_powerup_orb.global_position = global_position
-	signature_powerup_orb.tree_entered.connect(
-		func(): _set_up_signature_powerup_orb(signature_powerup_orb)
-		, CONNECT_DEFERRED
-	)
-	get_tree().root.get_node("Playground").call_deferred("add_child", signature_powerup_orb, true)
+	get_tree().root.get_node("Playground").spawn_corrupted_enemy_loot(default_powerup_path, global_position)

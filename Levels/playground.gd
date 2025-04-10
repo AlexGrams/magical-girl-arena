@@ -23,6 +23,8 @@ var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
 ## The upcoming spawn event to process.
 var _current_spawn_event: int = 0
+var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
+var _big_exp_orb: PackedScene = preload("res://Pickups/exp_orb_big.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -101,6 +103,25 @@ func _spawn_boss() -> void:
 	_has_boss_spawned = true
 	if corrupted_enemy_spawner != null and boss_to_spawn != null:
 		corrupted_enemy_spawner.spawn(boss_to_spawn)
+
+
+## Begin the process for spawning loot for a corrupted enemy, which is either a Powerup Pickup
+## (more likely), or a big EXP orb (less likely).
+func spawn_corrupted_enemy_loot(powerup_path: String, orb_position: Vector2) -> void:
+	var signature_powerup_orb: SignaturePowerupOrb = _signature_powerup_orb.instantiate()
+	
+	signature_powerup_orb.global_position = orb_position
+	signature_powerup_orb.tree_entered.connect(
+		func(): _set_up_signature_powerup_orb(signature_powerup_orb, powerup_path, orb_position)
+		, CONNECT_DEFERRED
+	)
+	get_tree().root.get_node("Playground").call_deferred("add_child", signature_powerup_orb, true)
+
+
+## Asynchronously set up the loot orb dropped by this Corrupted Enemy.
+func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb, powerup_path: String, orb_position: Vector2) -> void:
+	signature_powerup_orb.teleport.rpc(orb_position)
+	signature_powerup_orb.set_powerup.rpc(powerup_path)
 
 
 func get_hud_canvas_layer() -> HUDCanvasLayer:

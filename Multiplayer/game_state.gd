@@ -22,6 +22,11 @@ const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
 const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 
+# All the gold the player has.
+var _gold: int = 0
+# How much gold the player has gotten this round. Added to their total gold after the game ends.
+var _gold_this_game: int = 0
+
 # The local player's name.
 var player_name: String = ""
 # TODO: Combine with "players" variables in some sort of map struct object.
@@ -46,10 +51,6 @@ var lobby_id: int = 0
 
 # The parent node of all objects in the main portion of the game.
 var world: Node = null
-# All the gold the player has.
-var _gold: int = 0
-# How much gold the player has gotten this round. Added to their total gold after the game ends.
-var _gold_this_game: int = 0
 # Experience to next level
 var experience: float = 0.0
 var exp_for_next_level: float = 0.0
