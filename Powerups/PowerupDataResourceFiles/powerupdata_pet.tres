@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://dg1enwknoes20"]
+
+[ext_resource type="PackedScene" uid="uid://ygfb1najqino" path="res://Powerups/powerup_pet.tscn" id="1_rkbn8"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_d6ndq"]
+[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="3_oruj6"]
+
+[resource]
+script = ExtResource("2_d6ndq")
+scene = ExtResource("1_rkbn8")
+name = "Pet"
+sprite = ExtResource("3_oruj6")
+upgrade_description = "A pet that automatically attacks a nearby enemy with the most health."
