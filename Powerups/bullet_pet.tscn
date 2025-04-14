@@ -1,20 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://npslgflisq38"]
+[gd_scene load_steps=6 format=3 uid="uid://npslgflisq38"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pet.gd" id="1_anccp"]
-[ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_jvbdn"]
+[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="2_w22qu"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_lrjjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(38, 38)
+size = Vector2(42, 48)
 
-[node name="BulletPet" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wuwmx"]
+
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_anccp")
 speed = 1000.0
 lifetime = 1.0
+destroy_on_hit = false
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.087, 0.087)
-texture = ExtResource("2_jvbdn")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_w22qu")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
@@ -23,5 +28,8 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
+
+[node name="CharacterCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wuwmx")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -10,7 +10,7 @@ func _init():
 func _spawn_bullet(data):
 	if (
 		data.size() != 6
-		or typeof(data[0]) != TYPE_STRING	# Path to bullet scene
+		or typeof(data[0]) != TYPE_STRING	# Path to bullet scene or bullet scene UID
 		or typeof(data[1]) != TYPE_VECTOR2	# Position
 		or typeof(data[2]) != TYPE_VECTOR2	# Direction
 		or typeof(data[3]) != TYPE_FLOAT	# Damage
