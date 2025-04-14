@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://npslgflisq38"]
+[gd_scene load_steps=7 format=3 uid="uid://npslgflisq38"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pet.gd" id="1_anccp"]
 [ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="2_w22qu"]
@@ -8,14 +8,15 @@
 size = Vector2(42, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wuwmx"]
+size = Vector2(36, 43)
 
-[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("collider", "sprite")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_r3bxy"]
+radius = 322.076
+
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_attack_area")]
 script = ExtResource("1_anccp")
-speed = 1000.0
-lifetime = 1.0
-destroy_on_hit = false
-collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+_speed = 10.0
+_attack_area = NodePath("AttackArea2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -30,6 +31,14 @@ damage = 25.0
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="CharacterCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_wuwmx")
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("CircleShape2D_r3bxy")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
