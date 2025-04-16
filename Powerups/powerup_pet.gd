@@ -16,7 +16,10 @@ func activate_powerup():
 	if _is_owned_by_player:
 		var pet: BulletPet = load(pet_scene).instantiate()
 		get_tree().root.get_node("Playground").add_child(pet, true)
+		
+		# TODO: Call RPCs to set up the pet
 		pet.global_position = global_position
+		pet.set_owner_path.rpc(get_parent().get_path())
 		#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			#1, [pet_scene, 
 				#global_position, 

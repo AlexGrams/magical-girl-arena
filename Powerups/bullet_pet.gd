@@ -12,11 +12,20 @@ extends CharacterBody2D
 @export var _attack_area: Area2D = null
 
 ## Which Enemy the pet is currently trying to attack.
-var _target: Enemy = null
+var _target: Node2D = null
+## True when the current target is an Enemy, false if it is following the player.
+var _is_targeting_enemy: bool = false
+## Path to the Node2D that owns this pet. The pet returns to its owner when it isn't attacking.
+var _owner_path: String = ""
 ## Current time until the next attack.
 var _attack_timer: float = 0.0
 ## Default collision layer for the pet's attack.
 var _bullet_collision_layer: int = 0
+
+
+@rpc("any_peer", "call_local")
+func set_owner_path(path: String) -> void:
+	_owner_path = path
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	if _target != null:
 		velocity = (_target.global_position - global_position) * _speed
 		move_and_slide()
-	else:
+	if _target == null or not _is_targeting_enemy:
 		_get_highest_health_nearby_enemy()
 
 
@@ -54,6 +63,11 @@ func _get_highest_health_nearby_enemy() -> void:
 			var enemy: Enemy = area.get_parent()
 			if not highest_health_enemy or enemy.health > highest_health_enemy.health:
 				highest_health_enemy = enemy
-		if highest_health_enemy:
+		if highest_health_enemy != null:
+			_is_targeting_enemy = true
 			_target = highest_health_enemy
-			print(_target.name)
+	
+	# If we couldn't find an Enemy to target, then just go to the owning player.
+	if _target == null:
+		_is_targeting_enemy = false
+		_target = get_tree().root.get_node(_owner_path)
