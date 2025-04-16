@@ -21,6 +21,7 @@ _bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_w22qu")
 
