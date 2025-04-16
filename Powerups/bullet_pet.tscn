@@ -13,21 +13,23 @@ size = Vector2(36, 43)
 [sub_resource type="CircleShape2D" id="CircleShape2D_r3bxy"]
 radius = 322.076
 
-[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_attack_area")]
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area")]
 script = ExtResource("1_anccp")
 _speed = 10.0
+_attack_time = 0.25
+_bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_w22qu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="BulletCollisionArea2D" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource("3_lrjjw")
 damage = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletCollisionArea2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="CharacterCollisionShape2D" type="CollisionShape2D" parent="."]
@@ -41,4 +43,4 @@ collision_mask = 2
 [node name="AttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
 shape = SubResource("CircleShape2D_r3bxy")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="BulletCollisionArea2D" to="." method="_on_area_2d_area_entered"]
