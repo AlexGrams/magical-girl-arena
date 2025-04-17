@@ -16,7 +16,7 @@ var _target: Node2D = null
 ## True when the current target is an Enemy, false if it is following the player.
 var _is_targeting_enemy: bool = false
 ## Path to the Node2D that owns this pet. The pet returns to its owner when it isn't attacking.
-var _owner_path: String = ""
+var _owner_node: PlayerCharacterBody2D = null
 ## Current time until the next attack.
 var _attack_timer: float = 0.0
 ## Default collision layer for the pet's attack.
@@ -25,10 +25,23 @@ var _bullet_collision_layer: int = 0
 
 ## Initialize this pet.
 @rpc("any_peer", "call_local")
-func set_up(path: String, starting_position: Vector2) -> void:
-	_owner_path = path
+func set_up(owner_path: String, starting_position: Vector2) -> void:
+	_owner_node = get_tree().root.get_node(owner_path)
 	global_position = starting_position
 	set_multiplayer_authority(1)
+	
+	# Level up functionality
+	var pet_powerup = _owner_node.get_node_or_null("PetPowerup")
+	if pet_powerup != null:
+		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
+			level_up.rpc(new_level, new_damage)
+		)
+
+	# When the owner goes down, destroy this bullet
+	if is_multiplayer_authority():
+		_owner_node.died.connect(func():
+			queue_free()
+		)
 	
 	# Client replications do not process.
 	if not is_multiplayer_authority():
@@ -77,9 +90,15 @@ func _get_highest_health_nearby_enemy() -> void:
 	# If we couldn't find an Enemy to target, then just go to the owning player.
 	if _target == null:
 		_is_targeting_enemy = false
-		_target = get_tree().root.get_node(_owner_path)
+		_target = _owner_node
 
 
 @rpc("any_peer", "call_local")
 func teleport(new_position: Vector2) -> void:
 	global_position = new_position
+
+
+# This bullet's owner has leveled up this bullet's corresponding powerup
+@rpc("any_peer", "call_local")
+func level_up(_new_level: int, new_damage: float):
+	_bullet_hitbox.damage = new_damage
