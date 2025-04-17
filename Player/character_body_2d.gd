@@ -241,7 +241,7 @@ func add_powerup(powerup_data: PowerupData, is_signature: bool = false):
 	var powerup: Powerup = powerup_data.scene.instantiate()
 	powerup.set_authority(multiplayer.get_unique_id())
 	powerup.is_signature = is_signature
-	add_child(powerup)
+	add_child(powerup, true)
 	powerups.append(powerup)
 	
 	# Show the icon for this powerup on the HUD
@@ -445,3 +445,14 @@ func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
 		var parent: EXPOrb = area.get_parent()
 		if parent is not HealthOrb:
 			parent.set_player.rpc(self.get_path())
+
+
+## RPC the server to spawn in a pet owned by this character.
+@rpc("any_peer", "call_local")
+func spawn_pet_and_set_up(pet_scene: String, parent_path: String, starting_position: Vector2) -> void:
+	if multiplayer.get_unique_id() != 1:
+		return
+	
+	var pet: BulletPet = load(pet_scene).instantiate()
+	get_tree().root.get_node("Playground").add_child(pet, true)
+	pet.set_up.rpc(parent_path, starting_position)

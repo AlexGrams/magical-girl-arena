@@ -23,9 +23,16 @@ var _attack_timer: float = 0.0
 var _bullet_collision_layer: int = 0
 
 
+## Initialize this pet.
 @rpc("any_peer", "call_local")
-func set_owner_path(path: String) -> void:
+func set_up(path: String, starting_position: Vector2) -> void:
 	_owner_path = path
+	global_position = starting_position
+	set_multiplayer_authority(1)
+	
+	# Client replications do not process.
+	if not is_multiplayer_authority():
+		set_process(false)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,7 +40,7 @@ func _ready() -> void:
 	_bullet_collision_layer = _bullet_hitbox.collision_layer
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame on the multiplayer authority.
 func _process(delta: float) -> void:
 	# To attack, flicker the Bullet hitbox collision area for one frame.
 	if _attack_time == _attack_timer:
@@ -46,7 +53,7 @@ func _process(delta: float) -> void:
 		_attack_timer = _attack_time
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _target != null:
 		velocity = (_target.global_position - global_position) * _speed
 		move_and_slide()
@@ -71,3 +78,8 @@ func _get_highest_health_nearby_enemy() -> void:
 	if _target == null:
 		_is_targeting_enemy = false
 		_target = get_tree().root.get_node(_owner_path)
+
+
+@rpc("any_peer", "call_local")
+func teleport(new_position: Vector2) -> void:
+	global_position = new_position

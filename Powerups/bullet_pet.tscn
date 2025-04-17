@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_lrjjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(42, 48)
+size = Vector2(54, 62)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wuwmx"]
 size = Vector2(36, 43)

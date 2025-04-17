@@ -14,33 +14,10 @@ func _ready():
 
 func activate_powerup():
 	if _is_owned_by_player:
-		var pet: BulletPet = load(pet_scene).instantiate()
-		get_tree().root.get_node("Playground").add_child(pet, true)
-		
-		# TODO: Call RPCs to set up the pet
-		pet.global_position = global_position
-		pet.set_owner_path.rpc(get_parent().get_path())
-		#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			#1, [pet_scene, 
-				#global_position, 
-				#Vector2.UP, 
-				#_get_damage_from_curve(), 
-				#_is_owned_by_player,
-				#[$"..".get_path()]
-			#]
-		#)
+		get_parent().spawn_pet_and_set_up.rpc_id(1, pet_scene, get_parent().get_path(), global_position)
 	else:
 		# TODO: Support for when owned by an enemy.
 		pass
-		#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			#1, [pet_scene, 
-				#global_position, 
-				#Vector2.UP, 
-				#_get_damage_from_curve(), 
-				#_is_owned_by_player,
-				#[$"..".get_path()]
-			#]
-		#)
 
 
 # Does nothing. The bullet destroys itself based off of the player's "died" signal.
