@@ -25,13 +25,14 @@ var _bullet_collision_layer: int = 0
 
 ## Initialize this pet.
 @rpc("any_peer", "call_local")
-func set_up(owner_path: String, starting_position: Vector2) -> void:
+func set_up(owner_path: String, starting_position: Vector2, damage: float) -> void:
 	_owner_node = get_tree().root.get_node(owner_path)
 	global_position = starting_position
 	set_multiplayer_authority(1)
+	_bullet_hitbox.damage = damage
 	
 	# Level up functionality
-	var pet_powerup = _owner_node.get_node_or_null("PetPowerup")
+	var pet_powerup = _owner_node.get_node_or_null("PowerupPet")
 	if pet_powerup != null:
 		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
