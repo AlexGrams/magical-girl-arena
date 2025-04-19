@@ -43,10 +43,6 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float) -> vo
 		_owner_node.died.connect(func():
 			queue_free()
 		)
-	
-	# Client replications do not process.
-	if not is_multiplayer_authority():
-		set_process(false)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -55,19 +51,24 @@ func _ready() -> void:
 
 
 # Called every frame on the multiplayer authority.
-func _process(delta: float) -> void:
-	# To attack, flicker the Bullet hitbox collision area for one frame.
-	if _attack_time == _attack_timer:
-		_bullet_hitbox.collision_layer = _bullet_collision_layer
-	
-	_attack_timer -= delta
-	
-	if _attack_timer < 0.0:
-		_bullet_hitbox.collision_layer = 0
-		_attack_timer = _attack_time
+func _process(_delta: float) -> void:
+	pass
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	# Attacking
+	if is_multiplayer_authority():
+		# To attack, flicker the Bullet hitbox collision area for one physics frame.
+		if _attack_time == _attack_timer:
+			_bullet_hitbox.collision_layer = _bullet_collision_layer
+		
+		_attack_timer -= delta
+		
+		if _attack_timer < 0.0:
+			_bullet_hitbox.collision_layer = 0
+			_attack_timer = _attack_time
+	
+	# Movement and targeting
 	if _target != null:
 		velocity = (_target.global_position - global_position) * _speed
 		move_and_slide()
