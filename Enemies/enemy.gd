@@ -258,6 +258,14 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 				colliding_targets.remove_at(colliding_targets.find(node))
 
 
+## Forces this Enemy to attack a specific target for a set duration.
+@rpc("authority", "call_local")
+func apply_status_taunted(duration: float, temp_target_path: NodePath) -> void:
+	target = get_tree().root.get_node(temp_target_path)
+	await get_tree().create_timer(duration).timeout
+	target = null
+
+
 ## Apply Goth's Ultimate ability status to this Enemy for a duration
 func apply_status_goth_ult(duration: float, ally_lifetime: float, allied_damage: float) -> void:
 	_status_goth_ult = true

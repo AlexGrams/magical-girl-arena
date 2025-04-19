@@ -126,4 +126,4 @@ func level_up(_new_level: int, new_damage: float):
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
 func _on_taunt_area_2d_entered(area: Area2D) -> void:
 	if area.get_parent() is Enemy:
-		var enemy: Enemy = area.get_parent()
+		area.get_parent().apply_status_taunted.rpc(_taunt_duration, get_path())
