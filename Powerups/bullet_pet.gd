@@ -6,10 +6,16 @@ extends CharacterBody2D
 @export var _speed: float = 100.0
 ## Time in seconds between attacks.
 @export var _attack_time: float = 1.0
+## Time in seconds that an Enemy remains taunted for.
+@export var _taunt_duration: float = 5.0
+## Time in seconds between the Pet taunting nearby Enemies.
+@export var _taunt_cooldown: float = 10.0
 ## Component for damage collisions.
 @export var _bullet_hitbox: BulletHitbox = null
 ## Area component for checking which Enemies are within range of the pet.
 @export var _attack_area: Area2D = null
+## Area component for detecting taunt collisions.
+@export var _taunt_area: Area2D = null
 
 ## Which Enemy the pet is currently trying to attack.
 var _target: Node2D = null
@@ -19,8 +25,12 @@ var _is_targeting_enemy: bool = false
 var _owner_node: PlayerCharacterBody2D = null
 ## Current time until the next attack.
 var _attack_timer: float = 0.0
+## Time until next use of the taunt ability.
+var _taunt_timer: float = 0.0
 ## Default collision layer for the pet's attack.
 var _bullet_collision_layer: int = 0
+## Default collision mask for taunt effects.
+var _taunt_collision_mask: int = 0
 
 
 ## Initialize this pet.
@@ -48,6 +58,8 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float) -> vo
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_bullet_collision_layer = _bullet_hitbox.collision_layer
+	_taunt_collision_mask = _taunt_area.collision_mask
+	_taunt_area.collision_mask = 0
 
 
 # Called every frame on the multiplayer authority.
@@ -56,17 +68,22 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Attacking
 	if is_multiplayer_authority():
 		# To attack, flicker the Bullet hitbox collision area for one physics frame.
 		if _attack_time == _attack_timer:
 			_bullet_hitbox.collision_layer = _bullet_collision_layer
-		
 		_attack_timer -= delta
-		
-		if _attack_timer < 0.0:
+		if _attack_timer <= 0.0:
 			_bullet_hitbox.collision_layer = 0
 			_attack_timer = _attack_time
+		
+		# Taunt 
+		if _taunt_cooldown == _taunt_timer:
+			_taunt_area.collision_mask = 0
+		_taunt_timer -= delta
+		if _taunt_timer <= 0.0:
+			_taunt_area.collision_mask = _taunt_collision_mask
+			_taunt_timer = _taunt_cooldown
 	
 	# Movement and targeting
 	if _target != null:
@@ -104,3 +121,9 @@ func teleport(new_position: Vector2) -> void:
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
 	_bullet_hitbox.damage = new_damage
+
+
+## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
+func _on_taunt_area_2d_entered(area: Area2D) -> void:
+	if area.get_parent() is Enemy:
+		var enemy: Enemy = area.get_parent()
