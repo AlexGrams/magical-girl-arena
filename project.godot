@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Magical Girl Arena"
+config/name="Mumagi: Stellar Saviors"
 run/main_scene="res://Levels/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -28,6 +28,7 @@ AudioManager="*res://Audio/audio_manager.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
