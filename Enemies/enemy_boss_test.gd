@@ -1,8 +1,8 @@
 extends EnemyBoss
 
 
-## This test boss has all the powerups.
-@export var powerups_to_add: Array[PackedScene] = []
+## UIDs of Powerup scenes to add to the boss.
+@export var powerups_to_add: Array[String] = []
 ## Lower values means the boss moves around in a larger circle.
 @export var rotation_rate: float = 0.5
 
@@ -12,7 +12,8 @@ var _current_rotation: float = 0.0
 func _ready() -> void:
 	super()
 	
-	for powerup: PackedScene in powerups_to_add:
+	for powerup_uid: String in powerups_to_add:
+		var powerup: PackedScene = load(powerup_uid)
 		if powerup != null:
 			_add_powerup(powerup)
 
