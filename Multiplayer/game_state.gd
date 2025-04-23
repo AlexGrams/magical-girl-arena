@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -134,6 +134,7 @@ func _ready() -> void:
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
+		# 3689240
 		Steam.steamInitEx(true, 480)
 		
 		if Steam.getAppID() == 480:
