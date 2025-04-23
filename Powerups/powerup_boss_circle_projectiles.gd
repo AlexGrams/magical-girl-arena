@@ -1,25 +1,34 @@
 extends Powerup
 # Shoots a bunch of projectiles out in a circle
 
-const _NUM_BULLETS := 12
 
-@export var bullet_scene_uid := "res://Abilities/bullet_ult_sweet.tscn"
-@export var damage: float = 25.0
+## Bullets are spaced evenly around in a circle
+@export var _num_bullets := 12
+@export var _damage: float = 25.0
+## Time in seconds between activations
+@export var _shoot_interval: float = 1.0
+@export var _bullet_scene_uid := ""
+## UID of the scene for the powerup bullets
+
+var _shoot_timer: float = 0.0
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	if not is_multiplayer_authority():
+		set_process(false)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	if is_on:
+		_shoot_timer -= delta
+		if _shoot_timer <= 0.0:
+			_shoot()
+			_shoot_timer = _shoot_interval
 
 
 func activate_powerup():
-	# TODO: Start shooting
-	pass
+	is_on = true
+	_shoot_timer = _shoot_interval
 
 
 # For when adding this powerup to an Enemy when it is usually added to a Player.
@@ -29,21 +38,20 @@ func activate_powerup_for_enemy():
 
 
 func deactivate_powerup():
-	# TODO: Stop shooting
-	pass
+	is_on = false
 
 
 # Shoot around in a circle.
-func shoot() -> void:
+func _shoot() -> void:
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
 	# Shoot bullets all around
-	var rotation_increment: float = 2 * PI / _NUM_BULLETS
-	for i in range(_NUM_BULLETS):
+	var rotation_increment: float = 2 * PI / _num_bullets
+	for i in range(_num_bullets):
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		1, [bullet_scene_uid, 
+		1, [_bullet_scene_uid, 
 			get_parent().global_position, 
 			Vector2.UP.rotated(rotation_increment * i), 
-			damage, 
-			true,
+			_damage, 
+			false,
 			[]
 		])
