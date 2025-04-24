@@ -36,6 +36,8 @@ var lifetime: float = 0.0
 # Damage this Enemy does to other Enemies when it is an ally.
 var ally_damage: float = 0.0
 
+## All Powerup objects currently spawned in and added to this Enemy.
+var _powerups: Array[Powerup] = []
 # How long until this Enemy can attack again
 var _attack_timer: float = 0.0
 # Thresholds used for randomly determining what an enemy drops. 
@@ -113,6 +115,7 @@ func _add_powerup(powerup_scene: PackedScene) -> void:
 	powerup.set_authority(get_multiplayer_authority())
 	add_child(powerup)
 	powerup.activate_powerup_for_enemy()
+	_powerups.append(powerup)
 
 
 # Set target that this enemy is trying to attack. 
