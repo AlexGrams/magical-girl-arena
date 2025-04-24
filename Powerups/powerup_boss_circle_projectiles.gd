@@ -43,7 +43,9 @@ func deactivate_powerup():
 
 # Shoot around in a circle.
 func _shoot() -> void:
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
+	# TODO: Make a sound when we figure out what sound it should make.
+	#AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
+	
 	# Shoot bullets all around
 	var rotation_increment: float = 2 * PI / _num_bullets
 	for i in range(_num_bullets):

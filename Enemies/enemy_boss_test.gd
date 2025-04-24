@@ -12,6 +12,9 @@ var _current_rotation: float = 0.0
 func _ready() -> void:
 	super()
 	
+	if not is_multiplayer_authority():
+		return
+	
 	for powerup_uid: String in powerups_to_add:
 		var powerup: PackedScene = load(powerup_uid)
 		if powerup != null:

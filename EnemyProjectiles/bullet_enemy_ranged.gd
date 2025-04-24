@@ -3,7 +3,7 @@ extends Bullet
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +22,3 @@ func _process(delta: float) -> void:
 func request_delete() -> void:
 	if not is_queued_for_deletion():
 		queue_free()
-
-
-func set_damage(damage:float):
-	$Area2D.damage = damage

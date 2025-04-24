@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://elgo77ntpany"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_fgw7c"]
+[ext_resource type="Script" path="res://EnemyProjectiles/bullet_enemy_ranged.gd" id="1_ddm2y"]
 [ext_resource type="Texture2D" uid="uid://debkuvp8owvc0" path="res://Sparkle.png" id="2_o81vl"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_5ma5o"]
 
@@ -8,7 +8,7 @@
 size = Vector2(38, 38)
 
 [node name="BulletBossCircle" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
-script = ExtResource("1_fgw7c")
+script = ExtResource("1_ddm2y")
 speed = 500.0
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
