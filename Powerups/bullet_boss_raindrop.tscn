@@ -9,6 +9,7 @@ radius = 195.0
 
 [node name="BulletBossRaindrop" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_d5i4k")
+vfx_uid = "uid://jyy16gs6xyi8"
 speed = 0.0
 lifetime = 1.5
 destroy_on_hit = false

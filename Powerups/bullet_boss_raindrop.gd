@@ -4,11 +4,14 @@ extends Bullet
 ## will damage and indicates how long until damage is applied.
 
 
+## Particles to spawn when damage activates.
+@export var vfx_uid: String = ""
+
 ## How big the shadow of this attack is at its maximum value.
 var _max_shadow_scale: Vector2 = Vector2.ONE
 ## Collision layer this bullet will use to damage targets.
 var _collision_layer: int = 0
-## True for the one frame for which the bullet's collider is active
+## True for the one frame for which the bullet's collider is active.
 var _is_collision_active = false
 
 
@@ -30,13 +33,18 @@ func _physics_process(delta: float) -> void:
 	
 	if death_timer >= lifetime:
 		# Turn the hitbox on for one frame, then delete it.
-		if not is_multiplayer_authority():
-			return
-		
 		if not _is_collision_active:
 			_is_collision_active = true
-			collider.collision_layer = _collision_layer
-		else:
+			if is_multiplayer_authority():
+				collider.collision_layer = _collision_layer
+			
+			# Make particles
+			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
+			if playground != null:
+				var vfx: GPUParticles2D = load(vfx_uid).instantiate()
+				vfx.global_position = global_position
+				playground.add_child(vfx)
+		elif is_multiplayer_authority():
 			queue_free()
 	else:
 		sprite.scale = (death_timer / lifetime) * _max_shadow_scale
