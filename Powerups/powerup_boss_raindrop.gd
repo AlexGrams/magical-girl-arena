@@ -1,9 +1,7 @@
 extends Powerup
-# Shoots a bunch of projectiles out in a circle
+## Creates timed damage zones randomly around the boss and directly on players.
 
 
-## Bullets are spaced evenly around in a circle
-@export var _num_bullets := 12
 @export var _damage: float = 25.0
 ## Time in seconds between activations
 @export var _shoot_interval: float = 1.0
@@ -41,19 +39,16 @@ func deactivate_powerup():
 	is_on = false
 
 
-# Shoot around in a circle.
+## Spawn in timed raindrop bullets.
 func _shoot() -> void:
-	# TODO: Make a sound when we figure out what sound it should make.
-	#AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
-	
-	# Shoot bullets all around
-	var rotation_increment: float = 2 * PI / _num_bullets
-	for i in range(_num_bullets):
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		1, [_bullet_scene_uid, 
-			get_parent().global_position, 
-			Vector2.UP.rotated(rotation_increment * i), 
-			_damage, 
-			false,
-			[]
-		])
+	# Some raindrops appear directly over all players that aren't downed.
+	for player: PlayerCharacterBody2D in GameState.player_characters.values():
+		if not player.is_down:
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [_bullet_scene_uid, 
+				player.global_position, 
+				Vector2.ZERO, 
+				_damage, 
+				false,
+				[]
+			])

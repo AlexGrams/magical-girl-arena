@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxxhhnehdl0df"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_raindrop.gd" id="1_v7isu"]
+
+[node name="PowerupBossRaindrop" type="Node2D"]
+script = ExtResource("1_v7isu")
+_damage = 50.0
+_bullet_scene_uid = "uid://6an7e1yae8hf"
