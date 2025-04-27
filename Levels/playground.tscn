@@ -12241,16 +12241,17 @@ text = "Level: 1"
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 self_modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -94.0
-offset_bottom = -28.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 75.0
+offset_right = 144.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
 max_value = 1.0
 value = 0.5
@@ -12270,17 +12271,17 @@ vertical_alignment = 1
 
 [node name="TempHealthBar" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -94.0
-offset_right = -294.0
-offset_bottom = -28.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = 111.0
+offset_right = 43.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="CanvasLayer/TempHealthBar"]
 modulate = Color(0, 0.58041, 0.972094, 1)
@@ -12734,6 +12735,7 @@ position = Vector2(1062, 1816)
 scale = Vector2(240, 240)
 
 [node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
+position = Vector2(0.0333333, -0.183333)
 debug_color = Color(0, 0.435294, 0.403922, 0)
 
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
