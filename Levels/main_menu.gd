@@ -119,7 +119,7 @@ func setup_lobby_screen() -> void:
 					var lobby_button: Button = lobby_button_scene.instantiate()
 					
 					# Set up the button for this lobby
-					lobby_button.set_text(str(lobby_name, ": ", player_count, " players"))
+					lobby_button.set_text(str(lobby_name, ": ", player_count, "/", GameState.MAX_PLAYERS))
 					lobbies_list_container.add_child(lobby_button)
 					lobby_button.pressed.connect(
 						func():

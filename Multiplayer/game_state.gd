@@ -171,7 +171,7 @@ func _ready() -> void:
 				lobby_id = new_lobby_id
 				if status == 1:
 					Steam.setLobbyData(new_lobby_id, "name", 
-						str(Steam.getPersonaName(), "'s MGA Lobby"))
+						str(Steam.getPersonaName()))
 					create_steam_socket()
 				else:
 					push_error("Error on create lobby!")
