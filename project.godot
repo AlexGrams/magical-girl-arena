@@ -13,7 +13,8 @@ config_version=5
 config/name="Mumagi: Stellar Saviors"
 run/main_scene="res://Levels/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://ProjectIcons/Icon.png"
+config/windows_native_icon="res://ProjectIcons/IconWindows.ico"
 
 [autoload]
 
