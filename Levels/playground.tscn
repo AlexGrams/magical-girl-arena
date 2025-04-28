@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=114 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -45,7 +45,9 @@
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
-[ext_resource type="PackedScene" uid="uid://brcxbafnm32jx" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
+[ext_resource type="PackedScene" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
+[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
@@ -596,8 +598,24 @@ _data = {
 "Wave3": SubResource("Animation_lhp4o")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmcgt"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="Gradient" id="Gradient_vn3oc"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.964706, 0.776471, 1, 1, 0.811765, 0.439216, 1, 1, 0.611765, 0.419608, 1, 1, 0.4, 0.333333, 1, 0.937255, 0.388235, 0.537255, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nc5ny"]
+gradient = SubResource("Gradient_vn3oc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obhx2"]
+texture = SubResource("GradientTexture1D_nc5ny")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmlv1"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wr3nc"]
 
@@ -12219,7 +12237,6 @@ texture = ExtResource("7_gsdoh")
 expand_mode = 1
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
-modulate = Color(0.00402517, 0.17334, 0.76886, 1)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -12228,32 +12245,37 @@ offset_top = -27.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_bmcgt")
+theme_override_styles/fill = SubResource("StyleBoxTexture_obhx2")
 max_value = 1.0
 value = 0.5
+show_percentage = false
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
 offset_top = -52.0
-offset_right = 103.0
+offset_right = 113.0
 offset_bottom = -29.0
 grow_vertical = 0
+theme = ExtResource("34_po6dc")
 text = "Level: 1"
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
-self_modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -144.0
+offset_left = -79.0
 offset_top = 75.0
-offset_right = 144.0
+offset_right = 71.0
 offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lmlv1")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
 max_value = 1.0
 value = 0.5
@@ -12266,6 +12288,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("35_8cpdn")
 theme_override_font_sizes/font_size = 26
 text = "100/100"
 horizontal_alignment = 1
@@ -12278,10 +12301,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = 111.0
-offset_right = 43.0
-offset_bottom = 146.0
+offset_left = 82.0
+offset_top = 73.0
+offset_right = 168.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -12302,6 +12325,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("35_8cpdn")
 theme_override_font_sizes/font_size = 30
 text = "100"
 horizontal_alignment = 1
@@ -12612,6 +12636,7 @@ offset_top = 48.0
 offset_right = 320.0
 offset_bottom = 176.0
 grow_horizontal = 2
+theme = ExtResource("34_po6dc")
 theme_override_font_sizes/font_size = 90
 text = "Game Over"
 horizontal_alignment = 1
@@ -12685,12 +12710,12 @@ offset_top = 33.0
 offset_right = 79.0
 offset_bottom = 97.0
 grow_horizontal = 2
+theme = ExtResource("34_po6dc")
 theme_override_font_sizes/font_size = 46
 text = "00:00"
 horizontal_alignment = 1
 
 [node name="BossHealthBar" type="ProgressBar" parent="CanvasLayer"]
-self_modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 52.0
@@ -12711,9 +12736,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_outline_size = 7
+theme = ExtResource("35_8cpdn")
 theme_override_font_sizes/font_size = 72
 text = "100%"
 horizontal_alignment = 1
