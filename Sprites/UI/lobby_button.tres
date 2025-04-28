@@ -1,0 +1,32 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dsl2fiy1yknb4"]
+
+[ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_ler0k"]
+[ext_resource type="StyleBox" uid="uid://bqc0w5bwkrkbg" path="res://Sprites/UI/scrollbar_grabber.tres" id="2_d2405"]
+[ext_resource type="StyleBox" uid="uid://bh217i4fwf64c" path="res://Sprites/UI/scrollbar.tres" id="2_ig1d7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ecm8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1byqx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uwoyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wti7n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_po7sp"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("1_ler0k")
+Button/styles/disabled = SubResource("StyleBoxEmpty_ecm8o")
+Button/styles/focus = SubResource("StyleBoxEmpty_1byqx")
+Button/styles/hover = SubResource("StyleBoxEmpty_uwoyi")
+Button/styles/normal = SubResource("StyleBoxEmpty_wti7n")
+Button/styles/pressed = SubResource("StyleBoxEmpty_po7sp")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 48
+Label/fonts/font = ExtResource("1_ler0k")
+VScrollBar/styles/grabber = ExtResource("2_d2405")
+VScrollBar/styles/grabber_highlight = ExtResource("2_d2405")
+VScrollBar/styles/grabber_pressed = ExtResource("2_d2405")
+VScrollBar/styles/scroll = ExtResource("2_ig1d7")
+VScrollBar/styles/scroll_focus = ExtResource("2_ig1d7")

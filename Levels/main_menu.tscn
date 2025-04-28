@@ -1,11 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=18 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
-[ext_resource type="Texture2D" uid="uid://dqubvgudpdmts" path="res://OWBackground.png" id="1_hldg4"]
+[ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="3_bm35d"]
+[ext_resource type="Texture2D" uid="uid://d6o2bytnsyfa" path="res://Sprites/UI/Logo.png" id="3_ypdub"]
+[ext_resource type="Script" path="res://UI/logo_scale.gd" id="4_aw7yi"]
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="4_wqh84"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
 [ext_resource type="Texture2D" uid="uid://bsylv50x67ts0" path="res://SweetIcon.png" id="5_7g77h"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="5_76cyy"]
+[ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="7_mn14l"]
+[ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
+[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="11_27tbn"]
+[ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
+[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_ff267"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button")]
 layout_mode = 3
@@ -24,10 +36,10 @@ character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
 information_name = NodePath("Lobby/CharacterInformationContainer/Name")
 information_description = NodePath("Lobby/CharacterInformationContainer/Description")
 information_powerup_texture = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/PowerupImage")
-information_powerup_description = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/PowerupDescription")
+information_powerup_description = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer/PowerupDescription")
 information_ult_texture = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateImage")
-information_ult_description = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateDescription")
-start_game_button = NodePath("Lobby/StartGameButton")
+information_ult_description = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer/UltimateDescription")
+start_game_button = NodePath("Lobby/StartGame_Label/StartGameButton")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1
@@ -37,15 +49,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackgroundTexture" type="TextureRect" parent="Background"]
+[node name="Background" type="TextureRect" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_hldg4")
+texture = ExtResource("2_4w2ge")
 expand_mode = 3
+
+[node name="Logo" type="TextureRect" parent="Background"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_ypdub")
+stretch_mode = 4
+script = ExtResource("4_aw7yi")
 
 [node name="Main" type="Control" parent="."]
 layout_mode = 1
@@ -55,50 +76,81 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LobbyButton" type="Button" parent="Main"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -98.0
-offset_top = -348.0
-offset_right = 102.0
-offset_bottom = -252.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Start"
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 513.0
+offset_right = 615.0
+offset_bottom = 1033.0
+pivot_offset = Vector2(0, 260)
+theme_override_constants/separation = 0
+metadata/_edit_group_ = true
 
-[node name="QuitButton" type="Button" parent="Main"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -198.0
-offset_right = 104.0
-offset_bottom = -102.0
+[node name="Play_Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+text = "Play"
+
+[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Play_Label" node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_right = 261.0
+offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
+theme = ExtResource("4_wqh84")
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="Shop_Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+theme_override_colors/font_color = Color(0.27, 0.27, 0.27, 1)
+theme_override_colors/font_outline_color = Color(0.46, 0.46, 0.46, 1)
+text = "Shop"
+
+[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Shop_Label"]
+layout_mode = 2
+offset_right = 261.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_wqh84")
+disabled = true
+alignment = 0
+
+[node name="Settings_Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+theme_override_colors/font_color = Color(0.27, 0.27, 0.27, 1)
+theme_override_colors/font_outline_color = Color(0.46, 0.46, 0.46, 1)
+text = "Settings"
+
+[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Settings_Label"]
+layout_mode = 2
+offset_right = 261.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_wqh84")
+disabled = true
+alignment = 0
+
+[node name="Quit_Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
 text = "Quit"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Main"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 112.0
-offset_bottom = 187.0
+[node name="QuitButton" type="Button" parent="Main/VBoxContainer/Quit_Label" node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_right = 248.0
+offset_bottom = 127.0
 grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Magical Girl Arena[/center]"
+grow_vertical = 0
+theme = ExtResource("4_wqh84")
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="LobbyList" type="Control" parent="."]
 visible = false
@@ -109,59 +161,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="LobbyList"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 112.0
-offset_bottom = 187.0
-grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Lobby[/center]"
+[node name="CreateLobby_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 261.0
+offset_right = 823.0
+offset_bottom = 388.0
+pivot_offset = Vector2(0, 63)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Create Lobby"
+metadata/_edit_group_ = true
 
-[node name="HostButton" type="Button" parent="LobbyList"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -458.0
-offset_top = -367.0
-offset_right = -258.0
-offset_bottom = -271.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Host"
+[node name="HostButton" type="Button" parent="LobbyList/CreateLobby_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 90
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
-[node name="RefreshButton" type="Button" parent="LobbyList"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -456.0
-offset_top = -142.0
-offset_right = -256.0
-offset_bottom = -46.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Refresh"
+[node name="Refresh_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 392.0
+offset_right = 823.0
+offset_bottom = 519.0
+pivot_offset = Vector2(0, 63)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Refresh List"
+metadata/_edit_group_ = true
 
-[node name="LobbyListBackButton" type="Button" parent="LobbyList"]
-layout_mode = 1
-offset_left = 54.0
-offset_top = 48.0
-offset_right = 206.0
-offset_bottom = 137.0
-theme_override_font_sizes/font_size = 48
-text = "Back"
+[node name="RefreshButton" type="Button" parent="LobbyList/Refresh_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 597.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 90
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Return to Main Menu"
+metadata/_edit_group_ = true
+
+[node name="LobbyListBackButton" type="Button" parent="LobbyList/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="LobbiesScrollContainer" type="ScrollContainer" parent="LobbyList"]
 layout_mode = 1
@@ -170,16 +230,52 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -769.0
-offset_top = -429.0
+offset_left = -1190.0
+offset_top = -971.0
 offset_right = -47.0
-offset_bottom = -37.0
+offset_bottom = -158.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("7_mn14l")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
+follow_focus = true
 
 [node name="LobbiesList" type="VBoxContainer" parent="LobbyList/LobbiesScrollContainer"]
+custom_minimum_size = Vector2(980, 0)
+layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_constants/separation = -15
+alignment = 2
+metadata/_edit_group_ = true
+
+[node name="LobbyButton" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton2" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton3" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton4" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton5" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton6" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton7" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton8" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton9" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
 
 [node name="Lobby" type="Control" parent="."]
 visible = false
@@ -197,102 +293,73 @@ offset_bottom = 40.0
 
 [node name="Player1" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
 layout_mode = 0
-offset_left = 693.0
-offset_top = 416.0
-offset_right = 968.0
-offset_bottom = 755.0
+offset_left = 509.0
+offset_top = 582.0
+offset_right = 1042.0
+offset_bottom = 1013.0
 
 [node name="Player2" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
 layout_mode = 0
-offset_left = 983.0
-offset_top = 359.0
-offset_right = 1258.0
-offset_bottom = 698.0
+offset_left = 851.0
+offset_top = 447.0
+offset_right = 1384.0
+offset_bottom = 878.0
 
 [node name="Player3" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
 layout_mode = 0
-offset_left = 1566.0
-offset_top = 343.0
-offset_right = 1841.0
-offset_bottom = 682.0
+offset_left = 1214.0
+offset_top = 556.0
+offset_right = 1747.0
+offset_bottom = 987.0
 
 [node name="Player4" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
 layout_mode = 0
-offset_left = 1272.0
-offset_top = 275.0
-offset_right = 1547.0
-offset_bottom = 614.0
+offset_left = 1427.0
+offset_top = 372.0
+offset_right = 1960.0
+offset_bottom = 803.0
 
 [node name="CharacterSelectContainer" type="HBoxContainer" parent="Lobby"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 250.0
-offset_top = -249.0
-offset_right = 491.0
-offset_bottom = -132.0
+offset_left = 642.0
+offset_top = -988.0
+offset_right = 1036.0
+offset_bottom = -796.0
 grow_vertical = 0
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 
 [node name="CharacterSelectButton" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
 layout_mode = 2
+button_pressed = true
+image = ExtResource("11_27tbn")
 
 [node name="CharacterSelectButton2" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
 layout_mode = 2
 character = 1
+image = ExtResource("5_7g77h")
 
-[node name="Image" parent="Lobby/CharacterSelectContainer/CharacterSelectButton2" index="0"]
-texture = ExtResource("5_7g77h")
-
-[node name="TitleText" type="RichTextLabel" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 112.0
-offset_bottom = 187.0
-grow_horizontal = 2
-theme_override_font_sizes/normal_font_size = 50
-bbcode_enabled = true
-text = "[center]Lobby[/center]"
-
-[node name="StartGameButton" type="Button" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -98.0
-offset_top = -120.0
-offset_right = 102.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Start"
-
-[node name="LeaveButton" type="Button" parent="Lobby"]
-layout_mode = 1
-offset_left = 101.0
-offset_top = 86.0
-offset_right = 301.0
-offset_bottom = 182.0
-pivot_offset = Vector2(100, 96)
-theme_override_font_sizes/font_size = 48
-text = "Leave"
+[node name="CharacterInformation_Panel" type="TextureRect" parent="Lobby"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 254.0
+offset_right = 538.0
+offset_bottom = 943.0
+texture = ExtResource("13_flegh")
 
 [node name="CharacterInformationContainer" type="VBoxContainer" parent="Lobby"]
 layout_mode = 0
-offset_left = 136.0
-offset_top = 213.0
-offset_right = 659.0
-offset_bottom = 800.0
+offset_left = 58.0
+offset_top = 291.0
+offset_right = 497.0
+offset_bottom = 878.0
 
 [node name="Name" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 36
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center]Character Name[/center]"
 fit_content = true
@@ -305,7 +372,8 @@ layout_mode = 2
 
 [node name="Description" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 22
+theme = ExtResource("15_ff267")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
 fit_content = true
@@ -329,10 +397,23 @@ texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PowerupDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/normal_font_size = 24
+text = "Signature:"
+
+[node name="PowerupDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("15_ff267")
+theme_override_font_sizes/normal_font_size = 20
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
 fit_content = true
 
@@ -354,19 +435,94 @@ texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="UltimateDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/normal_font_size = 24
+text = "Ultimate:"
+
+[node name="UltimateDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("15_ff267")
+theme_override_font_sizes/normal_font_size = 20
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
 fit_content = true
 
-[connection signal="button_down" from="Main/LobbyButton" to="." method="_on_lobby_button_button_down"]
-[connection signal="button_down" from="Main/QuitButton" to="." method="_on_quit_button_button_down"]
-[connection signal="button_down" from="LobbyList/HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="LobbyList/RefreshButton" to="." method="request_lobby_list"]
-[connection signal="button_down" from="LobbyList/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
-[connection signal="button_down" from="Lobby/StartGameButton" to="." method="_on_start_game_button_down"]
-[connection signal="button_down" from="Lobby/LeaveButton" to="." method="_on_leave_button_down"]
+[node name="StartGame_Label" type="Label" parent="Lobby"]
+layout_mode = 0
+offset_left = 1337.0
+offset_top = 961.0
+offset_right = 1882.0
+offset_bottom = 1065.0
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Start Game"
+metadata/_edit_group_ = true
 
-[editable path="Lobby/CharacterSelectContainer/CharacterSelectButton2"]
+[node name="StartGameButton" type="Button" parent="Lobby/StartGame_Label"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -272.5
+offset_top = -104.0
+offset_right = 272.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 90
+text = "Start Game"
+
+[node name="LeaveLobby_Label" type="Label" parent="Lobby"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 994.0
+offset_right = 598.0
+offset_bottom = 1052.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Leave Lobby"
+metadata/_edit_group_ = true
+
+[node name="LeaveButton" type="Button" parent="Lobby/LeaveLobby_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 318.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 50
+text = "Leave Lobby"
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
+[connection signal="mouse_entered" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Settings_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/Refresh_Label/RefreshButton" to="." method="request_lobby_list"]
+[connection signal="mouse_entered" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
+[connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="button_down" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
+[connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="_on_leave_button_down"]
+[connection signal="mouse_entered" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]

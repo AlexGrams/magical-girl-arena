@@ -1,0 +1,28 @@
+extends Node
+
+@export var username_label:Label
+@export var playercount_label:Label
+@export var texture_box:TextureRect
+var original_scale:Vector2
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if username_label == null:
+		push_warning("Username_label has not been assigned")
+	if playercount_label == null:
+		push_warning("Playercount_label has not been assigned")
+	if texture_box == null:
+		push_warning("Texture_box has not been assigned")
+	else:
+		original_scale = texture_box.scale
+
+func set_host_name(name:String):
+	username_label.text = name
+
+func set_playercount(count:String):
+	playercount_label.text = count + "/" + str(GameState.MAX_PLAYERS) + " players"
+
+func _on_mouse_entered():
+	texture_box.scale = original_scale * 1.05
+
+func _on_mouse_exited():
+	texture_box.scale = original_scale

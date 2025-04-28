@@ -7,6 +7,8 @@ const character_animated_sprite: Resource = preload("res://UI/character_animated
 @export var id: Label = null
 @export var username: Label = null
 @export var character_sprite_location: Control = null
+@export var portal_open: TextureRect = null
+@export var portal_closed: TextureRect = null
 
 # The multiplayer ID of the player that this container represents
 var player_id: int = 0
@@ -38,6 +40,8 @@ func set_properties(
 	username.text = new_username
 	id.text = str(new_player_id)
 	player_id = new_player_id
+	portal_closed.hide()
+	portal_open.show()
 	
 	if sprite == null:
 		sprite = character_animated_sprite.instantiate()
@@ -54,6 +58,8 @@ func set_properties(
 func clear_properties() -> void:
 	username.text = ""
 	id.text = ""
+	portal_open.hide()
+	portal_closed.show()
 	if sprite != null and not sprite.is_queued_for_deletion():
 		sprite.queue_free()
 

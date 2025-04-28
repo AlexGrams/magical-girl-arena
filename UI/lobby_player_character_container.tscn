@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://j115lnwcarmj"]
+[gd_scene load_steps=5 format=3 uid="uid://j115lnwcarmj"]
 
 [ext_resource type="Script" path="res://UI/lobby_player_character_container.gd" id="1_j20e6"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="2_fkd01"]
+[ext_resource type="Texture2D" uid="uid://bovqghaxd3wsw" path="res://Sprites/UI/Portal_Open.png" id="3_ykegb"]
+[ext_resource type="Texture2D" uid="uid://b8jnl5vgqvcwr" path="res://Sprites/UI/Portal_Closed.png" id="4_rqb5g"]
 
-[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("id", "username", "character_sprite_location")]
+[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("id", "username", "character_sprite_location", "portal_open", "portal_closed")]
 offset_left = 413.0
 offset_top = 213.0
 offset_right = 688.0
@@ -11,8 +14,11 @@ script = ExtResource("1_j20e6")
 id = NodePath("ID")
 username = NodePath("Username")
 character_sprite_location = NodePath("CharacterSpriteLocation")
+portal_open = NodePath("Portal_Open")
+portal_closed = NodePath("Portal_Closed")
 
 [node name="ID" type="Label" parent="."]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "ID Goes here"
@@ -20,7 +26,8 @@ horizontal_alignment = 1
 
 [node name="Username" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("2_fkd01")
+theme_override_font_sizes/font_size = 48
 text = "Username goes here"
 horizontal_alignment = 1
 
@@ -34,5 +41,17 @@ size_flags_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="Portal_Open" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_ykegb")
+
+[node name="Portal_Closed" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_rqb5g")
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]

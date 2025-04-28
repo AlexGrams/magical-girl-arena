@@ -1,0 +1,39 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dtmg4b3y6iqwk"]
+
+[ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_tkaby"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rv1xo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yv10c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pm2h1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyif2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7iaq"]
+
+[resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.117647, 0.117647, 0.117647, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 0.94902, 0.745098, 1)
+Button/colors/font_hover_pressed_color = Color(1, 0.941176, 0.501961, 1)
+Button/colors/font_outline_color = Color(0.964706, 0.580392, 0.482353, 1)
+Button/colors/font_pressed_color = Color(1, 0.941176, 0.501961, 1)
+Button/constants/outline_size = 15
+Button/font_sizes/font_size = 110
+Button/fonts/font = ExtResource("1_tkaby")
+Button/styles/disabled = SubResource("StyleBoxEmpty_rv1xo")
+Button/styles/focus = SubResource("StyleBoxEmpty_yv10c")
+Button/styles/hover = SubResource("StyleBoxEmpty_pm2h1")
+Button/styles/normal = SubResource("StyleBoxEmpty_gyif2")
+Button/styles/pressed = SubResource("StyleBoxEmpty_k7iaq")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0.964706, 0.580392, 0.482353, 1)
+Label/colors/font_shadow_color = Color(1, 0, 0, 0.196078)
+Label/constants/outline_size = 15
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 4
+Label/constants/shadow_outline_size = 20
+Label/font_sizes/font_size = 110
+Label/fonts/font = ExtResource("1_tkaby")
