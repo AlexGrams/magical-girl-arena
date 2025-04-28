@@ -1,14 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://brcxbafnm32jx"]
+[gd_scene load_steps=3 format=3 uid="uid://brcxbafnm32jx"]
 
 [ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="1_aedit"]
+[ext_resource type="Script" path="res://UI/stat_level_indicator.gd" id="1_lnprn"]
 
-[node name="StatLevelIndicator" type="VBoxContainer"]
+[node name="StatLevelIndicator" type="VBoxContainer" node_paths=PackedStringArray("_label")]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -68.0
 offset_right = 42.0
 grow_vertical = 0
+script = ExtResource("1_lnprn")
+_label = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

@@ -76,6 +76,9 @@ signal revived()
 
 func _ready():
 	_revive_collision_area.hide()
+	
+	if is_multiplayer_authority():
+		$"../CanvasLayer".update_stats(self)
 
 
 ## Called when a Powerup is selected on the level up screen.
@@ -134,6 +137,8 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 			#_stat_ultimate_charge_rate += 1
 		_:
 			push_error("No upgrade functionality for this stat upgrade type")
+	
+	$"../CanvasLayer".update_stats(self)
 
 
 ## Returns the current level of a player's stat given the stat enum type.

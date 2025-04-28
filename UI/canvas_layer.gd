@@ -12,6 +12,8 @@ extends CanvasLayer
 @export var _ultimate_texture: TextureRect = null
 ## Displays the cooldown for the player's ultimate ability.
 @export var _ultimate_progress_bar: ProgressBar = null
+## Displays the player's current stat levels.
+@export var _stat_level_container: Control = null
 ## Only appears if the player has temp health
 @export var _temp_health_control: Control = null
 ## Displays how much temp health the player has
@@ -256,6 +258,16 @@ func update_powerup_level(powerup_data: PowerupData, new_level: int) -> void:
 		return
 	
 	_powerup_level_text[_powerup_display_index[powerup_data.name]].text = str(new_level)
+
+
+## Updates the stat values on the UI.
+func update_stats(player: PlayerCharacterBody2D) -> void:
+	var stat_containers := _stat_level_container.get_children()
+	
+	stat_containers[0].set_stat_value(player._stat_health)
+	stat_containers[1].set_stat_value(player._stat_health_regen)
+	stat_containers[2].set_stat_value(player._stat_speed)
+	stat_containers[3].set_stat_value(player._stat_pickup_radius)
 
 
 ## Display the boss health bar. Health percent = [0, 1].

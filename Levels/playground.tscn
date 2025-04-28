@@ -12162,7 +12162,7 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4746)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_temp_health_control", "_temp_health_text", "_boss_health_bar", "_boss_health_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_temp_health_control", "_temp_health_text", "_boss_health_bar", "_boss_health_text")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -12171,6 +12171,7 @@ _pointer_parent = NodePath("PlayerPointers")
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
 _ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/UltimateTextureRect")
 _ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/UltimateProgressBar")
+_stat_level_container = NodePath("AbilitiesAndStatsContainer/Stats")
 _temp_health_control = NodePath("TempHealthBar")
 _temp_health_text = NodePath("TempHealthBar/TempHealthText")
 _boss_health_bar = NodePath("BossHealthBar")
@@ -12312,9 +12313,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -406.0
+offset_left = -378.0
 offset_top = -125.0
-offset_right = 406.0
+offset_right = 378.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -12572,11 +12573,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 8
 
 [node name="StatLevelIndicator4" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-
-[node name="StatLevelIndicator5" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
