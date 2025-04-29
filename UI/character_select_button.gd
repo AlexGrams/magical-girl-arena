@@ -36,7 +36,6 @@ func _on_mouse_exited() -> void:
 	$CharacterContainer.scale = original_scale
 
 func _on_toggled(toggled_on: bool) -> void:
-	print(str(character) + " button: " + str(toggled_on))
 	if toggled_on:
 		set_to_selected()
 	else:
