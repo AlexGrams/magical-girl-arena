@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -453,8 +453,10 @@ func load_game():
 
 # Add exp to this player. Offer Powerups when leveling up.
 @rpc("any_peer", "call_local")
-func collect_exp(amount: int = 10) -> void:
+func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> void:
 	experience += amount
+	AudioManager.create_audio_at_location(sound_location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_EXP_PICKUP)
+		
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
 		experience -= exp_for_next_level
 		level += 1

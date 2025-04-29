@@ -46,7 +46,7 @@
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
-[ext_resource type="PackedScene" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
+[ext_resource type="PackedScene" uid="uid://brcxbafnm32jx" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]

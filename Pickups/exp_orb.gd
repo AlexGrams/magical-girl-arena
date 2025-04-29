@@ -4,6 +4,8 @@ extends Node2D
 
 # Acceleration in units/second^2
 const ACCELERATION = 1000.0
+## How much experience the regular orb gives
+const EXP = 10
 
 # The player that this EXP orb is moving towards.
 var player: Node2D = null
@@ -22,8 +24,7 @@ func _process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if uncollected and is_multiplayer_authority() and area.get_collision_layer_value(4):
 		uncollected = false
-		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_EXP_PICKUP)
-		GameState.collect_exp.rpc()
+		GameState.collect_exp.rpc(EXP, global_position)
 		destroy.rpc_id(1) 
 
 
