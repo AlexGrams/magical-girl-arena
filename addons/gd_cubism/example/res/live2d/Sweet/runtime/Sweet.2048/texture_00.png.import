@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c86ujgtjx2k6l"
-path="res://.godot/imported/texture_00.png-0b8d24c1aec27f0c7bc6da187d3d0069.ctex"
+uid="uid://c8oq80rt36hrg"
+path="res://.godot/imported/texture_00.png-6cbc03b37a960967c1197db1017c7af4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.1024/texture_00.png"
-dest_files=["res://.godot/imported/texture_00.png-0b8d24c1aec27f0c7bc6da187d3d0069.ctex"]
+source_file="res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.2048/texture_00.png"
+dest_files=["res://.godot/imported/texture_00.png-6cbc03b37a960967c1197db1017c7af4.ctex"]
 
 [params]
 
