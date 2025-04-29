@@ -24,6 +24,9 @@ func set_sprite(sprite: Constants.Character) -> void:
 		Constants.Character.SWEET:
 			gdcubism_user_model.set_assets(SWEET)
 
+func set_model_scale(scale: float) -> void:
+	gdcubism_user_model.adjust_scale = scale
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

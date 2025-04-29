@@ -62,6 +62,7 @@ func _ready() -> void:
 	_lobby_original_pos = lobby.position
 	
 	main_menu_character_sprite.set_read_input(false)
+	main_menu_character_sprite.set_model_scale(3)
 	_set_main_menu_character()
 	
 	setup_lobby_screen()

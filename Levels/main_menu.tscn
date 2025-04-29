@@ -196,7 +196,6 @@ label = NodePath("..")
 
 [node name="CharacterAnimatedSprite" parent="Main" instance=ExtResource("9_m305s")]
 position = Vector2(1394, 619)
-scale = Vector2(3, 3)
 texture = SubResource("ViewportTexture_k0lfe")
 flip_h = true
 
