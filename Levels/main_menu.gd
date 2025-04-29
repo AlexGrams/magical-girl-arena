@@ -29,7 +29,9 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
-
+var _main_menu_original_pos: Vector2
+var _lobby_list_original_pos: Vector2
+var _lobby_original_pos: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +54,10 @@ func _ready() -> void:
 			_on_character_select_button_pressed(button)
 		)
 	
+	_main_menu_original_pos = main_menu.position
+	_lobby_list_original_pos = lobby_list.position
+	_lobby_original_pos = lobby.position
+	
 	setup_lobby_screen()
 
 
@@ -67,8 +73,7 @@ func _on_quit_button_button_down() -> void:
 
 # Go from the main menu to the lobby list.
 func _on_lobby_button_button_down() -> void:
-	main_menu.hide()
-	lobby_list.show()
+	_switch_screen_animation(main_menu, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
 #endregion
 
@@ -83,17 +88,14 @@ func _on_host_button_button_down() -> void:
 			start_game_button.hide()
 	
 	# Show the lobby that you're in after clicking the "Host" button.
-	lobby_list.hide()
-	lobby.show()
+	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
 	update_character_description()
 
 
 # Go from the lobby list to the main menu.
 func _on_lobby_list_back_button_button_down() -> void:
-	lobby_list.hide()
-	main_menu.show()
-
+	_switch_screen_animation(lobby_list, main_menu , _main_menu_original_pos)
 
 # Refresh the lobby list
 func request_lobby_list() -> void:
@@ -147,8 +149,7 @@ func _on_start_game_button_down() -> void:
 # Leave a game lobby. Goes back to the lobby list.
 func _on_leave_button_down() -> void:
 	GameState.disconnect_local_player()
-	lobby.hide()
-	lobby_list.show()
+	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
 
 
@@ -214,3 +215,13 @@ func update_character_description() -> void:
 	information_ult_description.text = data.ult_name
 
 #endregion
+
+func _switch_screen_animation(from_screen: Control, to_screen: Control, to_screen_original_pos: Vector2):
+	to_screen.position = Vector2(-(to_screen.size.x), to_screen.position.y)
+	to_screen.show()
+	var tween = create_tween().set_parallel(true)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(to_screen, "position", to_screen_original_pos, 0.25)
+	await tween.tween_property(from_screen, "position", Vector2(-(from_screen.size.x), from_screen.position.y), 0.25).finished
+	from_screen.hide()
