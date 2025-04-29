@@ -31,7 +31,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
-## Used for switching screen animations
+## The location that these menus should be in when in focus. 
+## Used for animating the UI when switching screens.
 var _main_menu_original_pos: Vector2
 var _lobby_list_original_pos: Vector2
 var _lobby_original_pos: Vector2
@@ -221,6 +222,11 @@ func update_character_description() -> void:
 	information_powerup_description.text = data.base_powerup_name
 	information_ult_texture.texture = data.ult_texture
 	information_ult_description.text = data.ult_name
+
+
+## Switches from the lobby screen to the main menu
+func quit_to_main_menu() -> void:
+	_switch_screen_animation(lobby, main_menu, _main_menu_original_pos)
 
 #endregion
 

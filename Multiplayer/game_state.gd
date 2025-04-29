@@ -422,6 +422,7 @@ func quit_game(quitting_player: int):
 	
 	end_game()
 	main_menu.show()
+	main_menu.quit_to_main_menu()
 	if multiplayer.get_unique_id() == quitting_player:
 		# We wait for one frame before disconnecting the client to ensure the RPC to 
 		# quit_game is sent to all clients. Otherwise, quit_game is not called on 
