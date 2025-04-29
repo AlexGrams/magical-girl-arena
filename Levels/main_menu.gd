@@ -25,10 +25,13 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var information_ult_description: RichTextLabel
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_button: Button
-
+## Character that is visible on the main menu and their nametag.
+@export var main_menu_character_sprite: CharacterAnimatedSprite2D
+@export var main_menu_character_label: Label
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
+## Used for switching screen animations
 var _main_menu_original_pos: Vector2
 var _lobby_list_original_pos: Vector2
 var _lobby_original_pos: Vector2
@@ -58,6 +61,9 @@ func _ready() -> void:
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
 	
+	main_menu_character_sprite.set_read_input(false)
+	_set_main_menu_character()
+	
 	setup_lobby_screen()
 
 
@@ -75,6 +81,13 @@ func _on_quit_button_button_down() -> void:
 func _on_lobby_button_button_down() -> void:
 	_switch_screen_animation(main_menu, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
+
+func _set_main_menu_character() -> void:
+	var random_char = -1
+	while random_char == -1:
+		random_char = Constants.Character.values().pick_random()
+	main_menu_character_sprite.set_sprite(random_char)
+	main_menu_character_label.text = _get_character_data(random_char).name
 #endregion
 
 #region lobby_list
@@ -95,6 +108,7 @@ func _on_host_button_button_down() -> void:
 
 # Go from the lobby list to the main menu.
 func _on_lobby_list_back_button_button_down() -> void:
+	_set_main_menu_character()
 	_switch_screen_animation(lobby_list, main_menu , _main_menu_original_pos)
 
 # Refresh the lobby list
@@ -198,14 +212,7 @@ func update_character_description() -> void:
 	
 	var character: Constants.Character = GameState.players[multiplayer.get_unique_id()]["character"]
 	
-	var data: CharacterData = null
-	match(character):
-		Constants.Character.GOTH:
-			data = load("res://Player/CharacterResourceFiles/character_data_goth.tres")
-		Constants.Character.SWEET:
-			data = load("res://Player/CharacterResourceFiles/character_data_sweet.tres")
-		_:
-			print("uh oh")
+	var data: CharacterData = _get_character_data(character)
 	
 	information_name.text = "[center]" + data.name + "[/center]"
 	information_description.text = data.description
@@ -225,3 +232,14 @@ func _switch_screen_animation(from_screen: Control, to_screen: Control, to_scree
 	tween.tween_property(to_screen, "position", to_screen_original_pos, 0.25)
 	await tween.tween_property(from_screen, "position", Vector2(-(from_screen.size.x), from_screen.position.y), 0.25).finished
 	from_screen.hide()
+
+func _get_character_data(character: Constants.Character) -> CharacterData:
+	var data: CharacterData = null
+	match(character):
+		Constants.Character.GOTH:
+			data = load("res://Player/CharacterResourceFiles/character_data_goth.tres")
+		Constants.Character.SWEET:
+			data = load("res://Player/CharacterResourceFiles/character_data_sweet.tres")
+		_:
+			print("uh oh")
+	return data

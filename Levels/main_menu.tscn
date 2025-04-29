@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=25 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="5_76cyy"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="7_mn14l"]
 [ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
+[ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="9_m305s"]
 [ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="11_27tbn"]
 [ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
@@ -35,9 +36,12 @@ scale_min = 0.25
 scale_max = 1.5
 scale_curve = SubResource("CurveTexture_jt00i")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_k0lfe"]
+viewport_path = NodePath("GDCubismUserModel")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button", "main_menu_character_sprite", "main_menu_character_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,6 +62,8 @@ information_powerup_description = NodePath("Lobby/CharacterInformationContainer/
 information_ult_texture = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateImage")
 information_ult_description = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer/UltimateDescription")
 start_game_button = NodePath("Lobby/StartGame_Label/StartGameButton")
+main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
+main_menu_character_label = NodePath("Main/CharacterLabel")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1
@@ -187,6 +193,24 @@ theme = ExtResource("4_wqh84")
 alignment = 0
 script = ExtResource("5_76cyy")
 label = NodePath("..")
+
+[node name="CharacterAnimatedSprite" parent="Main" instance=ExtResource("9_m305s")]
+position = Vector2(1394, 619)
+scale = Vector2(3, 3)
+texture = SubResource("ViewportTexture_k0lfe")
+flip_h = true
+
+[node name="CharacterLabel" type="Label" parent="Main"]
+layout_mode = 0
+offset_left = 1537.0
+offset_top = 962.0
+offset_right = 1889.0
+offset_bottom = 1037.0
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 64
+text = "Character
+"
+horizontal_alignment = 1
 
 [node name="LobbyList" type="Control" parent="."]
 visible = false
