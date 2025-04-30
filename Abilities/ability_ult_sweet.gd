@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 func activate() -> void:
 	super()
 	
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
+	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
 	# Shoot bullets all around
 	var rotation_increment: float = 2 * PI / _NUM_BULLETS
 	for i in range(_NUM_BULLETS):
