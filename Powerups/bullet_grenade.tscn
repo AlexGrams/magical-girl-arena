@@ -1,19 +1,20 @@
 [gd_scene load_steps=6 format=3 uid="uid://b06fii00diw54"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_vi8ek"]
+[ext_resource type="Script" path="res://Powerups/bullet_grenade.gd" id="1_v6m4k"]
 [ext_resource type="Texture2D" uid="uid://cfi14d54hv8f1" path="res://OrangeGreen.png" id="2_cow03"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_tglxe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
+radius = 241.168
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(66, 66)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
-radius = 164.027
-
 [node name="BulletGrenade" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
-script = ExtResource("1_vi8ek")
-speed = 500.0
-lifetime = 1.0
+script = ExtResource("1_v6m4k")
+_vfx_uid = "uid://jyy16gs6xyi8"
+speed = 750.0
+lifetime = 0.5
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
@@ -24,15 +25,18 @@ texture = ExtResource("2_cow03")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
+monitorable = false
 script = ExtResource("3_tglxe")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_tg1bm")
-
-[node name="ExplosionArea2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+top_level = true
 shape = SubResource("CircleShape2D_n81gy")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="GrenadeArea2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrenadeArea2D"]
+shape = SubResource("RectangleShape2D_tg1bm")
+
+[connection signal="area_entered" from="GrenadeArea2D" to="." method="_on_area_2d_area_entered"]
