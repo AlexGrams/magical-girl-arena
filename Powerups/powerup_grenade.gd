@@ -9,7 +9,6 @@ var _shoot_timer: float = 0.0
 var _bullet_spawner: BulletSpawner = null
 
 
-
 func _ready() -> void:
 	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
 
@@ -23,10 +22,7 @@ func _process(delta: float) -> void:
 		if _is_owned_by_player:
 			# Get nearest enemy so direction can be set
 			var enemies: Array[Node] = [] 
-			if _is_owned_by_player:
-				enemies = get_tree().get_nodes_in_group("enemy")
-			else:
-				enemies = get_tree().get_nodes_in_group("player")
+			enemies = get_tree().get_nodes_in_group("enemy")
 			
 			if !enemies.is_empty():
 				var nearest_enemy = enemies[0]

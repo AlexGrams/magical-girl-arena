@@ -5,7 +5,8 @@ extends Bullet
 @export var _vfx_uid: String = ""
 
 ## Saved bullet collision layer for when we reactivate the collision.
-var _collision_layer: int
+var _collision_layer: int = 0
+var _explosion_time: float = lifetime
 
 
 func _ready() -> void:
@@ -19,17 +20,23 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	global_position += direction * speed * delta
-	
 	# Explode either when time runs out or it collides with sometime. When it explodes, its collider 
 	# is enabled for one physics frame before deleting the bullet.
 	death_timer += delta
-	if collider.collision_layer != 0:
-		print("Free")
+	
+	if (
+		collider.collision_layer != 0 and 
+		is_multiplayer_authority() and 
+		death_timer >= _explosion_time + 2.0 / 60.0
+	):
+		# Disgusting hack. For some reason, we need to wait two physics frames before
+		# enemies detect that the grenade collision has changed. It doesn't work this 
+		# way for the Boss Raindrop for some reason.
 		queue_free()
 	elif death_timer >= lifetime and sprite.visible:
-		print("Ran out of time")
 		_explode()
+	else:
+		global_position += direction * speed * delta
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -45,6 +52,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 ## Deal damage in an area around where the bullet is currently.
 func _explode() -> void:
+	_explosion_time = death_timer
+	
 	# Spawn explosion VFX
 	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 	if playground != null:
@@ -54,5 +63,4 @@ func _explode() -> void:
 	sprite.hide()
 	
 	if is_multiplayer_authority():
-		print("Collision is on")
 		collider.collision_layer = _collision_layer
