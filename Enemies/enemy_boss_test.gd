@@ -11,7 +11,6 @@ const _squared_destination_theshold: float = 100.0
 ## UIDs of Powerup scenes to add to the boss.
 @export var powerups_to_add: Array[String] = []
 
-var _current_rotation: float = 0.0
 ## Time in seconds until the next pattern switch.
 var _pattern_switch_timer: float = 0.0
 ## Which attack pattern the boss is currently doing.
@@ -53,7 +52,7 @@ func _process(delta: float) -> void:
 		_pattern_switch_timer = _pattern_interval
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target != null:
 		if global_position.distance_squared_to(_movement_points[_current_movement_point]) <= _squared_destination_theshold:
 			# Boss has completed one movement, so find the next point to move towards.
