@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 						nearest_distance = distance
 			
 				var direction = (nearest_enemy.global_position - self.global_position).normalized()
+				
 				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 					1,
 					[
