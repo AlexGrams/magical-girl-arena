@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b06fii00diw54"]
+[gd_scene load_steps=6 format=3 uid="uid://b06fii00diw54"]
 
 [ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_vi8ek"]
 [ext_resource type="Texture2D" uid="uid://cfi14d54hv8f1" path="res://OrangeGreen.png" id="2_cow03"]
@@ -7,10 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(66, 66)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
+radius = 164.027
+
 [node name="BulletGrenade" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_vi8ek")
-speed = 1000.0
+speed = 500.0
 lifetime = 1.0
+destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
@@ -25,5 +29,10 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
+
+[node name="ExplosionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+shape = SubResource("CircleShape2D_n81gy")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

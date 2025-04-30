@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=15 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="8_yawss"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="9_dl5oi"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="10_hqxjy"]
+[ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="11_b6mky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
@@ -24,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
-all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_dl5oi"), ExtResource("10_hqxjy")])
+all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_dl5oi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky")])
 upgrade_panels_holder = NodePath("UpgradesContainer/PowerupUpgradesContainer")
 reroll_button = NodePath("RerollButton")
 players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")

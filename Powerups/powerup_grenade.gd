@@ -5,20 +5,21 @@ extends Powerup
 ## UID to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
 
-var bullet
-var shoot_timer: float = 0.0
+var _shoot_timer: float = 0.0
+var _bullet_spawner: BulletSpawner = null
+
 
 
 func _ready() -> void:
-	pass
+	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
 
 
 func _process(delta: float) -> void:
 	if not is_on:
 		return
 	
-	shoot_timer += delta
-	if shoot_timer > shoot_interval:
+	_shoot_timer += delta
+	if _shoot_timer > shoot_interval:
 		if _is_owned_by_player:
 			# Get nearest enemy so direction can be set
 			var enemies: Array[Node] = [] 
@@ -37,11 +38,11 @@ func _process(delta: float) -> void:
 						nearest_distance = distance
 			
 				var direction = (nearest_enemy.global_position - self.global_position).normalized()
-				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
 						bullet_scene, 
-						Vector2.ZERO, 
+						global_position, 
 						direction, 
 						_get_damage_from_curve(), 
 						_is_owned_by_player,
@@ -58,11 +59,11 @@ func _process(delta: float) -> void:
 				var direction = owning_enemy.target.global_position - self.global_position
 				direction = direction.normalized()
 				
-				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				_bullet_spawner.request_spawn_bullet.rpc_id(
 					1, 
 					[
 						bullet_scene, 
-						Vector2.ZERO, 
+						global_position, 
 						direction, 
 						owning_enemy.attack_damage, 
 						_is_owned_by_player,
@@ -70,7 +71,7 @@ func _process(delta: float) -> void:
 					]
 				)
 		
-		shoot_timer = 0
+		_shoot_timer = 0
 
 
 func activate_powerup():
@@ -84,7 +85,7 @@ func activate_powerup_for_enemy():
 
 func deactivate_powerup():
 	is_on = false
-	shoot_timer = 0.0
+	_shoot_timer = 0.0
 
 
 func level_up():

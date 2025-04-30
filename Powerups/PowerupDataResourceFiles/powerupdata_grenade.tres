@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://b60dhg75p3ppn"]
+
+[ext_resource type="PackedScene" uid="uid://cokwnrccibmw5" path="res://Powerups/powerup_grenade.tscn" id="1_vbh1i"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_j245e"]
+[ext_resource type="Texture2D" uid="uid://cfi14d54hv8f1" path="res://OrangeGreen.png" id="3_r3kgj"]
+
+[resource]
+script = ExtResource("2_j245e")
+scene = ExtResource("1_vbh1i")
+name = "Grenade"
+sprite = ExtResource("3_r3kgj")
+upgrade_description = "Shoot a projectile that explodes after a short distance."
