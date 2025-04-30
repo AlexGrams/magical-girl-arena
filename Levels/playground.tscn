@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=116 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -53,6 +53,7 @@
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
+[ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12605,7 +12606,7 @@ size_flags_vertical = 8
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
-all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e")])
+all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve")])
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
 visible = false
@@ -12748,7 +12749,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 

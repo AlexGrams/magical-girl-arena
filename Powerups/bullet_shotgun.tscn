@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw55ega0qnbtq"]
+
+[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_106pl"]
+[ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="2_c5lhv"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_om2mk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(38, 38)
+
+[node name="Bullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_106pl")
+speed = 1000.0
+lifetime = 1.0
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("2_c5lhv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_om2mk")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.677491, 0.677491)
+shape = SubResource("RectangleShape2D_tg1bm")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
