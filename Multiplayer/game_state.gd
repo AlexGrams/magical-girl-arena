@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -477,8 +477,9 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 
 # Add gold to all players.
 @rpc("any_peer", "call_local")
-func collect_gold() -> void:
+func collect_gold(sound_position: Vector2) -> void:
 	_gold_this_game += 1
+	AudioManager.create_audio_at_location(sound_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_GOLD_PICKUP)
 
 
 ## Calculates and updates how much experience is required for the next level accounting for
