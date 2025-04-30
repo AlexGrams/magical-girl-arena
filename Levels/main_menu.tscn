@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=26 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -10,15 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="4_wqh84"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
-[ext_resource type="Texture2D" uid="uid://bsylv50x67ts0" path="res://SweetIcon.png" id="5_7g77h"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="5_76cyy"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="7_mn14l"]
 [ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="9_m305s"]
-[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="11_27tbn"]
 [ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
-[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_ff267"]
+[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="15_e8gbh"]
+[ext_resource type="Texture2D" uid="uid://cwpwmd20e76c2" path="res://Sprites/UI/CharacterIcons/SweetIcon.png" id="16_c71yi"]
+[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="18_651ly"]
+[ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
 
 [sub_resource type="Curve" id="Curve_28jnp"]
 _data = [Vector2(0, 0), 0.0, 3.49332, 0, 0, Vector2(0.496815, 1), 0.0, 0.0, 0, 0, Vector2(0.541401, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0737917, 0.0, 0, 0]
@@ -41,7 +42,7 @@ viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_button", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,10 +58,12 @@ players_holder = NodePath("Lobby/PlayersHolder")
 character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
 information_name = NodePath("Lobby/CharacterInformationContainer/Name")
 information_description = NodePath("Lobby/CharacterInformationContainer/Description")
-information_powerup_texture = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/PowerupImage")
-information_powerup_description = NodePath("Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer/PowerupDescription")
-information_ult_texture = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/UltimateImage")
-information_ult_description = NodePath("Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer/UltimateDescription")
+information_powerup_label = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer/Signature_Label")
+information_powerup_texture = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/Powerup_Icon/Powerup_Image")
+information_powerup_description = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer/PowerupDescription")
+information_ult_label = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer/Ultimate_Label")
+information_ult_texture = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Icon/Ultimate_Image")
+information_ult_description = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer/UltimateDescription")
 start_game_button = NodePath("Lobby/StartGame_Label/StartGameButton")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
@@ -394,12 +397,12 @@ theme_override_constants/separation = 10
 [node name="CharacterSelectButton" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
 layout_mode = 2
 button_pressed = true
-image = ExtResource("11_27tbn")
+image = ExtResource("15_e8gbh")
 
 [node name="CharacterSelectButton2" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
 layout_mode = 2
 character = 1
-image = ExtResource("5_7g77h")
+image = ExtResource("16_c71yi")
 
 [node name="CharacterInformation_Panel" type="TextureRect" parent="Lobby"]
 layout_mode = 0
@@ -414,120 +417,173 @@ layout_mode = 0
 offset_left = 58.0
 offset_top = 291.0
 offset_right = 497.0
-offset_bottom = 878.0
+offset_bottom = 596.0
 
-[node name="Name" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
+[node name="Name" type="Label" parent="Lobby/CharacterInformationContainer"]
+custom_minimum_size = Vector2(439, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("14_kechk")
-theme_override_font_sizes/normal_font_size = 48
-bbcode_enabled = true
-text = "[center]Character Name[/center]"
-fit_content = true
-scroll_active = false
+theme_override_font_sizes/font_size = 48
+text = "Character Name"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Description" type="RichTextLabel" parent="Lobby/CharacterInformationContainer"]
+[node name="Description" type="Label" parent="Lobby/CharacterInformationContainer"]
+custom_minimum_size = Vector2(439, 0)
 layout_mode = 2
-theme = ExtResource("15_ff267")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("18_651ly")
+theme_override_font_sizes/font_size = 24
 text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
-fit_content = true
-scroll_active = false
+autowrap_mode = 3
 
 [node name="HSeparator2" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="PowerupInformationContainer" type="HBoxContainer" parent="Lobby/CharacterInformationContainer"]
+[node name="CharacterInformationContainer2" type="VBoxContainer" parent="Lobby"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 610.0
+offset_right = 508.0
+offset_bottom = 905.0
+
+[node name="PowerupInformationContainer" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/separation = 15
 
-[node name="PowerupImage" type="TextureRect" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+[node name="Powerup_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
+texture = ExtResource("19_7guse")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Powerup_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/Powerup_Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer"]
+[node name="Signature_Label" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer"]
+custom_minimum_size = Vector2(335, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme = ExtResource("14_kechk")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/font_size = 24
 text = "Signature:"
+autowrap_mode = 3
 
-[node name="PowerupDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/PowerupInformationContainer/VBoxContainer"]
+[node name="PowerupDescription" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer"]
+custom_minimum_size = Vector2(335, 0)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("15_ff267")
-theme_override_font_sizes/normal_font_size = 20
+size_flags_vertical = 0
+theme = ExtResource("18_651ly")
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
-fit_content = true
+autowrap_mode = 3
 
-[node name="HSeparator3" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Lobby/CharacterInformationContainer2"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="UltimateInformation" type="HBoxContainer" parent="Lobby/CharacterInformationContainer"]
+[node name="UltimateInformation" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/separation = 15
 
-[node name="UltimateImage" type="TextureRect" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+[node name="Ultimate_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
+clip_children = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
+texture = ExtResource("19_7guse")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ultimate_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer/UltimateInformation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer"]
+[node name="Ultimate_Label" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer"]
+custom_minimum_size = Vector2(335, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("14_kechk")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/font_size = 24
 text = "Ultimate:"
+autowrap_mode = 3
 
-[node name="UltimateDescription" type="RichTextLabel" parent="Lobby/CharacterInformationContainer/UltimateInformation/VBoxContainer"]
+[node name="UltimateDescription" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer"]
+custom_minimum_size = Vector2(335, 0)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("15_ff267")
-theme_override_font_sizes/normal_font_size = 20
+theme = ExtResource("18_651ly")
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
-fit_content = true
+autowrap_mode = 3
 
 [node name="StartGame_Label" type="Label" parent="Lobby"]
 layout_mode = 0
-offset_left = 1337.0
-offset_top = 961.0
-offset_right = 1882.0
-offset_bottom = 1065.0
+offset_left = 1321.0
+offset_top = 949.0
+offset_right = 1866.0
+offset_bottom = 1053.0
+pivot_offset = Vector2(272, 52)
 theme = ExtResource("4_wqh84")
 theme_override_font_sizes/font_size = 90
 text = "Start Game"
 metadata/_edit_group_ = true
 
-[node name="StartGameButton" type="Button" parent="Lobby/StartGame_Label"]
+[node name="StartGameButton" type="Button" parent="Lobby/StartGame_Label" node_paths=PackedStringArray("label")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -539,8 +595,10 @@ offset_top = -104.0
 offset_right = 272.5
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(272, 52)
 theme_override_font_sizes/font_size = 90
-text = "Start Game"
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="LeaveLobby_Label" type="Label" parent="Lobby"]
 layout_mode = 0
@@ -556,10 +614,9 @@ metadata/_edit_group_ = true
 
 [node name="LeaveButton" type="Button" parent="Lobby/LeaveLobby_Label" node_paths=PackedStringArray("label")]
 layout_mode = 1
-offset_right = 318.0
-offset_bottom = 56.0
+offset_right = 331.0
+offset_bottom = 58.0
 theme_override_font_sizes/font_size = 50
-text = "Leave Lobby"
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
@@ -583,6 +640,8 @@ label = NodePath("..")
 [connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
+[connection signal="mouse_entered" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="_on_leave_button_down"]
 [connection signal="mouse_entered" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]

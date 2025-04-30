@@ -7,6 +7,7 @@ extends Button
 @export var selected_border_color: Color
 @export var unselected_color: Color
 @export var selected_color: Color
+
 var original_scale: Vector2
 
 # Called when the node enters the scene tree for the first time.
@@ -30,10 +31,16 @@ func set_to_unselected():
 	$CharacterContainer.self_modulate = unselected_color
 
 func _on_mouse_entered() -> void:
-	$CharacterContainer.scale = original_scale * 1.1
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property($CharacterContainer, "scale", original_scale * 1.10, 0.1)
 
 func _on_mouse_exited() -> void:
-	$CharacterContainer.scale = original_scale
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property($CharacterContainer, "scale", original_scale, 0.1)
 
 func _on_toggled(toggled_on: bool) -> void:
 	if toggled_on:

@@ -13,6 +13,8 @@ extends Resource
 @export var base_powerup_texture: Texture2D
 ## The name of this character's ultimate ability.
 @export var ult_name: String
+## Description of how this character's ultimate works.
+@export var ult_description: String
 ## Image representing the ultimate ability.
 @export var ult_texture: Texture2D
 ## Path to the .json file for this character's GDCubism sprite. 

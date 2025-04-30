@@ -14,11 +14,9 @@ func _on_mouse_entered():
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.tween_property(label, "scale", original_scale * 1.10, 0.1)
-	#label.scale = original_scale * 1.10
 
 func _on_mouse_exited():
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.tween_property(label, "scale", original_scale, 0.1)
-	#label.scale = original_scale

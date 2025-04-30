@@ -15,8 +15,8 @@ func _ready() -> void:
 	else:
 		original_scale = texture_box.scale
 
-func set_host_name(name:String):
-	username_label.text = name
+func set_host_name(host_name:String):
+	username_label.text = host_name
 
 func set_playercount(count:String):
 	playercount_label.text = count + "/" + str(GameState.MAX_PLAYERS) + " players"

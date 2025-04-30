@@ -17,12 +17,14 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
 ## Components for displaying selected character information on the Lobby screen.
-@export var information_name: RichTextLabel
-@export var information_description: RichTextLabel
+@export var information_name: Label
+@export var information_description: Label
+@export var information_powerup_label: Label
 @export var information_powerup_texture: TextureRect
-@export var information_powerup_description: RichTextLabel
+@export var information_powerup_description: Label
+@export var information_ult_label: Label
 @export var information_ult_texture: TextureRect
-@export var information_ult_description: RichTextLabel
+@export var information_ult_description: Label
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_button: Button
 ## Character that is visible on the main menu and their nametag.
@@ -223,12 +225,14 @@ func update_character_description() -> void:
 	
 	var data: CharacterData = _get_character_data(character)
 	
-	information_name.text = "[center]" + data.name + "[/center]"
+	information_name.text = data.name
 	information_description.text = data.description
 	information_powerup_texture.texture = data.base_powerup_texture
-	information_powerup_description.text = data.base_powerup_name
+	information_powerup_label.text = "Signature: " + data.base_powerup_name
+	information_powerup_description.text = load(data.base_powerup_data).upgrade_description
 	information_ult_texture.texture = data.ult_texture
-	information_ult_description.text = data.ult_name
+	information_ult_label.text = "Ultimate: " + data.ult_name
+	information_ult_description.text = data.ult_description
 
 
 ## Switches from the lobby screen to the main menu
