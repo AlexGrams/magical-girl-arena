@@ -41,7 +41,7 @@ viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button", "main_menu_character_sprite", "main_menu_character_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_texture", "information_powerup_description", "information_ult_texture", "information_ult_description", "start_game_button", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,6 +64,7 @@ information_ult_description = NodePath("Lobby/CharacterInformationContainer/Ulti
 start_game_button = NodePath("Lobby/StartGame_Label/StartGameButton")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
+main_menu_button_container = NodePath("Main/VBoxContainer")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1

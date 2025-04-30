@@ -28,6 +28,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## Character that is visible on the main menu and their nametag.
 @export var main_menu_character_sprite: CharacterAnimatedSprite2D
 @export var main_menu_character_label: Label
+## Container for buttons on main menu.
+@export var main_menu_button_container: VBoxContainer
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
@@ -58,6 +60,11 @@ func _ready() -> void:
 			_on_character_select_button_pressed(button)
 		)
 	
+	# Setting pivot offset for properly scaling on mouse hover.
+	# This is done here because it cannot be set in the inspector
+	for label in main_menu_button_container.get_children():
+		label.pivot_offset = Vector2(0, label.size.y / 2)
+
 	_main_menu_original_pos = main_menu.position
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position

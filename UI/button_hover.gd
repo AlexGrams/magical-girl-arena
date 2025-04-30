@@ -10,7 +10,15 @@ func _ready() -> void:
 		push_warning("Label has not been set")
 
 func _on_mouse_entered():
-	label.scale = original_scale * 1.10
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(label, "scale", original_scale * 1.10, 0.1)
+	#label.scale = original_scale * 1.10
 
 func _on_mouse_exited():
-	label.scale = original_scale
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(label, "scale", original_scale, 0.1)
+	#label.scale = original_scale
