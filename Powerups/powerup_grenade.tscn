@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cokwnrccibmw5"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_grenade.gd" id="1_y4psd"]
+
+[node name="PowerupGrenade" type="Node2D"]
+self_modulate = Color(1, 1, 0, 1)
+script = ExtResource("1_y4psd")
+bullet_scene = "uid://b06fii00diw54"
+damage_levels = Array[float]([25.0, 28.0, 30.0, 33.0, 37.0])
+signature_damage = 74.0
+powerup_name = "Scythe"
