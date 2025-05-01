@@ -148,6 +148,10 @@ func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
 
 # This player is voting to retry the game.
 func _on_retry_button_toggled(toggled_on: bool) -> void:
+	# TODO: Send over the multiplayer unique ID of the local client.
+	# Make icons for each character, mapped to each unique ID
+	# After function is called, map unique ID parameter to their corresponding icon
+	# and turn it on or off.
 	_update_retry_votes.rpc(toggled_on)
 
 
