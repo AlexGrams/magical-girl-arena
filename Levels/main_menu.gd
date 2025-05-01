@@ -152,8 +152,7 @@ func setup_lobby_screen() -> void:
 					lobby_button.pressed.connect(
 						func():
 							# Join the lobby
-							lobby_list.hide()
-							lobby.show()
+							_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 							start_game_button.hide()
 							
 							GameState.join_lobby(
