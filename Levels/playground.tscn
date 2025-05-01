@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=121 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -58,6 +58,9 @@
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
 [ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="55_sk2pv"]
+[ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12676,9 +12679,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -320.0
-offset_top = 48.0
+offset_top = 183.0
 offset_right = 320.0
-offset_bottom = 176.0
+offset_bottom = 311.0
 grow_horizontal = 2
 theme = ExtResource("34_po6dc")
 theme_override_font_sizes/font_size = 90
@@ -12694,18 +12697,22 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -159.0
-offset_top = -264.0
+offset_top = -345.0
 offset_right = 159.0
-offset_bottom = -81.0
+offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 7
+theme_override_constants/separation = 5
 
-[node name="RetryButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+[node name="RetryButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
+theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Retry"
+script = ExtResource("55_sk2pv")
+label = NodePath("Box")
 
 [node name="RetryVotesContainer" type="HBoxContainer" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton"]
 layout_mode = 1
@@ -12733,17 +12740,118 @@ layout_mode = 2
 [node name="PlayerReadyIndicator4" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer" instance=ExtResource("6_blcs8")]
 layout_mode = 2
 
-[node name="LobbyButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+[node name="Box" type="TextureRect" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -40.0
+offset_right = 250.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 42)
+texture = ExtResource("56_1uxvu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("35_8cpdn")
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LobbyButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
+theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
 text = "Back to Lobby
 "
+script = ExtResource("55_sk2pv")
+label = NodePath("Box")
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer"]
+[node name="Box" type="TextureRect" parent="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -40.0
+offset_right = 250.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 42)
+texture = ExtResource("56_1uxvu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("35_8cpdn")
+theme_override_font_sizes/font_size = 32
+text = "Return to Lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/GameOverScreen/ButtonContainer" node_paths=PackedStringArray("label")]
+custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
+theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
 text = "Quit to Main Menu
 "
+script = ExtResource("55_sk2pv")
+label = NodePath("Box")
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -40.0
+offset_right = 250.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 42)
+texture = ExtResource("56_1uxvu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("35_8cpdn")
+theme_override_font_sizes/font_size = 32
+text = "Quit to Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Timer" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -12829,8 +12937,14 @@ scale = Vector2(240, 240)
 position = Vector2(0.0333333, -0.183333)
 debug_color = Color(0, 0.435294, 0.403922, 0)
 
+[connection signal="mouse_entered" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_exited"]
 [connection signal="toggled" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer" method="_on_retry_button_toggled"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer" method="_on_lobby_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" to="CanvasLayer/GameOverScreen/ButtonContainer/LobbyButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer" method="_on_quit_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" to="CanvasLayer/GameOverScreen/ButtonContainer/QuitButton" method="_on_mouse_exited"]
 
 [editable path="LootBoxSpawner"]
