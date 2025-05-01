@@ -31,6 +31,7 @@ func set_to_unselected():
 	$CharacterContainer.self_modulate = unselected_color
 
 func _on_mouse_entered() -> void:
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER)
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)
@@ -47,3 +48,6 @@ func _on_toggled(toggled_on: bool) -> void:
 		set_to_selected()
 	else:
 		set_to_unselected()
+
+func _on_button_down() -> void:
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_PRESS)
