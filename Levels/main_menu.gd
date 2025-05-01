@@ -47,10 +47,21 @@ func _ready() -> void:
 	GameState.lobby_closed.connect(
 		func():
 			# Does the same thing as leaving the lobby by clicking the "Leave" button.
-			lobby.hide()
-			lobby_list.show()
+			_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 			request_lobby_list()
 	)
+	
+	# Exit the Lobby screen automatially if we attempt to join an invalid lobby.
+	if GameState.USING_GODOT_STEAM:
+		Steam.lobby_data_update.connect(
+			func(success: int, lobby_id: int, member_id: int):
+				if success == 0:
+					# Was not successful in getting new lobby data. Presumably this only happens
+					# when joining an invalid lobby, so return to the lobby select screen.
+					GameState.disconnect_local_player()
+					_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
+					request_lobby_list()
+		)
 	
 	for container in players_holder.get_children():
 		_player_containers.append(container)
@@ -151,9 +162,16 @@ func setup_lobby_screen() -> void:
 					lobbies_list_container.add_child(lobby_button)
 					lobby_button.pressed.connect(
 						func():
+							# First, see if the lobby even exists anymore.
+							# If not, don't join and refresh the lobby list.
+							var lobby_data_request_successful: bool = Steam.requestLobbyData(lobby_id)
+							if not lobby_data_request_successful:
+								push_error("Unable to send request for lobby data to the Steam servers.")
+								request_lobby_list()
+								return
+							
 							# Join the lobby
-							lobby_list.hide()
-							lobby.show()
+							_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 							start_game_button.hide()
 							
 							GameState.join_lobby(
@@ -211,6 +229,11 @@ func refresh_player_sprite(player_id: int) -> void:
 
 # Changes the client's selected character.
 func _on_character_select_button_pressed(button: CharacterSelectButton) -> void:
+	# TODO: Fix this or whatever
+	print(multiplayer.get_unique_id())
+	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
+		print("Null")
+		return
 	GameState.set_character.rpc(multiplayer.get_unique_id(), button.character)
 	refresh_player_sprite.rpc(multiplayer.get_unique_id())
 	update_character_description()
@@ -250,6 +273,7 @@ func _switch_screen_animation(from_screen: Control, to_screen: Control, to_scree
 	tween.tween_property(to_screen, "position", to_screen_original_pos, 0.25)
 	await tween.tween_property(from_screen, "position", Vector2(-(from_screen.size.x), from_screen.position.y), 0.25).finished
 	from_screen.hide()
+	to_screen.show()
 
 func _get_character_data(character: Constants.Character) -> CharacterData:
 	var data: CharacterData = null

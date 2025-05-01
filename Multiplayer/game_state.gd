@@ -334,11 +334,17 @@ func lobby_host_left():
 	lobby_closed.emit()
 
 
-# Stops the connection between this player and the server if we are a client, or between
-# all clients if we are the server.
+## Stops the connection between this player and the server if we are a client, or between
+## all clients if we are the server.
 func disconnect_local_player():
-	if lobby_id != 0:
-		# Close session with all users
+	# Most functionality is only run when using Steam connection.
+	# TODO: Something's bugging when host leaves the game
+	# Other players aren't disconnect, or their UI isn't updated/transitioned to show lobby list.
+	if USING_GODOT_STEAM and lobby_id == 0:
+		return
+	
+	# Close session with all Steam users
+	if USING_GODOT_STEAM:
 		for player_index: int in range(Steam.getNumLobbyMembers(lobby_id)):
 			# Make sure this isn't your Steam ID
 			
@@ -348,32 +354,34 @@ func disconnect_local_player():
 			if player_steam_id != local_player_steam_id:
 				# Close the P2P session
 				Steam.closeP2PSessionWithUser(player_steam_id)
+	
+	# If this client was the host, also disconnect the other players if they exist.
+	if (multiplayer.has_multiplayer_peer() 
+		and multiplayer.get_unique_id() == 1
+		and len(players) > 1
+	):
+		for player: int in players:
+			if player != 1:
+				lobby_host_left.rpc_id(player)
 		
-		# If this client was the host, also disconnect the other players if they exist.
-		if (multiplayer.has_multiplayer_peer() 
-			and multiplayer.get_unique_id() == 1
-			and len(players) > 1
-		):
-			for player: int in players:
-				if player != 1:
-					lobby_host_left.rpc_id(player)
-			
-			# Sort of a hack. We need to ensure that the RPCs are sent to the other clients
-			# before closing the connection. To do so, until all the other clients have left.
-			var timeout_func = func():
-				await get_tree().create_timer(HOST_CLOSE_RPC_TIMEOUT).timeout
-				_no_clients_connected_or_timeout.emit()
-			timeout_func.call()
-			
-			await _no_clients_connected_or_timeout
+		# Sort of a hack. We need to ensure that the RPCs are sent to the other clients
+		# before closing the connection. To do so, until all the other clients have left.
+		var timeout_func = func():
+			await get_tree().create_timer(HOST_CLOSE_RPC_TIMEOUT).timeout
+			_no_clients_connected_or_timeout.emit()
+		timeout_func.call()
 		
-		# Leave the lobby and reset variables.
+		await _no_clients_connected_or_timeout
+	
+	# Leave the lobby and reset variables.
+	if USING_GODOT_STEAM:
 		Steam.leaveLobby(lobby_id)
 		lobby_id = 0
-		players.clear()
 		peer.close()
 		peer = null
-		multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	
+	players.clear()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 
 
 # Called when a new player enters the lobby
