@@ -47,8 +47,7 @@ func _ready() -> void:
 	GameState.lobby_closed.connect(
 		func():
 			# Does the same thing as leaving the lobby by clicking the "Leave" button.
-			lobby.hide()
-			lobby_list.show()
+			_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 			request_lobby_list()
 	)
 	
