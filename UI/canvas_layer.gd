@@ -216,13 +216,12 @@ func set_up_ultimate_ui(character_data: CharacterData, ultimate: Ability) -> voi
 	_ultimate_texture.texture = character_data.ult_texture
 	# Update progress bar fill percent and visibility.
 	ultimate.cooldown_time_updated.connect(func(cooldown_time_remaining_fraction):
-		_ultimate_progress_bar.value = cooldown_time_remaining_fraction
+		_ultimate_progress_bar.value = (1 - cooldown_time_remaining_fraction)
 		if cooldown_time_remaining_fraction > 0:
-			_ultimate_progress_bar.show()
+			_ultimate_texture.modulate = Color.DIM_GRAY
 		else:
-			_ultimate_progress_bar.hide()
+			_ultimate_texture.modulate = Color.WHITE
 	)
-	_ultimate_progress_bar.hide()
 
 
 # TODO: Maybe make this event-based rather than checking every frame. Would then need a way to

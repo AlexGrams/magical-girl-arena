@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=118 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -56,9 +56,8 @@
 [ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="38_u4hku"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
-[ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
-[ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 [ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
+[ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12143,6 +12142,7 @@ speed_scale = 0.1
 position = Vector2(915, 983)
 
 [node name="ColorRect" type="ColorRect" parent="PlayerSpawnPoints/PlayerSpawnPoint1"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(1, 0.407246, 0.338652, 1)
@@ -12151,6 +12151,7 @@ color = Color(1, 0.407246, 0.338652, 1)
 position = Vector2(1169, 985)
 
 [node name="ColorRect" type="ColorRect" parent="PlayerSpawnPoints/PlayerSpawnPoint2"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(5.77569e-07, 0.720544, 0.427596, 1)
@@ -12364,7 +12365,7 @@ size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_i8jyi")
 theme_override_styles/fill = SubResource("StyleBoxTexture_obhx2")
 max_value = 1.0
-value = 0.79
+value = 1.0
 fill_mode = 3
 show_percentage = false
 
@@ -12420,7 +12421,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_gsdoh")
 expand_mode = 1
 stretch_mode = 5
 
@@ -12465,7 +12465,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_gsdoh")
 expand_mode = 1
 stretch_mode = 5
 
@@ -12510,7 +12509,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_gsdoh")
 expand_mode = 1
 stretch_mode = 5
 
@@ -12555,7 +12553,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_gsdoh")
 expand_mode = 1
 stretch_mode = 5
 
@@ -12600,7 +12597,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_gsdoh")
 expand_mode = 1
 stretch_mode = 5
 
