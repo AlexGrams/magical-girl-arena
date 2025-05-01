@@ -39,6 +39,20 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 		push_warning("SFX type not found: ", sfx_type)
 
 
-func create_audio():
-	pass
+func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE):
+	if sfx_type in sound_effect_dict:
+		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]
+		if !sfx.has_reached_limit():
+			sfx.update_audio_count(1)
+			var new_audio = AudioStreamPlayer.new()
+			add_child(new_audio)
+			
+			new_audio.stream = sfx.sound_effect
+			new_audio.volume_db = sfx.volume
+			new_audio.pitch_scale = sfx.pitch_scale
+			new_audio.pitch_scale += randf_range(-sfx.pitch_randomness, sfx.pitch_randomness)
+			new_audio.finished.connect(sfx.on_audio_finished)
+			new_audio.finished.connect(new_audio.queue_free)
+			
+			new_audio.play()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=20 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://bdb7w4mdyqvj3" path="res://Audio/SFX/Ultimates/Sweet_Ultimate.mp3" id="5_s3017"]
 [ext_resource type="AudioStream" uid="uid://dck2jpcdmgnk" path="res://Audio/SFX/Powerups/Card_Sound.mp3" id="6_axp6t"]
 [ext_resource type="AudioStream" uid="uid://d104a52tavg06" path="res://Audio/SFX/Enemy_Hit.wav" id="8_51y8p"]
+[ext_resource type="AudioStream" uid="uid://ljtf8ydvbjyq" path="res://Audio/SFX/On_Button_Hover_3.mp3" id="9_02tjj"]
+[ext_resource type="AudioStream" uid="uid://day7n86wpjy8f" path="res://Audio/SFX/On_Button_Pressed_2.mp3" id="10_pkguu"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 script = ExtResource("2_kdvej")
@@ -72,8 +74,26 @@ volume = -10
 pitch_scale = 1.0
 pitch_randomness = 0.0
 
+[sub_resource type="Resource" id="Resource_o6ktl"]
+script = ExtResource("2_kdvej")
+limit = 3
+type = 22
+sound_effect = ExtResource("9_02tjj")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
+[sub_resource type="Resource" id="Resource_e80ne"]
+script = ExtResource("2_kdvej")
+limit = 2
+type = 23
+sound_effect = ExtResource("10_pkguu")
+volume = -10
+pitch_scale = 2.0
+pitch_randomness = 0.0
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
