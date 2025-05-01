@@ -46,8 +46,8 @@ func _ready() -> void:
 		_pointers.append(pointer)
 		
 	for powerup_panel: Control in _powerup_container.get_children():
-		_powerup_textures.append(powerup_panel.find_child("TextureRect"))
-		_powerup_level_text.append(powerup_panel.find_child("LevelText"))
+		_powerup_textures.append(powerup_panel.find_child("Powerup_Image"))
+		_powerup_level_text.append(powerup_panel.find_child("Powerup_Level_Label"))
 		_powerup_level_text[-1].text = ""
 	
 	$ExperienceBar.value = 0.0

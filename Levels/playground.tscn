@@ -46,14 +46,19 @@
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
-[ext_resource type="PackedScene" uid="uid://brcxbafnm32jx" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
+[ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
+[ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="36_xpuqi"]
+[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="37_4s6gj"]
+[ext_resource type="Texture2D" uid="uid://bi2qfpm07ari0" path="res://Sprites/UI/UltimateCircle.png" id="37_salih"]
+[ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="38_u4hku"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
 [ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -621,19 +626,9 @@ bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wr3nc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0sha0"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whxxi"]
-bg_color = Color(1, 1, 1, 0.294118)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_moeyb"]
-bg_color = Color(1, 1, 1, 0.505882)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8jyi"]
+texture = ExtResource("37_salih")
+modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer")]
 script = ExtResource("1_s3iet")
@@ -12189,8 +12184,8 @@ _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/Re
 _timer_text = NodePath("Timer")
 _pointer_parent = NodePath("PlayerPointers")
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
-_ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/UltimateTextureRect")
-_ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/UltimateProgressBar")
+_ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar/UltimateTextureRect")
+_ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar")
 _stat_level_container = NodePath("AbilitiesAndStatsContainer/Stats")
 _temp_health_control = NodePath("TempHealthBar")
 _temp_health_text = NodePath("TempHealthBar/TempHealthText")
@@ -12346,236 +12341,287 @@ offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="UltimateCooldown" type="AspectRatioContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
+custom_minimum_size = Vector2(97, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown"]
+clip_children = 1
+custom_minimum_size = Vector2(97, 97)
+layout_mode = 2
+texture = ExtResource("37_salih")
+
+[node name="UltimateProgressBar" type="ProgressBar" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxTexture_i8jyi")
+theme_override_styles/fill = SubResource("StyleBoxTexture_obhx2")
+max_value = 1.0
+value = 0.79
+fill_mode = 3
+show_percentage = false
+
+[node name="UltimateTextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_dibxh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateTextureRect2" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar"]
+clip_children = 2
+layout_mode = 2
+offset_right = 97.0
+offset_bottom = 97.0
+texture = ExtResource("38_u4hku")
+expand_mode = 1
+
 [node name="Abilities" type="HBoxContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Panel" type="Panel" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+[node name="Powerup_Icon" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel"]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_gsdoh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="LevelText" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel"]
-layout_direction = 2
+[node name="Powerup_Level_Label" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -41.0
-offset_right = -9.0
+offset_left = -30.0
+offset_top = -47.0
+offset_right = -15.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("37_4s6gj")
+theme_override_colors/font_shadow_color = Color(0.231373, 0, 0, 0.964706)
 theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
+text = "1"
+horizontal_alignment = 1
 
-[node name="Panel2" type="Panel" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+[node name="Powerup_Icon2" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel2"]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_gsdoh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="LevelText" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel2"]
-layout_direction = 2
+[node name="Powerup_Level_Label" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon2"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -41.0
-offset_right = -9.0
+offset_left = -30.0
+offset_top = -47.0
+offset_right = -15.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("37_4s6gj")
+theme_override_colors/font_shadow_color = Color(0.231373, 0, 0, 0.964706)
 theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
+text = "1"
+horizontal_alignment = 1
 
-[node name="Panel3" type="Panel" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+[node name="Powerup_Icon3" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel3"]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_gsdoh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="LevelText" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel3"]
-layout_direction = 2
+[node name="Powerup_Level_Label" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon3"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -41.0
-offset_right = -9.0
+offset_left = -30.0
+offset_top = -47.0
+offset_right = -15.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("37_4s6gj")
+theme_override_colors/font_shadow_color = Color(0.231373, 0, 0, 0.964706)
 theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
+text = "1"
+horizontal_alignment = 1
 
-[node name="Panel4" type="Panel" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+[node name="Powerup_Icon4" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel4"]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_gsdoh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="LevelText" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel4"]
-layout_direction = 2
+[node name="Powerup_Level_Label" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon4"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -41.0
-offset_right = -9.0
+offset_left = -30.0
+offset_top = -47.0
+offset_right = -15.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("37_4s6gj")
+theme_override_colors/font_shadow_color = Color(0.231373, 0, 0, 0.964706)
 theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
+text = "1"
+horizontal_alignment = 1
 
-[node name="Panel5" type="Panel" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+[node name="Powerup_Icon5" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_0sha0")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel5"]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon5"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_gsdoh")
 expand_mode = 1
+stretch_mode = 5
 
-[node name="LevelText" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Panel5"]
-layout_direction = 2
+[node name="Powerup_Level_Label" type="Label" parent="CanvasLayer/AbilitiesAndStatsContainer/Abilities/Powerup_Icon5"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -41.0
-offset_right = -9.0
+offset_left = -30.0
+offset_top = -47.0
+offset_right = -15.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
+theme = ExtResource("37_4s6gj")
+theme_override_colors/font_shadow_color = Color(0.231373, 0, 0, 0.964706)
 theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="UltimateCooldown" type="AspectRatioContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="UltimateTextureRect" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown"]
-layout_mode = 2
-texture = ExtResource("26_dibxh")
-expand_mode = 1
-
-[node name="UltimateProgressBar" type="ProgressBar" parent="CanvasLayer/AbilitiesAndStatsContainer/UltimateCooldown"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_whxxi")
-theme_override_styles/fill = SubResource("StyleBoxFlat_moeyb")
-max_value = 1.0
-value = 0.79
-fill_mode = 3
-show_percentage = false
+text = "1"
+horizontal_alignment = 1
 
 [node name="Stats" type="HBoxContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
 layout_mode = 2
