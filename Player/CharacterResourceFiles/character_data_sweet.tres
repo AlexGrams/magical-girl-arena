@@ -15,3 +15,4 @@ ult_description = "Sweet grants herself and nearby allies bonus HP. She throws t
 ult_texture = ExtResource("1_dg116")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
 ultimate_ability = "res://Abilities/ability_ult_sweet.tscn"
+icon_uid = "uid://cwpwmd20e76c2"
