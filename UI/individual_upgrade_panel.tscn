@@ -1,56 +1,82 @@
-[gd_scene load_steps=4 format=3 uid="uid://14cc171vx3nh"]
+[gd_scene load_steps=11 format=3 uid="uid://14cc171vx3nh"]
 
 [ext_resource type="Script" path="res://UI/individual_upgrade_panel.gd" id="1_if0al"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_ux83s"]
 [ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_7p8sv"]
+[ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="3_5aaq8"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_e82gu"]
+[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="5_nxuy7"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="7_s8mrw"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="8_51mjh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckqs1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_arx2e"]
+texture = ExtResource("3_5aaq8")
 
 [node name="IndividualUpgradePanel" type="Panel"]
+custom_minimum_size = Vector2(238, 348)
 offset_right = 238.0
 offset_bottom = 348.0
-size_flags_horizontal = 3
+size_flags_vertical = 9
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ckqs1")
 script = ExtResource("1_if0al")
 stat_upgrade_texture = ExtResource("2_7p8sv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-z_index = 3
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.5
-offset_top = -139.5
-offset_right = 105.5
-offset_bottom = 139.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Powerup_Name"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("1_ux83s")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Label2" type="Label" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-text = "Description of powerup and its effects (or, description of upgraded stats)"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Button" type="Button" parent="."]
+[node name="Box" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(119, 174)
+theme_override_styles/panel = SubResource("StyleBoxTexture_arx2e")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Box"]
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Name_Label" type="Label" parent="Box/VBoxContainer"]
+custom_minimum_size = Vector2(0, 19)
+layout_mode = 2
+theme = ExtResource("3_e82gu")
+text = "Powerup_Name"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Box/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_ux83s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Box/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 15
+
+[node name="Description_Label" type="Label" parent="Box/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("5_nxuy7")
+text = "Description of powerup and its effects (or, description of upgraded stats)"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_s8mrw")
+script = ExtResource("8_51mjh")
+label = NodePath("../Box")
+
+[connection signal="mouse_entered" from="Button" to="Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="Button" method="_on_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

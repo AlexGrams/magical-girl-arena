@@ -12329,6 +12329,11 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
+process_mode = 2
+visible = false
+all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve")])
+
 [node name="AbilitiesAndStatsContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -12336,7 +12341,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -378.0
-offset_top = -125.0
+offset_top = -134.0
 offset_right = 378.0
 offset_bottom = -34.0
 grow_horizontal = 2
@@ -12644,11 +12649,6 @@ size_flags_vertical = 8
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-
-[node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
-process_mode = 2
-visible = false
-all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve")])
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
 visible = false

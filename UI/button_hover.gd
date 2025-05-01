@@ -1,6 +1,6 @@
 extends Button
 
-@export var label:Label
+@export var label:Control
 var original_scale:Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

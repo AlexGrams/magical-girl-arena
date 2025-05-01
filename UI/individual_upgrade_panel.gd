@@ -1,5 +1,5 @@
 class_name UpgradePanel
-extends Panel
+extends Control
 
 
 ## What shows up when upgrading a stat.
@@ -46,9 +46,9 @@ func set_upgrade(upgrade) -> void:
 
 ## Set up the text and image that appears on this button depending on what it upgrades. 
 func _set_display(upgrade_name: String, texture: Texture2D, description: String):
-	$VBoxContainer/Label.text = upgrade_name
-	$VBoxContainer/TextureRect.texture = texture
-	$VBoxContainer/Label2.text = description
+	$Box/VBoxContainer/Name_Label.text = upgrade_name
+	$Box/VBoxContainer/TextureRect.texture = texture
+	$Box/VBoxContainer/MarginContainer/Description_Label.text = description
 
 
 func _on_button_pressed() -> void:

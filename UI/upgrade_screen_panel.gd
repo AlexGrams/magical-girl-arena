@@ -7,6 +7,10 @@ extends Panel
 @export var upgrade_panels_holder: Control = null
 ## Button for rerolling the provided upgrades.
 @export var reroll_button: Button = null
+## Text for reroll button
+@export var reroll_label: Label = null
+## Box visual for the reroll button
+@export var reroll_texture: TextureRect = null
 ## Window that shows up saying how many players are still choosing upgrades.
 @export var players_selecting_upgrades_window: Control = null
 ## Parent of the PlayReadyIndicators
@@ -89,11 +93,13 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	
 	# Update the text on the Reroll button
 	var rerolls = player_character.get_rerolls()
-	reroll_button.text = "Reroll (" + str(rerolls) + " remaining)"
+	reroll_label.text = "Reroll (" + str(rerolls) + " remaining)"
 	if rerolls <= 0:
 		reroll_button.disabled = true
+		reroll_texture.modulate = Color.DIM_GRAY
 	else:
 		reroll_button.disabled = false
+		reroll_texture.modulate = Color.WHITE
 
 
 # Display a random selection of upgrades for the player to choose from.
