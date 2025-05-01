@@ -21,3 +21,5 @@ extends Resource
 @export var model_file_path: String
 ## Path to the .tscn file for this character's ultimate ability.
 @export var ultimate_ability: String
+## UID of the small icon image representing this character. 
+@export var icon_uid: String
