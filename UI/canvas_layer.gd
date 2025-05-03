@@ -162,7 +162,7 @@ func _on_retry_button_toggled(toggled_on: bool) -> void:
 	# Make icons for each character, mapped to each unique ID
 	# After function is called, map unique ID parameter to their corresponding icon
 	# and turn it on or off.
-	_update_retry_votes.rpc(toggled_on)
+	_update_retry_votes.rpc(toggled_on, multiplayer.get_unique_id())
 
 
 # If any person goes back to the lobby, then all players are taken back.
@@ -182,7 +182,7 @@ func _on_quit_button_down() -> void:
 # Update count of how many players want to restart the game. 
 # Reloads as soon as everyone votes to start again.
 @rpc("any_peer", "call_local")
-func _update_retry_votes(voting_retry: bool) -> void:
+func _update_retry_votes(voting_retry: bool, id: int) -> void:
 	if voting_retry:
 		_votes_to_retry += 1
 		if multiplayer.get_unique_id() == 1 and _votes_to_retry >= GameState.connected_players:
@@ -198,16 +198,9 @@ func _update_retry_votes(voting_retry: bool) -> void:
 		_votes_to_retry = max(0, _votes_to_retry - 1)
 	
 	# Update the indicators to display how many players want to retry.
-	var i = 0
-	while i < _votes_to_retry:
-		_retry_indicators[i].set_is_ready(true)
-		i += 1
-	while i < GameState.connected_players:
-		_retry_indicators[i].set_is_ready(false)
-		i += 1
-	while i < GameState.MAX_PLAYERS:
+	_retry_indicators[_retry_indicator_index[id]].set_is_ready(voting_retry)
+	for i in range(GameState.connected_players, GameState.MAX_PLAYERS):
 		_retry_indicators[i].hide()
-		i += 1
 
 
 # Unloads the Playground and shows the lobby.
