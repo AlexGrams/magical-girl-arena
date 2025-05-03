@@ -1,14 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4qjjq0v6o2kw"]
 
 [ext_resource type="Script" path="res://UI/player_ready_indicator.gd" id="1_ii0d5"]
-[ext_resource type="Texture2D" uid="uid://gmw05mw84nou" path="res://Blueberry.png" id="1_u2xg4"]
+[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="2_g8p2j"]
 
 [node name="PlayerReadyIndicator" type="Panel" node_paths=PackedStringArray("_not_ready_image", "_ready_image")]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(40, 40)
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_vertical = 3
 script = ExtResource("1_ii0d5")
+_character_data_map = {
+0: "uid://b38ynnwxhfxpe",
+1: "uid://cd7raql42kiv0"
+}
 _not_ready_image = NodePath("NotReady")
 _ready_image = NodePath("Ready")
 
@@ -20,7 +25,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_u2xg4")
+texture = ExtResource("2_g8p2j")
+expand_mode = 4
 
 [node name="Ready" type="TextureRect" parent="."]
 visible = false
@@ -30,4 +36,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_u2xg4")
+texture = ExtResource("2_g8p2j")
+expand_mode = 4

@@ -30,12 +30,15 @@ var fraction: float = 0.0
 var _powerup_textures: Array[TextureRect] = []
 ## Text displaying each powerup level
 var _powerup_level_text: Array[Label] = []
-var _votes_to_retry: int = 0
-var _retry_indicators: Array[PlayerReadyIndicator]
+## Guttered icons that point to other off-screen players.
 var _pointers: Array[TextureRect] = []
 ## Maps Powerup name to which index its UI components are in _powerup_level_text
 ## and _powerup_textures.
 var _powerup_display_index = {}
+var _votes_to_retry: int = 0
+var _retry_indicators: Array[PlayerReadyIndicator]
+## Maps multiplayer unique ID (int) to index of _retry_indicators for this player.
+var _retry_indicator_index = {}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -63,6 +66,13 @@ func _ready() -> void:
 			i += 1
 		while i < GameState.MAX_PLAYERS:
 			_retry_indicators[i].hide()
+			i += 1
+		
+		_retry_indicator_index = {}
+		i = 0
+		for id: int in GameState.players:
+			_retry_indicator_index[id] = i
+			_retry_indicators[i].set_sprite(GameState.players[id]["character"])
 			i += 1
 	)
 	_game_over_screen.hide()
