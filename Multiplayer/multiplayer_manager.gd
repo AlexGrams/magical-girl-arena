@@ -37,7 +37,7 @@ func join_multiplayer_lobby_using_enet():
 		multiplayer.multiplayer_peer = peer
 
 		player_ids[1] = null
-		GameState.register_player(multiplayer.get_unique_id(), "Host", GameState.local_player_steam_id)
+		GameState.register_player(multiplayer.get_unique_id(), "Host", GameState.local_player_steam_id, Constants.Character.GOTH)
 		
 		host_created.emit()
 	else:
@@ -57,7 +57,7 @@ func join_multiplayer_lobby_using_enet():
 # Called on all players when a client connects.
 # id = unique id of the client that connected
 func _on_peer_connected(id: int) -> void:
-	GameState.register_player(id, "Client", GameState.local_player_steam_id)
+	GameState.register_player(id, "Client", GameState.local_player_steam_id, Constants.Character.GOTH)
 	player_ids[id] = null
 
 
