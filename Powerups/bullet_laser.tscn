@@ -8,8 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unwy0"]
 size = Vector2(1, 6)
 
-[node name="BulletLaser" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletLaser" type="Node2D" node_paths=PackedStringArray("_area", "collider", "sprite")]
 script = ExtResource("1_mur24")
+_area = NodePath("Area2D")
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 

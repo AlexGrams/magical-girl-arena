@@ -6,6 +6,8 @@ extends Powerup
 @export var max_range: float = 500
 
 signal update_pointer_location(new_pointer_location: Vector2)
+## Signals to the laser bullet to activate signature functionality if this powerup is signature and max level.
+signal activate_signature()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -44,3 +46,5 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+	if current_level == max_level and is_signature:
+		activate_signature.emit()

@@ -6,9 +6,12 @@ extends Bullet
 ## position to set the transform of the laser, and the MultiplayerSynchronizer makes sure the
 ## new transform is replicated across all clients.
 
+@export var _area: Area2D = null
+
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
 var _pointer_location: Vector2
+var _signature_active: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -41,15 +44,23 @@ func _physics_process(_delta: float) -> void:
 	var result = space_state.intersect_ray(query)
 	
 	# Position and scale the laser beam
-	if result:
+	if result and is_multiplayer_authority() and _is_owned_by_player:
 		# The laser hit something and shouldn't be its full length.
 		$AudioStreamPlayer2D.pitch_scale = 0.8
 		$AudioStreamPlayer2D.volume_db = -25
-		end_point = result["position"]
 		
-		var hit_node: Node2D = result["collider"].get_parent()
-		if is_multiplayer_authority() and _is_owned_by_player and hit_node is Enemy:
-			hit_node.take_damage($Area2D.damage)
+		if not _signature_active:
+			# Non-signature functionality: Only harm the first enemy hit.
+			end_point = result["position"]
+		
+			var hit_node: Node2D = result["collider"].get_parent()
+			if hit_node is Enemy:
+				hit_node.take_damage($Area2D.damage)
+		else:
+			# Signature functionality: Harm all enemies the laser is touching
+			for hit_area: Area2D in _area.get_overlapping_areas():
+				if hit_area.get_parent() is Enemy:
+					hit_area.get_parent().take_damage($Area2D.damage)
 	else:
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
@@ -105,6 +116,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		laser_powerup.update_pointer_location.connect(
 			func(new_pointer_location):
 				set_pointer_direction.rpc(new_pointer_location)
+		)
+		
+		# Turn on signature functionality.
+		laser_powerup.activate_signature.connect(
+			func():
+				_signature_active = true
 		)
 	
 	_max_range = data[1]
