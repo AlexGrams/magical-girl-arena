@@ -5,7 +5,7 @@
 [node name="PowerupShotgun" type="Node2D"]
 script = ExtResource("1_dvav4")
 bullet_damage = 10.0
-_bullet_uid = "uid://bw55ega0qnbtq"
+_bullet_uid = "res://Powerups/bullet_shotgun.tscn"
 damage_levels = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
 signature_damage = 30.0
 powerup_name = "Shotgun"
