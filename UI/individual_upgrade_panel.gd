@@ -2,8 +2,10 @@ class_name UpgradePanel
 extends Control
 
 
-## What shows up when upgrading a stat.
-@export var stat_upgrade_texture: Texture2D = null
+var _health_icon_texture: Texture2D = preload("uid://b4meuc223cj41")
+var _regen_icon_texture: Texture2D = preload("uid://b62tnt1mxuchm")
+var _speed_icon_texture: Texture2D = preload("uid://dr7qvwfxxl54h")
+var _pickup_icon_texture: Texture2D = preload("uid://cnbo4juf7220o")
 
 ## PowerData for this button's currently associated Powerup. This being null indicates that 
 ## the button upgrades a stat instead.
@@ -25,13 +27,13 @@ func set_upgrade(upgrade) -> void:
 		
 		match upgrade:
 			Constants.StatUpgrades.HEALTH:
-				_set_display("Health", stat_upgrade_texture, "Increase max health.")
+				_set_display("Health", _health_icon_texture, "Increase max health.")
 			Constants.StatUpgrades.HEALTH_REGEN:
-				_set_display("Health Regeneration", stat_upgrade_texture, "Increase occasional health regen.")
+				_set_display("Health Regeneration", _regen_icon_texture, "Increase occasional health regen.")
 			Constants.StatUpgrades.SPEED:
-				_set_display("Speed", stat_upgrade_texture, "Increase movement speed.")
+				_set_display("Speed", _speed_icon_texture, "Increase movement speed.")
 			Constants.StatUpgrades.PICKUP_RADIUS:
-				_set_display("Pickup Radius", stat_upgrade_texture, "Increase range for picking up items such as experience and health.")
+				_set_display("Pickup Radius", _pickup_icon_texture, "Increase range for picking up items such as experience and health.")
 			#Constants.StatUpgrades.DAMAGE:
 				#_set_display("Health", stat_upgrade_texture, "Increase max health.")
 			#Constants.StatUpgrades.ULTIMATE_DAMAGE:

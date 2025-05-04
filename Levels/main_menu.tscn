@@ -396,7 +396,6 @@ theme_override_constants/separation = 10
 
 [node name="CharacterSelectButton" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
 layout_mode = 2
-button_pressed = true
 image = ExtResource("15_e8gbh")
 
 [node name="CharacterSelectButton2" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]

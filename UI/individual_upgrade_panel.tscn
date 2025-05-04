@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://14cc171vx3nh"]
+[gd_scene load_steps=10 format=3 uid="uid://14cc171vx3nh"]
 
 [ext_resource type="Script" path="res://UI/individual_upgrade_panel.gd" id="1_if0al"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_ux83s"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_7p8sv"]
 [ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="3_5aaq8"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_e82gu"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="5_nxuy7"]
@@ -21,7 +20,6 @@ offset_bottom = 348.0
 size_flags_vertical = 9
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ckqs1")
 script = ExtResource("1_if0al")
-stat_upgrade_texture = ExtResource("2_7p8sv")
 
 [node name="Box" type="PanelContainer" parent="."]
 layout_mode = 1
