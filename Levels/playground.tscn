@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=125 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -57,10 +57,14 @@
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
-[ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Texture2D" uid="uid://b4meuc223cj41" path="res://Sprites/Powerups/Stats/Health.png" id="54_aob33"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="55_sk2pv"]
+[ext_resource type="Texture2D" uid="uid://b62tnt1mxuchm" path="res://Sprites/Powerups/Stats/Regen.png" id="55_yatsb"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
+[ext_resource type="Texture2D" uid="uid://dr7qvwfxxl54h" path="res://Sprites/Powerups/Stats/Speed.png" id="56_c6h32"]
+[ext_resource type="Texture2D" uid="uid://cnbo4juf7220o" path="res://Sprites/Powerups/Stats/ion_magnet.png" id="57_wkgsw"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -12630,28 +12634,31 @@ horizontal_alignment = 1
 [node name="Stats" type="HBoxContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 size_flags_stretch_ratio = 0.34
 
 [node name="StatLevelIndicator" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+icon = ExtResource("54_aob33")
 
 [node name="StatLevelIndicator2" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+icon = ExtResource("55_yatsb")
 
 [node name="StatLevelIndicator3" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+icon = ExtResource("56_c6h32")
 
 [node name="StatLevelIndicator4" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
+icon = ExtResource("57_wkgsw")
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
 layout_mode = 3
