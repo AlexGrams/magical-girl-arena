@@ -40,14 +40,17 @@ func activate() -> void:
 	
 	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
 	
-	# Shoot bullets all around
-	#var rotation_increment: float = 2 * PI / _NUM_BULLETS
-	#for i in range(_NUM_BULLETS):
-	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		1, [_bullet_scene_uid, 
-			get_parent().global_position, 
-			Vector2.UP, 
-			_touch_damage, 
-			true,
-			[_explosion_damage]
-	])
+	# Shoot missiles all around in a sort of random way.
+	var slice_rotator = Vector2.UP
+	
+	for i in range(_num_missiles):
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [_bullet_scene_uid, 
+				get_parent().global_position, 
+				slice_rotator.rotated(randf_range(0.0, _rad_per_slice)), 
+				_touch_damage, 
+				true,
+				[_explosion_damage]
+		])
+		
+		slice_rotator = slice_rotator.rotated(_rad_per_slice)
