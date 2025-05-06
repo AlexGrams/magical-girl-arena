@@ -380,6 +380,10 @@ func ready_player_character(character: Constants.Character) -> void:
 			character_data = _character_data["Goth"]
 		Constants.Character.SWEET:
 			character_data = _character_data["Sweet"]
+		Constants.Character.VALE:
+			character_data = _character_data["Vale"]
+		_:
+			push_error("Character data not mapped!")
 	
 	_gdcubism_user_model.set_assets(character_data.model_file_path)
 	

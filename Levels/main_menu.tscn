@@ -403,6 +403,11 @@ layout_mode = 2
 character = 1
 image = ExtResource("16_c71yi")
 
+[node name="CharacterSelectButton3" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
+layout_mode = 2
+character = 2
+image = ExtResource("15_e8gbh")
+
 [node name="CharacterInformation_Panel" type="TextureRect" parent="Lobby"]
 layout_mode = 0
 offset_left = 18.0

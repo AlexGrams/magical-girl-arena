@@ -282,6 +282,8 @@ func _get_character_data(character: Constants.Character) -> CharacterData:
 			data = load("res://Player/CharacterResourceFiles/character_data_goth.tres")
 		Constants.Character.SWEET:
 			data = load("res://Player/CharacterResourceFiles/character_data_sweet.tres")
+		Constants.Character.VALE:
+			data = load("res://Player/CharacterResourceFiles/character_data_vale.tres")
 		_:
 			print("uh oh")
 	return data

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=24 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
 [ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_1y4go"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cd7raql42kiv0" path="res://Player/CharacterResourceFiles/character_data_sweet.tres" id="3_p1sie"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="4_ksedc"]
+[ext_resource type="Resource" uid="uid://drar62gqsdnby" path="res://Player/CharacterResourceFiles/character_data_vale.tres" id="4_xcgv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
 size = Vector2(128, 127)
@@ -446,7 +447,8 @@ script = ExtResource("1_b2ljt")
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
 _character_data = {
 "Goth": ExtResource("2_h66hh"),
-"Sweet": ExtResource("3_p1sie")
+"Sweet": ExtResource("3_p1sie"),
+"Vale": ExtResource("4_xcgv0")
 }
 _player_collision_area = NodePath("Area2D")
 _pickup_area = NodePath("ExpPickupArea2D")

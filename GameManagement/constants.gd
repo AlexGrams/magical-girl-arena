@@ -9,6 +9,7 @@ const ENEMY_BULLET_COLLISION_MASK: Array[int] = [1, 4]
 enum Character {
 	GOTH,
 	SWEET,
+	VALE,
 	NONE = -1
 }
 
