@@ -2,7 +2,7 @@ class_name BulletUltVale
 extends Bullet
 ## Moves in variety of sinusoidal patterns before exploding at its destination.
 
-const MOVEMENT_PATTERNS: int = 2
+const MOVEMENT_PATTERNS: int = 4
 
 @onready var _explosion_vfx: PackedScene = preload("res://Sprites/Map/leaf_explosion.tscn")
 
@@ -113,7 +113,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	collider.damage = data[0]
 	_explosion_area.damage = data[1]
-	_distance = data[3]
 	
 	# Determine movement mode
 	match(data[2]):
@@ -125,5 +124,20 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			# Four cycles
 			_amplitude = 1.0
 			_frequency = 4.0
+		2: 
+			# One cycle with higher, negative amplitude
+			_amplitude = -2.0
+			_frequency = 1.0
+		3:
+			# Two cycles, negative amplitude
+			_amplitude = -1.0
+			_frequency = 2.0
 		_:
 			push_error("Movement mode not defined.")
+	
+	# The distance the missile travels along the sine wave is different from the straight line distance
+	# given as input. The input distance is scaled using the amplitude of the sine wave to approximate
+	# the actual arc length distance. The exact calculation involves taking an integral, which is
+	# to expensive for what we want to do here. Magic numbers were found by plugging the equation
+	# for arc length of a sine wave into a calculator.
+	_distance = data[3] * (1.2 + 0.6 * (abs(_amplitude) - 1))
