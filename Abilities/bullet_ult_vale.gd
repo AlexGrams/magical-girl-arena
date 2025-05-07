@@ -36,8 +36,6 @@ func _ready() -> void:
 	
 	_starting_direction = direction
 	_starting_rotation = Vector2.LEFT.angle_to(direction)
-	## TODO: Set in setup_bullet
-	_distance = randf_range(250.0, 750.0)
 	lifetime = _distance / speed
 	
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.REVOLVING)
@@ -98,10 +96,11 @@ func _explode() -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
+		data.size() != 4
 		or (typeof(data[0])) != TYPE_FLOAT		# Collision damage
 		or (typeof(data[1])) != TYPE_FLOAT		# Explosion damage
 		or (typeof(data[2])) != TYPE_INT		# Movement mode
+		or (typeof(data[3])) != TYPE_FLOAT		# Travel distance
 	):
 		push_error("Malformed setup_bullet data argument.")
 		return
@@ -114,6 +113,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	collider.damage = data[0]
 	_explosion_area.damage = data[1]
+	_distance = data[3]
 	
 	# Determine movement mode
 	match(data[2]):

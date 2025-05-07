@@ -50,7 +50,12 @@ func activate() -> void:
 				slice_rotator.rotated(randf_range(0.0, _rad_per_slice)), 
 				_touch_damage, 
 				true,
-				[_touch_damage, _explosion_damage, randi_range(0, BulletUltVale.MOVEMENT_PATTERNS - 1)]
+				[
+					_touch_damage, 
+					_explosion_damage, 
+					randi_range(0, BulletUltVale.MOVEMENT_PATTERNS - 1), 
+					randf_range(_min_range, _max_range)
+				]
 		])
 		
 		slice_rotator = slice_rotator.rotated(_rad_per_slice)
