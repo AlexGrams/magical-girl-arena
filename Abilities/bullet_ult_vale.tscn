@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbme0ttmrvbc4"]
+[gd_scene load_steps=11 format=3 uid="uid://dbme0ttmrvbc4"]
 
 [ext_resource type="Script" path="res://Abilities/bullet_ult_vale.gd" id="1_dcxsn"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_fwphc"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(26, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yj0vg"]
+radius = 60.0
 
 [sub_resource type="Gradient" id="Gradient_jutjh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -26,25 +29,36 @@ scale_min = 0.0
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_qvbcj")
 
-[node name="BulletUltVale" type="Node2D"]
+[node name="BulletUltVale" type="Node2D" node_paths=PackedStringArray("_explosion_area", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_dcxsn")
+_explosion_area = NodePath("ExplosionArea2D")
 speed = 1000.0
 lifetime = 5.0
 destroy_on_hit = false
+collider = NodePath("CollisionArea2D")
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.047, 0.047)
 texture = ExtResource("2_fwphc")
 script = ExtResource("3_ta8tr")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionArea2D" type="Area2D" parent="."]
 collision_mask = 2
 script = ExtResource("4_p6tm1")
 damage = 100.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
+
+[node name="ExplosionArea2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("4_p6tm1")
+damage = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+shape = SubResource("CircleShape2D_yj0vg")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 10
@@ -52,4 +66,5 @@ process_material = SubResource("ParticleProcessMaterial_ocycc")
 texture = ExtResource("5_w78an")
 lifetime = 0.25
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="CollisionArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="ExplosionArea2D" to="." method="_on_area_2d_area_entered"]
