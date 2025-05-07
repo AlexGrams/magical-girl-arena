@@ -4,6 +4,10 @@ extends Bullet
 
 const MOVEMENT_PATTERNS: int = 2
 
+@onready var _explosion_vfx: PackedScene = preload("res://Sprites/Map/leaf_explosion.tscn")
+
+## How long the explosion hitbox should linger before this bullet is destroyed.
+@export var _explosion_lifetime: float = 0.05
 ## Used to deal damage when the missile explodes, which is different from when it collides with something.
 @export var _explosion_area: BulletHitbox = null
 
@@ -16,6 +20,9 @@ var _distance: float = 0.0
 var _amplitude: float = 1.0
 ## Frequency factor of the missile's movement pattern.
 var _frequency: float = 1.0
+var _explosion_collision_layer: int = 0
+## Has the missile already exploded?
+var _exploded: bool = false
 
 
 ## Special functionality: only sets the explosion damage.
@@ -24,6 +31,9 @@ func set_damage(damage: float):
 
 
 func _ready() -> void:
+	_explosion_collision_layer = _explosion_area.collision_layer
+	_explosion_area.collision_layer = 0
+	
 	_starting_direction = direction
 	_starting_rotation = Vector2.LEFT.angle_to(direction)
 	## TODO: Set in setup_bullet
@@ -37,20 +47,20 @@ func _process(delta: float) -> void:
 	#global_position += direction * speed * delta
 	death_timer += delta
 	
-	# For testing, 2PI is a complete cycle.
-	_timer += (delta / lifetime) * 2 * PI
-	direction = Vector2(1.0, _amplitude * cos(_frequency * _timer)).normalized().rotated(_starting_rotation)
-	global_position += direction * speed * delta
-	
-	# TODO: Somehow the rotation equation is off.
-	#rotation_degrees = rad_to_deg(Vector2.UP.angle_to(direction))
-	
-	if death_timer >= lifetime and is_multiplayer_authority():
+	if death_timer < lifetime:
+		# Move during the main part of the missile's lifetime.
+		_timer += (delta / lifetime) * 2 * PI
+		direction = Vector2(1.0, _amplitude * cos(_frequency * _timer)).normalized().rotated(_starting_rotation)
+		global_position += direction * speed * delta
+	elif not _exploded:
+		# The missile has just exceded its travel lifetime, so blow up. 
+		_explode()
+	elif death_timer >= lifetime + _explosion_lifetime and is_multiplayer_authority():
+		# The missile has exploded and lingered, so remove it.
 		queue_free()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	# TODO: Probably don't want to do anything here. Not really intending for this to be used by Enemies.
 	if not is_multiplayer_authority():
 		return
 	
@@ -63,6 +73,26 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		# NOTE: Enemy bullets are deleted when the character that they hit calls an RPC to delete them.
 		if area is BulletHitbox:
 			take_damage(area.damage)
+
+
+## Causes damage in an area around the missile, then frees it.
+func _explode() -> void:
+	# Spawn particles
+	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
+	if playground != null:
+		var explosion_particles: GPUParticles2D = _explosion_vfx.instantiate()
+		explosion_particles.global_position = global_position
+		playground.add_child(explosion_particles)
+	
+	_exploded = true
+	sprite.visible = false
+	
+	if not is_multiplayer_authority():
+		return
+	
+	# Switch to only use the explosion collider.
+	_explosion_area.collision_layer = _explosion_collision_layer
+	collider.collision_layer = 0
 
 
 # Set up other properties for this bullet
