@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://dbme0ttmrvbc4"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_ywj67"]
-[ext_resource type="Texture2D" uid="uid://buaarsvaugyyu" path="res://Sprites/Powerups/SweetTarotCard.png" id="2_eyr75"]
+[ext_resource type="Script" path="res://Abilities/bullet_ult_vale.gd" id="1_dcxsn"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_fwphc"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_ta8tr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_p6tm1"]
 [ext_resource type="Texture2D" uid="uid://debkuvp8owvc0" path="res://Sparkle.png" id="5_w78an"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(44, 44)
+size = Vector2(26, 29)
 
 [sub_resource type="Gradient" id="Gradient_jutjh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -26,18 +26,16 @@ scale_min = 0.0
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_qvbcj")
 
-[node name="BulletUltVale" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletUltVale" type="Node2D"]
 scale = Vector2(2, 2)
-script = ExtResource("1_ywj67")
-speed = 800.0
+script = ExtResource("1_dcxsn")
+speed = 1000.0
 lifetime = 5.0
 destroy_on_hit = false
-collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.087, 0.087)
-texture = ExtResource("2_eyr75")
+scale = Vector2(0.047, 0.047)
+texture = ExtResource("2_fwphc")
 script = ExtResource("3_ta8tr")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -49,7 +47,7 @@ damage = 100.0
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 20
+amount = 10
 process_material = SubResource("ParticleProcessMaterial_ocycc")
 texture = ExtResource("5_w78an")
 lifetime = 0.25
