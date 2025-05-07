@@ -12,7 +12,8 @@ size_flags_vertical = 3
 script = ExtResource("1_ii0d5")
 _character_data_map = {
 0: "uid://b38ynnwxhfxpe",
-1: "uid://cd7raql42kiv0"
+1: "uid://cd7raql42kiv0",
+2: "uid://drar62gqsdnby"
 }
 _not_ready_image = NodePath("NotReady")
 _ready_image = NodePath("Ready")
