@@ -32,11 +32,11 @@ func _process(delta: float) -> void:
 					1,
 					[
 						_bullet_uid, 
-						global_position, 
+						global_position + displacement, 
 						Vector2.ZERO, 
 						_get_damage_from_curve(), 
 						_is_owned_by_player,
-						[displacement]
+						[]
 					]
 				)
 		

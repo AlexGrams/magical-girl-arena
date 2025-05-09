@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=126 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -57,6 +57,7 @@
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
+[ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="48_hwjvr"]
 [ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 [ext_resource type="Texture2D" uid="uid://b4meuc223cj41" path="res://Sprites/Powerups/Stats/Health.png" id="54_aob33"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
@@ -12339,7 +12340,7 @@ vertical_alignment = 1
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
-all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve")])
+all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve"), ExtResource("48_hwjvr")])
 
 [node name="AbilitiesAndStatsContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
@@ -12905,7 +12906,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Abilities/bullet_ult_vale.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/boomerang_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_mines.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 

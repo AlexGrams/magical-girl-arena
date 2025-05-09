@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3wj41t6bqwea"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_mines.gd" id="1_y3unb"]
+[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="2_75osu"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_mdhh8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
+radius = 106.0
+
+[node name="BulletMines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_y3unb")
+_vfx_uid = "uid://jyy16gs6xyi8"
+speed = 750.0
+lifetime = 1.0
+destroy_on_hit = false
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0741855, 0.0741855)
+texture = ExtResource("2_75osu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_mdhh8")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+top_level = true
+shape = SubResource("CircleShape2D_n81gy")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=22 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="11_b6mky"]
 [ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="12_msdcf"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="13_giirl"]
+[ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="13_yxx1b"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_g80km"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="15_hy6ya"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="16_12wdd"]
@@ -31,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
-all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_dl5oi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky"), ExtResource("12_msdcf")])
+all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_dl5oi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky"), ExtResource("12_msdcf"), ExtResource("13_yxx1b")])
 upgrade_panels_holder = NodePath("PowerupUpgradesContainer")
 reroll_button = NodePath("RerollButton")
 reroll_label = NodePath("RerollButton/TextureRect/Reroll_Label")

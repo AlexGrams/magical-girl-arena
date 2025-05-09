@@ -5,6 +5,8 @@
 [node name="PowerupMines" type="Node2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_rqq4f")
-damage_levels = Array[float]([50.0, 60.0, 70.0, 80.0, 100.0])
+shoot_interval = 3.0
+_bullet_uid = "uid://b3wj41t6bqwea"
+damage_levels = Array[float]([25.0, 35.0, 50.0, 60.0, 70.0])
 signature_damage = 100.0
-powerup_name = "Grenade"
+powerup_name = "Mines"
