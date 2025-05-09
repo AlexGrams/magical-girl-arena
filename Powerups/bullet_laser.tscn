@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c46lklcir3voi"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_laser.gd" id="1_mur24"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_tv7hc"]
+[ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_5ks7x"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
 [ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_131sl"]
 
@@ -15,8 +15,10 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.004, 0.02)
-texture = ExtResource("2_tv7hc")
+rotation = 1.5708
+scale = Vector2(0.11, 0.004)
+skew = 0.555015
+texture = ExtResource("2_5ks7x")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
