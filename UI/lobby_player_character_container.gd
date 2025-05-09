@@ -51,7 +51,7 @@ func set_properties(
 			sprite.set_read_input(false)
 			, CONNECT_ONE_SHOT
 		)
-	sprite.set_sprite(character)
+	sprite.set_character(character)
 
 
 # Remove all the displayed data for this container.

@@ -29,3 +29,10 @@ enum StatUpgrades {
 	#ULTIMATE_DAMAGE,
 	#ULTIMATE_CHARGE_RATE
 }
+
+# Maps character enum to their CharacterData resource file
+var CHARACTER_DATA: Dictionary = {
+	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),
+	Character.SWEET: load("res://Player/CharacterResourceFiles/character_data_sweet.tres"),
+	Character.VALE: load("res://Player/CharacterResourceFiles/character_data_vale.tres")
+}

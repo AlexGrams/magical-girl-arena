@@ -82,8 +82,6 @@ func _ready() -> void:
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
 	
-	main_menu_character_sprite.set_read_input(false)
-	main_menu_character_sprite.set_model_scale(3)
 	_set_main_menu_character()
 	
 	setup_lobby_screen()
@@ -108,7 +106,9 @@ func _set_main_menu_character() -> void:
 	var random_char = -1
 	while random_char == -1:
 		random_char = Constants.Character.values().pick_random()
-	main_menu_character_sprite.set_sprite(random_char)
+	main_menu_character_sprite.set_character(random_char)
+	main_menu_character_sprite.set_read_input(false)
+	main_menu_character_sprite.set_model_scale(3)
 	main_menu_character_label.text = _get_character_data(random_char).name
 #endregion
 

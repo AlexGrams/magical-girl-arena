@@ -19,6 +19,8 @@ extends Resource
 @export var ult_texture: Texture2D
 ## Path to the .json file for this character's GDCubism sprite. 
 @export var model_file_path: String
+## Multiplied to the base scale to ensure all characters are the same size, since model sizes vary
+@export var model_scale_multiplier: float = 1
 ## Path to the .tscn file for this character's ultimate ability.
 @export var ultimate_ability: String
 ## UID of the small icon image representing this character. 

@@ -6,13 +6,14 @@
 [resource]
 script = ExtResource("2_qro6l")
 name = "Vale"
-description = "Vale is a robot."
+description = "When a magical girl felt herself growing old and wishing to retire, she created Vale, an eternal magical girl robot who could take her place."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres"
 base_powerup_name = "Vale's Laser"
 base_powerup_texture = ExtResource("1_bhade")
 ult_name = "Missle Swarm"
 ult_description = "Fire missles all around you."
 ult_texture = ExtResource("1_bhade")
-model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+model_scale_multiplier = 0.3
 ultimate_ability = "res://Abilities/ability_ult_vale.tscn"
 icon_uid = "uid://cy3wg1sq3tv87"

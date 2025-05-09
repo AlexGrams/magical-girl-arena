@@ -25,6 +25,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _revive_collision_area: Area2D = null
 @export var _revive_progress_bar: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
+@export var _character_animated_sprite: Sprite2D = null
 @export var _gdcubism_user_model: GDCubismUserModel = null
 
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
@@ -170,7 +171,7 @@ func get_input():
 
 
 func _process(delta: float) -> void:
-	var direction = get_global_mouse_position() - $Sprite2D.global_position
+	var direction = get_global_mouse_position() - _character_animated_sprite.global_position
 	var direction_normal = direction.normalized()
 	$Line2D.points = [direction_normal*100, Vector2.ZERO]
 	
@@ -374,18 +375,12 @@ func register_with_game_state(owning_player_id: int) -> void:
 @rpc("any_peer", "call_local")
 func ready_player_character(character: Constants.Character) -> void:
 	# Set the character's appearance
-	var character_data: CharacterData = null
-	match character:
-		Constants.Character.GOTH:
-			character_data = _character_data["Goth"]
-		Constants.Character.SWEET:
-			character_data = _character_data["Sweet"]
-		Constants.Character.VALE:
-			character_data = _character_data["Vale"]
-		_:
-			push_error("Character data not mapped!")
+	var character_data: CharacterData = Constants.CHARACTER_DATA[character]
+	if character_data == null:
+		push_error("Character data not mapped!")
 	
-	_gdcubism_user_model.set_assets(character_data.model_file_path)
+	_character_animated_sprite.set_character(character)
+	_character_animated_sprite.set_model_scale(0.5)
 	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
