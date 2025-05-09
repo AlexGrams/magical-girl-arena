@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d02yhhs7vqk85"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_mines.gd" id="1_rqq4f"]
+
+[node name="PowerupMines" type="Node2D"]
+self_modulate = Color(1, 1, 0, 1)
+script = ExtResource("1_rqq4f")
+damage_levels = Array[float]([50.0, 60.0, 70.0, 80.0, 100.0])
+signature_damage = 100.0
+powerup_name = "Grenade"
