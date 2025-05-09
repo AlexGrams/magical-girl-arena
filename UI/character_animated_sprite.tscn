@@ -622,4 +622,4 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_g5ukv")
 }
-playback_default_blend_time = 5.0
+playback_default_blend_time = 2.0
