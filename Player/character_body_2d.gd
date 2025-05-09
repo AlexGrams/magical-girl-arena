@@ -380,7 +380,6 @@ func ready_player_character(character: Constants.Character) -> void:
 		push_error("Character data not mapped!")
 	
 	_character_animated_sprite.set_character(character)
-	_character_animated_sprite.set_model_scale(0.5)
 	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():

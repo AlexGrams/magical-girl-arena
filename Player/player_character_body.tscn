@@ -131,6 +131,7 @@ tint_under = Color(0.388235, 0.388235, 0.388235, 0.501961)
 tint_progress = Color(1, 1, 1, 0.501961)
 
 [node name="CharacterAnimatedSprite" parent="." instance=ExtResource("7_7w7dn")]
+scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_6vtl0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
