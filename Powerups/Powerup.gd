@@ -74,3 +74,24 @@ func _get_damage_from_curve() -> float:
 		return signature_damage
 	else:
 		return damage_levels[current_level - 1]
+
+
+## Returns Node2D or null of the target nearest to the Powerup owner.
+func _find_nearest_target() -> Node2D: 
+	if _is_owned_by_player:
+		# Get nearest enemy so direction can be set
+		var enemies: Array[Node] = [] 
+		enemies = get_tree().get_nodes_in_group("enemy")
+		
+		if !enemies.is_empty():
+			var nearest_enemy = enemies[0]
+			var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
+			for enemy in enemies:
+				var distance = global_position.distance_squared_to(enemy.global_position)
+				if distance < nearest_distance:
+					nearest_enemy = enemy
+					nearest_distance = distance
+			return nearest_enemy
+	else:
+		push_warning("Not implemented for enemies")
+	return null
