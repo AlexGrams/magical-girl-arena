@@ -9,6 +9,8 @@ extends Bullet
 
 ## How big the shadow of this attack is at its maximum value.
 var _max_shadow_scale: Vector2 = Vector2.ONE
+## Which Enemy this bullet is targeting if it was spawned by a player's powerup.
+var _target: Node2D = null
 ## Collision layer this bullet will use to damage targets.
 var _collision_layer: int = 0
 ## True for the one frame for which the bullet's collider is active.
@@ -31,6 +33,9 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	death_timer += delta
 	
+	if _is_owned_by_player and _target != null:
+		global_position = _target.global_position
+	
 	if death_timer >= lifetime:
 		# Turn the hitbox on for one frame, then delete it.
 		if not _is_collision_active:
@@ -48,3 +53,22 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 	else:
 		sprite.scale = (death_timer / lifetime) * _max_shadow_scale
+
+
+# Set up other properties for this bullet
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
+	# Make the bullet hurt players
+	if not is_owned_by_player:
+		_is_owned_by_player = false
+		_health = max_health
+		_modify_collider_to_harm_players()
+	else:
+		# Owned by player and was spawned by powerup_raindrop
+		
+		if (len(data) != 1 
+			or typeof(data[0]) != TYPE_NODE_PATH	# Path to target
+		):
+			push_error("Malformed Bullet setup")
+			return
+		
+		_target = get_tree().root.get_node_or_null(data[0])

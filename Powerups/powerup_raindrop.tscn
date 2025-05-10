@@ -4,3 +4,6 @@
 
 [node name="PowerupRaindrop" type="Node2D"]
 script = ExtResource("1_f4ceg")
+_bullet_scene_uid = "uid://ci3oql3ckphvh"
+damage_levels = Array[float]([100.0, 125.0, 150.0, 175.0, 200.0])
+powerup_name = "Raindrop"
