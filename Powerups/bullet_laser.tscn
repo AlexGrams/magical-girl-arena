@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c46lklcir3voi"]
+[gd_scene load_steps=10 format=3 uid="uid://c46lklcir3voi"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_laser.gd" id="1_mur24"]
 [ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_5ks7x"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
 [ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_131sl"]
+[ext_resource type="Texture2D" uid="uid://dffoj6fex44q3" path="res://Sprites/Enemy/WhiteDwarf_Enemy/WhiteDwarf_Glow.png" id="5_q0f20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unwy0"]
 size = Vector2(1, 6)
@@ -36,6 +37,54 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0.486275, 1, 1, 1), Color(1, 1, 1, 1), Color(0.486275, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitmarkerSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 1), Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1), Vector2(0.5, 1), Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1), Vector2(0.5, 1), Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1), Vector2(0.5, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitmarkerSprite:skew")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.436332, -0.349066, 0.0, 0.436332, -0.349066, 0.0, 0.436332, -0.349066, 0.0, 0.436332, -0.349066]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("HitmarkerSprite:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1, 1.2, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 0, 1, 0, 1, 0, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(5, 20), Vector2(5, 20), Vector2(-5, -20), Vector2(-5, -20), Vector2(-5, 15)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitmarkerSprite/Glow:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.411765, 1, 1, 0), Color(0.411765, 1, 1, 1), Color(0.411765, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_xrair"]
 length = 0.001
@@ -62,6 +111,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitmarkerSprite:scale.y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitmarkerSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitmarkerSprite:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitmarkerSprite:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitmarkerSprite/Glow:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.411765, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u5dyo"]
@@ -110,3 +219,13 @@ libraries = {
 "": SubResource("AnimationLibrary_u5dyo")
 }
 autoplay = "glow"
+
+[node name="HitmarkerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 1)
+texture = ExtResource("5_q0f20")
+
+[node name="Glow" type="Sprite2D" parent="HitmarkerSprite"]
+self_modulate = Color(0.411765, 1, 1, 1)
+show_behind_parent = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_q0f20")

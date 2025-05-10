@@ -53,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.pitch_scale = 0.8
 		$AudioStreamPlayer2D.volume_db = -25
 		
+		
 		if not _signature_active:
 			# Non-signature functionality: Only harm the first enemy hit.
 			end_point = result["position"]
@@ -60,6 +61,9 @@ func _physics_process(_delta: float) -> void:
 			var hit_node: Node2D = result["collider"].get_parent()
 			if hit_node is Enemy:
 				hit_node.take_damage(_area.damage)
+			$HitmarkerSprite.position = end_point
+			$HitmarkerSprite.show()
+			
 		else:
 			# Signature functionality: Harm all enemies the laser is touching
 			for hit_area: Area2D in _area.get_overlapping_areas():
@@ -69,6 +73,7 @@ func _physics_process(_delta: float) -> void:
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
 		$AudioStreamPlayer2D.volume_db = -30
+		$HitmarkerSprite.hide()
 		
 	var hit_vector := end_point - _owning_character.global_position
 	_laser.global_position = hit_vector / 2.0 + _owning_character.global_position
