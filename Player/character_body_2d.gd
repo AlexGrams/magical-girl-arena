@@ -319,6 +319,7 @@ func die():
 	revive_timer = 0.0
 	_revive_collision_area.show()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
+	_character_animated_sprite.play_death_animation()
 	
 	disable_powerups()
 	died.emit()
@@ -330,6 +331,7 @@ func revive():
 	_revive_collision_area.hide()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
 	take_damage(-health_max)
+	_character_animated_sprite.play_revive_animation()
 	
 	enable_powerups()
 	revived.emit()
