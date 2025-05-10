@@ -24,7 +24,7 @@ var _health: float = 1.0
 
 
 func set_damage(damage: float):
-	$Area2D.damage = damage
+	collider.damage = damage
 
 
 func _ready() -> void:

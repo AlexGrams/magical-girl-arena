@@ -7,6 +7,8 @@ extends Bullet
 ## new transform is replicated across all clients.
 
 @export var _area: Area2D = null
+# Contains the visuals and collision for the laser
+@export var _laser: Node2D = null
 
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
@@ -16,11 +18,13 @@ var _signature_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# This is intentionally blank. It overrides Bullet's _ready() function.
 	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	# This is intentionally blank. It overrides Bullet's _process() function.
 	pass
 
 
@@ -55,21 +59,25 @@ func _physics_process(_delta: float) -> void:
 		
 			var hit_node: Node2D = result["collider"].get_parent()
 			if hit_node is Enemy:
-				hit_node.take_damage($Area2D.damage)
+				hit_node.take_damage(_area.damage)
 		else:
 			# Signature functionality: Harm all enemies the laser is touching
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				if hit_area.get_parent() is Enemy:
-					hit_area.get_parent().take_damage($Area2D.damage)
+					hit_area.get_parent().take_damage(_area.damage)
 	else:
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
 		$AudioStreamPlayer2D.volume_db = -30
 		
 	var hit_vector := end_point - _owning_character.global_position
-	global_position = hit_vector / 2.0 + _owning_character.global_position
-	rotation = hit_vector.angle()
-	scale.x = hit_vector.length()
+	_laser.global_position = hit_vector / 2.0 + _owning_character.global_position
+	_laser.rotation = hit_vector.angle()
+	_laser.scale.x = hit_vector.length()
+	
+	#$TextureRect.global_position = hit_vector / 2.0 + _owning_character.global_position
+	#$TextureRect.rotation = hit_vector.angle()
+	#$TextureRect.scale.x = hit_vector.length()
 
 
 # Set up other properties for this bullet
@@ -100,7 +108,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 	
 	if _owning_character == null:
-		push_error("Orbit bullet has a null owner. Player ID ", str(data[0]), 
+		push_error("Laser bullet has a null owner. Player ID ", str(data[0]), 
 			" was not found in GameState.player_characters.")
 		return
 	
@@ -130,4 +138,4 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
-	$Area2D.damage = new_damage
+	_area.damage = new_damage
