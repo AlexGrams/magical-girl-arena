@@ -54,7 +54,7 @@ func _ready() -> void:
 	# Exit the Lobby screen automatially if we attempt to join an invalid lobby.
 	if GameState.USING_GODOT_STEAM:
 		Steam.lobby_data_update.connect(
-			func(success: int, lobby_id: int, member_id: int):
+			func(success: int, _lobby_id: int, _member_id: int):
 				if success == 0:
 					# Was not successful in getting new lobby data. Presumably this only happens
 					# when joining an invalid lobby, so return to the lobby select screen.

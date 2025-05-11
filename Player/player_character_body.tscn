@@ -1,10 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=17 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
-[ext_resource type="Resource" uid="uid://b38ynnwxhfxpe" path="res://Player/CharacterResourceFiles/character_data_goth.tres" id="2_h66hh"]
-[ext_resource type="Resource" uid="uid://cd7raql42kiv0" path="res://Player/CharacterResourceFiles/character_data_sweet.tres" id="3_p1sie"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
-[ext_resource type="Resource" uid="uid://drar62gqsdnby" path="res://Player/CharacterResourceFiles/character_data_vale.tres" id="4_xcgv0"]
 [ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="5_x80sq"]
 [ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="6_0llbf"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="7_7w7dn"]
@@ -55,11 +52,6 @@ collision_layer = 0
 collision_mask = 194
 script = ExtResource("1_b2ljt")
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
-_character_data = {
-"Goth": ExtResource("2_h66hh"),
-"Sweet": ExtResource("3_p1sie"),
-"Vale": ExtResource("4_xcgv0")
-}
 _player_collision_area = NodePath("Area2D")
 _pickup_area = NodePath("ExpPickupArea2D")
 _revive_collision_area = NodePath("ReviveArea2D")

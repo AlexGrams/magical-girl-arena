@@ -18,8 +18,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
-# Maps string name of character to their CharacterData resource file
-@export var _character_data: Dictionary = {}
+
 @export var _player_collision_area: Area2D = null
 @export var _pickup_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
@@ -27,7 +26,6 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _revive_progress_bar_2: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
 @export var _character_animated_sprite: Sprite2D = null
-@export var _gdcubism_user_model: GDCubismUserModel = null
 
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
@@ -66,9 +64,10 @@ var _stat_health: int = 1
 var _stat_health_regen: int = 1
 var _stat_speed: int = 1
 var _stat_pickup_radius: int = 1
-var _stat_damage: int = 1
-var _stat_ultimate_damage: int = 1
-var _stat_ultimate_charge_rate: int = 1
+# TODO: Waiting for design of these stats.
+#var _stat_damage: int = 1
+#var _stat_ultimate_damage: int = 1
+#var _stat_ultimate_charge_rate: int = 1
 
 signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
@@ -280,7 +279,7 @@ func take_damage(damage: float) -> void:
 		# Deplete temp health before regular health.
 		# Skip this if the player is gaining health instead.
 		if _temp_health > 0:
-			_temp_health -= damage
+			_temp_health -= int(damage)
 			
 			if _temp_health < 0:
 				# Temporary health was delepeted
