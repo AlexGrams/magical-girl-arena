@@ -116,7 +116,6 @@ stretch_mode = 4
 script = ExtResource("4_aw7yi")
 
 [node name="Main" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -343,6 +342,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Lobby" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -429,6 +429,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 35
 theme_override_font_sizes/font_size = 48
 text = "Goth"
+horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -497,7 +498,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Signature:"
-horizontal_alignment = 0
 
 [node name="SignatureName" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
 layout_mode = 2
@@ -561,7 +561,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Ultimate:"
-horizontal_alignment = 0
 
 [node name="UltimateName" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
 layout_mode = 2
