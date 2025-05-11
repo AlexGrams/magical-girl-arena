@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://0yp250nwjpaf"]
+
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="1_xj3m1"]
+[ext_resource type="Script" path="res://UI/outline_label.gd" id="2_jh8qm"]
+
+[node name="OutlineLabel" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xj3m1")
+theme_override_font_sizes/font_size = 30
+text = "ExampleText"
+horizontal_alignment = 1
+script = ExtResource("2_jh8qm")
+
+[node name="Shadow" type="Label" parent="."]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xj3m1")
+theme_override_constants/outline_size = 0
+text = "ExampleText"
+
+[node name="Outline" type="Label" parent="."]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xj3m1")
+theme_override_colors/font_color = Color(1, 0.964706, 0.815686, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.964706, 0.815686, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 15
+text = "ExampleText"
