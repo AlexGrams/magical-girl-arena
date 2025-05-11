@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser.tscn" id="1_6ph5d"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_euh0s"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="3_tm8e7"]
+[ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_lr1i4"]
 
 [resource]
 script = ExtResource("2_euh0s")
 scene = ExtResource("1_6ph5d")
 name = "Laser"
-sprite = ExtResource("3_tm8e7")
+sprite = ExtResource("3_lr1i4")
 upgrade_description = "Point and shoot a continuous laser"

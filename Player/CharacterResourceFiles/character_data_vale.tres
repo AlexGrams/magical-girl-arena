@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://drar62gqsdnby"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://drar62gqsdnby"]
 
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="1_bhade"]
+[ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="1_uvomu"]
 [ext_resource type="Script" path="res://Player/character_data.gd" id="2_qro6l"]
 
 [resource]
@@ -9,7 +10,7 @@ name = "Vale"
 description = "When a magical girl felt herself growing old and wishing to retire, she created Vale, an eternal magical girl robot who could take her place."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres"
 base_powerup_name = "Laser"
-base_powerup_texture = ExtResource("1_bhade")
+base_powerup_texture = ExtResource("1_uvomu")
 ult_name = "Missile Swarm"
 ult_description = "Fire missiles all around you."
 ult_texture = ExtResource("1_bhade")
