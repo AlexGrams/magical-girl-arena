@@ -3,8 +3,7 @@ extends Bullet
 ## a laser from their body that hits the nearest target.
 ## Since the server has authority over all bullets, each player with a laser needs to RPC the 
 ## server each frame to notify it of where that player's mouse is. The server uses the mouse
-## position to set the transform of the laser, and the MultiplayerSynchronizer makes sure the
-## new transform is replicated across all clients.
+## position to set the transform of the laser.
 
 @export var _area: Area2D = null
 # Contains the visuals and collision for the laser
@@ -48,23 +47,22 @@ func _physics_process(_delta: float) -> void:
 	var result = space_state.intersect_ray(query)
 	
 	# Position and scale the laser beam
-	if result and is_multiplayer_authority() and _is_owned_by_player:
+	if result and _is_owned_by_player:
 		# The laser hit something and shouldn't be its full length.
 		$AudioStreamPlayer2D.pitch_scale = 0.8
 		$AudioStreamPlayer2D.volume_db = -25
 		
-		
 		if not _signature_active:
 			# Non-signature functionality: Only harm the first enemy hit.
 			end_point = result["position"]
-		
-			var hit_node: Node2D = result["collider"].get_parent()
-			if hit_node is Enemy:
-				hit_node.take_damage(_area.damage)
 			$HitmarkerSprite.position = end_point
 			$HitmarkerSprite.show()
 			
-		else:
+			if is_multiplayer_authority():
+				var hit_node: Node2D = result["collider"].get_parent()
+				if hit_node is Enemy:
+					hit_node.take_damage(_area.damage)
+		elif is_multiplayer_authority():
 			# Signature functionality: Harm all enemies the laser is touching
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				if hit_area.get_parent() is Enemy:
@@ -79,10 +77,6 @@ func _physics_process(_delta: float) -> void:
 	_laser.global_position = hit_vector / 2.0 + _owning_character.global_position
 	_laser.rotation = hit_vector.angle()
 	_laser.scale.x = hit_vector.length()
-	
-	#$TextureRect.global_position = hit_vector / 2.0 + _owning_character.global_position
-	#$TextureRect.rotation = hit_vector.angle()
-	#$TextureRect.scale.x = hit_vector.length()
 
 
 # Set up other properties for this bullet
