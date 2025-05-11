@@ -32,6 +32,11 @@ func set_pointer_direction(val: Vector2) -> void:
 	_pointer_location = val
 
 
+## Wrapper for set_pointer_direction that can be bound and unbound from signals.
+func _call_set_pointer_direction(val: Vector2) -> void:
+	set_pointer_direction.rpc(val)
+
+
 func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
@@ -120,9 +125,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 		
 		# Each frame, need to send the local player's mouse position to the server.
-		laser_powerup.update_pointer_location.connect(
-			func(new_pointer_location):
-				set_pointer_direction.rpc(new_pointer_location)
+		# This signal is disconnected when the player goes down so that we aren't RPCing from a freed node.
+		laser_powerup.update_pointer_location.connect(_call_set_pointer_direction)
+		_owning_character.died.connect(
+			func():
+				laser_powerup.update_pointer_location.disconnect(_call_set_pointer_direction)
 		)
 		
 		# Turn on signature functionality.
