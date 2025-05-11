@@ -24,6 +24,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _pickup_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
 @export var _revive_progress_bar: TextureProgressBar = null
+@export var _revive_progress_bar_2: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
 @export var _character_animated_sprite: Sprite2D = null
 @export var _gdcubism_user_model: GDCubismUserModel = null
@@ -196,7 +197,7 @@ func _process(delta: float) -> void:
 			down_timer += delta
 			
 			if down_timer >= TIME_BEFORE_PLAYER_CAN_BE_REVIVED:
-				_revive_progress_bar.value = 0.0
+				_revive_progress_bar.value = 1
 			else:
 				_revive_progress_bar.value = down_timer / TIME_BEFORE_PLAYER_CAN_BE_REVIVED
 		elif revive_timer < TIME_TO_REVIVE:
@@ -207,7 +208,7 @@ func _process(delta: float) -> void:
 			else:
 				revive_timer = max(revive_timer - delta, 0.0)
 			
-			_revive_progress_bar.value = revive_timer / TIME_TO_REVIVE
+			_revive_progress_bar_2.value = revive_timer / TIME_TO_REVIVE
 
 
 func _physics_process(_delta):

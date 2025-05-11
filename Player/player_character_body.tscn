@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=20 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
-[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_1y4go"]
 [ext_resource type="Resource" uid="uid://b38ynnwxhfxpe" path="res://Player/CharacterResourceFiles/character_data_goth.tres" id="2_h66hh"]
 [ext_resource type="Resource" uid="uid://cd7raql42kiv0" path="res://Player/CharacterResourceFiles/character_data_sweet.tres" id="3_p1sie"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 [ext_resource type="Resource" uid="uid://drar62gqsdnby" path="res://Player/CharacterResourceFiles/character_data_vale.tres" id="4_xcgv0"]
+[ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="5_x80sq"]
+[ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="6_0llbf"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="7_7w7dn"]
+[ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="7_kh3sg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
 size = Vector2(128, 127)
@@ -15,10 +17,13 @@ size = Vector2(128, 127)
 radius = 25.0
 height = 100.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_75ctg"]
-radius = 5.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_kccus"]
+radius = 250.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cjy5c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75ctg"]
+radius = 150.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6vtl0"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -44,9 +49,8 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_on_screen_notifier", "_character_animated_sprite") groups=["player"]]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite") groups=["player"]]
 z_index = 1
-position = Vector2(1116, 1072)
 collision_layer = 0
 collision_mask = 194
 script = ExtResource("1_b2ljt")
@@ -60,6 +64,7 @@ _player_collision_area = NodePath("Area2D")
 _pickup_area = NodePath("ExpPickupArea2D")
 _revive_collision_area = NodePath("ReviveArea2D")
 _revive_progress_bar = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgressBar")
+_revive_progress_bar_2 = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgressBar2")
 _on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 _character_animated_sprite = NodePath("CharacterAnimatedSprite")
 
@@ -90,8 +95,7 @@ gravity_direction = Vector2(0, 0)
 gravity = 100000.0
 
 [node name="ExpPickupCollisionShape" type="CollisionShape2D" parent="ExpPickupArea2D"]
-scale = Vector2(50, 50)
-shape = SubResource("CircleShape2D_75ctg")
+shape = SubResource("CircleShape2D_kccus")
 
 [node name="ReviveArea2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -104,9 +108,28 @@ gravity = 100000.0
 
 [node name="ReviveCollisionShape" type="CollisionShape2D" parent="ReviveArea2D"]
 material = SubResource("CanvasItemMaterial_cjy5c")
-scale = Vector2(30, 30)
 shape = SubResource("CircleShape2D_75ctg")
 debug_color = Color(1, 1, 1, 0.42)
+
+[node name="ReviveProgressBar2" type="TextureProgressBar" parent="ReviveArea2D/ReviveCollisionShape"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -148.5
+offset_right = 148.5
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(148, 148)
+max_value = 1.0
+step = 0.01
+fill_mode = 4
+texture_progress = ExtResource("7_kh3sg")
+tint_progress = Color(1, 0.831373, 0.454902, 0.392157)
 
 [node name="ReviveProgressBar" type="TextureProgressBar" parent="ReviveArea2D/ReviveCollisionShape"]
 anchors_preset = 8
@@ -114,22 +137,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -220.0
-offset_right = 220.0
-offset_bottom = 220.0
+offset_left = -148.5
+offset_top = -148.5
+offset_right = 148.5
+offset_bottom = 148.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.045, 0.045)
-pivot_offset = Vector2(220, 220)
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(148, 148)
 max_value = 1.0
 step = 0.01
 value = 0.5
 fill_mode = 4
-texture_under = ExtResource("2_1y4go")
-texture_progress = ExtResource("2_1y4go")
+texture_under = ExtResource("5_x80sq")
+texture_progress = ExtResource("6_0llbf")
 tint_under = Color(0.388235, 0.388235, 0.388235, 0.501961)
-tint_progress = Color(1, 1, 1, 0.501961)
 
 [node name="CharacterAnimatedSprite" parent="." instance=ExtResource("7_7w7dn")]
 scale = Vector2(0.5, 0.5)
