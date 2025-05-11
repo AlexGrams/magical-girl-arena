@@ -7,6 +7,8 @@ extends EnemyRanged
 ## Scene for the Powerup to give to this enemy when it spawns.
 @export var default_powerup_path: String = ""
 
+@export var _character: Constants.Character
+
 # How much time this corrupted enemy has left in the game.
 var current_lifetime: float = 0.0
 
@@ -15,6 +17,8 @@ var _hud_canvas_layer: HUDCanvasLayer = null
 
 func _ready() -> void:
 	super()
+	
+	sprite.set_character(_character)
 	
 	current_lifetime = corrupted_lifetime
 	

@@ -3,7 +3,7 @@ extends Sprite2D
 # An animated sprite for displaying selected characters outside of the Playground.
 
 @export var gdcubism_user_model:GDCubismUserModel
-var character_data:CharacterData = null
+var character_data:CharacterData = Constants.CHARACTER_DATA[Constants.Character.GOTH]
 # Float used to rescale model if character changes
 var previous_model_scale_multiplier:float = 1
 
@@ -52,7 +52,7 @@ func play_revive_animation() -> void:
 	# No animation done yet.
 
 func _physics_process(_delta: float) -> void:
-	if character_data == null:
+	if not is_instance_valid(character_data):
 		push_error("Character not set!")
 	# Simple animation if we don't care about user input.
 	if not is_dead:
