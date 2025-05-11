@@ -64,6 +64,7 @@ _on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 _character_animated_sprite = NodePath("CharacterAnimatedSprite")
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
