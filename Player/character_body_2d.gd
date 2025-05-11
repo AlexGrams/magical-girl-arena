@@ -318,6 +318,8 @@ func die():
 	is_down = true
 	down_timer = 0.0
 	revive_timer = 0.0
+	_revive_progress_bar.value = 0
+	_revive_progress_bar_2.value = 0
 	_revive_collision_area.show()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
 	_character_animated_sprite.play_death_animation()
