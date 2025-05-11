@@ -18,7 +18,6 @@ extends Ability
 @export var _bullet_scene_uid := ""
 
 
-var _temp_health_ranged_squared: float = 0.0
 ## Number of radians that each slice consists of.
 var _rad_per_slice: float = 0.0
 
