@@ -248,13 +248,13 @@ func update_character_description() -> void:
 	
 	var data: CharacterData = _get_character_data(character)
 	
-	information_name.text = data.name
+	information_name.change_text(data.name)
 	information_description.text = data.description
 	information_powerup_texture.texture = data.base_powerup_texture
-	information_powerup_label.text = "Signature: " + data.base_powerup_name
+	information_powerup_label.change_text(data.base_powerup_name)
 	information_powerup_description.text = load(data.base_powerup_data).upgrade_description
 	information_ult_texture.texture = data.ult_texture
-	information_ult_label.text = "Ultimate: " + data.ult_name
+	information_ult_label.change_text(data.ult_name)
 	information_ult_description.text = data.ult_description
 
 
@@ -276,14 +276,4 @@ func _switch_screen_animation(from_screen: Control, to_screen: Control, to_scree
 	to_screen.show()
 
 func _get_character_data(character: Constants.Character) -> CharacterData:
-	var data: CharacterData = null
-	match(character):
-		Constants.Character.GOTH:
-			data = load("res://Player/CharacterResourceFiles/character_data_goth.tres")
-		Constants.Character.SWEET:
-			data = load("res://Player/CharacterResourceFiles/character_data_sweet.tres")
-		Constants.Character.VALE:
-			data = load("res://Player/CharacterResourceFiles/character_data_vale.tres")
-		_:
-			print("uh oh")
-	return data
+	return Constants.CHARACTER_DATA[character]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=27 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -18,6 +18,7 @@
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="15_e8gbh"]
 [ext_resource type="Texture2D" uid="uid://cwpwmd20e76c2" path="res://Sprites/UI/CharacterIcons/SweetIcon.png" id="16_c71yi"]
+[ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="18_5ybm4"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="18_651ly"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
 
@@ -58,12 +59,12 @@ players_holder = NodePath("Lobby/PlayersHolder")
 character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
 information_name = NodePath("Lobby/CharacterInformationContainer/Name")
 information_description = NodePath("Lobby/CharacterInformationContainer/Description")
-information_powerup_label = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer/Signature_Label")
-information_powerup_texture = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/Powerup_Icon/Powerup_Image")
-information_powerup_description = NodePath("Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer/PowerupDescription")
-information_ult_label = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer/Ultimate_Label")
-information_ult_texture = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Icon/Ultimate_Image")
-information_ult_description = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer/UltimateDescription")
+information_powerup_label = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer/SignatureName")
+information_powerup_texture = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon/Powerup_Image")
+information_powerup_description = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/PowerupDescription")
+information_ult_label = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
+information_ult_texture = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
+information_ult_description = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
 start_game_button = NodePath("Lobby/StartGame_Label/StartGameButton")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
@@ -115,6 +116,7 @@ stretch_mode = 4
 script = ExtResource("4_aw7yi")
 
 [node name="Main" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -341,7 +343,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Lobby" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -413,25 +414,21 @@ layout_mode = 0
 offset_left = 18.0
 offset_top = 254.0
 offset_right = 538.0
-offset_bottom = 943.0
+offset_bottom = 995.0
 texture = ExtResource("13_flegh")
 
 [node name="CharacterInformationContainer" type="VBoxContainer" parent="Lobby"]
 layout_mode = 0
 offset_left = 58.0
-offset_top = 291.0
+offset_top = 299.0
 offset_right = 497.0
 offset_bottom = 596.0
 
-[node name="Name" type="Label" parent="Lobby/CharacterInformationContainer"]
-custom_minimum_size = Vector2(439, 0)
+[node name="Name" parent="Lobby/CharacterInformationContainer" instance=ExtResource("18_5ybm4")]
 layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("14_kechk")
+theme_override_constants/outline_size = 35
 theme_override_font_sizes/font_size = 48
-text = "Character Name"
-horizontal_alignment = 1
-autowrap_mode = 3
+text = "Goth"
 
 [node name="HSeparator" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -439,13 +436,13 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Description" type="Label" parent="Lobby/CharacterInformationContainer"]
-custom_minimum_size = Vector2(439, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
+size_flags_vertical = 3
 theme = ExtResource("18_651ly")
 theme_override_font_sizes/font_size = 24
 text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="HSeparator2" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
@@ -457,16 +454,17 @@ layout_mode = 2
 layout_mode = 0
 offset_left = 58.0
 offset_top = 610.0
-offset_right = 508.0
-offset_bottom = 905.0
+offset_right = 497.0
+offset_bottom = 928.0
 
-[node name="PowerupInformationContainer" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2"]
-custom_minimum_size = Vector2(20, 20)
+[node name="PowerupInformation" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 15
 
-[node name="Powerup_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer"]
+[node name="Powerup_Header_Container" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformation"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Powerup_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
 clip_children = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -475,7 +473,7 @@ texture = ExtResource("19_7guse")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Powerup_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/Powerup_Icon"]
+[node name="Powerup_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -492,27 +490,29 @@ texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer"]
+[node name="SignatureTitle_VboxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Signature_Label" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer"]
-custom_minimum_size = Vector2(335, 0)
+[node name="Signature" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
 layout_mode = 2
-size_flags_vertical = 0
-theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Signature:"
-autowrap_mode = 3
+horizontal_alignment = 0
 
-[node name="PowerupDescription" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformationContainer/VBoxContainer"]
-custom_minimum_size = Vector2(335, 0)
+[node name="SignatureName" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Signature Name"
+
+[node name="PowerupDescription" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformation"]
+custom_minimum_size = Vector2(439, 0)
 layout_direction = 2
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 6
 theme = ExtResource("18_651ly")
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="HSeparator3" type="HSeparator" parent="Lobby/CharacterInformationContainer2"]
@@ -520,13 +520,15 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="UltimateInformation" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2"]
-custom_minimum_size = Vector2(20, 20)
+[node name="UltimateInformation" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2"]
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 15
+size_flags_horizontal = 0
 
-[node name="Ultimate_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
+[node name="Ultimate_Header_Container" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Ultimate_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
 clip_children = 2
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -535,7 +537,7 @@ texture = ExtResource("19_7guse")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Ultimate_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Icon"]
+[node name="Ultimate_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -552,27 +554,28 @@ texture = ExtResource("5_1w6cg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
-custom_minimum_size = Vector2(100, 100)
+[node name="UltimateTitle_VboxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Ultimate_Label" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer"]
-custom_minimum_size = Vector2(335, 0)
+[node name="Ultimate" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Ultimate:"
-autowrap_mode = 3
+horizontal_alignment = 0
 
-[node name="UltimateDescription" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation/VBoxContainer"]
-custom_minimum_size = Vector2(335, 0)
+[node name="UltimateName" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ultimate Name"
+
+[node name="UltimateDescription" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
+custom_minimum_size = Vector2(439, 0)
 layout_direction = 2
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 6
 theme = ExtResource("18_651ly")
 text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="StartGame_Label" type="Label" parent="Lobby"]

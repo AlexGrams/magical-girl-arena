@@ -37,7 +37,7 @@ func set_properties(
 	character: Constants.Character
 ) -> void:
 	
-	username.text = new_username
+	update_username_text(new_username)
 	id.text = str(new_player_id)
 	player_id = new_player_id
 	portal_closed.hide()
@@ -52,11 +52,12 @@ func set_properties(
 			, CONNECT_ONE_SHOT
 		)
 	sprite.set_character(character)
+	sprite.set_model_scale(1.5)
 
 
 # Remove all the displayed data for this container.
 func clear_properties() -> void:
-	username.text = ""
+	update_username_text("")
 	id.text = ""
 	portal_open.hide()
 	portal_closed.show()
@@ -67,3 +68,10 @@ func clear_properties() -> void:
 func _on_hidden() -> void:
 	if sprite != null and not sprite.is_queued_for_deletion():
 		sprite.queue_free()
+
+func update_username_text(new_text:String) -> void:
+	# Updates the outline and shadow of the text as well.
+	# Outline and shadow are necessary since regular outline results in gaps
+	username.text = new_text
+	for child in username.get_children():
+		child.text = new_text
