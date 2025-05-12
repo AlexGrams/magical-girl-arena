@@ -81,9 +81,6 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		$"../CanvasLayer".update_stats(self)
-		
-		if GameState.USING_GODOT_STEAM:
-			set_nametag.rpc(Steam.getPersonaName())
 
 
 ## Called when a Powerup is selected on the level up screen.
@@ -438,6 +435,10 @@ func setup_authority(id: int, character: Constants.Character) -> void:
 	# Extra functionality if this client is being given authority to its own character.
 	if id == multiplayer.get_unique_id():
 		$Camera2D.make_current()
+		
+		# Sort of jank, but we notify all other client's about this character's nametag here.
+		if GameState.USING_GODOT_STEAM:
+			set_nametag.rpc(Steam.getPersonaName())
 
 
 # Emits the signal for gaining experience on all clients.
