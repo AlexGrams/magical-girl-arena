@@ -59,7 +59,7 @@ _revive_progress_bar = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgres
 _revive_progress_bar_2 = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgressBar2")
 _on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 _character_animated_sprite = NodePath("CharacterAnimatedSprite")
-_nametag = NodePath("Nametag")
+_nametag = NodePath("Label")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -158,7 +158,7 @@ libraries = {
 "": SubResource("AnimationLibrary_3geqs")
 }
 
-[node name="Nametag" type="Label" parent="."]
+[node name="Label" type="Label" parent="."]
 offset_left = -107.0
 offset_top = -117.0
 offset_right = 105.0
