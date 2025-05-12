@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -255,10 +255,8 @@ func start_game():
 	for player_id in players.keys():
 		var player: PlayerCharacterBody2D = player_resource.instantiate()
 		
-		if USING_GODOT_STEAM:
-			player.set_label_name(str(Steam.getPersonaName()))
-		else:
-			player.set_label_name(str(player_id))
+		if not USING_GODOT_STEAM:
+			player.set_nametag(str(player_id))
 		
 		player.died.connect(func():
 			_on_player_died.rpc()

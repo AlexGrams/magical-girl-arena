@@ -46,7 +46,7 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite") groups=["player"]]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag") groups=["player"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 194
@@ -59,6 +59,7 @@ _revive_progress_bar = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgres
 _revive_progress_bar_2 = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgressBar2")
 _on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 _character_animated_sprite = NodePath("CharacterAnimatedSprite")
+_nametag = NodePath("Nametag")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -157,7 +158,7 @@ libraries = {
 "": SubResource("AnimationLibrary_3geqs")
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Nametag" type="Label" parent="."]
 offset_left = -107.0
 offset_top = -117.0
 offset_right = 105.0

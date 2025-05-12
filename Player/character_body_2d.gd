@@ -26,6 +26,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _revive_progress_bar_2: TextureProgressBar = null
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
 @export var _character_animated_sprite: Sprite2D = null
+@export var _nametag: Label = null
 
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
@@ -80,6 +81,9 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		$"../CanvasLayer".update_stats(self)
+		
+		if GameState.USING_GODOT_STEAM:
+			set_nametag.rpc(Steam.getPersonaName())
 
 
 ## Called when a Powerup is selected on the level up screen.
@@ -339,8 +343,10 @@ func revive():
 	revived.emit()
 
 
-func set_label_name(new_name: String) -> void:
-	$Label.text = new_name
+## Set the name that appears above this character.
+@rpc("authority", "call_local")
+func set_nametag(new_name: String) -> void:
+	_nametag.text = new_name
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
