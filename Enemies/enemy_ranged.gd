@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 			take_damage(health)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if target != null:
 		if global_position.distance_squared_to(target.global_position) > squared_max_range:
 			velocity = (target.global_position - global_position).normalized() * speed
@@ -41,6 +41,13 @@ func _physics_process(_delta: float) -> void:
 			if is_multiplayer_authority() and fire_timer >= fire_interval:
 				shoot()
 				fire_timer = 0.0
+		
+		# Check to see if there is a closer target within range
+		if is_multiplayer_authority() and not is_ally:
+			_retarget_timer -= delta
+			if _retarget_timer <= 0.0:
+				_find_new_target()
+				_retarget_timer = retarget_check_interval
 	else:
 		if is_multiplayer_authority():
 			_find_new_target()

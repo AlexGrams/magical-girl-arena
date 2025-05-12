@@ -11,6 +11,8 @@ extends CharacterBody2D
 ## Time in seconds between when this Enemy can attack
 @export var attack_interval: float = 1.0
 @export var attack_damage: float = 10.0
+## Time in seconds between checks to see if there is a closer player to target.
+@export var retarget_check_interval: float = 5.0
 ## The relative liklihoods of dropping EXP, gold, or nothing when this Enemy dies.
 @export var drop_weight_exp: float = 1.0
 @export var drop_weight_gold: float = 1.0
@@ -38,9 +40,12 @@ var ally_damage: float = 0.0
 
 ## All Powerup objects currently spawned in and added to this Enemy.
 var _powerups: Array[Powerup] = []
-# How long until this Enemy can attack again
+## How long until this Enemy can attack again
 var _attack_timer: float = 0.0
-# Thresholds used for randomly determining what an enemy drops. 
+## Time in seconds until this Enemy checks to see if there is a player to target that is closer than its
+## current targer.
+var _retarget_timer: float = 0.0
+## Thresholds used for randomly determining what an enemy drops. 
 var _threshold_exp: float = 0.0
 var _threshold_gold: float = 0.0
 ## Status to make this Enemy an ally when it dies.
@@ -58,6 +63,7 @@ signal allied(enemy: Enemy)
 func _ready() -> void:
 	max_health = snapped(base_health * curve_max_health.sample(GameState.get_game_progress_as_fraction()), 1)
 	health = max_health
+	_retarget_timer = retarget_check_interval
 	
 	# Random loot generation
 	var total := drop_weight_exp + drop_weight_gold + drop_weight_nothing
@@ -86,10 +92,18 @@ func _process(delta: float) -> void:
 			take_damage(health)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if target != null:
 		velocity = (target.global_position - global_position).normalized() * speed
 		move_and_slide()
+		
+		# Retargeting check: Occasionally see if we should attack a player that is closer than our
+		# current target.
+		if is_multiplayer_authority() and not is_ally:
+			_retarget_timer -= delta
+			if _retarget_timer <= 0.0:
+				_find_new_target()
+				_retarget_timer = retarget_check_interval
 	else:
 		if is_multiplayer_authority():
 			_find_new_target()
@@ -118,8 +132,8 @@ func _add_powerup(powerup_scene: PackedScene) -> void:
 	_powerups.append(powerup)
 
 
-# Set target that this enemy is trying to attack. 
-# Makes sure to find a new target if the current one dies.
+## Sets target to the nearest character.
+## Makes sure to find a new target if the current one dies.
 func _find_new_target() -> void:
 	if not is_ally:
 		var new_target: Node2D = get_nearest_player_character()
