@@ -1,7 +1,5 @@
 extends Bullet
 
-## Characters that this bullet is touching that it will damage each physics tick.
-var _colliding_targets: Array[Node2D] = []
 ## How much damage this bullet does.
 var _damage: float = 0.0
 
@@ -16,11 +14,6 @@ func _process(delta: float) -> void:
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():
 		queue_free()
-
-
-func _physics_process(_delta: float) -> void:
-	for target: Node2D in _colliding_targets:
-		target.take_damage(_damage)
 
 
 func set_damage(damage: float):
@@ -41,13 +34,14 @@ func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 		collider.area_exited.disconnect(_on_area_2d_exited)
 
 
+## Apply damage continually to any overlapping Enemies.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
-	if other:
-		_colliding_targets.append(other)
+	if other != null and other is Enemy:
+		other.add_continuous_damage(_damage)
 
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
-	if other:
-		_colliding_targets.remove_at(_colliding_targets.find(other))
+	if other != null and other is Enemy:
+		other.add_continuous_damage(-_damage)

@@ -45,6 +45,9 @@ var _attack_timer: float = 0.0
 ## Time in seconds until this Enemy checks to see if there is a player to target that is closer than its
 ## current targer.
 var _retarget_timer: float = 0.0
+## Damage that will be applied to this Enemy every physics frame. Useful for continuous sources of 
+## damage such as AOE hazards or damaging debuffs.
+var _continuous_damage: float = 0.0
 ## Thresholds used for randomly determining what an enemy drops. 
 var _threshold_exp: float = 0.0
 var _threshold_gold: float = 0.0
@@ -97,13 +100,18 @@ func _physics_process(delta: float) -> void:
 		velocity = (target.global_position - global_position).normalized() * speed
 		move_and_slide()
 		
-		# Retargeting check: Occasionally see if we should attack a player that is closer than our
-		# current target.
-		if is_multiplayer_authority() and not is_ally:
-			_retarget_timer -= delta
-			if _retarget_timer <= 0.0:
-				_find_new_target()
-				_retarget_timer = retarget_check_interval
+		if is_multiplayer_authority():
+			# Continuous damage 
+			if _continuous_damage > 0.0:
+				_take_damage(_continuous_damage)
+			
+			# Retargeting check: Occasionally see if we should attack a player that is closer than our
+			# current target.
+			if not is_ally:
+				_retarget_timer -= delta
+				if _retarget_timer <= 0.0:
+					_find_new_target()
+					_retarget_timer = retarget_check_interval
 	else:
 		if is_multiplayer_authority():
 			_find_new_target()
@@ -206,6 +214,12 @@ func get_nearest_hostile_enemy() -> Enemy:
 @rpc("authority", "call_local")
 func set_target(target_path: NodePath) -> void:
 	target = get_node(target_path)
+
+
+## Changes the amount of damage being done to this Enemy each physics frame. Useful for sources of 
+## periodic damage such as AOE damage volumes and debuffs.
+func add_continuous_damage(damage: float) -> void:
+	_continuous_damage = max(_continuous_damage + damage, 0)
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
