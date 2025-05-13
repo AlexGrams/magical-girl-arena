@@ -15,6 +15,7 @@ ult_name = "Missile Swarm"
 ult_description = "Fire missiles all around you."
 ult_texture = ExtResource("1_bhade")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
 offset_height = -25.0
 ultimate_ability = "res://Abilities/ability_ult_vale.tscn"

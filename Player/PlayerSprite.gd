@@ -13,17 +13,21 @@ var last_direction = "move_right"
 var _read_input := true
 var is_dead:bool = false
 
-func set_character(character: Constants.Character) -> void:
+func set_character(character: Constants.Character, is_corrupted:bool = false) -> void:
 	character_data = Constants.CHARACTER_DATA[character]
-	_set_sprite()
+	_set_sprite(is_corrupted)
 	
 func set_read_input(new_val: bool) -> void:
 	_read_input = new_val
 
-func _set_sprite() -> void:
+func _set_sprite(is_corrupted:bool = false) -> void:
 	if character_data == null:
 		push_error("Character not set!")
-	gdcubism_user_model.set_assets(character_data.model_file_path)
+		
+	if is_corrupted:
+		gdcubism_user_model.set_assets(character_data.corrupted_model_file_path)
+	else:
+		gdcubism_user_model.set_assets(character_data.model_file_path)
 	
 	# If scale multiplier differs, we need to rescale
 	if character_data.model_scale_multiplier != previous_model_scale_multiplier:

@@ -18,7 +18,7 @@ var _hud_canvas_layer: HUDCanvasLayer = null
 func _ready() -> void:
 	super()
 	
-	sprite.set_character(_character)
+	sprite.set_character(_character, true)
 	
 	current_lifetime = corrupted_lifetime
 	

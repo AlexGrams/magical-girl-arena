@@ -15,6 +15,7 @@ ult_name = "Necromancy"
 ult_description = "Unleash a powerful attack, temporarily marking all enemies around you. When marked enemies are killed, they become your allies for a brief duration."
 ult_texture = ExtResource("3_iwh0v")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.model3.json"
 model_scale_multiplier = 1.0
 offset_height = 0.0
 ultimate_ability = "res://Abilities/ability_ult_goth.tscn"

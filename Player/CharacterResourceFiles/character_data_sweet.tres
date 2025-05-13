@@ -14,6 +14,7 @@ ult_name = "Divination"
 ult_description = "Sweet grants herself and nearby allies bonus HP. She throws tarot cards in 12 directions, which deal damage and pierce through enemies. Sweet gains +1 reroll."
 ult_texture = ExtResource("1_dg116")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Sweet/runtime/Sweet.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Sweet/Corrupted/Sweet.model3.json"
 model_scale_multiplier = 1.0
 offset_height = 0.0
 ultimate_ability = "res://Abilities/ability_ult_sweet.tscn"

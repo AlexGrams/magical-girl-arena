@@ -12,9 +12,54 @@
 			"Name": "Breathing"
 		},
 		{
-			"Id": "Walking",
+			"Id": "HeadRotation",
 			"GroupId": "",
-			"Name": "Walking"
+			"Name": "HeadRotation"
+		},
+		{
+			"Id": "Left_Pigtail_Rotation",
+			"GroupId": "",
+			"Name": "Left_Pigtail_Rotation"
+		},
+		{
+			"Id": "Right_Pigtail_Rotation",
+			"GroupId": "",
+			"Name": "Right_Pigtail_Rotation"
+		},
+		{
+			"Id": "Left_Arm_Rotation",
+			"GroupId": "",
+			"Name": "Left_Arm_Rotation"
+		},
+		{
+			"Id": "Right_Arm_Rotation",
+			"GroupId": "",
+			"Name": "Right_Arm_Rotation"
+		},
+		{
+			"Id": "Ribbon_Rotation",
+			"GroupId": "",
+			"Name": "Ribbon_Rotation"
+		},
+		{
+			"Id": "Skirt_Rotation",
+			"GroupId": "",
+			"Name": "Skirt_Rotation"
+		},
+		{
+			"Id": "Torso_Sway",
+			"GroupId": "",
+			"Name": "Torso_Sway"
+		},
+		{
+			"Id": "Torso_UpDown",
+			"GroupId": "",
+			"Name": "Torso_UpDown"
+		},
+		{
+			"Id": "Skirt_UpDown",
+			"GroupId": "",
+			"Name": "Skirt_UpDown"
 		}
 	],
 	"ParameterGroups": [],
