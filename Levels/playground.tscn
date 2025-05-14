@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=132 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -48,6 +48,7 @@
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
+[ext_resource type="Texture2D" uid="uid://bo1lmy1fjhpcf" path="res://Sprites/UI/HealthBarLines.png" id="35_17piw"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
 [ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="36_xpuqi"]
@@ -58,7 +59,7 @@
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
 [ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="48_hwjvr"]
-[ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Resource" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 [ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="49_xecmh"]
 [ext_resource type="Texture2D" uid="uid://b4meuc223cj41" path="res://Sprites/Powerups/Stats/Health.png" id="54_aob33"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
@@ -67,6 +68,7 @@
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
 [ext_resource type="Texture2D" uid="uid://dr7qvwfxxl54h" path="res://Sprites/Powerups/Stats/Speed.png" id="56_c6h32"]
 [ext_resource type="Texture2D" uid="uid://cnbo4juf7220o" path="res://Sprites/Powerups/Stats/ion_magnet.png" id="57_wkgsw"]
+[ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="66_eac6f"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
 script = ExtResource("5_b8hlh")
@@ -626,17 +628,31 @@ gradient = SubResource("Gradient_vn3oc")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obhx2"]
 texture = SubResource("GradientTexture1D_nc5ny")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmlv1"]
-bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+[sub_resource type="Gradient" id="Gradient_kh532"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
-bg_color = Color(0.901961, 0.25098, 0.25098, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pn3bw"]
+gradient = SubResource("Gradient_kh532")
+width = 150
+height = 35
+
+[sub_resource type="Gradient" id="Gradient_labx2"]
+colors = PackedColorArray(0.901961, 0.25098, 0.25098, 1, 1, 1, 0.443137, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g8v8b"]
+gradient = SubResource("Gradient_labx2")
+width = 150
+height = 35
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wr3nc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8jyi"]
 texture = ExtResource("37_salih")
 modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
+bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer")]
 script = ExtResource("1_s3iet")
@@ -12270,7 +12286,8 @@ grow_vertical = 0
 theme = ExtResource("34_po6dc")
 text = "Level: 1"
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+custom_minimum_size = Vector2(150, 35)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -12282,11 +12299,9 @@ offset_right = 71.0
 offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_lmlv1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_rlept")
-max_value = 1.0
-value = 0.5
-show_percentage = false
+texture_under = SubResource("GradientTexture2D_pn3bw")
+texture_over = ExtResource("35_17piw")
+texture_progress = SubResource("GradientTexture2D_g8v8b")
 
 [node name="HealthLabel" type="Label" parent="CanvasLayer/HealthBar"]
 layout_mode = 1
@@ -12663,6 +12678,7 @@ size_flags_vertical = 8
 icon = ExtResource("57_wkgsw")
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12861,16 +12877,16 @@ text = "Quit to Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Label" parent="CanvasLayer"]
+[node name="Timer" parent="CanvasLayer" instance=ExtResource("66_eac6f")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -75.0
+anchor_bottom = 0.0
+offset_left = -73.5
 offset_top = 33.0
-offset_right = 79.0
-offset_bottom = 97.0
-grow_horizontal = 2
-theme = ExtResource("34_po6dc")
+offset_right = 73.5
+offset_bottom = 87.0
+grow_vertical = 1
 theme_override_font_sizes/font_size = 46
 text = "00:00"
 horizontal_alignment = 1

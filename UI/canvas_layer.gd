@@ -83,9 +83,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	_timer_text.text = (
+	_timer_text.change_text((
 		"%02d:%02d" % [int(ceil(GameState.time)) / 60.0, int(ceil(GameState.time)) % 60]
-	)
+	))
 	
 	# Update pointers that indicate the direction of players not on the screen.
 	var used_pointers: int = 0
@@ -140,7 +140,7 @@ func _on_character_body_2d_gained_experience(experience: float, level: int) -> v
 
 func _on_character_body_2d_took_damage(health: int, health_max: int, temp_health: int) -> void:
 	$HealthBar/HealthLabel.text = str(health) + "/" + str(health_max)
-	$HealthBar.value = float(health) / health_max
+	$HealthBar.value = (float(health) / float(health_max)) * 100
 	
 	if temp_health > 0:
 		_temp_health_control.show()
