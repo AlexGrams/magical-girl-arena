@@ -18,11 +18,12 @@ config/windows_native_icon="res://ProjectIcons/IconWindows.ico"
 
 [autoload]
 
+Constants="*res://GameManagement/constants.gd"
+Analytics="*res://Analytics/analytics.gd"
 MultiplayerManager="*res://Multiplayer/multiplayer_manager.gd"
 GameState="*res://Multiplayer/game_state.gd"
 WorldMultiplayerSpawner="*res://Levels/LevelPlaceables/world_multiplayer_spawner.tscn"
 SaveManager="*res://Saving/save_manager.gd"
-Constants="*res://GameManagement/constants.gd"
 AudioManager="*res://Audio/audio_manager.tscn"
 
 [display]
@@ -32,6 +33,10 @@ window/size/viewport_height=1080
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GA-SDK-GODOT-master/example/addons/gameanalytics-android/plugin.cfg")
 
 [global_group]
 
