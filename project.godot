@@ -36,7 +36,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GA-SDK-GODOT-master/example/addons/gameanalytics-android/plugin.cfg")
+enabled=PackedStringArray("res://addons/game_analytics/example/addons/gameanalytics-android/plugin.cfg")
 
 [global_group]
 
