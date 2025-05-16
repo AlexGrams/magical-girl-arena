@@ -19,12 +19,13 @@ config/windows_native_icon="res://ProjectIcons/IconWindows.ico"
 [autoload]
 
 Constants="*res://GameManagement/constants.gd"
-Analytics="*res://Analytics/analytics.gd"
+PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 MultiplayerManager="*res://Multiplayer/multiplayer_manager.gd"
 GameState="*res://Multiplayer/game_state.gd"
 WorldMultiplayerSpawner="*res://Levels/LevelPlaceables/world_multiplayer_spawner.tscn"
 SaveManager="*res://Saving/save_manager.gd"
 AudioManager="*res://Audio/audio_manager.tscn"
+Analytics="*res://Analytics/analytics.gd"
 
 [display]
 
@@ -36,7 +37,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/game_analytics/example/addons/gameanalytics-android/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg")
 
 [global_group]
 
@@ -87,6 +88,10 @@ ability_ultimate={
 
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
+
+[playfab]
+
+title_id="50DEC"
 
 [rendering]
 
