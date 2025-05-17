@@ -288,6 +288,7 @@ func start_game():
 func _game_over(has_won_game: bool = false):
 	_gold += _gold_this_game
 	SaveManager.save_game()
+	Analytics.send_match_data.rpc()
 	
 	game_over.emit(has_won_game)
 

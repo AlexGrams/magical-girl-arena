@@ -35,18 +35,6 @@ func _ready():
 	# the option to not send data, we should have each client keep track of their own data.
 	# That makes it easier to keep track of things like powerups chosen since these things aren't 
 	# replicated. Will be harder to keep track of damage and health since only the server knows that.
-	
-	#PlayFabManager.client.logged_in.connect(func(_login_result: LoginResult):
-		## Next, try to send a telemetry event.
-		#var event_name := "test_telemetry_event"
-		#var payload := {
-			#"key_string": "value",
-			#"key_float": 1.5,
-			#"key_int": 3
-		#}
-		#
-		#write_title_player_telemetry_event(event_name, payload, _telemerty_event_callback)
-	#)
 
 
 ## Processes result returned by sending telemetry event to PlayFab server.
@@ -57,4 +45,12 @@ func _telemerty_event_callback(_data: Dictionary) -> void:
 @rpc("authority", "call_local")
 func set_match_id(id: int) -> void:
 	_telemetry_payload["match_id"] = id
+
+
+## Sends all the data this client gathered during the match to the PlayFab server. This data will 
+## then be visible on our dashboard.
+@rpc("authority", "call_local")
+func send_match_data() -> void:
+	write_title_player_telemetry_event("match_data", _telemetry_payload, _telemerty_event_callback)
+	print("Data sent!")
 	print(_telemetry_payload)
