@@ -30,6 +30,8 @@ func activate() -> void:
 		Vector2.ZERO, 
 		damage, 
 		true,
+		-1,
+		-1,
 		[status_duration]
 	]
 )

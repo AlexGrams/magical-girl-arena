@@ -61,6 +61,8 @@ func _shoot_targeted() -> void:
 				Vector2.ZERO, 
 				_damage, 
 				false,
+				-1,
+				-1,
 				[]
 			])
 
@@ -79,5 +81,7 @@ func _shoot_random() -> void:
 		Vector2.ZERO, 
 		_damage, 
 		false,
+		-1,
+		-1,
 		[]
 	])

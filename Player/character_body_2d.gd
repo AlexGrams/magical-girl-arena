@@ -251,6 +251,7 @@ func add_powerup(powerup_data: PowerupData, is_signature: bool = false):
 	var powerup: Powerup = powerup_data.scene.instantiate()
 	powerup.set_authority(multiplayer.get_unique_id())
 	powerup.is_signature = is_signature
+	powerup.set_powerup_index(len(powerups))
 	add_child(powerup, true)
 	powerups.append(powerup)
 	

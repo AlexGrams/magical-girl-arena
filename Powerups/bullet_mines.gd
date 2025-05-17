@@ -32,24 +32,6 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-# Set up other properties for this bullet
-#func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
-	#if (
-		#data.size() != 1
-		#or (typeof(data[0])) != TYPE_FLOAT		# Displacement from 
-	#):
-		#push_error("Malformed setup_bullet data argument.")
-		#return
-	#
-	#super(is_owned_by_player, data)
-	#
-	## Make the bullet hurt players
-	#if not is_owned_by_player:
-		#_is_owned_by_player = false
-		#_health = max_health
-		#_modify_collider_to_harm_players()
-
-
 ## Deal damage in an area around where the bullet is currently.
 func _explode() -> void:
 	_exploded = true

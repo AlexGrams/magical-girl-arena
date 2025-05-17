@@ -48,6 +48,8 @@ func _process(delta: float) -> void:
 						direction, 
 						_get_damage_from_curve(), 
 						_is_owned_by_player,
+						-1,
+						-1,
 						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
 					]
 				)
@@ -69,6 +71,8 @@ func _process(delta: float) -> void:
 						direction, 
 						owning_enemy.attack_damage, 
 						_is_owned_by_player,
+						-1,
+						-1,
 						[owning_enemy.get_path()]
 					]
 				)

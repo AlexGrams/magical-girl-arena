@@ -21,6 +21,8 @@ func activate_powerup():
 				Vector2.UP, 
 				_get_damage_from_curve(), 
 				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
 				[$"..".get_path()]
 			]
 		)
@@ -31,6 +33,8 @@ func activate_powerup():
 				Vector2.UP, 
 				_get_damage_from_curve(), 
 				_is_owned_by_player,
+				-1,
+				-1,
 				[$"..".get_path()]
 			]
 		)

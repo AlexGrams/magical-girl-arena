@@ -55,5 +55,7 @@ func _shoot() -> void:
 			Vector2.UP.rotated(rotation_increment * i), 
 			_damage, 
 			false,
+			-1,
+			-1,
 			[]
 		])

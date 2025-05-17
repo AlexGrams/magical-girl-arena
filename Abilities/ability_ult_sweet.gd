@@ -40,6 +40,8 @@ func activate() -> void:
 			Vector2.UP.rotated(rotation_increment * i), 
 			damage, 
 			true,
+			-1,
+			-1,
 			[]
 	])
 	

@@ -47,8 +47,10 @@ func activate() -> void:
 			1, [_bullet_scene_uid, 
 				get_parent().global_position, 
 				slice_rotator.rotated(randf_range(0.0, _rad_per_slice)), 
-				_touch_damage, 
+				_touch_damage,
 				true,
+				-1,
+				-1,
 				[
 					_touch_damage, 
 					_explosion_damage, 

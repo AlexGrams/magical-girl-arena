@@ -27,6 +27,8 @@ var is_on: bool = false
 
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true
+## The index of this powerup in the player's array of powerups, if this is owned by a player.
+var _powerup_index: int = -1
 
 # Emitted after increasing this Powerup's level
 signal powerup_level_up(new_level: int, new_damage: float)
@@ -38,6 +40,10 @@ func set_is_owned_by_player(value: bool) -> void:
 
 func set_is_signature(value: bool) -> void:
 	is_signature = value
+
+
+func set_powerup_index(index: int) -> void:
+	_powerup_index = index
 
 
 # Meant to be overridden

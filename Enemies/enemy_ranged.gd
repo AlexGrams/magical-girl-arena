@@ -68,6 +68,8 @@ func shoot() -> void:
 				direction_normal, 
 				bullet_damage, 
 				false,
+				-1,
+				-1,
 				[]
 			]
 		)
@@ -80,6 +82,8 @@ func shoot() -> void:
 				direction_normal, 
 				bullet_damage, 
 				true,
+				-1,
+				-1,
 				[]
 			]
 		)

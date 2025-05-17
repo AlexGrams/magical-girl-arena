@@ -36,6 +36,8 @@ func _process(delta: float) -> void:
 				Vector2.ZERO, 
 				_get_damage_from_curve(), 
 				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
 				[target.get_path()]
 			])
 		_shoot_timer = _shoot_interval

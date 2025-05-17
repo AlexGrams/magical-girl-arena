@@ -54,13 +54,19 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			take_damage(area.damage)
 
 
-# Set up other properties for this bullet
+## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 	# Make the bullet hurt players
 	if not is_owned_by_player:
 		_is_owned_by_player = false
 		_health = max_health
 		_modify_collider_to_harm_players()
+
+
+## Initialize properties used by the bullet for analytics on how much damage each of the player's powerups has done.
+func setup_analytics(owner_id: int, powerup_index: int) -> void:
+	collider.owner_id = owner_id
+	collider.powerup_index = powerup_index
 
 
 ## Do damage to this bullet. Bullets owned by enemies can be destroyed. Only call on 
