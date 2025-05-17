@@ -6,6 +6,9 @@ const ANALYTICS_ENABLED = true
 
 ## All the data relevant to this client that is generated during one match. 
 var _telemetry_payload: Dictionary = {}
+## Store damage values in an array that is unpacked into a dictionary when sending data.
+## Makes it easier to update since we're not using branching logic.
+var _powerup_damages: Array[float] = []
 
 
 func _ready():
@@ -52,12 +55,18 @@ func _setup_telemetry_payload() -> void:
 		"character": "",
 		"level_up_times": [],
 		"upgrades_chosen": [],
+		"powerup_1_damage": 0.0,
+		"powerup_2_damage": 0.0,
+		"powerup_3_damage": 0.0,
+		"powerup_4_damage": 0.0,
+		"powerup_5_damage": 0.0,
 		"times_ulted": 0,
 		"miniboss_hp_percent": 100,
 		"boss_hp_percent": 100,
 		"death_times": [],
 		"final_game_time": 0
 	}
+	_powerup_damages = [0.0, 0.0, 0.0, 0.0, 0.0]
 
 
 @rpc("authority", "call_local")
@@ -89,6 +98,10 @@ func add_upgrade_chosen(upgrade_name: String) -> void:
 	_telemetry_payload["upgrades_chosen"].append(upgrade_name)
 
 
+func add_powerup_damage(damage: float, index: int) -> void:
+	_powerup_damages[index] += damage
+
+
 func add_ult_count() -> void:
 	_telemetry_payload["times_ulted"] += 1
 
@@ -103,6 +116,12 @@ func add_death_time(time: int) -> void:
 func send_match_data() -> void:
 	if not is_multiplayer_authority():
 		return
+	
+	_telemetry_payload["powerup_1_damage"] = _powerup_damages[0]
+	_telemetry_payload["powerup_2_damage"] = _powerup_damages[1]
+	_telemetry_payload["powerup_3_damage"] = _powerup_damages[2]
+	_telemetry_payload["powerup_4_damage"] = _powerup_damages[3]
+	_telemetry_payload["powerup_5_damage"] = _powerup_damages[4]
 	
 	write_title_player_telemetry_event("match_data", _telemetry_payload, _send_telemerty_event_callback)
 	print("Data sent: " + str(_telemetry_payload))
