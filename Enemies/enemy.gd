@@ -56,6 +56,7 @@ var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
 var _goth_ult_allied_lifetime: float = 0.0
 var _goth_ult_allied_damage: float = 0.0
+var _hud_canvas_layer: HUDCanvasLayer = null
 
 # Emitted when this Enemy dies.
 signal died(enemy: Enemy)
@@ -255,6 +256,16 @@ func _damage_effects(damage: float) -> void:
 	
 	# Animation
 	$AnimationPlayer.play("take_damage")
+
+
+## Updates the displayed value on the boss HP bar and the recorded value for analytics.
+@rpc("authority", "call_local")
+func _update_boss_health_bar(new_percent: float, is_boss: bool) -> void:
+	_hud_canvas_layer.update_boss_health_bar(new_percent)
+	if is_boss:
+		Analytics.set_boss_hp_percent(int(new_percent * 100.0))
+	else:
+		Analytics.set_miniboss_hp_percent(int(new_percent * 100.0))
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

@@ -2,8 +2,6 @@ class_name EnemyBoss
 extends Enemy
 ## A special enemy that ends the game when it is defeated.
 
-var _hud_canvas_layer: HUDCanvasLayer = null
-
 
 func _ready() -> void:
 	super()
@@ -27,7 +25,7 @@ func _physics_process(delta: float) -> void:
 func _take_damage(damage: float) -> void:
 	super(damage)
 	
-	_hud_canvas_layer.update_boss_health_bar.rpc(float(health) / max_health)
+	_update_boss_health_bar.rpc(float(health) / max_health, true)
 
 
 ## Delete the boss. Only call on the server.

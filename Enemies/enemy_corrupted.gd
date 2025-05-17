@@ -12,8 +12,6 @@ extends EnemyRanged
 # How much time this corrupted enemy has left in the game.
 var current_lifetime: float = 0.0
 
-var _hud_canvas_layer: HUDCanvasLayer = null
-
 
 func _ready() -> void:
 	super()
@@ -51,7 +49,7 @@ func shoot() -> void:
 func _take_damage(damage: float) -> void:
 	super(damage)
 	
-	_hud_canvas_layer.update_boss_health_bar.rpc(float(health) / max_health)
+	_update_boss_health_bar.rpc(float(health) / max_health, false)
 
 
 ## Does nothing since corrupted Enemies cannot be made into allies.

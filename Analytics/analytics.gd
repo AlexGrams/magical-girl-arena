@@ -69,6 +69,14 @@ func set_character(character_name: String) -> void:
 	_telemetry_payload["character"] = character_name
 
 
+func set_miniboss_hp_percent(value: int) -> void:
+	_telemetry_payload["miniboss_hp_percent"] = value
+
+
+func set_boss_hp_percent(value: int) -> void:
+	_telemetry_payload["boss_hp_percent"] = value
+
+
 func set_final_game_time(time: int) -> void:
 	_telemetry_payload["final_game_time"] = time
 
