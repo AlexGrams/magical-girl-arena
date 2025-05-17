@@ -226,6 +226,9 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ability_ultimate") and abilities[0].get_can_activate():
 		abilities[0].activate()
+		
+		# Analytics: Record ult activation
+		Analytics.add_ult_count()
 
 
 func get_rerolls() -> int:
@@ -324,6 +327,7 @@ func die():
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
 	_character_animated_sprite.play_death_animation()
 	
+	Analytics.add_death_time(int(GameState.time))
 	disable_powerups()
 	died.emit()
 

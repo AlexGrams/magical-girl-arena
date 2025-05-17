@@ -40,7 +40,7 @@ func _ready():
 
 
 ## Processes result returned by sending telemetry event to PlayFab server.
-func _telemerty_event_callback(_data: Dictionary) -> void:
+func _send_telemerty_event_callback(_data: Dictionary) -> void:
 	pass
 
 
@@ -53,8 +53,8 @@ func _setup_telemetry_payload() -> void:
 		"level_up_times": [],
 		"upgrades_chosen": [],
 		"times_ulted": 0,
-		"miniboss_hp_percent": 0,
-		"boss_hp_percent": 0,
+		"miniboss_hp_percent": 100,
+		"boss_hp_percent": 100,
 		"death_times": [],
 		"final_game_time": 0
 	}
@@ -69,8 +69,20 @@ func set_character(character_name: String) -> void:
 	_telemetry_payload["character"] = character_name
 
 
+func set_final_game_time(time: int) -> void:
+	_telemetry_payload["final_game_time"] = time
+
+
 func add_level_up_time(time: int) -> void:
 	_telemetry_payload["level_up_times"].append(time)
+
+
+func add_ult_count() -> void:
+	_telemetry_payload["times_ulted"] += 1
+
+
+func add_death_time(time: int) -> void:
+	_telemetry_payload["death_times"].append(time)
 
 
 ## Sends all the data this client gathered during the match to the PlayFab server. This data will 
@@ -80,7 +92,7 @@ func send_match_data() -> void:
 	if not is_multiplayer_authority():
 		return
 	
-	write_title_player_telemetry_event("match_data", _telemetry_payload, _telemerty_event_callback)
+	write_title_player_telemetry_event("match_data", _telemetry_payload, _send_telemerty_event_callback)
 	print("Data sent: " + str(_telemetry_payload))
 	
 	# Clear the telemetry payload. This might be an issue if we want to retry sending the payload
