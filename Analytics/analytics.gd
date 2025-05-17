@@ -2,11 +2,14 @@ extends PlayFabEvent
 ## Manages game analytics through Microsoft Azure PlayFab: https://playfab.com/
 ## Docs: https://learn.microsoft.com/en-us/gaming/playfab/get-started/  
 
-const IS_ON = false
+const ANALYTICS_ENABLED = true
+
+## All the data relevant to this client that is generated during one match. 
+var _telemetry_payload: Dictionary = {}
 
 
 func _ready():
-	if not IS_ON:
+	if not ANALYTICS_ENABLED:
 		return
 	
 	super._ready()
@@ -24,19 +27,34 @@ func _ready():
 		push_warning("Creating new anonymous user")
 		PlayFabManager.client.login_anonymous()
 	
-	PlayFabManager.client.logged_in.connect(func(_login_result: LoginResult):
-		# Next, try to send a telemetry event.
-		var event_name := "test_telemetry_event"
-		var payload := {
-			"key_string": "value",
-			"key_float": 1.5,
-			"key_int": 3
-		}
-		
-		write_title_player_telemetry_event(event_name, payload, _telemerty_event_callback)
-	)
+	# Let's think about how we want to record data while the game is running.
+	# We know that we want to send telemetry when the game is over.
+	# Let's connect something to the "end game" signal, then use that to send
+	# the data when the game finishes.
+	# Since there might be some legal stuff that makes it so that we have to give players
+	# the option to not send data, we should have each client keep track of their own data.
+	# That makes it easier to keep track of things like powerups chosen since these things aren't 
+	# replicated. Will be harder to keep track of damage and health since only the server knows that.
+	
+	#PlayFabManager.client.logged_in.connect(func(_login_result: LoginResult):
+		## Next, try to send a telemetry event.
+		#var event_name := "test_telemetry_event"
+		#var payload := {
+			#"key_string": "value",
+			#"key_float": 1.5,
+			#"key_int": 3
+		#}
+		#
+		#write_title_player_telemetry_event(event_name, payload, _telemerty_event_callback)
+	#)
 
 
 ## Processes result returned by sending telemetry event to PlayFab server.
 func _telemerty_event_callback(_data: Dictionary) -> void:
 	pass
+
+
+@rpc("authority", "call_local")
+func set_match_id(id: int) -> void:
+	_telemetry_payload["match_id"] = id
+	print(_telemetry_payload)

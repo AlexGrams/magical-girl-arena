@@ -249,6 +249,10 @@ func start_game():
 	
 	load_game()
 	
+	# Analytics: Generate a random ID for this match. It is possible but unlikely that two different
+	# matches will have the same ID.
+	Analytics.set_match_id(randi())
+	
 	# Spawn each player at a spawn point.
 	var player_resource := load(player_scene)
 	var spawn_point_index = 0
