@@ -85,6 +85,10 @@ func add_level_up_time(time: int) -> void:
 	_telemetry_payload["level_up_times"].append(time)
 
 
+func add_upgrade_chosen(upgrade_name: String) -> void:
+	_telemetry_payload["upgrades_chosen"].append(upgrade_name)
+
+
 func add_ult_count() -> void:
 	_telemetry_payload["times_ulted"] += 1
 

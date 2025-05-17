@@ -136,6 +136,9 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	upgrade_chosen.emit(powerupdata)
 	GameState.player_selected_upgrade.rpc_id(1)
 	
+	# Analytics: Record selection
+	Analytics.add_upgrade_chosen(powerupdata.name)
+	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
 	reroll_button.hide()
@@ -148,6 +151,9 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	stat_upgrade_chosen.emit(stat_type)
 	GameState.player_selected_upgrade.rpc_id(1)
+	
+	# Analytics: record selection
+	Analytics.add_upgrade_chosen(Constants.StatUpgrades.keys()[stat_type])
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
