@@ -288,7 +288,8 @@ func start_game():
 func _game_over(has_won_game: bool = false):
 	_gold += _gold_this_game
 	SaveManager.save_game()
-	Analytics.send_match_data.rpc()
+	if is_multiplayer_authority():
+		Analytics.send_match_data.rpc()
 	
 	game_over.emit(has_won_game)
 
@@ -474,13 +475,15 @@ func load_game():
 func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> void:
 	experience += amount
 	AudioManager.create_audio_at_location(sound_location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_EXP_PICKUP)
-		
+	
+	# Level up if we have enough EXP.
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
+		# Analytics: record the time that we leveled up.
+		Analytics.add_level_up_time(int(time))
+		
 		experience -= exp_for_next_level
 		level += 1
 		_update_exp_for_next_level()
-		# TODO: Do something about replicating shoot interval
-		#shoot_interval = level_shoot_intervals[level]
 		
 		# Show and set up the upgrade screen
 		get_tree().paused = true

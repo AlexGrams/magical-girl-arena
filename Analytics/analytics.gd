@@ -51,10 +51,20 @@ func set_character(character_name: String) -> void:
 	_telemetry_payload["character"] = character_name
 
 
+func add_level_up_time(time: int) -> void:
+	if not _telemetry_payload.has("level_up_times"):
+		_telemetry_payload["level_up_times"] = []
+	_telemetry_payload["level_up_times"].append(time)
+	print(_telemetry_payload)
+
+
 ## Sends all the data this client gathered during the match to the PlayFab server. This data will 
 ## then be visible on our dashboard.
 @rpc("authority", "call_local")
 func send_match_data() -> void:
+	if not is_multiplayer_authority():
+		return
+	
 	write_title_player_telemetry_event("match_data", _telemetry_payload, _telemerty_event_callback)
 	print("Data sent!")
 	print(_telemetry_payload)
