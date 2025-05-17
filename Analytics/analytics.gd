@@ -47,6 +47,10 @@ func set_match_id(id: int) -> void:
 	_telemetry_payload["match_id"] = id
 
 
+func set_character(character_name: String) -> void:
+	_telemetry_payload["character"] = character_name
+
+
 ## Sends all the data this client gathered during the match to the PlayFab server. This data will 
 ## then be visible on our dashboard.
 @rpc("authority", "call_local")
@@ -54,3 +58,7 @@ func send_match_data() -> void:
 	write_title_player_telemetry_event("match_data", _telemetry_payload, _telemerty_event_callback)
 	print("Data sent!")
 	print(_telemetry_payload)
+	
+	# Clear the telemetry payload. This might be an issue if we want to retry sending the payload
+	# in case it fails.
+	_telemetry_payload = {}

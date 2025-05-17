@@ -390,6 +390,9 @@ func ready_player_character(character: Constants.Character) -> void:
 	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
+		# Analytics: record this client's character
+		Analytics.set_character(character_data.name)
+		
 		# Signal for experience changes
 		gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
 		
