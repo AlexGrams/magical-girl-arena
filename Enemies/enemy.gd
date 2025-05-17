@@ -272,6 +272,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
 		if is_multiplayer_authority():
 			take_damage(area.damage)
+		
+		# Analytics: Record damage done by touching a bullet for this client only.
+		if area.owner_id == multiplayer.get_unique_id():
+			Analytics.add_powerup_damage(area.damage, area.powerup_index)
+		
 		return
 	
 	var other = area.get_parent()
