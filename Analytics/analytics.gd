@@ -27,6 +27,8 @@ func _ready():
 		push_warning("Creating new anonymous user")
 		PlayFabManager.client.login_anonymous()
 	
+	_setup_telemetry_payload()
+	
 	# Let's think about how we want to record data while the game is running.
 	# We know that we want to send telemetry when the game is over.
 	# Let's connect something to the "end game" signal, then use that to send
@@ -42,6 +44,22 @@ func _telemerty_event_callback(_data: Dictionary) -> void:
 	pass
 
 
+## The analytic data we send to the PlayFab server is a dictionary, so we need to set its fields
+## so that they are listed in the same order every time. 
+func _setup_telemetry_payload() -> void:
+	_telemetry_payload = {
+		"match_id": 0,
+		"character": "",
+		"level_up_times": [],
+		"upgrades_chosen": [],
+		"times_ulted": 0,
+		"miniboss_hp_percent": 0,
+		"boss_hp_percent": 0,
+		"death_times": [],
+		"final_game_time": 0
+	}
+
+
 @rpc("authority", "call_local")
 func set_match_id(id: int) -> void:
 	_telemetry_payload["match_id"] = id
@@ -52,10 +70,7 @@ func set_character(character_name: String) -> void:
 
 
 func add_level_up_time(time: int) -> void:
-	if not _telemetry_payload.has("level_up_times"):
-		_telemetry_payload["level_up_times"] = []
 	_telemetry_payload["level_up_times"].append(time)
-	print(_telemetry_payload)
 
 
 ## Sends all the data this client gathered during the match to the PlayFab server. This data will 
@@ -66,9 +81,8 @@ func send_match_data() -> void:
 		return
 	
 	write_title_player_telemetry_event("match_data", _telemetry_payload, _telemerty_event_callback)
-	print("Data sent!")
-	print(_telemetry_payload)
+	print("Data sent: " + str(_telemetry_payload))
 	
 	# Clear the telemetry payload. This might be an issue if we want to retry sending the payload
 	# in case it fails.
-	_telemetry_payload = {}
+	_setup_telemetry_payload()
