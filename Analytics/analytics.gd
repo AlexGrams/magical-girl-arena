@@ -2,8 +2,15 @@ extends PlayFabEvent
 ## Manages game analytics through Microsoft Azure PlayFab: https://playfab.com/
 ## Docs: https://learn.microsoft.com/en-us/gaming/playfab/get-started/  
 
+const IS_ON = false
+
 
 func _ready():
+	if not IS_ON:
+		return
+	
+	super._ready()
+	
 	# First, we need to log in to send any events to the PlayFab servers
 	if PlayFabManager.client_config.login_type == PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID:
 		# User doesn't have an anonymous account yet, so make a new one.
@@ -16,18 +23,20 @@ func _ready():
 	else:
 		push_warning("Creating new anonymous user")
 		PlayFabManager.client.login_anonymous()
-	print("Attempting login...")
 	
 	PlayFabManager.client.logged_in.connect(func(_login_result: LoginResult):
 		# Next, try to send a telemetry event.
-		#var event_name := "test_telemetry_event"
-		#var payload := {
-			#"key_string": "value",
-			#"key_float": 1.5,
-			#"key_int": 3
-		#}
-		#
-		#write_title_player_telemetry_event(event_name, payload)
-		print("Telemetry event sent!")
+		var event_name := "test_telemetry_event"
+		var payload := {
+			"key_string": "value",
+			"key_float": 1.5,
+			"key_int": 3
+		}
+		
+		write_title_player_telemetry_event(event_name, payload, _telemerty_event_callback)
 	)
-	
+
+
+## Processes result returned by sending telemetry event to PlayFab server.
+func _telemerty_event_callback(_data: Dictionary) -> void:
+	pass
