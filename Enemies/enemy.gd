@@ -48,6 +48,10 @@ var _retarget_timer: float = 0.0
 ## Damage that will be applied to this Enemy every physics frame. Useful for continuous sources of 
 ## damage such as AOE hazards or damaging debuffs.
 var _continuous_damage: float = 0.0
+## Index of the powerup that is doing the local continuous damage. For analytics.
+var _continuous_damage_powerup_index: int = -1
+## How much continuous damage comes from the local player. For analytics.
+var _local_continuous_damage: float = 0.0
 ## Thresholds used for randomly determining what an enemy drops. 
 var _threshold_exp: float = 0.0
 var _threshold_gold: float = 0.0
@@ -105,6 +109,9 @@ func _physics_process(delta: float) -> void:
 			# Continuous damage 
 			if _continuous_damage > 0.0:
 				_take_damage(_continuous_damage)
+				# Analytics: Right now, we assume that continuous damage only comes from one local powerup.
+				if _continuous_damage_powerup_index != -1:
+					Analytics.add_powerup_damage(_local_continuous_damage, _continuous_damage_powerup_index)
 			
 			# Retargeting check: Occasionally see if we should attack a player that is closer than our
 			# current target.
@@ -221,6 +228,12 @@ func set_target(target_path: NodePath) -> void:
 ## periodic damage such as AOE damage volumes and debuffs.
 func add_continuous_damage(damage: float) -> void:
 	_continuous_damage = max(_continuous_damage + damage, 0)
+
+
+## For analytics. Set how much continuous damage the local client is doing to this Enemy.
+func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void:
+	_local_continuous_damage = damage
+	_continuous_damage_powerup_index = powerup_index
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
