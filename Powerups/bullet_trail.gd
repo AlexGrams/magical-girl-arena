@@ -51,13 +51,13 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	if other != null and other is Enemy:
 		if is_multiplayer_authority():
 			other.add_continuous_damage(_damage)
-		if multiplayer.get_unique_id() == _owner_id:
-			other.continuous_damage_analytics(_damage, _powerup_index)
+			if multiplayer.get_unique_id() == _owner_id:
+				other.continuous_damage_analytics(_damage, _powerup_index)
 
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other != null and other is Enemy:
 		other.add_continuous_damage(-_damage)
-	if multiplayer.get_unique_id() == _owner_id:
-		other.continuous_damage_analytics(_damage, _powerup_index)
+		if multiplayer.get_unique_id() == _owner_id:
+			other.continuous_damage_analytics(_damage, _powerup_index)
