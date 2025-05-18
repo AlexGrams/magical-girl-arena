@@ -120,11 +120,10 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 		Constants.StatUpgrades.HEALTH:
 			_stat_health += 1
 			# TODO: Temporary for now. Figure out if we want to do this off a curve or something.
-			health_max += 10
-			take_damage(-10.0)
+			_add_max_health.rpc(10)
 		Constants.StatUpgrades.HEALTH_REGEN:
 			_stat_health_regen += 1
-			_health_regen += 1.0
+			_add_health_regen.rpc(1.0)
 		Constants.StatUpgrades.SPEED:
 			_stat_speed += 1
 			speed += 40
@@ -299,8 +298,25 @@ func take_damage(damage: float) -> void:
 	
 	if damage > 0:
 		$AnimationPlayer.play("took_damage")
-		if health <= 0:
-			die()
+		
+		# While every client knows when every other player takes damage, the values become desynced 
+		# because of health regen and max health not being replicated. Can either replicate these
+		# changes
+		if is_multiplayer_authority() and health <= 0:
+			die.rpc()
+
+
+## Increases this player's max health, which also increases their current health value by the same amount.
+@rpc("authority", "call_local")
+func _add_max_health(max_health_to_add: int) -> void:
+	health_max += max_health_to_add
+	take_damage(-max_health_to_add)
+
+
+## Increases this player's health regen.
+@rpc("authority", "call_local")
+func _add_health_regen(health_regen_to_add: float) -> void:
+	_health_regen += health_regen_to_add
 
 
 # Add temporary health to the player
@@ -318,6 +334,7 @@ func add_temp_health(temp_health_to_add: int) -> void:
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
 # time before being able to be revived by another player. If no players remain, then the
 # game is over.
+@rpc("authority", "call_local")
 func die():
 	is_down = true
 	down_timer = 0.0
