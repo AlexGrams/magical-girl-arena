@@ -190,7 +190,6 @@ func _spawn_big_exp_orb() -> void:
 	if not _is_pooling_clients_for_powerup_pickup:
 		return
 	_is_pooling_clients_for_powerup_pickup = false
-	print("Exp spawned")
 	
 	var big_exp_orb: BigEXPOrb = _big_exp_orb.instantiate()
 	big_exp_orb.global_position = _powerup_pickup_location

@@ -230,9 +230,7 @@ func refresh_player_sprite(player_id: int) -> void:
 # Changes the client's selected character.
 func _on_character_select_button_pressed(button: CharacterSelectButton) -> void:
 	# TODO: Fix this or whatever
-	print(multiplayer.get_unique_id())
 	if multiplayer.multiplayer_peer is OfflineMultiplayerPeer:
-		print("Null")
 		return
 	GameState.set_character.rpc(multiplayer.get_unique_id(), button.character)
 	refresh_player_sprite.rpc(multiplayer.get_unique_id())
