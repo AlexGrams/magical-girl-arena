@@ -1,11 +1,17 @@
 class_name EnemySpawner
 extends AreaSpawner
 
+## Scales the number of enemies spawned per spawn event with respect to the number of players in the game. 
+@export var _player_count_spawn_amount_scale: Array[float] = [1.0, 1.5, 2.0, 2.5]
 
 # All spawn events that are running on this spawner.
 # 0: EnemySpawnEventData - information for this spawn event.
 # 1: float - time until the next activation.
 var _active_spawn_events: Array[Array] = []
+
+
+func _get_spawn_scale() -> float:
+	return _player_count_spawn_amount_scale[GameState.connected_players - 1]
 
 
 func _process(delta: float) -> void:
@@ -15,9 +21,12 @@ func _process(delta: float) -> void:
 		var spawn_event: Array = _active_spawn_events[i]
 		
 		if spawn_event[1] <= 0.0:
-			var enemies_to_spawn: int = spawn_event[0].min_spawn_count
+			var enemies_to_spawn: int = ceil(spawn_event[0].min_spawn_count * _get_spawn_scale())
 			if spawn_event[0].max_spawn_count > spawn_event[0].min_spawn_count:
-				enemies_to_spawn = randi_range(spawn_event[0].min_spawn_count, spawn_event[0].max_spawn_count)
+				enemies_to_spawn = randi_range(
+					spawn_event[0].min_spawn_count * _get_spawn_scale(), 
+					spawn_event[0].max_spawn_count * _get_spawn_scale()
+				)
 			
 			for j in range(enemies_to_spawn):
 				spawn(spawn_event[0].enemy)
