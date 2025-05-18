@@ -116,9 +116,6 @@ func add_death_time(time: int) -> void:
 ## then be visible on our dashboard.
 @rpc("authority", "call_local")
 func send_match_data() -> void:
-	if not is_multiplayer_authority():
-		return
-	
 	_telemetry_payload["powerup_1_damage"] = _powerup_damages[0]
 	_telemetry_payload["powerup_2_damage"] = _powerup_damages[1]
 	_telemetry_payload["powerup_3_damage"] = _powerup_damages[2]

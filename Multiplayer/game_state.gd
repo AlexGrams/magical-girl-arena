@@ -288,10 +288,10 @@ func start_game():
 func _game_over(has_won_game: bool = false):
 	_gold += _gold_this_game
 	SaveManager.save_game()
-	if is_multiplayer_authority():
-		# TODO: See how to have all clients call this properly
-		Analytics.set_final_game_time(int(time))
-		Analytics.send_match_data()
+	
+	# Send analytic data for this match to the PlayFab servers.
+	Analytics.set_final_game_time(int(time))
+	Analytics.send_match_data()
 	
 	game_over.emit(has_won_game)
 
