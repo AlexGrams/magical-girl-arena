@@ -48,8 +48,8 @@ func _process(delta: float) -> void:
 						direction, 
 						_get_damage_from_curve(), 
 						_is_owned_by_player,
-						-1,
-						-1,
+						multiplayer.get_unique_id(),
+						_powerup_index,
 						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
 					]
 				)
