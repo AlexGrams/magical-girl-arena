@@ -345,7 +345,9 @@ func die():
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
 	_character_animated_sprite.play_death_animation()
 	
-	Analytics.add_death_time(int(GameState.time))
+	if is_multiplayer_authority():
+		Analytics.add_death_time(int(GameState.time))
+	
 	disable_powerups()
 	died.emit()
 
