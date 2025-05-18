@@ -429,7 +429,9 @@ func unregister_player_by_steam_id(steam_id: int):
 		)
 	
 	players.erase(steam_ids[steam_id])
-	steam_ids.erase(steam_id)
+	if steam_ids.has(steam_id):
+		steam_ids.erase(steam_id)
+	
 	player_list_changed.emit()
 
 
