@@ -35,11 +35,15 @@ var _taunt_collision_mask: int = 0
 
 ## Initialize this pet.
 @rpc("any_peer", "call_local")
-func set_up(owner_path: String, starting_position: Vector2, damage: float) -> void:
+func set_up(owner_path: String, starting_position: Vector2, damage: float, owner_id: int, powerup_index: int) -> void:
 	_owner_node = get_tree().root.get_node(owner_path)
 	global_position = starting_position
 	set_multiplayer_authority(1)
 	_bullet_hitbox.damage = damage
+	
+	# Analytics information
+	_bullet_hitbox.owner_id = owner_id
+	_bullet_hitbox.powerup_index = powerup_index
 	
 	# Level up functionality
 	var pet_powerup = _owner_node.get_node_or_null("PowerupPet")

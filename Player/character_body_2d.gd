@@ -471,10 +471,10 @@ func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
 
 ## RPC the server to spawn in a pet owned by this character.
 @rpc("any_peer", "call_local")
-func spawn_pet_and_set_up(pet_scene: String, parent_path: String, starting_position: Vector2, damage: float) -> void:
+func spawn_pet_and_set_up(pet_scene: String, parent_path: String, starting_position: Vector2, damage: float, owner_id: int, powerup_index: int) -> void:
 	if multiplayer.get_unique_id() != 1:
 		return
 	
 	var pet: BulletPet = load(pet_scene).instantiate()
 	get_tree().root.get_node("Playground").add_child(pet, true)
-	pet.set_up.rpc(parent_path, starting_position, damage)
+	pet.set_up.rpc(parent_path, starting_position, damage, owner_id, powerup_index)

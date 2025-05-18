@@ -14,7 +14,15 @@ func _ready():
 
 func activate_powerup():
 	if _is_owned_by_player:
-		get_parent().spawn_pet_and_set_up.rpc_id(1, pet_scene, get_parent().get_path(), global_position, _get_damage_from_curve())
+		get_parent().spawn_pet_and_set_up.rpc_id(
+			1, 
+			pet_scene, 
+			get_parent().get_path(), 
+			global_position, 
+			_get_damage_from_curve(),
+			multiplayer.get_unique_id(),
+			_powerup_index
+		)
 	else:
 		# TODO: Support for when owned by an enemy.
 		pass
