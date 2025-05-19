@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://c3m341n71hh1o"]
+
+[ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="1_lvj68"]
+[ext_resource type="Script" path="res://Player/character_data.gd" id="2_lws6o"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="3_n6s63"]
+
+[resource]
+script = ExtResource("2_lws6o")
+name = "Dove"
+description = "Amore Dove is a magical girl who solves all sorts of relationship problems, from misunderstandings to full-blown arguments."
+base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres"
+base_powerup_name = "Cupid Arrows"
+base_powerup_texture = ExtResource("1_lvj68")
+ult_name = "Missile Swarm"
+ult_description = "Fire missiles all around you."
+ult_texture = ExtResource("3_n6s63")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Dove/runtime/Dove.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Dove/runtime/Dove.model3.json"
+model_scale_multiplier = 0.3
+offset_height = -25.0
+ultimate_ability = "res://Abilities/ability_ult_vale.tscn"
+icon_uid = "uid://bk5p8xafbrgki"
