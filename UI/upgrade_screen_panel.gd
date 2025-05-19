@@ -17,12 +17,15 @@ extends Panel
 @export var player_ready_indicator_holder: Control = null
 
 var upgrade_panels: Array[UpgradePanel] = []
-var ready_indicators: Array = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
 
 # Map of String to PowerupData
 var _powerup_name_to_powerupdata := {}
+## Displays which characters have finished selecting their upgrade.
+var _ready_indicators: Array[PlayerReadyIndicator] = []
+## Maps each connecter player's multiplayer unique ID to their corresponding PlayerReadyIndicator.
+var _player_id_to_ready_indicator: Dictionary = {}
 
 signal upgrade_chosen(title)
 signal stat_upgrade_chosen(stat_type: Constants.StatUpgrades)
@@ -34,8 +37,10 @@ func _ready() -> void:
 		upgrade_panels.append(child)
 		child.upgrade_powerup_chosen.connect(_on_upgrade_chosen)
 		child.upgrade_stat_chosen.connect(_on_stat_upgrade_chosen)
+	
+	# Set up ready indicators
 	for child in player_ready_indicator_holder.get_children():
-		ready_indicators.append(child)
+		_ready_indicators.append(child)
 	
 	# Set up the powerup name to PowerupData map
 	for powerupdata: PowerupData in all_powerup_data:
@@ -48,6 +53,13 @@ func setup():
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
 	reroll_button.show()
+	
+	# Set up PlayerReadyIndicator icons
+	for i in range(GameState.connected_players):
+		var id = GameState.players.keys()[i]
+		_ready_indicators[i].set_sprite(GameState.players[id]["character"])
+		_ready_indicators[i].set_is_ready(false)
+		_player_id_to_ready_indicator[id] = _ready_indicators[i]
 	
 	_generate_and_show_random_upgrade_choices()
 	
@@ -143,7 +155,7 @@ func _on_upgrade_chosen(powerupdata: PowerupData):
 	upgrade_panels_holder.hide()
 	reroll_button.hide()
 	
-	increment_players_selecting_upgrades.rpc()
+	_update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
 
@@ -159,30 +171,33 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	upgrade_panels_holder.hide()
 	reroll_button.hide()
 	
-	increment_players_selecting_upgrades.rpc()
+	_update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
 
-# Update the displayed count of how many players are still selecting their upgrades.
+## Update the PlayerReadyIndicators showing how many players are still selecting their upgrades.
 @rpc("any_peer", "call_local")
-func increment_players_selecting_upgrades() -> void:
+func _update_players_selecting_upgrades() -> void:
 	players_done_selecting_upgrades += 1
 	
 	if players_done_selecting_upgrades >= GameState.connected_players:
 		hide()
 	
-	var i = 0
-	# Ready players
-	while i < players_done_selecting_upgrades:
-		ready_indicators[i].show()
-		ready_indicators[i].set_is_ready(true)
-		i += 1
-	# Not ready players
-	while i < GameState.connected_players:
-		ready_indicators[i].show()
-		ready_indicators[i].set_is_ready(false)
-		i += 1
+	_player_id_to_ready_indicator[multiplayer.get_remote_sender_id()].set_is_ready(true)
+	
+	#var i = 0
+	## Ready players
+	#while i < players_done_selecting_upgrades:
+		#_ready_indicators[i].show()
+		#_ready_indicators[i].set_is_ready(true)
+		#i += 1
+	## Not ready players
+	#while i < GameState.connected_players:
+		#_ready_indicators[i].show()
+		#_ready_indicators[i].set_is_ready(false)
+		#i += 1
+	for i in range(GameState.connected_players):
+		_ready_indicators[i].show()
 	# Hide remaining indicators
-	while i < GameState.MAX_PLAYERS:
-		ready_indicators[i].hide()
-		i += 1
+	for i in range(GameState.connected_players, GameState.MAX_PLAYERS):
+		_ready_indicators[i].hide()
