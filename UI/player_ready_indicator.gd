@@ -29,7 +29,7 @@ func set_is_ready(new_is_ready: bool) -> void:
 
 ## Set which character icon is displayed on this indicator.
 func set_sprite(character: Constants.Character) -> void:
-	var data: CharacterData = load(_character_data_map[character])
+	var data: CharacterData = Constants.CHARACTER_DATA[character]
 	var image: Texture2D = load(data.icon_uid)
 	
 	_not_ready_image.texture = image

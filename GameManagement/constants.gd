@@ -10,6 +10,7 @@ enum Character {
 	GOTH,
 	SWEET,
 	VALE,
+	DOVE,
 	NONE = -1
 }
 
@@ -34,5 +35,6 @@ enum StatUpgrades {
 var CHARACTER_DATA: Dictionary = {
 	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),
 	Character.SWEET: load("res://Player/CharacterResourceFiles/character_data_sweet.tres"),
-	Character.VALE: load("res://Player/CharacterResourceFiles/character_data_vale.tres")
+	Character.VALE: load("res://Player/CharacterResourceFiles/character_data_vale.tres"),
+	Character.DOVE: load("res://Player/CharacterResourceFiles/character_data_dove.tres")
 }
