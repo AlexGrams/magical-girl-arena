@@ -64,6 +64,10 @@
 			"Name": "Vale.psd (Corresponding layer not found)"
 		},
 		{
+			"Id": "Part3",
+			"Name": "Robot_Head.png"
+		},
+		{
 			"Id": "Part",
 			"Name": "Layer Group"
 		}
