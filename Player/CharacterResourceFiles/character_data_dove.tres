@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_lws6o")
 name = "Dove"
+display_name = "Amore Dove"
 description = "Amore Dove is a magical girl who solves all sorts of relationship problems, from misunderstandings to full-blown arguments."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres"
 base_powerup_name = "Cupid Arrows"

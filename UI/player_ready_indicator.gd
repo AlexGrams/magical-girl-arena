@@ -1,8 +1,6 @@
 class_name PlayerReadyIndicator
 extends Panel
 
-
-@export var _character_data_map := {}
 @export var _not_ready_image: TextureRect = null
 @export var _ready_image: TextureRect = null
 

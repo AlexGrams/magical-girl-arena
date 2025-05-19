@@ -1,8 +1,10 @@
 class_name CharacterData
 extends Resource
 
-## Name as it will appear whenever displayed to the player
+## Name as it will appear whenever displayed to the player and for animations
 @export var name: String
+## Name as it will appear whenever displayed to the player, if differ from name
+@export var display_name: String = ""
 ## The character's lore
 @export var description: String
 ## Path to the PowerupData for this character's base Powerup.

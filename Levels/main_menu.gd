@@ -109,7 +109,7 @@ func _set_main_menu_character() -> void:
 	main_menu_character_sprite.set_character(random_char)
 	main_menu_character_sprite.set_read_input(false)
 	main_menu_character_sprite.set_model_scale(3)
-	main_menu_character_label.text = _get_character_data(random_char).name
+	main_menu_character_label.text = _get_character_data(random_char).name if _get_character_data(random_char).display_name == "" else _get_character_data(random_char).display_name
 #endregion
 
 #region lobby_list
@@ -246,7 +246,7 @@ func update_character_description() -> void:
 	
 	var data: CharacterData = _get_character_data(character)
 	
-	information_name.change_text(data.name)
+	information_name.change_text(data.name if data.display_name == "" else data.display_name)
 	information_description.text = data.description
 	information_powerup_texture.texture = data.base_powerup_texture
 	information_powerup_label.change_text(data.base_powerup_name)
