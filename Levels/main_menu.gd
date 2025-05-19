@@ -26,7 +26,7 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var information_ult_texture: TextureRect
 @export var information_ult_description: Label
 ## The button to begin the actual game. Disabled for clients that are not the host.
-@export var start_game_button: Button
+@export var start_game_label: Label
 ## Character that is visible on the main menu and their nametag.
 @export var main_menu_character_sprite: CharacterAnimatedSprite2D
 @export var main_menu_character_label: Label
@@ -120,7 +120,7 @@ func _on_host_button_button_down() -> void:
 	else:
 		MultiplayerManager.join_multiplayer_lobby_using_enet()
 		if not multiplayer.is_server():
-			start_game_button.hide()
+			start_game_label.hide()
 	
 	# Show the lobby that you're in after clicking the "Host" button.
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
@@ -172,7 +172,7 @@ func setup_lobby_screen() -> void:
 							
 							# Join the lobby
 							_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
-							start_game_button.hide()
+							start_game_label.hide()
 							
 							GameState.join_lobby(
 								lobby_id,
