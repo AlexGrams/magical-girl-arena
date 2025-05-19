@@ -10,6 +10,8 @@ extends Powerup
 ## Bullets are angled at most _fire_angle/2 degrees away from the target.
 @export var _fire_angle: float = 60.0
 
+# Toggles between left and right directions
+var direction_toggle: bool = false
 var shoot_timer: float = 0
 ## Angle in radians of far apart each bullet is spread.
 var _fire_angle_rad_delta: float = 0
@@ -32,20 +34,11 @@ func _process(delta: float) -> void:
 	if shoot_timer > shoot_interval:
 		var direction := Vector2.ZERO
 		if _is_owned_by_player:
-			# Get nearest enemy so direction can be set
-			var enemies: Array[Node] = [] 
-			enemies = get_tree().get_nodes_in_group("enemy")
-			
-			if !enemies.is_empty():
-				var nearest_enemy = enemies[0]
-				var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
-				for enemy in enemies:
-					var distance = global_position.distance_squared_to(enemy.global_position)
-					if distance < nearest_distance:
-						nearest_enemy = enemy
-						nearest_distance = distance
-			
-				direction = (nearest_enemy.global_position - self.global_position).normalized()
+			if direction_toggle:
+				direction = Vector2.LEFT
+			else:
+				direction = Vector2.RIGHT
+			direction_toggle = !direction_toggle
 		else:
 			# Enemy bullet moves in direction of Enemy's desired velocity.
 			direction = get_parent().velocity.normalized()
