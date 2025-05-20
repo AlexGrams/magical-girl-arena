@@ -2,7 +2,7 @@ class_name EnemySpawner
 extends AreaSpawner
 
 ## Scales the spawn interval of each SpawnEvent with respect to the number of players in the game. 
-@export var _player_count_spawn_amount_scale: Array[float] = [1.0, 0.75, 0.5, 0.25]
+@export var _player_count_spawn_amount_scale: Array[float] = [1.0, 0.95, 0.9, 0.85]
 
 # All spawn events that are running on this spawner.
 # 0: EnemySpawnEventData - information for this spawn event.
