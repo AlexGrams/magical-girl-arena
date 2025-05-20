@@ -186,7 +186,13 @@ func setup_lobby_screen() -> void:
 #region lobby
 # The button that only the lobby host can press to begin the shooting part of the game.
 func _on_start_game_button_down() -> void:
+	_hide_main_menu.rpc()
 	GameState.start_game()
+
+
+@rpc("any_peer", "call_local")
+func _hide_main_menu() -> void:
+	self.hide()
 
 
 # Leave a game lobby. Goes back to the lobby list.
