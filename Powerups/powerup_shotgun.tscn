@@ -8,4 +8,4 @@ bullet_damage = 10.0
 _bullet_uid = "res://Powerups/bullet_shotgun.tscn"
 damage_levels = Array[float]([10.0, 15.0, 20.0, 25.0, 30.0])
 signature_damage = 30.0
-powerup_name = "Shotgun"
+powerup_name = "Cupid Arrows"
