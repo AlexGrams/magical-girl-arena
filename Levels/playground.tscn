@@ -59,7 +59,7 @@
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
 [ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="48_hwjvr"]
-[ext_resource type="Resource" uid="uid://b2d2nmln2dvyk" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
+[ext_resource type="Resource" uid="uid://bp1uxo1q43yq0" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 [ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="49_xecmh"]
 [ext_resource type="Texture2D" uid="uid://b4meuc223cj41" path="res://Sprites/Powerups/Stats/Health.png" id="54_aob33"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
@@ -668,6 +668,7 @@ regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), N
 hud_canvas_layer = NodePath("CanvasLayer")
 
 [node name="Background" type="ColorRect" parent="."]
+z_index = -2
 offset_left = -2815.0
 offset_top = -1504.0
 offset_right = 4855.0
