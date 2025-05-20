@@ -19,7 +19,6 @@ radius = 532.046
 [node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area")]
 script = ExtResource("1_anccp")
 _speed = 10.0
-_attack_time = 0.5
 _taunt_duration = 4.0
 _bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
