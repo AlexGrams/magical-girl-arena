@@ -8,4 +8,4 @@ _touch_damage = 10.0
 _min_range = 200.0
 _max_range = 500.0
 _bullet_scene_uid = "uid://dbme0ttmrvbc4"
-cooldown = 0.2
+cooldown = 60.0
