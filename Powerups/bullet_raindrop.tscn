@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci3oql3ckphvh"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_raindrop.gd" id="1_o0b5k"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_ike0g"]
+[ext_resource type="Texture2D" uid="uid://ma4qbv43n3de" path="res://Sprites/Powerups/CorvusRaindrop.png" id="2_ols4n"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_cq8i6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7cxdy"]
@@ -18,8 +18,8 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.47451, 0.47451, 0.47451, 0.796078)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("2_ike0g")
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_ols4n")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
