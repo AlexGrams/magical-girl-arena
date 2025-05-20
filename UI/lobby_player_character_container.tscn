@@ -25,6 +25,7 @@ text = "ID Goes here"
 horizontal_alignment = 1
 
 [node name="Username" type="Label" parent="."]
+z_index = 2
 layout_mode = 2
 theme = ExtResource("2_fkd01")
 theme_override_constants/outline_size = 35

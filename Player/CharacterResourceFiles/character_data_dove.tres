@@ -18,6 +18,6 @@ ult_texture = ExtResource("3_n6s63")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Dove/runtime/Dove.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Dove/runtime/Dove.model3.json"
 model_scale_multiplier = 0.3
-offset_height = -25.0
+offset_height = -40.0
 ultimate_ability = "res://Abilities/ability_ult_vale.tscn"
 icon_uid = "uid://douk8d6fdvxg5"
