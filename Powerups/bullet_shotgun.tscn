@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dimpsrfkfu4no"]
+[gd_scene load_steps=6 format=3 uid="uid://dimpsrfkfu4no"]
 
 [ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_106pl"]
-[ext_resource type="Texture2D" uid="uid://bk5p8xafbrgki" path="res://Orange.png" id="2_c5lhv"]
+[ext_resource type="Texture2D" uid="uid://dsv6ihphft6se" path="res://Sprites/Powerups/DoveArrow.png" id="2_t3uhj"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_om2mk"]
+[ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_vcjug"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
@@ -15,8 +16,10 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("2_c5lhv")
+position = Vector2(0, 1)
+scale = Vector2(0.273333, 0.273333)
+texture = ExtResource("2_t3uhj")
+script = ExtResource("3_vcjug")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
