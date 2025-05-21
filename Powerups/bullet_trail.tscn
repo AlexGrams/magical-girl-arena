@@ -1,7 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://wmeh15cfi3s8"]
+[gd_scene load_steps=10 format=3 uid="uid://wmeh15cfi3s8"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_trail.gd" id="1_sax0x"]
-[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_0vvxf"]
+[ext_resource type="Script" path="res://Powerups/trail_sprite.gd" id="3_cshb1"]
+[ext_resource type="Texture2D" uid="uid://cqv8hq3o5id2s" path="res://Sprites/Powerups/Trail_BlueFlower.png" id="3_v70sc"]
+[ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="4_r7oyf"]
+[ext_resource type="Texture2D" uid="uid://c2ny46h74qsb2" path="res://Sprites/Powerups/Trail_WhiteFlower.png" id="5_rs8ql"]
+
+[sub_resource type="Animation" id="Animation_x24uj"]
+resource_name = "grow_flowers"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flower1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flower2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flower3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_akx0t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flower1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u2x01"]
+_data = {
+"RESET": SubResource("Animation_akx0t"),
+"grow_flowers": SubResource("Animation_x24uj")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(66.5, 67)
@@ -14,10 +78,35 @@ destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("TrailSprite")
 
-[node name="TrailSprite" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.196078)
+[node name="TrailSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("flower1", "flower2", "flower3")]
+z_index = -1
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_0vvxf")
+script = ExtResource("3_cshb1")
+trail1 = ExtResource("3_v70sc")
+trail2 = ExtResource("4_r7oyf")
+trail3 = ExtResource("5_rs8ql")
+flower1 = NodePath("Flower1")
+flower2 = NodePath("Flower2")
+flower3 = NodePath("Flower3")
+
+[node name="Flower1" type="Sprite2D" parent="TrailSprite"]
+position = Vector2(-116.667, -123.333)
+texture = ExtResource("4_r7oyf")
+
+[node name="Flower2" type="Sprite2D" parent="TrailSprite"]
+position = Vector2(-26.6667, 123.333)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_rs8ql")
+
+[node name="Flower3" type="Sprite2D" parent="TrailSprite"]
+position = Vector2(116.667, -60)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_v70sc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TrailSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_u2x01")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
