@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://os33i8c1p8ue" path="res://Powerups/powerup_trail.tscn" id="1_4uf8l"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_5m6dr"]
-[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="3_5c0dn"]
+[ext_resource type="Texture2D" uid="uid://bwvj736th2f3v" path="res://Sprites/Powerups/Trail_Icon.png" id="3_dt1ta"]
 
 [resource]
 script = ExtResource("2_5m6dr")
 scene = ExtResource("1_4uf8l")
-name = "Trail"
-sprite = ExtResource("3_5c0dn")
-upgrade_description = "Leave a damaging pool everywhere you walk"
+name = "Nature's Path"
+sprite = ExtResource("3_dt1ta")
+upgrade_description = "Leave damaging flowers everywhere you walk"
