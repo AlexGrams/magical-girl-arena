@@ -6,4 +6,4 @@
 script = ExtResource("1_f4ceg")
 _bullet_scene_uid = "uid://ci3oql3ckphvh"
 damage_levels = Array[float]([40.0, 42.0, 44.1, 46.31, 48.62])
-powerup_name = "Raindrop"
+powerup_name = "Bubble Pop"

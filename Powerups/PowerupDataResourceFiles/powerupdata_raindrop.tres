@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://cvpbc6ujwfdux" path="res://Powerups/powerup_raindrop.tscn" id="1_lx7bt"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_e7rmp"]
-[ext_resource type="Texture2D" uid="uid://ma4qbv43n3de" path="res://Sprites/Powerups/CorvusRaindrop.png" id="3_75ygu"]
+[ext_resource type="Texture2D" uid="uid://b62upe4o73ci2" path="res://Sprites/Powerups/Bubble.png" id="3_o56ew"]
 
 [resource]
 script = ExtResource("2_e7rmp")
 scene = ExtResource("1_lx7bt")
-name = "Raindrop"
-sprite = ExtResource("3_75ygu")
-upgrade_description = "Create a giant raindrop that falls on the nearest enemy after a delay, doing damage in an area."
+name = "Bubble Pop"
+sprite = ExtResource("3_o56ew")
+upgrade_description = "Create a bubble on an enemy that pops after a delay"
