@@ -7,4 +7,4 @@ self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_gq2cx")
 damage_levels = Array[float]([40.0, 44.0, 48.0, 53.0, 59.0])
 signature_damage = 59.0
-powerup_name = "Orbit"
+powerup_name = "Prism Star Power"

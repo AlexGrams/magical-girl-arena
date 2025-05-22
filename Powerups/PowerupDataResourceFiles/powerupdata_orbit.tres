@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dhnrvoa0bq8ke" path="res://Powerups/orbit_powerup.tscn" id="1_0m21i"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_pq7hf"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="3_hi7gf"]
+[ext_resource type="Texture2D" uid="uid://cjcpxqi2186eh" path="res://Sprites/Powerups/Orbit_Icon.png" id="3_cgv3i"]
 
 [resource]
 script = ExtResource("1_pq7hf")
 scene = ExtResource("1_0m21i")
-name = "Orbit"
-sprite = ExtResource("3_hi7gf")
+name = "Prism Star Power"
+sprite = ExtResource("3_cgv3i")
 upgrade_description = "A bullet continuously revolves around you"
