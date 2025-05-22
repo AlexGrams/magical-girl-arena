@@ -7,12 +7,15 @@ extends Bullet
 ## Saved bullet collision layer for when we reactivate the collision.
 var _collision_layer: int = 0
 var _explosion_time: float = lifetime
+var _has_exploded:bool = false
 
 
 func _ready() -> void:
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.REVOLVING)
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
+	
+	rotation = direction.angle() + deg_to_rad(90)
 
 
 func _process(_delta: float) -> void:
@@ -33,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		# enemies detect that the grenade collision has changed. It doesn't work this 
 		# way for the Boss Raindrop for some reason.
 		queue_free()
-	elif death_timer >= lifetime and sprite.visible:
+	elif death_timer >= lifetime and !_has_exploded:
 		_explode()
 	else:
 		global_position += direction * speed * delta
@@ -52,6 +55,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 ## Deal damage in an area around where the bullet is currently.
 func _explode() -> void:
+	_has_exploded = true
 	_explosion_time = death_timer
 	
 	# Spawn explosion VFX

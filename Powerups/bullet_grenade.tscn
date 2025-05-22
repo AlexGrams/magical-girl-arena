@@ -1,8 +1,94 @@
-[gd_scene load_steps=6 format=3 uid="uid://b06fii00diw54"]
+[gd_scene load_steps=9 format=3 uid="uid://b06fii00diw54"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_grenade.gd" id="1_v6m4k"]
-[ext_resource type="Texture2D" uid="uid://cfi14d54hv8f1" path="res://OrangeGreen.png" id="2_cow03"]
+[ext_resource type="Texture2D" uid="uid://k8r8fnqjhnpy" path="res://Sprites/Powerups/Grenade_Heart.png" id="2_lbuti"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_tglxe"]
+
+[sub_resource type="Animation" id="Animation_3i0mn"]
+resource_name = "heartbeat"
+length = 1.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.208333, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.408333, 0.9, 1.4),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Heart3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.608333, 1.1, 1.6),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Heart4:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8, 1.3, 1.8),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.15, 0.15), Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
+}
+
+[sub_resource type="Animation" id="Animation_qw2wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0hi7d"]
+_data = {
+"RESET": SubResource("Animation_qw2wg"),
+"heartbeat": SubResource("Animation_3i0mn")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
 radius = 241.168
@@ -12,16 +98,44 @@ size = Vector2(66, 66)
 
 [node name="BulletGrenade" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_v6m4k")
-_vfx_uid = "uid://jyy16gs6xyi8"
+_vfx_uid = "uid://33boemmsbh6i"
 speed = 750.0
 lifetime = 0.5
 destroy_on_hit = false
 collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("Heart")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Heart4" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
+show_behind_parent = true
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_cow03")
+texture = ExtResource("2_lbuti")
+offset = Vector2(0, 300)
+
+[node name="Heart3" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.392157)
+show_behind_parent = true
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_lbuti")
+offset = Vector2(0, 200)
+
+[node name="Heart2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.588235)
+show_behind_parent = true
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_lbuti")
+offset = Vector2(0, 100)
+
+[node name="Heart" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_lbuti")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0hi7d")
+}
+autoplay = "heartbeat"
+speed_scale = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
