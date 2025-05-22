@@ -5,6 +5,7 @@ extends Bullet
 @export var _explosion_lifetime: float = 0.05
 ## Explosion VFX to spawn when damage activates.
 @export var _vfx_uid: String = ""
+@export var flower_scene: PackedScene
 
 ## Saved bullet collision layer for when we reactivate the collision.
 var _collision_layer: int = 0
@@ -42,7 +43,14 @@ func _explode() -> void:
 		var vfx: GPUParticles2D = load(_vfx_uid).instantiate()
 		vfx.global_position = global_position
 		playground.add_child(vfx)
+	
+	var flower_vfx = flower_scene.instantiate()
+	flower_vfx.global_position = global_position
+	playground.add_child(flower_vfx)
+	
 	sprite.hide()
+	
+	
 	
 	if is_multiplayer_authority():
 		collider.collision_layer = _collision_layer

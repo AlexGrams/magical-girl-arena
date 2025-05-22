@@ -1,8 +1,100 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3wj41t6bqwea"]
+[gd_scene load_steps=11 format=3 uid="uid://b3wj41t6bqwea"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_mines.gd" id="1_y3unb"]
-[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="2_75osu"]
+[ext_resource type="PackedScene" uid="uid://c7thmbp12j8m8" path="res://Powerups/mines_flower_sprite.tscn" id="2_f1nrp"]
+[ext_resource type="Texture2D" uid="uid://dsrmljgh6k2v7" path="res://Sprites/Powerups/Mines_Seed2.png" id="2_if4nf"]
+[ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="3_buwjc"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_mdhh8"]
+
+[sub_resource type="Animation" id="Animation_0p1vg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flower:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flower:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_s4yw3"]
+resource_name = "flower_blossom"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flower:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3.5, 3.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flower:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, -3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_lk2k5"]
+resource_name = "seed_shake"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(0, 0), Vector2(-1, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m6dq0"]
+_data = {
+"RESET": SubResource("Animation_0p1vg"),
+"flower_blossom": SubResource("Animation_s4yw3"),
+"seed_shake": SubResource("Animation_lk2k5")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
 radius = 106.0
@@ -10,6 +102,7 @@ radius = 106.0
 [node name="BulletMines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_y3unb")
 _vfx_uid = "uid://jyy16gs6xyi8"
+flower_scene = ExtResource("2_f1nrp")
 speed = 750.0
 lifetime = 1.0
 destroy_on_hit = false
@@ -17,8 +110,21 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0741855, 0.0741855)
-texture = ExtResource("2_75osu")
+z_index = -1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_if4nf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_m6dq0")
+}
+autoplay = "seed_shake"
+speed_scale = 5.0
+
+[node name="Flower" type="Sprite2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(4, 4)
+texture = ExtResource("3_buwjc")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

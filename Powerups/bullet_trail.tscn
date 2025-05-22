@@ -6,6 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="4_r7oyf"]
 [ext_resource type="Texture2D" uid="uid://c2ny46h74qsb2" path="res://Sprites/Powerups/Trail_WhiteFlower.png" id="5_rs8ql"]
 
+[sub_resource type="Animation" id="Animation_akx0t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flower1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_x24uj"]
 resource_name = "grow_flowers"
 length = 0.5
@@ -44,21 +59,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_akx0t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flower1:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u2x01"]
