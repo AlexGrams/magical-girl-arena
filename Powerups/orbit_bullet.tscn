@@ -1,8 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://eo3cwv53lvfa"]
+[gd_scene load_steps=14 format=3 uid="uid://eo3cwv53lvfa"]
 
 [ext_resource type="Script" path="res://Powerups/orbit_bullet.gd" id="1_vq7vf"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_k30hb"]
+[ext_resource type="Texture2D" uid="uid://dfpj03ylfslah" path="res://Sprites/Powerups/Orbit_Star.png" id="2_5fh2q"]
+[ext_resource type="Texture2D" uid="uid://b2sucfuxcr2h1" path="res://Sprites/Powerups/Orbit_Rainbow.png" id="3_3ivj7"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_sgpxh"]
+[ext_resource type="Texture2D" uid="uid://fbldcso8wm2b" path="res://Sprites/Powerups/Orbit_Rainbow2.png" id="4_vtyoy"]
+
+[sub_resource type="Gradient" id="Gradient_brxql"]
+offsets = PackedFloat32Array(0.00383142, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cr5bq"]
+gradient = SubResource("Gradient_brxql")
+
+[sub_resource type="Curve" id="Curve_0j4e0"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c70br"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0063113), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hine8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_448op"]
+curve_x = SubResource("Curve_0j4e0")
+curve_y = SubResource("Curve_c70br")
+curve_z = SubResource("Curve_hine8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mjs6m"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(50, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveXYZTexture_448op")
+color_ramp = SubResource("GradientTexture1D_cr5bq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
@@ -18,8 +53,23 @@ sprite = NodePath("BulletOffset/Sprite2D")
 [node name="BulletOffset" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="BulletOffset"]
-scale = Vector2(0.087, 0.087)
-texture = ExtResource("2_k30hb")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_5fh2q")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="BulletOffset/Sprite2D"]
+visible = false
+show_behind_parent = true
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_mjs6m")
+texture = ExtResource("3_3ivj7")
+lifetime = 5.0
+speed_scale = 10.0
+fixed_fps = 60
+
+[node name="Sprite2D" type="Sprite2D" parent="BulletOffset/Sprite2D"]
+show_behind_parent = true
+position = Vector2(255, 5)
+texture = ExtResource("4_vtyoy")
 
 [node name="Area2D" type="Area2D" parent="BulletOffset"]
 collision_mask = 2
