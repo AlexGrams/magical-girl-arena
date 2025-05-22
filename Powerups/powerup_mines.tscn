@@ -9,4 +9,4 @@ shoot_interval = 3.0
 _bullet_uid = "uid://b3wj41t6bqwea"
 damage_levels = Array[float]([25.0, 35.0, 50.0, 60.0, 70.0])
 signature_damage = 100.0
-powerup_name = "Mines"
+powerup_name = "Firework Flora"
