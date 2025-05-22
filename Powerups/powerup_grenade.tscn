@@ -8,4 +8,4 @@ script = ExtResource("1_y4psd")
 bullet_scene = "uid://b06fii00diw54"
 damage_levels = Array[float]([50.0, 60.0, 70.0, 80.0, 100.0])
 signature_damage = 100.0
-powerup_name = "Grenade"
+powerup_name = "Heartbeat Burst"

@@ -4,6 +4,33 @@
 [ext_resource type="Texture2D" uid="uid://k8r8fnqjhnpy" path="res://Sprites/Powerups/Grenade_Heart.png" id="2_lbuti"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_tglxe"]
 
+[sub_resource type="Animation" id="Animation_qw2wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.15, 0.15)]
+}
+
 [sub_resource type="Animation" id="Animation_3i0mn"]
 resource_name = "heartbeat"
 length = 1.8
@@ -55,33 +82,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(0.5, 0.5, 1),
 "update": 0,
 "values": [Vector2(0.15, 0.15), Vector2(0.3, 0.3), Vector2(0.15, 0.15)]
-}
-
-[sub_resource type="Animation" id="Animation_qw2wg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Heart:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.15, 0.15)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Heart2:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.15, 0.15)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0hi7d"]
