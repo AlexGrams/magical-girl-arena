@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=118 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -11,14 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://be2cldfe4eb6y" path="res://Enemies/enemy_brown-dwarf.tscn" id="4_bckfe"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="5_b8hlh"]
 [ext_resource type="PackedScene" uid="uid://cfy5r3rayhatg" path="res://Enemies/enemy.tscn" id="6_5l6y0"]
-[ext_resource type="Script" path="res://Levels/LakeAnimation.gd" id="6_ad32h"]
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="6_b2lbv"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="6_blcs8"]
 [ext_resource type="PackedScene" uid="uid://cl3yy7sxyrm4" path="res://Enemies/enemy_white-dwarf_special.tscn" id="6_m8bth"]
 [ext_resource type="Texture2D" uid="uid://5jne2i7m67kq" path="res://Sprites/Map/Patch_Light_Grass.png" id="6_rdarx"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="7_gsdoh"]
-[ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="7_jfhpd"]
 [ext_resource type="Texture2D" uid="uid://d041byvkp64a5" path="res://Sprites/Map/Patch_Dark_Grass.png" id="7_xnnrg"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
@@ -32,13 +30,12 @@
 [ext_resource type="Texture2D" uid="uid://c0wov7qsfe6v0" path="res://Sprites/Map/Grass_Tuft2.png" id="11_yv3qn"]
 [ext_resource type="Texture2D" uid="uid://igd106yex1nv" path="res://Sprites/Map/Grass_Tuft3.png" id="12_1q4rg"]
 [ext_resource type="PackedScene" uid="uid://b115cb3mkdhhc" path="res://Enemies/enemy_red-giant_special.tscn" id="12_ari5o"]
-[ext_resource type="Texture2D" uid="uid://coejko4nboanm" path="res://Sprites/Map/Lake_Fill.png" id="12_bxale"]
 [ext_resource type="PackedScene" uid="uid://745psetp0fi1" path="res://Enemies/enemy_supergiant_special.tscn" id="13_eg3m3"]
 [ext_resource type="Texture2D" uid="uid://clf7dd0e1v7fh" path="res://Sprites/Map/Patch_Dirt.png" id="14_op1re"]
-[ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="15_sbn0e"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
 [ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="26_dibxh"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="26_ntkj0"]
+[ext_resource type="PackedScene" uid="uid://c3anntj04ajri" path="res://Levels/LevelPlaceables/lake.tscn" id="27_lmbp7"]
 [ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="27_vw2yc"]
 [ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
 [ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="29_2x3ae"]
@@ -469,151 +466,6 @@ spawn_interval = 4.0
 spawn_interval_offset = 1.0
 min_spawn_count = 1
 max_spawn_count = 1
-
-[sub_resource type="Animation" id="Animation_i77v7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-106, 57)]
-}
-
-[sub_resource type="Animation" id="Animation_wq7gb"]
-resource_name = "Wave1"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-106, 57), Vector2(358, 57)]
-}
-
-[sub_resource type="Animation" id="Animation_vyskg"]
-resource_name = "Wave2"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-106, 57), Vector2(358, 57)]
-}
-
-[sub_resource type="Animation" id="Animation_ca5bf"]
-resource_name = "Wave3"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-106, 57), Vector2(358, 57)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ic4a8"]
-_data = {
-"RESET": SubResource("Animation_i77v7"),
-"Wave1": SubResource("Animation_wq7gb"),
-"Wave2": SubResource("Animation_vyskg"),
-"Wave3": SubResource("Animation_ca5bf")
-}
-
-[sub_resource type="Animation" id="Animation_r5yvg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-125, 164)]
-}
-
-[sub_resource type="Animation" id="Animation_iojvc"]
-resource_name = "Wave2"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-125, 164), Vector2(611, 164)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w43eo"]
-_data = {
-"RESET": SubResource("Animation_r5yvg"),
-"Wave2": SubResource("Animation_iojvc")
-}
-
-[sub_resource type="Animation" id="Animation_piy0s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-88, 247)]
-}
-
-[sub_resource type="Animation" id="Animation_lhp4o"]
-resource_name = "Wave3"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WaterLines:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-88, 247), Vector2(611, 245)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hlw47"]
-_data = {
-"RESET": SubResource("Animation_piy0s"),
-"Wave3": SubResource("Animation_lhp4o")
-}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmcgt"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
@@ -12094,73 +11946,29 @@ offset_right = 4372.0
 offset_bottom = 2627.0
 texture = ExtResource("14_op1re")
 
-[node name="Lake" type="TextureRect" parent="Background"]
-clip_children = 2
+[node name="Lake" parent="Background" instance=ExtResource("27_lmbp7")]
 layout_mode = 0
-offset_left = 2353.0
-offset_top = 1360.0
-offset_right = 2969.0
-offset_bottom = 1688.0
-texture = ExtResource("12_bxale")
-script = ExtResource("6_ad32h")
 
-[node name="WaterLines" type="TextureRect" parent="Background/Lake"]
+[node name="Lake2" parent="Background" instance=ExtResource("27_lmbp7")]
 layout_mode = 0
-offset_left = -88.0
-offset_top = 247.0
-offset_right = 38.0
-offset_bottom = 277.0
-texture = ExtResource("7_jfhpd")
+offset_left = 2724.0
+offset_top = 3443.0
+offset_right = 3340.0
+offset_bottom = 3771.0
 
-[node name="WaterLines2" type="TextureRect" parent="Background/Lake"]
+[node name="Lake3" parent="Background" instance=ExtResource("27_lmbp7")]
 layout_mode = 0
-offset_left = -125.0
-offset_top = 164.0
-offset_right = 1.0
-offset_bottom = 194.0
-texture = ExtResource("7_jfhpd")
+offset_left = 3640.0
+offset_top = 4745.0
+offset_right = 4256.0
+offset_bottom = 5073.0
 
-[node name="WaterLines3" type="TextureRect" parent="Background/Lake"]
+[node name="Lake4" parent="Background" instance=ExtResource("27_lmbp7")]
 layout_mode = 0
-offset_left = -106.0
-offset_top = 57.0
-offset_right = 20.0
-offset_bottom = 87.0
-texture = ExtResource("7_jfhpd")
-
-[node name="Border" type="TextureRect" parent="Background/Lake"]
-layout_mode = 0
-offset_left = -24.0
-offset_top = -2.0
-offset_right = 647.0
-offset_bottom = 333.0
-texture = ExtResource("15_sbn0e")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Background/Lake"]
-visible = false
-collision_layer = 128
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Lake/StaticBody2D"]
-polygon = PackedVector2Array(146, 9, 238, 7, 393, 91, 548, 128, 593, 151, 620, 212, 614, 273, 585, 314, 509, 331, 433, 327, 350, 311, 235, 281, 144, 304, 92, 291, 42, 242, 1, 157, 19, 91, 81, 29)
-
-[node name="LakeAnimationPlayer" type="AnimationPlayer" parent="Background/Lake"]
-libraries = {
-"": SubResource("AnimationLibrary_ic4a8")
-}
-speed_scale = 0.1
-
-[node name="LakeAnimationPlayer2" type="AnimationPlayer" parent="Background/Lake"]
-libraries = {
-"": SubResource("AnimationLibrary_w43eo")
-}
-speed_scale = 0.1
-
-[node name="LakeAnimationPlayer3" type="AnimationPlayer" parent="Background/Lake"]
-libraries = {
-"": SubResource("AnimationLibrary_hlw47")
-}
-speed_scale = 0.1
+offset_left = 4996.0
+offset_top = 4107.0
+offset_right = 5612.0
+offset_bottom = 4435.0
 
 [node name="PlayerSpawnPoints" type="Node2D" parent="."]
 
@@ -12957,6 +12765,7 @@ scale = Vector2(5, 5)
 [node name="LootBoxSpawner" parent="." instance=ExtResource("48_2eh24")]
 position = Vector2(1062, 1816)
 scale = Vector2(240, 240)
+spawn_interval = 20.0
 
 [node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
 position = Vector2(0.0333333, -0.183333)

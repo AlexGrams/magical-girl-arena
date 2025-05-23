@@ -1,0 +1,217 @@
+[gd_scene load_steps=16 format=3 uid="uid://c3anntj04ajri"]
+
+[ext_resource type="Texture2D" uid="uid://coejko4nboanm" path="res://Sprites/Map/Lake_Fill.png" id="1_fcfcg"]
+[ext_resource type="Script" path="res://Levels/LakeAnimation.gd" id="2_3vhh8"]
+[ext_resource type="Texture2D" uid="uid://utwghy358ar2" path="res://WaterLine.png" id="3_53y8b"]
+[ext_resource type="Texture2D" uid="uid://b107s4mam0ted" path="res://Sprites/Map/Lake_Border.png" id="4_vtflj"]
+
+[sub_resource type="Animation" id="Animation_i77v7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-106, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_wq7gb"]
+resource_name = "Wave1"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-106, 57), Vector2(358, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_vyskg"]
+resource_name = "Wave2"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-106, 57), Vector2(358, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_ca5bf"]
+resource_name = "Wave3"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-106, 57), Vector2(358, 57)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ic4a8"]
+_data = {
+"RESET": SubResource("Animation_i77v7"),
+"Wave1": SubResource("Animation_wq7gb"),
+"Wave2": SubResource("Animation_vyskg"),
+"Wave3": SubResource("Animation_ca5bf")
+}
+
+[sub_resource type="Animation" id="Animation_r5yvg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-125, 164)]
+}
+
+[sub_resource type="Animation" id="Animation_iojvc"]
+resource_name = "Wave2"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-125, 164), Vector2(611, 164)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w43eo"]
+_data = {
+"RESET": SubResource("Animation_r5yvg"),
+"Wave2": SubResource("Animation_iojvc")
+}
+
+[sub_resource type="Animation" id="Animation_piy0s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-88, 247)]
+}
+
+[sub_resource type="Animation" id="Animation_lhp4o"]
+resource_name = "Wave3"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterLines:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-88, 247), Vector2(611, 245)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hlw47"]
+_data = {
+"RESET": SubResource("Animation_piy0s"),
+"Wave3": SubResource("Animation_lhp4o")
+}
+
+[node name="Lake" type="TextureRect"]
+clip_children = 2
+offset_left = 2353.0
+offset_top = 1360.0
+offset_right = 2969.0
+offset_bottom = 1688.0
+texture = ExtResource("1_fcfcg")
+script = ExtResource("2_3vhh8")
+
+[node name="WaterLines" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 247.0
+offset_right = 38.0
+offset_bottom = 277.0
+texture = ExtResource("3_53y8b")
+
+[node name="WaterLines2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -125.0
+offset_top = 164.0
+offset_right = 1.0
+offset_bottom = 194.0
+texture = ExtResource("3_53y8b")
+
+[node name="WaterLines3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -106.0
+offset_top = 57.0
+offset_right = 20.0
+offset_bottom = 87.0
+texture = ExtResource("3_53y8b")
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -24.0
+offset_top = -2.0
+offset_right = 647.0
+offset_bottom = 333.0
+texture = ExtResource("4_vtflj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(149, 12, 234, 13, 387, 96, 539, 132, 581, 158, 605, 216, 598, 269, 570, 303, 502, 319, 434, 317, 364, 305, 239, 270, 143, 292, 94, 280, 47, 235, 8, 156, 25, 90, 87, 32)
+
+[node name="LakeAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ic4a8")
+}
+speed_scale = 0.1
+
+[node name="LakeAnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w43eo")
+}
+speed_scale = 0.1
+
+[node name="LakeAnimationPlayer3" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hlw47")
+}
+speed_scale = 0.1
