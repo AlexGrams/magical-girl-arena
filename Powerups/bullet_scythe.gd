@@ -7,7 +7,7 @@ extends Bullet
 
 var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
-var _signature_behavior: bool = false
+var _signature_behavior: bool = true
 
 
 func set_damage(damage: float):
@@ -17,22 +17,22 @@ func set_damage(damage: float):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.SCYTHE)
+	_half_lifetime = lifetime / 2.0
 	if not _signature_behavior:
 		# Normal behavior: 
 		# Calculate the speed in radians per second that the scythe moves in order to complete two swipes
 		# in its lifetime.
 		speed = ((arc_length * PI) / 180.0) * 2 / lifetime
-		_half_lifetime = lifetime / 2.0
 	else:
-		# Signature behavior: Set up to rotate in a complete circle over lifetime
-		speed = 2 * PI / lifetime
+		# Signature behavior:
+		# Speed needed to complete four swipes
+		speed = ((arc_length * PI) / 180.0) * 2 / lifetime * 2
 
 
 func _process(delta: float) -> void:
 	if _owning_player != null:
 		global_position = _owning_player.global_position
-	
-	
+
 	if not _signature_behavior:
 		# Move in an arc
 		if death_timer < _half_lifetime:
@@ -40,8 +40,15 @@ func _process(delta: float) -> void:
 		else:
 			rotate(-speed * delta)
 	else:
-		# Max level behavior: Spin around in a complete circle
-		rotate(speed * delta)
+		# Max level behavior: Move in an arc four times
+		if death_timer > lifetime * 0.75:
+			rotate(-speed * delta)
+		elif death_timer > lifetime * 0.5:
+			rotate(speed * delta)
+		elif death_timer > lifetime * 0.25:
+			rotate(-speed * delta)
+		else:
+			rotate(speed * delta)
 	
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():

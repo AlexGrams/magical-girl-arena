@@ -5,8 +5,6 @@ extends Powerup
 ## Path to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
 
-# TODO: Do we even need this? If so, it should probably go in Powerup and not here.
-#@export var sprite: Resource = null
 var bullet
 var shoot_timer: float = 0.0
 
