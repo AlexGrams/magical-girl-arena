@@ -1,11 +1,48 @@
-[gd_scene load_steps=5 format=3 uid="uid://bibemdm2ideu"]
+[gd_scene load_steps=8 format=3 uid="uid://bibemdm2ideu"]
 
 [ext_resource type="Script" path="res://Powerups/boomerang_bullet.gd" id="1_j62nq"]
-[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="2_awwga"]
+[ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="2_xwqkf"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_agwup"]
 
+[sub_resource type="Animation" id="Animation_2ou5i"]
+resource_name = "spinning"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.28319, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3w6wb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gknyv"]
+_data = {
+"RESET": SubResource("Animation_3w6wb"),
+"spinning": SubResource("Animation_2ou5i")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(38, 38)
+size = Vector2(50, 50)
 
 [node name="BoomerangBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
@@ -15,8 +52,16 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.23, 0.23)
-texture = ExtResource("2_awwga")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_xwqkf")
+offset = Vector2(35, 25)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_gknyv")
+}
+autoplay = "spinning"
+speed_scale = 2.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_6ihao"]
 [ext_resource type="PackedScene" uid="uid://djo8kggrhm1l0" path="res://Powerups/boomerang_powerup.tscn" id="1_fnspg"]
-[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="3_ke06d"]
+[ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="3_1ptwq"]
 
 [resource]
 script = ExtResource("1_6ihao")
 scene = ExtResource("1_fnspg")
-name = "Boomerang"
-sprite = ExtResource("3_ke06d")
-upgrade_description = "Throw a boomerang at the nearest enemy"
+name = "Jeweled Boomerang"
+sprite = ExtResource("3_1ptwq")
+upgrade_description = "Throw a boomerang, hitting all enemies in its path"

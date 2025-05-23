@@ -7,4 +7,4 @@ self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_wufpq")
 damage_levels = Array[float]([20.0, 23.0, 26.0, 30.0, 35.0])
 signature_damage = 29.0
-powerup_name = "Boomerang"
+powerup_name = "Jeweled Boomerang"
