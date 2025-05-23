@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=18 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 [ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="5_x80sq"]
 [ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="6_0llbf"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="7_7w7dn"]
+[ext_resource type="Texture2D" uid="uid://c34urh2h2ne6m" path="res://Sprites/Powerups/Laser_Drone.png" id="7_687rg"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="7_kh3sg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kh5"]
@@ -173,6 +174,18 @@ replication_config = SubResource("SceneReplicationConfig_vfgy6")
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
 script = ExtResource("3_q0m3g")
+
+[node name="LaserPos" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -500)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_687rg")
+
+[node name="LaserPos2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 500)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_687rg")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="ExpPickupArea2D" to="." method="_on_exp_pickup_area_2d_area_entered"]

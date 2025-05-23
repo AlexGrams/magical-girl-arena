@@ -12,7 +12,8 @@ extends Bullet
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
 var _pointer_location: Vector2
-var _signature_active: bool = false
+var _piercing_active: bool = false
+var _starting_position: Node2D = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,9 +43,9 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	var space_state = get_world_2d().direct_space_state
-	var end_point: Vector2 = _owning_character.global_position + (_pointer_location - _owning_character.global_position).normalized() * _max_range
+	var end_point: Vector2 = _starting_position.global_position + (_pointer_location - _starting_position.global_position).normalized() * _max_range
 	var query := PhysicsRayQueryParameters2D.create(
-		_owning_character.global_position, 
+		_starting_position.global_position, 
 		end_point
 	)
 	query.collide_with_areas = true
@@ -57,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.pitch_scale = 0.8
 		$AudioStreamPlayer2D.volume_db = -25
 		
-		if not _signature_active:
+		if not _piercing_active:
 			# Non-signature functionality: Only harm the first enemy hit.
 			end_point = result["position"]
 			$HitmarkerSprite.position = end_point
@@ -82,8 +83,8 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.volume_db = -30
 		$HitmarkerSprite.hide()
 		
-	var hit_vector := end_point - _owning_character.global_position
-	_laser.global_position = hit_vector / 2.0 + _owning_character.global_position
+	var hit_vector := end_point - _starting_position.global_position
+	_laser.global_position = hit_vector / 2.0 + _starting_position.global_position
 	_laser.rotation = hit_vector.angle()
 	_laser.scale.x = hit_vector.length()
 
@@ -91,12 +92,15 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
+		data.size() != 4
 		or (typeof(data[0])) != TYPE_NODE_PATH	# Owning Node2D
 		or (typeof(data[1])) != TYPE_FLOAT		# Range
+		or (typeof(data[2])) != TYPE_NODE_PATH  # Starting position
+		or (typeof(data[3])) != TYPE_BOOL		# If piercing is active
 	):
 		return
 	
+	_starting_position = get_node(data[2])
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])
@@ -137,9 +141,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 		
 		# Turn on signature functionality.
-		laser_powerup.activate_signature.connect(
+		laser_powerup.activate_piercing.connect(
 			func():
-				_signature_active = true
+				_piercing_active = true
 		)
 	
 	_max_range = data[1]
