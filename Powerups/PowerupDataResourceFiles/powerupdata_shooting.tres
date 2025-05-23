@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_h3sdd"]
 [ext_resource type="PackedScene" uid="uid://bowbgv1jw2mul" path="res://Powerups/powerup_shooting.tscn" id="1_l0fl7"]
-[ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_pblsx"]
+[ext_resource type="Texture2D" uid="uid://bd72ia10e385e" path="res://Sprites/Powerups/Shooting_Marble.png" id="3_lrcip"]
 
 [resource]
 script = ExtResource("1_h3sdd")
 scene = ExtResource("1_l0fl7")
-name = "Shooting"
-sprite = ExtResource("2_pblsx")
-upgrade_description = "Shoot a bullet in the direction you aim"
+name = "Marble Slingshot"
+sprite = ExtResource("3_lrcip")
+upgrade_description = "Shoot a marble in the direction you aim"

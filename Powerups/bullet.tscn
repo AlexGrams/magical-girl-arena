@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsmrsq1fwptsw"]
 
 [ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_u38u2"]
-[ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_hd53n"]
+[ext_resource type="Texture2D" uid="uid://bd72ia10e385e" path="res://Sprites/Powerups/Shooting_Marble.png" id="2_ogu7b"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_404gu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
@@ -15,8 +15,8 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.087, 0.087)
-texture = ExtResource("2_hd53n")
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_ogu7b")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
