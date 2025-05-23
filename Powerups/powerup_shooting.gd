@@ -4,6 +4,7 @@ extends Powerup
 @export var bullet_damage: float = 50.0
 @export var bullet_scene := "res://Powerups/bullet.tscn"
 
+var crit:bool = false
 var shoot_timer: float = 0
 
 signal picked_up_powerup(sprite)
@@ -30,11 +31,15 @@ func _process(delta: float) -> void:
 			direction = get_parent().velocity.normalized()
 		var bullet_position := self.global_position + (direction * 100)
 		
+		crit = randf() >= 0.75
+		
+		var actual_bullet_damage = bullet_damage * 2 if crit else bullet_damage
+		
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, [bullet_scene, 
 				bullet_position, 
 				direction, 
-				bullet_damage, 
+				actual_bullet_damage, 
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
