@@ -98,7 +98,8 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 	# Upgrade the chosen powerup if we already have it.
 	for child in get_children():
 		if child is Powerup and child.powerup_name == powerup_data.name:
-			child.level_up()
+			if child.current_level < child.max_level:
+				child.level_up()
 			if is_signature:
 				child.set_is_signature(true)
 			$"..".get_hud_canvas_layer().update_powerup_level(powerup_data, child.current_level)
