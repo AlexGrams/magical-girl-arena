@@ -45,7 +45,7 @@ viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,6 +71,7 @@ start_game_label = NodePath("Lobby/StartGame_Label")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
 main_menu_button_container = NodePath("Main/VBoxContainer")
+version_label = NodePath("Main/VersionLabel")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1
@@ -218,6 +219,20 @@ theme_override_font_sizes/font_size = 64
 text = "Character
 "
 horizontal_alignment = 1
+
+[node name="VersionLabel" parent="Main" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -211.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 46.0
+grow_horizontal = 0
+grow_vertical = 1
+text = "Version ???"
+horizontal_alignment = 2
 
 [node name="LobbyList" type="Control" parent="."]
 visible = false

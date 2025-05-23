@@ -32,6 +32,7 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var main_menu_character_label: Label
 ## Container for buttons on main menu.
 @export var main_menu_button_container: VBoxContainer
+@export var version_label: Label
 
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
@@ -82,8 +83,9 @@ func _ready() -> void:
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
 	
-	_set_main_menu_character()
 	
+	_set_main_menu_character()
+	version_label.change_text("Version " + ProjectSettings.get_setting("application/config/version"))
 	setup_lobby_screen()
 
 
