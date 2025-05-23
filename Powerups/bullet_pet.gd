@@ -16,6 +16,8 @@ extends CharacterBody2D
 @export var _attack_area: Area2D = null
 ## Area component for detecting taunt collisions.
 @export var _taunt_area: Area2D = null
+## Setting sprite to angry when taunting
+@export var _sprite: Node2D
 
 ## Which Enemy the pet is currently trying to attack.
 var _target: Node2D = null
@@ -86,6 +88,10 @@ func _physics_process(delta: float) -> void:
 			_taunt_area.collision_mask = 0
 		_taunt_timer -= delta
 		if _taunt_timer <= 0.0:
+			# Turn sprite angry
+			_sprite.set_angry()
+			
+			# Briefly turn on taunt
 			_taunt_area.collision_mask = _taunt_collision_mask
 			_taunt_timer = _taunt_cooldown
 	

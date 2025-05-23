@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://npslgflisq38"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pet.gd" id="1_anccp"]
-[ext_resource type="Texture2D" uid="uid://da5po8k6ud1qc" path="res://Goth_VectorTest5.png" id="2_w22qu"]
+[ext_resource type="PackedScene" uid="uid://ctspfn4xtevb4" path="res://Sprites/Powerups/pet_bee_sprite.tscn" id="2_ywet7"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_lrjjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
@@ -16,18 +16,17 @@ radius = 322.076
 [sub_resource type="CircleShape2D" id="CircleShape2D_qx8hf"]
 radius = 532.046
 
-[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area")]
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area", "_sprite")]
 script = ExtResource("1_anccp")
 _speed = 10.0
 _taunt_duration = 4.0
 _bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
 _taunt_area = NodePath("TauntArea2D")
+_sprite = NodePath("Bee_Sprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_w22qu")
+[node name="Bee_Sprite" parent="." instance=ExtResource("2_ywet7")]
+scale = Vector2(0.3, 0.3)
 
 [node name="BulletCollisionArea2D" type="Area2D" parent="."]
 collision_mask = 2
