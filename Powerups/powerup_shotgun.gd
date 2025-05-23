@@ -5,10 +5,10 @@ extends Powerup
 @export var bullet_damage: float = 50.0
 @export var _bullet_uid := "res://Powerups/bullet.tscn"
 ## How many bullets are made per firing
-@export var _num_bullets: int = 10
+@export var _num_bullets: int = 6
 ## Angle in degrees for which bullets are evenly spread towards the target.
 ## Bullets are angled at most _fire_angle/2 degrees away from the target.
-@export var _fire_angle: float = 60.0
+@export var _fire_angle: float = 45.0
 
 # Toggles between left and right directions
 var direction_toggle: bool = false
@@ -16,6 +16,8 @@ var shoot_timer: float = 0
 ## Angle in radians of far apart each bullet is spread.
 var _fire_angle_rad_delta: float = 0
 
+var signature_active: bool = false
+var signature_direction_toggle: int = 0
 signal picked_up_powerup(sprite)
 
 
@@ -34,16 +36,13 @@ func _process(delta: float) -> void:
 	if shoot_timer > shoot_interval:
 		var direction := Vector2.ZERO
 		if _is_owned_by_player:
-			if direction_toggle:
-				direction = Vector2.LEFT
-			else:
-				direction = Vector2.RIGHT
-			direction_toggle = !direction_toggle
+			# Set volley direction
+			direction = Vector2.LEFT if direction_toggle else Vector2.RIGHT
 		else:
 			# Enemy bullet moves in direction of Enemy's desired velocity.
 			direction = get_parent().velocity.normalized()
-		direction = direction.rotated(deg_to_rad(-_fire_angle / 2.0))
 		
+		direction = direction.rotated(deg_to_rad(-_fire_angle / 2.0))
 		for i in range(_num_bullets):
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 				1, [_bullet_uid, 
@@ -58,7 +57,20 @@ func _process(delta: float) -> void:
 			)
 			direction = direction.rotated(_fire_angle_rad_delta)
 		
-		shoot_timer = 0
+		# Signature quickly fires a second volley
+		if signature_active and signature_direction_toggle == 0:
+			shoot_timer = shoot_interval * 0.75
+		else:
+			shoot_timer = 0
+		
+		# Decide next volley direction
+		if not signature_active:
+			direction_toggle = !direction_toggle
+		else:
+			signature_direction_toggle += 1
+			if signature_direction_toggle >= 2:
+				direction_toggle = !direction_toggle
+				signature_direction_toggle = 0
 
 
 func activate_powerup():
@@ -74,4 +86,12 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	bullet_damage = _get_damage_from_curve()
+	
+	if current_level >= 3:
+		_num_bullets = 10
+		_fire_angle_rad_delta = deg_to_rad(_fire_angle / _num_bullets)
+		shoot_interval = shoot_interval * 0.9
+
+	if is_signature and current_level == max_level:
+		signature_active = true
 	powerup_level_up.emit(current_level, bullet_damage)
