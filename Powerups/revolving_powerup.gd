@@ -70,8 +70,16 @@ func level_up():
 	
 	# Shoot way faster at 5th level
 	if is_signature and current_level >= max_level:
-		bullet_damage = signature_damage
-		_rotation = _max_level_rotation
-		shoot_interval = max_level_shoot_interval
+		set_signature_settings()
 	
 	powerup_level_up.emit(current_level, bullet_damage)
+
+func set_is_signature(value: bool) -> void:
+	is_signature = value
+	if is_signature and current_level >= max_level:
+		set_signature_settings()
+
+func set_signature_settings() -> void:
+	bullet_damage = signature_damage
+	_rotation = _max_level_rotation
+	shoot_interval = max_level_shoot_interval
