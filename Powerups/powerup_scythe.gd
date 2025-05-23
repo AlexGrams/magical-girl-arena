@@ -51,6 +51,20 @@ func _process(delta: float) -> void:
 						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
 					]
 				)
+				if current_level >= 3:
+					get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+					1,
+					[
+						bullet_scene, 
+						Vector2.ZERO, 
+						-direction, 
+						_get_damage_from_curve(), 
+						_is_owned_by_player,
+						multiplayer.get_unique_id(),
+						_powerup_index,
+						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
+					]
+					)
 		else:
 			var owning_enemy: Node2D = get_parent()
 			

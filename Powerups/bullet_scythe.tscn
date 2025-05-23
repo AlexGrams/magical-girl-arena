@@ -9,27 +9,33 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 79.25)
 
-[node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("collider")]
+[node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("area", "collider")]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
+area = NodePath("BulletOffset/ScytheSprite/Area2D")
 lifetime = 0.75
-collider = NodePath("BulletOffset/Area2D")
+collider = NodePath("BulletOffset/ScytheSprite/Area2D")
 
-[node name="BulletOffset" type="Node2D" parent="."]
+[node name="BulletOffset" type="Node2D" parent="." node_paths=PackedStringArray("base_sprite")]
 z_index = 1
 script = ExtResource("2_64wyv")
 scythe_sprite = ExtResource("3_vyapk")
+base_sprite = NodePath("ScytheSprite")
 
 [node name="ScytheSprite" type="Sprite2D" parent="BulletOffset"]
 position = Vector2(3.75, 3.8594e-06)
 rotation = 3.14159
 scale = Vector2(0.45, 0.398)
 texture = ExtResource("2_ryc7v")
+offset = Vector2(0, -100)
 
-[node name="Area2D" type="Area2D" parent="BulletOffset"]
+[node name="Area2D" type="Area2D" parent="BulletOffset/ScytheSprite"]
+position = Vector2(0, -100)
+rotation = -3.14159
+scale = Vector2(2.22222, 2.51256)
 collision_mask = 2
 script = ExtResource("3_eudj7")
 damage = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/ScytheSprite/Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")

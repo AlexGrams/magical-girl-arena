@@ -1,9 +1,11 @@
 extends Bullet
 
 ## How far the center of the hitbox is from the character
-@export var radius: float = 100
+@export var radius: float = 50
 ## Rotation in degrees that the scythe moves through in one sweep. 360 is a full rotation around the character.
 @export var arc_length: float = 120
+## Collision area that deals damage
+@export var area: Area2D
 
 var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
@@ -11,7 +13,7 @@ var _signature_behavior: bool = true
 
 
 func set_damage(damage: float):
-	$BulletOffset/Area2D.damage = damage
+	area.damage = damage
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,8 +27,9 @@ func _ready() -> void:
 		speed = ((arc_length * PI) / 180.0) * 2 / lifetime
 	else:
 		# Signature behavior:
-		# Speed needed to complete four swipes
-		speed = ((arc_length * PI) / 180.0) * 2 / lifetime * 2
+		# Speed needed to complete three swipes
+		speed = ((arc_length * PI) / 180.0) * 3 / lifetime
+		$BulletOffset.scale = Vector2(1.5, 1.5)
 
 
 func _process(delta: float) -> void:
@@ -37,18 +40,21 @@ func _process(delta: float) -> void:
 		# Move in an arc
 		if death_timer < _half_lifetime:
 			rotate(speed * delta)
+			$BulletOffset/ScytheSprite.flip_h = false
 		else:
 			rotate(-speed * delta)
+			$BulletOffset/ScytheSprite.flip_h = true
 	else:
-		# Max level behavior: Move in an arc four times
-		if death_timer > lifetime * 0.75:
-			rotate(-speed * delta)
-		elif death_timer > lifetime * 0.5:
+		# Max level behavior: Move in an arc three times
+		if death_timer > lifetime * 0.666:
 			rotate(speed * delta)
-		elif death_timer > lifetime * 0.25:
+			$BulletOffset/ScytheSprite.flip_h = false
+		elif death_timer > lifetime * 0.333:
 			rotate(-speed * delta)
+			$BulletOffset/ScytheSprite.flip_h = true
 		else:
 			rotate(speed * delta)
+			$BulletOffset/ScytheSprite.flip_h = false
 	
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():
