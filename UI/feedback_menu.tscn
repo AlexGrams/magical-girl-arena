@@ -100,6 +100,36 @@ alignment = 0
 script = ExtResource("3_86ml7")
 label = NodePath("..")
 
+[node name="ButtonClose" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_right = -31.0
+offset_bottom = 127.0
+grow_horizontal = 0
+theme = ExtResource("1_e0277")
+theme_override_colors/font_color = Color(1, 0.346577, 0.280009, 1)
+text = "X"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ButtonSubmit" type="Button" parent="ButtonClose" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e0277")
+alignment = 0
+script = ExtResource("3_86ml7")
+label = NodePath("..")
+
 [connection signal="button_down" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="." method="_on_button_submit_down"]
 [connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_exited"]
+[connection signal="button_down" from="ButtonClose/ButtonSubmit" to="." method="hide"]
+[connection signal="mouse_entered" from="ButtonClose/ButtonSubmit" to="ButtonClose/ButtonSubmit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonClose/ButtonSubmit" to="ButtonClose/ButtonSubmit" method="_on_mouse_exited"]
