@@ -35,8 +35,6 @@ func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 	if not is_multiplayer_authority():
 		set_physics_process(false)
 		set_process(false)
-		collider.area_entered.disconnect(_on_area_2d_entered)
-		collider.area_exited.disconnect(_on_area_2d_exited)
 
 
 ## Initialize properties used by the bullet for analytics on how much damage each of the player's powerups has done.
@@ -51,13 +49,18 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	if other != null and other is Enemy:
 		if is_multiplayer_authority():
 			other.add_continuous_damage(_damage)
-			if multiplayer.get_unique_id() == _owner_id:
-				other.continuous_damage_analytics(_damage, _powerup_index)
+		
+		# Each client separately records continuous damage analytics on their local versions of each Enemy.
+		if multiplayer.get_unique_id() == _owner_id:
+			other.continuous_damage_analytics(_damage, _powerup_index)
+			if _owner_id != 1:
+				pass
 
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other != null and other is Enemy:
-		other.add_continuous_damage(-_damage)
+		if is_multiplayer_authority():
+			other.add_continuous_damage(-_damage)
 		if multiplayer.get_unique_id() == _owner_id:
-			other.continuous_damage_analytics(_damage, _powerup_index)
+			other.continuous_damage_analytics(-_damage, -1)

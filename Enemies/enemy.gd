@@ -109,9 +109,6 @@ func _physics_process(delta: float) -> void:
 			# Continuous damage 
 			if _continuous_damage > 0.0:
 				_take_damage(_continuous_damage)
-				# Analytics: Right now, we assume that continuous damage only comes from one local powerup.
-				if _continuous_damage_powerup_index != -1:
-					Analytics.add_powerup_damage(_local_continuous_damage, _continuous_damage_powerup_index)
 			
 			# Retargeting check: Occasionally see if we should attack a player that is closer than our
 			# current target.
@@ -127,6 +124,12 @@ func _physics_process(delta: float) -> void:
 			# Continue moving in the same direction until we are notified by the server of
 			# the new target
 			move_and_slide()
+	
+	
+	# Analytics: Continuous damage. Right now, we assume that continuous damage only comes from one 
+	# local powerup.
+	if _continuous_damage_powerup_index != -1:
+		Analytics.add_powerup_damage(_local_continuous_damage, _continuous_damage_powerup_index)
 
 
 ## Move this enemy to a location.
@@ -232,8 +235,11 @@ func add_continuous_damage(damage: float) -> void:
 
 ## For analytics. Set how much continuous damage the local client is doing to this Enemy.
 func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void:
-	_local_continuous_damage = damage
-	_continuous_damage_powerup_index = powerup_index
+	_local_continuous_damage = max(_local_continuous_damage + damage, 0)
+	if _local_continuous_damage > 0.0:
+		_continuous_damage_powerup_index = powerup_index
+	else:
+		_continuous_damage_powerup_index = -1
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
