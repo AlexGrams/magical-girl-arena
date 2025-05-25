@@ -40,8 +40,7 @@ func _physics_process(delta: float) -> void:
 		# Turn the hitbox on for one frame, then delete it.
 		if not _is_collision_active:
 			_is_collision_active = true
-			if is_multiplayer_authority():
-				collider.collision_layer = _collision_layer
+			collider.collision_layer = _collision_layer
 			
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
