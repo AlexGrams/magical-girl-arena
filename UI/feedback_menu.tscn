@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsncuf4mu8prx"]
+
+[ext_resource type="Script" path="res://UI/feedback_menu.gd" id="1_3wbj7"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="1_e0277"]
+[ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_ktmol"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="3_86ml7"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_88vo4"]
+[ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="3_h3xjo"]
+
+[node name="FeedbackMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3wbj7")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = 43.0
+offset_right = -59.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_e0277")
+theme_override_fonts/font = ExtResource("1_ktmol")
+theme_override_font_sizes/font_size = 125
+text = "Send us your feedback!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 33.065)
+layout_mode = 2
+
+[node name="LabelDescription" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_h3xjo")
+theme_override_fonts/font = ExtResource("1_ktmol")
+theme_override_font_sizes/font_size = 55
+text = "Your feedback helps us improve the game!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 33.065)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_88vo4")
+theme_override_fonts/font = ExtResource("1_ktmol")
+theme_override_font_sizes/font_size = 40
+placeholder_text = "Write here..."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="LabelSubmit" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_e0277")
+text = "Submit"
+
+[node name="ButtonSubmit" type="Button" parent="VBoxContainer/HBoxContainer/LabelSubmit" node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_right = 261.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_e0277")
+alignment = 0
+script = ExtResource("3_86ml7")
+label = NodePath("..")
+
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_exited"]
