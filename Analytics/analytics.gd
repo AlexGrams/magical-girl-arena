@@ -129,3 +129,11 @@ func send_match_data() -> void:
 	# Clear the telemetry payload. This might be an issue if we want to retry sending the payload
 	# in case it fails.
 	_setup_telemetry_payload()
+
+
+## Sends a text message from the user of feedback for the game.
+func send_feedback(message: String) -> void:
+	var payload: Dictionary = {"message": message}
+	
+	write_title_player_telemetry_event("feedback", payload, _send_telemerty_event_callback)
+	print("Feedback sent: " + message)

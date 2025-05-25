@@ -15,10 +15,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	# TODO: Limit length of text that can be entered into the text box.
 	pass
 
 
 func _on_button_submit_down() -> void:
-	# TODO: Submit text through analytics
+	Analytics.send_feedback(_text_box.text)
+	_text_box.text = ""
 	hide()
