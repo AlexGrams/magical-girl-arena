@@ -37,6 +37,8 @@ func _physics_process(delta: float) -> void:
 func _explode() -> void:
 	_exploded = true
 	
+	collider.collision_layer = _collision_layer
+	
 	# Spawn explosion VFX
 	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 	if playground != null:
@@ -49,8 +51,3 @@ func _explode() -> void:
 	playground.add_child(flower_vfx)
 	
 	sprite.hide()
-	
-	
-	
-	if is_multiplayer_authority():
-		collider.collision_layer = _collision_layer
