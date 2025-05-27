@@ -56,11 +56,11 @@ func _physics_process(delta: float) -> void:
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
-	# Make the bullet hurt players
 	if not is_owned_by_player:
+		# Make the bullet hurt players and indestructible.
 		_is_owned_by_player = false
-		_health = max_health
-		_modify_collider_to_harm_players()
+		if sprite != null:
+			sprite.self_modulate = Color.RED
 	else:
 		# Owned by player and was spawned by powerup_raindrop
 		

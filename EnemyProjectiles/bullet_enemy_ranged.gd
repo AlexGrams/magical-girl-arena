@@ -1,4 +1,6 @@
+class_name BulletEnemy
 extends Bullet
+## A simple bullet shot by ranged Enemies.
 
 
 # Called when the node enters the scene tree for the first time.
