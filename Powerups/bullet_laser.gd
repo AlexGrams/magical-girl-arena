@@ -66,15 +66,16 @@ func _physics_process(_delta: float) -> void:
 			
 			if is_multiplayer_authority():
 				var hit_node: Node2D = result["collider"].get_parent()
-				if hit_node is Enemy:
+				if hit_node is Enemy or hit_node is LootBox:
 					hit_node.take_damage(_area.damage)
 					Analytics.add_powerup_damage.rpc_id(_area.owner_id, _area.damage, _area.powerup_index)
 		elif is_multiplayer_authority():
 			# Signature functionality: Harm all enemies the laser is touching
 			var damage_done: float = 0
 			for hit_area: Area2D in _area.get_overlapping_areas():
-				if hit_area.get_parent() is Enemy:
-					hit_area.get_parent().take_damage(_area.damage)
+				var hit_node = hit_area.get_parent()
+				if hit_node is Enemy or hit_node is LootBox:
+					hit_node.take_damage(_area.damage)
 					damage_done += _area.damage
 			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
 	else:
