@@ -12,6 +12,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if (uncollected 
 		and multiplayer.get_unique_id() == area.get_multiplayer_authority() 
 		and other is PlayerCharacterBody2D
+		and other.health < other.health_max
 	):
 		uncollected = false
 		other.take_damage.rpc(-abs(HEALTH_TO_ADD))
