@@ -42,9 +42,9 @@ func _ready() -> void:
 	)
 
 
-## Call after spawning to set this LootBox to the correct position on other clients.
+## Move LootBox to a location. Call using RPC for replication.
 @rpc("authority", "call_local")
-func set_position_for_clients(pos: Vector2) -> void:
+func teleport(pos: Vector2) -> void:
 	global_position = pos
 
 
@@ -54,6 +54,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	
 	if area is BulletHitbox:
 		take_damage(area.damage)
+
 
 ## Break this object and create a pickup. Only call on server.
 func _destroy() -> void:
