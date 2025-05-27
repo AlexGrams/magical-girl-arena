@@ -33,6 +33,11 @@ func set_pointer_direction(val: Vector2) -> void:
 	_pointer_location = val
 
 
+@rpc("any_peer", "call_local")
+func _set_piercing(val: bool) -> void:
+	_piercing_active = val
+
+
 ## Wrapper for set_pointer_direction that can be bound and unbound from signals.
 func _call_set_pointer_direction(val: Vector2) -> void:
 	set_pointer_direction.rpc(val)
@@ -144,7 +149,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		# Turn on signature functionality.
 		laser_powerup.activate_piercing.connect(
 			func():
-				_piercing_active = true
+				_set_piercing.rpc(true)
 		)
 	
 	_max_range = data[1]
