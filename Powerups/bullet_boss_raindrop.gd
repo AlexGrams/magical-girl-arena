@@ -42,6 +42,8 @@ func _physics_process(delta: float) -> void:
 			_is_collision_active = true
 			collider.collision_layer = _collision_layer
 			
+			# Play SFX
+			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP)
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 			if playground != null:

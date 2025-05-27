@@ -31,7 +31,9 @@ enum SOUND_EFFECT_TYPE{
 	ON_ENEMY_MOVE,
 	# UI
 	UI_BUTTON_HOVER,
-	UI_BUTTON_PRESS
+	UI_BUTTON_PRESS,
+	# Powerup
+	RAINDROP
 }
 
 @export_range(0, 20) var limit : int = 20
