@@ -6,6 +6,7 @@ extends CanvasLayer
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
 @export var _pointer_parent: Control = null
+@export var _pointer_icon_parent: Control = null
 ## Parent of panels displaying each powerup
 @export var _powerup_container: Container = null
 ## Displays the icon for the player's ultimate ability.
@@ -32,6 +33,8 @@ var _powerup_textures: Array[TextureRect] = []
 var _powerup_level_text: Array[Label] = []
 ## Guttered icons that point to other off-screen players.
 var _pointers: Array[TextureRect] = []
+## Guttered character icons used with the player pointers.
+var _pointer_icons: Array[TextureRect] = []
 ## Maps Powerup name to which index its UI components are in _powerup_level_text
 ## and _powerup_textures.
 var _powerup_display_index = {}
@@ -47,6 +50,7 @@ func _ready() -> void:
 	
 	for pointer in _pointer_parent.get_children():
 		_pointers.append(pointer)
+	_pointer_icons.assign(_pointer_icon_parent.get_children())
 		
 	for powerup_panel: Control in _powerup_container.get_children():
 		_powerup_textures.append(powerup_panel.find_child("Powerup_Image"))
@@ -100,7 +104,9 @@ func _process(_delta: float) -> void:
 			continue
 		
 		var _pointer = _pointers[used_pointers]
+		var _pointer_icon = _pointer_icons[used_pointers]
 		_pointer.show()
+		_pointer_icon.show()
 		used_pointers += 1
 		
 		# The angle in radians from the local player to the other player character
@@ -127,9 +133,14 @@ func _process(_delta: float) -> void:
 			))
 		
 		_pointer.rotation = angle_to_other_player
+		
+		# Position the character icon
+		_pointer_icon.texture = load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid)
+		_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))
 	
 	while used_pointers < len(_pointers):
 		_pointers[used_pointers].hide()
+		_pointer_icons[used_pointers].hide()
 		used_pointers += 1
 
 

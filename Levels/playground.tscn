@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=119 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="30_2tatt"]
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
+[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
@@ -12016,12 +12017,13 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4422)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_temp_health_control", "_temp_health_text", "_boss_health_bar", "_boss_health_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_temp_health_control", "_temp_health_text", "_boss_health_bar", "_boss_health_text")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
 _pointer_parent = NodePath("PlayerPointers")
+_pointer_icon_parent = NodePath("PlayerPointerIcons")
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
 _ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar/UltimateTextureRect")
 _ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar")
@@ -12040,7 +12042,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Pointer1" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
-visible = false
 layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
@@ -12070,6 +12071,39 @@ offset_right = 103.0
 offset_bottom = 146.0
 pivot_offset = Vector2(40, 40)
 texture = ExtResource("30_2tatt")
+expand_mode = 1
+
+[node name="PlayerPointerIcons" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointerIcon1" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
+offset_right = 60.0
+offset_bottom = 60.0
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("31_ek7na")
+expand_mode = 1
+
+[node name="PointerIcon2" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
+visible = false
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 83.0
+offset_bottom = 126.0
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("31_ek7na")
+expand_mode = 1
+
+[node name="PointerIcon3" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
+visible = false
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 83.0
+offset_bottom = 126.0
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("31_ek7na")
 expand_mode = 1
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
