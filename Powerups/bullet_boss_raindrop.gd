@@ -23,6 +23,7 @@ func _ready() -> void:
 	sprite.scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_GROW, true, lifetime)
 
 
 func _process(_delta: float) -> void:
@@ -43,7 +44,7 @@ func _physics_process(delta: float) -> void:
 			collider.collision_layer = _collision_layer
 			
 			# Play SFX
-			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP)
+			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_POP)
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 			if playground != null:

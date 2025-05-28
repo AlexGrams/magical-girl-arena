@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=24 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ljtf8ydvbjyq" path="res://Audio/SFX/On_Button_Hover_3.mp3" id="9_02tjj"]
 [ext_resource type="AudioStream" uid="uid://day7n86wpjy8f" path="res://Audio/SFX/On_Button_Pressed_2.mp3" id="10_pkguu"]
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
+[ext_resource type="AudioStream" uid="uid://bdb3xnwjieyd" path="res://Audio/SFX/Powerups/Bubble_Grow_3.mp3" id="12_5j5vb"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 script = ExtResource("2_kdvej")
@@ -102,8 +103,17 @@ volume = 0
 pitch_scale = 1.0
 pitch_randomness = 0.1
 
+[sub_resource type="Resource" id="Resource_iveav"]
+script = ExtResource("2_kdvej")
+limit = 3
+type = 25
+sound_effect = ExtResource("12_5j5vb")
+volume = -5
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
