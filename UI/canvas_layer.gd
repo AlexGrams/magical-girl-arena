@@ -126,7 +126,7 @@ func _process(_delta: float) -> void:
 				clamp((0.5 * screen_x) * tan(PI - angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
 			))
 		
-		_pointer.rotation = angle_to_other_player + PI / 2
+		_pointer.rotation = angle_to_other_player
 	
 	while used_pointers < len(_pointers):
 		_pointers[used_pointers].hide()

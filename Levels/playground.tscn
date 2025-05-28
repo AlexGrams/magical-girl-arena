@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://cl3yy7sxyrm4" path="res://Enemies/enemy_white-dwarf_special.tscn" id="6_m8bth"]
 [ext_resource type="Texture2D" uid="uid://5jne2i7m67kq" path="res://Sprites/Map/Patch_Light_Grass.png" id="6_rdarx"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="6_rscnf"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="7_gsdoh"]
 [ext_resource type="Texture2D" uid="uid://d041byvkp64a5" path="res://Sprites/Map/Patch_Dark_Grass.png" id="7_xnnrg"]
 [ext_resource type="PackedScene" uid="uid://w6mllopse3wt" path="res://UI/upgrade_screen_panel.tscn" id="7_y7jy2"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="8_0gogc"]
@@ -39,6 +38,7 @@
 [ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="27_vw2yc"]
 [ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
 [ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="29_2x3ae"]
+[ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="30_2tatt"]
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
@@ -12047,7 +12047,7 @@ offset_top = 66.0
 offset_right = 103.0
 offset_bottom = 146.0
 pivot_offset = Vector2(40, 40)
-texture = ExtResource("7_gsdoh")
+texture = ExtResource("30_2tatt")
 expand_mode = 1
 
 [node name="Pointer2" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
@@ -12058,7 +12058,7 @@ offset_top = 66.0
 offset_right = 103.0
 offset_bottom = 146.0
 pivot_offset = Vector2(40, 40)
-texture = ExtResource("7_gsdoh")
+texture = ExtResource("30_2tatt")
 expand_mode = 1
 
 [node name="Pointer3" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
@@ -12069,7 +12069,7 @@ offset_top = 66.0
 offset_right = 103.0
 offset_bottom = 146.0
 pivot_offset = Vector2(40, 40)
-texture = ExtResource("7_gsdoh")
+texture = ExtResource("30_2tatt")
 expand_mode = 1
 
 [node name="ExperienceBar" type="ProgressBar" parent="CanvasLayer"]
