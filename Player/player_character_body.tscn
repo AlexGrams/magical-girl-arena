@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://f2bxm7cg14yq"]
+[gd_scene load_steps=25 format=3 uid="uid://f2bxm7cg14yq"]
 
 [ext_resource type="Script" path="res://Player/character_body_2d.gd" id="1_b2ljt"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="3_q0m3g"]
 [ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="5_x80sq"]
 [ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="6_0llbf"]
+[ext_resource type="Texture2D" uid="uid://bo1lmy1fjhpcf" path="res://Sprites/UI/HealthBarLines.png" id="6_nf4kw"]
+[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="7_4xoi3"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="7_7w7dn"]
 [ext_resource type="Texture2D" uid="uid://c34urh2h2ne6m" path="res://Sprites/Powerups/Laser_Drone.png" id="7_687rg"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="7_kh3sg"]
@@ -38,6 +40,25 @@ _data = {
 "RESET": SubResource("Animation_et2e4"),
 "took_damage": SubResource("Animation_4u4gq")
 }
+
+[sub_resource type="Gradient" id="Gradient_kh532"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gsxyx"]
+gradient = SubResource("Gradient_kh532")
+width = 150
+height = 35
+
+[sub_resource type="Gradient" id="Gradient_labx2"]
+colors = PackedColorArray(0.901961, 0.25098, 0.25098, 1, 1, 1, 0.443137, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bwa5k"]
+gradient = SubResource("Gradient_labx2")
+width = 150
+height = 35
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6ebma"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vfgy6"]
 properties/0/path = NodePath("Label:text")
@@ -165,6 +186,75 @@ offset_top = -117.0
 offset_right = 105.0
 offset_bottom = -40.0
 text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+visible = false
+custom_minimum_size = Vector2(150, 35)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = 72.5
+offset_right = 71.0
+offset_bottom = 107.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_under = SubResource("GradientTexture2D_gsxyx")
+texture_over = ExtResource("6_nf4kw")
+texture_progress = SubResource("GradientTexture2D_bwa5k")
+
+[node name="HealthLabel" type="Label" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_4xoi3")
+theme_override_font_sizes/font_size = 26
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempHealthBar" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 82.0
+offset_top = 73.0
+offset_right = 168.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="TempHealthBar"]
+modulate = Color(0, 0.58041, 0.972094, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_6ebma")
+
+[node name="TempHealthText" type="Label" parent="TempHealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_4xoi3")
+theme_override_font_sizes/font_size = 30
+text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 

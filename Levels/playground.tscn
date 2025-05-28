@@ -481,20 +481,20 @@ gradient = SubResource("Gradient_vn3oc")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_obhx2"]
 texture = SubResource("GradientTexture1D_nc5ny")
 
-[sub_resource type="Gradient" id="Gradient_kh532"]
+[sub_resource type="Gradient" id="Gradient_qiucp"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.196078, 0.196078, 0.196078, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_pn3bw"]
-gradient = SubResource("Gradient_kh532")
+gradient = SubResource("Gradient_qiucp")
 width = 150
 height = 35
 
-[sub_resource type="Gradient" id="Gradient_labx2"]
+[sub_resource type="Gradient" id="Gradient_necq8"]
 colors = PackedColorArray(0.901961, 0.25098, 0.25098, 1, 1, 1, 0.443137, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_g8v8b"]
-gradient = SubResource("Gradient_labx2")
+gradient = SubResource("Gradient_necq8")
 width = 150
 height = 35
 
