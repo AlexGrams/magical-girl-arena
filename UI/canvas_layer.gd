@@ -134,6 +134,11 @@ func _process(_delta: float) -> void:
 		
 		_pointer.rotation = angle_to_other_player
 		
+		if node.is_down:
+			_pointer.modulate = Color.DIM_GRAY
+		else:
+			_pointer.modulate = Color.WHITE
+		
 		# Position the character icon
 		_pointer_icon.texture = load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid)
 		_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))

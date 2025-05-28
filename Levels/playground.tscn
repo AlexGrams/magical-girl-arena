@@ -12042,6 +12042,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Pointer1" type="TextureRect" parent="CanvasLayer/PlayerPointers"]
+visible = false
 layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
@@ -12080,6 +12081,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PointerIcon1" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
+visible = false
 offset_right = 60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
