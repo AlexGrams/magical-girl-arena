@@ -111,7 +111,7 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_if4nf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
