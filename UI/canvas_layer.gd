@@ -15,10 +15,6 @@ extends CanvasLayer
 @export var _ultimate_progress_bar: ProgressBar = null
 ## Displays the player's current stat levels.
 @export var _stat_level_container: Control = null
-## Only appears if the player has temp health
-@export var _temp_health_control: Control = null
-## Displays how much temp health the player has
-@export var _temp_health_text: Label = null
 ## Health bar for bosses.
 @export var _boss_health_bar: ProgressBar = null
 ## Text displaying boss health.
@@ -152,17 +148,6 @@ func _process(_delta: float) -> void:
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
 	$ExperienceBar.value = experience
 	$LevelLabel.text = "Level: " + str(level)
-
-
-func _on_character_body_2d_took_damage(health: int, health_max: int, temp_health: int) -> void:
-	$HealthBar/HealthLabel.text = str(health) + "/" + str(health_max)
-	$HealthBar.value = (float(health) / float(health_max)) * 100
-	
-	if temp_health > 0:
-		_temp_health_control.show()
-		_temp_health_text.text = str(temp_health)
-	else:
-		_temp_health_control.hide()
 
 
 func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
