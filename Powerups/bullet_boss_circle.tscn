@@ -18,12 +18,10 @@ texture = ExtResource("2_f0dji")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.92, 7.28)
-collision_layer = 0
-collision_mask = 2
+collision_layer = 32
+collision_mask = 8
 script = ExtResource("3_5ma5o")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

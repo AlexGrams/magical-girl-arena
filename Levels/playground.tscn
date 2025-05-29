@@ -12082,6 +12082,7 @@ offset_bottom = 40.0
 
 [node name="PointerIcon1" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
 visible = false
+layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
 pivot_offset = Vector2(30, 30)
@@ -12090,6 +12091,7 @@ expand_mode = 1
 
 [node name="PointerIcon2" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
 visible = false
+layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
 offset_right = 83.0
@@ -12100,6 +12102,7 @@ expand_mode = 1
 
 [node name="PointerIcon3" type="TextureRect" parent="CanvasLayer/PlayerPointerIcons"]
 visible = false
+layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
 offset_right = 83.0
