@@ -36,8 +36,7 @@ func _process(delta: float) -> void:
 	if shoot_timer > shoot_interval:
 		var direction := Vector2.ZERO
 		if _is_owned_by_player:
-			# Set volley direction
-			direction = Vector2.LEFT if direction_toggle else Vector2.RIGHT
+			direction = global_position.direction_to(_find_nearest_target().global_position)
 		else:
 			# Enemy bullet moves in direction of Enemy's desired velocity.
 			direction = get_parent().velocity.normalized()
@@ -94,4 +93,5 @@ func level_up():
 
 	if is_signature and current_level == max_level:
 		signature_active = true
+		shoot_interval = 0.5
 	powerup_level_up.emit(current_level, bullet_damage)
