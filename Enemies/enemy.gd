@@ -267,11 +267,11 @@ func _take_damage(damage: float) -> void:
 
 @rpc("authority", "call_local")
 func _damage_effects(damage: float) -> void:
-	# Damage indicator
-	var damage_indicator = damage_indicator_scene.instantiate()
-	damage_indicator.global_position = global_position
-	damage_indicator.text = str(damage)
-	get_tree().root.get_node("Playground").add_child(damage_indicator)
+	## Damage indicator
+	#var damage_indicator = damage_indicator_scene.instantiate()
+	#damage_indicator.global_position = global_position
+	#damage_indicator.text = str(damage)
+	#get_tree().root.get_node("Playground").add_child(damage_indicator)
 	
 	# Animation
 	$AnimationPlayer.play("take_damage")
