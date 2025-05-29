@@ -6,7 +6,8 @@ extends Bullet
 
 ## Particles to spawn when damage activates.
 @export var vfx_uid: String = ""
-
+## Child of initial Sprite2D. Used to scale for mask.
+@export var sprite_child: Sprite2D
 ## How big the shadow of this attack is at its maximum value.
 var _max_shadow_scale: Vector2 = Vector2.ONE
 ## Which Enemy this bullet is targeting if it was spawned by a player's powerup.
@@ -23,7 +24,8 @@ func _ready() -> void:
 	sprite.scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_GROW, true, lifetime)
+	if _is_owned_by_player:
+		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_GROW, true, lifetime)
 
 
 func _process(_delta: float) -> void:
@@ -43,8 +45,9 @@ func _physics_process(delta: float) -> void:
 			_is_collision_active = true
 			collider.collision_layer = _collision_layer
 			
-			# Play SFX
-			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_POP)
+			# Play bubble SFX
+			if _is_owned_by_player:
+				AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_POP)
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 			if playground != null:
@@ -55,6 +58,8 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 	else:
 		sprite.scale = (death_timer / lifetime) * _max_shadow_scale
+		if not _is_owned_by_player:
+			sprite_child.scale = Vector2(1.0, 1.0) / sprite.scale
 
 
 # Set up other properties for this bullet

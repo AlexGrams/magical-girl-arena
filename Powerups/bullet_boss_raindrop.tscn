@@ -1,25 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://6an7e1yae8hf"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_raindrop.gd" id="1_d5i4k"]
-[ext_resource type="Texture2D" uid="uid://ma4qbv43n3de" path="res://Sprites/Powerups/CorvusRaindrop.png" id="2_fgaa6"]
+[ext_resource type="Texture2D" uid="uid://4cllps2xw4x8" path="res://Sprites/Powerups/Corvus_Circle.png" id="2_srkep"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_amvvv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7cxdy"]
 radius = 195.0
 
-[node name="BulletBossRaindrop" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletBossRaindrop" type="Node2D" node_paths=PackedStringArray("sprite_child", "collider", "sprite")]
 script = ExtResource("1_d5i4k")
 vfx_uid = "uid://jyy16gs6xyi8"
+sprite_child = NodePath("Mask/Circle")
 speed = 0.0
 lifetime = 1.5
 destroy_on_hit = false
 collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("Mask")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Mask" type="Sprite2D" parent="."]
+clip_children = 1
 z_index = -1
-scale = Vector2(1.1, 1.1)
-texture = ExtResource("2_fgaa6")
+texture = ExtResource("2_srkep")
+
+[node name="Circle" type="Sprite2D" parent="Mask"]
+texture = ExtResource("2_srkep")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
