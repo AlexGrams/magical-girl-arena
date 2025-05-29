@@ -48,11 +48,12 @@ func _shoot() -> void:
 	
 	# Shoot bullets all around
 	var rotation_increment: float = 2 * PI / _num_bullets
+	var random_starting_point = Vector2(randf(), randf()).normalized()
 	for i in range(_num_bullets):
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 		1, [_bullet_scene_uid, 
 			get_parent().global_position, 
-			Vector2.UP.rotated(rotation_increment * i), 
+			random_starting_point.rotated(rotation_increment * i), 
 			_damage, 
 			false,
 			-1,
