@@ -36,7 +36,11 @@ func _process(delta: float) -> void:
 	if shoot_timer > shoot_interval:
 		var direction := Vector2.ZERO
 		if _is_owned_by_player:
-			direction = global_position.direction_to(_find_nearest_target().global_position)
+			var target = _find_nearest_target()
+			if target != null:
+				direction = global_position.direction_to(target.global_position)
+			else:
+				direction = Vector2.LEFT
 		else:
 			# Enemy bullet moves in direction of Enemy's desired velocity.
 			direction = get_parent().velocity.normalized()
