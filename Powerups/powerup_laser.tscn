@@ -5,6 +5,6 @@
 [node name="PowerupLaser" type="Node2D"]
 script = ExtResource("1_oytnp")
 max_range = 750.0
-damage_levels = Array[float]([1.0, 1.75, 3.06, 5.36, 9.38])
+damage_levels = Array[float]([1.0, 1.75, 2.25, 3.38, 5.06])
 signature_damage = 5.36
 powerup_name = "Laser"
