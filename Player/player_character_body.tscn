@@ -68,7 +68,7 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag") groups=["player"]]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label") groups=["player"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 194
@@ -82,6 +82,10 @@ _revive_progress_bar_2 = NodePath("ReviveArea2D/ReviveCollisionShape/ReviveProgr
 _on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 _character_animated_sprite = NodePath("CharacterAnimatedSprite")
 _nametag = NodePath("Label")
+_health_bar = NodePath("HealthBar")
+_health_label = NodePath("HealthBar/HealthLabel")
+_temp_health_bar = NodePath("TempHealthBar")
+_temp_health_label = NodePath("TempHealthBar/TempHealthLabel")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -190,7 +194,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-visible = false
 custom_minimum_size = Vector2(150, 35)
 anchors_preset = 8
 anchor_left = 0.5
@@ -245,7 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_6ebma")
 
-[node name="TempHealthText" type="Label" parent="TempHealthBar"]
+[node name="TempHealthLabel" type="Label" parent="TempHealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

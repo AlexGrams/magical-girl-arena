@@ -27,6 +27,10 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _on_screen_notifier: VisibleOnScreenNotifier2D = null
 @export var _character_animated_sprite: Sprite2D = null
 @export var _nametag: Label = null
+@export var _health_bar: TextureProgressBar = null
+@export var _health_label: Label = null
+@export var _temp_health_bar: Control = null
+@export var _temp_health_label: Label = null
 
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
@@ -300,11 +304,20 @@ func take_damage(damage: float) -> void:
 	if damage > 0:
 		$AnimationPlayer.play("took_damage")
 		
-		# While every client knows when every other player takes damage, the values become desynced 
-		# because of health regen and max health not being replicated. Can either replicate these
-		# changes
 		if is_multiplayer_authority() and health <= 0:
 			die.rpc()
+
+
+## Changes the health bar and temp health bar displayed under this character.
+func _update_health_bar(_new_health, _new_health_max, _new_temp_health) -> void:
+	_health_label.text = str(health) + "/" + str(health_max)
+	_health_bar.value = (float(health) / float(health_max)) * 100
+	
+	if _temp_health > 0:
+		_temp_health_bar.show()
+		_temp_health_label.text = str(_temp_health)
+	else:
+		_temp_health_bar.hide()
 
 
 ## Increases this player's max health, which also increases their current health value by the same amount.
@@ -413,6 +426,10 @@ func ready_player_character(character: Constants.Character) -> void:
 	
 	_character_animated_sprite.set_character(character)
 	
+	# Signal for health changes
+	took_damage.connect(_update_health_bar)
+	took_damage.emit(health, health_max, _temp_health)
+	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
 		# Analytics: record this client's character
@@ -420,10 +437,6 @@ func ready_player_character(character: Constants.Character) -> void:
 		
 		# Signal for experience changes
 		gained_experience.connect($"../CanvasLayer"._on_character_body_2d_gained_experience)
-		
-		# Signal for health changes
-		took_damage.connect($"../CanvasLayer"._on_character_body_2d_took_damage)
-		took_damage.emit(health, health_max, _temp_health)
 		
 		# Powerup upgrade buttons
 		$"../CanvasLayer/UpgradeScreenPanel".upgrade_chosen.connect(_on_upgrade_chosen)
