@@ -140,9 +140,10 @@ func _ready() -> void:
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
-		# Original: 3689240
+		# Main: 3689240
 		# Playtest: 3705120
-		Steam.steamInitEx(true, 3705120)
+		# Demo: 3782600
+		Steam.steamInitEx(true, 3782600)
 		
 		if Steam.getAppID() == 480:
 			push_warning("Release app ID was not changed from the testing value of 480! Change it in game_state or make this a debug build.")
