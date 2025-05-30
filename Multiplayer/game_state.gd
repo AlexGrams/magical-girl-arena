@@ -287,6 +287,8 @@ func start_game():
 # Called when the game ends, either by the players winning or losing
 @rpc("authority", "call_local")
 func _game_over(has_won_game: bool = false):
+	get_tree().paused = true
+	
 	_gold += _gold_this_game
 	SaveManager.save_game()
 	
@@ -444,6 +446,7 @@ func quit_game(quitting_player: int):
 	var lobby: Control = get_tree().get_root().get_node(lobby_path)
 	
 	end_game()
+	get_tree().paused = false
 	main_menu.show()
 	main_menu.quit_to_main_menu()
 	if multiplayer.get_unique_id() == quitting_player:
@@ -472,7 +475,7 @@ func load_game():
 	get_tree().get_root().add_child(world, true)
 	get_tree().get_root().get_node(main_menu_node_path).hide()
 
-	get_tree().set_pause(false) 
+	get_tree().paused = false
 
 
 # Add exp to this player. Offer Powerups when leveling up.

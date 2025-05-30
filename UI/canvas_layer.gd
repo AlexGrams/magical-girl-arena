@@ -209,6 +209,7 @@ func _update_retry_votes(voting_retry: bool, id: int) -> void:
 func _return_to_lobby():
 	var main_menu: MainMenu = get_tree().get_root().get_node(GameState.main_menu_node_path)
 	
+	get_tree().paused = false
 	GameState.end_game()
 	main_menu.show()
 	main_menu.refresh_lobby()

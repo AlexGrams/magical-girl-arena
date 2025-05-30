@@ -12441,6 +12441,7 @@ size_flags_vertical = 8
 icon = ExtResource("57_wkgsw")
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15
