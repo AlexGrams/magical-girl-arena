@@ -60,6 +60,9 @@ func _process(delta: float) -> void:
 			)
 			direction = direction.rotated(_fire_angle_rad_delta)
 		
+		# Play sound effect
+		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
+		
 		# Signature quickly fires a second volley
 		if signature_active and signature_direction_toggle == 0:
 			shoot_timer = shoot_interval * 0.75

@@ -32,6 +32,7 @@ script = ExtResource("1_42fto")
 speed = 800.0
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+sound_effect = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.087, 0.087)

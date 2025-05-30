@@ -34,7 +34,8 @@ enum SOUND_EFFECT_TYPE{
 	UI_BUTTON_PRESS,
 	# Powerup
 	RAINDROP_POP,
-	RAINDROP_GROW
+	RAINDROP_GROW,
+	CUPID_ARROW
 }
 
 @export_range(0, 20) var limit : int = 20
