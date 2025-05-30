@@ -1,13 +1,12 @@
 class_name Enemy
 extends CharacterBody2D
 
-# Base health is the starting health before the curve multiplier is added
+## Base health is the starting health before the curve multiplier is added
 @export var base_health: int = 0
 ## Describes how this enemy's health changes as the game time progresses.
 @export var curve_max_health: Curve = preload("res://Curves/Enemies/atom_enemy_max_health.tres")
-## Parent of this Enemy's collider
-@export var collider_area: Area2D = null
-@export var sprite: Node2D = null
+## Movement speed of this Enemy
+@export var speed: float = 100
 ## Time in seconds between when this Enemy can attack
 @export var attack_interval: float = 1.0
 @export var attack_damage: float = 10.0
@@ -17,6 +16,9 @@ extends CharacterBody2D
 @export var drop_weight_exp: float = 1.0
 @export var drop_weight_gold: float = 1.0
 @export var drop_weight_nothing: float = 1.0
+## Parent of this Enemy's collider
+@export var collider_area: Area2D = null
+@export var sprite: Node2D = null
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 @onready var gold_scene = preload("res://Pickups/gold.tscn")
@@ -29,8 +31,6 @@ var health: int = 0
 var target: Node2D = null
 # All Objects that this Enemy can damage that it is touching right now.
 var colliding_targets: Array[Node2D] = []
-# Movement speed of this Enemy
-@export var speed: float = 100
 # True if it tries to harm Enemies instead of players.
 var is_ally := false
 # How long this Enemy lasts as an ally before being destroyed
@@ -60,6 +60,10 @@ var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
 var _goth_ult_allied_lifetime: float = 0.0
 var _goth_ult_allied_damage: float = 0.0
+## How long this Enemy is affected by the Slow status. Slow is not additive, and only one type of slow is applied at a time.
+var _status_slow_duration: float = 0.0
+## 0 = character moves at full speed, 1 = character doesn't move at all.
+var _status_slow_percent: float = 0.0
 var _hud_canvas_layer: HUDCanvasLayer = null
 
 # Emitted when this Enemy dies.
@@ -94,6 +98,13 @@ func _process(delta: float) -> void:
 		
 		_attack_timer = attack_interval
 	
+	# Update slow
+	if _status_slow_duration > 0.0:
+		_status_slow_duration -= delta
+		if _status_slow_duration <= 0.0:
+			_status_slow_percent = 0.0
+	
+	# Update allied lifetime
 	if is_multiplayer_authority() and is_ally:
 		lifetime -= delta
 		if lifetime <= 0.0:
@@ -102,7 +113,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if target != null:
-		velocity = (target.global_position - global_position).normalized() * speed
+		velocity = (target.global_position - global_position).normalized() * speed * (1.0 - _status_slow_percent)
 		move_and_slide()
 		
 		if is_multiplayer_authority():
@@ -339,6 +350,13 @@ func apply_status_goth_ult(duration: float, ally_lifetime: float, allied_damage:
 	_goth_ult_allied_damage = allied_damage
 	await get_tree().create_timer(duration).timeout
 	_status_goth_ult = false
+
+
+## Apply a slow to this Enemy. Only the latest slow is applied, and only one slow can be applied at a time.
+@rpc("authority", "call_local")
+func apply_status_slow(duration: float, percent: float) -> void:
+	_status_slow_duration = duration
+	_status_slow_percent = percent
 
 
 # Turn this Enemy into an ally of the player. Will instead try to damage Enemies that 

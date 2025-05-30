@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbme0ttmrvbc4"]
+[gd_scene load_steps=12 format=3 uid="uid://dbme0ttmrvbc4"]
 
 [ext_resource type="Script" path="res://Abilities/bullet_ult_dove.gd" id="1_dcxsn"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_fwphc"]
@@ -11,6 +11,9 @@ size = Vector2(26, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yj0vg"]
 radius = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75c1j"]
+radius = 124.0
 
 [sub_resource type="Gradient" id="Gradient_jutjh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -29,10 +32,11 @@ scale_min = 0.0
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_qvbcj")
 
-[node name="BulletUltDove" type="Node2D" node_paths=PackedStringArray("_explosion_area", "collider", "sprite")]
+[node name="BulletUltDove" type="Node2D" node_paths=PackedStringArray("_explosion_area", "_slow_area", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_dcxsn")
 _explosion_area = NodePath("ExplosionArea2D")
+_slow_area = NodePath("SlowArea2D2")
 speed = 1000.0
 lifetime = 5.0
 destroy_on_hit = false
@@ -57,8 +61,14 @@ collision_mask = 2
 script = ExtResource("4_p6tm1")
 damage = 100.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
+[node name="ExplosionShape2D" type="CollisionShape2D" parent="ExplosionArea2D"]
 shape = SubResource("CircleShape2D_yj0vg")
+
+[node name="SlowArea2D2" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="SlowShape2D" type="CollisionShape2D" parent="SlowArea2D2"]
+shape = SubResource("CircleShape2D_75c1j")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 10
@@ -67,4 +77,4 @@ texture = ExtResource("5_w78an")
 lifetime = 0.25
 
 [connection signal="area_entered" from="CollisionArea2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="ExplosionArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="SlowArea2D2" to="." method="_on_slow_area_entered"]

@@ -8,6 +8,10 @@ extends Ability
 @export var _touch_damage: float = 100.0
 ## How much damage each missile does after exploding. Damage is dealt in an area.
 @export var _explosion_damage: float = 100.0
+## Time in seconds to slow hit enemies for.
+@export var _slow_duration: float = 10.0
+## How much enemies are slowed by, where 0.0 is no slow and 1.0 is they are completely immobile. 
+@export_range(0.0, 1.0) var _slow_percent: float = 0.5
 ## Minimum distance from the player that the missiles will target.
 @export var _min_range: float = 500.0
 ## Maximum distance from the player that the missiles will target.
@@ -54,7 +58,9 @@ func activate() -> void:
 				[
 					_touch_damage, 
 					_explosion_damage, 
-					randi_range(0, BulletUltVale.MOVEMENT_PATTERNS - 1), 
+					_slow_duration,
+					_slow_percent,
+					randi_range(0, BulletUltDove.MOVEMENT_PATTERNS - 1), 
 					randf_range(_min_range, _max_range)
 				]
 		])

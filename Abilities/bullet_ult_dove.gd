@@ -1,4 +1,4 @@
-class_name BulletUltVale
+class_name BulletUltDove
 extends Bullet
 ## Moves in variety of sinusoidal patterns before exploding at its destination.
 
@@ -10,7 +10,11 @@ const MOVEMENT_PATTERNS: int = 4
 @export var _explosion_lifetime: float = 0.05
 ## Used to deal damage when the missile explodes, which is different from when it collides with something.
 @export var _explosion_area: BulletHitbox = null
+## Used to slow Enemies when the missile explodes.
+@export var _slow_area: Area2D
 
+var _slow_duration: float = 0.0
+var _slow_percent: float = 0.0
 var _timer: float = 0.0
 var _starting_direction: Vector2 = Vector2.ZERO
 var _starting_rotation: float = 0.0
@@ -20,6 +24,7 @@ var _distance: float = 0.0
 var _amplitude: float = 1.0
 ## Frequency factor of the missile's movement pattern.
 var _frequency: float = 1.0
+## Stored collision layer for turning on collision with the explosion and slow areas.
 var _explosion_collision_layer: int = 0
 ## Has the missile already exploded?
 var _exploded: bool = false
@@ -33,10 +38,15 @@ func set_damage(damage: float):
 func _ready() -> void:
 	_explosion_collision_layer = _explosion_area.collision_layer
 	_explosion_area.collision_layer = 0
+	_slow_area.collision_layer = 0
 	
 	_starting_direction = direction
 	_starting_rotation = Vector2.LEFT.angle_to(direction)
 	lifetime = _distance / speed
+	
+	## Only the server applies Slow status. 
+	if not is_multiplayer_authority():
+		_slow_area.area_entered.disconnect(_on_slow_area_entered)
 	
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.REVOLVING)
 
@@ -73,6 +83,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			take_damage(area.damage)
 
 
+## Slow enemies that touch the slow area.
+func _on_slow_area_entered(area: Area2D) -> void:
+	var enemy: Node = area.get_parent()
+	if enemy is Enemy:
+		enemy.apply_status_slow.rpc(_slow_duration, _slow_percent)
+
+
 ## Causes damage in an area around the missile, then frees it.
 func _explode() -> void:
 	# Spawn particles
@@ -90,17 +107,20 @@ func _explode() -> void:
 	
 	# Switch to only use the explosion collider.
 	_explosion_area.collision_layer = _explosion_collision_layer
+	_slow_area.collision_layer = _explosion_collision_layer
 	collider.collision_layer = 0
 
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 4
+		data.size() != 6
 		or (typeof(data[0])) != TYPE_FLOAT		# Collision damage
 		or (typeof(data[1])) != TYPE_FLOAT		# Explosion damage
-		or (typeof(data[2])) != TYPE_INT		# Movement mode
-		or (typeof(data[3])) != TYPE_FLOAT		# Travel distance
+		or (typeof(data[2])) != TYPE_FLOAT		# Slow duration
+		or (typeof(data[3])) != TYPE_FLOAT		# Slow percent
+		or (typeof(data[4])) != TYPE_INT		# Movement mode
+		or (typeof(data[5])) != TYPE_FLOAT		# Travel distance
 	):
 		push_error("Malformed setup_bullet data argument.")
 		return
@@ -113,9 +133,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	collider.damage = data[0]
 	_explosion_area.damage = data[1]
+	_slow_duration = data[2]
+	_slow_percent = data[3]
 	
 	# Determine movement mode
-	match(data[2]):
+	match(data[4]):
 		0:
 			# One cycle
 			_amplitude = 1.0
@@ -140,4 +162,4 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# the actual arc length distance. The exact calculation involves taking an integral, which is
 	# to expensive for what we want to do here. Magic numbers were found by plugging the equation
 	# for arc length of a sine wave into a calculator.
-	_distance = data[3] * (1.2 + 0.6 * (abs(_amplitude) - 1))
+	_distance = data[5] * (1.2 + 0.6 * (abs(_amplitude) - 1))
