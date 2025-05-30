@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dbme0ttmrvbc4"]
 
-[ext_resource type="Script" path="res://Abilities/bullet_ult_vale.gd" id="1_dcxsn"]
+[ext_resource type="Script" path="res://Abilities/bullet_ult_dove.gd" id="1_dcxsn"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_fwphc"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_ta8tr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_p6tm1"]
@@ -29,7 +29,7 @@ scale_min = 0.0
 scale_max = 0.25
 color_ramp = SubResource("GradientTexture1D_qvbcj")
 
-[node name="BulletUltVale" type="Node2D" node_paths=PackedStringArray("_explosion_area", "collider", "sprite")]
+[node name="BulletUltDove" type="Node2D" node_paths=PackedStringArray("_explosion_area", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_dcxsn")
 _explosion_area = NodePath("ExplosionArea2D")

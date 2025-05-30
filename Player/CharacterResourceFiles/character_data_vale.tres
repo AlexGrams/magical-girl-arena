@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_qro6l")
 name = "Vale"
+display_name = ""
 description = "When a magical girl felt herself growing old and wishing to retire, she created Vale, an eternal magical girl robot who could take her place."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres"
 base_powerup_name = "Laser"
@@ -18,5 +19,5 @@ model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.m
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
 offset_height = -25.0
-ultimate_ability = "res://Abilities/ability_ult_vale.tscn"
+ultimate_ability = "res://Abilities/ability_ult_dove.tscn"
 icon_uid = "uid://bw7bs1ov0n768"
