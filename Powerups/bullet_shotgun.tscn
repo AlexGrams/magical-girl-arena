@@ -1,9 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://dimpsrfkfu4no"]
+[gd_scene load_steps=10 format=3 uid="uid://dimpsrfkfu4no"]
 
 [ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_106pl"]
 [ext_resource type="Texture2D" uid="uid://dsv6ihphft6se" path="res://Sprites/Powerups/DoveArrow.png" id="2_t3uhj"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_om2mk"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_vcjug"]
+[ext_resource type="Texture2D" uid="uid://dufp6oabhvclo" path="res://Sprites/UI/Sparkle.png" id="4_86350"]
+
+[sub_resource type="Gradient" id="Gradient_0ho5m"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_okexn"]
+gradient = SubResource("Gradient_0ho5m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mosbr"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 10, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+color = Color(1, 0.803922, 0.368627, 1)
+color_ramp = SubResource("GradientTexture1D_okexn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
@@ -14,6 +31,12 @@ speed = 1000.0
 lifetime = 1.0
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-26, 0)
+process_material = SubResource("ParticleProcessMaterial_mosbr")
+texture = ExtResource("4_86350")
+lifetime = 0.25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
