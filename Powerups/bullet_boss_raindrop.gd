@@ -71,7 +71,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			sprite.self_modulate = Color.RED
 	else:
 		# Owned by player and was spawned by powerup_raindrop
-		
 		if (len(data) != 1 
 			or typeof(data[0]) != TYPE_NODE_PATH	# Path to target
 		):
