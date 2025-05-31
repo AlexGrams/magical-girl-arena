@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://byj8ht8bk7spo"]
+
+[ext_resource type="Script" path="res://Abilities/ability_ult_vale.gd" id="1_ylvgu"]
+
+[node name="AbilityUltVale" type="Node2D"]
+script = ExtResource("1_ylvgu")
+cooldown = 0.2
