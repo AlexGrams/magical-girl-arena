@@ -61,6 +61,10 @@ var _temp_health_timer: float = 0.0
 var _health_regen: float = 0.0
 # How long until the next health regen tick.
 var _health_regen_timer: float = 0.0
+## For spectating. All the players in the game.
+var _characters: Array[PlayerCharacterBody2D] = []
+## Index of the character in _characters that the local player is currently spectating if they are down.
+var _spectate_index: int = 0
 # Number of remaining powerup rerolls. Not replicated.
 var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
@@ -182,9 +186,11 @@ func get_spectator_input() -> void:
 		return
 	
 	if Input.is_action_just_pressed("move_left"):
-		GameState.player_characters.values()[0].make_camera_current()
+		_spectate_index = (_spectate_index - 1) % len(_characters)
+		_characters[_spectate_index].make_camera_current()
 	elif Input.is_action_just_pressed("move_right"):
-		GameState.player_characters.values()[1].make_camera_current()
+		_spectate_index = (_spectate_index + 1) % len(_characters)
+		_characters[_spectate_index].make_camera_current()
 
 
 ## Switches client's view to use this character's camera.
@@ -381,6 +387,7 @@ func die():
 	
 	if is_multiplayer_authority():
 		Analytics.add_death_time(int(GameState.time))
+		_setup_spectator_mode()
 	
 	disable_powerups()
 	died.emit()
@@ -393,12 +400,21 @@ func revive():
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
 	take_damage(-health_max)
 	_character_animated_sprite.play_revive_animation()
-	enable_powerups()
 	
 	if is_multiplayer_authority():
 		make_camera_current()
 	
+	enable_powerups()
 	revived.emit()
+
+
+## Set up UI and controls so that the local player can spectate other players.
+func _setup_spectator_mode() -> void:
+	_characters.clear()
+	for character: PlayerCharacterBody2D in GameState.player_characters.values():
+		if character == self:
+			_spectate_index = len(_characters)
+		_characters.append(character)
 
 
 ## Set the name that appears above this character.
