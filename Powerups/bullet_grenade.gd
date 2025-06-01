@@ -11,7 +11,7 @@ var _has_exploded:bool = false
 
 
 func _ready() -> void:
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.REVOLVING)
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.HEARTBEATBURST_LAUNCH)
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 	
@@ -65,6 +65,9 @@ func _explode() -> void:
 		vfx.global_position = global_position
 		playground.add_child(vfx)
 	sprite.hide()
+	
+	# Play SFX
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.HEARTBEATBURST_EXPLOSION)
 	
 	if is_multiplayer_authority():
 		collider.collision_layer = _collision_layer
