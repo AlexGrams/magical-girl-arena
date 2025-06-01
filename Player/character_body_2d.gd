@@ -53,6 +53,8 @@ var is_down := false
 var down_timer: float = 0.0
 var revive_timer: float = 0.0
 
+## What character this player is.
+var _character: Constants.Character
 # Temporary HP that goes away after some time
 var _temp_health: int = 0
 # How long until temp HP automatically disappears.
@@ -62,8 +64,8 @@ var _health_regen: float = 0.0
 # How long until the next health regen tick.
 var _health_regen_timer: float = 0.0
 ## For spectating. All the players in the game.
-var _characters: Array[PlayerCharacterBody2D] = []
-## Index of the character in _characters that the local player is currently spectating if they are down.
+var _spectate_characters: Array[PlayerCharacterBody2D] = []
+## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
 var _spectate_index: int = 0
 # Number of remaining powerup rerolls. Not replicated.
 var _rerolls: int = STARTING_REROLLS
@@ -119,6 +121,11 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 	# If we don't have the chosen powerup, then add it to the player.
 	if !powerup_found:
 		add_powerup(powerup_data, is_signature)
+
+
+## Returns which character this player is.
+func get_character() -> Constants.Character:
+	return _character
 
 
 ## Upgrade stats depending on which upgrade was chosen
@@ -186,11 +193,15 @@ func get_spectator_input() -> void:
 		return
 	
 	if Input.is_action_just_pressed("move_left"):
-		_spectate_index = (_spectate_index - 1) % len(_characters)
-		_characters[_spectate_index].make_camera_current()
+		_spectate_index -= 1
+		if _spectate_index < 0:
+			_spectate_index = len(_spectate_characters) - 1
+		_spectate_characters[_spectate_index].make_camera_current()
+		$"..".get_hud_canvas_layer().set_spectated_character(_spectate_index)
 	elif Input.is_action_just_pressed("move_right"):
-		_spectate_index = (_spectate_index + 1) % len(_characters)
-		_characters[_spectate_index].make_camera_current()
+		_spectate_index = (_spectate_index + 1) % len(_spectate_characters)
+		_spectate_characters[_spectate_index].make_camera_current()
+		$"..".get_hud_canvas_layer().set_spectated_character(_spectate_index)
 
 
 ## Switches client's view to use this character's camera.
@@ -403,6 +414,7 @@ func revive():
 	
 	if is_multiplayer_authority():
 		make_camera_current()
+		$"..".get_hud_canvas_layer().hide_spectator_mode()
 	
 	enable_powerups()
 	revived.emit()
@@ -410,11 +422,13 @@ func revive():
 
 ## Set up UI and controls so that the local player can spectate other players.
 func _setup_spectator_mode() -> void:
-	_characters.clear()
+	_spectate_characters.clear()
 	for character: PlayerCharacterBody2D in GameState.player_characters.values():
 		if character == self:
-			_spectate_index = len(_characters)
-		_characters.append(character)
+			_spectate_index = len(_spectate_characters)
+		_spectate_characters.append(character)
+	
+	$"..".get_hud_canvas_layer().setup_spectator_mode(_spectate_characters, _spectate_index)
 
 
 ## Set the name that appears above this character.
@@ -459,6 +473,7 @@ func register_with_game_state(owning_player_id: int) -> void:
 @rpc("any_peer", "call_local")
 func ready_player_character(character: Constants.Character) -> void:
 	# Set the character's appearance
+	_character = character
 	var character_data: CharacterData = Constants.CHARACTER_DATA[character]
 	if character_data == null:
 		push_error("Character data not mapped!")

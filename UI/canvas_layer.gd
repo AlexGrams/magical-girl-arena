@@ -241,6 +241,28 @@ func set_up_ultimate_ui(character_data: CharacterData, ultimate: Ability) -> voi
 	)
 
 
+## Highlights the icon for the character currently being spectated.
+func set_spectated_character(spectate_index: int) -> void:
+	for i in range(len(_spectator_icons)):
+		_spectator_icons[i].modulate = Color.DIM_GRAY if i != spectate_index else Color.WHITE
+
+
+## Configure the UI to display who the local client is currently spectating.
+func setup_spectator_mode(characters: Array[PlayerCharacterBody2D], starting_spectate_index: int) -> void:
+	for i in range(len(characters)):
+		_spectator_icons[i].texture = load(Constants.CHARACTER_DATA[characters[i].get_character()].icon_uid)
+		_spectator_icons[i].show()
+	for i in range(len(characters), len(_spectator_icons)):
+		_spectator_icons[i].hide()
+	
+	set_spectated_character(starting_spectate_index)
+	_spectator_container.show()
+
+
+func hide_spectator_mode() -> void:
+	_spectator_container.hide()
+
+
 # TODO: Maybe make this event-based rather than checking every frame. Would then need a way to
 # keep track of the object that each pointer is pointing to.
 # Connects events to enable or disable arrows to offscreen players.
