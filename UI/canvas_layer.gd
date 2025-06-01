@@ -7,6 +7,10 @@ extends CanvasLayer
 @export var _timer_text: Label = null
 @export var _pointer_parent: Control = null
 @export var _pointer_icon_parent: Control = null
+## Contains UI elements for spectator mode
+@export var _spectator_container: Control = null
+## Parent of the character icons for displaying which character is being spectated.
+@export var _spectator_icon_parent: Control = null
 ## Parent of panels displaying each powerup
 @export var _powerup_container: Container = null
 ## Displays the icon for the player's ultimate ability.
@@ -31,6 +35,7 @@ var _powerup_level_text: Array[Label] = []
 var _pointers: Array[TextureRect] = []
 ## Guttered character icons used with the player pointers.
 var _pointer_icons: Array[TextureRect] = []
+var _spectator_icons: Array[TextureRect] = []
 ## Maps Powerup name to which index its UI components are in _powerup_level_text
 ## and _powerup_textures.
 var _powerup_display_index = {}
@@ -47,7 +52,10 @@ func _ready() -> void:
 	for pointer in _pointer_parent.get_children():
 		_pointers.append(pointer)
 	_pointer_icons.assign(_pointer_icon_parent.get_children())
-		
+	
+	_spectator_icons.assign(_spectator_icon_parent.get_children())
+	_spectator_container.hide()
+	
 	for powerup_panel: Control in _powerup_container.get_children():
 		_powerup_textures.append(powerup_panel.find_child("Powerup_Image"))
 		_powerup_level_text.append(powerup_panel.find_child("Powerup_Level_Label"))

@@ -11997,13 +11997,15 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4422)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
 _pointer_parent = NodePath("PlayerPointers")
 _pointer_icon_parent = NodePath("PlayerPointerIcons")
+_spectator_container = NodePath("SpectatorContainer")
+_spectator_icon_parent = NodePath("SpectatorContainer/SpectatorPlayerIconsContainer")
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
 _ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar/UltimateTextureRect")
 _ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar")
@@ -12120,6 +12122,54 @@ text = "Level: 1"
 process_mode = 2
 visible = false
 all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("27_vw2yc"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("32_avmeh"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve"), ExtResource("48_hwjvr"), ExtResource("49_xecmh")])
+
+[node name="SpectatorContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -213.0
+offset_top = -245.0
+offset_right = 209.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="LeftArrow" type="TextureRect" parent="CanvasLayer/SpectatorContainer"]
+layout_mode = 2
+texture = ExtResource("30_2tatt")
+expand_mode = 2
+flip_h = true
+
+[node name="SpectatorPlayerIconsContainer" type="HBoxContainer" parent="CanvasLayer/SpectatorContainer"]
+layout_mode = 2
+
+[node name="SpectatorIcon1" type="TextureRect" parent="CanvasLayer/SpectatorContainer/SpectatorPlayerIconsContainer"]
+layout_mode = 2
+texture = ExtResource("31_ek7na")
+expand_mode = 2
+
+[node name="SpectatorIcon2" type="TextureRect" parent="CanvasLayer/SpectatorContainer/SpectatorPlayerIconsContainer"]
+layout_mode = 2
+texture = ExtResource("31_ek7na")
+expand_mode = 2
+
+[node name="SpectatorIcon3" type="TextureRect" parent="CanvasLayer/SpectatorContainer/SpectatorPlayerIconsContainer"]
+layout_mode = 2
+texture = ExtResource("31_ek7na")
+expand_mode = 2
+
+[node name="SpectatorIcon4" type="TextureRect" parent="CanvasLayer/SpectatorContainer/SpectatorPlayerIconsContainer"]
+layout_mode = 2
+texture = ExtResource("31_ek7na")
+expand_mode = 2
+
+[node name="RightArrow" type="TextureRect" parent="CanvasLayer/SpectatorContainer"]
+layout_mode = 2
+texture = ExtResource("30_2tatt")
+expand_mode = 2
 
 [node name="AbilitiesAndStatsContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
@@ -12723,7 +12773,7 @@ scale = Vector2(240, 240)
 spawn_interval = 20.0
 
 [node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
-position = Vector2(0.0333333, -0.183333)
+position = Vector2(0.0458333, 0.175)
 debug_color = Color(0, 0.435294, 0.403922, 0)
 
 [connection signal="mouse_entered" from="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" to="CanvasLayer/GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_entered"]
