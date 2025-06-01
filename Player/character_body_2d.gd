@@ -19,6 +19,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var level_shoot_intervals:Array
 @export var speed = 400
 
+@export var _camera: Camera2D = null
 @export var _player_collision_area: Area2D = null
 @export var _pickup_area: Area2D = null
 @export var _revive_collision_area: Area2D = null
@@ -175,6 +176,22 @@ func get_input():
 		velocity = input_direction * speed
 
 
+## Controls for when in spectator mode
+func get_spectator_input() -> void:
+	if len(GameState.player_characters.values()) <= 1:
+		return
+	
+	if Input.is_action_just_pressed("move_left"):
+		GameState.player_characters.values()[0].make_camera_current()
+	elif Input.is_action_just_pressed("move_right"):
+		GameState.player_characters.values()[1].make_camera_current()
+
+
+## Switches client's view to use this character's camera.
+func make_camera_current() -> void:
+	_camera.make_current()
+
+
 func _process(delta: float) -> void:
 	var direction = get_global_mouse_position() - _character_animated_sprite.global_position
 	var direction_normal = direction.normalized()
@@ -216,9 +233,12 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta):
-	if not is_down and is_multiplayer_authority():
-		get_input()
-		move_and_slide()
+	if is_multiplayer_authority():
+		if not is_down:
+			get_input()
+			move_and_slide()
+		else:
+			get_spectator_input()
 
 
 func _input(event: InputEvent) -> void:
@@ -373,8 +393,11 @@ func revive():
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
 	take_damage(-health_max)
 	_character_animated_sprite.play_revive_animation()
-	
 	enable_powerups()
+	
+	if is_multiplayer_authority():
+		make_camera_current()
+	
 	revived.emit()
 
 
@@ -475,7 +498,7 @@ func setup_authority(id: int, character: Constants.Character) -> void:
 	
 	# Extra functionality if this client is being given authority to its own character.
 	if id == multiplayer.get_unique_id():
-		$Camera2D.make_current()
+		make_camera_current()
 		
 		# Sort of jank, but we notify all other client's about this character's nametag here.
 		if GameState.USING_GODOT_STEAM:

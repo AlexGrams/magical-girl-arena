@@ -116,12 +116,13 @@ properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label") groups=["player"]]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label") groups=["player"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 194
 script = ExtResource("1_b2ljt")
 level_shoot_intervals = [1, 1, 0.8, 0.6, 0.5, 0.4, 0.3]
+_camera = NodePath("Camera2D")
 _player_collision_area = NodePath("Area2D")
 _pickup_area = NodePath("ExpPickupArea2D")
 _revive_collision_area = NodePath("ReviveArea2D")
