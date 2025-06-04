@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7thmbp12j8m8"]
+[gd_scene load_steps=14 format=3 uid="uid://c7thmbp12j8m8"]
 
 [ext_resource type="Script" path="res://Powerups/mines_flower_sprite.gd" id="2_26ckt"]
 [ext_resource type="Texture2D" uid="uid://bqa716yi56x4e" path="res://Sprites/Powerups/Mines_Petal2.png" id="3_can21"]
 [ext_resource type="Texture2D" uid="uid://dbv12bplh2at6" path="res://Sprites/Powerups/Mines_Petal.png" id="3_p32ky"]
 [ext_resource type="Texture2D" uid="uid://dkds3ao5cwnww" path="res://Sprites/Powerups/Mines_Petal3.png" id="4_0rqea"]
 [ext_resource type="Texture2D" uid="uid://bi2qfpm07ari0" path="res://Sprites/UI/UltimateCircle.png" id="5_wj0wp"]
+[ext_resource type="Texture2D" uid="uid://dufp6oabhvclo" path="res://Sprites/UI/Sparkle.png" id="6_n162u"]
 
 [sub_resource type="Animation" id="Animation_72xn6"]
 length = 0.001
@@ -44,6 +45,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(0.670588, 0.239216, 0.12549, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.580392, 0.270588, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_gmnvp"]
 resource_name = "blossom"
@@ -74,6 +87,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_fdki3"]
 resource_name = "pop_blossom"
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -278,6 +292,18 @@ tracks/16/keys = {
 "update": 0,
 "values": [Color(0.6, 0.168627, 0.0431373, 1), Color(0.6, 0.168627, 0.0431373, 0)]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("GPUParticles2D:self_modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(4.06667, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.580392, 0.270588, 1), Color(1, 0.580392, 0.270588, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eb6uy"]
 _data = {
@@ -285,6 +311,21 @@ _data = {
 "blossom": SubResource("Animation_gmnvp"),
 "pop_blossom": SubResource("Animation_fdki3")
 }
+
+[sub_resource type="Gradient" id="Gradient_rxqb3"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hvhh3"]
+gradient = SubResource("Gradient_rxqb3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0jclb"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.1
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_hvhh3")
 
 [node name="Flower" type="Sprite2D" node_paths=PackedStringArray("all_petal_sprites")]
 scale = Vector2(1.2, 1.2)
@@ -358,5 +399,10 @@ texture = ExtResource("3_p32ky")
 self_modulate = Color(0.670588, 0.239216, 0.12549, 1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_wj0wp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 0.580392, 0.270588, 1)
+process_material = SubResource("ParticleProcessMaterial_0jclb")
+texture = ExtResource("6_n162u")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

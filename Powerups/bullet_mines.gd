@@ -12,6 +12,7 @@ var _exploded: bool = false
 
 
 func _ready() -> void:
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_SEEDS, true, lifetime)
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 
@@ -37,6 +38,8 @@ func _explode() -> void:
 	
 	collider.collision_layer = _collision_layer
 	
+	# Sound effect
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_EXPLODED)
 	# Spawn explosion VFX
 	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 	if playground != null:

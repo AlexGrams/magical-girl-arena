@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer += delta
 	if _shoot_timer > shoot_interval:
+		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_DROPPED)
 		for i in range(_mines):
 			# Each mine is moved to a random position in a circle around the player.
 			var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(0, _max_range)
