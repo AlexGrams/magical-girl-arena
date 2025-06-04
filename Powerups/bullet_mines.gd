@@ -3,8 +3,6 @@ extends Bullet
 
 ## Time in seconds that this mine's damage collider will be active for before the bullet is destroyed.
 @export var _explosion_lifetime: float = 0.05
-## Explosion VFX to spawn when damage activates.
-@export var _vfx_uid: String = ""
 @export var flower_scene: PackedScene
 
 ## Saved bullet collision layer for when we reactivate the collision.
@@ -42,12 +40,8 @@ func _explode() -> void:
 	# Spawn explosion VFX
 	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 	if playground != null:
-		var vfx: GPUParticles2D = load(_vfx_uid).instantiate()
-		vfx.global_position = global_position
-		playground.add_child(vfx)
-	
-	var flower_vfx = flower_scene.instantiate()
-	flower_vfx.global_position = global_position
-	playground.add_child(flower_vfx)
+		var flower_vfx = flower_scene.instantiate()
+		flower_vfx.global_position = global_position
+		playground.add_child(flower_vfx)
 	
 	sprite.hide()

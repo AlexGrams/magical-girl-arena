@@ -101,7 +101,6 @@ radius = 106.0
 
 [node name="BulletMines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_y3unb")
-_vfx_uid = "uid://jyy16gs6xyi8"
 flower_scene = ExtResource("2_f1nrp")
 speed = 750.0
 lifetime = 1.0
