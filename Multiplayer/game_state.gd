@@ -5,6 +5,11 @@ extends Node
 
 # Should only be false in debugging builds.
 const USING_GODOT_STEAM := false
+## The unique identifier used to find lobbies through the Steamworks API.
+## Main: 3689240
+## Playtest: 3705120
+## Demo: 3782600
+const APPID: int = 3705120
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -140,10 +145,7 @@ func _ready() -> void:
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
-		# Main: 3689240
-		# Playtest: 3705120
-		# Demo: 3782600
-		Steam.steamInitEx(true, 3782600)
+		Steam.steamInitEx(true, APPID)
 		
 		if Steam.getAppID() == 480:
 			push_warning("Release app ID was not changed from the testing value of 480! Change it in game_state or make this a debug build.")
