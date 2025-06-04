@@ -444,7 +444,6 @@ func unregister_player_by_steam_id(steam_id: int):
 @rpc("any_peer", "call_local", "reliable")
 func quit_game(quitting_player: int):
 	var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
-	var _lobby: Control = get_tree().get_root().get_node(lobby_path)
 	
 	end_game()
 	get_tree().paused = false
@@ -458,7 +457,6 @@ func quit_game(quitting_player: int):
 		await get_tree().process_frame
 		await get_tree().process_frame
 		
-		var _lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
 		disconnect_local_player()
 
 
