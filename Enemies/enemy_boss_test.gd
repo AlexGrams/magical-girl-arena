@@ -8,6 +8,8 @@ const _squared_destination_theshold: float = 100.0
 @export var _pattern_interval: float = 5.0
 ## The distance of the points that the boss moves between from its spawn position
 @export var _movement_radius: float = 500.0
+## Multiplier by which to increase boss health by depending on the number of players in the game.
+@export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
 ## UIDs of Powerup scenes to add to the boss.
 @export var powerups_to_add: Array[String] = []
 
@@ -22,6 +24,10 @@ var _current_movement_point: int = 0
 
 func _ready() -> void:
 	super()
+	
+	# Scale health for number of players. Overrides how base Enemy scales health.
+	max_health = base_health * _health_scale[GameState.connected_players - 1]
+	health = max_health
 	
 	if not is_multiplayer_authority():
 		set_process(false)
