@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=29 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
 [ext_resource type="AudioStream" uid="uid://bdb3xnwjieyd" path="res://Audio/SFX/Powerups/Bubble_Grow_3.mp3" id="12_5j5vb"]
 [ext_resource type="AudioStream" uid="uid://dewenafki2fix" path="res://Audio/SFX/Powerups/Cupid_Arrow_Shot.mp3" id="13_nsayd"]
-[ext_resource type="AudioStream" uid="uid://dyggpb464g62u" path="res://Audio/SFX/Powerups/HeartbeatBurst_Explosion.mp3" id="14_hwte6"]
 [ext_resource type="AudioStream" uid="uid://rj0n6862dnpu" path="res://Audio/SFX/Powerups/HeartbeatBurst_Launch.mp3" id="15_4qlyl"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
@@ -128,9 +127,9 @@ pitch_randomness = 0.0
 script = ExtResource("2_kdvej")
 limit = 10
 type = 27
-sound_effect = ExtResource("14_hwte6")
-volume = -10
-pitch_scale = 1.0
+sound_effect = ExtResource("15_4qlyl")
+volume = -40
+pitch_scale = 3.0
 pitch_randomness = 0.0
 
 [sub_resource type="Resource" id="Resource_vi4yv"]
