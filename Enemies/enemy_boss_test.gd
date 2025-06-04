@@ -26,7 +26,7 @@ func _ready() -> void:
 	super()
 	
 	# Scale health for number of players. Overrides how base Enemy scales health.
-	max_health = base_health * _health_scale[GameState.connected_players - 1]
+	max_health = int(base_health * _health_scale[GameState.connected_players - 1])
 	health = max_health
 	
 	if not is_multiplayer_authority():
