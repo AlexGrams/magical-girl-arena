@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dbme0ttmrvbc4"]
 
 [ext_resource type="Script" path="res://Abilities/bullet_ult_dove.gd" id="1_dcxsn"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_fwphc"]
+[ext_resource type="Texture2D" uid="uid://dsv6ihphft6se" path="res://Sprites/Powerups/DoveArrow.png" id="2_p7bio"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_ta8tr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_p6tm1"]
 [ext_resource type="Texture2D" uid="uid://debkuvp8owvc0" path="res://Sparkle.png" id="5_w78an"]
@@ -13,7 +13,7 @@ size = Vector2(26, 29)
 radius = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75c1j"]
-radius = 124.0
+radius = 150.0
 
 [sub_resource type="Gradient" id="Gradient_jutjh"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -45,7 +45,7 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.047, 0.047)
-texture = ExtResource("2_fwphc")
+texture = ExtResource("2_p7bio")
 script = ExtResource("3_ta8tr")
 
 [node name="CollisionArea2D" type="Area2D" parent="."]

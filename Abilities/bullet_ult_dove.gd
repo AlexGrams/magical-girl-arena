@@ -4,7 +4,7 @@ extends Bullet
 
 const MOVEMENT_PATTERNS: int = 4
 
-@onready var _explosion_vfx: PackedScene = preload("res://Sprites/Map/leaf_explosion.tscn")
+@onready var _explosion_vfx: PackedScene = preload("res://Sprites/Map/dove_ult_explosion.tscn")
 
 ## How long the explosion hitbox should linger before this bullet is destroyed.
 @export var _explosion_lifetime: float = 0.05
