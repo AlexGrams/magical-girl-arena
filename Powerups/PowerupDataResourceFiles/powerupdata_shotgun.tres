@@ -9,4 +9,4 @@ script = ExtResource("2_7ar2v")
 scene = ExtResource("1_r0epx")
 name = "Cupid Arrows"
 sprite = ExtResource("3_0rnpc")
-upgrade_description = "Shoot arrows in a cone, alternating left and right"
+upgrade_description = "Shoot arrows in a cone towards the nearest enemy"
