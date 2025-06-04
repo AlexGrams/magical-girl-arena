@@ -269,20 +269,21 @@ func _take_damage(damage: float) -> void:
 	
 	health -= snapped(damage, 1)
 	
+	_damage_effects.rpc(damage)
 	if health <= 0:
 		die()
-	else:
+	#else:
 		# This enemy is still alive, so replicate the damage effects on all clients.
-		_damage_effects.rpc(damage)
 
 
 @rpc("authority", "call_local")
-func _damage_effects(_damage: float) -> void:
+func _damage_effects(damage: float) -> void:
 	## Damage indicator
-	#var damage_indicator = damage_indicator_scene.instantiate()
-	#damage_indicator.global_position = global_position
+	var damage_indicator = damage_indicator_scene.instantiate()
+	damage_indicator.global_position = global_position
+	damage_indicator.damage_value = damage
 	#damage_indicator.text = str(damage)
-	#get_tree().root.get_node("Playground").add_child(damage_indicator)
+	get_tree().root.get_node("Playground").add_child(damage_indicator)
 	
 	# Animation
 	$AnimationPlayer.play("take_damage")
