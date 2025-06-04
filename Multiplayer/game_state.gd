@@ -444,26 +444,22 @@ func unregister_player_by_steam_id(steam_id: int):
 @rpc("any_peer", "call_local", "reliable")
 func quit_game(quitting_player: int):
 	var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
-	var lobby: Control = get_tree().get_root().get_node(lobby_path)
+	var _lobby: Control = get_tree().get_root().get_node(lobby_path)
 	
 	end_game()
 	get_tree().paused = false
 	main_menu.show()
-	main_menu.quit_to_main_menu()
+	
 	if multiplayer.get_unique_id() == quitting_player:
+		main_menu.quit_to_main_menu()
 		# We wait for one frame before disconnecting the client to ensure the RPC to 
 		# quit_game is sent to all clients. Otherwise, quit_game is not called on 
 		# other players as the sender (this client) is disconnected before the RPC goes out.
 		await get_tree().process_frame
 		await get_tree().process_frame
 		
-		var lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
+		var _lobby_list: Control = get_tree().get_root().get_node(lobby_list_path)
 		disconnect_local_player()
-		lobby.hide()
-		lobby_list.show()
-	else:
-		# TODO: Maybe something different needs to happen if the host presses "Quit"
-		main_menu.refresh_lobby()
 
 
 # Load the main game scene and hide the menu.
