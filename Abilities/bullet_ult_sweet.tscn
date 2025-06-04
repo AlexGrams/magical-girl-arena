@@ -39,6 +39,7 @@ sprite = NodePath("Sprite2D")
 scale = Vector2(0.087, 0.087)
 texture = ExtResource("2_josau")
 script = ExtResource("3_ke1a1")
+degree_offset = 90.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
