@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		crit = randf() >= 0.75
 		
 		var actual_bullet_damage = bullet_damage * 2 if crit else bullet_damage
-		
+		AudioManager.create_audio_at_location(bullet_position, SoundEffectSettings.SOUND_EFFECT_TYPE.SHOOTING)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, [bullet_scene, 
 				bullet_position, 
