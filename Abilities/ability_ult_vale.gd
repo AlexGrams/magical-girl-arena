@@ -10,6 +10,8 @@ extends Ability
 @export var active_time: float = 10.0
 @export var bullet_scene_path := ""
 
+var mouse_cursor = load("res://Sprites/UI/ArrowSmall.png")
+var target_cursor = load("res://Sprites/UI/Target.png")
 
 ## How long the player has left to use this ultimate.
 var _current_active_time: float = 0.0
@@ -30,12 +32,12 @@ func _process(delta: float) -> void:
 		_current_active_time -= delta
 		if _current_active_time <= 0.0:
 			## Disable ult
-			pass
+			Input.set_custom_mouse_cursor(mouse_cursor)
 
 
 func activate() -> void:
 	super()
-	
+	Input.set_custom_mouse_cursor(target_cursor)
 	_current_active_time = active_time
 	_bombs_remaining = num_bombs
 
@@ -63,3 +65,4 @@ func _input(event: InputEvent) -> void:
 			_bombs_remaining -= 1
 			if _bombs_remaining <= 0:
 				_current_active_time = 0.0
+				Input.set_custom_mouse_cursor(mouse_cursor)

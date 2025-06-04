@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://drar62gqsdnby"]
 
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="1_bhade"]
 [ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="1_uvomu"]
 [ext_resource type="Script" path="res://Player/character_data.gd" id="2_qro6l"]
+[ext_resource type="Texture2D" uid="uid://vv03ulf2j5u7" path="res://Sprites/UI/Target.png" id="3_l12v5"]
 
 [resource]
 script = ExtResource("2_qro6l")
@@ -14,7 +14,7 @@ base_powerup_name = "Laser"
 base_powerup_texture = ExtResource("1_uvomu")
 ult_name = "Bombs"
 ult_description = "Click areas on the screen to bring down large bombs that deal massive damage. "
-ult_texture = ExtResource("1_bhade")
+ult_texture = ExtResource("3_l12v5")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
