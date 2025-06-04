@@ -241,6 +241,7 @@ func set_target(target_path: NodePath) -> void:
 ## Changes the amount of damage being done to this Enemy each physics frame. Useful for sources of 
 ## periodic damage such as AOE damage volumes and debuffs.
 func add_continuous_damage(damage: float) -> void:
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
 	_continuous_damage = max(_continuous_damage + damage, 0)
 
 
