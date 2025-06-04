@@ -18,6 +18,8 @@ extends CharacterBody2D
 @export var _taunt_area: Area2D = null
 ## Setting sprite to angry when taunting
 @export var _sprite: Node2D
+# Audio for angry buzzing SFX. NOT looping buzz.
+@export var _audio_player: AudioStreamPlayer2D
 
 ## Which Enemy the pet is currently trying to attack.
 var _target: Node2D = null
@@ -90,6 +92,8 @@ func _physics_process(delta: float) -> void:
 		if _taunt_timer <= 0.0:
 			# Turn sprite angry
 			_sprite.set_angry()
+			# Play angry sound once
+			_audio_player.play()
 			
 			# Briefly turn on taunt
 			_taunt_area.collision_mask = _taunt_collision_mask
@@ -137,3 +141,7 @@ func level_up(_new_level: int, new_damage: float):
 func _on_taunt_area_2d_entered(area: Area2D) -> void:
 	if area.get_parent() is Enemy:
 		area.get_parent().apply_status_taunted.rpc(_taunt_duration, get_path())
+
+
+func _on_audio_stream_player_2d_finished() -> void:
+	print("FINISHED")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://npslgflisq38"]
+[gd_scene load_steps=10 format=3 uid="uid://npslgflisq38"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pet.gd" id="1_anccp"]
 [ext_resource type="PackedScene" uid="uid://ctspfn4xtevb4" path="res://Sprites/Powerups/pet_bee_sprite.tscn" id="2_ywet7"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_lrjjw"]
+[ext_resource type="AudioStream" uid="uid://iyla8j1t656e" path="res://Audio/SFX/Powerups/Bee_Buzzing.mp3" id="4_4d74n"]
+[ext_resource type="AudioStream" uid="uid://cn1ahdm1s44xr" path="res://Audio/SFX/Powerups/Bee_Angry_Buzz.mp3" id="5_xp3o2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(85, 88)
@@ -16,7 +18,7 @@ radius = 322.076
 [sub_resource type="CircleShape2D" id="CircleShape2D_qx8hf"]
 radius = 532.046
 
-[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area", "_sprite")]
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area", "_sprite", "_audio_player")]
 script = ExtResource("1_anccp")
 _speed = 10.0
 _taunt_duration = 4.0
@@ -24,6 +26,7 @@ _bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
 _taunt_area = NodePath("TauntArea2D")
 _sprite = NodePath("Bee_Sprite")
+_audio_player = NodePath("AngryBuzzAudio")
 
 [node name="Bee_Sprite" parent="." instance=ExtResource("2_ywet7")]
 scale = Vector2(0.3, 0.3)
@@ -54,5 +57,16 @@ collision_mask = 2
 [node name="TauntCollisionShape2D" type="CollisionShape2D" parent="TauntArea2D"]
 shape = SubResource("CircleShape2D_qx8hf")
 
+[node name="LoopingAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4d74n")
+volume_db = -30.0
+autoplay = true
+attenuation = 2.0
+parameters/looping = true
+
+[node name="AngryBuzzAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_xp3o2")
+
 [connection signal="area_entered" from="BulletCollisionArea2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="TauntArea2D" to="." method="_on_taunt_area_2d_entered"]
+[connection signal="finished" from="LoopingAudio" to="." method="_on_audio_stream_player_2d_finished"]
