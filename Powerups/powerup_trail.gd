@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer += delta
 	if _shoot_timer > shoot_interval:
+		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.TRAIL)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, 
 			[
