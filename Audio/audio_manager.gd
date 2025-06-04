@@ -17,7 +17,7 @@ func _ready() -> void:
 ## replicate sounds without having to do a separate RPC just for the audio.
 ## For example, if a sound is played when the player shoots, the bullet's _ready function should
 ## create the sound instead of the shooting player calling this function via RPC.
-@rpc("authority", "call_local")
+@rpc("any_peer", "call_local")
 func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, change_length:bool = false, desired_length:float = -1):
 	if sfx_type in sound_effect_dict:
 		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]

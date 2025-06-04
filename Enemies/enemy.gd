@@ -277,7 +277,7 @@ func _take_damage(damage: float) -> void:
 
 
 @rpc("authority", "call_local")
-func _damage_effects(damage: float) -> void:
+func _damage_effects(_damage: float) -> void:
 	## Damage indicator
 	#var damage_indicator = damage_indicator_scene.instantiate()
 	#damage_indicator.global_position = global_position
