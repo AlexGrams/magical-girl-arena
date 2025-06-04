@@ -430,6 +430,7 @@ func unregister_player_by_steam_id(steam_id: int):
 			"\nsteam_ids: " + str(steam_ids) + 
 			"\nID to delete: " + str(steam_id)
 		)
+		return
 	
 	players.erase(steam_ids[steam_id])
 	if steam_ids.has(steam_id):

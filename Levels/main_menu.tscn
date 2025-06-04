@@ -633,6 +633,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="StartGame_Label" type="Label" parent="Lobby"]
+z_index = 1
 layout_mode = 0
 offset_left = 1321.0
 offset_top = 949.0
