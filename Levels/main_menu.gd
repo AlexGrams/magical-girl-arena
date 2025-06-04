@@ -207,6 +207,10 @@ func _on_leave_button_down() -> void:
 # Updates the lobby view to show the players that are connected and their characters.
 @rpc("any_peer", "call_local")
 func refresh_lobby() -> void:
+	# Don't try to refresh the lobby if we're in a game right now.
+	if GameState.game_running:
+		return
+	
 	var i = 0
 	for player_id in GameState.players:
 		_player_containers[i].set_properties(
