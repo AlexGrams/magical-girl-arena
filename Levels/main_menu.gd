@@ -164,25 +164,41 @@ func setup_lobby_screen() -> void:
 					lobbies_list_container.add_child(lobby_button)
 					lobby_button.pressed.connect(
 						func():
-							# First, see if the lobby even exists anymore.
-							# If not, don't join and refresh the lobby list.
-							var lobby_data_request_successful: bool = Steam.requestLobbyData(lobby_id)
-							if not lobby_data_request_successful:
-								push_error("Unable to send request for lobby data to the Steam servers.")
-								request_lobby_list()
-								return
-							
-							# Join the lobby
-							_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
-							start_game_label.hide()
-							
-							GameState.join_lobby(
-								lobby_id,
-								Steam.getPersonaName())
+							_on_lobby_button_pressed(lobby_id)
 					)
 		)
 	
 	request_lobby_list()
+
+
+## Asynchronous function to connect to another server using the Steamworks API.
+func _on_lobby_button_pressed(lobby_id: int) -> void:
+	# First, get the most recent information about the lobby.
+	# If this doesn't work, don't join and refresh the lobby list.
+	var lobby_data_request_successful: bool = Steam.requestLobbyData(lobby_id)
+	if not lobby_data_request_successful:
+		push_error("Unable to send request for lobby data to the Steam servers.")
+		request_lobby_list()
+		return
+	
+	# TODO: Do something to prevent people from clicking buttons or whatever until after the data returns.
+	# Async wait until the lobby information is returned.
+	await Steam.lobby_data_update
+	
+	
+	# Don't join a lobby that nobody is in.
+	if Steam.getNumLobbyMembers(lobby_id) <= 0:
+		request_lobby_list()
+		return
+	
+	# Join the lobby
+	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
+	start_game_label.hide()
+	
+	GameState.join_lobby(
+		lobby_id,
+		Steam.getPersonaName())
+
 #endregion
 
 #region lobby

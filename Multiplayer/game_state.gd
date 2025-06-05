@@ -9,7 +9,7 @@ const USING_GODOT_STEAM := true
 ## Main: 3689240
 ## Playtest: 3705120
 ## Demo: 3782600
-const APPID: int = 3705120
+const APPID: int = 3782600
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -188,7 +188,12 @@ func _ready() -> void:
 		
 		# When this client connects to a server. Includes when the client's own server.
 		Steam.lobby_joined.connect(
-			func(new_lobby_id: int, _permissions: int, _locked: bool, _response: int):
+			func(new_lobby_id: int, _permissions: int, _locked: bool, response: int):
+				if response != Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
+					# Failed to enter a lobby. The lobby probably doesn't exist.
+					lobby_host_left()
+					return
+				
 				lobby_id = new_lobby_id
 				# If the client is not the server, create a Steam socket connection.
 				var id = Steam.getLobbyOwner(new_lobby_id)
@@ -343,7 +348,7 @@ func add_player_character(player_id: int, player_character: CharacterBody2D) -> 
 	)
 
 
-# Closes notifies this client that the lobby closed and disconnects the client.
+# Notifies this client that the lobby closed and disconnects the client.
 # Should only be called by the lobby host.
 @rpc("any_peer", "call_remote")
 func lobby_host_left():
