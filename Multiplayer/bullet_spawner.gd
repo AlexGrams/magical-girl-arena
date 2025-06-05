@@ -22,7 +22,11 @@ func _spawn_bullet(data):
 		push_error("Bullet could not be instantiated because of malformed 'data' parameter.")
 		return null
 	
-	var bullet: Bullet = load(data[0]).instantiate()
+	var t0 = Time.get_ticks_msec()
+	var object = load(data[0])
+	var t1 = Time.get_ticks_msec()
+	var bullet: Bullet = object.instantiate()
+	print(str(t1 - t0) + " " + str(Time.get_ticks_msec() - t1))
 	
 	if bullet == null:
 		push_error("Bullet could not be instantiated from path: " + str(data[0]))
