@@ -5,6 +5,6 @@
 [node name="PowerupShooting" type="Node2D"]
 script = ExtResource("1_a0uoa")
 shoot_interval = 0.5
-damage_levels = Array[float]([50.0, 55.0, 61.0, 67.0, 73.0])
-signature_damage = 73.0
+damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
+signature_damage = 130.0
 powerup_name = "Marble Slingshot"

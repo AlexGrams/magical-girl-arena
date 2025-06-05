@@ -52,7 +52,7 @@ collision_mask = 384
 script = ExtResource("1_yjg42")
 max_range = 400.0
 bullet_scene_path = "res://EnemyProjectiles/bullet_enemy_ranged.tscn"
-base_health = 250
+base_health = 100
 collider_area = NodePath("Area2D")
 sprite = NodePath("PulsarSprite")
 

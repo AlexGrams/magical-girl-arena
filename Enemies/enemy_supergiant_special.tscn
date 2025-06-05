@@ -50,11 +50,11 @@ _data = {
 collision_layer = 256
 collision_mask = 384
 script = ExtResource("1_fuudh")
-base_health = 1000
-collider_area = NodePath("Area2D")
-sprite = NodePath("SupergiantSprite")
+base_health = 1500
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
+collider_area = NodePath("Area2D")
+sprite = NodePath("SupergiantSprite")
 
 [node name="SupergiantSprite" parent="." instance=ExtResource("2_67opd")]
 starting_type = 1

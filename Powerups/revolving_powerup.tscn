@@ -5,6 +5,6 @@
 [node name="RevolvingPowerup" type="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_w1l0c")
-damage_levels = Array[float]([35.0, 40.0, 46.0, 53.0, 61.0])
-signature_damage = 46.0
+damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
+signature_damage = 70.0
 powerup_name = "Tarot Cards"
