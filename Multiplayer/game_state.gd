@@ -114,6 +114,15 @@ func set_game_running(value: bool):
 	game_running = value
 
 
+## Makes this Steam lobby joinable by other players. A lobby should only be joinable
+## if the players are on the character select screen.
+func set_lobby_joinable(value: bool) -> void:
+	if not USING_GODOT_STEAM:
+		return
+	
+	Steam.setLobbyJoinable(lobby_id, value)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if OS.has_feature("release") and not USING_GODOT_STEAM:
@@ -169,8 +178,6 @@ func _ready() -> void:
 		multiplayer.server_disconnected.connect(
 			func():
 				pass
-				#game_error.emit("Server disconnected")
-				#end_game()
 		)
 		
 		# If lobby creation is successful, set the name of the lobby and create the 
@@ -254,6 +261,8 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 # Switches the scene and loads the players.
 func start_game():
 	assert(multiplayer.is_server())
+	
+	set_lobby_joinable(false)
 	
 	load_game()
 	
@@ -465,6 +474,10 @@ func quit_game(quitting_player: int):
 		await get_tree().process_frame
 		
 		disconnect_local_player()
+	elif multiplayer.get_unique_id() == 1:
+		# Someone other than the host quit to the main menu, so the lobby is still active.
+		# Make this lobby joinable again.
+		set_lobby_joinable(true)
 
 
 # Load the main game scene and hide the menu.
