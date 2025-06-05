@@ -2,7 +2,7 @@
 
 [resource]
 resource_name = "ExpPerLevel"
-min_value = 30.0
-max_value = 1024.0
-_data = [Vector2(0, 30), 0.0, 1850.0, 0, 1, Vector2(0.2, 400), 1850.0, 2454.56, 1, 0, Vector2(1, 1024), -0.00141398, 0.0, 0, 0]
-point_count = 3
+min_value = 10.0
+max_value = 900.0
+_data = [Vector2(0, 10), 0.0, 890.0, 0, 1, Vector2(1, 900), 890.0, 2454.56, 1, 0]
+point_count = 2
