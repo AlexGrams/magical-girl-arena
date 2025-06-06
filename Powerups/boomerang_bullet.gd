@@ -10,7 +10,7 @@ var boomerang_owner: Node2D = null
 var farthest_enemy: Node
 
 # Target enemy must be within this range
-var max_range: float = 1000
+@export var max_range: float = 750
 
 var is_returning := true
 
