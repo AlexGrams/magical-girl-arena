@@ -668,6 +668,33 @@ theme_override_font_sizes/font_size = 50
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
+[node name="Feedback_Label" type="Label" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -415.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = 68.0
+grow_horizontal = 0
+pivot_offset = Vector2(395, 0)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Send Feedback"
+
+[node name="LobbyButton" type="Button" parent="Lobby/Feedback_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_wqh84")
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
 [node name="FeedbackMenu" parent="." instance=ExtResource("7_ryuk3")]
 visible = false
 layout_mode = 1
@@ -704,3 +731,6 @@ offset_bottom = 290.0
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="_on_leave_button_down"]
 [connection signal="mouse_entered" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Lobby/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
+[connection signal="mouse_entered" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
