@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="5_76cyy"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="7_mn14l"]
 [ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
-[ext_resource type="PackedScene" uid="uid://dsncuf4mu8prx" path="res://UI/feedback_menu.tscn" id="7_ryuk3"]
+[ext_resource type="PackedScene" uid="uid://bw3l43n1jry4" path="res://UI/feedback_menu.tscn" id="7_ryuk3"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="9_m305s"]
 [ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
@@ -130,9 +130,9 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Main"]
 layout_mode = 0
 offset_left = 114.0
-offset_top = 513.0
-offset_right = 615.0
-offset_bottom = 1033.0
+offset_top = 424.0
+offset_right = 983.0
+offset_bottom = 1059.0
 pivot_offset = Vector2(0, 260)
 theme_override_constants/separation = 0
 metadata/_edit_group_ = true
@@ -148,6 +148,23 @@ offset_right = 261.0
 offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("4_wqh84")
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="Feedback_Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+text = "Send Feedback"
+
+[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Feedback_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("4_wqh84")
 alignment = 0
 script = ExtResource("5_76cyy")
@@ -234,37 +251,6 @@ grow_horizontal = 0
 grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
-
-[node name="Feedback_Label" type="Label" parent="Main"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -189.0
-offset_top = -121.0
-offset_right = 190.0
-offset_bottom = -59.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 46
-text = "Send Feedback"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LobbyButton" type="Button" parent="Main/Feedback_Label" node_paths=PackedStringArray("label")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_wqh84")
-alignment = 0
-script = ExtResource("5_76cyy")
-label = NodePath("..")
 
 [node name="LobbyList" type="Control" parent="."]
 visible = false
@@ -685,19 +671,23 @@ label = NodePath("..")
 [node name="FeedbackMenu" parent="." instance=ExtResource("7_ryuk3")]
 visible = false
 layout_mode = 1
+offset_left = -460.0
+offset_top = -290.0
+offset_right = 460.0
+offset_bottom = 290.0
 
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
+[connection signal="mouse_entered" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Settings_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Main/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
-[connection signal="mouse_entered" from="Main/Feedback_Label/LobbyButton" to="Main/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Main/Feedback_Label/LobbyButton" to="Main/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]

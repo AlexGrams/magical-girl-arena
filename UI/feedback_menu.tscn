@@ -1,11 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsncuf4mu8prx"]
+[gd_scene load_steps=9 format=3 uid="uid://bw3l43n1jry4"]
 
 [ext_resource type="Script" path="res://UI/feedback_menu.gd" id="1_3wbj7"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="1_e0277"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_ktmol"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="3_86ml7"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_88vo4"]
-[ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="3_h3xjo"]
+[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="6_kaekl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n31nm"]
+bg_color = Color(0.917647, 0.317647, 0.317647, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62fu2"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.151866, 0.0222184, 0.0259219, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [node name="FeedbackMenu" type="Control" node_paths=PackedStringArray("_text_box")]
 z_index = 1
@@ -16,9 +40,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3wbj7")
-_text_box = NodePath("VBoxContainer/TextEdit")
+_text_box = NodePath("Panel/VBoxContainer/TextEdit")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,71 +52,127 @@ grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -290.0
+offset_right = 460.0
+offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n31nm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Panel2" type="Panel" parent="Panel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -387.0
+offset_top = -1.0
+offset_right = 113.0
+offset_bottom = 124.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n31nm")
+
+[node name="ButtonClose" type="Label" parent="Panel/Panel2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 10.0
+offset_right = -35.0
+offset_bottom = 107.0
+grow_horizontal = 0
+pivot_offset = Vector2(30, 48)
+theme = ExtResource("1_e0277")
+theme_override_font_sizes/font_size = 84
+text = "X"
+
+[node name="ButtonSubmit" type="Button" parent="Panel/Panel2/ButtonClose" node_paths=PackedStringArray("label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = 43.0
-offset_right = -59.0
-offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="LabelTitle" type="Label" parent="VBoxContainer"]
-layout_mode = 2
 theme = ExtResource("1_e0277")
+alignment = 0
+script = ExtResource("3_86ml7")
+label = NodePath("..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -402.0
+offset_top = 24.0
+offset_right = 402.0
+offset_bottom = 549.0
+grow_horizontal = 2
+
+[node name="LabelTitle" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_88vo4")
 theme_override_fonts/font = ExtResource("1_ktmol")
-theme_override_font_sizes/font_size = 125
+theme_override_font_sizes/font_size = 64
 text = "Send us your feedback!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 33.065)
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="LabelDescription" type="Label" parent="VBoxContainer"]
+[node name="LabelDescription" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("3_h3xjo")
+size_flags_stretch_ratio = 85.0
+theme = ExtResource("6_kaekl")
 theme_override_fonts/font = ExtResource("1_ktmol")
-theme_override_font_sizes/font_size = 55
-text = "Your feedback helps us improve the game!"
+theme_override_font_sizes/font_size = 24
+text = "The game is still in early stages, so we appreciate all feedback and suggestions! Thank you so much!"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 171
 
-[node name="Spacer2" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 33.065)
+[node name="Spacer2" type="Control" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_88vo4")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_ktmol")
-theme_override_font_sizes/font_size = 40
-placeholder_text = "Write here..."
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_62fu2")
+placeholder_text = "Write here!"
+wrap_mode = 1
+scroll_smooth = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="LabelSubmit" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="LabelSubmit" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_e0277")
+theme_override_font_sizes/font_size = 64
 text = "Submit"
+horizontal_alignment = 1
 
-[node name="ButtonSubmit" type="Button" parent="VBoxContainer/HBoxContainer/LabelSubmit" node_paths=PackedStringArray("label")]
+[node name="ButtonSubmit" type="Button" parent="Panel/VBoxContainer/HBoxContainer/LabelSubmit" node_paths=PackedStringArray("label")]
 layout_mode = 2
 offset_right = 261.0
-offset_bottom = 127.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_e0277")
@@ -100,36 +180,9 @@ alignment = 0
 script = ExtResource("3_86ml7")
 label = NodePath("..")
 
-[node name="ButtonClose" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -127.0
-offset_right = -31.0
-offset_bottom = 127.0
-grow_horizontal = 0
-theme = ExtResource("1_e0277")
-theme_override_colors/font_color = Color(1, 0.346577, 0.280009, 1)
-text = "X"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="ButtonSubmit" type="Button" parent="ButtonClose" node_paths=PackedStringArray("label")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_e0277")
-alignment = 0
-script = ExtResource("3_86ml7")
-label = NodePath("..")
-
-[connection signal="button_down" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="." method="_on_button_submit_down"]
-[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_exited"]
-[connection signal="button_down" from="ButtonClose/ButtonSubmit" to="." method="hide"]
-[connection signal="mouse_entered" from="ButtonClose/ButtonSubmit" to="ButtonClose/ButtonSubmit" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ButtonClose/ButtonSubmit" to="ButtonClose/ButtonSubmit" method="_on_mouse_exited"]
+[connection signal="button_down" from="Panel/Panel2/ButtonClose/ButtonSubmit" to="." method="hide"]
+[connection signal="mouse_entered" from="Panel/Panel2/ButtonClose/ButtonSubmit" to="Panel/Panel2/ButtonClose/ButtonSubmit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/Panel2/ButtonClose/ButtonSubmit" to="Panel/Panel2/ButtonClose/ButtonSubmit" method="_on_mouse_exited"]
+[connection signal="button_down" from="Panel/VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="." method="_on_button_submit_down"]
+[connection signal="mouse_entered" from="Panel/VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="Panel/VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" to="Panel/VBoxContainer/HBoxContainer/LabelSubmit/ButtonSubmit" method="_on_mouse_exited"]
