@@ -8,8 +8,8 @@ extends Powerup
 @export var _mines: int = 10
 ## Farthest distance that a mine is placed from the player.
 @export var _max_range: float = 300.0
-## UID to the Bullet-derived bullet scene.
-@export var _bullet_uid := ""
+## Path to the Bullet-derived bullet scene.
+@export var _bullet_scene := ""
 
 var _shoot_timer: float = 0.0
 var _bullet_spawner: BulletSpawner = null
@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 			_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
-						_bullet_uid, 
+						_bullet_scene, 
 						global_position + displacement, 
 						Vector2.ZERO, 
 						_get_damage_from_curve(), 

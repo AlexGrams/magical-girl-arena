@@ -3,7 +3,8 @@ extends Bullet
 
 ## Time in seconds that this mine's damage collider will be active for before the bullet is destroyed.
 @export var _explosion_lifetime: float = 0.05
-@export var flower_scene: PackedScene
+## Path to explosion VFX.
+@export var flower_scene: String = ""
 
 ## Saved bullet collision layer for when we reactivate the collision.
 var _collision_layer: int = 0
@@ -15,6 +16,8 @@ func _ready() -> void:
 	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_SEEDS, true, lifetime)
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
+	
+	ResourceLoader.load_threaded_request(flower_scene, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
 
 
 func _process(_delta: float) -> void:
@@ -43,7 +46,7 @@ func _explode() -> void:
 	# Spawn explosion VFX
 	var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 	if playground != null:
-		var flower_vfx = flower_scene.instantiate()
+		var flower_vfx = ResourceLoader.load_threaded_get(flower_scene).instantiate()
 		flower_vfx.global_position = global_position
 		playground.add_child(flower_vfx)
 	

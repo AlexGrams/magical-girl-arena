@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3wj41t6bqwea"]
+[gd_scene load_steps=10 format=3 uid="uid://b3wj41t6bqwea"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_mines.gd" id="1_y3unb"]
-[ext_resource type="PackedScene" uid="uid://c7thmbp12j8m8" path="res://Powerups/mines_flower_sprite.tscn" id="2_f1nrp"]
 [ext_resource type="Texture2D" uid="uid://dsrmljgh6k2v7" path="res://Sprites/Powerups/Mines_Seed2.png" id="2_if4nf"]
 [ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="3_buwjc"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_mdhh8"]
@@ -101,7 +100,7 @@ radius = 106.0
 
 [node name="BulletMines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_y3unb")
-flower_scene = ExtResource("2_f1nrp")
+flower_scene = "res://Powerups/mines_flower_sprite.tscn"
 speed = 750.0
 lifetime = 1.0
 destroy_on_hit = false
