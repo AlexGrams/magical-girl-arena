@@ -1,7 +1,24 @@
 extends Node
-# Manager class for saving and loading persistent data.
+## Manager class for saving and loading persistent data.
 
 const SAVE_GAME_PATH := "user://savedata.json"
+const SETTINGS_PATH := "user://settings.json"
+const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+const DEFAULT_VOLUME := 1.0
+
+
+func _ready() -> void:
+	load_settings()
+
+
+## Write the configured game settings to disk.
+func save_settings(display_mode: DisplayServer.WindowMode, volume: float) -> void:
+	var config = ConfigFile.new()
+
+	config.set_value("display", "display_mode", display_mode)
+	config.set_value("sound", "volume", volume)
+
+	config.save(SETTINGS_PATH)
 
 
 # Saves data to disk. Should be modified when new data to save is added.
@@ -19,6 +36,23 @@ func save_game() -> void:
 	
 	var json_string := JSON.stringify(save_data)
 	save_file.store_line(json_string)
+
+
+## Read and apply the settings for the game. Creates the settings file if one doesn't exist already.
+func load_settings() -> void:
+	# Create a new settings file if one doesn't exist.
+	if not FileAccess.file_exists(SETTINGS_PATH):
+		save_settings(DEFAULT_DISPLAY_MODE, DEFAULT_VOLUME)
+
+	var settings = ConfigFile.new()
+	var err = settings.load(SETTINGS_PATH)
+	if err != OK:
+		return
+
+	# Apply settings
+	SettingsManager.apply_display_mode(settings.get_value("display", "display_mode"))
+	SettingsManager.apply_volume(settings.get_value("sound", "volume"))
+	SettingsManager.set_settings(settings)
 
 
 # Load data from disk and set variables. Should be modified when new data to save is added.

@@ -20,12 +20,13 @@ config/windows_native_icon="res://ProjectIcons/IconWindows.ico"
 [autoload]
 
 Constants="*res://GameManagement/constants.gd"
-PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
+SettingsManager="*res://GameManagement/settings_manager.gd"
 MultiplayerManager="*res://Multiplayer/multiplayer_manager.gd"
 GameState="*res://Multiplayer/game_state.gd"
 WorldMultiplayerSpawner="*res://Levels/LevelPlaceables/world_multiplayer_spawner.tscn"
-SaveManager="*res://Saving/save_manager.gd"
 AudioManager="*res://Audio/audio_manager.tscn"
+SaveManager="*res://Saving/save_manager.gd"
+PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 Analytics="*res://Analytics/analytics.gd"
 
 [display]

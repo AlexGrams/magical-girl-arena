@@ -279,7 +279,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_volume_slider", "_spinbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_volume_slider", "_spinbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -288,6 +288,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
+_screen_mode_option = NodePath("VBoxContainer/ScreenModeContainer/OptionButton")
 _volume_slider = NodePath("VBoxContainer/VolumeContainer/VolumeHSlider")
 _spinbox = NodePath("VBoxContainer/VolumeContainer/SpinBox")
 
@@ -394,10 +395,10 @@ offset_bottom = 1026.0
 pivot_offset = Vector2(0, 29)
 theme = ExtResource("4_wqh84")
 theme_override_font_sizes/font_size = 50
-text = "Return to Main Menu"
+text = "Save and Exit"
 metadata/_edit_group_ = true
 
-[node name="LobbyListBackButton" type="Button" parent="Settings/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+[node name="BackButton" type="Button" parent="Settings/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
 layout_mode = 0
 offset_right = 553.0
 offset_bottom = 58.0
@@ -874,10 +875,11 @@ offset_bottom = 290.0
 [connection signal="item_selected" from="Settings/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
 [connection signal="drag_ended" from="Settings/VBoxContainer/VolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VBoxContainer/VolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
-[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_settings_back_button_down"]
-[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
-[connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]
+[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]
+[connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings/ReturntoMainMenu_Label/BackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings/ReturntoMainMenu_Label/BackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]
