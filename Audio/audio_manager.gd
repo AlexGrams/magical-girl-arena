@@ -6,11 +6,18 @@ extends Node2D
 @export var sound_effect_settings : Array[SoundEffectSettings]
 var sound_effect_dict : Dictionary
 
+## Value by which to scale the volume of sounds played in the game.
+var _volume_multiplier: float = 1.0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for sfx in sound_effect_settings:
 		sound_effect_dict[sfx.type] = sfx
+
+
+func set_volume_multiplier(value: float) -> void:
+	_volume_multiplier = value
 
 
 ## Plays a sound. RPC calls to this should be used sparingly, as there are often ways to 
@@ -28,7 +35,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			
 			new_2D_audio.position = location
 			new_2D_audio.stream = sfx.sound_effect
-			new_2D_audio.volume_db = sfx.volume
+			new_2D_audio.volume_db = linear_to_db(db_to_linear(sfx.volume) * _volume_multiplier)
 			if change_length:
 				new_2D_audio.pitch_scale = (new_2D_audio.stream.get_length() / desired_length)
 			else:
