@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dtmg4b3y6iqwk"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://dtmg4b3y6iqwk"]
 
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_tkaby"]
 [ext_resource type="Texture2D" uid="uid://rsxlf3fm1ojq" path="res://Sprites/UI/Blank.png" id="2_324nq"]
@@ -12,6 +12,51 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyif2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k7iaq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7im72"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xkhrs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fbgr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_54crc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uaiin"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24uqv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ka1p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_retku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nepv0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmwd8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b8yci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xn1u1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm8k6"]
+bg_color = Color(1, 0.635294, 0.603922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8q6h5"]
+bg_color = Color(0.917647, 0.317647, 0.317647, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_br2kr"]
+color = Color(1, 0.811765, 0.439216, 1)
+grow_begin = -20.0
+grow_end = -20.0
+thickness = 5
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -38,10 +83,25 @@ Label/constants/shadow_offset_y = 4
 Label/constants/shadow_outline_size = 20
 Label/font_sizes/font_size = 110
 Label/fonts/font = ExtResource("1_tkaby")
+OptionButton/icons/arrow = SubResource("CompressedTexture2D_7im72")
+OptionButton/styles/disabled = SubResource("StyleBoxEmpty_xkhrs")
+OptionButton/styles/disabled_mirrored = SubResource("StyleBoxEmpty_fbgr0")
+OptionButton/styles/focus = SubResource("StyleBoxEmpty_54crc")
+OptionButton/styles/hover = SubResource("StyleBoxEmpty_uaiin")
+OptionButton/styles/hover_mirrored = SubResource("StyleBoxEmpty_24uqv")
+OptionButton/styles/hover_pressed = SubResource("StyleBoxEmpty_3ka1p")
+OptionButton/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_retku")
+OptionButton/styles/normal = SubResource("StyleBoxEmpty_nepv0")
+OptionButton/styles/normal_mirrored = SubResource("StyleBoxEmpty_nmwd8")
+OptionButton/styles/pressed = SubResource("StyleBoxEmpty_b8yci")
+OptionButton/styles/pressed_mirrored = SubResource("StyleBoxEmpty_xn1u1")
 PopupMenu/colors/font_color = Color(1, 1, 1, 1)
 PopupMenu/colors/font_hover_color = Color(1, 0.94902, 0.745098, 1)
 PopupMenu/colors/font_outline_color = Color(0.964706, 0.580392, 0.482353, 1)
+PopupMenu/constants/item_end_padding = 5
+PopupMenu/constants/item_start_padding = 5
 PopupMenu/constants/outline_size = 15
+PopupMenu/constants/v_separation = 7
 PopupMenu/font_sizes/font_size = 110
 PopupMenu/fonts/font = ExtResource("1_tkaby")
 PopupMenu/fonts/font_separator = ExtResource("1_tkaby")
@@ -50,3 +110,6 @@ PopupMenu/icons/radio_checked = ExtResource("2_324nq")
 PopupMenu/icons/radio_checked_disabled = ExtResource("2_324nq")
 PopupMenu/icons/radio_unchecked = ExtResource("2_324nq")
 PopupMenu/icons/radio_unchecked_disabled = ExtResource("2_324nq")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_mm8k6")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_8q6h5")
+PopupMenu/styles/separator = SubResource("StyleBoxLine_br2kr")
