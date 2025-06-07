@@ -6,6 +6,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 
 ## The first screen shown when the game is started.
 @export var main_menu: Control
+## The screen for changing the game's settings.
+@export var settings: Control
 ## The screen to host or join a lobby.
 @export var lobby_list: Control
 ## The scroll box showing lobbies available to join.
@@ -39,6 +41,7 @@ var _character_select_buttons: Array[CharacterSelectButton] = []
 ## The location that these menus should be in when in focus. 
 ## Used for animating the UI when switching screens.
 var _main_menu_original_pos: Vector2
+var _settings_original_pos: Vector2
 var _lobby_list_original_pos: Vector2
 var _lobby_original_pos: Vector2
 
@@ -80,6 +83,7 @@ func _ready() -> void:
 		label.pivot_offset = Vector2(0, label.size.y / 2)
 
 	_main_menu_original_pos = main_menu.position
+	_settings_original_pos = settings.position
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
 	
@@ -104,6 +108,12 @@ func _on_lobby_button_button_down() -> void:
 	_switch_screen_animation(main_menu, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
 
+
+## Switch to the settings screen.
+func _on_settings_button_down() -> void:
+	_switch_screen_animation(main_menu, settings, _settings_original_pos)
+
+
 func _set_main_menu_character() -> void:
 	var random_char = -1
 	while random_char == -1:
@@ -113,6 +123,16 @@ func _set_main_menu_character() -> void:
 	main_menu_character_sprite.set_model_scale(3)
 	main_menu_character_label.text = _get_character_data(random_char).name if _get_character_data(random_char).display_name == "" else _get_character_data(random_char).display_name
 #endregion
+
+
+#region settings
+
+func _on_settings_back_button_down() -> void:
+	_set_main_menu_character()
+	_switch_screen_animation(settings, main_menu , _main_menu_original_pos)
+
+#endregion
+
 
 #region lobby_list
 # Start a new lobby.

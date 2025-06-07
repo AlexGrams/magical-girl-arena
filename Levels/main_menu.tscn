@@ -46,7 +46,7 @@ viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,6 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f3ir0")
 main_menu = NodePath("Main")
+settings = NodePath("Settings")
 lobby_list = NodePath("LobbyList")
 lobbies_list_container = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList")
 lobby = NodePath("Lobby")
@@ -190,19 +191,18 @@ alignment = 0
 [node name="Settings_Label" type="Label" parent="Main/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_wqh84")
-theme_override_colors/font_color = Color(0.27, 0.27, 0.27, 1)
-theme_override_colors/font_outline_color = Color(0.46, 0.46, 0.46, 1)
 text = "Settings"
 
-[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Settings_Label"]
+[node name="SettingsButton" type="Button" parent="Main/VBoxContainer/Settings_Label" node_paths=PackedStringArray("label")]
 layout_mode = 2
 offset_right = 261.0
 offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_wqh84")
-disabled = true
 alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="Quit_Label" type="Label" parent="Main/VBoxContainer"]
 layout_mode = 2
@@ -251,6 +251,61 @@ grow_horizontal = 0
 grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 229.0
+offset_right = 321.0
+offset_bottom = 441.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Resolution" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Resolution"
+metadata/_edit_group_ = true
+
+[node name="ScreenMode" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Screen Mode"
+metadata/_edit_group_ = true
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Return to Main Menu"
+metadata/_edit_group_ = true
+
+[node name="LobbyListBackButton" type="Button" parent="Settings/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="LobbyList" type="Control" parent="."]
 visible = false
@@ -711,10 +766,17 @@ offset_bottom = 290.0
 [connection signal="mouse_entered" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
-[connection signal="button_down" from="Main/VBoxContainer/Settings_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="." method="_on_settings_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="Background/Logo" method="scale_to_half"]
+[connection signal="mouse_entered" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="Main/VBoxContainer/Settings_Label/SettingsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="Main/VBoxContainer/Settings_Label/SettingsButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_settings_back_button_down"]
+[connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]
