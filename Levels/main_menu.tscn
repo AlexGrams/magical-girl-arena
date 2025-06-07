@@ -280,7 +280,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_volume_slider")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_volume_slider", "_spinbox")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -289,6 +289,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
 _volume_slider = NodePath("VBoxContainer/VolumeContainer/VolumeHSlider")
+_spinbox = NodePath("VBoxContainer/VolumeContainer/SpinBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -368,6 +369,21 @@ step = 0.01
 value = 0.8
 tick_count = 11
 ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/VolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/VolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("4_wqh84")
+value = 80.0
+rounded = true
+alignment = 1
 
 [node name="ReturntoMainMenu_Label" type="Label" parent="Settings"]
 layout_mode = 0
@@ -857,6 +873,7 @@ offset_bottom = 290.0
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
 [connection signal="item_selected" from="Settings/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
 [connection signal="drag_ended" from="Settings/VBoxContainer/VolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VBoxContainer/VolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
