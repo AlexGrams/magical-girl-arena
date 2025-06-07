@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dtmg4b3y6iqwk"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dtmg4b3y6iqwk"]
 
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="1_tkaby"]
+[ext_resource type="Texture2D" uid="uid://rsxlf3fm1ojq" path="res://Sprites/UI/Blank.png" id="2_324nq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rv1xo"]
 
@@ -37,3 +38,15 @@ Label/constants/shadow_offset_y = 4
 Label/constants/shadow_outline_size = 20
 Label/font_sizes/font_size = 110
 Label/fonts/font = ExtResource("1_tkaby")
+PopupMenu/colors/font_color = Color(1, 1, 1, 1)
+PopupMenu/colors/font_hover_color = Color(1, 0.94902, 0.745098, 1)
+PopupMenu/colors/font_outline_color = Color(0.964706, 0.580392, 0.482353, 1)
+PopupMenu/constants/outline_size = 15
+PopupMenu/font_sizes/font_size = 110
+PopupMenu/fonts/font = ExtResource("1_tkaby")
+PopupMenu/fonts/font_separator = ExtResource("1_tkaby")
+PopupMenu/fonts/title_font = ExtResource("1_tkaby")
+PopupMenu/icons/radio_checked = ExtResource("2_324nq")
+PopupMenu/icons/radio_checked_disabled = ExtResource("2_324nq")
+PopupMenu/icons/radio_unchecked = ExtResource("2_324nq")
+PopupMenu/icons/radio_unchecked_disabled = ExtResource("2_324nq")

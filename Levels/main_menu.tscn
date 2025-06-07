@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=31 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
 [ext_resource type="PackedScene" uid="uid://bw3l43n1jry4" path="res://UI/feedback_menu.tscn" id="7_ryuk3"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="9_m305s"]
+[ext_resource type="Script" path="res://UI/settings.gd" id="12_r21tk"]
 [ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="15_e8gbh"]
@@ -260,6 +261,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("12_r21tk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -280,12 +282,30 @@ theme_override_font_sizes/font_size = 90
 text = "Resolution"
 metadata/_edit_group_ = true
 
-[node name="ScreenMode" type="Label" parent="Settings/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScreenMode" type="Label" parent="Settings/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_wqh84")
 theme_override_font_sizes/font_size = 90
 text = "Screen Mode"
 metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="OptionButton" type="OptionButton" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("4_wqh84")
+selected = 0
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
 
 [node name="ReturntoMainMenu_Label" type="Label" parent="Settings"]
 layout_mode = 0
@@ -773,6 +793,7 @@ offset_bottom = 290.0
 [connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
+[connection signal="item_selected" from="Settings/VBoxContainer/HBoxContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/LobbyListBackButton" to="Settings/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
