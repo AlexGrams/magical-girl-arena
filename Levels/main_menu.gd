@@ -179,9 +179,31 @@ func setup_lobby_screen() -> void:
 		Steam.lobby_match_list.connect(
 			# lobbies: Array[int] (lobby IDs) - All lobbies in the specified region for this game.
 			func(lobbies: Array):
+				# We need to separately get all the lobbies that are joinable by friends only.
+				for i in range(0, Steam.getFriendCount()):
+					var steam_id: int = Steam.getFriendByIndex(i, Steam.FRIEND_FLAG_IMMEDIATE)
+					var game_info: Dictionary = Steam.getFriendGamePlayed(steam_id)
+					
+					if not game_info.is_empty():
+						# They are playing a game, check if it's the same game as ours
+						var lobby_id = game_info['lobby']
+						
+						if game_info['id'] != Steam.getAppID() or lobby_id is not int:
+							# Either not in this game, or not in a lobby
+							continue
+						
+						if not lobbies.has(lobby_id):
+							lobbies.append(lobby_id)
+							Steam.requestLobbyData(lobby_id)
+				
 				for lobby_id: int in lobbies:
 					var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
 					var player_count: int = Steam.getNumLobbyMembers(lobby_id)
+					
+					# Don't make the button if we don't have good data for this lobby.
+					if lobby_name == "" or player_count == 0:
+						continue
+					
 					var lobby_button: Button = lobby_button_scene.instantiate()
 					
 					# Set up the button for this lobby
