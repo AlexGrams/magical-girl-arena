@@ -9,8 +9,6 @@ const TIME_TO_REVIVE: float = 3.0
 const PLAYER_COLLISION_LAYER: int = 4
 # The most number of different powerups that this player can have INCLUDING their base powerup.
 const MAX_POWERUPS: int = 5
-# How many rerolls this player is given at the start of the game.
-@onready var STARTING_REROLLS: int = GameState.rerolls
 # How long temporary health stays on the player before going away.
 const TEMP_HEALTH_LINGER_TIME: float = 5.0
 # Time in seconds between health regen ticks
@@ -67,8 +65,6 @@ var _health_regen_timer: float = 0.0
 var _spectate_characters: Array[PlayerCharacterBody2D] = []
 ## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
 var _spectate_index: int = 0
-# Number of remaining powerup rerolls. Not replicated.
-@onready var _rerolls: int = STARTING_REROLLS
 # Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
 var _temp_rerolls: int = 0
 # Stat levels
@@ -273,7 +269,7 @@ func _input(event: InputEvent) -> void:
 
 
 func get_rerolls() -> int:
-	return _rerolls + _temp_rerolls
+	return GameState.rerolls + _temp_rerolls
 
 
 func increment_temp_rerolls() -> void:
@@ -284,7 +280,8 @@ func decrement_rerolls() -> void:
 	if _temp_rerolls > 0:
 		_temp_rerolls -= 1
 	else:
-		_rerolls -= 1
+		GameState.rerolls -= 1
+		SaveManager.save_game()
 
 
 # Gives this player a new powerup.
