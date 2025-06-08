@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://iyahls5w0r7j"]
+
+[ext_resource type="Texture2D" uid="uid://bchq18hkloumb" path="res://Sprites/UI/Shop_Reroll_Icon_Disabled.png" id="1_tafsu"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="1_w7uu5"]
+[ext_resource type="Script" path="res://UI/Shop/shop_item_data.gd" id="2_1ct8u"]
+
+[resource]
+script = ExtResource("2_1ct8u")
+item_name = "Reroll"
+item_desc = "Use once to roll 3 new upgrades"
+icon = ExtResource("1_w7uu5")
+disabled_icon = ExtResource("1_tafsu")
+price = 100
+max_quantity = 5
+_sold_message = 0
