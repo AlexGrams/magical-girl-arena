@@ -46,6 +46,23 @@ func _process(delta: float) -> void:
 				[]
 			]
 		)
+		if current_level >= 3:
+			## Shoot 4 bullets in random directions. They cannot crit.
+			actual_bullet_damage = bullet_damage
+			for i in range(4):
+				direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+				bullet_position = self.global_position + (direction * 100)
+				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1, [bullet_scene, 
+					bullet_position, 
+					direction, 
+					actual_bullet_damage, 
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[]
+					]
+				)
 		
 		shoot_timer = 0
 
