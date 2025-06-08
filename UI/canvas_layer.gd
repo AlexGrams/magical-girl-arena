@@ -216,6 +216,7 @@ func _update_retry_votes(voting_retry: bool, id: int) -> void:
 @rpc("any_peer", "call_local")
 func _return_to_lobby():
 	var main_menu: MainMenu = get_tree().get_root().get_node(GameState.main_menu_node_path)
+	AudioManager.play_main_menu_music()
 	
 	get_tree().paused = false
 	GameState.end_game()

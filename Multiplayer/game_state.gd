@@ -113,6 +113,7 @@ func set_gold(new_gold: int) -> void:
 
 @rpc("any_peer", "call_local")
 func set_game_running(value: bool):
+	AudioManager.play_map_one_music()
 	game_running = value
 
 
@@ -469,6 +470,7 @@ func unregister_player_by_steam_id(steam_id: int):
 @rpc("any_peer", "call_local", "reliable")
 func quit_game(quitting_player: int):
 	var main_menu: MainMenu = get_tree().get_root().get_node(main_menu_node_path)
+	AudioManager.play_main_menu_music()
 	
 	end_game()
 	get_tree().paused = false

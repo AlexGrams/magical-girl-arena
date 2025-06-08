@@ -112,6 +112,7 @@ func _spawn_corrupted_enemy() -> void:
 # Spawn the boss enemy. The game ends when it is defeated.
 func _spawn_boss() -> void:
 	var boss_to_spawn: PackedScene = boss_choices.pick_random()
+	AudioManager.play_boss_music()
 	
 	_has_boss_spawned = true
 	if corrupted_enemy_spawner != null and boss_to_spawn != null:

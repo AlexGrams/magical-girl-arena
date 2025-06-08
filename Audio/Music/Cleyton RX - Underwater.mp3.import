@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtfqs7d0abub8"
+path="res://.godot/imported/Cleyton RX - Underwater.mp3-5c3d427c3831a7008f5256d36f052a08.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Cleyton RX - Underwater.mp3"
+dest_files=["res://.godot/imported/Cleyton RX - Underwater.mp3-5c3d427c3831a7008f5256d36f052a08.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
