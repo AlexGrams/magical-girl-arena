@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=41 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://c1bdhpf7vcfd0" path="res://Audio/SFX/Powerups/Mines_Explosion2.mp3" id="17_a0fgx"]
 [ext_resource type="AudioStream" uid="uid://ndr2pql55it1" path="res://Audio/SFX/Powerups/sfx-accent-eye-glitter-tinkle-1-6342.mp3" id="18_5002c"]
 [ext_resource type="AudioStream" uid="uid://bwni84fd4wqs7" path="res://Audio/SFX/Powerups/Marble2.mp3" id="19_k2pvy"]
+[ext_resource type="AudioStream" uid="uid://d1jiqf7s63cn3" path="res://Audio/SFX/Shop_Purchase.mp3" id="20_bbxmu"]
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 script = ExtResource("2_kdvej")
@@ -191,8 +192,17 @@ volume = -10
 pitch_scale = 2.0
 pitch_randomness = 0.5
 
+[sub_resource type="Resource" id="Resource_sbdwg"]
+script = ExtResource("2_kdvej")
+limit = 5
+type = 32
+sound_effect = ExtResource("20_bbxmu")
+volume = -20
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_sbdwg")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

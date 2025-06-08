@@ -67,7 +67,7 @@ func update_quantity(new_quantity:int) -> void:
 		
 
 func _on_background_panel_pressed() -> void:
-	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_PRESS)
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.ITEM_PURCHASED)
 	add_child(coin_particles.instantiate())
 
 func _on_mouse_entered():
