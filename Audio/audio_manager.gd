@@ -58,7 +58,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			add_child(new_audio)
 			
 			new_audio.stream = sfx.sound_effect
-			new_audio.volume_db = sfx.volume
+			new_audio.volume_db = linear_to_db(db_to_linear(sfx.volume) * _volume_multiplier)
 			new_audio.pitch_scale = sfx.pitch_scale
 			new_audio.pitch_scale += randf_range(-sfx.pitch_randomness, sfx.pitch_randomness)
 			new_audio.finished.connect(sfx.on_audio_finished)
