@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=39 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="15_e8gbh"]
 [ext_resource type="Texture2D" uid="uid://cwpwmd20e76c2" path="res://Sprites/UI/CharacterIcons/SweetIcon.png" id="16_c71yi"]
 [ext_resource type="Texture2D" uid="uid://bw7bs1ov0n768" path="res://Sprites/UI/CharacterIcons/ValeIcon.png" id="17_2qjas"]
+[ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="17_7br78"]
+[ext_resource type="Script" path="res://Levels/shop.gd" id="17_rr20q"]
+[ext_resource type="PackedScene" uid="uid://pivdwl1bwb7m" path="res://UI/Shop/shop_item.tscn" id="17_y7mn5"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="18_5ybm4"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="18_651ly"]
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
@@ -74,7 +77,19 @@ expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "lobby_list", "lobbies_list_container", "lobby", "lobby_visibility_holder", "lobby_visibility_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3i082"]
+bg_color = Color(0.890196, 0.278431, 0.278431, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_container", "lobby", "lobby_visibility_holder", "lobby_visibility_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,6 +99,7 @@ grow_vertical = 2
 script = ExtResource("1_f3ir0")
 main_menu = NodePath("Main")
 settings = NodePath("Settings")
+shop = NodePath("Shop")
 lobby_list = NodePath("LobbyList")
 lobbies_list_container = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList")
 lobby = NodePath("Lobby")
@@ -204,19 +220,18 @@ label = NodePath("..")
 [node name="Shop_Label" type="Label" parent="Main/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_wqh84")
-theme_override_colors/font_color = Color(0.27, 0.27, 0.27, 1)
-theme_override_colors/font_outline_color = Color(0.46, 0.46, 0.46, 1)
 text = "Shop"
 
-[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Shop_Label"]
+[node name="LobbyButton" type="Button" parent="Main/VBoxContainer/Shop_Label" node_paths=PackedStringArray("label")]
 layout_mode = 2
-offset_right = 261.0
+offset_right = 337.0
 offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("4_wqh84")
-disabled = true
 alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="Settings_Label" type="Label" parent="Main/VBoxContainer"]
 layout_mode = 2
@@ -532,6 +547,154 @@ layout_mode = 2
 
 [node name="LobbyButton9" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
 layout_mode = 2
+
+[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_rr20q")
+coins_label = NodePath("PlayerCoins_Container/Label")
+reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem")
+
+[node name="ShopLabel" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+offset_left = 590.0
+offset_top = 60.0
+offset_right = -989.0
+offset_bottom = -872.0
+theme_override_font_sizes/font_size = 128
+text = "Shop"
+
+[node name="ShopLabel2" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+offset_left = 982.0
+offset_top = 150.0
+offset_right = -296.0
+offset_bottom = -892.0
+theme_override_font_sizes/font_size = 32
+text = "Prepare yourself for the next battle!"
+
+[node name="Panel" type="Panel" parent="Shop"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 225.0
+offset_right = 1750.0
+offset_bottom = 945.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3i082")
+
+[node name="LobbiesScrollContainer" type="ScrollContainer" parent="Shop"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1764.0
+offset_top = -845.0
+offset_right = -47.0
+offset_bottom = -145.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7_mn14l")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/LobbiesScrollContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Rerolls_Label" parent="Shop/LobbiesScrollContainer/VBoxContainer" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = " Rerolls"
+
+[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Rerolls_Container" type="HBoxContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="ShopItem" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer" instance=ExtResource("17_y7mn5")]
+layout_mode = 2
+
+[node name="TemporaryMessage" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 422.0
+offset_top = 822.0
+offset_right = 1444.0
+offset_bottom = 897.0
+theme_override_font_sizes/font_size = 64
+text = " More items to be added soon!"
+horizontal_alignment = 1
+
+[node name="PlayerCoins_Container" type="HBoxContainer" parent="Shop"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -607.0
+offset_top = -133.0
+offset_right = -30.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Shop/PlayerCoins_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 96
+text = "9999999"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PlayerCoins_Container"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+texture = ExtResource("17_7br78")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="Shop"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Return to Main Menu"
+metadata/_edit_group_ = true
+
+[node name="ShopBackButton" type="Button" parent="Shop/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="Lobby" type="Control" parent="."]
 visible = false
@@ -883,6 +1046,7 @@ item_count = 3
 popup/item_0/text = "Public"
 popup/item_0/id = 1
 popup/item_1/text = "Friends Only"
+popup/item_1/id = 1
 popup/item_2/text = "Closed"
 popup/item_2/id = 2
 script = ExtResource("13_r3p63")
@@ -902,7 +1066,10 @@ offset_bottom = 290.0
 [connection signal="button_down" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Feedback_Label/LobbyButton" to="Main/VBoxContainer/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="." method="_on_shop_button_down"]
+[connection signal="button_down" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
+[connection signal="mouse_entered" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="Main/VBoxContainer/Shop_Label/LobbyButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer/Shop_Label/LobbyButton" to="Main/VBoxContainer/Shop_Label/LobbyButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="." method="_on_settings_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="Background/Logo" method="scale_to_half"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Settings_Label/SettingsButton" to="Main/VBoxContainer/Settings_Label/SettingsButton" method="_on_mouse_entered"]
@@ -928,6 +1095,10 @@ offset_bottom = 290.0
 [connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
+[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="mouse_entered" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_exited"]

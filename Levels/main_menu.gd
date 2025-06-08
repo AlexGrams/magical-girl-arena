@@ -8,6 +8,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var main_menu: Control
 ## The screen for changing the game's settings.
 @export var settings: Control
+## The screen for the shop
+@export var shop: Control
 ## The screen to host or join a lobby.
 @export var lobby_list: Control
 ## The scroll box showing lobbies available to join.
@@ -48,6 +50,7 @@ var _main_menu_original_pos: Vector2
 var _settings_original_pos: Vector2
 var _lobby_list_original_pos: Vector2
 var _lobby_original_pos: Vector2
+var _shop_original_pos: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -90,6 +93,7 @@ func _ready() -> void:
 	_settings_original_pos = settings.position
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
+	_shop_original_pos = shop.position
 	
 	
 	_set_main_menu_character()
@@ -116,6 +120,10 @@ func _on_lobby_button_button_down() -> void:
 ## Switch to the settings screen.
 func _on_settings_button_down() -> void:
 	_switch_screen_animation(main_menu, settings, _settings_original_pos)
+	
+## Switch to the shop screen.
+func _on_shop_button_down() -> void:
+	_switch_screen_animation(main_menu, shop, _settings_original_pos)
 
 
 func _set_main_menu_character() -> void:
@@ -361,6 +369,16 @@ func update_character_description() -> void:
 func quit_to_main_menu() -> void:
 	_switch_screen_animation(lobby, main_menu, _main_menu_original_pos)
 
+#endregion
+
+#region shop
+
+# Switches from shop screen to the main menu
+func from_shop_to_main_menu() -> void:
+	shop.update_coins()
+	_set_main_menu_character()
+	_switch_screen_animation(shop, main_menu, _main_menu_original_pos)
+	
 #endregion
 
 func _switch_screen_animation(from_screen: Control, to_screen: Control, to_screen_original_pos: Vector2):

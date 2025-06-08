@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bv8573qr7ucnf" path="res://UI/Shop/shop_coin_particles.tscn" id="12_7dale"]
 
 [node name="ShopItem" type="Control" node_paths=PackedStringArray("button", "item_icon", "item_name", "item_desc", "item_price", "item_quantity", "disabled_panel", "disabled_message")]
+custom_minimum_size = Vector2(321, 219)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 321.0
@@ -70,8 +71,10 @@ text = "Item Name"
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="BackgroundPanel/VBoxContainer"]
+custom_minimum_size = Vector2(126, 63)
 layout_mode = 2
 theme = ExtResource("4_6uss8")
+theme_override_font_sizes/font_size = 16
 text = "This is a description of this item"
 autowrap_mode = 2
 
@@ -121,10 +124,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_6uss8")
+theme_override_font_sizes/font_size = 16
 text = "Maximum Reached"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="button_down" from="BackgroundPanel" to="." method="_on_background_panel_pressed"]
-[connection signal="mouse_entered" from="BackgroundPanel" to="BackgroundPanel" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="BackgroundPanel" to="BackgroundPanel" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="BackgroundPanel" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BackgroundPanel" to="." method="_on_mouse_exited"]

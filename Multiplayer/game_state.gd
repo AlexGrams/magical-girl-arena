@@ -27,6 +27,8 @@ const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
 const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 
+# Number of rerolls the player currently has.
+var rerolls: int = 0
 # All the gold the player has.
 var _gold: int = 0
 # How much gold the player has gotten this round. Added to their total gold after the game ends.

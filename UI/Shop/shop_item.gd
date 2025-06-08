@@ -69,3 +69,18 @@ func update_quantity(new_quantity:int) -> void:
 func _on_background_panel_pressed() -> void:
 	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_PRESS)
 	add_child(coin_particles.instantiate())
+
+func _on_mouse_entered():
+	if button.disabled:
+		return
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER, true)
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(button, "scale", Vector2.ONE * 1.10, 0.1)
+
+func _on_mouse_exited():
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.tween_property(button, "scale", Vector2.ONE, 0.1)
