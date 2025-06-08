@@ -126,6 +126,16 @@ func _set_main_menu_character() -> void:
 	main_menu_character_sprite.set_read_input(false)
 	main_menu_character_sprite.set_model_scale(3)
 	main_menu_character_label.text = _get_character_data(random_char).name if _get_character_data(random_char).display_name == "" else _get_character_data(random_char).display_name
+
+
+## Go from any other menu screen to the lobby screen.
+func switch_any_to_lobby() -> void:
+	settings.hide()
+	lobby_list.hide()
+	lobby.hide()
+	main_menu.show()
+	_switch_screen_animation(main_menu, lobby, _lobby_original_pos)
+
 #endregion
 
 
@@ -272,7 +282,7 @@ func _on_lobby_visibility_option_button_item_selected(index: int) -> void:
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PUBLIC)
 		1: # Friends only
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_FRIENDS_ONLY)
-		2: # Invite only
+		2: # Closed
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PRIVATE)
 
 

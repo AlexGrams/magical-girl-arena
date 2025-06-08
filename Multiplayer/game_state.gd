@@ -216,6 +216,13 @@ func _ready() -> void:
 					# Player left a lobby
 					unregister_player_by_steam_id(changed_id)
 		)
+		
+		# User tries to join a lobby from their friends list or accepts a lobby invite.
+		Steam.join_requested.connect(
+			func(join_lobby_id: int, _friends_steam_id: int):
+				get_tree().root.get_node("MainMenu").switch_any_to_lobby() 
+				join_lobby(join_lobby_id, Steam.getPersonaName())
+		)
 	
 	SaveManager.load_game()
 
