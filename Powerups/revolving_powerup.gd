@@ -68,6 +68,8 @@ func level_up():
 	current_level += 1
 	bullet_damage = _get_damage_from_curve()
 	
+	if current_level == 3:
+		shoot_interval = shoot_interval + ((max_level_shoot_interval - shoot_interval) / 2)
 	# Shoot way faster at 5th level
 	if is_signature and current_level >= max_level:
 		set_signature_settings()
