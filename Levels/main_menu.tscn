@@ -74,7 +74,7 @@ expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "lobby_list", "lobbies_list_container", "lobby", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "lobby_list", "lobbies_list_container", "lobby", "lobby_visibility_holder", "lobby_visibility_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,6 +87,8 @@ settings = NodePath("Settings")
 lobby_list = NodePath("LobbyList")
 lobbies_list_container = NodePath("LobbyList/LobbiesScrollContainer/LobbiesList")
 lobby = NodePath("Lobby")
+lobby_visibility_holder = NodePath("Lobby/LobbyVisibilityContainer")
+lobby_visibility_option_button = NodePath("Lobby/LobbyVisibilityContainer/LobbyVisibilityOptionButton")
 players_holder = NodePath("Lobby/PlayersHolder")
 character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
 information_name = NodePath("Lobby/CharacterInformationContainer/Name")
@@ -849,6 +851,42 @@ alignment = 0
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
+[node name="LobbyVisibilityContainer" type="VBoxContainer" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -443.0
+offset_top = 118.0
+offset_right = -29.0
+offset_bottom = 262.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="LobbyVisibilityLabel" type="Label" parent="Lobby/LobbyVisibilityContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Lobby Type:"
+
+[node name="LobbyVisibilityOptionButton" type="OptionButton" parent="Lobby/LobbyVisibilityContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 61
+alignment = 1
+selected = 1
+item_count = 3
+popup/item_0/text = "Public"
+popup/item_0/id = 1
+popup/item_1/text = "Friends Only"
+popup/item_2/text = "Invite Only"
+popup/item_2/id = 2
+script = ExtResource("13_r3p63")
+
 [node name="FeedbackMenu" parent="." instance=ExtResource("7_ryuk3")]
 visible = false
 layout_mode = 1
@@ -899,3 +937,4 @@ offset_bottom = 290.0
 [connection signal="button_down" from="Lobby/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
 [connection signal="mouse_entered" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
+[connection signal="item_selected" from="Lobby/LobbyVisibilityContainer/LobbyVisibilityOptionButton" to="." method="_on_lobby_visibility_option_button_item_selected"]

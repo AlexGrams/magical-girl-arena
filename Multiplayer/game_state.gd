@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 ## The unique identifier used to find lobbies through the Steamworks API.
 ## Main: 3689240
 ## Playtest: 3705120
@@ -248,7 +248,7 @@ func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM or OS.has_feature("release"):
 		player_name = host_player_name
 		register_player(multiplayer.get_unique_id(), host_player_name, 1, Constants.Character.GOTH)
-		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_PLAYERS)
+		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, MAX_PLAYERS)
 
 
 # Join an existing multiplayer lobby

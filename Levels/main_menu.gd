@@ -14,6 +14,10 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
 @export var lobby: Control
+## Parent of the UI elements displaying lobby visibility option.
+@export var lobby_visibility_holder: Control 
+## For selecting who can join this lobby.
+@export var lobby_visibility_option_button: OptionButton
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Contains buttons for selecting a character
@@ -145,6 +149,8 @@ func _on_host_button_button_down() -> void:
 			start_game_label.hide()
 	
 	# Show the lobby that you're in after clicking the "Host" button.
+	lobby_visibility_holder.visible = true
+	lobby_visibility_option_button.selected = 1
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
 	update_character_description()
@@ -212,6 +218,7 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 		return
 	
 	# Join the lobby
+	lobby_visibility_holder.visible = false
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	start_game_label.hide()
 	
@@ -231,6 +238,20 @@ func _on_start_game_button_down() -> void:
 @rpc("any_peer", "call_local")
 func _hide_main_menu() -> void:
 	self.hide()
+
+
+## Change which other players can join this lobby.
+func _on_lobby_visibility_option_button_item_selected(index: int) -> void:
+	if not GameState.USING_GODOT_STEAM and not OS.has_feature("release"):
+		return
+	
+	match(index):
+		0: # Public
+			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PUBLIC)
+		1: # Friends only
+			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_FRIENDS_ONLY)
+		2: # Invite only
+			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PRIVATE)
 
 
 # Leave a game lobby. Goes back to the lobby list.
