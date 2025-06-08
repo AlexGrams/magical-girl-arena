@@ -8,6 +8,7 @@ extends Bullet
 var _collision_layer: int = 0
 var _explosion_time: float = lifetime
 var _has_exploded:bool = false
+var _is_level_3:bool = false
 
 
 func _ready() -> void:
@@ -63,6 +64,8 @@ func _explode() -> void:
 	if playground != null:
 		var vfx: GPUParticles2D = load(_vfx_uid).instantiate()
 		vfx.global_position = global_position
+		if _is_level_3:
+			vfx.scale = Vector2(2, 2)
 		playground.add_child(vfx)
 	sprite.hide()
 	
@@ -71,3 +74,17 @@ func _explode() -> void:
 	
 	if is_multiplayer_authority():
 		collider.collision_layer = _collision_layer
+
+## Set up other properties for this bullet
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
+	# Increase explosion size at level 3
+	_is_level_3 = data[2]
+	if _is_level_3:
+		var collision_shape = collider.get_child(0)
+		collision_shape.shape.radius = collision_shape.shape.radius * 2
+	
+	# Make the bullet hurt players
+	if not is_owned_by_player:
+		_is_owned_by_player = false
+		_health = max_health
+		_modify_collider_to_harm_players()

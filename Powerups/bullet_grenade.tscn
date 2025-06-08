@@ -91,7 +91,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
-radius = 241.168
+radius = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(66, 66)

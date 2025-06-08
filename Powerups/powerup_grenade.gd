@@ -21,18 +21,9 @@ func _process(delta: float) -> void:
 	if _shoot_timer > shoot_interval:
 		if _is_owned_by_player:
 			# Get nearest enemy so direction can be set
-			var enemies: Array[Node] = [] 
-			enemies = get_tree().get_nodes_in_group("enemy")
+			var nearest_enemy = _find_nearest_target()
 			
-			if !enemies.is_empty():
-				var nearest_enemy = enemies[0]
-				var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
-				for enemy in enemies:
-					var distance = global_position.distance_squared_to(enemy.global_position)
-					if distance < nearest_distance:
-						nearest_enemy = enemy
-						nearest_distance = distance
-			
+			if nearest_enemy != null:
 				var direction = (nearest_enemy.global_position - self.global_position).normalized()
 				_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
@@ -44,7 +35,7 @@ func _process(delta: float) -> void:
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
-						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
+						[multiplayer.get_unique_id(), is_signature and current_level == max_level, current_level >= 3]
 					]
 				)
 		else:
