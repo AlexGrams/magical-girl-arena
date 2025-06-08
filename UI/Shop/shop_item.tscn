@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://pivdwl1bwb7m"]
+
+[ext_resource type="Script" path="res://UI/Shop/shop_item.gd" id="1_c637o"]
+[ext_resource type="Texture2D" uid="uid://bdaucih3eqqg" path="res://Sprites/UI/ShopButton.png" id="1_p1mne"]
+[ext_resource type="Resource" uid="uid://iyahls5w0r7j" path="res://UI/Shop/Items/item_reroll.tres" id="2_7xf00"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="2_s0lkj"]
+[ext_resource type="Texture2D" uid="uid://5v4ha8axlmn4" path="res://Sprites/UI/ShopButton_Disabled.png" id="3_244yp"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_wc8mt"]
+[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="4_6uss8"]
+[ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="5_rebb8"]
+[ext_resource type="Theme" uid="uid://d2on3aykhw23b" path="res://Sprites/UI/disabled_description_text.tres" id="5_vljwb"]
+[ext_resource type="Theme" uid="uid://clh6n34b206us" path="res://Sprites/UI/disabled_description_white_with_shadow_text.tres" id="7_wkrqi"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="9_lpyi2"]
+[ext_resource type="PackedScene" uid="uid://bv8573qr7ucnf" path="res://UI/Shop/shop_coin_particles.tscn" id="12_7dale"]
+
+[node name="ShopItem" type="Control" node_paths=PackedStringArray("button", "item_icon", "item_name", "item_desc", "item_price", "item_quantity", "disabled_panel", "disabled_message")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 321.0
+offset_bottom = 219.0
+script = ExtResource("1_c637o")
+item_data = ExtResource("2_7xf00")
+button = NodePath("BackgroundPanel")
+item_icon = NodePath("BackgroundPanel/IconImage")
+item_name = NodePath("BackgroundPanel/VBoxContainer/Name")
+item_desc = NodePath("BackgroundPanel/VBoxContainer/Description")
+item_price = NodePath("HBoxContainer/Price")
+item_quantity = NodePath("HBoxContainer/Quantity")
+disabled_panel = NodePath("Disabled_Message")
+disabled_message = NodePath("Disabled_Message/Label")
+panel_texture = ExtResource("1_p1mne")
+panel_disabled_texture = ExtResource("3_244yp")
+name_theme = ExtResource("3_wc8mt")
+name_disabled_theme = ExtResource("5_vljwb")
+desc_theme = ExtResource("4_6uss8")
+desc_disabled_theme = ExtResource("7_wkrqi")
+coin_particles = ExtResource("12_7dale")
+
+[node name="BackgroundPanel" type="TextureButton" parent="." node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_right = 321.0
+offset_bottom = 177.0
+pivot_offset = Vector2(160, 88)
+texture_normal = ExtResource("1_p1mne")
+texture_disabled = ExtResource("3_244yp")
+script = ExtResource("9_lpyi2")
+label = NodePath(".")
+
+[node name="IconImage" type="TextureRect" parent="BackgroundPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 25.0
+offset_right = 152.0
+offset_bottom = 144.0
+texture = ExtResource("2_s0lkj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackgroundPanel"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 26.0
+offset_right = 289.0
+offset_bottom = 145.0
+theme_override_constants/separation = 10
+
+[node name="Name" type="Label" parent="BackgroundPanel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wc8mt")
+theme_override_font_sizes/font_size = 18
+text = "Item Name"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="BackgroundPanel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_6uss8")
+text = "This is a description of this item"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+offset_left = 23.0
+offset_top = 162.0
+offset_right = 298.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+
+[node name="GoldCoin_Image" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_rebb8")
+
+[node name="Price" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_6uss8")
+theme_override_font_sizes/font_size = 32
+text = "100"
+
+[node name="Quantity" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_6uss8")
+theme_override_font_sizes/font_size = 32
+text = "0/5"
+horizontal_alignment = 2
+
+[node name="Disabled_Message" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 115.0
+offset_right = 306.0
+offset_bottom = 137.0
+color = Color(0, 0, 0, 0.588235)
+
+[node name="Label" type="Label" parent="Disabled_Message"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_6uss8")
+text = "Maximum Reached"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="BackgroundPanel" to="." method="_on_background_panel_pressed"]
+[connection signal="mouse_entered" from="BackgroundPanel" to="BackgroundPanel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BackgroundPanel" to="BackgroundPanel" method="_on_mouse_exited"]

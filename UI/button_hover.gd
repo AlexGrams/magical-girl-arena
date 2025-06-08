@@ -1,4 +1,4 @@
-extends Button
+extends BaseButton
 
 @export var label:Control
 var original_scale:Vector2
