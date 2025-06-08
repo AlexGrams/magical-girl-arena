@@ -8,6 +8,8 @@ extends Powerup
 var _shoot_timer: float = 0
 ## How much damage the powerup does at its current level.
 var _damage: float = 0.0
+## Lifetime for bullet. Doubles at level 3
+var _trail_lifetime: float = 2
 
 signal picked_up_powerup(sprite)
 
@@ -35,7 +37,7 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[]
+				[_trail_lifetime]
 			]
 		)
 		
@@ -55,4 +57,6 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	_damage = _get_damage_from_curve()
+	if current_level == 3:
+		_trail_lifetime = _trail_lifetime * 2
 	powerup_level_up.emit(current_level, _damage)
