@@ -31,7 +31,8 @@ func save_game() -> void:
 		return
 	
 	var save_data := {
-		"gold": GameState.get_gold()
+		"gold": GameState.get_gold(),
+		"rerolls": GameState.rerolls
 	}
 	
 	var json_string := JSON.stringify(save_data)
@@ -71,7 +72,9 @@ func load_game() -> void:
 		return
 
 	# Get the data from the JSON object.
-	var save_data = json.data
+	var save_data: Dictionary = json.data
 	
 	# Set game variables from the loaded data
 	GameState.set_gold(save_data["gold"])
+	if save_data.has("rerolls"):
+		GameState.rerolls = save_data["rerolls"]

@@ -9,6 +9,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_gold_display(GameState.get_gold())
+	reroll_item.update_quantity(GameState.rerolls)
 	
 	## Connect all item buttons
 	reroll_item.button.button_down.connect(buy_reroll)
@@ -28,9 +29,10 @@ func buy_reroll() -> void:
 		return
 	spend_gold(reroll_item)
 	
-	# TODO: Save reroll?
 	GameState.rerolls += 1
 	reroll_item.update_quantity(GameState.rerolls)
+	
+	SaveManager.save_game()
 #endregion
 
 #region Helper Functions
