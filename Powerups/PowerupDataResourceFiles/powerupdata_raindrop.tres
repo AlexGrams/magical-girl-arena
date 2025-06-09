@@ -10,4 +10,4 @@ scene = ExtResource("1_lx7bt")
 name = "Bubble Pop"
 sprite = ExtResource("3_o56ew")
 upgrade_description = "Create a bubble on an enemy that pops after a delay"
-upgrade_description_list = Array[String](["Create a bubble on an enemy that pops after a delay", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Create a bubble on an enemy that pops after a delay", "Increase damage", "Increase fire rate and damage", "Increase damage", "Increase damage", "Increase damage"])

@@ -20,7 +20,7 @@ var _is_collision_active = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_max_shadow_scale = sprite.scale
+	#_max_shadow_scale = sprite.scale
 	sprite.scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
@@ -71,10 +71,13 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			sprite.self_modulate = Color.RED
 	else:
 		# Owned by player and was spawned by powerup_raindrop
-		if (len(data) != 1 
+		if (len(data) != 2
 			or typeof(data[0]) != TYPE_NODE_PATH	# Path to target
+			or typeof(data[1]) != TYPE_FLOAT		# Lifetime
+			
 		):
 			push_error("Malformed Bullet setup")
 			return
 		
 		_target = get_tree().root.get_node_or_null(data[0])
+		lifetime = data[1]

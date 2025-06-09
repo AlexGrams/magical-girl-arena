@@ -12,6 +12,7 @@ extends Powerup
 var _shoot_timer: float = 0.0
 var _bullet_spawner: BulletSpawner = null
 var _range_squared: float = 1.0
+var _lifetime: float = 1.5
 
 
 func _ready() -> void:
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[target.get_path()]
+				[target.get_path(), _lifetime]
 			])
 		_shoot_timer = _shoot_interval
 
@@ -60,4 +61,7 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
+	if current_level == 3:
+		_lifetime = 0.5
+		_shoot_interval = _shoot_interval / 2
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
