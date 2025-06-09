@@ -296,7 +296,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_volume_slider", "_spinbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -306,8 +306,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
 _screen_mode_option = NodePath("VBoxContainer/ScreenModeContainer/OptionButton")
-_volume_slider = NodePath("VBoxContainer/VolumeContainer/VolumeHSlider")
-_spinbox = NodePath("VBoxContainer/VolumeContainer/SpinBox")
+_music_volume_slider = NodePath("VBoxContainer/MusicVolumeContainer/VolumeHSlider")
+_music_spinbox = NodePath("VBoxContainer/MusicVolumeContainer/SpinBox")
+_sfx_volume_slider = NodePath("VBoxContainer/SFXVolumeContainer/VolumeHSlider")
+_sfx_spinbox = NodePath("VBoxContainer/SFXVolumeContainer/SpinBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -334,7 +336,7 @@ layout_mode = 2
 
 [node name="ScreenMode" type="Label" parent="Settings/VBoxContainer/ScreenModeContainer"]
 layout_mode = 2
-theme = ExtResource("4_wqh84")
+theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "Screen Mode"
 metadata/_edit_group_ = true
@@ -355,22 +357,23 @@ popup/item_1/text = "Windowed"
 popup/item_1/id = 1
 script = ExtResource("13_r3p63")
 
-[node name="VolumeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 127)
 layout_mode = 2
 
-[node name="Volume" type="Label" parent="Settings/VBoxContainer/VolumeContainer"]
+[node name="Volume" type="Label" parent="Settings/VBoxContainer/MusicVolumeContainer"]
 layout_mode = 2
-theme = ExtResource("4_wqh84")
+theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
-text = "Volume"
+text = "Music Volume"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/VolumeContainer"]
-custom_minimum_size = Vector2(356, 0)
+[node name="Spacer" type="Control" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/VolumeContainer"]
+[node name="VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(0, 61.685)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -388,12 +391,60 @@ value = 0.8
 tick_count = 11
 ticks_on_borders = true
 
-[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/VolumeContainer"]
+[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/VolumeContainer"]
+[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("4_wqh84")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 90
+text = "SFX Volume"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(159, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("14_ddmg2")
+theme_override_icons/grabber_highlight = ExtResource("14_ddmg2")
+theme_override_icons/grabber_disabled = ExtResource("14_ddmg2")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/SFXVolumeContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1078,8 +1129,10 @@ offset_bottom = 290.0
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
 [connection signal="item_selected" from="Settings/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
-[connection signal="drag_ended" from="Settings/VBoxContainer/VolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/VBoxContainer/VolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VBoxContainer/MusicVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VBoxContainer/MusicVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]
