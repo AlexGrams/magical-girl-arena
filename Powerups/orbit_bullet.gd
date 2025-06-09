@@ -64,8 +64,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
-func level_up(_new_level: int, new_damage: float):
+func level_up(new_level: int, new_damage: float):
 	$BulletOffset/Area2D.damage = new_damage
+	if new_level == 3:
+		speed = speed * 2
 
 
 # Must be done through RPC because clients run functionality to spawn the bullet, but bullets'

@@ -10,4 +10,4 @@ scene = ExtResource("1_0m21i")
 name = "Prism Star Power"
 sprite = ExtResource("3_cgv3i")
 upgrade_description = "A bullet continuously revolves around you"
-upgrade_description_list = Array[String](["A bullet continuously revolves around you", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["A bullet continuously revolves around you", "Increase damage", "Increase speed and damage", "Increase damage", "Increase damage", "Increase damage"])
