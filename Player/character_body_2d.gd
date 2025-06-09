@@ -65,7 +65,7 @@ var _health_regen_timer: float = 0.0
 var _spectate_characters: Array[PlayerCharacterBody2D] = []
 ## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
 var _spectate_index: int = 0
-# Temporary rerolls that only become available in rare situations, and can only be used for one levelup.
+# Temporary rerolls that only become available in rare situations
 var _temp_rerolls: int = 0
 # Stat levels
 var _stat_health: int = 1
@@ -92,9 +92,6 @@ func _ready():
 
 ## Called when a Powerup is selected on the level up screen.
 func _on_upgrade_chosen(powerup_data: PowerupData):
-	# Reset temp rerolls in case we have any
-	_temp_rerolls = 0
-	
 	upgrade_or_grant_powerup(powerup_data, false)
 
 
@@ -126,9 +123,6 @@ func get_character() -> Constants.Character:
 
 ## Upgrade stats depending on which upgrade was chosen
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
-	# Reset temp rerolls in case we have any
-	_temp_rerolls = 0
-	
 	match stat_type:
 		Constants.StatUpgrades.HEALTH:
 			_stat_health += 1
