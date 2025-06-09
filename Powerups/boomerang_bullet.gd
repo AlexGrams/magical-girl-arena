@@ -112,5 +112,8 @@ func set_damage(damage:float):
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
-func level_up(_new_level: int, new_damage: float):
+func level_up(new_level: int, new_damage: float):
 	$Area2D.damage = new_damage
+	if new_level == 3:
+		# Increase size
+		scale = scale * 2

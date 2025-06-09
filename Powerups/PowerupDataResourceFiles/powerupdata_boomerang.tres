@@ -10,4 +10,4 @@ scene = ExtResource("1_fnspg")
 name = "Jeweled Boomerang"
 sprite = ExtResource("3_1ptwq")
 upgrade_description = "Throw a boomerang, hitting all enemies in its path"
-upgrade_description_list = Array[String](["Throw a boomerang, hitting all enemies in its path", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Throw a boomerang, hitting all enemies in its path", "Increase damage", "Increase size and damage", "Increase damage", "Increase damage", "Increase damage"])
