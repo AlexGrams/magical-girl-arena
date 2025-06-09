@@ -301,6 +301,11 @@ func _on_leave_button_down() -> void:
 	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
 
+# Show shop, but don't leave lobby.
+func _on_shop_button_down_from_lobby() -> void:
+	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
+	request_lobby_list()
+
 
 # Updates the lobby view to show the players that are connected and their characters.
 @rpc("any_peer", "call_local")
@@ -379,6 +384,29 @@ func from_shop_to_main_menu() -> void:
 	shop.update_coins()
 	_set_main_menu_character()
 	_switch_screen_animation(shop, main_menu, _main_menu_original_pos)
+
+# Used to show shop without leaving current screen
+func show_shop() -> void:
+	# If shop is off-screen, move it to center
+	print("Show shop")
+	print(shop.position)
+	if shop.position != _shop_original_pos:
+		shop.position = _shop_original_pos
+	shop.get_node("DimBackground").show()
+	shop.get_node("HideShop_Label").show()
+	shop.get_node("ReturntoMainMenu_Label").hide()
+	shop.show()
+
+# Used to hide shop after using show shop
+func hide_shop() -> void:
+	print("Hide shop")
+	print(shop.position)
+	shop.get_node("DimBackground").hide()
+	shop.get_node("HideShop_Label").hide()
+	shop.get_node("ReturntoMainMenu_Label").show()
+	shop.hide()
+	# Move shop back off-screen
+	shop.position = Vector2(-(shop.size.x), shop.position.y)
 	
 #endregion
 

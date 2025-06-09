@@ -599,154 +599,6 @@ layout_mode = 2
 [node name="LobbyButton9" parent="LobbyList/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
 layout_mode = 2
 
-[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item")]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("17_rr20q")
-coins_label = NodePath("PlayerCoins_Container/Label")
-reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem")
-
-[node name="ShopLabel" parent="Shop" instance=ExtResource("18_5ybm4")]
-layout_mode = 1
-offset_left = 590.0
-offset_top = 60.0
-offset_right = -989.0
-offset_bottom = -872.0
-theme_override_font_sizes/font_size = 128
-text = "Shop"
-
-[node name="ShopLabel2" parent="Shop" instance=ExtResource("18_5ybm4")]
-layout_mode = 1
-offset_left = 982.0
-offset_top = 150.0
-offset_right = -296.0
-offset_bottom = -892.0
-theme_override_font_sizes/font_size = 32
-text = "Prepare yourself for the next battle!"
-
-[node name="Panel" type="Panel" parent="Shop"]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 225.0
-offset_right = 1750.0
-offset_bottom = 945.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_3i082")
-
-[node name="LobbiesScrollContainer" type="ScrollContainer" parent="Shop"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1764.0
-offset_top = -845.0
-offset_right = -47.0
-offset_bottom = -145.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("7_mn14l")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
-follow_focus = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Shop/LobbiesScrollContainer"]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Rerolls_Label" parent="Shop/LobbiesScrollContainer/VBoxContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = " Rerolls"
-
-[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Rerolls_Container" type="HBoxContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-
-[node name="GridContainer" type="GridContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
-layout_mode = 2
-theme_override_constants/h_separation = 50
-columns = 4
-
-[node name="ShopItem" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer" instance=ExtResource("17_y7mn5")]
-layout_mode = 2
-
-[node name="TemporaryMessage" parent="Shop" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 422.0
-offset_top = 822.0
-offset_right = 1444.0
-offset_bottom = 897.0
-theme_override_font_sizes/font_size = 64
-text = " More items to be added soon!"
-horizontal_alignment = 1
-
-[node name="PlayerCoins_Container" type="HBoxContainer" parent="Shop"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -607.0
-offset_top = -133.0
-offset_right = -30.0
-offset_bottom = -22.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Shop/PlayerCoins_Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 96
-text = "9999999"
-horizontal_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="Shop/PlayerCoins_Container"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-texture = ExtResource("17_7br78")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ReturntoMainMenu_Label" type="Label" parent="Shop"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 968.0
-offset_right = 593.0
-offset_bottom = 1026.0
-pivot_offset = Vector2(0, 29)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 50
-text = "Return to Main Menu"
-metadata/_edit_group_ = true
-
-[node name="ShopBackButton" type="Button" parent="Shop/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
-layout_mode = 0
-offset_right = 553.0
-offset_bottom = 58.0
-theme_override_font_sizes/font_size = 50
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
 [node name="Lobby" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -1022,7 +874,7 @@ label = NodePath("..")
 layout_mode = 0
 offset_left = 45.0
 offset_top = 994.0
-offset_right = 598.0
+offset_right = 376.0
 offset_bottom = 1052.0
 pivot_offset = Vector2(0, 29)
 theme = ExtResource("4_wqh84")
@@ -1033,6 +885,27 @@ metadata/_edit_group_ = true
 [node name="LeaveButton" type="Button" parent="Lobby/LeaveLobby_Label" node_paths=PackedStringArray("label")]
 layout_mode = 1
 offset_right = 331.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="Shop_Label" type="Label" parent="Lobby"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 994.0
+offset_right = 618.0
+offset_bottom = 1052.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Shop"
+horizontal_alignment = 2
+metadata/_edit_group_ = true
+
+[node name="ShopButton" type="Button" parent="Lobby/Shop_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 133.0
 offset_bottom = 58.0
 theme_override_font_sizes/font_size = 50
 script = ExtResource("5_76cyy")
@@ -1081,7 +954,7 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-theme = ExtResource("4_wqh84")
+theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 50
 text = "Lobby Type:"
 
@@ -1101,6 +974,185 @@ popup/item_1/id = 1
 popup/item_2/text = "Closed"
 popup/item_2/id = 2
 script = ExtResource("13_r3p63")
+
+[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item")]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_rr20q")
+coins_label = NodePath("PlayerCoins_Container/Label")
+reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem")
+
+[node name="DimBackground" type="Panel" parent="Shop"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopLabel" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+offset_left = 590.0
+offset_top = 60.0
+offset_right = -989.0
+offset_bottom = -872.0
+theme_override_font_sizes/font_size = 128
+text = "Shop"
+
+[node name="ShopLabel2" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+offset_left = 982.0
+offset_top = 150.0
+offset_right = -296.0
+offset_bottom = -892.0
+theme_override_font_sizes/font_size = 32
+text = "Prepare yourself for the next battle!"
+
+[node name="Panel" type="Panel" parent="Shop"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 225.0
+offset_right = 1750.0
+offset_bottom = 945.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3i082")
+
+[node name="LobbiesScrollContainer" type="ScrollContainer" parent="Shop"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1764.0
+offset_top = -845.0
+offset_right = -47.0
+offset_bottom = -145.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7_mn14l")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/LobbiesScrollContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Rerolls_Label" parent="Shop/LobbiesScrollContainer/VBoxContainer" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = " Rerolls"
+
+[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Rerolls_Container" type="HBoxContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="ShopItem" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer" instance=ExtResource("17_y7mn5")]
+layout_mode = 2
+
+[node name="TemporaryMessage" parent="Shop" instance=ExtResource("18_5ybm4")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 422.0
+offset_top = 822.0
+offset_right = 1444.0
+offset_bottom = 897.0
+theme_override_font_sizes/font_size = 64
+text = " More items to be added soon!"
+horizontal_alignment = 1
+
+[node name="PlayerCoins_Container" type="HBoxContainer" parent="Shop"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -607.0
+offset_top = -133.0
+offset_right = -30.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Shop/PlayerCoins_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 96
+text = "9999999"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/PlayerCoins_Container"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+texture = ExtResource("17_7br78")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="Shop"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Return to Main Menu"
+metadata/_edit_group_ = true
+
+[node name="ShopBackButton" type="Button" parent="Shop/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="HideShop_Label" type="Label" parent="Shop"]
+visible = false
+layout_mode = 0
+offset_left = 782.0
+offset_top = 968.0
+offset_right = 1033.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(125, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Exit Shop"
+metadata/_edit_group_ = true
+
+[node name="ShopBackButton" type="Button" parent="Shop/HideShop_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 251.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
 
 [node name="FeedbackMenu" parent="." instance=ExtResource("7_ryuk3")]
 visible = false
@@ -1148,17 +1200,23 @@ offset_bottom = 290.0
 [connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
-[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
-[connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="mouse_entered" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="_on_leave_button_down"]
 [connection signal="mouse_entered" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Lobby/Shop_Label/ShopButton" to="." method="show_shop"]
+[connection signal="mouse_entered" from="Lobby/Shop_Label/ShopButton" to="Lobby/Shop_Label/ShopButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Shop_Label/ShopButton" to="Lobby/Shop_Label/ShopButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
 [connection signal="mouse_entered" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
 [connection signal="item_selected" from="Lobby/LobbyVisibilityContainer/LobbyVisibilityOptionButton" to="." method="_on_lobby_visibility_option_button_item_selected"]
+[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
+[connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Shop/HideShop_Label/ShopBackButton" to="." method="hide_shop"]
+[connection signal="mouse_entered" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
