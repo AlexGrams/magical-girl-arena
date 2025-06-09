@@ -1,3 +1,4 @@
+class_name Shop
 extends Control
 
 ## Displays number of player's coins
@@ -9,7 +10,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_gold_display(GameState.get_gold())
-	reroll_item.update_quantity(GameState.rerolls)
+	update_all_quantities()
 	
 	## Connect all item buttons
 	reroll_item.button.button_down.connect(buy_reroll)
@@ -37,6 +38,12 @@ func buy_reroll() -> void:
 
 #region Helper Functions
 ## Helper functions
+
+## Update the displayed quantity of all item buttons.
+func update_all_quantities() -> void:
+	reroll_item.update_quantity(GameState.rerolls)
+
+
 func spend_gold(item:Control):
 	# TODO: Save gold?
 	if has_enough_gold(item):

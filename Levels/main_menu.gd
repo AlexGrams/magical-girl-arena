@@ -9,7 +9,7 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## The screen for changing the game's settings.
 @export var settings: Control
 ## The screen for the shop
-@export var shop: Control
+@export var shop: Shop
 ## The screen to host or join a lobby.
 @export var lobby_list: Control
 ## The scroll box showing lobbies available to join.
@@ -124,6 +124,7 @@ func _on_settings_button_down() -> void:
 ## Switch to the shop screen.
 func _on_shop_button_down() -> void:
 	_switch_screen_animation(main_menu, shop, _settings_original_pos)
+	shop.update_all_quantities()
 
 
 func _set_main_menu_character() -> void:
