@@ -360,7 +360,7 @@ func update_character_description() -> void:
 	information_description.text = data.description
 	information_powerup_texture.texture = data.base_powerup_texture
 	information_powerup_label.change_text(data.base_powerup_name)
-	information_powerup_description.text = load(data.base_powerup_data).upgrade_description
+	information_powerup_description.text = load(data.base_powerup_data).upgrade_description_list[5]
 	information_ult_texture.texture = data.ult_texture
 	information_ult_label.change_text(data.ult_name)
 	information_ult_description.text = data.ult_description
