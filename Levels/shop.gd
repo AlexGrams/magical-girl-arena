@@ -26,10 +26,10 @@ func update_coins() -> void:
 ## Used to buy a standard reroll
 func buy_reroll() -> void:
 	# Don't buy if at max quantity or if not enough money
-	if GameState.rerolls >= get_max_quantity(reroll_item):
+	if GameState.rerolls >= get_max_quantity(reroll_item) or !has_enough_gold(reroll_item):
 		return
-	spend_gold(reroll_item)
 	
+	spend_gold(reroll_item)
 	GameState.rerolls += 1
 	reroll_item.update_quantity(GameState.rerolls)
 	
@@ -44,11 +44,11 @@ func update_all_quantities() -> void:
 	reroll_item.update_quantity(GameState.rerolls)
 
 
-func spend_gold(item:Control):
-	# TODO: Save gold?
+func spend_gold(item:Control) -> void:
 	if has_enough_gold(item):
 		GameState.set_gold(GameState.get_gold() - get_price(item))
 		update_coins()
+		item.play_purchase_animation()
 
 func get_price(item:Control) -> int:
 	return item.item_data.price

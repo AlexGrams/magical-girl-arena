@@ -66,7 +66,7 @@ func update_quantity(new_quantity:int) -> void:
 		disabled_panel.hide()
 		
 
-func _on_background_panel_pressed() -> void:
+func play_purchase_animation() -> void:
 	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.ITEM_PURCHASED)
 	add_child(coin_particles.instantiate())
 
