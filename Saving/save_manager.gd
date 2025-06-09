@@ -60,9 +60,6 @@ func load_settings() -> void:
 		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
 	SettingsManager.apply_music_volume(settings.get_value("music", "volume"))
 	SettingsManager.set_settings(settings)
-	
-	print(settings.get_value("sound", "volume"))
-	print(settings.get_value("music", "volume"))
 
 
 # Load data from disk and set variables. Should be modified when new data to save is added.

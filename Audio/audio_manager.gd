@@ -107,7 +107,6 @@ func play_map_one_music():
 	music_player.volume_db = linear_to_db(db_to_linear(-30) * _music_volume_multiplier)
 	add_child(music_player)
 	_battle_music_player_node = music_player
-	print(_battle_music_player_node)
 
 func play_victory_music():
 	# Remove battle music if playing
