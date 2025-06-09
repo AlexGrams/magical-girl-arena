@@ -17,10 +17,10 @@ signal upgrade_stat_chosen(stat: Constants.StatUpgrades)
 
 
 ## Displays which Powerup or Stat this button will upgrade when clicked.
-func set_upgrade(upgrade) -> void:
+func set_upgrade(upgrade, level_dictionary:Dictionary) -> void:
 	if upgrade is PowerupData:
 		_powerupdata = upgrade
-		_set_display(_powerupdata.name, _powerupdata.sprite, _powerupdata.get_upgrade_description())
+		_set_display(_powerupdata.name, _powerupdata.sprite, _powerupdata.get_upgrade_description(level_dictionary[_powerupdata.name]))
 	elif upgrade is Constants.StatUpgrades:
 		_stat = upgrade
 		_powerupdata = null

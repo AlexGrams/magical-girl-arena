@@ -16,5 +16,5 @@ extends Resource
 ## 5: Signature functionality
 @export var upgrade_description_list: Array[String]
 
-func get_upgrade_description() -> String:
-	return upgrade_description
+func get_upgrade_description(level:int = 0) -> String:
+	return upgrade_description_list[level]

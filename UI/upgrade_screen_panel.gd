@@ -71,6 +71,8 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
 	# Mixed array of either PowerupData or Constants.StatUpgrades
 	var upgrade_choices: Array = []
+	# Current powerup level that corresponds to upgrade_choices. 0 = Not yet obtained
+	var upgrade_levels: Dictionary = {}
 	
 	# Decide which Powerups can possibly be upgraded
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
@@ -80,9 +82,27 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		for powerup: Powerup in player_character.powerups:
 			if powerup.current_level < powerup.max_level:
 				upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
+				if powerup.current_level == 4 and powerup.is_signature:
+					upgrade_levels[powerup.powerup_name] = 5
+				else:
+					upgrade_levels[powerup.powerup_name] = powerup.current_level
 	else:
 		# Otherwise, choose randomly from the whole pool up abilities.
 		upgrade_choices.append_array(all_powerup_data.duplicate())
+		
+		# If in inventory, get current level for each powerup
+		for data in all_powerup_data:
+			var found_powerup := false
+			for powerup in player_character.powerups:
+				if data.name == powerup.powerup_name:
+					found_powerup = true
+					if powerup.current_level == 4 and powerup.is_signature:
+						upgrade_levels[powerup.powerup_name] = 5
+					else:
+						upgrade_levels[powerup.powerup_name] = powerup.current_level
+					break
+			if not found_powerup:
+				upgrade_levels[data.name] = 0
 
 		# Remove powerups from the random list that can't be upgraded anymore.
 		var powerups_to_remove = []
@@ -101,7 +121,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	for stat_name in range(len(Constants.StatUpgrades)):
 		upgrade_choices.append(stat_name)
 	
-	_show_random_upgrade_choices(upgrade_choices)
+	_show_random_upgrade_choices(upgrade_choices, upgrade_levels)
 	
 	# Update the text on the Reroll button
 	var rerolls = player_character.get_rerolls()
@@ -116,11 +136,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 
 # Display a random selection of upgrades for the player to choose from.
 # upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array) -> void:
+func _show_random_upgrade_choices(upgrade_data: Array, upgrade_levels: Dictionary) -> void:
 	upgrade_data.shuffle()
 	var i = 0
 	while i < len(upgrade_panels) and i < len(upgrade_data):
-		upgrade_panels[i].set_upgrade(upgrade_data[i])
+		upgrade_panels[i].set_upgrade(upgrade_data[i], upgrade_levels)
 		upgrade_panels[i].show()
 		i += 1
 	
