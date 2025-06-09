@@ -265,7 +265,7 @@ func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TY
 ## Only call on the server
 @rpc("any_peer", "call_local")
 func _take_damage(damage: float) -> void:
-	if not is_multiplayer_authority():
+	if not is_multiplayer_authority() or health <= 0:
 		return
 	
 	health -= snapped(damage, 1)
