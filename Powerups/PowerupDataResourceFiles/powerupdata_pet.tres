@@ -10,3 +10,4 @@ scene = ExtResource("1_rkbn8")
 name = "Mr. Bee"
 sprite = ExtResource("3_mu2to")
 upgrade_description = "Mr. Bee attacks nearby enemies and occasionally taunts."
+upgrade_description_list = Array[String](["Mr. Bee attacks nearby enemies and occasionally taunts.", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])

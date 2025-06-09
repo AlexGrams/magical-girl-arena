@@ -10,7 +10,11 @@ extends Resource
 @export var sprite: Resource = null
 ## Text displayed on the Powerup upgrade screen.
 @export var upgrade_description: String = ""
-
+## Text to display on the Powerup upgrade screen for levels 1 - 5, and signature (6)
+## 0: Explains functionality
+## 2: Level 3 upgrade
+## 5: Signature functionality
+@export var upgrade_description_list: Array[String]
 
 func get_upgrade_description() -> String:
 	return upgrade_description

@@ -10,3 +10,4 @@ scene = ExtResource("1_jlhnn")
 name = "Firework Flora"
 sprite = ExtResource("3_omwtg")
 upgrade_description = "Scatter seeds around you that explode into flowers after a delay."
+upgrade_description_list = Array[String](["Scatter seeds around you that explode into flowers after a delay.", "Increase damage", "Increase drop rate", "Increase damage", "Increase damage", "Increase damage"])

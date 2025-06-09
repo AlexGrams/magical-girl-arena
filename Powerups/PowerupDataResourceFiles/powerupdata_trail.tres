@@ -10,3 +10,4 @@ scene = ExtResource("1_4uf8l")
 name = "Nature's Path"
 sprite = ExtResource("3_dt1ta")
 upgrade_description = "Leave damaging flowers everywhere you walk"
+upgrade_description_list = Array[String](["Leave damaging flowers everywhere you walk", "Increase damage", "Increase flower duration", "Increase damage", "Increase damage", "Increase damage"])

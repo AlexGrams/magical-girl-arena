@@ -10,3 +10,4 @@ scene = ExtResource("1_6ph5d")
 name = "Laser"
 sprite = ExtResource("3_lr1i4")
 upgrade_description = "Point and shoot a continuous laser"
+upgrade_description_list = Array[String](["Point and shoot a continuous laser", "Increase damage", "Laser now pierces through enemies", "Increase damage", "Increase damage", "Add 2 additional non-piercing lasers"])
