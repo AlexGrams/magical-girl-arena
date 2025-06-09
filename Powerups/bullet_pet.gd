@@ -133,8 +133,12 @@ func teleport(new_position: Vector2) -> void:
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
-func level_up(_new_level: int, new_damage: float):
+func level_up(new_level: int, new_damage: float):
 	_bullet_hitbox.damage = new_damage
+	if new_level == 3:
+		_taunt_cooldown = 8
+		_attack_time = 0.75
+	
 
 
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
