@@ -283,7 +283,7 @@ func _damage_effects(damage: float) -> void:
 	var damage_indicator = damage_indicator_scene.instantiate()
 	damage_indicator.global_position = global_position
 	damage_indicator.damage_value = damage
-	damage_indicator.text = str(damage)
+	#damage_indicator.text = str(damage)
 	get_tree().root.get_node("Playground").add_child(damage_indicator)
 	
 	# Animation
