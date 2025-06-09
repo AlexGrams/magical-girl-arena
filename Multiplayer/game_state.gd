@@ -475,6 +475,8 @@ func quit_game(quitting_player: int):
 	end_game()
 	get_tree().paused = false
 	main_menu.show()
+	# Set main menu logo back to full
+	main_menu.get_node("Background/Logo").scale_to_normal()
 	
 	if multiplayer.get_unique_id() == quitting_player:
 		main_menu.quit_to_main_menu()
