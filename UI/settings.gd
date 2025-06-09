@@ -22,26 +22,49 @@ func _ready() -> void:
 	var settings: ConfigFile = SettingsManager.get_settings()
 	_screen_mode_option.selected = _screen_modes.find(settings.get_value("display", "display_mode"))
 	_sfx_volume_slider.value = settings.get_value("sound", "volume") / max_volume_slider_value
-	_sfx_spinbox.value = _sfx_volume_slider.value * 100
+	_sfx_spinbox.value = _slider_to_spinbox_value(_sfx_volume_slider.value)
+	_music_volume_slider.value = settings.get_value("music", "volume") / max_volume_slider_value
+	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
 
 
 func _on_screen_mode_item_selected(index: int) -> void:
 	SettingsManager.apply_display_mode(_screen_modes[index])
 
 
+## Volume Slider for SFX
 # Volume slider range is 0 - 1
 func _on_volume_slider_drag_ended(_value_changed: bool) -> void:
-	var new_slider_value = _sfx_volume_slider.value
-	_sfx_spinbox.value = new_slider_value * 100
+	_sfx_spinbox.value = _slider_to_spinbox_value(_sfx_volume_slider.value)
 
-
+## Spinbox for SFX
 # Spinbox range is 0 - 100
 func _on_spin_box_value_changed(spinbox_value: float) -> void:
-	SettingsManager.apply_volume((spinbox_value / 100) * max_volume_slider_value)
-	if (spinbox_value / 100) != _sfx_volume_slider.value:
-		_sfx_volume_slider.value = spinbox_value / 100
+	var slider_volume = _spinbox_to_slider_value(spinbox_value)
+	SettingsManager.apply_volume(slider_volume * max_volume_slider_value)
+	if slider_volume != _sfx_volume_slider.value:
+		_sfx_volume_slider.value = slider_volume
 
+## Volume Slider for MUSIC
+# Volume slider range is 0 - 1
+func _on_music_volume_slider_drag_ended(_value_changed: bool) -> void:
+	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
+
+## Spinbox for MUSIC
+# Spinbox range is 0 - 100
+func _on_music_spin_box_value_changed(spinbox_value: float) -> void:
+	var slider_volume = _spinbox_to_slider_value(spinbox_value)
+	SettingsManager.apply_music_volume(slider_volume * max_volume_slider_value)
+	if slider_volume != _music_volume_slider.value:
+		_music_volume_slider.value = slider_volume
+		
 
 ## Writes values set on this screen to disk.
 func _save_settings_changes() -> void:
-	SaveManager.save_settings(_screen_modes[_screen_mode_option.selected], _sfx_volume_slider.value * max_volume_slider_value)
+	SaveManager.save_settings(_screen_modes[_screen_mode_option.selected], _sfx_volume_slider.value * max_volume_slider_value, _music_volume_slider.value * max_volume_slider_value)
+
+## Helper functions
+func _spinbox_to_slider_value(spinbox_value: float) -> float:
+	return spinbox_value / 100
+
+func _slider_to_spinbox_value(slider_value: float) -> float:
+	return slider_value * 100

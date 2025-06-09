@@ -5,6 +5,7 @@ const SAVE_GAME_PATH := "user://savedata.json"
 const SETTINGS_PATH := "user://settings.json"
 const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 const DEFAULT_VOLUME := 1.0
+const DEFAULT_MUSIC_VOLUME := 1.0
 
 
 func _ready() -> void:
@@ -12,11 +13,12 @@ func _ready() -> void:
 
 
 ## Write the configured game settings to disk.
-func save_settings(display_mode: DisplayServer.WindowMode, volume: float) -> void:
+func save_settings(display_mode: DisplayServer.WindowMode, volume: float, music_volume: float) -> void:
 	var config = ConfigFile.new()
 
 	config.set_value("display", "display_mode", display_mode)
 	config.set_value("sound", "volume", volume)
+	config.set_value("music", "volume", music_volume)
 
 	config.save(SETTINGS_PATH)
 
@@ -43,7 +45,7 @@ func save_game() -> void:
 func load_settings() -> void:
 	# Create a new settings file if one doesn't exist.
 	if not FileAccess.file_exists(SETTINGS_PATH):
-		save_settings(DEFAULT_DISPLAY_MODE, DEFAULT_VOLUME)
+		save_settings(DEFAULT_DISPLAY_MODE, DEFAULT_VOLUME, DEFAULT_MUSIC_VOLUME)
 
 	var settings = ConfigFile.new()
 	var err = settings.load(SETTINGS_PATH)
@@ -53,7 +55,14 @@ func load_settings() -> void:
 	# Apply settings
 	SettingsManager.apply_display_mode(settings.get_value("display", "display_mode"))
 	SettingsManager.apply_volume(settings.get_value("sound", "volume"))
+	## TODO: QUICK FIX FOR TESTING FOR RIGHT NOW.
+	if settings.get_value("music", "volume") == null:
+		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
+	SettingsManager.apply_music_volume(settings.get_value("music", "volume"))
 	SettingsManager.set_settings(settings)
+	
+	print(settings.get_value("sound", "volume"))
+	print(settings.get_value("music", "volume"))
 
 
 # Load data from disk and set variables. Should be modified when new data to save is added.

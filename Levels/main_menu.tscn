@@ -306,8 +306,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
 _screen_mode_option = NodePath("VBoxContainer/ScreenModeContainer/OptionButton")
-_music_volume_slider = NodePath("VBoxContainer/MusicVolumeContainer/VolumeHSlider")
-_music_spinbox = NodePath("VBoxContainer/MusicVolumeContainer/SpinBox")
+_music_volume_slider = NodePath("VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider")
+_music_spinbox = NodePath("VBoxContainer/MusicVolumeContainer/Music_SpinBox")
 _sfx_volume_slider = NodePath("VBoxContainer/SFXVolumeContainer/VolumeHSlider")
 _sfx_spinbox = NodePath("VBoxContainer/SFXVolumeContainer/SpinBox")
 
@@ -373,7 +373,7 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Music_VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(0, 61.685)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -396,7 +396,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Music_SpinBox" type="SpinBox" parent="Settings/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1129,8 +1129,8 @@ offset_bottom = 290.0
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
 [connection signal="item_selected" from="Settings/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
-[connection signal="drag_ended" from="Settings/VBoxContainer/MusicVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/VBoxContainer/MusicVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider" to="Settings" method="_on_music_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]

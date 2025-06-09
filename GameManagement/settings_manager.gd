@@ -18,7 +18,10 @@ func set_settings(settings: ConfigFile) -> void:
 func apply_display_mode(display_mode: DisplayServer.WindowMode):
 	DisplayServer.window_set_mode(display_mode)
 
-
-## Changes the current volume multiplier setting.
+## Changes the current SFX volume multiplier setting.
 func apply_volume(volume: float):
 	AudioManager.set_volume_multiplier(volume)
+
+## Changes the current MUSIC volume multiplier setting.
+func apply_music_volume(volume: float):
+	AudioManager.set_music_volume_multiplier(volume)

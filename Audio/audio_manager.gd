@@ -85,8 +85,8 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			
 			new_audio.play()
 
-func update_music_volume(default_volume = main_menu_music_player.volume_db):
-	main_menu_music_player.volume_db = linear_to_db(db_to_linear(default_volume) * _music_volume_multiplier)
+func update_music_volume():
+	main_menu_music_player.volume_db = linear_to_db(db_to_linear(-20) * _music_volume_multiplier)
 
 func play_main_menu_music():
 	# Remove battle music if playing
@@ -104,7 +104,7 @@ func play_map_one_music():
 		_battle_music_player_node.queue_free()
 	main_menu_music_player.stop()
 	var music_player = battle_music_player.instantiate()
-	music_player.volume_db = linear_to_db(db_to_linear(-25) * _music_volume_multiplier)
+	music_player.volume_db = linear_to_db(db_to_linear(-30) * _music_volume_multiplier)
 	add_child(music_player)
 	_battle_music_player_node = music_player
 	print(_battle_music_player_node)
