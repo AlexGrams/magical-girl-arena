@@ -45,8 +45,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		# Alternatively, they can pick this up if they don't have the Powerup already and they are
 		# not maxed out on Powerups.
 		if has_upgradable_powerup or len(player_character.powerups) < PlayerCharacterBody2D.MAX_POWERUPS:
-			player_character.upgrade_or_grant_powerup(_pickup_powerup_data, true)
 			uncollected = false
+			player_character.upgrade_or_grant_powerup(_pickup_powerup_data, true)
 			destroy.rpc_id(1) 
 
 
@@ -69,3 +69,9 @@ func set_powerup(powerup_data_path: String) -> void:
 	var largest_dimension_length: float = max(texture_size.x, texture_size.y)
 	sprite.scale = ((_size * Vector2(texture_size.x / largest_dimension_length, texture_size.y / largest_dimension_length)) 
 					/ texture_size)
+
+
+## Reliably delete this Signature orb on all clients. Only call on the server.
+@rpc("any_peer", "call_local", "reliable")
+func destroy() -> void:
+	queue_free()
