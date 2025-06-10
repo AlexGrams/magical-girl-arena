@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=40 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -30,6 +30,7 @@
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="18_651ly"]
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
+[ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
 
 [sub_resource type="Curve" id="Curve_28jnp"]
 _data = [Vector2(0, 0), 0.0, 3.49332, 0, 0, Vector2(0.496815, 1), 0.0, 0.0, 0, 0, Vector2(0.541401, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0737917, 0.0, 0, 0]
@@ -1161,6 +1162,44 @@ offset_left = -460.0
 offset_top = -290.0
 offset_right = 460.0
 offset_bottom = 290.0
+
+[node name="Connecting" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="Connecting"]
+self_modulate = Color(0.2484, 0.2484, 0.2484, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="Connecting"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -402.0
+offset_top = -37.5
+offset_right = 402.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_kechk")
+theme_override_fonts/font = ExtResource("31_gcfgr")
+theme_override_font_sizes/font_size = 64
+text = "Connecting..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
