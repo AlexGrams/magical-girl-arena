@@ -16,6 +16,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
 @export var lobby: Control
+## The screen telling the player that they're connecting to a game
+@export var connecting_screen: Control
 ## Parent of the UI elements displaying lobby visibility option.
 @export var lobby_visibility_holder: Control 
 ## For selecting who can join this lobby.
@@ -247,25 +249,32 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 		push_error("Unable to send request for lobby data to the Steam servers.")
 		request_lobby_list()
 		return
+	connecting_screen.show()
 	
-	# TODO: Do something to prevent people from clicking buttons or whatever until after the data returns.
 	# Async wait until the lobby information is returned.
 	await Steam.lobby_data_update
 	
-	
 	# Don't join a lobby that nobody is in.
 	if Steam.getNumLobbyMembers(lobby_id) <= 0:
+		connecting_screen.hide()
 		request_lobby_list()
 		return
 	
 	# Join the lobby
-	lobby_visibility_holder.visible = false
-	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
-	start_game_label.hide()
-	
 	GameState.join_lobby(
 		lobby_id,
 		Steam.getPersonaName())
+	
+	# There should be at least one other player in the lobby. Wait until we get someone 
+	# else's data in the lobby.
+	# TODO: Maybe add a timeout so we don't get stuck here?
+	await GameState.player_list_changed
+	
+	refresh_lobby()
+	lobby_visibility_holder.visible = false
+	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
+	start_game_label.hide()
+	connecting_screen.hide()
 
 #endregion
 
