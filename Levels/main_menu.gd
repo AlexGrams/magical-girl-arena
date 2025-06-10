@@ -316,7 +316,8 @@ func _on_shop_button_down_from_lobby() -> void:
 	request_lobby_list()
 
 
-# Updates the lobby view to show the players that are connected and their characters.
+## Updates the lobby view to show connected players, their characters, and the local player's
+## character information.
 @rpc("any_peer", "call_local")
 func refresh_lobby() -> void:
 	# Don't try to refresh the lobby if we're in a game right now.
@@ -336,6 +337,8 @@ func refresh_lobby() -> void:
 	while i < GameState.MAX_PLAYERS:
 		_player_containers[i].clear_properties()
 		i += 1
+	
+	update_character_description()
 
 
 # Updates the displayed sprite to represent the player's currently selected character.
