@@ -6,8 +6,12 @@ extends Powerup
 @export var _shoot_interval: float = 2.0
 ## Maximum distance at which an Enemy can be from the player in order for this powerup to target them.
 @export var _range: float = 1000.0
+## At most how many targets this powerup has at higher levels.
+@export var _max_targets_at_higher_level: int = 3
 ## UID of the scene for the powerup bullets
 @export var _bullet_scene_uid := ""
+## Area for finding groups of Enemies near the player.
+@export var _nearby_collision_area: Area2D = null
 
 var _shoot_timer: float = 0.0
 var _bullet_spawner: BulletSpawner = null
@@ -29,18 +33,35 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer -= delta
 	if _shoot_timer <= 0.0:
-		var target: Node2D = _find_nearest_target()
-		if target != null and global_position.distance_squared_to(target.global_position) <= _range_squared:
-			_bullet_spawner.request_spawn_bullet.rpc_id(
-			1, [_bullet_scene_uid, 
-				target.global_position, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[target.get_path(), _lifetime]
-			])
+		if current_level < 3:
+			var target: Node2D = _find_nearest_target()
+			if target != null and global_position.distance_squared_to(target.global_position) <= _range_squared:
+				_bullet_spawner.request_spawn_bullet.rpc_id(
+				1, [_bullet_scene_uid, 
+					target.global_position, 
+					Vector2.ZERO, 
+					_get_damage_from_curve(), 
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[target.get_path(), _lifetime]
+				])
+		else:
+			# Target at most 3 arbitrary nearby Enemies.
+			var near_enemies = _nearby_collision_area.get_overlapping_areas()
+			for i in range(min(_max_targets_at_higher_level, len(near_enemies))):
+				var target: Node2D = near_enemies[i].get_parent()
+				if target != null:
+					_bullet_spawner.request_spawn_bullet.rpc_id(
+					1, [_bullet_scene_uid, 
+						target.global_position, 
+						Vector2.ZERO, 
+						_get_damage_from_curve(), 
+						_is_owned_by_player,
+						multiplayer.get_unique_id(),
+						_powerup_index,
+						[target.get_path(), _lifetime]
+					])
 		_shoot_timer = _shoot_interval
 
 
@@ -61,7 +82,4 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	if current_level == 3:
-		_lifetime = 0.5
-		_shoot_interval = _shoot_interval / 2
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
