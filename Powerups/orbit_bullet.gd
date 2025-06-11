@@ -52,6 +52,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	$BulletOffset.position.y = radius
+	rotate(direction.angle())
 	
 	var orbit_powerup := owning_player.get_node_or_null("OrbitPowerup")
 	# The Powerup child is not replicated, so only the client which owns this character has it.
@@ -60,14 +61,13 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
+		orbit_powerup.add_bullet(self)
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
-func level_up(new_level: int, new_damage: float):
+func level_up(_new_level: int, new_damage: float):
 	$BulletOffset/Area2D.damage = new_damage
-	if new_level == 3:
-		speed = speed * 2
 
 
 # Must be done through RPC because clients run functionality to spawn the bullet, but bullets'
