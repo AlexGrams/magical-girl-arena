@@ -23,6 +23,8 @@ extends CharacterBody2D
 # Audio for angry buzzing SFX. NOT looping buzz.
 @export var _audio_player: AudioStreamPlayer2D
 
+## Owning powerup level
+var _current_level: int = 1
 ## Square of how far the pet can get from its owning player.
 var _max_squared_distance: float = _distance_threshold ** 2
 ## Which Enemy the pet is currently trying to attack.
@@ -43,11 +45,13 @@ var _taunt_collision_mask: int = 0
 
 ## Initialize this pet.
 @rpc("any_peer", "call_local")
-func set_up(owner_path: String, starting_position: Vector2, damage: float, owner_id: int, powerup_index: int) -> void:
+func set_up(owner_path: String, starting_position: Vector2, damage: float, owner_id: int, powerup_index: int, level: int) -> void:
 	_owner_node = get_tree().root.get_node(owner_path)
 	global_position = starting_position
 	set_multiplayer_authority(1)
 	_bullet_hitbox.damage = damage
+	if _current_level < level:
+		_current_level = level
 	
 	# Analytics information
 	_bullet_hitbox.owner_id = owner_id
@@ -55,11 +59,13 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	
 	# Level up functionality
 	var pet_powerup = _owner_node.get_node_or_null("PowerupPet")
-	if pet_powerup != null:
+	if pet_powerup != null and pet_powerup is Powerup:
 		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
 		)
-
+		# It is possible that this bullet was leveled up before it was set up.
+		level_up.rpc(pet_powerup.current_level, _bullet_hitbox.damage)
+	
 	# When the owner goes down, destroy this bullet
 	if is_multiplayer_authority():
 		_owner_node.died.connect(func():
@@ -89,19 +95,20 @@ func _physics_process(delta: float) -> void:
 			_bullet_hitbox.collision_layer = 0
 			_attack_timer = _attack_time
 		
-		# Taunt 
-		if _taunt_cooldown == _taunt_timer:
-			_taunt_area.collision_mask = 0
-		_taunt_timer -= delta
-		if _taunt_timer <= 0.0:
-			# Turn sprite angry
-			_sprite.set_angry()
-			# Play angry sound once
-			_audio_player.play()
-			
-			# Briefly turn on taunt
-			_taunt_area.collision_mask = _taunt_collision_mask
-			_taunt_timer = _taunt_cooldown
+		# Taunt: Activate the taunt area for one physics frame.
+		if _current_level >= 3:
+			if _taunt_cooldown == _taunt_timer:
+				_taunt_area.collision_mask = 0
+			_taunt_timer -= delta
+			if _taunt_timer <= 0.0:
+				# Turn sprite angry
+				_sprite.set_angry()
+				# Play angry sound once
+				_audio_player.play()
+				
+				# Activate taunt collision area
+				_taunt_area.collision_mask = _taunt_collision_mask
+				_taunt_timer = _taunt_cooldown
 	
 	# Movement and targeting
 	if _target != null:
@@ -146,11 +153,14 @@ func teleport(new_position: Vector2) -> void:
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(new_level: int, new_damage: float):
+	if new_level < _current_level:
+		return
+	
 	_bullet_hitbox.damage = new_damage
-	if new_level == 3:
+	_current_level = new_level
+	if _current_level == 3:
 		_taunt_cooldown = 8
 		_attack_time = 0.75
-	
 
 
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.

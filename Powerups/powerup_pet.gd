@@ -21,7 +21,8 @@ func activate_powerup():
 			global_position, 
 			_get_damage_from_curve(),
 			multiplayer.get_unique_id(),
-			_powerup_index
+			_powerup_index,
+			current_level
 		)
 	else:
 		# TODO: Support for when owned by an enemy.
