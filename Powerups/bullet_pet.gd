@@ -2,6 +2,8 @@ class_name BulletPet
 extends CharacterBody2D
 
 
+## Max distance that the Pet can get from its owner before it is forced to return.
+@export var _distance_threshold: float = 750.0
 ## How fast the pet moves in units/second.
 @export var _speed: float = 100.0
 ## Time in seconds between attacks.
@@ -21,6 +23,8 @@ extends CharacterBody2D
 # Audio for angry buzzing SFX. NOT looping buzz.
 @export var _audio_player: AudioStreamPlayer2D
 
+## Square of how far the pet can get from its owning player.
+var _max_squared_distance: float = _distance_threshold ** 2
 ## Which Enemy the pet is currently trying to attack.
 var _target: Node2D = null
 ## True when the current target is an Enemy, false if it is following the player.
@@ -104,24 +108,32 @@ func _physics_process(delta: float) -> void:
 		velocity = (_target.global_position - global_position) * _speed
 		move_and_slide()
 	if _target == null or not _is_targeting_enemy:
-		_get_highest_health_nearby_enemy()
+		_get_target()
 
 
-## Sets the Pet's target to the Enemy with the highest health value in the nearby range.
-func _get_highest_health_nearby_enemy() -> void:
-	for area: Area2D in _attack_area.get_overlapping_areas():
-		var highest_health_enemy = null
-		
-		if area.get_parent() is Enemy:
-			var enemy: Enemy = area.get_parent()
-			if not highest_health_enemy or enemy.health > highest_health_enemy.health:
-				highest_health_enemy = enemy
-		if highest_health_enemy != null:
-			_is_targeting_enemy = true
-			_target = highest_health_enemy
+## Sets the Pet's target to the Enemy closest to the Pet.
+func _get_target() -> void:
+	# Go back to the player if we get too far from them.
+	if _owner_node.position.distance_squared_to(self.position) > _max_squared_distance:
+		_is_targeting_enemy = false
+		_target = _owner_node
+		return
 	
-	# If we couldn't find an Enemy to target, then just go to the owning player.
-	if _target == null:
+	var closest_distance_squared := INF
+	_target = null
+	
+	for area: Area2D in _attack_area.get_overlapping_areas():
+		var enemy = area.get_parent()
+		if enemy is Enemy:
+			var distance_squared = self.position.distance_squared_to(enemy.position)
+			if not _target or distance_squared < closest_distance_squared:
+				_target = enemy
+				closest_distance_squared = distance_squared
+	
+	if _target != null:
+		_is_targeting_enemy = true
+	else:
+		# If we couldn't find an Enemy to target, then just go to the owning player.
 		_is_targeting_enemy = false
 		_target = _owner_node
 
