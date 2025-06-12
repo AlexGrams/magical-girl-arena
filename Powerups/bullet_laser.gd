@@ -10,6 +10,8 @@ extends Bullet
 @export var _laser: Node2D = null
 
 var _max_range: float = 0.0
+## Squared max range for distance calculations
+var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
 var _piercing_active: bool = false
 var _starting_position: Node2D = null
@@ -51,8 +53,9 @@ func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
+	var target_position: Vector2 = _get_nearest_player_position()
 	var space_state = get_world_2d().direct_space_state
-	var end_point: Vector2 = _starting_position.global_position + (_get_nearest_player_position() - _starting_position.global_position).normalized() * _max_range
+	var end_point: Vector2 = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
 	var query := PhysicsRayQueryParameters2D.create(
 		_starting_position.global_position, 
 		end_point
@@ -92,7 +95,11 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.pitch_scale = 0.9
 		$AudioStreamPlayer2D.volume_db = -30
 		$HitmarkerSprite.hide()
-		
+	
+	# Position and scale the laser.
+	if target_position.distance_squared_to(_starting_position.global_position) < _max_range_squared:
+		end_point = target_position
+	
 	var hit_vector := end_point - _starting_position.global_position
 	_laser.global_position = hit_vector / 2.0 + _starting_position.global_position
 	_laser.rotation = hit_vector.angle()
@@ -149,6 +156,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 	
 	_max_range = data[1]
+	_max_range_squared = _max_range ** 2
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
