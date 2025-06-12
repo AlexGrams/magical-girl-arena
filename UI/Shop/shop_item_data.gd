@@ -18,7 +18,6 @@ enum SOLD_MESSAGE_TYPE
 @export var max_quantity:int
 @export var _sold_message:SOLD_MESSAGE_TYPE
 
-var _current_rerolls:int = 0
 
 func get_sold_message() -> String:
 	match _sold_message:
