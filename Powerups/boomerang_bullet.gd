@@ -1,28 +1,26 @@
 extends Bullet
 
 ## How close the Boomerang needs to get to its destination before switching directions.
-const touching_distance_threshold: float = 30
+const touching_distance_threshold: float = 30.0
 
-# The bullet object is replicated on all clients.
-# This owner is the client's replicated version of the character that owns this bullet.
-var boomerang_owner: Node2D = null
-
-var farthest_enemy: Node
-
-# Target enemy must be within this range
+## Target enemy must be within this range
 @export var max_range: float = 750
 
+## The bullet object is replicated on all clients.
+## This owner is the client's replicated version of the character that owns this bullet.
+var boomerang_owner: Node2D = null
+var farthest_enemy: Node
 var is_returning := true
 
+@onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
 ## When owned by an Enemy, the location that the bullet to moving towards away from its owner. 
 var _target_location := Vector2.ZERO
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	if is_returning:
 		if boomerang_owner == null or boomerang_owner.is_queued_for_deletion():
