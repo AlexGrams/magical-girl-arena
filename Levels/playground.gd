@@ -91,7 +91,7 @@ func _process(_delta: float) -> void:
 			_spawn_corrupted_enemy()
 	elif not _has_boss_spawned:
 		if GameState.get_game_progress_as_fraction() >= 1.0:
-			_spawn_boss()
+			_spawn_boss.rpc()
 
 
 # Spawn the corrupted magical girl enemy.
@@ -127,7 +127,7 @@ func _spawn_boss() -> void:
 	await get_tree().create_timer(1).timeout
 	
 	# Play boss summoning animation and wait for it to finish
-	var boss_animation = _spawn_boss_animation()
+	var cutscene_boss_animation = _spawn_boss_animation()
 	# Wait for animation length
 	await get_tree().create_timer(1.7).timeout
 	
@@ -138,12 +138,12 @@ func _spawn_boss() -> void:
 	await get_tree().create_timer(1).timeout
 	
 	#Reset camera, wait for it to be in position, then unpause the game
-	_reset_camera.rpc()
+	_reset_camera()
 	await get_tree().create_timer(2).timeout
 	GameState.pause_game(false)
 	
 	# Spawn in real boss and remove animation
-	boss_animation.queue_free()
+	cutscene_boss_animation.queue_free()
 	if (
 			is_multiplayer_authority()
 			and corrupted_enemy_spawner != null
@@ -190,7 +190,6 @@ func _move_camera(to_pos:Vector2) -> void:
 
 
 ## Used to reset the player's camera after using _move_camera()
-@rpc("authority", "call_local")
 func _reset_camera() -> void:
 	if point_light != null:
 		point_light.reset_camera()
