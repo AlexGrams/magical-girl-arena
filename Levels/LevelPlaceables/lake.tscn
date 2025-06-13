@@ -152,6 +152,7 @@ _data = {
 
 [node name="Lake" type="TextureRect"]
 clip_children = 2
+light_mask = 2
 offset_left = 2353.0
 offset_top = 1360.0
 offset_right = 2969.0
@@ -160,6 +161,7 @@ texture = ExtResource("1_fcfcg")
 script = ExtResource("2_3vhh8")
 
 [node name="WaterLines" type="TextureRect" parent="."]
+light_mask = 2
 layout_mode = 0
 offset_left = -88.0
 offset_top = 247.0
@@ -168,6 +170,7 @@ offset_bottom = 277.0
 texture = ExtResource("3_53y8b")
 
 [node name="WaterLines2" type="TextureRect" parent="."]
+light_mask = 2
 layout_mode = 0
 offset_left = -125.0
 offset_top = 164.0
@@ -176,6 +179,7 @@ offset_bottom = 194.0
 texture = ExtResource("3_53y8b")
 
 [node name="WaterLines3" type="TextureRect" parent="."]
+light_mask = 2
 layout_mode = 0
 offset_left = -106.0
 offset_top = 57.0
@@ -184,6 +188,7 @@ offset_bottom = 87.0
 texture = ExtResource("3_53y8b")
 
 [node name="Border" type="TextureRect" parent="."]
+light_mask = 2
 layout_mode = 0
 offset_left = -24.0
 offset_top = -2.0

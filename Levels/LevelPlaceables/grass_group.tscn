@@ -1,0 +1,95 @@
+[gd_scene load_steps=4 format=3 uid="uid://djb77wkpsn7pr"]
+
+[ext_resource type="Texture2D" uid="uid://c0wov7qsfe6v0" path="res://Sprites/Map/Grass_Tuft2.png" id="1_yyj6s"]
+[ext_resource type="Texture2D" uid="uid://igd106yex1nv" path="res://Sprites/Map/Grass_Tuft3.png" id="2_68vsf"]
+[ext_resource type="Texture2D" uid="uid://cb67nn1t733oe" path="res://Sprites/Map/Grass_Tuft.png" id="3_t1vfs"]
+
+[node name="GrassGroup" type="Node2D"]
+light_mask = 3
+
+[node name="Tuft" type="TextureRect" parent="."]
+self_modulate = Color(0.129412, 0.627451, 0.207843, 1)
+light_mask = 2
+offset_left = 1558.0
+offset_top = 832.0
+offset_right = 1601.0
+offset_bottom = 872.0
+texture = ExtResource("1_yyj6s")
+
+[node name="Tuft2" type="TextureRect" parent="."]
+self_modulate = Color(0, 0.458824, 0, 1)
+light_mask = 2
+offset_left = 1903.0
+offset_top = 1079.0
+offset_right = 1946.0
+offset_bottom = 1119.0
+texture = ExtResource("1_yyj6s")
+
+[node name="Tuft3" type="TextureRect" parent="."]
+self_modulate = Color(0.290196, 0.729412, 0.360784, 1)
+light_mask = 2
+offset_left = 1492.0
+offset_top = 1027.0
+offset_right = 1535.0
+offset_bottom = 1067.0
+texture = ExtResource("1_yyj6s")
+
+[node name="Tuft4" type="TextureRect" parent="."]
+self_modulate = Color(0.290196, 0.729412, 0.360784, 1)
+light_mask = 2
+offset_left = 1783.0
+offset_top = 932.0
+offset_right = 1826.0
+offset_bottom = 972.0
+texture = ExtResource("2_68vsf")
+stretch_mode = 5
+
+[node name="Tuft5" type="TextureRect" parent="."]
+self_modulate = Color(0.129412, 0.627451, 0.207843, 1)
+light_mask = 2
+offset_left = 1650.0
+offset_top = 1162.0
+offset_right = 1693.0
+offset_bottom = 1202.0
+texture = ExtResource("2_68vsf")
+stretch_mode = 5
+
+[node name="Tuft6" type="TextureRect" parent="."]
+self_modulate = Color(0, 0.458824, 0, 1)
+light_mask = 2
+offset_left = 1326.0
+offset_top = 943.0
+offset_right = 1369.0
+offset_bottom = 983.0
+texture = ExtResource("2_68vsf")
+stretch_mode = 5
+
+[node name="Tuft7" type="TextureRect" parent="."]
+self_modulate = Color(0, 0.458824, 0, 1)
+light_mask = 2
+offset_left = 1637.0
+offset_top = 995.0
+offset_right = 1684.0
+offset_bottom = 1035.0
+texture = ExtResource("3_t1vfs")
+stretch_mode = 5
+
+[node name="Tuft8" type="TextureRect" parent="."]
+self_modulate = Color(0.129412, 0.627451, 0.207843, 1)
+light_mask = 2
+offset_left = 1351.0
+offset_top = 1106.0
+offset_right = 1398.0
+offset_bottom = 1146.0
+texture = ExtResource("3_t1vfs")
+stretch_mode = 5
+
+[node name="Tuft9" type="TextureRect" parent="."]
+self_modulate = Color(0.290196, 0.729412, 0.360784, 1)
+light_mask = 2
+offset_left = 1362.0
+offset_top = 808.0
+offset_right = 1409.0
+offset_bottom = 848.0
+texture = ExtResource("3_t1vfs")
+stretch_mode = 5

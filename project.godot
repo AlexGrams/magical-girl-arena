@@ -77,6 +77,7 @@ ability_ultimate={
 
 [layer_names]
 
+2d_render/layer_2="Map"
 2d_physics/layer_1="player_bullet"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="exp_orb"

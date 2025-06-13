@@ -23,6 +23,8 @@ const _POWERUP_POOLING_TIMEOUT: float = 3.0
 @export var regular_enemy_spawners: Array[EnemySpawner] = []
 ## The HUD for the local player
 @export var hud_canvas_layer: HUDCanvasLayer = null
+## Light to create darkness when boss spawns
+@export var point_light: PointLight2D = null
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
@@ -115,9 +117,25 @@ func _spawn_boss() -> void:
 	AudioManager.play_boss_music()
 	
 	_has_boss_spawned = true
+	
+	# Make scene dark
+	if point_light != null:
+		point_light.global_position = corrupted_enemy_spawner.global_position
+		point_light.show()
+		var player:AnimationPlayer = point_light.get_child(0)
+		player.play("grow_darkness")
+
 	if corrupted_enemy_spawner != null and boss_to_spawn != null:
 		corrupted_enemy_spawner.spawn(boss_to_spawn)
 
+## Turn lighting back to normal when boss is defeated.
+func _shrink_darkness() -> void:
+	# Make scene dark
+	if point_light != null:
+		point_light.global_position = corrupted_enemy_spawner.global_position
+		point_light.show()
+		var player:AnimationPlayer = point_light.get_child(0)
+		player.play("shrink_darkness")
 
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
 ## either a Powerup Pickup (more likely), or a big EXP orb (less likely).
