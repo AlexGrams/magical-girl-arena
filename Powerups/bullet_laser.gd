@@ -10,32 +10,16 @@ extends Bullet
 @export var _laser: Node2D = null
 
 var _max_range: float = 0.0
-## Squared max range for distance calculations
-var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
+var _pointer_location: Vector2
 var _piercing_active: bool = false
 var _starting_position: Node2D = null
-
-
-## Returns PlayerCharacterBody2D that is nearest to _owning_character if any exists.
-func _get_nearest_player_position() -> Vector2: 
-	var nearest: Node2D = _owning_character
-	var least_distance: float = INF
-	
-	for player: Node2D in GameState.player_characters.values():
-		if player != _owning_character:
-			var dist: float = player.position.distance_squared_to(nearest.position)
-			if dist < least_distance:
-				least_distance = dist
-				nearest = player
-	
-	return nearest.position
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# This is intentionally blank. It overrides Bullet's _ready() function.
-	_set_piercing(true)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,17 +29,26 @@ func _process(_delta: float) -> void:
 
 
 @rpc("any_peer", "call_local")
+func set_pointer_direction(val: Vector2) -> void:
+	_pointer_location = val
+
+
+@rpc("any_peer", "call_local")
 func _set_piercing(val: bool) -> void:
 	_piercing_active = val
+
+
+## Wrapper for set_pointer_direction that can be bound and unbound from signals.
+func _call_set_pointer_direction(val: Vector2) -> void:
+	set_pointer_direction.rpc(val)
 
 
 func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
-	var target_position: Vector2 = _get_nearest_player_position()
 	var space_state = get_world_2d().direct_space_state
-	var end_point: Vector2 = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
+	var end_point: Vector2 = _starting_position.global_position + (_pointer_location - _starting_position.global_position).normalized() * _max_range
 	var query := PhysicsRayQueryParameters2D.create(
 		_starting_position.global_position, 
 		end_point
@@ -95,11 +88,7 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.pitch_scale = 0.9
 		$AudioStreamPlayer2D.volume_db = -30
 		$HitmarkerSprite.hide()
-	
-	# Position and scale the laser.
-	if target_position.distance_squared_to(_starting_position.global_position) < _max_range_squared:
-		end_point = target_position
-	
+		
 	var hit_vector := end_point - _starting_position.global_position
 	_laser.global_position = hit_vector / 2.0 + _starting_position.global_position
 	_laser.rotation = hit_vector.angle()
@@ -142,11 +131,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var laser_powerup: PowerupLaserMultiplayer = _owning_character.get_node_or_null("PowerupLaserMultiplayer")
+	var laser_powerup: PowerupLaser = _owning_character.get_node_or_null("PowerupLaser")
 	if laser_powerup != null:
 		laser_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
+		)
+		
+		# Each frame, need to send the local player's mouse position to the server.
+		# This signal is disconnected when the player goes down so that we aren't RPCing from a freed node.
+		laser_powerup.update_pointer_location.connect(_call_set_pointer_direction)
+		_owning_character.died.connect(
+			func():
+				laser_powerup.update_pointer_location.disconnect(_call_set_pointer_direction)
 		)
 		
 		# Turn on signature functionality.
@@ -156,7 +153,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 	
 	_max_range = data[1]
-	_max_range_squared = _max_range ** 2
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup

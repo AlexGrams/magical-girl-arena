@@ -1,10 +1,11 @@
-class_name PowerupLaserMultiplayer
+class_name PowerupLaser
 extends Powerup
 
 
 @export var bullet_scene := "res://Powerups/bullet_laser.tscn"
 @export var max_range: float = 500
 
+signal update_pointer_location(new_pointer_location: Vector2)
 ## Signals to the laser bullet to activate signature functionality if this powerup is signature and max level.
 signal activate_piercing()
 
@@ -12,6 +13,11 @@ signal activate_piercing()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	update_pointer_location.emit(get_global_mouse_position())
 
 
 func activate_powerup():
