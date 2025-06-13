@@ -5,6 +5,8 @@ extends Ability
 @export var damage: float = 100.0
 ## Number of bombs the player can drop using this ability.
 @export var num_bombs: int = 3
+## Time in seconds before each bomb explodes after the player clicks on the screen to place it.
+@export var bomb_lifetime: float = 0.5
 ## Time in seconds that the play has after using this ult to drop bombs. Nothing happens if the player does not
 ## drop all bombs by the time this ultimate expires.
 @export var active_time: float = 10.0
@@ -58,7 +60,10 @@ func _input(event: InputEvent) -> void:
 				true,
 				-1,
 				-1,
-				[NodePath("")]
+				[
+					NodePath(""),
+					bomb_lifetime
+				]
 			])
 			
 			# Count remaining bombs
