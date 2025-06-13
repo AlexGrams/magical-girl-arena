@@ -128,7 +128,7 @@ func _spawn_boss() -> void:
 	# Play boss summoning animation and wait for it to finish
 	var boss_animation = _spawn_boss_animation()
 	# Wait for animation length
-	await get_tree().create_timer(2.1).timeout
+	await get_tree().create_timer(1.7).timeout
 	
 	# Make scene dark
 	_grow_darkness.rpc() 

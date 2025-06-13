@@ -575,3 +575,6 @@ func _on_player_died():
 @rpc("any_peer", "call_local")
 func _on_player_revived():
 	players_down -= 1
+
+func pause_game(is_paused = true):
+	get_tree().paused = is_paused 
