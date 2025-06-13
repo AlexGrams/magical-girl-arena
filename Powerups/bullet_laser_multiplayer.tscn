@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c46lklcir3voi"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_laser.gd" id="1_mur24"]
+[ext_resource type="Script" path="res://Powerups/bullet_laser_multiplayer.gd" id="1_mur24"]
 [ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_5ks7x"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
 [ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_131sl"]
@@ -167,7 +167,7 @@ _data = {
 "glow": SubResource("Animation_cf1ce")
 }
 
-[node name="BulletLaser" type="Node2D" node_paths=PackedStringArray("_area", "_laser", "collider", "sprite")]
+[node name="BulletLaserMultiplayer" type="Node2D" node_paths=PackedStringArray("_area", "_laser", "collider", "sprite")]
 script = ExtResource("1_mur24")
 _area = NodePath("Laser/Area2D")
 _laser = NodePath("Laser")

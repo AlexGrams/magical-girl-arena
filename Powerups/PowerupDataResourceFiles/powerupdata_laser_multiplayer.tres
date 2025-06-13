@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://cj3ir3yldvbtn"]
 
-[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser.tscn" id="1_6ph5d"]
+[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser_multiplayer.tscn" id="1_6ph5d"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_euh0s"]
 [ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_lr1i4"]
 

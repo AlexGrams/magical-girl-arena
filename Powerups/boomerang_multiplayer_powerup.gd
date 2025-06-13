@@ -1,7 +1,7 @@
 extends Powerup
 
 
-var bullet_scene := "res://Powerups/boomerang_bullet.tscn"
+var bullet_scene := "res://Powerups/boomerang_multiplayer_bullet.tscn"
 var sprite = preload("res://Peach.png")
 # The single bullet instance used by this Powerup. The boomerang is never destroyed.
 var bullet: Object
