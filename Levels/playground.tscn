@@ -42,7 +42,7 @@
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
-[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="32_avmeh"]
+[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser_multiplayer.tres" id="32_avmeh"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
@@ -12746,7 +12746,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/boomerang_multiplayer_bullet.tscn", "res://Powerups/bullet_laser_multiplayer.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 
