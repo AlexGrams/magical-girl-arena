@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://byntc2n136ytr"]
+[gd_scene load_steps=10 format=3 uid="uid://byntc2n136ytr"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_lnner"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="2_jeu8l"]
+[ext_resource type="PackedScene" uid="uid://cwisr0ykkkrhm" path="res://Sprites/Enemy/darkness_particles.tscn" id="2_lacjf"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f4qto"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -58,10 +59,12 @@ default_powerup_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_scyt
 max_range = 200.0
 allied_bullet_scene_path = ""
 base_health = 10000
-collider_area = NodePath("Area2D")
-sprite = NodePath("CharacterAnimatedSprite")
 drop_weight_exp = 15.0
 drop_weight_gold = 4.0
+collider_area = NodePath("Area2D")
+sprite = NodePath("CharacterAnimatedSprite")
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("2_lacjf")]
 
 [node name="CharacterAnimatedSprite" parent="." instance=ExtResource("2_jeu8l")]
 scale = Vector2(0.5, 0.5)
