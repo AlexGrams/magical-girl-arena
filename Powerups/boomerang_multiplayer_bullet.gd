@@ -54,7 +54,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning character 
 	):
 		return
-	print(multiplayer.get_unique_id())
 	
 	_boomerang_owner = get_tree().root.get_node(data[0])
 	global_position = _boomerang_owner.global_position
