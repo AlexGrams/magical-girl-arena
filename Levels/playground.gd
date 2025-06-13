@@ -114,6 +114,7 @@ func _spawn_corrupted_enemy() -> void:
 
 
 # Spawn the boss enemy. The game ends when it is defeated.
+@rpc("authority", "call_local")
 func _spawn_boss() -> void:
 	var boss_to_spawn: PackedScene = boss_choices.pick_random()
 	AudioManager.play_boss_music()
@@ -122,7 +123,7 @@ func _spawn_boss() -> void:
 	GameState.pause_game()
 	
 	# Move camera and wait for it to be in position
-	_move_camera.rpc(corrupted_enemy_spawner.global_position)
+	_move_camera(corrupted_enemy_spawner.global_position)
 	await get_tree().create_timer(1).timeout
 	
 	# Play boss summoning animation and wait for it to finish
@@ -131,7 +132,7 @@ func _spawn_boss() -> void:
 	await get_tree().create_timer(1.7).timeout
 	
 	# Make scene dark
-	_grow_darkness.rpc() 
+	_grow_darkness() 
 	
 	# Pause to take in the boss
 	await get_tree().create_timer(1).timeout
@@ -143,22 +144,26 @@ func _spawn_boss() -> void:
 	
 	# Spawn in real boss and remove animation
 	boss_animation.queue_free()
-	if corrupted_enemy_spawner != null and boss_to_spawn != null:
+	if (
+			is_multiplayer_authority()
+			and corrupted_enemy_spawner != null
+			and boss_to_spawn != null
+	):
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
 		)
 
+
 ## Show animation for when Corvus boss is summoned
-@rpc("authority", "call_local")
 func _spawn_boss_animation() -> Node2D:
 	var animated_boss = boss_animation.instantiate()
 	animated_boss.global_position = corrupted_enemy_spawner.global_position
 	add_child(animated_boss)
 	return animated_boss
-	
+
+
 ## Darken the lighting when the boss spawns.
-@rpc("authority", "call_local")
 func _grow_darkness() -> void:
 	if point_light != null:
 		point_light.global_position = corrupted_enemy_spawner.global_position
@@ -177,17 +182,19 @@ func _shrink_darkness() -> void:
 		point_light.show()
 		point_light.shrink_darkness()
 
+
 ## Used to move the player's camera on a location
-@rpc("authority", "call_local")
 func _move_camera(to_pos:Vector2) -> void:
 	if point_light != null:
 		point_light.move_camera(to_pos)
+
 
 ## Used to reset the player's camera after using _move_camera()
 @rpc("authority", "call_local")
 func _reset_camera() -> void:
 	if point_light != null:
 		point_light.reset_camera()
+
 
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
 ## either a Powerup Pickup (more likely), or a big EXP orb (less likely).
