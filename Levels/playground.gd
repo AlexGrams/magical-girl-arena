@@ -119,16 +119,27 @@ func _spawn_boss() -> void:
 	_has_boss_spawned = true
 	
 	# Make scene dark
+	_grow_darkness.rpc()
+
+	if corrupted_enemy_spawner != null and boss_to_spawn != null:
+		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
+		boss.died.connect(func(_boss: Node2D): 
+			_shrink_darkness.rpc()
+		)
+
+
+## Darken the lighting when the boss spawns.
+@rpc("authority", "call_local")
+func _grow_darkness() -> void:
 	if point_light != null:
 		point_light.global_position = corrupted_enemy_spawner.global_position
 		point_light.show()
 		var player:AnimationPlayer = point_light.get_child(0)
 		player.play("grow_darkness")
 
-	if corrupted_enemy_spawner != null and boss_to_spawn != null:
-		corrupted_enemy_spawner.spawn(boss_to_spawn)
 
 ## Turn lighting back to normal when boss is defeated.
+@rpc("authority", "call_local")
 func _shrink_darkness() -> void:
 	# Make scene dark
 	if point_light != null:
@@ -136,6 +147,7 @@ func _shrink_darkness() -> void:
 		point_light.show()
 		var player:AnimationPlayer = point_light.get_child(0)
 		player.play("shrink_darkness")
+
 
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
 ## either a Powerup Pickup (more likely), or a big EXP orb (less likely).
