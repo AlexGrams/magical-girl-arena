@@ -28,6 +28,8 @@ const _POWERUP_POOLING_TIMEOUT: float = 3.0
 
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
+## Animation to play when the boss spawns
+var boss_animation: PackedScene = preload("res://Sprites/Enemy/Constellation_Summoning_Animation.tscn")
 ## The upcoming spawn event to process.
 var _current_spawn_event: int = 0
 var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
@@ -117,25 +119,53 @@ func _spawn_boss() -> void:
 	AudioManager.play_boss_music()
 	
 	_has_boss_spawned = true
+	GameState.pause_game()
+	
+	# Move camera and wait for it to be in position
+	_move_camera.rpc(corrupted_enemy_spawner.global_position)
+	await get_tree().create_timer(1).timeout
+	
+	# Play boss summoning animation and wait for it to finish
+	var boss_animation = _spawn_boss_animation()
+	# Wait for animation length
+	await get_tree().create_timer(2.1).timeout
 	
 	# Make scene dark
-	_grow_darkness.rpc()
-
+	_grow_darkness.rpc() 
+	
+	# Pause to take in the boss
+	await get_tree().create_timer(1).timeout
+	
+	#Reset camera, wait for it to be in position, then unpause the game
+	_reset_camera.rpc()
+	await get_tree().create_timer(2).timeout
+	GameState.pause_game(false)
+	
+	# Spawn in real boss and remove animation
+	boss_animation.queue_free()
 	if corrupted_enemy_spawner != null and boss_to_spawn != null:
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
 		)
 
-
+## Show animation for when Corvus boss is summoned
+@rpc("authority", "call_local")
+func _spawn_boss_animation() -> Node2D:
+	var animated_boss = boss_animation.instantiate()
+	animated_boss.global_position = corrupted_enemy_spawner.global_position
+	add_child(animated_boss)
+	return animated_boss
+	
 ## Darken the lighting when the boss spawns.
 @rpc("authority", "call_local")
 func _grow_darkness() -> void:
 	if point_light != null:
 		point_light.global_position = corrupted_enemy_spawner.global_position
+		point_light.grow_darkness()
+		# For some reason, there is 1 frame of the point light covering the full screen
+		await get_tree().create_timer(0.01).timeout
 		point_light.show()
-		var player:AnimationPlayer = point_light.get_child(0)
-		player.play("grow_darkness")
 
 
 ## Turn lighting back to normal when boss is defeated.
@@ -145,9 +175,19 @@ func _shrink_darkness() -> void:
 	if point_light != null:
 		point_light.global_position = corrupted_enemy_spawner.global_position
 		point_light.show()
-		var player:AnimationPlayer = point_light.get_child(0)
-		player.play("shrink_darkness")
+		point_light.shrink_darkness()
 
+## Used to move the player's camera on a location
+@rpc("authority", "call_local")
+func _move_camera(to_pos:Vector2) -> void:
+	if point_light != null:
+		point_light.move_camera(to_pos)
+
+## Used to reset the player's camera after using _move_camera()
+@rpc("authority", "call_local")
+func _reset_camera() -> void:
+	if point_light != null:
+		point_light.reset_camera()
 
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
 ## either a Powerup Pickup (more likely), or a big EXP orb (less likely).

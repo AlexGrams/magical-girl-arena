@@ -144,6 +144,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_r7kh5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

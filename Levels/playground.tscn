@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=117 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -33,13 +33,14 @@
 [ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="26_dibxh"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="26_ntkj0"]
 [ext_resource type="PackedScene" uid="uid://c3anntj04ajri" path="res://Levels/LevelPlaceables/lake.tscn" id="27_lmbp7"]
+[ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_pbc18"]
 [ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
 [ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="29_2x3ae"]
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="30_2tatt"]
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
-[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="34_e3kyl"]
+[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang_multiplayer.tres" id="34_e3kyl"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
@@ -49,7 +50,7 @@
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="37_4s6gj"]
 [ext_resource type="Texture2D" uid="uid://bi2qfpm07ari0" path="res://Sprites/UI/UltimateCircle.png" id="37_salih"]
 [ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="38_u4hku"]
-[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="39_y4iin"]
+[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser_multiplayer.tres" id="39_y4iin"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
 [ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
@@ -6137,7 +6138,8 @@ offset_top = 4107.0
 offset_right = 5612.0
 offset_bottom = 4435.0
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." node_paths=PackedStringArray("boss_enemy_spawner")]
+process_mode = 3
 visible = false
 position = Vector2(1009, 1709)
 scale = Vector2(45, 45)
@@ -6146,6 +6148,8 @@ energy = 16.0
 blend_mode = 2
 range_item_cull_mask = 2
 texture = ExtResource("67_a1168")
+script = ExtResource("27_pbc18")
+boss_enemy_spawner = NodePath("../TEMP_EnemySpawner5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
 process_mode = 3
