@@ -35,8 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
-all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_l1ugi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky"), ExtResource("12_msdcf"), ExtResource("13_yxx1b"), ExtResource("14_4dk1e")])
-all_multiplayer_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("15_cjf5j"), ExtResource("16_2bo1k")])
+all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_l1ugi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky"), ExtResource("12_msdcf"), ExtResource("13_yxx1b"), ExtResource("14_4dk1e"), ExtResource("15_cjf5j"), ExtResource("16_2bo1k")])
 upgrade_panels_holder = NodePath("PowerupUpgradesContainer")
 reroll_button = NodePath("RerollButton")
 reroll_label = NodePath("RerollButton/TextureRect/Reroll_Label")
@@ -85,6 +84,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="IndividualUpgradePanel3" parent="PowerupUpgradesContainer" instance=ExtResource("1_0s0gu")]
+layout_mode = 2
+
+[node name="IndividualUpgradePanel4" parent="PowerupUpgradesContainer" instance=ExtResource("1_0s0gu")]
 layout_mode = 2
 
 [node name="RerollButton" type="Button" parent="." node_paths=PackedStringArray("label")]

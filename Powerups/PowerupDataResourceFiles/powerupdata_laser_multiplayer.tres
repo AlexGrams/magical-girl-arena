@@ -1,13 +1,14 @@
 [gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://bwej72maxgsht"]
 
-[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser_multiplayer.tscn" id="1_klo7k"]
-[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_cp47j"]
-[ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_npexv"]
+[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser_multiplayer.tscn" id="1_6ph5d"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_euh0s"]
+[ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_lr1i4"]
 
 [resource]
-script = ExtResource("2_cp47j")
-scene = ExtResource("1_klo7k")
-name = "Laser"
-sprite = ExtResource("3_npexv")
+script = ExtResource("2_euh0s")
+scene = ExtResource("1_6ph5d")
+name = "Laser Multiplayer"
+sprite = ExtResource("3_lr1i4")
+is_multiplayer = true
 upgrade_description = "Point and shoot a continuous laser"
 upgrade_description_list = Array[String](["Point and shoot a continuous laser", "Increase damage", "Laser now pierces through enemies", "Increase damage", "Increase damage", "Add 2 additional non-piercing lasers"])

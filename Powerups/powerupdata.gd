@@ -8,6 +8,8 @@ extends Resource
 @export var name := ""
 ## The sprite to show representing this powerup.
 @export var sprite: Resource = null
+## True if this powerup requires other players to be in the game in order to function.
+@export var is_multiplayer: bool = false
 ## Text displayed on the Powerup upgrade screen.
 @export var upgrade_description: String = ""
 ## Text to display on the Powerup upgrade screen for levels 1 - 5, and signature (6)

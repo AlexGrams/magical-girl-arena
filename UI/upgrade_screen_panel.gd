@@ -1,10 +1,15 @@
 extends Panel
 
 
+## How many upgrade choices are not multiplayer-specific.
+const MAX_NORMAL_UPGRADES: int = 3
+## How many choices will be offered to acquire a new multiplayer-specific powerup.
+const MAX_NEW_MULTIPLAYER_POWERUPS: int = 1
+
 ## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
 @export var all_powerup_data: Array[PowerupData] = []
-## Powerups that are only available in multiplayer.
-@export var all_multiplayer_powerup_data: Array[PowerupData] = []
+## Chance of being offered a new multiplayer-specific powerup.
+@export_range(0.0, 1.0) var multiplayer_powerup_chance: float = 0.5
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
 ## Button for rerolling the provided upgrades.
@@ -18,6 +23,7 @@ extends Panel
 ## Parent of the PlayReadyIndicators
 @export var player_ready_indicator_holder: Control = null
 
+# All upgrade panels.
 var upgrade_panels: Array[UpgradePanel] = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
@@ -73,6 +79,8 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
 	# Mixed array of either PowerupData or Constants.StatUpgrades
 	var upgrade_choices: Array = []
+	# Powerups that can only be granted in multiplayer.
+	var multiplayer_upgrade_choices: Array[PowerupData] = []
 	# Current powerup level that corresponds to upgrade_choices. 0 = Not yet obtained
 	var upgrade_levels: Dictionary = {}
 	
@@ -90,10 +98,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 					upgrade_levels[powerup.powerup_name] = powerup.current_level
 	else:
 		# Otherwise, choose randomly from the whole pool up abilities.
+		var powerups_to_remove = []
 		upgrade_choices.append_array(all_powerup_data.duplicate())
 		
 		# If in inventory, get current level for each powerup
-		for data in all_powerup_data:
+		for data: PowerupData in all_powerup_data:
 			var found_powerup := false
 			for powerup in player_character.powerups:
 				if data.name == powerup.powerup_name:
@@ -104,10 +113,13 @@ func _generate_and_show_random_upgrade_choices() -> void:
 						upgrade_levels[powerup.powerup_name] = powerup.current_level
 					break
 			if not found_powerup:
+				if data.is_multiplayer:
+					# Multiplayer Powerups can only be granted by the last special slot. 
+					powerups_to_remove.append(data.name)
+					multiplayer_upgrade_choices.append(data)
 				upgrade_levels[data.name] = 0
 
 		# Remove powerups from the random list that can't be upgraded anymore.
-		var powerups_to_remove = []
 		for powerup: Powerup in player_character.powerups:
 			if powerup.current_level >= powerup.max_level:
 				powerups_to_remove.append(powerup.powerup_name)
@@ -123,7 +135,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	for stat_name in range(len(Constants.StatUpgrades)):
 		upgrade_choices.append(stat_name)
 	
-	_show_random_upgrade_choices(upgrade_choices, upgrade_levels)
+	_show_random_upgrade_choices(upgrade_choices, multiplayer_upgrade_choices, upgrade_levels)
 	
 	# Update the text on the Reroll button
 	var rerolls = player_character.get_rerolls()
@@ -138,13 +150,23 @@ func _generate_and_show_random_upgrade_choices() -> void:
 
 # Display a random selection of upgrades for the player to choose from.
 # upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array, upgrade_levels: Dictionary) -> void:
+func _show_random_upgrade_choices(upgrade_data: Array, multiplayer_upgrade_data: Array[PowerupData], upgrade_levels: Dictionary) -> void:
 	upgrade_data.shuffle()
 	var i = 0
-	while i < len(upgrade_panels) and i < len(upgrade_data):
+	while i < MAX_NORMAL_UPGRADES and i < len(upgrade_data):
 		upgrade_panels[i].set_upgrade(upgrade_data[i], upgrade_levels)
 		upgrade_panels[i].show()
 		i += 1
+	
+	# Show multiplayer-specific upgrade choices
+	if GameState.connected_players > 1 and randf() <= multiplayer_powerup_chance:
+		multiplayer_upgrade_data.shuffle()
+		var j = 0
+		while j < MAX_NEW_MULTIPLAYER_POWERUPS and j < len(multiplayer_upgrade_data):
+			upgrade_panels[i+j].set_upgrade(multiplayer_upgrade_data[j], upgrade_levels)
+			upgrade_panels[i+j].show()
+			j += 1
+		i += j
 	
 	# Hide remaining panels
 	if i == 0:
