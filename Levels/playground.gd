@@ -117,10 +117,12 @@ func _spawn_corrupted_enemy() -> void:
 @rpc("authority", "call_local")
 func _spawn_boss() -> void:
 	var boss_to_spawn: PackedScene = boss_choices.pick_random()
-	AudioManager.play_boss_music()
+	
 	
 	_has_boss_spawned = true
 	GameState.pause_game()
+	AudioManager.pause_music()
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.CONSTELLATION_SUMMON_RUMBLE)
 	
 	# Move camera and wait for it to be in position
 	_move_camera(corrupted_enemy_spawner.global_position)
@@ -130,6 +132,7 @@ func _spawn_boss() -> void:
 	var cutscene_boss_animation = _spawn_boss_animation()
 	# Wait for animation length
 	await get_tree().create_timer(1.7).timeout
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.CORVUS_SUMMON)
 	
 	# Make scene dark
 	_grow_darkness() 
@@ -149,10 +152,12 @@ func _spawn_boss() -> void:
 			and corrupted_enemy_spawner != null
 			and boss_to_spawn != null
 	):
+		
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
 		)
+	AudioManager.play_boss_music()
 
 
 ## Show animation for when Corvus boss is summoned

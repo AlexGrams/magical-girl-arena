@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=49 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -20,7 +20,9 @@
 [ext_resource type="AudioStream" uid="uid://ndr2pql55it1" path="res://Audio/SFX/Powerups/sfx-accent-eye-glitter-tinkle-1-6342.mp3" id="18_5002c"]
 [ext_resource type="AudioStream" uid="uid://bwni84fd4wqs7" path="res://Audio/SFX/Powerups/Marble2.mp3" id="19_k2pvy"]
 [ext_resource type="AudioStream" uid="uid://d1jiqf7s63cn3" path="res://Audio/SFX/Shop_Purchase.mp3" id="20_bbxmu"]
+[ext_resource type="AudioStream" uid="uid://ds6mfma226ov0" path="res://Audio/SFX/Constellation_Summon_Rumble.mp3" id="21_rucmw"]
 [ext_resource type="AudioStream" uid="uid://dtfqs7d0abub8" path="res://Audio/Music/Cleyton RX - Underwater.mp3" id="21_wp1x8"]
+[ext_resource type="AudioStream" uid="uid://covfi8qpye1ed" path="res://Audio/SFX/Constellation_Corvus_Summon.mp3" id="22_huwx2"]
 [ext_resource type="PackedScene" uid="uid://dytisf2b6ldff" path="res://Audio/default_battle_music.tscn" id="22_mr100"]
 [ext_resource type="AudioStream" uid="uid://b8fy0p5oa10s" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.wav" id="24_lbmdr"]
 [ext_resource type="AudioStream" uid="uid://dmeah32wh35q8" path="res://Audio/Music/newthingget.ogg" id="26_86adp"]
@@ -205,10 +207,28 @@ volume = -20
 pitch_scale = 1.0
 pitch_randomness = 0.0
 
+[sub_resource type="Resource" id="Resource_dl7d3"]
+script = ExtResource("2_kdvej")
+limit = 1
+type = 33
+sound_effect = ExtResource("21_rucmw")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
+[sub_resource type="Resource" id="Resource_imnlt"]
+script = ExtResource("2_kdvej")
+limit = 1
+type = 34
+sound_effect = ExtResource("22_huwx2")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_sbdwg")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wxos4"), SubResource("Resource_wty40"), SubResource("Resource_nuda6"), SubResource("Resource_h7jin"), SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_sbdwg"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")

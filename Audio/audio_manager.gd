@@ -102,23 +102,28 @@ func play_map_one_music():
 	# Remove battle music if playing
 	if _battle_music_player_node != null:
 		_battle_music_player_node.queue_free()
+	# Stop main menu music
 	main_menu_music_player.stop()
+	# Add new battle music player, which will play tracks 1-3
 	var music_player = battle_music_player.instantiate()
 	music_player.volume_db = linear_to_db(db_to_linear(-30) * _music_volume_multiplier)
 	add_child(music_player)
 	_battle_music_player_node = music_player
 
+## Plays victory sound, meant to be called when players win
 func play_victory_music():
 	# Remove battle music if playing
 	if _battle_music_player_node != null:
 		_battle_music_player_node.queue_free()
 	
+	# Add new music player for victory music
 	var new_audio := AudioStreamPlayer.new()
 	add_child(new_audio)
 	new_audio.stream = map_1_victory
 	new_audio.volume_db = linear_to_db(db_to_linear(-10) * _volume_multiplier)
 	new_audio.finished.connect(new_audio.queue_free)
 
+## Plays boss music, meant to be played after constellation is summoned
 func play_boss_music():
 	# Remove battle music if playing
 	if _battle_music_player_node != null:
@@ -126,3 +131,9 @@ func play_boss_music():
 	update_music_volume()
 	main_menu_music_player.stream = map_1_loop_4
 	main_menu_music_player.play()
+
+## Pauses any battle music in play. May also pause main menu music.
+func pause_music():
+	if _battle_music_player_node != null:
+		_battle_music_player_node.stream_paused = true
+	main_menu_music_player.stream_paused = true
