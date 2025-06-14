@@ -3,6 +3,8 @@ extends Panel
 
 ## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
 @export var all_powerup_data: Array[PowerupData] = []
+## Powerups that are only available in multiplayer.
+@export var all_multiplayer_powerup_data: Array[PowerupData] = []
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
 ## Button for rerolling the provided upgrades.
