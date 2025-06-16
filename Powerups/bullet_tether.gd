@@ -142,7 +142,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var laser_powerup: PowerupLaserMultiplayer = _owning_character.get_node_or_null("PowerupLaserMultiplayer")
+	var laser_powerup: PowerupTether = _owning_character.get_node_or_null("PowerupTether")
 	if laser_powerup != null:
 		laser_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):

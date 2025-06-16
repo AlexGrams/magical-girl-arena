@@ -1,4 +1,4 @@
-class_name PowerupLaserMultiplayer
+class_name PowerupTether
 extends Powerup
 
 

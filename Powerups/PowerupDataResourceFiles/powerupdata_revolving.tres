@@ -9,5 +9,6 @@ script = ExtResource("1_k3h05")
 scene = ExtResource("1_uifdx")
 name = "Tarot Cards"
 sprite = ExtResource("2_d18it")
+is_multiplayer = false
 upgrade_description = "Shoot cards, rotating clockwise"
 upgrade_description_list = Array[String](["Shoot cards, rotating clockwise", "Increase damage", "Increase fire rate and damage", "Increase damage", "Increase damage", "Greatly increase fire rate"])

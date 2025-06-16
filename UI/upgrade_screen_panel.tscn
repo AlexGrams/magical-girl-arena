@@ -17,10 +17,10 @@
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="13_giirl"]
 [ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="13_yxx1b"]
 [ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="14_4dk1e"]
-[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang_multiplayer.tres" id="15_cjf5j"]
+[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pingpong.tres" id="15_cjf5j"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_g80km"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="15_hy6ya"]
-[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser_multiplayer.tres" id="16_2bo1k"]
+[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_tether.tres" id="16_2bo1k"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="16_12wdd"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="16_513rf"]
 

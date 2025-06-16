@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c46lklcir3voi"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_laser_multiplayer.gd" id="1_mur24"]
+[ext_resource type="Script" path="res://Powerups/bullet_tether.gd" id="1_mur24"]
 [ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_5ks7x"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
 [ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_131sl"]
@@ -177,12 +177,15 @@ sprite = NodePath("Laser/LaserSprite")
 [node name="Laser" type="Node2D" parent="."]
 
 [node name="LaserSprite" type="Sprite2D" parent="Laser"]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-0.0992124, -0.0615149)
 rotation = 1.5708
-scale = Vector2(0.11, 0.004)
+scale = Vector2(0.11, 0.00322176)
 skew = 0.555015
 texture = ExtResource("2_5ks7x")
 
 [node name="GlowSprite" type="Sprite2D" parent="Laser"]
+modulate = Color(1, 0, 1, 1)
 position = Vector2(-3.18706e-07, 0.0880406)
 rotation = 1.5708
 scale = Vector2(0.2, 0.004)

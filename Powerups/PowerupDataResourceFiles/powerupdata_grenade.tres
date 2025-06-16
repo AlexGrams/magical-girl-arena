@@ -9,5 +9,6 @@ script = ExtResource("2_j245e")
 scene = ExtResource("1_vbh1i")
 name = "Heartbeat Burst"
 sprite = ExtResource("3_xc40g")
+is_multiplayer = false
 upgrade_description = "Shoot a projectile that explodes after a short distance."
 upgrade_description_list = Array[String](["Shoot a projectile that explodes after a short distance.", "Increase damage", "Increase explosion size and damage", "Increase damage", "Increase damage", "Increase damage"])

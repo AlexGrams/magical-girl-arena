@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bibemdm2ideu"]
 
-[ext_resource type="Script" path="res://Powerups/boomerang_multiplayer_bullet.gd" id="1_f7tjj"]
+[ext_resource type="Script" path="res://Powerups/bullet_pingpong.gd" id="1_f7tjj"]
 [ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="2_04apf"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_6w1pa"]
 [ext_resource type="AudioStream" uid="uid://da1cnl3lkse1k" path="res://Audio/SFX/Powerups/Boomerang.mp3" id="4_kbgxp"]
@@ -45,7 +45,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(50, 50)
 
-[node name="BoomerangMultiplayerBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="PingPongBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+modulate = Color(1, 0, 1, 1)
 scale = Vector2(2, 2)
 script = ExtResource("1_f7tjj")
 max_range = 900.0

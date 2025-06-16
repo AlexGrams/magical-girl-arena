@@ -40,7 +40,7 @@
 [ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
 [ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
-[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang_multiplayer.tres" id="34_e3kyl"]
+[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pingpong.tres" id="34_e3kyl"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
@@ -51,7 +51,7 @@
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="37_4s6gj"]
 [ext_resource type="Texture2D" uid="uid://bi2qfpm07ari0" path="res://Sprites/UI/UltimateCircle.png" id="37_salih"]
 [ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="38_u4hku"]
-[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser_multiplayer.tres" id="39_y4iin"]
+[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_tether.tres" id="39_y4iin"]
 [ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="40_jft8l"]
 [ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
@@ -6952,7 +6952,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/boomerang_multiplayer_bullet.tscn", "res://Powerups/bullet_laser_multiplayer.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/boomerang_bullet.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/boomerang_bullet.tscn", "res://Powerups/bullet_pingpong.tscn", "res://Powerups/bullet_tether.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 
