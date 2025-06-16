@@ -1,3 +1,4 @@
+class_name  BulletBoomerang
 extends Bullet
 
 ## How close the Boomerang needs to get to its destination before switching directions.
