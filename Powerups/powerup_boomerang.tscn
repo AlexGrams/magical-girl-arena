@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5a3c0385xm8c"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boomerang.gd" id="1_ftjhv"]
+
+[node name="PowerupBoomerang" type="Sprite2D"]
+self_modulate = Color(1, 1, 0, 1)
+script = ExtResource("1_ftjhv")
+bullet_scene = "res://Powerups/bullet_boomerang.tscn"
+damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
+signature_damage = 29.0
+powerup_name = "Jeweled Boomerang"

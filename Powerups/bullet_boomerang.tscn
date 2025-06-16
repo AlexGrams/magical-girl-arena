@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bibemdm2ideu"]
 
-[ext_resource type="Script" path="res://Powerups/boomerang_bullet.gd" id="1_j62nq"]
+[ext_resource type="Script" path="res://Powerups/bullet_boomerang.gd" id="1_j62nq"]
 [ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="2_xwqkf"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_agwup"]
 [ext_resource type="AudioStream" uid="uid://da1cnl3lkse1k" path="res://Audio/SFX/Powerups/Boomerang.mp3" id="4_etipu"]

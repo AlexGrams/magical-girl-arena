@@ -6952,7 +6952,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/boomerang_bullet.tscn", "res://Powerups/bullet_pingpong.tscn", "res://Powerups/bullet_tether.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/bullet_boomerang.tscn", "res://Powerups/bullet_pingpong.tscn", "res://Powerups/bullet_tether.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("6_rscnf")
 

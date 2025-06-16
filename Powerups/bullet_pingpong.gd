@@ -71,7 +71,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := _boomerang_owner.get_node_or_null("BoomerangPowerup")
+		var boomerang_powerup := _boomerang_owner.get_node_or_null("PowerupPingPong")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
