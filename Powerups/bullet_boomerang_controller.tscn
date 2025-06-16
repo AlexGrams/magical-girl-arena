@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5cwiabnn3jyt"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_boomerang_controller.gd" id="1_xa0fc"]
+
+[node name="BulletBoomerangController" type="Node2D"]
+script = ExtResource("1_xa0fc")

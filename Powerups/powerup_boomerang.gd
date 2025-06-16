@@ -1,7 +1,12 @@
 extends Powerup
 
 
-@export var bullet_scene: String = ""
+## The boomerang controller.
+@export var _controller_bullet_scene: String = ""
+## The actual boomerang bullet that does damage.
+@export var _boomerang_bullet_scene: String = ""
+## Time in seconds between when boomerangs are sent out when this powerup is upgraded to have multiple boomerangs.
+@export var _upgraded_fire_interval: float = 1.0
 
 var sprite = preload("res://Peach.png")
 # The single bullet instance used by this Powerup. The boomerang is never destroyed.
@@ -17,19 +22,20 @@ func _ready():
 func activate_powerup():
 	if _is_owned_by_player:
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [bullet_scene, 
+			1, [_controller_bullet_scene, 
 				global_position, 
 				Vector2.UP, 
 				_get_damage_from_curve(), 
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[$"..".get_path()]
+				[$"..".get_path(), _upgraded_fire_interval, _boomerang_bullet_scene]
 			]
 		)
 	else:
+		push_warning("Not implemented!")
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [bullet_scene, 
+			1, [_controller_bullet_scene, 
 				global_position, 
 				Vector2.UP, 
 				_get_damage_from_curve(), 
