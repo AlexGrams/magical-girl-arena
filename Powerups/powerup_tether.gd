@@ -2,7 +2,7 @@ class_name PowerupTether
 extends Powerup
 
 
-@export var bullet_scene := "res://Powerups/bullet_laser.tscn"
+@export var bullet_scene := "res://Powerups/bullet_tether.tscn"
 @export var max_range: float = 500
 
 ## Signals to the laser bullet to activate signature functionality if this powerup is signature and max level.
