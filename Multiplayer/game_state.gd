@@ -4,12 +4,12 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 ## The unique identifier used to find lobbies through the Steamworks API.
 ## Main: 3689240
 ## Playtest: 3705120
 ## Demo: 3782600
-const APPID: int = 3782600
+const APPID: int = 3705120
 # Max number of players. I believe this includes the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
