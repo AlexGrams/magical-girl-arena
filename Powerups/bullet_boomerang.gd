@@ -1,5 +1,7 @@
 class_name  BulletBoomerang
 extends Bullet
+## NOTE: Not implemented for use by enemies.
+
 
 ## How close the Boomerang needs to get to its destination before switching directions.
 const touching_distance_threshold: float = 30.0
@@ -7,13 +9,12 @@ const touching_distance_threshold: float = 30.0
 ## Target enemy must be within this range
 @export var max_range: float = 750
 
-#var farthest_enemy: Node
-#var is_returning := true
-
 @onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
 ## The bullet object is replicated on all clients.
 ## This owner is the client's replicated version of the character that owns this bullet.
 var _boomerang_owner: Node2D = null
+## This boomerang's controller bullet.
+var _controller: BulletBoomerangController = null
 ## Object that this boomerang is moving towards.
 var _target: Node
 
@@ -35,7 +36,8 @@ func _process(delta: float) -> void:
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
 			if _target == _boomerang_owner:
 				# We have returned back to our owner.
-				find_new_target()
+				_target = null
+				_controller.add_ready_boomerang(self)
 			else:
 				# We have hit the object that we were aiming at, so return back to the owner.
 				_target = _boomerang_owner
@@ -43,14 +45,14 @@ func _process(delta: float) -> void:
 
 ## Sets this boomerang's target to the farthest Enemy within range.
 func find_new_target() -> void:
-	var enemies: Array[Node] = [] 
+	var enemies: Array[Node] = []
+	
 	if _is_owned_by_player:
 		enemies = get_tree().get_nodes_in_group("enemy")
 	else:
 		enemies = get_tree().get_nodes_in_group("player")
 		
 	if !enemies.is_empty():
-		#_target = null
 		var farthest_distance = 0
 		for enemy in enemies:
 			var distance = global_position.distance_squared_to(enemy.global_position)
@@ -62,12 +64,14 @@ func find_new_target() -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 2
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning character 
+		or typeof(data[1]) != TYPE_NODE_PATH	# Boomerang controller path
 	):
 		return
 	
 	_boomerang_owner = get_tree().root.get_node(data[0])
+	_controller = get_tree().root.get_node(data[1])
 	_target = _boomerang_owner
 	
 	_is_owned_by_player = is_owned_by_player

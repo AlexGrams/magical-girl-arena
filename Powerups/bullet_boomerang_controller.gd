@@ -1,3 +1,4 @@
+class_name BulletBoomerangController
 extends Bullet
 ## Manages sending out multiple bullet_boomerang objects. The boomerang bullets are spawned by
 ## this object, but both the controller and the boomerangs destroy themselves separately when 
@@ -34,7 +35,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _powerup_level < 3:
 		# Rapid fire boomerangs
-		pass
+		if len(_ready_boomerangs) > 0:
+			_ready_boomerangs[0].find_new_target()
+			_ready_boomerangs.pop_front()
 	else:
 		# Wait a little bit in between firing boomerangs.
 		pass
@@ -102,11 +105,16 @@ func _spawn_boomerang() -> void:
 			_is_owned_by_player,
 			_owner_id,
 			_powerup_index,
-			[_boomerang_owner_path]
+			[_boomerang_owner_path, self.get_path()]
 		]
 	)
 	_boomerangs.append(spawned_bullet)
 	_ready_boomerangs.append(spawned_bullet)
+
+
+## Add a boomerang that is ready to fire to our list of boomerangs
+func add_ready_boomerang(boomerang: BulletBoomerang) -> void:
+	_ready_boomerangs.append(boomerang)
 
 
 ## This bullet's owner has leveled up this bullet's corresponding powerup
