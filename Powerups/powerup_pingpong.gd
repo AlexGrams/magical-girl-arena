@@ -2,11 +2,8 @@ extends Powerup
 
 
 var bullet_scene := "res://Powerups/bullet_pingpong.tscn"
-var sprite = preload("res://Peach.png")
 # The single bullet instance used by this Powerup. The boomerang is never destroyed.
 var bullet: Object
-
-signal picked_up_powerup(sprite)
 
 
 func _ready():
@@ -38,8 +35,6 @@ func activate_powerup():
 				[$"..".get_path()]
 			]
 		)
-	
-	picked_up_powerup.emit(sprite)
 
 
 # Does nothing. The bullet destroys itself based off of the player's "died" signal.

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/powerup_pingpong.gd" id="1_6mit1"]
 
-[node name="PowerupPingPong" type="Sprite2D"]
+[node name="PowerupPingPong" type="Node2D"]
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_6mit1")
 damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])

@@ -10,6 +10,14 @@ const touching_distance_threshold: float = 30.0
 
 ## Target enemy must be within this range
 @export var max_range: float = 750
+## Minimum time in seconds that the bullets needs to be traveling for in order to grant temp HP.
+@export var _min_travel_time_for_shield: float = 1.0
+## Minimum time in seconds that temp HP granted by this powerup will last for.
+@export var _min_shield_duration: float = 0.5
+## Determines how travel time over _min_travel_time_for_shield is converted to temp HP duration.
+## A value of 1 means that for each second long than the minimum time the bullet travels, one second
+## is added to the temp HP duration.
+@export var _shield_duration_per_second_traveled_over_threshold: float = 1.0
 
 @onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
 ## The bullet object is replicated on all clients.
@@ -21,6 +29,8 @@ var _target: Node2D = null
 var _all_targets: Array[Node2D] = []
 ## index of _all_targets that the boomerang is currently moving towards.
 var _target_index: int = 0
+## How long the bullet has been moving for since it last reached a target
+var _travel_time: float = 0.0
 
 
 func _ready() -> void:
@@ -40,11 +50,13 @@ func _process(delta: float) -> void:
 		return
 	
 	global_position += (_target.global_position - global_position).normalized() * speed * delta
+	_travel_time += delta
 	
 	# Choose the next target if we are close enough to our current target.
 	if global_position.distance_squared_to(_target.global_position) <= _squared_touching_distance_threshold:
 		_target_index = (_target_index + 1) % len(_all_targets)
 		_target = _all_targets[_target_index]
+		_travel_time = 0.0
 
 
 # Set up other properties for this bullet
