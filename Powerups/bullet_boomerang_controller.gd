@@ -3,6 +3,9 @@ extends Bullet
 ## Manages sending out multiple bullet_boomerang objects. The boomerang bullets are spawned by
 ## this object, but both the controller and the boomerangs destroy themselves separately when 
 ## this powerup is deactivated.
+## Boomerang management logic is performed separately on each client. No RPCs are used to
+## communicate which boomerang is targeting which enemy. I'm just hoping that each boomerang
+## behaves about the same on each client. 
 
 
 ## The bullet object is replicated on all clients.
@@ -22,7 +25,7 @@ var _fire_timer: float = 0.0
 var _boomerang_bullet_scene: String = ""
 ## How much damage each boomerang does
 var _damage: float = 0.0
-var _powerup_level: int = 0
+var _powerup_level: int = 1
 ## Properties for analytics
 var _owner_id: int = -1
 var _powerup_index: int = -1
@@ -32,15 +35,19 @@ func _ready() -> void:
 	pass
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _powerup_level < 3:
 		# Rapid fire boomerangs
 		if len(_ready_boomerangs) > 0:
-			_ready_boomerangs[0].find_new_target()
-			_ready_boomerangs.pop_front()
+			if _ready_boomerangs[0].find_new_target():
+				_ready_boomerangs.pop_front()
 	else:
 		# Wait a little bit in between firing boomerangs.
-		pass
+		_fire_timer += delta
+		if _fire_timer >= _fire_interval and len(_ready_boomerangs) > 0:
+			_fire_timer = 0.0
+			if _ready_boomerangs[0].find_new_target():
+				_ready_boomerangs.pop_front()
 
 
 # Set up other properties for this bullet
@@ -70,7 +77,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# Connect signals.
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := boomerang_owner.get_node_or_null("BoomerangPowerup")
+		var boomerang_powerup := boomerang_owner.get_node_or_null("PowerupBoomerang")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
@@ -99,7 +106,7 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 func _spawn_boomerang() -> void:
 	var spawned_bullet = get_tree().root.get_node("Playground/BulletSpawner").spawn(
 		[_boomerang_bullet_scene, 
-			global_position, 
+			boomerang_owner.global_position, 
 			Vector2.UP, 
 			_damage, 
 			_is_owned_by_player,
@@ -109,7 +116,6 @@ func _spawn_boomerang() -> void:
 		]
 	)
 	_boomerangs.append(spawned_bullet)
-	_ready_boomerangs.append(spawned_bullet)
 
 
 ## Add a boomerang that is ready to fire to our list of boomerangs
@@ -123,6 +129,6 @@ func level_up(new_level: int, new_damage: float):
 	_powerup_level = new_level
 	_damage = new_damage
 	
-	if new_level == 3:
+	if is_multiplayer_authority() and new_level == 3:
 		_spawn_boomerang()
 		_spawn_boomerang()

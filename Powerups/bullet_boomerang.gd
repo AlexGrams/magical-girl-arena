@@ -17,6 +17,8 @@ var _boomerang_owner: Node2D = null
 var _controller: BulletBoomerangController = null
 ## Object that this boomerang is moving towards.
 var _target: Node
+## True if this boomerang is not idling at the player.
+var _active: bool = true
 
 
 func _ready() -> void:
@@ -24,7 +26,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if _boomerang_owner == null or _boomerang_owner.is_queued_for_deletion():
+	if (_boomerang_owner == null or _boomerang_owner.is_queued_for_deletion()):
 		return
 	
 	if _target == null or _target.is_queued_for_deletion():
@@ -36,15 +38,18 @@ func _process(delta: float) -> void:
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
 			if _target == _boomerang_owner:
 				# We have returned back to our owner.
+				if _active:
+					_controller.add_ready_boomerang(self)
+				_active = false
 				_target = null
-				_controller.add_ready_boomerang(self)
 			else:
 				# We have hit the object that we were aiming at, so return back to the owner.
 				_target = _boomerang_owner
 
 
 ## Sets this boomerang's target to the farthest Enemy within range.
-func find_new_target() -> void:
+## Returns true if the target has been set to an Enemy.
+func find_new_target() -> bool:
 	var enemies: Array[Node] = []
 	
 	if _is_owned_by_player:
@@ -58,7 +63,10 @@ func find_new_target() -> void:
 			var distance = global_position.distance_squared_to(enemy.global_position)
 			if distance > farthest_distance and distance <= (max_range * max_range):
 				_target = enemy
+				_active = true
 				farthest_distance = distance
+	
+	return _target != null and _target is Enemy
 
 
 # Set up other properties for this bullet
