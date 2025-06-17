@@ -368,6 +368,9 @@ func make_ally(new_lifetime: float, new_damage: float) -> void:
 	is_ally = true
 	lifetime = new_lifetime
 	ally_damage = new_damage
+	# Give the ally some health so that we can damage it to destroy it when its lifetime expires.
+	health = 1
+	
 	colliding_targets.clear()
 	collider_area.collision_mask = 2
 	# We will now treat this Enemy as a player bullet.
