@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://cj3ir3yldvbtn"]
 
-[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_tether.tscn" id="1_6ra87"]
+[ext_resource type="PackedScene" uid="uid://chf1wm0tnv43k" path="res://Powerups/powerup_laser.tscn" id="1_k6qlc"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_euh0s"]
 [ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_lr1i4"]
 
 [resource]
 script = ExtResource("2_euh0s")
-scene = ExtResource("1_6ra87")
+scene = ExtResource("1_k6qlc")
 name = "Laser"
 sprite = ExtResource("3_lr1i4")
 is_multiplayer = false

@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c46lklcir3voi"]
+[gd_scene load_steps=10 format=3 uid="uid://f3l55bt5g05n"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_tether.gd" id="1_mur24"]
-[ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_5ks7x"]
-[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_d6neb"]
-[ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_131sl"]
-[ext_resource type="Texture2D" uid="uid://bvjk1c48x2mac" path="res://Sprites/Powerups/Laser_Endpoint.png" id="5_jfc7j"]
+[ext_resource type="Script" path="res://Powerups/bullet_tether.gd" id="1_btf2e"]
+[ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_u5bog"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hyfaf"]
+[ext_resource type="AudioStream" uid="uid://bwyjclkpmxcow" path="res://Audio/SFX/Powerups/Laser_Hum.wav" id="4_4u4qg"]
+[ext_resource type="Texture2D" uid="uid://bvjk1c48x2mac" path="res://Sprites/Powerups/Laser_Endpoint.png" id="5_u0e7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unwy0"]
 size = Vector2(1, 6)
@@ -168,7 +168,7 @@ _data = {
 }
 
 [node name="BulletLaserMultiplayer" type="Node2D" node_paths=PackedStringArray("_area", "_laser", "collider", "sprite")]
-script = ExtResource("1_mur24")
+script = ExtResource("1_btf2e")
 _area = NodePath("Laser/Area2D")
 _laser = NodePath("Laser")
 collider = NodePath("Laser/Area2D")
@@ -182,7 +182,7 @@ position = Vector2(-0.0992124, -0.0615149)
 rotation = 1.5708
 scale = Vector2(0.11, 0.00322176)
 skew = 0.555015
-texture = ExtResource("2_5ks7x")
+texture = ExtResource("2_u5bog")
 
 [node name="GlowSprite" type="Sprite2D" parent="Laser"]
 modulate = Color(1, 0, 1, 1)
@@ -190,18 +190,18 @@ position = Vector2(-3.18706e-07, 0.0880406)
 rotation = 1.5708
 scale = Vector2(0.2, 0.004)
 skew = 0.555015
-texture = ExtResource("2_5ks7x")
+texture = ExtResource("2_u5bog")
 
 [node name="Area2D" type="Area2D" parent="Laser"]
 collision_mask = 2
-script = ExtResource("3_d6neb")
+script = ExtResource("3_hyfaf")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/Area2D"]
 shape = SubResource("RectangleShape2D_unwy0")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_131sl")
+stream = ExtResource("4_4u4qg")
 volume_db = -30.0
 autoplay = true
 
@@ -218,8 +218,8 @@ scale = Vector2(0.5, 1)
 self_modulate = Color(0.411765, 1, 1, 1)
 show_behind_parent = true
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_jfc7j")
+texture = ExtResource("5_u0e7p")
 
 [node name="Star" type="Sprite2D" parent="HitmarkerSprite"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_jfc7j")
+texture = ExtResource("5_u0e7p")
