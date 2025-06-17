@@ -7,15 +7,15 @@ const touching_distance_threshold: float = 30.0
 ## Target enemy must be within this range
 @export var max_range: float = 750
 
-## The bullet object is replicated on all clients.
-## This owner is the client's replicated version of the character that owns this bullet.
-var boomerang_owner: Node2D = null
-var farthest_enemy: Node
-var is_returning := true
+#var farthest_enemy: Node
+#var is_returning := true
 
 @onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
-## When owned by an Enemy, the location that the bullet to moving towards away from its owner. 
-var _target_location := Vector2.ZERO
+## The bullet object is replicated on all clients.
+## This owner is the client's replicated version of the character that owns this bullet.
+var _boomerang_owner: Node2D = null
+## Object that this boomerang is moving towards.
+var _target: Node
 
 
 func _ready() -> void:
@@ -23,52 +23,40 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if is_returning:
-		if boomerang_owner == null or boomerang_owner.is_queued_for_deletion():
-			return
-		
-		# Move towards player
-		global_position += (boomerang_owner.global_position - global_position).normalized() * speed * delta
-		
-		# If close enough to player, send out again
-		if boomerang_owner.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
-			# Get next nearest character to attack
-			var enemies: Array[Node] = [] 
-			if _is_owned_by_player:
-				enemies = get_tree().get_nodes_in_group("enemy")
-			else:
-				enemies = get_tree().get_nodes_in_group("player")
-				
-			if !enemies.is_empty():
-				farthest_enemy = null
-				var farthest_distance = 0
-				for enemy in enemies:
-					var distance = global_position.distance_squared_to(enemy.global_position)
-					if distance > farthest_distance and distance <= (max_range * max_range):
-						farthest_enemy = enemy
-						farthest_distance = distance
-			
-			# An Enemy Boomerang moves towards a static location instead of chasing the Player.
-			if not _is_owned_by_player:
-				_target_location = farthest_enemy.global_position
-			
-			# Stop returning and start moving out
-			is_returning = false
+	if _boomerang_owner == null or _boomerang_owner.is_queued_for_deletion():
+		return
+	
+	if _target == null or _target.is_queued_for_deletion():
+		# Target is no longer valid
+		_target = _boomerang_owner
 	else:
-		if _is_owned_by_player:
-			# If the closest enemy still exists, move towards them
-			# Otherwise return to player
-			if farthest_enemy != null:
-				global_position += (farthest_enemy.global_position - global_position).normalized() * speed * delta
-				if farthest_enemy.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
-					is_returning = true
+		# Move, then see if we're close enough to our target.
+		global_position += (_target.global_position - global_position).normalized() * speed * delta
+		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
+			if _target == _boomerang_owner:
+				# We have returned back to our owner.
+				find_new_target()
 			else:
-				is_returning = true
-		else:
-			# Enemy Boomerang behavior
-			global_position += (_target_location - global_position).normalized() * speed * delta
-			if (_target_location - global_position).length() <= touching_distance_threshold:
-				is_returning = true
+				# We have hit the object that we were aiming at, so return back to the owner.
+				_target = _boomerang_owner
+
+
+## Sets this boomerang's target to the farthest Enemy within range.
+func find_new_target() -> void:
+	var enemies: Array[Node] = [] 
+	if _is_owned_by_player:
+		enemies = get_tree().get_nodes_in_group("enemy")
+	else:
+		enemies = get_tree().get_nodes_in_group("player")
+		
+	if !enemies.is_empty():
+		#_target = null
+		var farthest_distance = 0
+		for enemy in enemies:
+			var distance = global_position.distance_squared_to(enemy.global_position)
+			if distance > farthest_distance and distance <= (max_range * max_range):
+				_target = enemy
+				farthest_distance = distance
 
 
 # Set up other properties for this bullet
@@ -79,12 +67,13 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	):
 		return
 	
-	boomerang_owner = get_tree().root.get_node(data[0])
+	_boomerang_owner = get_tree().root.get_node(data[0])
+	_target = _boomerang_owner
 	
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := boomerang_owner.get_node_or_null("BoomerangPowerup")
+		var boomerang_powerup := _boomerang_owner.get_node_or_null("BoomerangPowerup")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
@@ -92,7 +81,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 	
 		# When the owner goes down, destroy this bullet
-		boomerang_owner.died.connect(func():
+		_boomerang_owner.died.connect(func():
 			queue_free()
 		)
 	else:
@@ -100,7 +89,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		
 		# Destroy bullet when owning Enemy dies
 		if is_multiplayer_authority():
-			boomerang_owner.died.connect(func(_enemy: Enemy):
+			_boomerang_owner.died.connect(func(_enemy: Enemy):
 				queue_free()
 			)
 
