@@ -10,6 +10,8 @@ const touching_distance_threshold: float = 30.0
 
 ## Target enemy must be within this range
 @export var max_range: float = 750
+## How much temp HP is granted to allies.
+@export var _shield_amount: int = 10
 ## Minimum time in seconds that the bullets needs to be traveling for in order to grant temp HP.
 @export var _min_travel_time_for_shield: float = 1.0
 ## Minimum time in seconds that temp HP granted by this powerup will last for.
@@ -54,6 +56,18 @@ func _process(delta: float) -> void:
 	
 	# Choose the next target if we are close enough to our current target.
 	if global_position.distance_squared_to(_target.global_position) <= _squared_touching_distance_threshold:
+		# Grant shield
+		if _travel_time > _min_travel_time_for_shield:
+			_target.add_temp_health(
+				_shield_amount, 
+				_min_shield_duration + (_travel_time - _min_travel_time_for_shield) * _shield_duration_per_second_traveled_over_threshold
+			)
+			
+			# The exact position of the boomerang becomes desynced over time, so occasionally
+			# RPC to synchronize the position.
+			if is_multiplayer_authority() and _target_index == 0:
+				_teleport.rpc(global_position)
+		
 		_target_index = (_target_index + 1) % len(_all_targets)
 		_target = _all_targets[_target_index]
 		_travel_time = 0.0
@@ -106,6 +120,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 func set_damage(damage:float):
 	$Area2D.damage = damage
+
+
+@rpc("authority", "call_remote")
+func _teleport(new_position: Vector2) -> void:
+	global_position = new_position
 
 
 ## Call from a client only to request the order in which targets are visited from the server.

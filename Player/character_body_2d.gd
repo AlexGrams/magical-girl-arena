@@ -363,12 +363,12 @@ func _add_health_regen(health_regen_to_add: float) -> void:
 
 # Add temporary health to the player
 @rpc("any_peer", "call_local")
-func add_temp_health(temp_health_to_add: int) -> void:
+func add_temp_health(temp_health_to_add: int, _duration: float = TEMP_HEALTH_LINGER_TIME) -> void:
 	if is_down: 
 		return
 	
 	_temp_health += temp_health_to_add
-	_temp_health_timer = TEMP_HEALTH_LINGER_TIME
+	_temp_health_timer = _duration
 	
 	took_damage.emit(health, health_max, _temp_health)
 
