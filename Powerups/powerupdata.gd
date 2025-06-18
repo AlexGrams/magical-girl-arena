@@ -1,13 +1,8 @@
 class_name PowerupData
-extends Resource
+extends ItemData
 ## Contains information about a powerup.
 
-## The Powerup-derived scene that is spawned in after this powerup is chosen
-@export var scene: Resource = null
-## The name of this powerup.
-@export var name := ""
-## The sprite to show representing this powerup.
-@export var sprite: Resource = null
+
 ## True if this powerup requires other players to be in the game in order to function.
 @export var is_multiplayer: bool = false
 ## Text displayed on the Powerup upgrade screen.
@@ -17,6 +12,7 @@ extends Resource
 ## 2: Level 3 upgrade
 ## 5: Signature functionality
 @export var upgrade_description_list: Array[String]
+
 
 func get_upgrade_description(level:int = 0) -> String:
 	return upgrade_description_list[level]
