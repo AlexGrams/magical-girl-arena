@@ -167,7 +167,7 @@ _data = {
 "glow": SubResource("Animation_cf1ce")
 }
 
-[node name="BulletLaserMultiplayer" type="Node2D" node_paths=PackedStringArray("_area", "_laser", "collider", "sprite")]
+[node name="BulletTether" type="Node2D" node_paths=PackedStringArray("_area", "_laser", "collider", "sprite")]
 script = ExtResource("1_btf2e")
 _area = NodePath("Laser/Area2D")
 _laser = NodePath("Laser")
@@ -178,15 +178,14 @@ sprite = NodePath("Laser/LaserSprite")
 
 [node name="LaserSprite" type="Sprite2D" parent="Laser"]
 modulate = Color(1, 0, 1, 1)
-position = Vector2(-0.0992124, -0.0615149)
 rotation = 1.5708
-scale = Vector2(0.11, 0.00322176)
+scale = Vector2(0.11, 0.00402314)
 skew = 0.555015
 texture = ExtResource("2_u5bog")
 
 [node name="GlowSprite" type="Sprite2D" parent="Laser"]
 modulate = Color(1, 0, 1, 1)
-position = Vector2(-3.18706e-07, 0.0880406)
+position = Vector2(-3.18706e-07, 0)
 rotation = 1.5708
 scale = Vector2(0.2, 0.004)
 skew = 0.555015
