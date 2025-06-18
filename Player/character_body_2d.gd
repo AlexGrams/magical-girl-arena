@@ -53,10 +53,9 @@ var revive_timer: float = 0.0
 
 ## What character this player is.
 var _character: Constants.Character
-# Temporary HP that goes away after some time
-var _temp_health: int = 0
-# How long until temp HP automatically disappears.
-var _temp_health_timer: float = 0.0
+## Temporary HP that goes away after some time. Divided into segments that have their own
+## duration and value. Temp health is used up from first added to latest added.
+var _temp_health_segments: Array[StatusTempHealth] = []
 # How much health is recovered per health regen tick.
 var _health_regen: float = 0.0
 # How long until the next health regen tick.
@@ -171,6 +170,13 @@ func get_stat(stat_type: Constants.StatUpgrades) -> int:
 	return 1
 
 
+func get_temp_health() -> int:
+	var result: int = 0
+	for segment: StatusTempHealth in _temp_health_segments:
+		result += segment.value
+	return result
+
+
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_direction != null:
@@ -211,13 +217,6 @@ func _process(delta: float) -> void:
 			# Add health
 			take_damage(-_health_regen)
 			_health_regen_timer = HEALTH_REGEN_INTERVAL
-	
-	# Temporary health is reset after some time has passed.
-	if _temp_health_timer > 0.0:
-		_temp_health_timer -= delta
-		if _temp_health_timer <= 0.0:
-			_temp_health = 0
-			took_damage.emit(health, health_max, _temp_health)
 	
 	# Death and reviving
 	if is_down:
@@ -312,22 +311,22 @@ func take_damage(damage: float) -> void:
 	if is_down:
 		return
 	
+	# Deplete temp health before regular health.
+	# Skip this if the player is gaining health instead.
 	if damage > 0:
-		# Deplete temp health before regular health.
-		# Skip this if the player is gaining health instead.
-		if _temp_health > 0:
-			_temp_health -= int(damage)
-			
-			if _temp_health < 0:
-				# Temporary health was delepeted
-				damage = abs(_temp_health)
-				_temp_health = 0
-				_temp_health_timer = 0.0
-			else:
+		while len(_temp_health_segments) > 0 and damage > 0:
+			if _temp_health_segments[0].value > damage:
+				# Damage doesn't fully deplete the first segment.
+				_temp_health_segments[0].value -= int(damage)
 				damage = 0
+			else:
+				# Damage depletes the first segment and carries onto subsequent segments.
+				damage -= _temp_health_segments[0].value
+				_temp_health_segments[0].queue_free()
+				_temp_health_segments.pop_front()
 	
 	health = clamp(health - damage, 0, health_max)
-	took_damage.emit(health, health_max, _temp_health)
+	took_damage.emit(health, health_max, get_temp_health())
 	
 	if damage > 0:
 		$AnimationPlayer.play("took_damage")
@@ -341,9 +340,10 @@ func _update_health_bar(_new_health, _new_health_max, _new_temp_health) -> void:
 	_health_label.text = str(health) + "/" + str(health_max)
 	_health_bar.value = (float(health) / float(health_max)) * 100
 	
-	if _temp_health > 0:
+	var temp_health: int = get_temp_health()
+	if temp_health > 0:
 		_temp_health_bar.show()
-		_temp_health_label.text = str(_temp_health)
+		_temp_health_label.text = str(temp_health)
 	else:
 		_temp_health_bar.hide()
 
@@ -361,16 +361,24 @@ func _add_health_regen(health_regen_to_add: float) -> void:
 	_health_regen += health_regen_to_add
 
 
-# Add temporary health to the player
+## Add temporary health to the player by creating a new temp HP segment.
 @rpc("any_peer", "call_local")
 func add_temp_health(temp_health_to_add: int, _duration: float = TEMP_HEALTH_LINGER_TIME) -> void:
 	if is_down: 
 		return
 	
-	_temp_health += temp_health_to_add
-	_temp_health_timer = _duration
+	var new_segment: StatusTempHealth = StatusTempHealth.new()
 	
-	took_damage.emit(health, health_max, _temp_health)
+	new_segment.duration = _duration
+	new_segment.value = temp_health_to_add
+	_temp_health_segments.append(new_segment)
+	new_segment.expired.connect(func():
+		_temp_health_segments.remove_at(_temp_health_segments.find(new_segment))
+		took_damage.emit(health, health_max, get_temp_health())
+	)
+	add_child(new_segment)
+	
+	took_damage.emit(health, health_max, get_temp_health())
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
@@ -473,7 +481,7 @@ func ready_player_character(character: Constants.Character) -> void:
 	
 	# Signal for health changes
 	took_damage.connect(_update_health_bar)
-	took_damage.emit(health, health_max, _temp_health)
+	took_damage.emit(health, health_max, get_temp_health())
 	
 	# Should not be called on characters that are not owned by this game instance.
 	if is_multiplayer_authority():
