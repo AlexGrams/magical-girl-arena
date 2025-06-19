@@ -115,6 +115,13 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 		add_powerup(powerup_data, is_signature)
 
 
+## Adds an artifact to this player
+func grant_artifact(artifact_data: ArtifactData) -> void:
+	var artifact: Artifact = artifact_data.scene.instantiate()
+	add_child(artifact, true)
+	artifact.activate(self)
+
+
 ## Returns which character this player is.
 func get_character() -> Constants.Character:
 	return _character
