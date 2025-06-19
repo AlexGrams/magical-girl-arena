@@ -90,8 +90,11 @@ func _ready():
 
 
 ## Called when a Powerup is selected on the level up screen.
-func _on_upgrade_chosen(powerup_data: PowerupData):
-	upgrade_or_grant_powerup(powerup_data, false)
+func _on_upgrade_chosen(itemdata: ItemData):
+	if itemdata is PowerupData:
+		upgrade_or_grant_powerup(itemdata, false)
+	elif itemdata is ArtifactData:
+		grant_artifact(itemdata)
 
 
 ## Increases the level of a Powerup, or adds it to the player if they don't have it already.

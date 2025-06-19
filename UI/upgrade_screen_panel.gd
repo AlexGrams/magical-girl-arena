@@ -8,6 +8,8 @@ const MAX_NEW_MULTIPLAYER_POWERUPS: int = 1
 
 ## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
 @export var all_powerup_data: Array[PowerupData] = []
+## Every artifact that can be acquired in the game.
+@export var all_artifact_data: Array[ArtifactData] = []
 ## Chance of being offered a new multiplayer-specific powerup.
 @export_range(0.0, 1.0) var multiplayer_powerup_chance: float = 0.5
 ## Parent of the upgrade panel UI objects.
@@ -43,6 +45,7 @@ signal stat_upgrade_chosen(stat_type: Constants.StatUpgrades)
 func _ready() -> void:
 	for child: UpgradePanel in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
+		child.upgrade_chosen.connect(_on_upgrade_chosen)
 		child.upgrade_powerup_chosen.connect(_on_upgrade_chosen)
 		child.upgrade_stat_chosen.connect(_on_stat_upgrade_chosen)
 	
@@ -77,8 +80,8 @@ func setup():
 ## Makes a random list of powerups to obtain or upgrade, and update the stats upgrade panel.
 func _generate_and_show_random_upgrade_choices() -> void:
 	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
-	# Mixed array of either PowerupData or Constants.StatUpgrades
-	var upgrade_choices: Array = []
+	# Powerups or Artifacts that can be upgraded 
+	var upgrade_choices: Array[ItemData] = []
 	# Powerups that can only be granted in multiplayer.
 	var multiplayer_upgrade_choices: Array[PowerupData] = []
 	# Current powerup level that corresponds to upgrade_choices. 0 = Not yet obtained
@@ -131,9 +134,9 @@ func _generate_and_show_random_upgrade_choices() -> void:
 					i -= 1
 				i += 1
 	
-	# Decide which stats can be upgraded.
-	for stat_name in range(len(Constants.StatUpgrades)):
-		upgrade_choices.append(stat_name)
+	for artifact_data: ArtifactData in all_artifact_data:
+		upgrade_choices.push_front(artifact_data)
+		upgrade_levels[artifact_data.name] = 0
 	
 	_show_random_upgrade_choices(upgrade_choices, multiplayer_upgrade_choices, upgrade_levels)
 	
@@ -150,7 +153,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 
 # Display a random selection of upgrades for the player to choose from.
 # upgrade_data must contain valid upgrade possibilities. 
-func _show_random_upgrade_choices(upgrade_data: Array, multiplayer_upgrade_data: Array[PowerupData], upgrade_levels: Dictionary) -> void:
+func _show_random_upgrade_choices(upgrade_data: Array[ItemData], multiplayer_upgrade_data: Array[PowerupData], upgrade_levels: Dictionary) -> void:
 	upgrade_data.shuffle()
 	var i = 0
 	while i < MAX_NORMAL_UPGRADES and i < len(upgrade_data):
@@ -185,15 +188,15 @@ func _on_reroll_button_down() -> void:
 	_generate_and_show_random_upgrade_choices()
 
 
-# Notify relevant systems that this player has selected an upgrade.
-# Called after one of the upgrade panels has been clicked.
-func _on_upgrade_chosen(powerupdata: PowerupData):
+## Notify relevant systems that this player has selected an upgrade.
+## Called after one of the upgrade panels has been clicked.
+func _on_upgrade_chosen(itemdata: ItemData):
 	# This signal is connected to the player's function for adding or upgrading the powerup.
-	upgrade_chosen.emit(powerupdata)
+	upgrade_chosen.emit(itemdata)
 	GameState.player_selected_upgrade.rpc_id(1)
 	
 	# Analytics: Record selection
-	Analytics.add_upgrade_chosen(powerupdata.name)
+	Analytics.add_upgrade_chosen(itemdata.name)
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()

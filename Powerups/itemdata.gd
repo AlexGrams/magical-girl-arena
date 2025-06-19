@@ -9,3 +9,7 @@ extends Resource
 @export var name := ""
 ## The sprite to show representing this item.
 @export var sprite: Resource = null
+
+
+func get_upgrade_description(_level: int = 0) -> String:
+	return ""
