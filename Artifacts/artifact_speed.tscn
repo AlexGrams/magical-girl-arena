@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byvev3gf182d"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_speed.gd" id="1_uu5gd"]
+
+[node name="ArtifactSpeed" type="Node"]
+script = ExtResource("1_uu5gd")
