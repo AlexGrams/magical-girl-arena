@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("2_lx4rk")
-scene = ExtResource("1_jlhnn")
-name = "Firework Flora"
-sprite = ExtResource("3_omwtg")
 is_multiplayer = false
 upgrade_description = "Scatter seeds around you that explode into flowers after a delay."
 upgrade_description_list = Array[String](["Scatter seeds around you that explode into flowers after a delay.", "Increase damage", "Increase drop rate", "Increase damage", "Increase damage", "Increase damage"])
+scene = ExtResource("1_jlhnn")
+name = "Firework Flora"
+sprite = ExtResource("3_omwtg")

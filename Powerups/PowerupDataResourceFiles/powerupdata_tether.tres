@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("2_75avm")
-scene = ExtResource("1_8hjfb")
-name = "Tether"
-sprite = ExtResource("3_c6ffg")
 is_multiplayer = true
 upgrade_description = "Connect a laser between you and every other player."
 upgrade_description_list = Array[String](["Connect a laser between you and every other player.", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+scene = ExtResource("1_8hjfb")
+name = "Tether"
+sprite = ExtResource("3_c6ffg")

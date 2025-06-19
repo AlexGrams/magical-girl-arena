@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_6ihao")
-scene = ExtResource("1_iw13p")
-name = "Jeweled Boomerang"
-sprite = ExtResource("3_1ptwq")
 is_multiplayer = false
 upgrade_description = "Throw a boomerang, hitting all enemies in its path"
 upgrade_description_list = Array[String](["Throw a boomerang, hitting all enemies in its path", "Increase damage", "Increase size and damage", "Increase damage", "Increase damage", "Increase damage"])
+scene = ExtResource("1_iw13p")
+name = "Jeweled Boomerang"
+sprite = ExtResource("3_1ptwq")
