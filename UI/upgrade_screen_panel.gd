@@ -46,7 +46,6 @@ func _ready() -> void:
 	for child: UpgradePanel in upgrade_panels_holder.get_children():
 		upgrade_panels.append(child)
 		child.upgrade_chosen.connect(_on_upgrade_chosen)
-		child.upgrade_powerup_chosen.connect(_on_upgrade_chosen)
 		child.upgrade_stat_chosen.connect(_on_stat_upgrade_chosen)
 	
 	# Set up ready indicators

@@ -6,5 +6,5 @@ extends ItemData
 @export var _description: String = ""
 
 
-func get_upgrade_description(level: int = 0) -> String:
+func get_upgrade_description(_level: int = 0) -> String:
 	return _description

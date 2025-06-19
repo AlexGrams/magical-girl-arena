@@ -2,19 +2,11 @@ class_name UpgradePanel
 extends Control
 
 
-var _health_icon_texture: Texture2D = preload("uid://b4meuc223cj41")
-var _regen_icon_texture: Texture2D = preload("uid://b62tnt1mxuchm")
-var _speed_icon_texture: Texture2D = preload("uid://dr7qvwfxxl54h")
-var _pickup_icon_texture: Texture2D = preload("uid://cnbo4juf7220o")
-
+## ItemData for this button's currently associated item. Can be an Artifact or a Powerup.
 var _itemdata: ItemData = null
-## PowerData for this button's currently associated Powerup. This being null indicates that 
-## the button upgrades a stat instead.
-var _powerupdata: PowerupData = null
 var _stat: Constants.StatUpgrades = Constants.StatUpgrades.HEALTH
 
 signal upgrade_chosen(itemdata: ItemData)
-signal upgrade_powerup_chosen(powerupdata: PowerupData)
 signal upgrade_stat_chosen(stat: Constants.StatUpgrades)
 
 
