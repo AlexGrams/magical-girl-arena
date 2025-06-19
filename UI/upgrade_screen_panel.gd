@@ -86,6 +86,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	# Current powerup level that corresponds to upgrade_choices. 0 = Not yet obtained
 	var upgrade_levels: Dictionary = {}
 	
+	# Add artifact choices.
+	for artifact_data: ArtifactData in all_artifact_data:
+		upgrade_choices.append(artifact_data)
+		upgrade_levels[artifact_data.name] = 0
+	
 	# Decide which Powerups can possibly be upgraded
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
@@ -132,10 +137,6 @@ func _generate_and_show_random_upgrade_choices() -> void:
 					upgrade_choices.remove_at(i)
 					i -= 1
 				i += 1
-	
-	for artifact_data: ArtifactData in all_artifact_data:
-		upgrade_choices.push_front(artifact_data)
-		upgrade_levels[artifact_data.name] = 0
 	
 	_show_random_upgrade_choices(upgrade_choices, multiplayer_upgrade_choices, upgrade_levels)
 	
