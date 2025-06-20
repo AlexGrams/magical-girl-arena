@@ -60,6 +60,8 @@ var _temp_health_segments: Array[StatusTempHealth] = []
 var _health_regen: float = 0.0
 # How long until the next health regen tick.
 var _health_regen_timer: float = 0.0
+## If true, the next time health is brought to 0, set it to 1 instead.
+var _prevent_death: bool = false
 ## For spectating. All the players in the game.
 var _spectate_characters: Array[PlayerCharacterBody2D] = []
 ## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
@@ -78,8 +80,15 @@ var _stat_pickup_radius: int = 1
 
 signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
+## Was saved from taking lethal damage because _prevent_death was true.
+signal death_prevented()
 signal died()
 signal revived()
+
+
+@rpc("authority", "call_local")
+func set_prevent_death(value: bool) -> void:
+	_prevent_death = value
 
 
 func _ready():
@@ -347,8 +356,14 @@ func take_damage(damage: float) -> void:
 	if damage > 0:
 		$AnimationPlayer.play("took_damage")
 		
-		if is_multiplayer_authority() and health <= 0:
-			die.rpc()
+		# Death
+		if health <= 0:
+			if _prevent_death:
+				health = 1
+				_prevent_death = false
+				death_prevented.emit()
+			elif is_multiplayer_authority():
+				die.rpc()
 
 
 ## Changes the health bar and temp health bar displayed under this character.
@@ -527,6 +542,8 @@ func ready_player_character(character: Constants.Character) -> void:
 		# This client does not own this PlayerCharacter. Connect events to show the
 		# pointer to this character when it goes off screen for the local client.
 		get_tree().root.get_node("Playground/CanvasLayer").add_character_to_point_to(_on_screen_notifier)
+	
+	# NOTE: Put player-related testing functionality here.
 
 
 @rpc("any_peer", "call_local")
