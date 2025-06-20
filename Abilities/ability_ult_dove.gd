@@ -4,10 +4,6 @@ extends Ability
 
 ## How many bullets are created by this ability.
 @export var _num_missiles: int = 24
-## How much damage each missile does when it touches an enemy. Missiles do not explode after touching.
-@export var _touch_damage: float = 100.0
-## How much damage each missile does after exploding. Damage is dealt in an area.
-@export var _explosion_damage: float = 100.0
 ## Time in seconds to slow hit enemies for.
 @export var _slow_duration: float = 10.0
 ## How much enemies are slowed by, where 0.0 is no slow and 1.0 is they are completely immobile. 
@@ -20,8 +16,13 @@ extends Ability
 ## spread more lopsided. Each missile is assigned a "slice" of the circle around the player for it to target.
 @export var _num_slices: int = 6
 @export var _bullet_scene_uid := ""
+@export var _damage_curve_touch: Curve = preload("res://Curves/Abilities/ability_ult_dove_touch.tres")
+@export var _damage_curve_explosion: Curve = preload("res://Curves/Abilities/ability_ult_dove_explosion.tres")
 
-
+## How much damage each missile does when it touches an enemy. Missiles do not explode after touching.
+var _touch_damage: float = 100.0
+## How much damage each missile does after exploding. Damage is dealt in an area.
+var _explosion_damage: float = 100.0
 ## Number of radians that each slice consists of.
 var _rad_per_slice: float = 0.0
 
@@ -66,3 +67,9 @@ func activate() -> void:
 		])
 		
 		slice_rotator = slice_rotator.rotated(_rad_per_slice)
+
+
+## Change the damage of this Ability based on its owner's level.
+func update_damage(_level: int) -> void:
+	_touch_damage = _damage_curve_touch.sample(float(_level) / GameState.MAX_LEVEL)
+	_explosion_damage = _damage_curve_explosion.sample(float(_level) / GameState.MAX_LEVEL)
