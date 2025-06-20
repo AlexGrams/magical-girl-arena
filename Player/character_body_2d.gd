@@ -317,6 +317,7 @@ func disable_powerups():
 
 ## Changes ultimate cooldown time by a percentage.
 func scale_ultimate_cooldown(percent: float) -> void:
+	abilities[0].current_cooldown_time *= percent
 	abilities[0].cooldown *= percent
 
 
