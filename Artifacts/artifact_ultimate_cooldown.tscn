@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqxfe2epc4k6v"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_ultimate_cooldown.gd" id="1_gqsw2"]
+
+[node name="ArtifactUltimateCooldown" type="Node"]
+script = ExtResource("1_gqsw2")

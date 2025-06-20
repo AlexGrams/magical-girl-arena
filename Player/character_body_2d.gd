@@ -315,6 +315,11 @@ func disable_powerups():
 		powerup.deactivate_powerup()
 
 
+## Changes ultimate cooldown time by a percentage.
+func scale_ultimate_cooldown(percent: float) -> void:
+	abilities[0].cooldown *= percent
+
+
 # Deal damage to the player. Should be RPC'd on everyone.
 @rpc("authority", "call_local")
 func take_damage(damage: float) -> void:
