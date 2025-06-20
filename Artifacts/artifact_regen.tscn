@@ -4,3 +4,4 @@
 
 [node name="ArtifactRegen" type="Node"]
 script = ExtResource("1_d0x27")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_regen.tres"

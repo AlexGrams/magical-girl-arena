@@ -30,8 +30,10 @@ var upgrade_panels: Array[UpgradePanel] = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
 
-# Map of String to PowerupData
+## Map of String to PowerupData
 var _powerup_name_to_powerupdata := {}
+## Map of String to ArtifactData
+var _artifact_name_to_artifactdata := {}
 ## Displays which characters have finished selecting their upgrade.
 var _ready_indicators: Array[PlayerReadyIndicator] = []
 ## Maps each connecter player's multiplayer unique ID to their corresponding PlayerReadyIndicator.
@@ -55,6 +57,10 @@ func _ready() -> void:
 	# Set up the powerup name to PowerupData map
 	for powerupdata: PowerupData in all_powerup_data:
 		_powerup_name_to_powerupdata[powerupdata.name] = powerupdata
+	
+	# Set up artifact name to ArtifactData map
+	for artifactdata: ArtifactData in all_artifact_data:
+		_artifact_name_to_artifactdata[artifactdata.name] = artifactdata
 
 
 # Show the upgrade screen and set up the options provided to the player.
@@ -86,10 +92,16 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	# Current powerup level that corresponds to upgrade_choices. 0 = Not yet obtained
 	var upgrade_levels: Dictionary = {}
 	
-	# Add artifact choices.
-	for artifact_data: ArtifactData in all_artifact_data:
-		upgrade_choices.append(artifact_data)
-		upgrade_levels[artifact_data.name] = 0
+	# Add artifact choices that the player doesn't have already.
+	if len(player_character.artifacts) < player_character.MAX_ARTIFACTS:
+		var artifactdata_dict: Dictionary = _artifact_name_to_artifactdata.duplicate()
+		
+		for owned_artifact: Artifact in player_character.artifacts:
+			artifactdata_dict.erase(owned_artifact.artifactdata.name)
+		
+		for artifact_data: ArtifactData in artifactdata_dict.values():
+			upgrade_choices.append(artifact_data)
+			upgrade_levels[artifact_data.name] = 0
 	
 	# Decide which Powerups can possibly be upgraded
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:

@@ -1,17 +1,19 @@
 class_name PlayerCharacterBody2D
 extends CharacterBody2D
 
-# How long this player has to wait before being able to be revived.
+## How long this player has to wait before being able to be revived.
 const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
-# How long another player must spend reviving this player.
+## How long another player must spend reviving this player.
 const TIME_TO_REVIVE: float = 3.0
-# Index of the collision layer for players.
+## Index of the collision layer for players.
 const PLAYER_COLLISION_LAYER: int = 4
-# The most number of different powerups that this player can have INCLUDING their base powerup.
+## The most number of different powerups that this player can have INCLUDING their base powerup.
 const MAX_POWERUPS: int = 5
-# How long temporary health stays on the player before going away.
+## The most number of different artifacts that this player can have.
+const MAX_ARTIFACTS: int = 3
+## How long temporary health stays on the player before going away.
 const TEMP_HEALTH_LINGER_TIME: float = 5.0
-# Time in seconds between health regen ticks
+## Time in seconds between health regen ticks.
 const HEALTH_REGEN_INTERVAL: float = 5.0
 
 @export var level_shoot_intervals:Array
@@ -33,11 +35,13 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 
 @onready var bullet_scene = preload("res://Powerups/bullet.tscn")
 var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
-# All powerups that this player has.
+## All Powerups that this player has.
 var powerups: Array[Powerup] = []
-# All Abilities that this player has.
-# Index 0 is the ultimate, and higher indicies are the regular abilities.
+## All Abilities that this player has.
+## Index 0 is the ultimate, and higher indicies are the regular abilities.
 var abilities: Array[Ability] = []
+## All Artifacts that this player has.
+var artifacts: Array[Artifact] = []
 var shoot_timer = 0
 var shoot_interval = 1
 var level = 1
@@ -107,7 +111,7 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	if itemdata is PowerupData:
 		upgrade_or_grant_powerup(itemdata, false)
 	elif itemdata is ArtifactData:
-		grant_artifact(itemdata)
+		add_artifact(itemdata)
 
 
 ## Increases the level of a Powerup, or adds it to the player if they don't have it already.
@@ -132,9 +136,10 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 
 
 ## Adds an artifact to this player
-func grant_artifact(artifact_data: ArtifactData) -> void:
+func add_artifact(artifact_data: ArtifactData) -> void:
 	var artifact: Artifact = artifact_data.scene.instantiate()
 	add_child(artifact, true)
+	artifacts.append(artifact)
 	artifact.activate(self)
 
 

@@ -4,3 +4,4 @@
 
 [node name="ArtifactSpeed" type="Node"]
 script = ExtResource("1_uu5gd")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_speed.tres"

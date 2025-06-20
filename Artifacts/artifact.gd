@@ -3,8 +3,13 @@ extends Node
 ## Abstract class for an item that provides a passive bonus when acquired by the player.
 
 
+@export_file("*.tres") var _artifactdata_path: String = ""
+
+var artifactdata: ArtifactData = null
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	artifactdata = load(_artifactdata_path)
 
 
 func _process(_delta: float) -> void:

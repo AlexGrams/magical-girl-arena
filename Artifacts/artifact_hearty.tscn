@@ -4,3 +4,4 @@
 
 [node name="ArtifactHearty" type="Node"]
 script = ExtResource("1_0kbdx")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_hearty.tres"

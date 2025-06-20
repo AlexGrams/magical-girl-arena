@@ -4,3 +4,4 @@
 
 [node name="ArtifactUltimateCooldown" type="Node"]
 script = ExtResource("1_gqsw2")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_ultimate_cooldown.tres"
