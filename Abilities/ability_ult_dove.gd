@@ -47,18 +47,19 @@ func activate() -> void:
 	# Shoot missiles all around in a sort of random way.
 	var slice_rotator = Vector2.UP
 	
+	var crit_mul: float =  1.0 if randf() > _crit_chance else 2.0
 	for i in range(_num_missiles):
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, [_bullet_scene_uid, 
 				get_parent().global_position, 
 				slice_rotator.rotated(randf_range(0.0, _rad_per_slice)), 
-				_touch_damage,
+				_touch_damage * crit_mul,
 				true,
 				-1,
 				-1,
 				[
-					_touch_damage, 
-					_explosion_damage, 
+					_touch_damage * crit_mul, 
+					_explosion_damage * crit_mul, 
 					_slow_duration,
 					_slow_percent,
 					randi_range(0, BulletUltDove.MOVEMENT_PATTERNS - 1), 

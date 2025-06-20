@@ -91,6 +91,10 @@ func set_prevent_death(value: bool) -> void:
 	_prevent_death = value
 
 
+func set_ultimate_crit_chance(value: float) -> void:
+	abilities[0].set_crit_chance(value)
+
+
 func _ready():
 	_revive_collision_area.hide()
 	

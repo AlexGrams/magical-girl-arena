@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ei8hv0bq82qj"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_ultimate_crit.gd" id="1_rxryw"]
+
+[node name="ArtifactUltimateCrit" type="Node"]
+script = ExtResource("1_rxryw")

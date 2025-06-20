@@ -15,6 +15,9 @@ extends Node2D
 
 var current_cooldown_time: float = 0.0
 
+## Chance of critical damage as a fraction. 1.0 is guaranteed critical.
+var _crit_chance: float = 0.0
+
 ## Emitted every time current_cooldown_time is updated.
 signal cooldown_time_updated(cooldown_time_remaining_fraction: float)
 
@@ -26,6 +29,10 @@ func get_can_activate() -> bool:
 # Set the multiplayer authority for this ability
 func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)
+
+
+func set_crit_chance(value: float) -> void:
+	_crit_chance = value
 
 
 # Called when the node enters the scene tree for the first time.

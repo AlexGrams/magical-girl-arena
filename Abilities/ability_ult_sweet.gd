@@ -40,7 +40,7 @@ func activate() -> void:
 		1, [bullet_scene_path, 
 			get_parent().global_position, 
 			Vector2.UP.rotated(rotation_increment * i), 
-			_damage, 
+			_damage * (1.0 if randf() > _crit_chance else 2.0), 
 			true,
 			-1,
 			-1,

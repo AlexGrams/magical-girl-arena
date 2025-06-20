@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ArtifactData" load_steps=4 format=3 uid="uid://n1rkh6d7qvq2"]
+
+[ext_resource type="PackedScene" uid="uid://ei8hv0bq82qj" path="res://Artifacts/artifact_ultimate_crit.tscn" id="1_b5agi"]
+[ext_resource type="Script" path="res://Artifacts/artifactdata.gd" id="1_dns70"]
+[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="3_rthif"]
+
+[resource]
+script = ExtResource("1_dns70")
+_description = "Your ultimate ability has a random chance to critically hit for more damage."
+scene = ExtResource("1_b5agi")
+name = "Ultimate Critical"
+sprite = ExtResource("3_rthif")
