@@ -32,6 +32,7 @@ func set_authority(id: int) -> void:
 func _ready() -> void:
 	# Start with the ability ready to use.
 	cooldown_time_updated.emit(0)
+	update_damage(1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -5,13 +5,15 @@ extends Ability
 
 const _NUM_BULLETS := 12
 
+@export var _damage_curve: Curve = preload("res://Curves/Abilities/ability_ult_sweet.tres")
+
 @export var bullet_scene_path := "res://Abilities/bullet_ult_sweet.tscn"
-@export var damage: float = 100.0
 ## How much temporary health is granted to nearby players when this Ability is used.
 @export var temp_health_healing: int = 50
 ## Radius in which nearby players are granted temporary health by this Ability.
 @export var temp_health_range: float = 1000.0
 
+var _damage: float = 100.0
 var _temp_health_ranged_squared: float = 0.0
 
 
@@ -38,7 +40,7 @@ func activate() -> void:
 		1, [bullet_scene_path, 
 			get_parent().global_position, 
 			Vector2.UP.rotated(rotation_increment * i), 
-			damage, 
+			_damage, 
 			true,
 			-1,
 			-1,
@@ -53,3 +55,8 @@ func activate() -> void:
 	for player: PlayerCharacterBody2D in get_tree().get_nodes_in_group("player"):
 		if owner_position.distance_squared_to(player.global_position) <= _temp_health_ranged_squared:
 			player.add_temp_health.rpc(temp_health_healing)
+
+
+## Change the damage of this Ability based on its owner's level.
+func update_damage(_level: int) -> void:
+	_damage = _damage_curve.sample(float(_level) / GameState.MAX_LEVEL)

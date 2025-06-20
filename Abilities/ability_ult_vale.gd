@@ -1,8 +1,8 @@
 extends Ability
 ## Click areas on the screen to bring down large bombs that deal massive damage. 
 
-## How much damage each bomb does
-@export var damage: float = 100.0
+@export var _damage_curve: Curve = preload("res://Curves/Abilities/ability_ult_vale.tres")
+
 ## Number of bombs the player can drop using this ability.
 @export var num_bombs: int = 3
 ## Time in seconds before each bomb explodes after the player clicks on the screen to place it.
@@ -12,9 +12,10 @@ extends Ability
 @export var active_time: float = 10.0
 @export var bullet_scene_path := ""
 
-var mouse_cursor = load("res://Sprites/UI/ArrowSmall.png")
-var target_cursor = load("res://Sprites/UI/Target.png")
-
+var _mouse_cursor = load("res://Sprites/UI/ArrowSmall.png")
+var _target_cursor = load("res://Sprites/UI/Target.png")
+## How much damage each bomb does
+var _damage: float = 100.0
 ## How long the player has left to use this ultimate.
 var _current_active_time: float = 0.0
 var _bombs_remaining: int = 0
@@ -34,12 +35,12 @@ func _process(delta: float) -> void:
 		_current_active_time -= delta
 		if _current_active_time <= 0.0:
 			## Disable ult
-			Input.set_custom_mouse_cursor(mouse_cursor)
+			Input.set_custom_mouse_cursor(_mouse_cursor)
 
 
 func activate() -> void:
 	super()
-	Input.set_custom_mouse_cursor(target_cursor)
+	Input.set_custom_mouse_cursor(_target_cursor)
 	_current_active_time = active_time
 	_bombs_remaining = num_bombs
 
@@ -56,7 +57,7 @@ func _input(event: InputEvent) -> void:
 			1, [bullet_scene_path, 
 				get_global_mouse_position(), 
 				Vector2.ZERO, 
-				damage, 
+				_damage, 
 				true,
 				-1,
 				-1,
@@ -70,4 +71,9 @@ func _input(event: InputEvent) -> void:
 			_bombs_remaining -= 1
 			if _bombs_remaining <= 0:
 				_current_active_time = 0.0
-				Input.set_custom_mouse_cursor(mouse_cursor)
+				Input.set_custom_mouse_cursor(_mouse_cursor)
+
+
+## Change the damage of this Ability based on its owner's level.
+func update_damage(_level: int) -> void:
+	_damage = _damage_curve.sample(float(_level) / GameState.MAX_LEVEL)

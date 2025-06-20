@@ -5,9 +5,10 @@ extends Ability
 # your location.
 
 
+@export var _damage_curve: Curve = preload("res://Curves/Abilities/ability_ult_goth.tres")
+
 @export var bullet_scene_path := "res://Abilities/bullet_ult_goth.tscn"
 @export var status_duration: float = 1.0
-@export var _damage_curve: Curve = preload("res://Curves/Abilities/ability_ult_goth.tres")
 
 var _damage: float = 100.0
 
