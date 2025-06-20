@@ -6,8 +6,10 @@ extends Ability
 
 
 @export var bullet_scene_path := "res://Abilities/bullet_ult_goth.tscn"
-@export var damage: float = 100.0
 @export var status_duration: float = 1.0
+@export var _damage_curve: Curve = preload("res://Curves/Abilities/ability_ult_goth.tres")
+
+var _damage: float = 100.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,10 +30,14 @@ func activate() -> void:
 	1, [bullet_scene_path, 
 		get_parent().global_position, 
 		Vector2.ZERO, 
-		damage, 
+		_damage, 
 		true,
 		-1,
 		-1,
 		[status_duration]
-	]
-)
+	])
+
+
+## Change the damage of this Ability based on its owner's level.
+func update_damage(_level: int) -> void:
+	_damage = _damage_curve.sample(float(_level) / GameState.MAX_LEVEL)

@@ -44,3 +44,8 @@ func _process(delta: float) -> void:
 # Start this Ability's functionality.
 func activate() -> void:
 	current_cooldown_time = cooldown
+
+
+## Change the damage of this Ability based on its owner's level.
+func update_damage(_level: int) -> void:
+	pass

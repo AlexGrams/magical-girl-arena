@@ -565,6 +565,11 @@ func _on_exp_pickup_area_2d_area_entered(area: Area2D) -> void:
 			parent.set_player.rpc(self.get_path())
 
 
+## Called when this character levels up, but before they select their next upgrade.
+func level_up(new_level: int) -> void:
+	abilities[0].update_damage(new_level)
+
+
 ## RPC the server to spawn in a pet owned by this character.
 @rpc("any_peer", "call_local")
 func spawn_pet_and_set_up(pet_scene: String, parent_path: String, starting_position: Vector2, damage: float, owner_id: int, powerup_index: int, pet_level: int) -> void:

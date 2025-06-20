@@ -514,12 +514,13 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 	
 	# Level up if we have enough EXP.
 	if level < MAX_LEVEL and experience >= exp_for_next_level:
+		level += 1
+		experience -= exp_for_next_level
+		_update_exp_for_next_level()
+		GameState.get_local_player().level_up(level)
+		
 		# Analytics: record the time that we leveled up.
 		Analytics.add_level_up_time(int(time))
-		
-		experience -= exp_for_next_level
-		level += 1
-		_update_exp_for_next_level()
 		
 		# Show and set up the upgrade screen
 		get_tree().paused = true
