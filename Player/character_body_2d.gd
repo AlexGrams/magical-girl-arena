@@ -287,6 +287,13 @@ func _input(event: InputEvent) -> void:
 		
 		# Analytics: Record ult activation
 		Analytics.add_ult_count()
+	
+	# Cheats
+	if not OS.has_feature("release"):
+		if event is InputEventKey and event.pressed:
+			# Level up
+			if event.keycode == KEY_KP_1:
+				GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
 
 
 func get_rerolls() -> int:
