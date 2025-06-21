@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_o8d3m")
 _description = "Increases max health by 20. The first time your health reaches 0 after getting this artifact, stay at 1 HP and gain a 50 HP temporary shield."
+is_unique = false
 scene = ExtResource("1_kn0x6")
 name = "Hearty"
 sprite = ExtResource("3_5x8ll")

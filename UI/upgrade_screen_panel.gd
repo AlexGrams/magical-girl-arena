@@ -45,6 +45,9 @@ var _displayed_upgrade_names: Array[String] = []
 ## Map of int (player multiplayer ID) to Array[String] (list of upgrades names from ItemData.name).
 ## Only contains information on the server.
 var _player_possible_upgrades: Dictionary = {}
+## Keys are String names of unique artifacts that any player has acquired for the rest of the game.
+## Acquired unique artifacts are not offered to other players. Only contains information on the server.
+var _owned_unique_artifacts: Dictionary = {}
 ## Contains a key if a unique artifact with that name has been assigned to someone. 
 ## Only contains information on the server.
 var _assigned_unique_artifacts: Dictionary = {}
@@ -200,7 +203,7 @@ func _report_upgrade_choices(upgrade_names: Array[String]) -> void:
 		# Random order in which we determine who gets what upgrades.
 		var assign_order: Array = _player_possible_upgrades.keys()
 		
-		_assigned_unique_artifacts.clear()
+		_assigned_unique_artifacts = _owned_unique_artifacts.duplicate()
 		
 		assign_order.shuffle()
 		for id in assign_order:
@@ -296,6 +299,11 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	upgrade_chosen.emit(itemdata)
 	GameState.player_selected_upgrade.rpc_id(1)
 	
+	# If the upgrade was a unique artifact, prevent other players from getting that artifact on 
+	# subsequent levelups.
+	if itemdata is ArtifactData and itemdata.is_unique:
+		_add_chosen_unique_artifact.rpc_id(1, itemdata.name)
+	
 	# Analytics: Record selection
 	Analytics.add_upgrade_chosen(itemdata.name)
 	
@@ -305,6 +313,16 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	
 	_update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
+
+
+## Records unique artifacts that any player has acquired, preventing other players from getting that 
+## artifact as well. Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _add_chosen_unique_artifact(unique_artifact_name: String) -> void:
+	if not multiplayer.is_server():
+		return
+	
+	_owned_unique_artifacts[unique_artifact_name] = true
 
 
 ## Notify relevant systems that a stat upgrade was chosen, then hide the upgrades menu.

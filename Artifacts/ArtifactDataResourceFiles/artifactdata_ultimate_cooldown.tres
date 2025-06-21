@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_0lx7s")
 _description = "Reduces the cooldown of your ultimate by half."
+is_unique = true
 scene = ExtResource("1_nwajm")
 name = "Ultimate Cooldown"
 sprite = ExtResource("3_vlyn3")
