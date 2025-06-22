@@ -13,7 +13,6 @@ var _max_range: float = 0.0
 ## Squared max range for distance calculations
 var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
-var _piercing_active: bool = false
 var _starting_position: Node2D = null
 
 
@@ -35,7 +34,7 @@ func _get_nearest_player_position() -> Vector2:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# This is intentionally blank. It overrides Bullet's _ready() function.
-	_set_piercing(true)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,45 +43,26 @@ func _process(_delta: float) -> void:
 	pass
 
 
-@rpc("any_peer", "call_local")
-func _set_piercing(val: bool) -> void:
-	_piercing_active = val
-
-
 func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
 	var target_position: Vector2 = _get_nearest_player_position()
-	var space_state = get_world_2d().direct_space_state
-	var end_point: Vector2 = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
-	var query := PhysicsRayQueryParameters2D.create(
-		_starting_position.global_position, 
-		end_point
-	)
-	query.collide_with_areas = true
-	query.collision_mask = collider.collision_mask
-	var result = space_state.intersect_ray(query)
+	var end_point: Vector2
+	if _owning_character.position.distance_squared_to(target_position) <= _max_range_squared:
+		# The Tether is active and connects to the nearest player.
+		end_point = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
 	
-	# Position and scale the laser beam
-	if result and _is_owned_by_player:
-		# The laser hit something and shouldn't be its full length.
-		$AudioStreamPlayer2D.pitch_scale = 0.8
-		$AudioStreamPlayer2D.volume_db = -25
-		
-		if not _piercing_active:
-			# Non-signature functionality: Only harm the first enemy hit.
-			end_point = result["position"]
-			$HitmarkerSprite.position = end_point
-			$HitmarkerSprite.show()
-			
-			if is_multiplayer_authority():
-				var hit_node: Node2D = result["collider"].get_parent()
-				if hit_node is Enemy or hit_node is LootBox:
-					hit_node.take_damage(_area.damage)
-					Analytics.add_powerup_damage.rpc_id(_area.owner_id, _area.damage, _area.powerup_index)
-		elif is_multiplayer_authority():
-			# Signature functionality: Harm all enemies the laser is touching
+		var space_state = get_world_2d().direct_space_state
+		var query := PhysicsRayQueryParameters2D.create(
+			_starting_position.global_position, 
+			end_point
+		)
+		query.collide_with_areas = true
+		query.collision_mask = collider.collision_mask
+	
+		if is_multiplayer_authority():
+			# Harm all enemies the Tether is touching.
 			var damage_done: float = 0
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
@@ -90,7 +70,13 @@ func _physics_process(_delta: float) -> void:
 					hit_node.take_damage(_area.damage)
 					damage_done += _area.damage
 			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
+		
+		$AudioStreamPlayer2D.pitch_scale = 0.8
+		$AudioStreamPlayer2D.volume_db = -25
 	else:
+		# The Tether is deactivated since there isn't anyone else in range.
+		end_point = _owning_character.position
+		
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
 		$AudioStreamPlayer2D.volume_db = -30
@@ -142,17 +128,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var laser_powerup: PowerupTether = _owning_character.get_node_or_null("PowerupTether")
-	if laser_powerup != null:
-		laser_powerup.powerup_level_up.connect(
+	var tether_powerup: PowerupTether = _owning_character.get_node_or_null("PowerupTether")
+	if tether_powerup != null:
+		tether_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
-		)
-		
-		# Turn on signature functionality.
-		laser_powerup.activate_piercing.connect(
-			func():
-				_set_piercing.rpc(true)
 		)
 	
 	_max_range = data[1]
