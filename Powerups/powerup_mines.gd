@@ -63,5 +63,5 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
-	if current_level >= 3:
+	if current_level == 3:
 		shoot_interval = shoot_interval / 2
