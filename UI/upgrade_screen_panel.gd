@@ -352,6 +352,7 @@ func _update_players_selecting_upgrades() -> void:
 	players_done_selecting_upgrades += 1
 	
 	if players_done_selecting_upgrades >= GameState.connected_players:
+		_player_possible_upgrades.clear()
 		hide()
 	
 	_player_id_to_ready_indicator[multiplayer.get_remote_sender_id()].set_is_ready(true)
