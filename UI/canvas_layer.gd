@@ -31,6 +31,8 @@ var fraction: float = 0.0
 var _powerup_textures: Array[TextureRect] = []
 ## Text displaying each powerup level
 var _powerup_level_text: Array[Label] = []
+## Images indicating each artifact
+var _artifact_textures: Array[TextureRect] = []
 ## Guttered icons that point to other off-screen players.
 var _pointers: Array[TextureRect] = []
 ## Guttered character icons used with the player pointers.
@@ -60,6 +62,9 @@ func _ready() -> void:
 		_powerup_textures.append(powerup_panel.find_child("Powerup_Image"))
 		_powerup_level_text.append(powerup_panel.find_child("Powerup_Level_Label"))
 		_powerup_level_text[-1].text = ""
+	
+	for artifact_container:Control in _stat_level_container.get_children():
+		_artifact_textures.append(artifact_container.find_child("Powerup_Image"))
 	
 	$ExperienceBar.value = 0.0
 	
@@ -303,15 +308,22 @@ func update_powerup_level(powerup_data: PowerupData, new_level: int) -> void:
 	
 	_powerup_level_text[_powerup_display_index[powerup_data.name]].text = str(new_level)
 
-
-## Updates the stat values on the UI.
-func update_stats(player: PlayerCharacterBody2D) -> void:
-	var stat_containers := _stat_level_container.get_children()
+## Add artifact icon to the UI
+func add_artifact(artifact_data: ArtifactData) -> void:
+	for icon in _artifact_textures:
+		if icon.texture == null:
+			icon.texture = artifact_data.sprite
+			break
 	
-	stat_containers[0].set_stat_value(player._stat_health)
-	stat_containers[1].set_stat_value(player._stat_health_regen)
-	stat_containers[2].set_stat_value(player._stat_speed)
-	stat_containers[3].set_stat_value(player._stat_pickup_radius)
+## OLD. NO LONGER USING STATS.
+### Updates the stat values on the UI.
+#func update_stats(player: PlayerCharacterBody2D) -> void:
+	#var stat_containers := _stat_level_container.get_children()
+	#
+	#stat_containers[0].set_stat_value(player._stat_health)
+	#stat_containers[1].set_stat_value(player._stat_health_regen)
+	#stat_containers[2].set_stat_value(player._stat_speed)
+	#stat_containers[3].set_stat_value(player._stat_pickup_radius)
 
 
 ## Display the boss health bar. Health percent = [0, 1].

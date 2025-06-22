@@ -108,8 +108,9 @@ func set_exp_pickup_enabled(value: bool) -> void:
 func _ready():
 	_revive_collision_area.hide()
 	
-	if is_multiplayer_authority():
-		$"../CanvasLayer".update_stats(self)
+	## No longer using stats.
+	#if is_multiplayer_authority():
+		#$"../CanvasLayer".update_stats(self)
 
 
 ## Called when a Powerup is selected on the level up screen.
@@ -147,6 +148,9 @@ func add_artifact(artifact_data: ArtifactData) -> void:
 	add_child(artifact, true)
 	artifacts.append(artifact)
 	artifact.activate(self)
+	
+	# Add artifact sprite to UI
+	$"../CanvasLayer".add_artifact(artifact_data)
 
 
 ## Returns which character this player is.
@@ -179,7 +183,8 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 		_:
 			push_error("No upgrade functionality for this stat upgrade type")
 	
-	$"../CanvasLayer".update_stats(self)
+	## No longer using stats.
+	#$"../CanvasLayer".update_stats(self)
 
 
 ## Returns the current level of a player's stat given the stat enum type.

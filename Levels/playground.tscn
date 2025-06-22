@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=114 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -42,7 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
 [ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pingpong.tres" id="34_e3kyl"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
-[ext_resource type="PackedScene" uid="uid://dd8itl02g7dv3" path="res://UI/stat_level_indicator.tscn" id="35_1nta3"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
 [ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="35_65npg"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
@@ -59,13 +58,9 @@
 [ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="48_hwjvr"]
 [ext_resource type="Resource" uid="uid://bp1uxo1q43yq0" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
 [ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="49_xecmh"]
-[ext_resource type="Texture2D" uid="uid://b4meuc223cj41" path="res://Sprites/Powerups/Stats/Health.png" id="54_aob33"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="55_sk2pv"]
-[ext_resource type="Texture2D" uid="uid://b62tnt1mxuchm" path="res://Sprites/Powerups/Stats/Regen.png" id="55_yatsb"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
-[ext_resource type="Texture2D" uid="uid://dr7qvwfxxl54h" path="res://Sprites/Powerups/Stats/Speed.png" id="56_c6h32"]
-[ext_resource type="Texture2D" uid="uid://cnbo4juf7220o" path="res://Sprites/Powerups/Stats/ion_magnet.png" id="57_wkgsw"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="66_eac6f"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="67_a1168"]
 
@@ -6215,7 +6210,7 @@ _spectator_icon_parent = NodePath("SpectatorContainer/SpectatorPlayerIconsContai
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
 _ultimate_texture = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar/UltimateTextureRect")
 _ultimate_progress_bar = NodePath("AbilitiesAndStatsContainer/UltimateCooldown/TextureRect/UltimateProgressBar")
-_stat_level_container = NodePath("AbilitiesAndStatsContainer/Stats")
+_stat_level_container = NodePath("AbilitiesAndStatsContainer/Artifacts")
 _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 
@@ -6676,34 +6671,86 @@ theme_override_font_sizes/font_size = 32
 text = "1"
 horizontal_alignment = 1
 
-[node name="Stats" type="HBoxContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
+[node name="Artifacts" type="HBoxContainer" parent="CanvasLayer/AbilitiesAndStatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
 size_flags_stretch_ratio = 0.34
 
-[node name="StatLevelIndicator" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
+[node name="Powerup_Icon" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts"]
+clip_children = 2
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-icon = ExtResource("54_aob33")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="StatLevelIndicator2" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-icon = ExtResource("55_yatsb")
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts/Powerup_Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="StatLevelIndicator3" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
+[node name="Powerup_Icon2" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts"]
+clip_children = 2
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-icon = ExtResource("56_c6h32")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="StatLevelIndicator4" parent="CanvasLayer/AbilitiesAndStatsContainer/Stats" instance=ExtResource("35_1nta3")]
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts/Powerup_Icon2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Powerup_Icon3" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts"]
+clip_children = 2
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-icon = ExtResource("57_wkgsw")
+size_flags_horizontal = 0
+texture = ExtResource("36_xpuqi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Powerup_Image" type="TextureRect" parent="CanvasLayer/AbilitiesAndStatsContainer/Artifacts/Powerup_Icon3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="GameOverScreen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("text")]
 process_mode = 3
