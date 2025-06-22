@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dxkm7uv8852dv" path="res://Powerups/powerup_tether.tscn" id="1_8hjfb"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_75avm"]
-[ext_resource type="Texture2D" uid="uid://c4ebvi5lue4mc" path="res://Sprites/Powerups/LaserIcon.png" id="3_c6ffg"]
+[ext_resource type="Texture2D" uid="uid://cngg83copj7rr" path="res://Sprites/Powerups/RibbonIcon.png" id="3_pk8s0"]
 
 [resource]
 script = ExtResource("2_75avm")
 is_multiplayer = true
-upgrade_description = "Connect a laser between you and every other player."
+upgrade_description = "Connect a ribbon between you and every other player."
 upgrade_description_list = Array[String](["Connect a laser between you and every other player.", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_8hjfb")
 name = "Tether"
-sprite = ExtResource("3_c6ffg")
+sprite = ExtResource("3_pk8s0")
