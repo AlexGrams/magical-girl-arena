@@ -7,4 +7,4 @@ self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_6mit1")
 damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
 signature_damage = 29.0
-powerup_name = "PingPong"
+powerup_name = "Shuttle Shuffle"
