@@ -9,7 +9,7 @@ extends Bullet
 ## Child of initial Sprite2D. Used to scale for mask.
 @export var sprite_child: Sprite2D
 ## How big the shadow of this attack is at its maximum value.
-var _max_shadow_scale: Vector2 = Vector2.ONE
+@export var _max_shadow_scale: Vector2 = Vector2.ONE
 ## Which Enemy this bullet is targeting if it was spawned by a player's powerup.
 var _target: Node2D = null
 ## Collision layer this bullet will use to damage targets.

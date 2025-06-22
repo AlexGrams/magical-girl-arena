@@ -11,6 +11,7 @@ radius = 506.025
 script = ExtResource("1_o0b5k")
 vfx_uid = "uid://b1rugluq8875v"
 sprite_child = NodePath("Sprite2D")
+_max_shadow_scale = Vector2(2.63824, 2.63824)
 speed = 0.0
 lifetime = 0.5
 destroy_on_hit = false
