@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://djo8kggrhm1l0" path="res://Powerups/powerup_pingpong.tscn" id="1_u7qkm"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_v05if"]
-[ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="3_xkubf"]
+[ext_resource type="Texture2D" uid="uid://lqfpw4ywtnhd" path="res://Sprites/Powerups/PingPong.png" id="3_umc62"]
 
 [resource]
 script = ExtResource("2_v05if")
 is_multiplayer = true
-upgrade_description = "Throw a boomerang which bounces between all players. "
+upgrade_description = "Bounces between players, dealing damage and shielding based on distance traveled."
 upgrade_description_list = Array[String](["Throw a boomerang which bounces between all players. ", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_u7qkm")
 name = "PingPong"
-sprite = ExtResource("3_xkubf")
+sprite = ExtResource("3_umc62")
