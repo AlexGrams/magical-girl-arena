@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
 size = Vector2(26, 26)
 
-[node name="ExpOrb" type="Node2D"]
+[node name="ExpOrb" type="Node2D" groups=["pickup"]]
 script = ExtResource("1_whsa2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

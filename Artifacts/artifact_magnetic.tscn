@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cij6w7yu86mv"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_magnetic.gd" id="1_wfi45"]
+
+[node name="ArtifactMagnetic" type="Node"]
+script = ExtResource("1_wfi45")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_magnetic.tres"

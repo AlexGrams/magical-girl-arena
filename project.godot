@@ -46,6 +46,7 @@ enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg")
 
 enemy=""
 player=""
+pickup="Something that can magnetize to a player."
 
 [input]
 

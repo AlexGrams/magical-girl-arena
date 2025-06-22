@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oyy"]
 size = Vector2(26, 26)
 
-[node name="ExpOrbBig" type="Node2D"]
+[node name="ExpOrbBig" type="Node2D" groups=["pickup"]]
 scale = Vector2(5, 5)
 script = ExtResource("1_jh607")
 

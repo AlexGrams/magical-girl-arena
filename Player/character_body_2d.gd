@@ -99,6 +99,12 @@ func set_ultimate_crit_chance(value: float) -> void:
 	abilities[0].set_crit_chance(value)
 
 
+## Disable or enabled the magnetic area to pick up items.
+@rpc("any_peer", "call_local")
+func set_exp_pickup_enabled(value: bool) -> void:
+	_pickup_area.get_child(0).set_deferred("disabled", not value)
+
+
 func _ready():
 	_revive_collision_area.hide()
 	
@@ -594,6 +600,13 @@ func emit_gained_experience(new_experience: float, new_level: int):
 	level = new_level
 	
 	gained_experience.emit(float(experience) / GameState.exp_for_next_level, level)
+
+
+## Causes all pickups on the field to magnetize towards this player.
+@rpc("any_peer", "call_local")
+func collect_all_pickups() -> void:
+	for pickup: EXPOrb in get_tree().get_nodes_in_group("pickup"):
+		pickup.set_player(get_path())
 
 
 ## Causes EXP and Gold orbs to gravitate towards the player when they enter this area.
