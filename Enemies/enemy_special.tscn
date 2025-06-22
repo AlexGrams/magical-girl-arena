@@ -49,6 +49,8 @@ _data = {
 [node name="Atom_Special" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
 collision_mask = 384
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_833s6")
 base_health = 1100
 speed = 125.0

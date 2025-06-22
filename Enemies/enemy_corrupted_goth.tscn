@@ -53,6 +53,8 @@ _data = {
 [node name="EnemyCorruptedGoth" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
 collision_mask = 384
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_lnner")
 corrupted_lifetime = 60.0
 default_powerup_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres"
