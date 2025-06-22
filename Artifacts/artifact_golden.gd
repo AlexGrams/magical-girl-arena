@@ -4,11 +4,6 @@ extends Artifact
 var _owner: PlayerCharacterBody2D = null
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 func activate(artifact_owner: PlayerCharacterBody2D) -> void:
 	get_tree().root.get_node("Playground").drop_weight_nothing = 0.0
 	

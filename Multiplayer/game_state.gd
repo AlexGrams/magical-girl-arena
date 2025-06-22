@@ -10,7 +10,7 @@ const USING_GODOT_STEAM := true
 ## Playtest: 3705120
 ## Demo: 3782600
 const APPID: int = 3782600
-# Max number of players. I believe this includes the server.
+# Max number of players, including the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
 # closing its network connection when the host shuts down the lobby.
