@@ -8,12 +8,15 @@ extends Bullet
 @export var _area: Area2D = null
 # Contains the visuals and collision for the laser
 @export var _laser: Node2D = null
+@export var _animation_player:AnimationPlayer = null
 
 var _max_range: float = 0.0
 ## Squared max range for distance calculations
 var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
 var _starting_position: Node2D = null
+## Indicates if the tether is visually on or not
+var _visual_is_active: bool = false
 
 
 ## Returns PlayerCharacterBody2D that is nearest to _owning_character if any exists.
@@ -51,6 +54,10 @@ func _physics_process(_delta: float) -> void:
 	var end_point: Vector2
 	if _owning_character.position.distance_squared_to(target_position) <= _max_range_squared:
 		# The Tether is active and connects to the nearest player.
+		if not _visual_is_active:
+			_animation_player.play("fade_in")
+			_visual_is_active = true
+			
 		end_point = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
 	
 		var space_state = get_world_2d().direct_space_state
@@ -75,7 +82,13 @@ func _physics_process(_delta: float) -> void:
 		$AudioStreamPlayer2D.volume_db = -25
 	else:
 		# The Tether is deactivated since there isn't anyone else in range.
-		end_point = _owning_character.position
+		if _visual_is_active:
+			_animation_player.play("fade_out")
+			await _animation_player.animation_finished
+			end_point = _owning_character.position
+			_visual_is_active = false
+		else:
+			end_point = _owning_character.position
 		
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
