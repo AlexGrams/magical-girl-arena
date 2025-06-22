@@ -173,15 +173,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	for upgrade: ItemData in upgrade_choices:
 		upgrade_choice_names.append(upgrade.name)
 	
-	# Update the text on the Reroll button
-	var rerolls = player_character.get_rerolls()
-	reroll_label.text = "Reroll (" + str(rerolls) + " remaining)"
-	if rerolls <= 0:
-		reroll_button.disabled = true
-		reroll_texture.modulate = Color.DIM_GRAY
-	else:
-		reroll_button.disabled = false
-		reroll_texture.modulate = Color.WHITE
+	_update_reroll_button()
 	
 	_report_upgrade_choices.rpc_id(1, upgrade_choice_names)
 
@@ -290,6 +282,19 @@ func _request_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> v
 			_assigned_unique_artifacts.erase(upgrade_name)
 	
 	_show_random_upgrade_choices.rpc_id(id, _make_valid_random_upgrade_choices(id))
+	_update_reroll_button()
+
+
+## Update the text on the Reroll button
+func _update_reroll_button() -> void:
+	var rerolls = GameState.get_local_player().get_rerolls()
+	reroll_label.text = "Reroll (" + str(rerolls) + " remaining)"
+	if rerolls <= 0:
+		reroll_button.disabled = true
+		reroll_texture.modulate = Color.DIM_GRAY
+	else:
+		reroll_button.disabled = false
+		reroll_texture.modulate = Color.WHITE
 
 
 ## Notify relevant systems that this player has selected an upgrade.
