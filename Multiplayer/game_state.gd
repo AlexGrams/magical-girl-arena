@@ -545,7 +545,7 @@ func collect_gold(sound_position: Vector2) -> void:
 @rpc("authority", "call_local")
 func _update_exp_for_next_level() -> void:
 	## This is multiplied by 3, because the curve only goes to a max y value of 1024
-	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL)) * 2 * len(players)
+	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL)) * len(players)
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
