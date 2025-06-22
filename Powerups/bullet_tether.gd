@@ -60,14 +60,6 @@ func _physics_process(_delta: float) -> void:
 			
 		end_point = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
 	
-		var space_state = get_world_2d().direct_space_state
-		var query := PhysicsRayQueryParameters2D.create(
-			_starting_position.global_position, 
-			end_point
-		)
-		query.collide_with_areas = true
-		query.collision_mask = collider.collision_mask
-	
 		if is_multiplayer_authority():
 			# Harm all enemies the Tether is touching.
 			var damage_done: float = 0
