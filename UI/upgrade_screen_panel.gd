@@ -174,6 +174,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		upgrade_choice_names.append(upgrade.name)
 	
 	_update_reroll_button()
+	upgrade_panels_holder.hide()
 	
 	_report_upgrade_choices.rpc_id(1, upgrade_choice_names)
 
@@ -257,6 +258,8 @@ func _show_random_upgrade_choices(upgrade_names: Array[String]) -> void:
 	while i < len(upgrade_panels):
 		upgrade_panels[i].hide()
 		i += 1
+	
+	upgrade_panels_holder.show()
 
 
 func _on_reroll_button_down() -> void:
