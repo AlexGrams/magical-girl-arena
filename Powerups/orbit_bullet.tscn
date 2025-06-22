@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="6_42tvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(38, 38)
+size = Vector2(38, 50)
 
 [node name="OrbitBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
@@ -34,6 +34,7 @@ script = ExtResource("3_sgpxh")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/Area2D"]
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
