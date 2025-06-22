@@ -115,6 +115,7 @@ func set_gold(new_gold: int) -> void:
 func set_game_running(value: bool):
 	AudioManager.play_map_one_music()
 	game_running = value
+	get_tree().paused = not value
 
 
 ## Makes this Steam lobby joinable by other players. A lobby should only be joinable
