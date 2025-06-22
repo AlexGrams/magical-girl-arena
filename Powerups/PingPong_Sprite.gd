@@ -7,5 +7,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var direction = PingPongBullet._target.global_position - global_position
-	rotation = direction.angle() + deg_to_rad(90)
+	var target = PingPongBullet._target
+	if target != null:
+		var direction = target.global_position - global_position
+		rotation = direction.angle() + deg_to_rad(90)
