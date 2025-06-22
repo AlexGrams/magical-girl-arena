@@ -207,7 +207,8 @@ func _update_retry_votes(voting_retry: bool, id: int) -> void:
 		_votes_to_retry = max(0, _votes_to_retry - 1)
 	
 	# Update the indicators to display how many players want to retry.
-	_retry_indicators[_retry_indicator_index[id]].set_is_ready(voting_retry)
+	if _retry_indicator_index.has(id):
+		_retry_indicators[_retry_indicator_index[id]].set_is_ready(voting_retry)
 	for i in range(GameState.connected_players, GameState.MAX_PLAYERS):
 		_retry_indicators[i].hide()
 
