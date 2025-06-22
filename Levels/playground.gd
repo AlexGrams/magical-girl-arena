@@ -26,6 +26,11 @@ const _POWERUP_POOLING_TIMEOUT: float = 3.0
 ## Light to create darkness when boss spawns
 @export var point_light: PointLight2D = null
 
+## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
+var drop_weight_exp: float = 1.0
+var drop_weight_gold: float = 1.0
+var drop_weight_nothing: float = 1.0
+
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
 ## Animation to play when the boss spawns

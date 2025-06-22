@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpcxywpgyk6ve"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_golden.gd" id="1_gqh8p"]
+
+[node name="ArtifactGolden" type="Node"]
+script = ExtResource("1_gqh8p")
+_artifactdata_path = "res://Artifacts/ArtifactDataResourceFiles/artifactdata_golden.tres"

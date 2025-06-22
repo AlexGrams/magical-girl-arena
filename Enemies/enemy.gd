@@ -12,10 +12,6 @@ extends CharacterBody2D
 @export var attack_damage: float = 10.0
 ## Time in seconds between checks to see if there is a closer player to target.
 @export var retarget_check_interval: float = 5.0
-## The relative liklihoods of dropping EXP, gold, or nothing when this Enemy dies.
-@export var drop_weight_exp: float = 1.0
-@export var drop_weight_gold: float = 1.0
-@export var drop_weight_nothing: float = 1.0
 ## Parent of this Enemy's collider
 @export var collider_area: Area2D = null
 @export var sprite: Node2D = null
@@ -38,6 +34,8 @@ var lifetime: float = 0.0
 # Damage this Enemy does to other Enemies when it is an ally.
 var ally_damage: float = 0.0
 
+## Playground world that this Enemy was spawned into.
+var _playground: Playground = null
 ## All Powerup objects currently spawned in and added to this Enemy.
 var _powerups: Array[Powerup] = []
 ## How long until this Enemy can attack again
@@ -52,9 +50,6 @@ var _continuous_damage: float = 0.0
 var _continuous_damage_powerup_index: int = -1
 ## How much continuous damage comes from the local player. For analytics.
 var _local_continuous_damage: float = 0.0
-## Thresholds used for randomly determining what an enemy drops. 
-var _threshold_exp: float = 0.0
-var _threshold_gold: float = 0.0
 ## Status to make this Enemy an ally when it dies.
 var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
@@ -77,10 +72,7 @@ func _ready() -> void:
 	health = max_health
 	_retarget_timer = retarget_check_interval
 	
-	# Random loot generation
-	var total := drop_weight_exp + drop_weight_gold + drop_weight_nothing
-	_threshold_exp = drop_weight_exp / total
-	_threshold_gold = drop_weight_gold / total + _threshold_exp
+	_playground = get_tree().root.get_node("Playground")
 
 
 func _process(delta: float) -> void:
@@ -284,7 +276,7 @@ func _damage_effects(damage: float) -> void:
 	damage_indicator.global_position = global_position
 	damage_indicator.damage_value = damage
 	#damage_indicator.text = str(damage)
-	get_tree().root.get_node("Playground").add_child(damage_indicator)
+	_playground.add_child(damage_indicator)
 	
 	# Animation
 	$AnimationPlayer.play("take_damage")
@@ -408,6 +400,11 @@ func die() -> void:
 
 # Randomly spawns EXP, gold, or nothing from this Enemy. Call after it dies.
 func _spawn_loot() -> void:
+	# Random loot calculation
+	var total := _playground.drop_weight_exp + _playground.drop_weight_gold + _playground.drop_weight_nothing
+	var _threshold_exp = _playground.drop_weight_exp / total
+	var _threshold_gold = _playground.drop_weight_gold / total + _threshold_exp
+	
 	var random_value := randf()
 	if random_value <= _threshold_exp:
 		var exp_orb: EXPOrb = exp_scene.instantiate()
@@ -416,7 +413,7 @@ func _spawn_loot() -> void:
 			func(): exp_orb.teleport.rpc(global_position)
 			, CONNECT_DEFERRED
 		)
-		get_tree().root.get_node("Playground").call_deferred("add_child", exp_orb, true)
+		_playground.call_deferred("add_child", exp_orb, true)
 	elif random_value <= _threshold_gold:
 		var gold := gold_scene.instantiate()
 		gold.global_position = global_position
@@ -424,7 +421,7 @@ func _spawn_loot() -> void:
 			func(): gold.teleport.rpc(global_position)
 			, CONNECT_DEFERRED
 		)
-		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
+		_playground.call_deferred("add_child", gold, true)
 	else:
 		# Nothing rewarded
 		pass
