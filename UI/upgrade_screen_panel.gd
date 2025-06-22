@@ -182,7 +182,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 ## which upgrades they can display. Once all clients send their choices, sends a random selection of 
 ## upgrades back to each player. Ensures that no two players are given an option for the same unique
 ## Artifact. Only call on server.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func _report_upgrade_choices(upgrade_names: Array[String]) -> void:
 	if not multiplayer.is_server():
 		push_warning("Only call on the server.")
@@ -230,7 +230,7 @@ func _make_valid_random_upgrade_choices(id: int) -> Array[String]:
 
 ## Display a selection of upgrades for the player to choose from.
 ## upgrade_names must contain valid upgrade possibilities. Only call from the server.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func _show_random_upgrade_choices(upgrade_names: Array[String]) -> void:
 	_displayed_upgrade_names = upgrade_names
 	var i = 0
@@ -271,7 +271,7 @@ func _on_reroll_button_down() -> void:
 
 ## Get a new selection of upgrade choices, taking into account unique Artifacts that were assigned
 ## to other players.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func _request_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> void:
 	# ID of player who is rerolling.
 	var id: int = multiplayer.get_remote_sender_id()
@@ -347,7 +347,7 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 
 
 ## Update the PlayerReadyIndicators showing how many players are still selecting their upgrades.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func _update_players_selecting_upgrades() -> void:
 	players_done_selecting_upgrades += 1
 	
