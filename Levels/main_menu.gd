@@ -400,8 +400,7 @@ func from_shop_to_main_menu() -> void:
 # Used to show shop without leaving current screen
 func show_shop() -> void:
 	# If shop is off-screen, move it to center
-	print("Show shop")
-	print(shop.position)
+	shop.update_all_quantities()
 	if shop.position != _shop_original_pos:
 		shop.position = _shop_original_pos
 	shop.get_node("DimBackground").show()
@@ -409,10 +408,9 @@ func show_shop() -> void:
 	shop.get_node("ReturntoMainMenu_Label").hide()
 	shop.show()
 
+
 # Used to hide shop after using show shop
 func hide_shop() -> void:
-	print("Hide shop")
-	print(shop.position)
 	shop.get_node("DimBackground").hide()
 	shop.get_node("HideShop_Label").hide()
 	shop.get_node("ReturntoMainMenu_Label").show()
