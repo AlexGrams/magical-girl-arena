@@ -9,7 +9,7 @@ const USING_GODOT_STEAM := true
 ## Main: 3689240
 ## Playtest: 3705120
 ## Demo: 3782600
-const APPID: int = 3782600
+const APPID: int = 3705120
 # Max number of players, including the server.
 const MAX_PLAYERS: int = 4
 # The time in seconds that the host will wait for all clients to disconnect from it before
@@ -111,7 +111,7 @@ func set_gold(new_gold: int) -> void:
 	_gold = new_gold
 
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func set_game_running(value: bool):
 	AudioManager.play_map_one_music()
 	game_running = value
@@ -243,7 +243,8 @@ func _process(delta: float) -> void:
 # Set this client up as a game server through Steam.
 func create_steam_socket():
 	peer = SteamMultiplayerPeer.new()
-	peer.create_host(0)
+	var error: Error = peer.create_host(0)
+	print(error)
 	multiplayer.set_multiplayer_peer(peer)
 
 
@@ -312,7 +313,7 @@ func start_game():
 
 
 # Called when the game ends, either by the players winning or losing
-@rpc("authority", "call_local")
+@rpc("authority", "call_local", "reliable")
 func _game_over(has_won_game: bool = false):
 	get_tree().paused = true
 	
@@ -327,7 +328,7 @@ func _game_over(has_won_game: bool = false):
 
 
 # Stops the main gameplay segment by deleting the world and resetting state variables.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func end_game():
 	reset_game_variables()
 	
@@ -370,7 +371,7 @@ func add_player_character(player_id: int, player_character: CharacterBody2D) -> 
 
 # Notifies this client that the lobby closed and disconnects the client.
 # Should only be called by the lobby host.
-@rpc("any_peer", "call_remote")
+@rpc("any_peer", "call_remote", "reliable")
 func lobby_host_left():
 	disconnect_local_player()
 	lobby_closed.emit()
@@ -427,7 +428,7 @@ func disconnect_local_player():
 
 
 # Called when a new player enters the lobby
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func register_player(id:int, new_player_name: String, new_steam_id: int, character: Constants.Character):
 	players[id] = {
 		"name" = new_player_name,
@@ -438,7 +439,7 @@ func register_player(id:int, new_player_name: String, new_steam_id: int, charact
 
 
 # Remove a player from our map of registered players.
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func unregister_player(id: int):
 	players.erase(id)
 	# Hack to remove from steam_ids as well
@@ -549,7 +550,7 @@ func _update_exp_for_next_level() -> void:
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func player_selected_upgrade() -> void:
 	if not multiplayer.is_server():
 		return
@@ -561,7 +562,7 @@ func player_selected_upgrade() -> void:
 
 
 # Continues the game
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func resume_game() -> void:
 	get_tree().paused = false
 
