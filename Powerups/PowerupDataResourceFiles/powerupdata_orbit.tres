@@ -8,7 +8,7 @@
 script = ExtResource("1_pq7hf")
 is_multiplayer = false
 upgrade_description = "A bullet continuously revolves around you"
-upgrade_description_list = Array[String](["A bullet continuously revolves around you", "Increase damage", "Increase speed and damage", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["A star continuously revolves around you", "Increase damage", "Add an additional star", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_0m21i")
 name = "Prism Star Power"
 sprite = ExtResource("3_cgv3i")
