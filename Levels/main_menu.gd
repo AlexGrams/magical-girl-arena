@@ -164,6 +164,7 @@ func _on_settings_back_button_down() -> void:
 func _on_host_button_button_down() -> void:
 	if GameState.USING_GODOT_STEAM:
 		GameState.host_lobby(Steam.getPersonaName())
+		start_game_label.show()
 	else:
 		MultiplayerManager.join_multiplayer_lobby_using_enet()
 		if not multiplayer.is_server():
