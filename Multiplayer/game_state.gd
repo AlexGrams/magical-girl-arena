@@ -438,7 +438,6 @@ func disconnect_local_player():
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local", "reliable")
 func register_player(id: int, new_player_name: String, new_steam_id: int, character: Constants.Character):
-	print("Register ", id, " ", multiplayer.get_remote_sender_id())
 	players[id] = {
 		"name" = new_player_name,
 		"character" = character
