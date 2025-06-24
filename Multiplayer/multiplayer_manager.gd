@@ -1,14 +1,12 @@
+class_name MGAMultiplayerManager
 extends Node
 
-class_name MGAMultiplayerManager
 
 # Port number for ENet multiplayer connections. Not commonly used or assigned:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const PORT_NUMBER: int = 34229
 
 var peer: MultiplayerPeer = null
-# Map of connected players to their data
-var player_ids = {}
 
 # Emitted after a peer is created
 signal peer_created()
@@ -17,8 +15,7 @@ signal host_created()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	multiplayer.peer_connected.connect(_on_peer_connected)
-	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,7 +33,6 @@ func join_multiplayer_lobby_using_enet():
 		# Server created
 		multiplayer.multiplayer_peer = peer
 
-		player_ids[1] = null
 		print("Hosting and telling myself.")
 		GameState.register_player(multiplayer.get_unique_id(), "Host", GameState.local_player_steam_id, Constants.Character.GOTH)
 		
@@ -53,16 +49,3 @@ func join_multiplayer_lobby_using_enet():
 			return
 
 		peer_created.emit()
-
-
-# Called on all players when a client connects.
-# id = unique id of the client that connected
-func _on_peer_connected(id: int) -> void:
-	print("on peer connected")
-	GameState.register_player(id, "Client", GameState.local_player_steam_id, Constants.Character.GOTH)
-	player_ids[id] = null
-
-
-# Called on all players when a client disconnects.
-func _on_peer_disconnected(id: int) -> void:
-	player_ids.erase(id)
