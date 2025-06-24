@@ -139,6 +139,7 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(
 		func(id : int):
 			# Tell the connected peer that this client is in the lobby.
+			print("Telling someone else that peer connected")
 			register_player.rpc_id(
 				id, 
 				multiplayer.get_unique_id(), 
@@ -152,6 +153,7 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(
 		func():
 			# Tell all clients (including the local one) this client's information.
+			print("Telling everyone peer connected")
 			register_player.rpc(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
 			#connection_succeeded.emit()	
 	)
@@ -258,6 +260,7 @@ func connect_steam_socket(steam_id : int):
 # Create a new public multiplayer lobby.
 func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM or OS.has_feature("release"):
+		print("Hosting lobby and telling everyone")
 		player_name = host_player_name
 		register_player(multiplayer.get_unique_id(), host_player_name, 1, Constants.Character.GOTH)
 		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, MAX_PLAYERS)
@@ -430,6 +433,7 @@ func disconnect_local_player():
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local", "reliable")
 func register_player(id:int, new_player_name: String, new_steam_id: int, character: Constants.Character):
+	print("Register ", id)
 	players[id] = {
 		"name" = new_player_name,
 		"character" = character
