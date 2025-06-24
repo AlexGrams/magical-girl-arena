@@ -321,8 +321,6 @@ func _on_shop_button_down_from_lobby() -> void:
 ## character information.
 @rpc("any_peer", "call_local")
 func refresh_lobby() -> void:
-	print("Refresh requested")
-	print()
 	# Don't try to refresh the lobby if we're in a game right now.
 	if GameState.game_running:
 		return

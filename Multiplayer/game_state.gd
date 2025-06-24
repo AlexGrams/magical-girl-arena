@@ -135,11 +135,16 @@ func _ready() -> void:
 	
 	exp_per_level_curve = load(exp_per_level_curve_path)
 	_update_exp_for_next_level()
-		
+	
 	multiplayer.peer_connected.connect(
 		func(id : int):
-			# Tell the connected peer that this client is in the lobby.
-			print("Telling someone else that peer connected")
+			# Called when someone joins the lobby that this client is in, or when this client joins
+			# an existing lobby. Tell the connected peer this client's information.
+			if not players.has(multiplayer.get_unique_id()):
+				# NOTE: I don't know if peer_connected is guaranteed to be called after connected_to_server,
+				# so this is here to make sure the "players" dictionary is up to date at this point.
+				register_player(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
+			
 			register_player.rpc_id(
 				id, 
 				multiplayer.get_unique_id(), 
@@ -152,10 +157,8 @@ func _ready() -> void:
 	# TODO: Possibly do something for the following three events.
 	multiplayer.connected_to_server.connect(
 		func():
-			# Tell all clients (including the local one) this client's information.
-			print("Telling everyone peer connected")
-			register_player.rpc(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
-			#connection_succeeded.emit()	
+			# Record the local client's own information.
+			register_player(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
 	)
 	
 	# Set up Steam-specific functionality
@@ -246,7 +249,10 @@ func _process(delta: float) -> void:
 func create_steam_socket():
 	peer = SteamMultiplayerPeer.new()
 	var error: Error = peer.create_host(0)
-	print(error)
+	if error != OK:
+		push_error("Something went wrong when creating Steam socket: " + str(error))
+		return
+	
 	multiplayer.set_multiplayer_peer(peer)
 
 
@@ -260,7 +266,6 @@ func connect_steam_socket(steam_id : int):
 # Create a new public multiplayer lobby.
 func host_lobby(host_player_name: String) -> void:
 	if USING_GODOT_STEAM or OS.has_feature("release"):
-		print("Hosting lobby and telling everyone")
 		player_name = host_player_name
 		register_player(multiplayer.get_unique_id(), host_player_name, 1, Constants.Character.GOTH)
 		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, MAX_PLAYERS)
@@ -432,8 +437,8 @@ func disconnect_local_player():
 
 # Called when a new player enters the lobby
 @rpc("any_peer", "call_local", "reliable")
-func register_player(id:int, new_player_name: String, new_steam_id: int, character: Constants.Character):
-	print("Register ", id)
+func register_player(id: int, new_player_name: String, new_steam_id: int, character: Constants.Character):
+	print("Register ", id, " ", multiplayer.get_remote_sender_id())
 	players[id] = {
 		"name" = new_player_name,
 		"character" = character
@@ -462,9 +467,9 @@ func unregister_player_by_steam_id(steam_id: int):
 			"\nsteam_ids: " + str(steam_ids) + 
 			"\nID to delete: " + str(steam_id)
 		)
-		return
+	else:
+		players.erase(steam_ids[steam_id])
 	
-	players.erase(steam_ids[steam_id])
 	if steam_ids.has(steam_id):
 		steam_ids.erase(steam_id)
 	

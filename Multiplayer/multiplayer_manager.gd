@@ -33,7 +33,6 @@ func join_multiplayer_lobby_using_enet():
 		# Server created
 		multiplayer.multiplayer_peer = peer
 
-		print("Hosting and telling myself.")
 		GameState.register_player(multiplayer.get_unique_id(), "Host", GameState.local_player_steam_id, Constants.Character.GOTH)
 		
 		host_created.emit()
@@ -45,7 +44,7 @@ func join_multiplayer_lobby_using_enet():
 		multiplayer.multiplayer_peer = peer
 
 		if create_client_result != OK:
-			print("Error when creating client: " + str(create_client_result))
+			push_error("Error when creating client: " + str(create_client_result))
 			return
 
 		peer_created.emit()
