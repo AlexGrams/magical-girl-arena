@@ -88,6 +88,7 @@ ability_ultimate={
 2d_physics/layer_7="Walls"
 2d_physics/layer_8="obstacle"
 2d_physics/layer_9="enemy_collision"
+2d_physics/layer_10="downed_player"
 
 [physics]
 

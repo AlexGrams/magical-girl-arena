@@ -22,10 +22,14 @@ func _process(delta: float) -> void:
 
 # Destroys orb and adds EXP. Called when EXP orb touches a player.
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if uncollected and is_multiplayer_authority() and area.get_collision_layer_value(4):
+	if not is_multiplayer_authority():
+		return
+	
+	var hit_node: Node = area.get_parent()
+	if uncollected and hit_node != null and hit_node.is_in_group("player"):
 		uncollected = false
 		GameState.collect_exp.rpc(EXP, global_position)
-		destroy.rpc_id(1) 
+		destroy()
 
 
 # Can be called only once to set which player this orb is gravitating towards

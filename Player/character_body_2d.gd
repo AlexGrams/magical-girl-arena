@@ -7,6 +7,8 @@ const TIME_BEFORE_PLAYER_CAN_BE_REVIVED: float = 5.0
 const TIME_TO_REVIVE: float = 3.0
 ## Index of the collision layer for players.
 const PLAYER_COLLISION_LAYER: int = 4
+## Index of the collision layer for players that have been downed.
+const DOWNED_PLAYER_COLLISION_LAYER: int = 10
 ## The most number of different powerups that this player can have INCLUDING their base powerup.
 const MAX_POWERUPS: int = 5
 ## The most number of different artifacts that this player can have.
@@ -451,6 +453,7 @@ func die():
 	_revive_progress_bar_2.value = 0
 	_revive_collision_area.show()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, false)
+	_player_collision_area.set_collision_layer_value(DOWNED_PLAYER_COLLISION_LAYER, true)
 	_character_animated_sprite.play_death_animation()
 	
 	if is_multiplayer_authority():
@@ -466,6 +469,7 @@ func revive():
 	is_down = false
 	_revive_collision_area.hide()
 	_player_collision_area.set_collision_layer_value(PLAYER_COLLISION_LAYER, true)
+	_player_collision_area.set_collision_layer_value(DOWNED_PLAYER_COLLISION_LAYER, false)
 	take_damage(-health_max)
 	_character_animated_sprite.play_revive_animation()
 	
