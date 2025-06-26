@@ -275,7 +275,6 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 	lobby_visibility_holder.visible = false
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	start_game_label.hide()
-	connecting_screen.hide()
 
 #endregion
 
@@ -422,6 +421,10 @@ func hide_shop() -> void:
 #endregion
 
 func _switch_screen_animation(from_screen: Control, to_screen: Control, to_screen_original_pos: Vector2):
+	# Sort of a hack to prevent the connecting screen from blocking input erroneously.
+	# Assumes we never switch screens while waiting to connect.
+	connecting_screen.hide()
+	
 	to_screen.position = Vector2(-(to_screen.size.x), to_screen.position.y)
 	to_screen.show()
 	var tween = create_tween().set_parallel(true)
