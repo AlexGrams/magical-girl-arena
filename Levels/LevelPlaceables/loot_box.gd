@@ -81,6 +81,9 @@ func _destroy() -> void:
 
 
 func take_damage(damage: float) -> void:
+	if _health <= 0.0:
+		return
+	
 	_health -= damage
 	if _health <= 0.0:
 		_destroy()
