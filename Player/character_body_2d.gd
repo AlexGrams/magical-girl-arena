@@ -93,6 +93,11 @@ signal revived()
 
 
 @rpc("authority", "call_local")
+func _set_speed(new_speed: float) -> void:
+	speed = new_speed
+
+
+@rpc("authority", "call_local")
 func set_prevent_death(value: bool) -> void:
 	_prevent_death = value
 
@@ -172,7 +177,7 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 			_add_health_regen.rpc(1.0)
 		Constants.StatUpgrades.SPEED:
 			_stat_speed += 1
-			speed += 40
+			_set_speed.rpc(speed + 40)
 		Constants.StatUpgrades.PICKUP_RADIUS:
 			_stat_pickup_radius += 1
 			_pickup_area.scale += Vector2(0.1, 0.1)
@@ -282,6 +287,12 @@ func _physics_process(_delta):
 			move_and_slide()
 		else:
 			get_spectator_input()
+	else:
+		# For characters owned by other clients, use input direction to predict their movement,
+		# making it seem smoother. input_direction is replicated using the MultiplayerSynchronizer.
+		if not is_down:
+			velocity = input_direction * speed
+			move_and_slide()
 
 
 func _input(event: InputEvent) -> void:
