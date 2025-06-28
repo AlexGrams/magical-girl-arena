@@ -136,9 +136,6 @@ _health_label = NodePath("HealthBar/HealthLabel")
 _temp_health_bar = NodePath("TempHealthBar")
 _temp_health_label = NodePath("TempHealthBar/TempHealthLabel")
 
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_r7kh5")

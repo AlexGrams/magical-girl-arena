@@ -247,10 +247,6 @@ func make_camera_current() -> void:
 
 
 func _process(delta: float) -> void:
-	var direction = get_global_mouse_position() - _character_animated_sprite.global_position
-	var direction_normal = direction.normalized()
-	$Line2D.points = [direction_normal*100, Vector2.ZERO]
-	
 	# Health regen - ticks at every interval, but does nothing if it ticks when health is full
 	if _health_regen > 0.0:
 		_health_regen_timer -= delta
