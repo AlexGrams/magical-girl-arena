@@ -8,10 +8,12 @@ var character_data:CharacterData = Constants.CHARACTER_DATA[Constants.Character.
 var previous_model_scale_multiplier:float = 1
 
 var last_direction = "move_right"
+var is_dead:bool = false
 
 # True if this sprite changes state depending on local user input.
 var _read_input := true
-var is_dead:bool = false
+## Not null if this sprite is a child of a player character.
+var _owning_player: PlayerCharacterBody2D = null
 
 func set_character(character: Constants.Character, is_corrupted:bool = false) -> void:
 	character_data = Constants.CHARACTER_DATA[character]
@@ -44,6 +46,9 @@ func set_model_scale(new_scale: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Blinking_AnimationPlayer.play("Blinking")
+	
+	if get_parent() != null and get_parent() is PlayerCharacterBody2D:
+		_owning_player = get_parent()
 
 # Called by death signal
 func play_death_animation() -> void:
@@ -67,25 +72,34 @@ func _physics_process(_delta: float) -> void:
 			$Live2D_AnimationPlayer.speed_scale = 1
 			return
 		
-		var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var input_direction: Vector2 = Vector2.ZERO 
+		if is_multiplayer_authority():
+			# Sprite responds to this client's input.
+			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+			
+			# This section is for 2-way sprites
+			if Input.is_action_just_pressed("move_left"):
+				flip_h = true
+				last_direction = "move_left"
+			elif Input.is_action_just_pressed("move_right"):
+				flip_h = false
+				last_direction = "move_right"
+			elif Input.is_action_pressed(last_direction):
+				pass
+			elif Input.is_action_pressed("move_left"):
+				flip_h = true
+			elif Input.is_action_pressed("move_right"):
+				flip_h = false
+		elif _owning_player != null:
+			# Sprite responds to another's client's input.
+			input_direction = _owning_player.input_direction
+			flip_h = input_direction.x < 0.0
+			
+		
 		if input_direction != Vector2.ZERO:
 			$Live2D_AnimationPlayer.play(character_data.name + "_Walking")
 			$Live2D_AnimationPlayer.speed_scale = 2
 		else:
 			$Live2D_AnimationPlayer.play(character_data.name + "_Idle")
 			$Live2D_AnimationPlayer.speed_scale = 1
-			
-		### This section is for 2-way sprites
-		if Input.is_action_just_pressed("move_left"):
-			flip_h = true
-			last_direction = "move_left"
-		elif Input.is_action_just_pressed("move_right"):
-			flip_h = false
-			last_direction = "move_right"
-		elif Input.is_action_pressed(last_direction):
-			pass
-		elif Input.is_action_pressed("move_left"):
-			flip_h = true
-		elif Input.is_action_pressed("move_right"):
-			flip_h = false
 	

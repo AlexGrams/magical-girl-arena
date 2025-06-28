@@ -115,6 +115,9 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:input_direction")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label") groups=["player"]]
 z_index = 1

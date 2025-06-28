@@ -20,6 +20,8 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
+## The movement direction being inputted for this character.
+@export var input_direction: Vector2 = Vector2.ZERO
 
 @export var _camera: Camera2D = null
 @export var _player_collision_area: Area2D = null
@@ -35,8 +37,6 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _temp_health_bar: Control = null
 @export var _temp_health_label: Label = null
 
-@onready var bullet_scene = preload("res://Powerups/bullet.tscn")
-var shoot_powerup_path = "res://Powerups/shooting_powerup.tscn"
 ## All Powerups that this player has.
 var powerups: Array[Powerup] = []
 ## All Abilities that this player has.
@@ -219,7 +219,7 @@ func get_temp_health() -> int:
 
 
 func get_input():
-	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_direction != null:
 		velocity = input_direction * speed
 
