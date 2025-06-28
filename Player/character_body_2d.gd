@@ -369,7 +369,7 @@ func scale_ultimate_cooldown(percent: float) -> void:
 # Deal damage to the player. Should be RPC'd on everyone.
 @rpc("authority", "call_local")
 func take_damage(damage: float) -> void:
-	if is_down:
+	if is_down or not is_multiplayer_authority():
 		return
 	
 	# Deplete temp health before regular health.
@@ -400,6 +400,18 @@ func take_damage(damage: float) -> void:
 				death_prevented.emit()
 			elif is_multiplayer_authority():
 				die.rpc()
+
+
+## Emit the took_damage signal on this client's replication of this character with certain arguments.
+@rpc("authority", "call_remote")
+func _emit_took_damage(new_health, new_health_max, new_temp_health) -> void:
+	# Sort of a hack to get the "take damage" animation to play on all clients
+	if new_health < health:
+		$AnimationPlayer.play("took_damage")
+	
+	health = new_health
+	health_max = new_health_max
+	took_damage.emit(new_health, new_health_max, new_temp_health)
 
 
 ## Changes the health bar and temp health bar displayed under this character.
@@ -576,6 +588,11 @@ func ready_player_character(character: Constants.Character) -> void:
 		add_child(ult)
 		abilities.append(ult)
 		$"..".get_hud_canvas_layer().set_up_ultimate_ui(character_data, ult)
+		
+		# Every time our health updates, signal on the other clients what the new healh values are.
+		took_damage.connect(func(new_health, new_health_max, new_temp_health):
+			_emit_took_damage.rpc(new_health, new_health_max, new_temp_health)
+		)
 	else:
 		# This client does not own this PlayerCharacter. Connect events to show the
 		# pointer to this character when it goes off screen for the local client.
