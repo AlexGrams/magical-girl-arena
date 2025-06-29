@@ -53,9 +53,8 @@ func _ready() -> void:
 # Called by death signal
 func play_death_animation() -> void:
 	is_dead = true
-	if character_data.name != "Goth": # GOTH IS NOT DONE
-		$Blinking_AnimationPlayer.stop()
-		$Live2D_AnimationPlayer.play(character_data.name + "_Death")
+	$Blinking_AnimationPlayer.stop()
+	$Live2D_AnimationPlayer.play(character_data.name + "_Death")
 
 func play_revive_animation() -> void:
 	is_dead = false

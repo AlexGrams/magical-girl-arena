@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjhih1tuw0lf5"
-path="res://.godot/imported/texture_00.png-dce8d2051d5c7c8942915efb076a14a1.ctex"
+uid="uid://bbpwbpdhds1e4"
+path="res://.godot/imported/texture_00.png-9e3c38a9d8dc3badc5f8b70bd4180664.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gd_cubism/example/res/live2d/Goth/runtime/GothVector0.2048/texture_00.png"
-dest_files=["res://.godot/imported/texture_00.png-dce8d2051d5c7c8942915efb076a14a1.ctex"]
+source_file="res://addons/gd_cubism/example/res/live2d/Goth/runtime/Goth.2048/texture_00.png"
+dest_files=["res://.godot/imported/texture_00.png-9e3c38a9d8dc3badc5f8b70bd4180664.ctex"]
 
 [params]
 
