@@ -52,9 +52,7 @@ collision_mask = 384
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_fuudh")
-base_health = 1500
-drop_weight_exp = 15.0
-drop_weight_gold = 4.0
+base_health = 2000
 collider_area = NodePath("Area2D")
 sprite = NodePath("SupergiantSprite")
 
