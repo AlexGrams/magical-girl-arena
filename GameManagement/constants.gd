@@ -31,6 +31,15 @@ enum StatUpgrades {
 	#ULTIMATE_CHARGE_RATE
 }
 
+## Different times throughout a game in which dialogue can play.
+enum DialoguePlayTrigger {
+	NONE,
+	START,
+	MINIBOSS,
+	BOSS,
+	WIN
+}
+
 # Maps character enum to their CharacterData resource file
 var CHARACTER_DATA: Dictionary = {
 	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),
