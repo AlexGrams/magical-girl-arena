@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=115 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -61,6 +61,7 @@
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="55_sk2pv"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
+[ext_resource type="PackedScene" uid="uid://cyi3kj48dlj1x" path="res://UI/dialogue_box.tscn" id="60_h6niw"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="66_eac6f"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="67_a1168"]
 
@@ -6982,6 +6983,8 @@ theme_override_font_sizes/font_size = 32
 text = "Quit to Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource("60_h6niw")]
 
 [node name="Timer" parent="CanvasLayer" instance=ExtResource("66_eac6f")]
 anchors_preset = 5
