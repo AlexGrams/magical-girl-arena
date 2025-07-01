@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3 uid="uid://bq6xw0bolrfgw"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_wrskc"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_qis0y"]
+
+[sub_resource type="Resource" id="Resource_u1ate"]
+script = ExtResource("1_wrskc")
+speaker = 2
+dialogue = "Something something."
+
+[sub_resource type="Resource" id="Resource_abfib"]
+script = ExtResource("1_wrskc")
+speaker = 0
+dialogue = "Something more."
+
+[resource]
+script = ExtResource("2_qis0y")
+lines = Array[ExtResource("1_wrskc")]([SubResource("Resource_u1ate"), SubResource("Resource_abfib")])
+play_trigger = 1

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3 uid="uid://70o84buyexlu"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_a8hxq"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_k5v5a"]
+
+[sub_resource type="Resource" id="Resource_qud8o"]
+script = ExtResource("1_a8hxq")
+speaker = 0
+dialogue = "Hello world."
+
+[sub_resource type="Resource" id="Resource_ochdu"]
+script = ExtResource("1_a8hxq")
+speaker = 1
+dialogue = "Hello again."
+
+[resource]
+script = ExtResource("2_k5v5a")
+lines = Array[ExtResource("1_a8hxq")]([SubResource("Resource_qud8o"), SubResource("Resource_ochdu")])
+play_trigger = 1

@@ -7,3 +7,12 @@ extends Resource
 @export var lines: Array[DialogueLine] = []
 ## At what point in the game can this dialogue be played. 
 @export var play_trigger: Constants.DialoguePlayTrigger = Constants.DialoguePlayTrigger.NONE
+
+
+## Returns list of characters that participate in this dialogue.
+func get_characters() -> Array[Constants.Character]:
+	var result: Array[Constants.Character] = [] 
+	for line: DialogueLine in lines:
+		if line.speaker not in result:
+			result.append(line.speaker)
+	return result
