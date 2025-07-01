@@ -14,5 +14,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
+
+
+## Set the properties of this container.
+func set_up(line: DialogueLine) -> void:
+	_text.text = line.dialogue
+	_portrait.texture = load(Constants.CHARACTER_DATA[line.speaker].icon_uid)
