@@ -23,6 +23,8 @@ extends CanvasLayer
 @export var _boss_health_bar: ProgressBar = null
 ## Text displaying boss health.
 @export var _boss_health_text: Label = null
+## Control for displaying and playing dialogue.
+@export var _dialogue_box: DialogueBox = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -314,16 +316,6 @@ func add_artifact(artifact_data: ArtifactData) -> void:
 		if icon.texture == null:
 			icon.texture = artifact_data.sprite
 			break
-	
-## OLD. NO LONGER USING STATS.
-### Updates the stat values on the UI.
-#func update_stats(player: PlayerCharacterBody2D) -> void:
-	#var stat_containers := _stat_level_container.get_children()
-	#
-	#stat_containers[0].set_stat_value(player._stat_health)
-	#stat_containers[1].set_stat_value(player._stat_health_regen)
-	#stat_containers[2].set_stat_value(player._stat_speed)
-	#stat_containers[3].set_stat_value(player._stat_pickup_radius)
 
 
 ## Display the boss health bar. Health percent = [0, 1].
@@ -344,3 +336,8 @@ func hide_boss_health_bar() -> void:
 func update_boss_health_bar(health_percent: float) -> void:
 	_boss_health_bar.value = health_percent
 	_boss_health_text.text = str(ceil(health_percent * 100.0)) + "%"
+
+
+## Start a dialogue through the DialogueBox. Only call on server.
+func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
+	_dialogue_box.start_dialogue(trigger)

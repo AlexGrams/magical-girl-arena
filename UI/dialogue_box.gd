@@ -45,11 +45,6 @@ func _ready() -> void:
 			_dialogue[dialogue_data.play_trigger] = []
 		_dialogue[dialogue_data.play_trigger].append(dialogue_data)
 		_dialogue_paths[dialogue_data] = full_path
-	
-	# TODO: For testing, wait some time before trying to start the dialogue.
-	if multiplayer.is_server():
-		await get_tree().create_timer(2.0).timeout
-		start_dialogue(Constants.DialoguePlayTrigger.START)
 
 
 func _process(delta: float) -> void:
@@ -80,14 +75,15 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
 		for data: Dictionary in GameState.players.values():
 			_player_character_set[data["character"]] = true
 	
-	for dialogue: DialogueData in _dialogue[trigger]:
-		var can_add: bool = true
-		for character: Constants.Character in dialogue.get_characters():
-			if not _player_character_set.has(character):
-				can_add = false
-				break
-		if can_add:
-			dialogue_choices.append(dialogue)
+	if _dialogue.has(trigger):
+		for dialogue: DialogueData in _dialogue[trigger]:
+			var can_add: bool = true
+			for character: Constants.Character in dialogue.get_characters():
+				if not _player_character_set.has(character):
+					can_add = false
+					break
+			if can_add:
+				dialogue_choices.append(dialogue)
 	
 	if len(dialogue_choices) <= 0:
 		return
@@ -95,7 +91,7 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
 	_run_dialogue.rpc(_dialogue_paths[dialogue_choices.pick_random()])
 
 
-## Play a full dialogue sequence. Should only be called by the server.
+## Play a full dialogue sequence. Should only be called via RPC by the server.
 @rpc("any_peer", "call_local", "reliable")
 func _run_dialogue(dialogue_data_path: String) -> void:
 	_running_dialogue = load(dialogue_data_path)

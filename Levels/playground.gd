@@ -74,9 +74,14 @@ func _ready() -> void:
 	spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
 		return a.start_time_seconds > b.start_time_seconds
 	)
+	
+	# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
+	# TODO: Remove once we have loading screens working.
+	await get_tree().create_timer(2.0).timeout
+	hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.START)
 
 
-# Only process on the server.
+## Only process on the server.
 func _process(_delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
@@ -94,9 +99,11 @@ func _process(_delta: float) -> void:
 	if not _has_corrupted_enemy_spawned:
 		if GameState.get_game_progress_as_fraction() >= corrupted_enemy_spawn_time_fraction:
 			_spawn_corrupted_enemy()
+			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS)
 	elif not _has_boss_spawned:
 		if GameState.get_game_progress_as_fraction() >= 1.0:
 			_spawn_boss.rpc()
+			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.BOSS)
 
 
 # Spawn the corrupted magical girl enemy.
@@ -157,10 +164,10 @@ func _spawn_boss() -> void:
 			and corrupted_enemy_spawner != null
 			and boss_to_spawn != null
 	):
-		
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
+			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.WIN)
 		)
 	AudioManager.play_boss_music()
 

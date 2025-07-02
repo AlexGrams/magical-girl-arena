@@ -242,7 +242,6 @@ func _process(delta: float) -> void:
 	
 	if game_running and time > 0.0:
 		time = max(time - delta, 0.0)
-		
 
 
 # Set this client up as a game server through Steam.
