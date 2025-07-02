@@ -6,6 +6,14 @@ extends Control
 
 ## Parent folder for dialogue resources.
 const DIALOGUE_DATA_FOLDER_PATH: String = "res://Dialogue/DialogueData/"
+## Minimum amount of time in seconds that we wait in between displaying lines of dialogue.
+const BASE_LINE_WAIT: float = 0.5
+## Delay in seconds between displaying the next dialogue line per character in the current line.
+const PER_CHARACTER_LINE_WAIT: float = 0.1
+## Delay in seconds between removing lines from the screen after a dialogue has finished.
+const DESTROY_LINE_WAIT_AFTER_DIALOGUE: float = 3.0
+## Most number of dialogue lines that we show at once.
+const MAX_LINES: int = 3
 
 ## Map containing DialogueData for all dialogue sequences in the game.
 ## Key: Constants.DialoguePlayTrigger - When the dialogue can be played.
@@ -16,6 +24,12 @@ var _dialogue_paths: Dictionary = {}
 var _dialogue_line_container: PackedScene = preload("res://UI/dialogue_line_container.tscn")
 ## Dictionary used as set where keys are player characters that are in the game.
 var _player_character_set: Dictionary = {}
+## Dialogue that we're currently playing, if any.
+var _running_dialogue: DialogueData = null
+## Line of dialogue that we're going to display next.
+var _running_dialogue_index: int = 0
+## Time until the next line of dialogue is displayed.
+var _dialogue_timer: float = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,9 +52,23 @@ func _ready() -> void:
 		start_dialogue(Constants.DialoguePlayTrigger.START)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	if _running_dialogue != null:
+		# Play lines of dialogue in sequence, waiting some time after showing each line.
+		_dialogue_timer -= delta
+		if _dialogue_timer <= 0.0:
+			_show_line(_running_dialogue.lines[_running_dialogue_index])
+			
+			_running_dialogue_index += 1
+			# End dialogue if we run out of lines.
+			if _running_dialogue_index >= len(_running_dialogue.lines):
+				_running_dialogue = null
+	elif get_child_count() > 0:
+		# Delete lines of dialogue after we've finished playing a dialogue.
+		_dialogue_timer -= delta
+		if _dialogue_timer <= 0.0:
+			get_child(0).delete()
+			_dialogue_timer = DESTROY_LINE_WAIT_AFTER_DIALOGUE
 
 
 ## Randomly selects a dialogue to run. Only call on server.
@@ -51,8 +79,6 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
 	if _player_character_set.is_empty():
 		for data: Dictionary in GameState.players.values():
 			_player_character_set[data["character"]] = true
-	
-	print(_player_character_set)
 	
 	for dialogue: DialogueData in _dialogue[trigger]:
 		var can_add: bool = true
@@ -72,12 +98,18 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
 ## Play a full dialogue sequence. Should only be called by the server.
 @rpc("any_peer", "call_local", "reliable")
 func _run_dialogue(dialogue_data_path: String) -> void:
-	var dialogue_data: DialogueData = load(dialogue_data_path)
-	_show_line(dialogue_data.lines[0])
+	_running_dialogue = load(dialogue_data_path)
+	_running_dialogue_index = 0
+	_dialogue_timer = 0.0
 
 
 ## Display a new line of dialogue.
 func _show_line(line: DialogueLine) -> void:
 	var dialogue_line_container: DialogueLineContainer = _dialogue_line_container.instantiate()
+	
 	dialogue_line_container.set_up(line)
 	add_child(dialogue_line_container, true)
+	_dialogue_timer = len(line.dialogue) * PER_CHARACTER_LINE_WAIT + BASE_LINE_WAIT
+	
+	if get_child_count() > MAX_LINES:
+		get_child(0).delete()

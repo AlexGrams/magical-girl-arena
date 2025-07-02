@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueData" load_steps=5 format=3 uid="uid://70o84buyexlu"]
+[gd_resource type="Resource" script_class="DialogueData" load_steps=7 format=3 uid="uid://70o84buyexlu"]
 
 [ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_a8hxq"]
 [ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_k5v5a"]
@@ -13,7 +13,17 @@ script = ExtResource("1_a8hxq")
 speaker = 1
 dialogue = "Hello again."
 
+[sub_resource type="Resource" id="Resource_f7b3o"]
+script = ExtResource("1_a8hxq")
+speaker = 0
+dialogue = "Here's another line"
+
+[sub_resource type="Resource" id="Resource_a7kvy"]
+script = ExtResource("1_a8hxq")
+speaker = 1
+dialogue = "Here's the last line."
+
 [resource]
 script = ExtResource("2_k5v5a")
-lines = Array[ExtResource("1_a8hxq")]([SubResource("Resource_qud8o"), SubResource("Resource_ochdu")])
+lines = Array[ExtResource("1_a8hxq")]([SubResource("Resource_qud8o"), SubResource("Resource_ochdu"), SubResource("Resource_f7b3o"), SubResource("Resource_a7kvy")])
 play_trigger = 1

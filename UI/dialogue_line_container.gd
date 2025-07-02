@@ -22,3 +22,9 @@ func _process(_delta: float) -> void:
 func set_up(line: DialogueLine) -> void:
 	_text.text = line.dialogue
 	_portrait.texture = load(Constants.CHARACTER_DATA[line.speaker].icon_uid)
+
+
+## Get rid of this dialogue line.
+func delete() -> void:
+	# TODO: Maybe play a fade out animation?
+	queue_free()
