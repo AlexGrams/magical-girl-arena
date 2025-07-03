@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=100 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -31,34 +31,18 @@
 [ext_resource type="PackedScene" uid="uid://djb77wkpsn7pr" path="res://Levels/LevelPlaceables/grass_group.tscn" id="17_fubdp"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="17_xfem1"]
 [ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="26_dibxh"]
-[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="26_ntkj0"]
 [ext_resource type="PackedScene" uid="uid://c3anntj04ajri" path="res://Levels/LevelPlaceables/lake.tscn" id="27_lmbp7"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_pbc18"]
-[ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="28_p2dsx"]
-[ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="29_2x3ae"]
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="30_2tatt"]
-[ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="30_us2e1"]
-[ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="31_e8ykx"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
-[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pingpong.tres" id="34_e3kyl"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
-[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="35_65npg"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
-[ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="35_nprps"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="36_xpuqi"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="37_4s6gj"]
 [ext_resource type="Texture2D" uid="uid://bi2qfpm07ari0" path="res://Sprites/UI/UltimateCircle.png" id="37_salih"]
 [ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="38_u4hku"]
-[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_tether.tres" id="39_y4iin"]
-[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="40_jft8l"]
-[ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="44_g0g2a"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
-[ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="48_f6h6e"]
-[ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="48_hwjvr"]
-[ext_resource type="Resource" uid="uid://bp1uxo1q43yq0" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="49_38lve"]
-[ext_resource type="Resource" uid="uid://dmbt2o070k7da" path="res://Powerups/PowerupDataResourceFiles/powerupdata_turret.tres" id="49_ugxnk"]
-[ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="49_xecmh"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="55_bjgvv"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="55_sk2pv"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="56_1uxvu"]
@@ -6325,7 +6309,6 @@ text = "Level: 1"
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
 visible = false
-all_powerup_data = Array[ExtResource("26_ntkj0")]([ExtResource("35_65npg"), ExtResource("28_p2dsx"), ExtResource("29_2x3ae"), ExtResource("30_us2e1"), ExtResource("31_e8ykx"), ExtResource("40_jft8l"), ExtResource("35_nprps"), ExtResource("44_g0g2a"), ExtResource("48_f6h6e"), ExtResource("49_38lve"), ExtResource("48_hwjvr"), ExtResource("49_xecmh"), ExtResource("34_e3kyl"), ExtResource("39_y4iin"), ExtResource("49_ugxnk")])
 
 [node name="SpectatorContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7

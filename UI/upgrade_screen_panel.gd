@@ -5,11 +5,11 @@ extends Panel
 const MAX_NORMAL_UPGRADES: int = 3
 ## How many choices will be offered to acquire a new multiplayer-specific powerup.
 const MAX_NEW_MULTIPLAYER_POWERUPS: int = 1
+## Folder containing all PowerupData files.
+const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
+## Folder containing all ArtifactData files.
+const ARTIFACT_DATA_PATH: String = "res://Artifacts/ArtifactDataResourceFiles/"
 
-## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
-@export var all_powerup_data: Array[PowerupData] = []
-## Every artifact that can be acquired in the game.
-@export var all_artifact_data: Array[ArtifactData] = []
 ## Chance of being offered a new multiplayer-specific powerup.
 @export_range(0.0, 1.0) var multiplayer_powerup_chance: float = 0.5
 ## Parent of the upgrade panel UI objects.
@@ -30,6 +30,10 @@ var upgrade_panels: Array[UpgradePanel] = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
 
+## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
+var _all_powerup_data: Array[PowerupData] = []
+## Every artifact that can be acquired in the game.
+var _all_artifact_data: Array[ArtifactData] = []
 ## Map of String to ItemData
 var _item_name_to_itemdata: Dictionary = {}
 ## Map of String to PowerupData
@@ -71,13 +75,33 @@ func _ready() -> void:
 	for child in player_ready_indicator_holder.get_children():
 		_ready_indicators.append(child)
 	
+	# Load PowerupData files
+	for powerup_data_file_name: String in DirAccess.open(POWERUP_DATA_PATH).get_files():
+		# Exporting adds ".remap" to the end of .tres files.
+		if '.tres.remap' in powerup_data_file_name:
+			powerup_data_file_name = powerup_data_file_name.trim_suffix('.remap')
+		
+		var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
+		if powerup_data != null:
+			_all_powerup_data.append(powerup_data)
+	
 	# Set up the powerup name to PowerupData map
-	for powerupdata: PowerupData in all_powerup_data:
+	for powerupdata: PowerupData in _all_powerup_data:
 		_powerup_name_to_powerupdata[powerupdata.name] = powerupdata
 		_item_name_to_itemdata[powerupdata.name] = powerupdata
 	
+	# Load ArtifactData files
+	for artifact_data_file_name: String in DirAccess.open(ARTIFACT_DATA_PATH).get_files():
+		# Exporting adds ".remap" to the end of .tres files.
+		if '.tres.remap' in artifact_data_file_name:
+			artifact_data_file_name = artifact_data_file_name.trim_suffix('.remap')
+		
+		var artifact_data: ArtifactData = ResourceLoader.load(ARTIFACT_DATA_PATH + artifact_data_file_name)
+		if artifact_data != null:
+			_all_artifact_data.append(artifact_data)
+	
 	# Set up artifact name to ArtifactData map
-	for artifactdata: ArtifactData in all_artifact_data:
+	for artifactdata: ArtifactData in _all_artifact_data:
 		_artifact_name_to_artifactdata[artifactdata.name] = artifactdata
 		_item_name_to_itemdata[artifactdata.name] = artifactdata
 
@@ -136,10 +160,10 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	else:
 		# Otherwise, choose randomly from the whole pool up abilities.
 		var powerups_to_remove = []
-		upgrade_choices.append_array(all_powerup_data.duplicate())
+		upgrade_choices.append_array(_all_powerup_data.duplicate())
 		
 		# If in inventory, get current level for each powerup
-		for data: PowerupData in all_powerup_data:
+		for data: PowerupData in _all_powerup_data:
 			var found_powerup := false
 			for powerup in player_character.powerups:
 				if data.name == powerup.powerup_name:

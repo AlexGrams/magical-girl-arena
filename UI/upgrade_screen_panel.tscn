@@ -1,37 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=10 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
-[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_3ofe6"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="3_2mijq"]
-[ext_resource type="Resource" uid="uid://ccoa7j7mlp0jc" path="res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres" id="3_3uka7"]
-[ext_resource type="Resource" uid="uid://cq1s8jwavt8ep" path="res://Powerups/PowerupDataResourceFiles/powerupdata_orbit.tres" id="4_g814s"]
-[ext_resource type="Resource" uid="uid://cwsbyqniccvqj" path="res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres" id="5_17hfx"]
-[ext_resource type="Resource" uid="uid://lc2cobp8qm3y" path="res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres" id="6_b5on6"]
-[ext_resource type="Resource" uid="uid://ccwy7yx1gd6gp" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres" id="7_tydhb"]
-[ext_resource type="Resource" uid="uid://dwpphuuknq01i" path="res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres" id="8_yawss"]
-[ext_resource type="Resource" uid="uid://cj3ir3yldvbtn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres" id="9_l1ugi"]
-[ext_resource type="Resource" uid="uid://dg1enwknoes20" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pet.tres" id="10_hqxjy"]
-[ext_resource type="Resource" uid="uid://b60dhg75p3ppn" path="res://Powerups/PowerupDataResourceFiles/powerupdata_grenade.tres" id="11_b6mky"]
-[ext_resource type="Resource" uid="uid://bp1uxo1q43yq0" path="res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres" id="12_msdcf"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="13_giirl"]
-[ext_resource type="Resource" uid="uid://cdllaft4kpcdv" path="res://Powerups/PowerupDataResourceFiles/powerupdata_mines.tres" id="13_yxx1b"]
-[ext_resource type="Resource" uid="uid://bivxdimack67x" path="res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres" id="14_4dk1e"]
-[ext_resource type="Resource" uid="uid://benorf1g244xo" path="res://Powerups/PowerupDataResourceFiles/powerupdata_pingpong.tres" id="15_cjf5j"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_g80km"]
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="15_hy6ya"]
-[ext_resource type="Resource" uid="uid://bwej72maxgsht" path="res://Powerups/PowerupDataResourceFiles/powerupdata_tether.tres" id="16_2bo1k"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="16_12wdd"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="16_513rf"]
-[ext_resource type="Script" path="res://Artifacts/artifactdata.gd" id="17_iqi5b"]
-[ext_resource type="Resource" uid="uid://dmbt2o070k7da" path="res://Powerups/PowerupDataResourceFiles/powerupdata_turret.tres" id="17_ucf4j"]
-[ext_resource type="Resource" uid="uid://bu6ylro6deih5" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_speed.tres" id="18_22k6m"]
-[ext_resource type="Resource" uid="uid://1fwg1f8vs65i" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_regen.tres" id="19_14sw5"]
-[ext_resource type="Resource" uid="uid://bu75s85d1wekp" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_ultimate_cooldown.tres" id="20_ucvyf"]
-[ext_resource type="Resource" uid="uid://ch02dovwirov8" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_hearty.tres" id="21_d4ts0"]
-[ext_resource type="Resource" uid="uid://n1rkh6d7qvq2" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_ultimate_crit.tres" id="22_qlw6y"]
-[ext_resource type="Resource" uid="uid://c7cr2ymjcrmir" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_magnetic.tres" id="23_ohl1b"]
-[ext_resource type="Resource" uid="uid://cves852ahgk2q" path="res://Artifacts/ArtifactDataResourceFiles/artifactdata_golden.tres" id="24_dm1tu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
@@ -44,8 +20,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
-all_powerup_data = Array[ExtResource("2_3ofe6")]([ExtResource("3_3uka7"), ExtResource("4_g814s"), ExtResource("5_17hfx"), ExtResource("6_b5on6"), ExtResource("7_tydhb"), ExtResource("8_yawss"), ExtResource("9_l1ugi"), ExtResource("10_hqxjy"), ExtResource("11_b6mky"), ExtResource("12_msdcf"), ExtResource("13_yxx1b"), ExtResource("14_4dk1e"), ExtResource("15_cjf5j"), ExtResource("16_2bo1k"), ExtResource("17_ucf4j")])
-all_artifact_data = Array[ExtResource("17_iqi5b")]([ExtResource("18_22k6m"), ExtResource("19_14sw5"), ExtResource("20_ucvyf"), ExtResource("21_d4ts0"), ExtResource("22_qlw6y"), ExtResource("23_ohl1b"), ExtResource("24_dm1tu")])
 upgrade_panels_holder = NodePath("PowerupUpgradesContainer")
 reroll_button = NodePath("RerollButton")
 reroll_label = NodePath("RerollButton/TextureRect/Reroll_Label")
