@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://wmeh15cfi3s8"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_trail.gd" id="1_sax0x"]
+[ext_resource type="Script" path="res://Powerups/bullet_continuous.gd" id="1_sax0x"]
 [ext_resource type="Script" path="res://Powerups/trail_sprite.gd" id="3_cshb1"]
 [ext_resource type="Texture2D" uid="uid://cqv8hq3o5id2s" path="res://Sprites/Powerups/Trail_BlueFlower.png" id="3_v70sc"]
 [ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="4_r7oyf"]

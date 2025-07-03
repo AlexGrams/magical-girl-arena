@@ -1,4 +1,7 @@
+class_name BulletContinuous
 extends Bullet
+## A bullet that stays in place and deals damage each frame to all Enemies touching it.
+
 
 ## How much damage this bullet does.
 var _damage: float = 0.0
