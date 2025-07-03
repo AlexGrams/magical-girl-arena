@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://k8lgo7vfe3e7"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_bounce.gd" id="1_s3dn3"]
+
+[node name="PowerupBounce" type="Node2D"]
+script = ExtResource("1_s3dn3")
+_bullet_scene = "res://Powerups/bullet_bounce.tscn"
+_powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_bounce.tres"
+damage_levels = Array[float]([25.0, 50.0, 75.0, 100.0, 150.0])
