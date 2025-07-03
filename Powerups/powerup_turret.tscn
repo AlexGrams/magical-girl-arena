@@ -7,3 +7,4 @@ script = ExtResource("1_dy0js")
 shoot_interval = 1.0
 _bullet_scene = "res://Powerups/bullet_turret.tscn"
 damage_levels = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+powerup_name = "Turret"
