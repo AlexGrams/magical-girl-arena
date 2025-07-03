@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3swd8iglq57q"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_turret.gd" id="1_3dwxv"]
+[ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_1k30p"]
+
+[node name="BulletTurret" type="Node2D"]
+script = ExtResource("1_3dwxv")
+_turret_bullet_scene = "res://Powerups/bullet_turret_bullet.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.316667, 0.316667)
+texture = ExtResource("2_1k30p")

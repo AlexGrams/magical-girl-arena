@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm7xkgcutvo85"]
+
+[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_j0368"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_67mo1"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hsojb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(38, 38)
+
+[node name="BulletTurretBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_j0368")
+speed = 1000.0
+lifetime = 1.0
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.316667, 0.316667)
+texture = ExtResource("2_67mo1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_hsojb")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tg1bm")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
