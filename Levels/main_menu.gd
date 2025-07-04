@@ -3,6 +3,8 @@ extends Control
 
 # Will be spawned in the Lobby screen. Clicking allows the player to join a lobby
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
+## Time in seconds that it takes for the Lobby List to automatically refresh.
+const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 
 ## The first screen shown when the game is started.
 @export var main_menu: Control
@@ -44,6 +46,8 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 @export var main_menu_button_container: VBoxContainer
 @export var version_label: Label
 
+## Current time until automatically refreshing the Lobby List.
+var _lobby_list_refresh_timer: float = 0.0
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
 ## The location that these menus should be in when in focus. 
@@ -53,6 +57,7 @@ var _settings_original_pos: Vector2
 var _lobby_list_original_pos: Vector2
 var _lobby_original_pos: Vector2
 var _shop_original_pos: Vector2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -103,8 +108,12 @@ func _ready() -> void:
 	setup_lobby_screen()
 
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	# Lobby list auto refresh
+	if lobby_list.visible:
+		_lobby_list_refresh_timer -= delta
+		if _lobby_list_refresh_timer <= 0.0:
+			request_lobby_list()
 
 
 #region main
@@ -183,13 +192,16 @@ func _on_lobby_list_back_button_button_down() -> void:
 	_set_main_menu_character()
 	_switch_screen_animation(lobby_list, main_menu , _main_menu_original_pos)
 
-# Refresh the lobby list
+
+## Refresh the lobby list
 func request_lobby_list() -> void:
 	for button in lobbies_list_container.get_children():
 		button.queue_free()
 	
 	if GameState.USING_GODOT_STEAM:
 		Steam.requestLobbyList()
+	
+	_lobby_list_refresh_timer = LOBBY_LIST_AUTO_REFRESH_INTERVAL
 
 
 # Adds list of joinable lobbies to the lobby screen.
