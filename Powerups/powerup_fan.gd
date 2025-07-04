@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 	
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
-		print(_owning_character.input_direction)
 		_bullet_spawner.request_spawn_bullet.rpc_id(
 				1,
 				[

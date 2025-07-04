@@ -48,6 +48,10 @@ var _retarget_timer: float = 0.0
 var _continuous_damage: float = 0.0
 ## For analytics. Key: Powerup index. Value: continuous damage from that powerup.
 var _continuous_damage_analytic_data: Dictionary = {}
+## Direction and magnitude of knockback.
+var _knockback: Vector2 = Vector2.ZERO
+## Current remaining knockback duration. 
+var _knockback_duration: float = 0.0
 ## Status to make this Enemy an ally when it dies.
 var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
@@ -63,6 +67,11 @@ var _hud_canvas_layer: HUDCanvasLayer = null
 signal died(enemy: Enemy)
 # Emitted when this Enemy is converted to an ally.
 signal allied(enemy: Enemy)
+
+
+func set_knockback(vector: Vector2, duration: float) -> void:
+	_knockback = vector
+	_knockback_duration = duration
 
 
 func _ready() -> void:
@@ -103,7 +112,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if target != null:
-		velocity = (target.global_position - global_position).normalized() * speed * (1.0 - _status_slow_percent)
+		if _knockback_duration >= 0.0:
+			# Knockback movement: go in direction of knockback
+			velocity = _knockback
+			_knockback_duration -= delta
+		else:
+			# Normal movement: go towards target.
+			velocity = (target.global_position - global_position).normalized() * speed * (1.0 - _status_slow_percent)
 		move_and_slide()
 		
 		if is_multiplayer_authority():

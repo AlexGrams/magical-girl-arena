@@ -33,9 +33,16 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if target != null:
-		if global_position.distance_squared_to(target.global_position) > squared_max_range:
-			velocity = (target.global_position - global_position).normalized() * speed
+		if _knockback_duration > 0.0:
+			# Knockback movement
+			velocity = _knockback
+			_knockback_duration -= delta
 			move_and_slide()
+		if global_position.distance_squared_to(target.global_position) > squared_max_range:
+			# Normal movement
+			if _knockback_duration <= 0.0:
+				velocity = (target.global_position - global_position).normalized() * speed
+				move_and_slide()
 		else:
 			# Shoot at the target
 			if is_multiplayer_authority() and fire_timer >= fire_interval:
