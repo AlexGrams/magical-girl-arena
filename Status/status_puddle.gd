@@ -9,6 +9,10 @@ extends Status
 var _player: PlayerCharacterBody2D = null
 
 
+func get_status_name() -> String:
+	return "Puddle"
+
+
 func _ready() -> void:
 	super()
 
@@ -28,3 +32,4 @@ func activate() -> void:
 func deactivate() -> void:
 	_player.decrement_stat(Constants.StatUpgrades.HEALTH_REGEN)
 	_player.decrement_stat(Constants.StatUpgrades.SPEED)
+	_player.remove_status(self)

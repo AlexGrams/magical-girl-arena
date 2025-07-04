@@ -6,3 +6,7 @@ extends Status
 
 ## How much temp HP is remaining for this segment.
 var value: int = 0
+
+
+func get_status_name() -> String:
+	return "TempHealth"

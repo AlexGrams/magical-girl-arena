@@ -4,7 +4,7 @@
 
 [node name="PowerupPuddle" type="Node2D"]
 script = ExtResource("1_jptwq")
-_fire_interval = 5.0
+_puddles = 1
 _bullet_scene = "res://Powerups/bullet_puddle.tscn"
 _powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_puddle.tres"
 damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])

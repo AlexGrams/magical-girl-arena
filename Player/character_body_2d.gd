@@ -94,6 +94,14 @@ signal died()
 signal revived()
 
 
+## Returns a Status object if it exists on this player, or null if it does not.
+func get_status(status_name: String) -> Status:
+	for status in _statuses:
+		if status.get_status_name() == status_name:
+			return status
+	return null
+
+
 @rpc("authority", "call_local")
 func _set_speed(new_speed: float) -> void:
 	speed = new_speed
@@ -489,6 +497,12 @@ func add_status(status: Status) -> void:
 	_statuses.append(status)
 	add_child(status)
 	status.activate()
+
+
+func remove_status(status: Status) -> void:
+	var index: int = _statuses.find(status)
+	if index != -1:
+		_statuses.remove_at(index)
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some

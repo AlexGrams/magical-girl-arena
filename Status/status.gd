@@ -11,6 +11,10 @@ var duration: float = 0.0
 signal expired()
 
 
+func get_status_name() -> String:
+	return ""
+
+
 func _ready() -> void:
 	pass # Replace with function body.
 
