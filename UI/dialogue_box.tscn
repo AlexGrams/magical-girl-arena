@@ -12,5 +12,6 @@ offset_right = 1133.0
 offset_bottom = 932.0
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
 alignment = 2
 script = ExtResource("1_2008t")
