@@ -14,6 +14,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var shop: Shop
 ## The screen to host or join a lobby.
 @export var lobby_list: Control
+## Appears on the Lobby List while waiting for the list of available lobbies.
+@export var lobbies_list_searching_overlay: Control = null
 ## The scroll box showing lobbies available to join.
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
@@ -197,6 +199,7 @@ func _on_lobby_list_back_button_button_down() -> void:
 func request_lobby_list() -> void:
 	for button in lobbies_list_container.get_children():
 		button.queue_free()
+	lobbies_list_searching_overlay.show()
 	
 	if GameState.USING_GODOT_STEAM:
 		Steam.requestLobbyList()
@@ -248,6 +251,7 @@ func setup_lobby_screen() -> void:
 						func():
 							_on_lobby_button_pressed(lobby_id)
 					)
+				lobbies_list_searching_overlay.hide()
 		)
 	
 	request_lobby_list()
