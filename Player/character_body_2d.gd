@@ -193,6 +193,31 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 			push_error("No upgrade functionality for this stat upgrade type")
 
 
+## Remove a stat upgrade level.
+func decrement_stat(stat_type: Constants.StatUpgrades) -> void:
+	match stat_type:
+		Constants.StatUpgrades.HEALTH:
+			push_error("Not implemented")
+		Constants.StatUpgrades.HEALTH_REGEN:
+			if _stat_health_regen > 1:
+				_stat_health_regen -= 1
+				_add_health_regen.rpc(-1.0)
+		Constants.StatUpgrades.SPEED:
+			if _stat_speed > 1:
+				_stat_speed -= 1
+				_set_speed.rpc(speed - 40)
+		Constants.StatUpgrades.PICKUP_RADIUS:
+			push_error("Not implemented")
+		#Constants.StatUpgrades.DAMAGE:
+			#_stat_damage += 1
+		#Constants.StatUpgrades.ULTIMATE_DAMAGE:
+			#_stat_ultimate_damage += 1
+		#Constants.StatUpgrades.ULTIMATE_CHARGE_RATE:
+			#_stat_ultimate_charge_rate += 1
+		_:
+			push_error("No upgrade functionality for this stat upgrade type")
+
+
 ## Returns the current level of a player's stat given the stat enum type.
 func get_stat(stat_type: Constants.StatUpgrades) -> int:
 	match stat_type:
@@ -463,6 +488,7 @@ func add_temp_health(temp_health_to_add: int, _duration: float = TEMP_HEALTH_LIN
 func add_status(status: Status) -> void:
 	_statuses.append(status)
 	add_child(status)
+	status.activate()
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some

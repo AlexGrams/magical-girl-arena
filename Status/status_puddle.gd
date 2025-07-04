@@ -5,9 +5,26 @@ extends Status
 ## is touching a puddle.
 
 
+## Owning player
+var _player: PlayerCharacterBody2D = null
+
+
 func _ready() -> void:
 	super()
 
 
 func _process(delta: float) -> void:
 	super(delta)
+
+
+## Temporarily boost owning player's speed and health regen.
+func activate() -> void:
+	_player = get_parent()
+	_player._on_stat_upgrade_chosen(Constants.StatUpgrades.HEALTH_REGEN)
+	_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
+
+
+## Revert speed and health regen changes.
+func deactivate() -> void:
+	_player.decrement_stat(Constants.StatUpgrades.HEALTH_REGEN)
+	_player.decrement_stat(Constants.StatUpgrades.SPEED)

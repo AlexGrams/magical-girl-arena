@@ -18,5 +18,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	duration -= delta
 	if duration <= 0.0:
+		deactivate()
 		expired.emit()
 		queue_free()
+
+
+## Start this status effect's functionality. Only call after adding this as a child to the object
+## that this status affects.
+func activate() -> void:
+	pass
+
+
+## Get rid of the effects of this status.
+func deactivate() -> void:
+	pass

@@ -22,8 +22,17 @@ texture = ExtResource("2_lb4cl")
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jj0wr")
+
+[node name="AllyArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="AllyCollisionShape2D" type="CollisionShape2D" parent="AllyArea2D"]
 shape = SubResource("RectangleShape2D_jj0wr")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_exited"]
+[connection signal="area_entered" from="AllyArea2D" to="." method="_on_ally_area_2d_entered"]
