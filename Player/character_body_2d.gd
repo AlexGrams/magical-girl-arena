@@ -62,6 +62,8 @@ var _character: Constants.Character
 ## Temporary HP that goes away after some time. Divided into segments that have their own
 ## duration and value. Temp health is used up from first added to latest added.
 var _temp_health_segments: Array[StatusTempHealth] = []
+## All status effects on this player.
+var _statuses: Array[Status] = []
 # How much health is recovered per health regen tick.
 var _health_regen: float = 0.0
 # How long until the next health regen tick.
@@ -189,9 +191,6 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 			#_stat_ultimate_charge_rate += 1
 		_:
 			push_error("No upgrade functionality for this stat upgrade type")
-	
-	## No longer using stats.
-	#$"../CanvasLayer".update_stats(self)
 
 
 ## Returns the current level of a player's stat given the stat enum type.
@@ -458,6 +457,12 @@ func add_temp_health(temp_health_to_add: int, _duration: float = TEMP_HEALTH_LIN
 	add_child(new_segment)
 	
 	took_damage.emit(health, health_max, get_temp_health())
+
+
+## Apply a status effect to this player.
+func add_status(status: Status) -> void:
+	_statuses.append(status)
+	add_child(status)
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
