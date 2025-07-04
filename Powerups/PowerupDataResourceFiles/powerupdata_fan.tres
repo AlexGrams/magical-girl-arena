@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://cfa0wg41nqf82"]
+
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_lx4ni"]
+[ext_resource type="PackedScene" uid="uid://bmxvwgjd8v0ij" path="res://Powerups/powerup_fan.tscn" id="1_o8v66"]
+[ext_resource type="Texture2D" uid="uid://c56jj5sjp47tv" path="res://Cantaloupe.png" id="3_affrr"]
+
+[resource]
+script = ExtResource("1_lx4ni")
+is_multiplayer = false
+upgrade_description = "Shoot a gust of wind in the direction that you're moving which damages and pushes back enemies."
+upgrade_description_list = Array[String](["Shoot a gust of wind in the direction that you're moving which damages and pushes back enemies.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
+scene = ExtResource("1_o8v66")
+name = "Fan"
+sprite = ExtResource("3_affrr")
