@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5heqi2q2j60p"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_pulse.gd" id="1_c5ibc"]
+
+[node name="PowerupPulse" type="Node2D"]
+script = ExtResource("1_c5ibc")
+_fire_interval = 1.0
+_bullet_scene = "res://Powerups/bullet_pulse.tscn"
+_powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_pulse.tres"
+damage_levels = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])

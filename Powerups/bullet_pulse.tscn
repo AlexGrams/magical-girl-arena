@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2syl66o48prq"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_pulse.gd" id="1_4nyg4"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_od4xw"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_xoslf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
+radius = 72.2496
+
+[node name="BulletPulse" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_4nyg4")
+_knockback_speed = 250.0
+speed = 10.0
+lifetime = 0.5
+destroy_on_hit = false
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(0.327273, 0.327273)
+texture = ExtResource("2_od4xw")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("4_xoslf")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+top_level = true
+shape = SubResource("CircleShape2D_n81gy")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
