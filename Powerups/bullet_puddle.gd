@@ -22,7 +22,6 @@ func _on_ally_area_2d_entered(area: Area2D) -> void:
 	var player: PlayerCharacterBody2D = area.get_parent()
 	if player != null:
 		if GameState.get_local_player() == player and player.get_status("Puddle") == null:
-			print(multiplayer.get_unique_id())
 			var status_puddle = StatusPuddle.new()
 			status_puddle.duration = _status_duration
 			player.add_status(status_puddle)

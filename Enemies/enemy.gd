@@ -46,10 +46,8 @@ var _retarget_timer: float = 0.0
 ## Damage that will be applied to this Enemy every physics frame. Useful for continuous sources of 
 ## damage such as AOE hazards or damaging debuffs.
 var _continuous_damage: float = 0.0
-## Index of the powerup that is doing the local continuous damage. For analytics.
-var _continuous_damage_powerup_index: int = -1
-## How much continuous damage comes from the local player. For analytics.
-var _local_continuous_damage: float = 0.0
+## For analytics. Key: Powerup index. Value: continuous damage from that powerup.
+var _continuous_damage_analytic_data: Dictionary = {}
 ## Status to make this Enemy an ally when it dies.
 var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
@@ -131,8 +129,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Analytics: Continuous damage. Right now, we assume that continuous damage only comes from one 
 	# local powerup.
-	if _continuous_damage_powerup_index != -1:
-		Analytics.add_powerup_damage(_local_continuous_damage, _continuous_damage_powerup_index)
+	if not _continuous_damage_analytic_data.is_empty():
+		for index: int in _continuous_damage_analytic_data:
+			Analytics.add_powerup_damage(_continuous_damage_analytic_data[index], index)
 
 
 ## Move this enemy to a location.
@@ -239,11 +238,13 @@ func add_continuous_damage(damage: float) -> void:
 
 ## For analytics. Set how much continuous damage the local client is doing to this Enemy.
 func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void:
-	_local_continuous_damage = max(_local_continuous_damage + damage, 0)
-	if _local_continuous_damage > 0.0:
-		_continuous_damage_powerup_index = powerup_index
+	if _continuous_damage_analytic_data.has(powerup_index):
+		_continuous_damage_analytic_data[powerup_index] = max(_continuous_damage_analytic_data[powerup_index] + damage, 0)
 	else:
-		_continuous_damage_powerup_index = -1
+		_continuous_damage_analytic_data[powerup_index] = damage
+	
+	if _continuous_damage_analytic_data[powerup_index] <= 0.0:
+		_continuous_damage_analytic_data.erase(powerup_index)
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
