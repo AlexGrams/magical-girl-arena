@@ -5,12 +5,13 @@
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_up1gn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksfcb"]
-size = Vector2(1, 26)
+size = Vector2(1, 74)
 
 [node name="BulletLightning" type="Node2D" node_paths=PackedStringArray("_area", "_lightning", "collider", "sprite")]
 script = ExtResource("1_38lrb")
 _area = NodePath("LightningNode2D/Area2D")
 _lightning = NodePath("LightningNode2D")
+_lighting_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 speed = 0.0
 destroy_on_hit = false
 collider = NodePath("LightningNode2D/Area2D")
@@ -19,7 +20,7 @@ sprite = NodePath("LightningNode2D/Sprite2D")
 [node name="LightningNode2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="LightningNode2D"]
-scale = Vector2(0.024, 0.0352303)
+scale = Vector2(0.024, 0.100271)
 texture = ExtResource("2_o5eyx")
 
 [node name="Area2D" type="Area2D" parent="LightningNode2D"]
@@ -29,3 +30,5 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightningNode2D/Area2D"]
 shape = SubResource("RectangleShape2D_ksfcb")
+
+[connection signal="area_entered" from="LightningNode2D/Area2D" to="." method="_on_area_2d_entered"]
