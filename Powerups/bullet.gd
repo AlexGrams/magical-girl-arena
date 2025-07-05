@@ -16,7 +16,7 @@ extends Node2D
 ## The rendered part of the bullet. Used to change its color when Enemies shoot it.
 @export var sprite: Sprite2D = null
 ## Type of sound to play when bullet is created
-@export var sound_effect: SoundEffectSettings.SOUND_EFFECT_TYPE = -1
+@export var sound_effect: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.NONE
 
 var direction: Vector2
 var death_timer: float = 0
@@ -30,7 +30,7 @@ func set_damage(damage: float):
 
 
 func _ready() -> void:
-	if sound_effect != -1:
+	if sound_effect != SoundEffectSettings.SOUND_EFFECT_TYPE.NONE:
 		AudioManager.create_audio_at_location(global_position, sound_effect)
 
 

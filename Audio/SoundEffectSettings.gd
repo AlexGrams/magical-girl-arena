@@ -44,7 +44,9 @@ enum SOUND_EFFECT_TYPE{
 	# Shop
 	ITEM_PURCHASED,
 	CONSTELLATION_SUMMON_RUMBLE,
-	CORVUS_SUMMON
+	CORVUS_SUMMON,
+	# Default
+	NONE
 }
 
 @export_range(0, 20) var limit : int = 20
