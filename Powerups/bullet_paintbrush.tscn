@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://depvpf4b2w2si"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_paintbrush.gd" id="1_cvlpg"]
+[ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_l2nf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6577"]
+size = Vector2(1, 70)
+
+[node name="BulletPaintbrush" type="Node2D" node_paths=PackedStringArray("_paintbrush", "collider", "sprite")]
+script = ExtResource("1_cvlpg")
+_paintbrush = NodePath("PainbrushNode2D")
+speed = 1250.0
+destroy_on_hit = false
+collider = NodePath("PainbrushNode2D/Area2D")
+sprite = NodePath("PainbrushNode2D/Sprite")
+
+[node name="PainbrushNode2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="PainbrushNode2D"]
+z_index = -1
+scale = Vector2(0.02, 0.233333)
+texture = ExtResource("2_l2nf3")
+
+[node name="Area2D" type="Area2D" parent="PainbrushNode2D"]
+collision_mask = 2
+
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="PainbrushNode2D/Area2D"]
+shape = SubResource("RectangleShape2D_y6577")
+
+[connection signal="area_entered" from="PainbrushNode2D/Area2D" to="." method="_on_area_2d_entered"]
+[connection signal="area_exited" from="PainbrushNode2D/Area2D" to="." method="_on_area_2d_exited"]

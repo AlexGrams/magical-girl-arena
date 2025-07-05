@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://cgwbq54xmnohi"]
+
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_hi3lf"]
+[ext_resource type="PackedScene" uid="uid://dsk8cc2485fv4" path="res://Powerups/powerup_paintbrush.tscn" id="1_w6uhb"]
+[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="3_mioo6"]
+
+[resource]
+script = ExtResource("1_hi3lf")
+is_multiplayer = true
+upgrade_description = "Paints a damaging line from you to your farthest ally."
+upgrade_description_list = Array[String](["Paints a damaging line from you to your farthest ally.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
+scene = ExtResource("1_w6uhb")
+name = "Paintbrush"
+sprite = ExtResource("3_mioo6")

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_54icb")
-is_multiplayer = false
+is_multiplayer = true
 upgrade_description = "Shoot a bolt of lightning to your allies which bounces between enemies hit along its path."
 upgrade_description_list = Array[String](["Shoot a bolt of lightning to your allies which bounces between enemies hit along its path.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_vu6m4")
