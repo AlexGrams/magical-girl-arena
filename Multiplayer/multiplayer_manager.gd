@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 # then join it as a client instead. Used for testing.
 func join_multiplayer_lobby_using_enet():
 	peer = ENetMultiplayerPeer.new()
+	# NOTE: Produces an error if host already exists, but we handle it here.
 	var create_server_result = peer.create_server(PORT_NUMBER, GameState.MAX_PLAYERS)
 	
 	if create_server_result == OK:
@@ -38,8 +39,6 @@ func join_multiplayer_lobby_using_enet():
 		host_created.emit()
 	else:
 		# Client created, or some unrelated error happened. Won't consider that case.
-		push_warning("Ignore previous error.")
-		
 		var create_client_result = peer.create_client("localhost", PORT_NUMBER)
 		multiplayer.multiplayer_peer = peer
 
