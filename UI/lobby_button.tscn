@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="2_cm2v4"]
 [ext_resource type="Script" path="res://UI/lobby_button_visual.gd" id="2_esu1h"]
 
-[node name="LobbyButton" type="Button" node_paths=PackedStringArray("username_label", "playercount_label", "texture_box")]
+[node name="LobbyButton" type="Button" node_paths=PackedStringArray("username_label", "playercount_label", "texture_box", "ping_label")]
 custom_minimum_size = Vector2(962, 158)
 offset_right = 962.0
 offset_bottom = 128.0
@@ -15,6 +15,7 @@ script = ExtResource("2_esu1h")
 username_label = NodePath("TextureRect/Username_Label")
 playercount_label = NodePath("TextureRect/PlayerCount_Label")
 texture_box = NodePath("TextureRect")
+ping_label = NodePath("TextureRect/Ping_Label")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -47,19 +48,35 @@ text = "Host
 layout_mode = 0
 offset_left = 35.0
 offset_top = 57.0
-offset_right = 300.0
+offset_right = 630.0
 offset_bottom = 113.0
 theme = ExtResource("1_mopan")
-text = "Username"
+text = "Username kdsjfjlkdsj"
+text_overrun_behavior = 3
 
 [node name="PlayerCount_Label" type="Label" parent="TextureRect"]
 layout_mode = 0
-offset_left = 499.0
+offset_left = 652.0
 offset_top = 57.0
 offset_right = 950.0
 offset_bottom = 113.0
 theme = ExtResource("1_mopan")
 text = "4/4 Players"
+horizontal_alignment = 2
+
+[node name="Ping_Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -282.0
+offset_top = 28.0
+offset_right = -42.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme = ExtResource("1_mopan")
+theme_override_font_sizes/font_size = 24
+text = "Ping: Unknown"
 horizontal_alignment = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

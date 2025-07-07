@@ -2,9 +2,10 @@ class_name LobbyButton
 extends Node
 
 
-@export var username_label:Label
-@export var playercount_label:Label
-@export var texture_box:TextureRect
+@export var username_label: Label
+@export var playercount_label: Label
+@export var texture_box: TextureRect
+@export var ping_label: Label
 
 var original_scale:Vector2
 
@@ -29,7 +30,9 @@ func set_playercount(count:String):
 
 func set_ping(other_location: String) -> void:
 	var ping = Steam.estimatePingTimeFromLocalHost(PackedByteArray(str_to_var(other_location)))
-	print(ping)
+	if ping < 0:
+		ping = "Unknown"
+	ping_label.text = "Ping: " + str(ping)
 
 
 func _on_mouse_entered():
