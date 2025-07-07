@@ -7,8 +7,10 @@
 radius = 65.0
 
 [node name="BulletTurret" type="Node2D"]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_3dwxv")
 _turret_bullet_scene = "res://Powerups/bullet_turret_bullet.tscn"
+speed = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.316667, 0.316667)
