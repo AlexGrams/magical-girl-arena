@@ -5,12 +5,16 @@ const TOUCHING_DISTANCE_THRESHOLD: float = 25.0
 
 ## How many targets this bullet hits before it is destroyed.
 @export var _max_bounces: int = 3
+## The collision shape for finding enemies within range.
+@export var _enemy_mask_collision_shape: Area2D = null
 @onready var _squared_touching_distance_threshold: float = TOUCHING_DISTANCE_THRESHOLD ** 2
 ## Current remaining number of enemies this bullet can hit before it is destroyed.
 @onready var _bounces: int = _max_bounces 
 
 ## Enemy that this bullet is moving towards.
 var _target: Node = null
+## True when we need to update this bullet's target next physics frame.
+var _update_target: bool = false
 
 
 func _ready() -> void:
@@ -21,9 +25,18 @@ func _process(delta: float) -> void:
 	if _target != null:
 		global_position += (_target.global_position - global_position).normalized() * speed * delta
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
-			_find_new_target()
+			_update_target = true
 	else:
+		_update_target = true
+
+
+func _physics_process(_delta: float) -> void:
+	# _find_new_target is called in the physics process since it is possible for it to be destroyed
+	# this frame. If it is destroyed before collisions are updated, then the last enemy that it 
+	# touched won't take damage.
+	if _update_target:
 		_find_new_target()
+		_update_target = false
 
 
 ## Set this bullet's target to the nearest enemy that isn't the current target.
@@ -35,22 +48,27 @@ func _find_new_target() -> void:
 			queue_free()
 			return
 	
-	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemy")
-		
+	var enemies: Array[Area2D] = _enemy_mask_collision_shape.get_overlapping_areas()
+	
 	if !enemies.is_empty():
-		var nearest_enemy: Node2D = enemies[0]
-		var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
+		var nearest_enemy: Node2D = null
+		var nearest_distance = INF 
 		
-		for enemy in enemies:
+		for enemy_area: Area2D in enemies:
+			var enemy: Node = enemy_area.get_parent()
 			if enemy == _target:
 				continue
-			
-			var distance = global_position.distance_squared_to(enemy.global_position)
-			if distance < nearest_distance:
-				nearest_enemy = enemy
-				nearest_distance = distance
+			if enemy is Enemy:
+				var distance = global_position.distance_squared_to(enemy.global_position)
+				if distance < nearest_distance:
+					nearest_enemy = enemy
+					nearest_distance = distance
 		
 		_target = nearest_enemy
+	
+	# There were no valid enemies within range, so destroy this bullet.
+	if _target == null and is_multiplayer_authority():
+		queue_free()
 
 
 ## Set up other properties for this bullet

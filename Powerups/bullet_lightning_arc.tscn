@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqxs4hl46ig4d"]
+[gd_scene load_steps=6 format=3 uid="uid://dqxs4hl46ig4d"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_bounce.gd" id="1_e3qtl"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_nbke8"]
@@ -7,8 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2iod"]
 size = Vector2(24, 24)
 
-[node name="BulletLightningArc" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlimj"]
+radius = 1000.0
+
+[node name="BulletLightningArc" type="Node2D" node_paths=PackedStringArray("_enemy_mask_collision_shape", "collider", "sprite")]
 script = ExtResource("1_e3qtl")
+_enemy_mask_collision_shape = NodePath("EnemyMaskArea2D")
 speed = 1000.0
 lifetime = 0.0
 destroy_on_hit = false
@@ -27,3 +31,10 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_b2iod")
+
+[node name="EnemyMaskArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="EnemyMaskCollisionShape2D" type="CollisionShape2D" parent="EnemyMaskArea2D"]
+shape = SubResource("CircleShape2D_mlimj")
