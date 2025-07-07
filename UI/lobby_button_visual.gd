@@ -28,7 +28,8 @@ func set_playercount(count:String):
 
 
 func set_ping(other_location: String) -> void:
-	print(other_location)
+	var ping = Steam.estimatePingTimeFromLocalHost(PackedByteArray(str_to_var(other_location)))
+	print(ping)
 
 
 func _on_mouse_entered():

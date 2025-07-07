@@ -235,8 +235,6 @@ func setup_lobby_screen() -> void:
 				
 				for lobby_id: int in lobbies:
 					var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
-					# TODO: Test this
-					print(Steam.getAllLobbyData(lobby_id))
 					var player_count: int = Steam.getNumLobbyMembers(lobby_id)
 					
 					# Don't make the button if we don't have good data for this lobby.
