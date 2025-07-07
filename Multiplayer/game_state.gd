@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 ## The unique identifier used to find lobbies through the Steamworks API.
 ## Main: 3689240
 ## Playtest: 3705120
@@ -195,8 +195,8 @@ func _ready() -> void:
 			func(status: int, new_lobby_id: int):
 				lobby_id = new_lobby_id
 				if status == 1:
-					Steam.setLobbyData(new_lobby_id, "name", 
-						str(Steam.getPersonaName()))
+					Steam.setLobbyData(new_lobby_id, "name", str(Steam.getPersonaName()))
+					Steam.setLobbyData(new_lobby_id, "location", str(Steam.getLocalPingLocation()))
 					create_steam_socket()
 				else:
 					push_error("Error on create lobby!")
