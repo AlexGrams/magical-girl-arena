@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=47 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -142,6 +142,9 @@ _data = {
 "RESET": SubResource("Animation_5i70u"),
 "loading": SubResource("Animation_4adry")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
+bg_color = Color(0, 0, 0, 0.784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3i082"]
 bg_color = Color(0.890196, 0.278431, 0.278431, 1)
@@ -1112,6 +1115,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5h8wx")
 
 [node name="ShopLabel" parent="Shop" instance=ExtResource("18_5ybm4")]
 layout_mode = 1
