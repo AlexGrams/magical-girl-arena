@@ -4,18 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://c56jj5sjp47tv" path="res://Cantaloupe.png" id="2_kedfw"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_1mrrj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mnytm"]
-radius = 44.0454
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5lou"]
+size = Vector2(300, 75)
 
 [node name="BulletFan" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_3q0bu")
-speed = 1000.0
+_knockback_speed = 900.0
+_knockback_duration = 0.25
+speed = 2000.0
+lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(1, 0.25)
 texture = ExtResource("2_kedfw")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -23,6 +26,6 @@ collision_mask = 2
 script = ExtResource("3_1mrrj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_mnytm")
+shape = SubResource("RectangleShape2D_c5lou")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]

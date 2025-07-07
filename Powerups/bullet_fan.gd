@@ -9,6 +9,7 @@ extends Bullet
 
 
 func _ready() -> void:
+	rotation = direction.angle() + deg_to_rad(90)
 	super()
 
 
