@@ -48,14 +48,12 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
-collision_mask = 384
+collision_mask = 1408
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_8u1l2")
 base_health = 300
 speed = 150.0
-drop_weight_exp = 15.0
-drop_weight_gold = 4.0
 collider_area = NodePath("Area2D")
 sprite = NodePath("BrownDwarf_Sprite")
 

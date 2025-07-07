@@ -90,6 +90,7 @@ ability_ultimate={
 2d_physics/layer_8="obstacle"
 2d_physics/layer_9="enemy_collision"
 2d_physics/layer_10="downed_player"
+2d_physics/layer_11="obstacle_for_enemy_only"
 
 [physics]
 

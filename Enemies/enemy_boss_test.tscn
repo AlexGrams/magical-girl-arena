@@ -27,15 +27,13 @@ _data = {
 
 [node name="EnemyBossTest" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
 collision_layer = 256
-collision_mask = 384
+collision_mask = 1408
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_te4ea")
 _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
 powerups_to_add = Array[String](["uid://biltdrxoxjfk0", "uid://b3bbiu1hy1i50", "uid://bxxhhnehdl0df"])
 base_health = 50000
-drop_weight_exp = 15.0
-drop_weight_gold = 4.0
 sprite = NodePath("ConstellationAnimatedSprite")
 
 [node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_hxoe2")]
