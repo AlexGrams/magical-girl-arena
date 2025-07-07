@@ -243,11 +243,12 @@ func setup_lobby_screen() -> void:
 					if lobby_name == "" or player_count == 0:
 						continue
 					
-					var lobby_button: Button = lobby_button_scene.instantiate()
+					var lobby_button: LobbyButton = lobby_button_scene.instantiate()
 					
 					# Set up the button for this lobby
 					lobby_button.set_host_name(lobby_name)
 					lobby_button.set_playercount(str(player_count))
+					lobby_button.set_ping(Steam.getLobbyData(lobby_id, "Location"))
 					lobbies_list_container.add_child(lobby_button)
 					lobby_button.pressed.connect(
 						func():

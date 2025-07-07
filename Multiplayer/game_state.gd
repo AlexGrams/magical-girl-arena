@@ -71,6 +71,9 @@ var time: float = MAX_TIME
 # How many players are currently dead.
 var players_down: int = 0
 
+## The location information of the lobby being hosted. Only has data if the local player is hosting.
+var _local_ping_location: String = ""
+
 signal player_list_changed()
 # Called when the host leaves the lobby.
 signal lobby_closed()
@@ -163,6 +166,8 @@ func _ready() -> void:
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
+		# TODO: This will error if we're not logged into steam. Use this to print a 
+		# "not online" error.
 		Steam.steamInitEx(true, APPID)
 		
 		if Steam.getAppID() == 480:
@@ -196,7 +201,9 @@ func _ready() -> void:
 				lobby_id = new_lobby_id
 				if status == 1:
 					Steam.setLobbyData(new_lobby_id, "name", str(Steam.getPersonaName()))
-					Steam.setLobbyData(new_lobby_id, "location", str(Steam.getLocalPingLocation()))
+					var ping_location: PackedByteArray = Steam.getLocalPingLocation()["location"]
+					_local_ping_location = Steam.convertPingLocationToString(ping_location)
+					Steam.setLobbyData(new_lobby_id, "Location", str(ping_location))
 					create_steam_socket()
 				else:
 					push_error("Error on create lobby!")
@@ -242,6 +249,12 @@ func _process(delta: float) -> void:
 	
 	if game_running and time > 0.0:
 		time = max(time - delta, 0.0)
+	
+	# Refresh this lobby's location if it hasn't been set yet. Sort of a hack.
+	if lobby_id != 0 and multiplayer.get_unique_id() == 1 and _local_ping_location == "":
+		var ping_location: PackedByteArray = Steam.getLocalPingLocation()["location"]
+		_local_ping_location = Steam.convertPingLocationToString(ping_location)
+		Steam.setLobbyData(lobby_id, "Location", str(ping_location))
 
 
 # Set this client up as a game server through Steam.

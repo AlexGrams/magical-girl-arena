@@ -1,10 +1,14 @@
+class_name LobbyButton
 extends Node
+
 
 @export var username_label:Label
 @export var playercount_label:Label
 @export var texture_box:TextureRect
+
 var original_scale:Vector2
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready() -> void:
 	if username_label == null:
 		push_warning("Username_label has not been assigned")
@@ -18,11 +22,18 @@ func _ready() -> void:
 func set_host_name(host_name:String):
 	username_label.text = host_name
 
+
 func set_playercount(count:String):
 	playercount_label.text = count + "/" + str(GameState.MAX_PLAYERS) + " players"
 
+
+func set_ping(other_location: String) -> void:
+	print(other_location)
+
+
 func _on_mouse_entered():
 	texture_box.scale = original_scale * 1.05
+
 
 func _on_mouse_exited():
 	texture_box.scale = original_scale
