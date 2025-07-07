@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3swd8iglq57q"]
+[gd_scene load_steps=4 format=3 uid="uid://b3swd8iglq57q"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_turret.gd" id="1_3dwxv"]
 [ext_resource type="Texture2D" uid="uid://ddie18g12e4id" path="res://Honeydew.png" id="2_1k30p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xihk8"]
+radius = 65.0
 
 [node name="BulletTurret" type="Node2D"]
 script = ExtResource("1_3dwxv")
@@ -10,3 +13,10 @@ _turret_bullet_scene = "res://Powerups/bullet_turret_bullet.tscn"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.316667, 0.316667)
 texture = ExtResource("2_1k30p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_xihk8")
