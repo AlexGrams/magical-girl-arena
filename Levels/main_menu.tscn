@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=49 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -143,6 +143,12 @@ _data = {
 "loading": SubResource("Animation_4adry")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5e32"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_8c3cl"]
+Panel/styles/panel = SubResource("StyleBoxFlat_i5e32")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
 bg_color = Color(0, 0, 0, 0.784314)
 
@@ -158,7 +164,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_container", "lobby", "connecting_screen", "lobby_visibility_holder", "lobby_visibility_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "lobby", "connecting_screen", "lobby_visibility_holder", "lobby_visibility_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,6 +177,7 @@ settings = NodePath("Settings")
 shop = NodePath("Shop")
 lobby_list = NodePath("LobbyList")
 lobbies_list_searching_overlay = NodePath("LobbyList/LobbiesListPanelContainer/SearchingPanel")
+lobbies_list_no_connection_overlay = NodePath("LobbyList/LobbiesListPanelContainer/NoConnectionPanel")
 lobbies_list_container = NodePath("LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList")
 lobby = NodePath("Lobby")
 connecting_screen = NodePath("Connecting")
@@ -717,6 +724,29 @@ libraries = {
 "": SubResource("AnimationLibrary_i8f35")
 }
 autoplay = "loading"
+
+[node name="NoConnectionPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_8c3cl")
+
+[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoConnectionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.5
+offset_top = -57.5
+offset_right = 406.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No internet connection! 
+Check your device's network connection and that you're signed into Steam, then restart the game."
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Lobby" type="Control" parent="."]
 visible = false

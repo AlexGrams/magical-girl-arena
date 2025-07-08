@@ -16,6 +16,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobby_list: Control
 ## Appears on the Lobby List while waiting for the list of available lobbies.
 @export var lobbies_list_searching_overlay: Control = null
+## Appears on the Lobby List if there's no network connection.
+@export var lobbies_list_no_connection_overlay: Control = null
 ## The scroll box showing lobbies available to join.
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
@@ -199,6 +201,10 @@ func _on_lobby_list_back_button_button_down() -> void:
 func request_lobby_list() -> void:
 	for button in lobbies_list_container.get_children():
 		button.queue_free()
+	
+	if not GameState.get_has_online_connection():
+		lobbies_list_no_connection_overlay.show()
+		return
 	lobbies_list_searching_overlay.show()
 	
 	if GameState.USING_GODOT_STEAM:

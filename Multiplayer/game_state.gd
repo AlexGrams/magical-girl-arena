@@ -71,6 +71,8 @@ var time: float = MAX_TIME
 # How many players are currently dead.
 var players_down: int = 0
 
+## True if we're connected to Steam 
+var _has_online_connection: bool = false
 ## The location information of the lobby being hosted. Only has data if the local player is hosting.
 var _local_ping_location: String = ""
 
@@ -82,6 +84,10 @@ signal game_over(has_won_game: bool)
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
+
+
+func get_has_online_connection() -> bool:
+	return _has_online_connection
 
 
 # Returns this client's instanced player character.
@@ -166,9 +172,10 @@ func _ready() -> void:
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
-		# TODO: This will error if we're not logged into steam. Use this to print a 
-		# "not online" error.
-		Steam.steamInitEx(true, APPID)
+		var steam_init_result: Dictionary = Steam.steamInitEx(true, APPID)
+		
+		# status is 0 if we're connected to Steam and nonzero if there was an error.
+		_has_online_connection = steam_init_result["status"] == 0
 		
 		if Steam.getAppID() == 480:
 			push_warning("Release app ID was not changed from the testing value of 480! Change it in game_state or make this a debug build.")
