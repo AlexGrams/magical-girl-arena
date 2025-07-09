@@ -9,10 +9,12 @@ extends Powerup
 @export var _powerup_data_file_path: String = ""
 
 var _fire_timer: float = 0.0
+var _owner: Node = null
 
 
 func _ready() -> void:
 	powerup_name = load(_powerup_data_file_path).name
+	_owner = get_parent()
 
 
 func _process(delta: float) -> void:
@@ -31,7 +33,7 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[]
+				[_owner.get_path()]
 			]
 		)
 		
