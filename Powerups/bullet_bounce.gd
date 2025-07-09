@@ -3,13 +3,12 @@ extends Bullet
 ## How close this bullet needs to get to its destination before switching targets.
 const TOUCHING_DISTANCE_THRESHOLD: float = 25.0
 
-## How many targets this bullet hits before it is destroyed.
-@export var _max_bounces: int = 3
+
 ## The collision shape for finding enemies within range.
 @export var _enemy_mask_collision_shape: Area2D = null
 @onready var _squared_touching_distance_threshold: float = TOUCHING_DISTANCE_THRESHOLD ** 2
 ## Current remaining number of enemies this bullet can hit before it is destroyed.
-@onready var _bounces: int = _max_bounces 
+var _bounces: int
 
 ## Enemy that this bullet is moving towards.
 var _target: Node = null
@@ -74,12 +73,14 @@ func _find_new_target() -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
-		or typeof(data[0]) != TYPE_NODE_PATH	# Path to first target 
+		data.size() != 2
+		or typeof(data[0]) != TYPE_NODE_PATH	# Path to first target
+		or typeof(data[1]) != TYPE_INT			# Max # of bounces
 	):
 		push_error("Malformed data array")
 		return
 	
+	_bounces = data[1]
 	_target = get_tree().root.get_node(data[0])
 	_is_owned_by_player = is_owned_by_player
 	if not is_owned_by_player:
