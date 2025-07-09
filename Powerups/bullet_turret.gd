@@ -4,6 +4,8 @@ extends Bullet
 
 ## The actual bullet that does damage for the Boomerang powerup.
 @export var _turret_bullet_scene: String = ""
+## Used to get possible targets within range.
+@export var _range_area: Area2D = null
 
 ## Time in seconds between when this Turret shoots.
 var _fire_interval: float = 0.0
@@ -59,36 +61,36 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 
 
 func _shoot() -> void:
-	get_tree().root.get_node("Playground/BulletSpawner").spawn(
-		[
-			_turret_bullet_scene, 
-			global_position, 
-			(_find_nearest_target_position() - global_position).normalized(), 
-			_damage, 
-			_is_owned_by_player,
-			_owner_id,
-			_powerup_index,
-			[]
-		]
-	)
+	var target_position: Vector2 = _find_nearest_target_position()
+	
+	# Only shoot if there is something within range to shoot at.
+	if target_position != global_position:
+		get_tree().root.get_node("Playground/BulletSpawner").spawn(
+			[
+				_turret_bullet_scene, 
+				global_position, 
+				(target_position - global_position).normalized(), 
+				_damage, 
+				_is_owned_by_player,
+				_owner_id,
+				_powerup_index,
+				[]
+			]
+		)
 
 
 ## Returns location of the nearest target.
 func _find_nearest_target_position() -> Vector2: 
 	if _is_owned_by_player:
-		# Get nearest enemy so direction can be set
-		var enemies: Array[Node] = [] 
-		enemies = get_tree().get_nodes_in_group("enemy")
+		var nearest_position: Vector2 = global_position
+		var least_health = INF
 		
-		if !enemies.is_empty():
-			var nearest_position: Vector2 = enemies[0].global_position
-			var nearest_distance = global_position.distance_squared_to(enemies[0].global_position)
-			for enemy in enemies:
-				var distance = global_position.distance_squared_to(enemy.global_position)
-				if distance < nearest_distance:
-					nearest_position = enemy.global_position
-					nearest_distance = distance
-			return nearest_position
+		for area: Area2D in _range_area.get_overlapping_areas():
+			if area.get_parent() is Enemy:
+				if area.get_parent().health < least_health:
+					nearest_position = area.global_position
+					least_health = area.get_parent().health
+		return nearest_position
 	else:
 		push_warning("Not implemented for enemies")
 	return Vector2.UP
