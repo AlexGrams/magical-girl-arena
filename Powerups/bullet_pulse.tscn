@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_xoslf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
-radius = 72.2496
+radius = 72.26
 
 [node name="BulletPulse" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_4nyg4")
 _knockback_speed = 250.0
 speed = 10.0
-lifetime = 0.5
+lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
