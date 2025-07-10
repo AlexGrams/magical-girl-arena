@@ -17,3 +17,4 @@ dialogue = "Something more."
 script = ExtResource("2_qis0y")
 lines = Array[ExtResource("1_wrskc")]([SubResource("Resource_u1ate"), SubResource("Resource_abfib")])
 play_trigger = 1
+extra_play_trigger = 0

@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 
 
 ## Randomly selects a dialogue to run. Only call on server.
-func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
+func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Constants.DialoguePlayTriggerExtra.NONE) -> void:
 	var dialogue_choices: Array[DialogueData] = []
 	
 	# Get all the characters that are in the game if we don't have it already.
@@ -78,10 +78,15 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
 	if _dialogue.has(trigger):
 		for dialogue: DialogueData in _dialogue[trigger]:
 			var can_add: bool = true
-			for character: Constants.Character in dialogue.get_characters():
-				if not _player_character_set.has(character):
-					can_add = false
-					break
+			
+			if extra_trigger != Constants.DialoguePlayTriggerExtra.NONE and extra_trigger != dialogue.extra_play_trigger:
+				# The extra trigger for this dialogue is set and is not fulfilled right now.
+				can_add = false
+			else:
+				for character: Constants.Character in dialogue.get_characters():
+					if not _player_character_set.has(character):
+						can_add = false
+						break
 			if can_add:
 				dialogue_choices.append(dialogue)
 	

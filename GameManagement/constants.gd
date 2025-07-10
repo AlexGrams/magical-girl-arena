@@ -40,6 +40,16 @@ enum DialoguePlayTrigger {
 	WIN
 }
 
+## An optional extra descriptor for a dialogue trigger. If not NONE, then this condition must also
+## be met in order to play the dialogue.
+enum DialoguePlayTriggerExtra {
+	NONE,
+	MINIBOSS_GOTH,
+	MINIBOSS_SWEET,
+	MINIBOSS_VALE,
+	MINIBOSS_DOVE
+}
+
 # Maps character enum to their CharacterData resource file
 var CHARACTER_DATA: Dictionary = {
 	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),

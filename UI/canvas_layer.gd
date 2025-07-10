@@ -339,5 +339,5 @@ func update_boss_health_bar(health_percent: float) -> void:
 
 
 ## Start a dialogue through the DialogueBox. Only call on server.
-func start_dialogue(trigger: Constants.DialoguePlayTrigger) -> void:
-	_dialogue_box.start_dialogue(trigger)
+func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Constants.DialoguePlayTriggerExtra.NONE) -> void:
+	_dialogue_box.start_dialogue(trigger, extra_trigger)

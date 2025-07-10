@@ -99,7 +99,6 @@ func _process(_delta: float) -> void:
 	if not _has_corrupted_enemy_spawned:
 		if GameState.get_game_progress_as_fraction() >= corrupted_enemy_spawn_time_fraction:
 			_spawn_corrupted_enemy()
-			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS)
 	elif not _has_boss_spawned:
 		if GameState.get_game_progress_as_fraction() >= 1.0:
 			_spawn_boss.rpc()

@@ -23,6 +23,20 @@ func _ready() -> void:
 	_hud_canvas_layer = get_tree().root.get_node("Playground/CanvasLayer")
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
 	
+	# Start dialogue
+	match _character:
+		Constants.Character.GOTH:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_GOTH)
+		Constants.Character.SWEET:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_SWEET)
+		Constants.Character.VALE:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_VALE)
+		Constants.Character.DOVE:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_DOVE)
+		_:
+			push_error("Play miniboss dialogue not implemented for this character")
+	
+	
 	var default_powerup: PowerupData = load(default_powerup_path)
 	if default_powerup != null:
 		_add_powerup(default_powerup.scene)
