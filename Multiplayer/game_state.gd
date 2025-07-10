@@ -301,7 +301,7 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 func start_game():
 	assert(multiplayer.is_server())
 	
-	set_is_game_in_progress(false)
+	set_is_game_in_progress(true)
 	
 	load_game()
 	
@@ -519,7 +519,7 @@ func quit_game(quitting_player: int):
 	elif multiplayer.get_unique_id() == 1:
 		# Someone other than the host quit to the main menu, so the lobby is still active.
 		# Make this lobby joinable again.
-		set_is_game_in_progress(true)
+		set_is_game_in_progress(false)
 
 
 # Load the main game scene and hide the menu.
