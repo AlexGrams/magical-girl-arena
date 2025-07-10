@@ -1,5 +1,5 @@
 class_name LobbyButton
-extends Node
+extends Button
 
 
 @export var username_label: Label

@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := false
+const USING_GODOT_STEAM := true
 ## The unique identifier used to find lobbies through the Steamworks API.
 ## Main: 3689240
 ## Playtest: 3705120
@@ -127,13 +127,12 @@ func set_game_running(value: bool):
 	get_tree().paused = not value
 
 
-## Makes this Steam lobby joinable by other players. A lobby should only be joinable
-## if the players are on the character select screen.
-func set_lobby_joinable(value: bool) -> void:
+## Sets a lobby data variable saying if this lobby is in a game.
+func set_is_game_in_progress(value: bool) -> void:
 	if not USING_GODOT_STEAM:
 		return
 	
-	Steam.setLobbyJoinable(lobby_id, value)
+	Steam.setLobbyData(lobby_id, "IsGameInProgress", str(value))
 
 
 # Called when the node enters the scene tree for the first time.
@@ -211,6 +210,7 @@ func _ready() -> void:
 					var ping_location: PackedByteArray = Steam.getLocalPingLocation()["location"]
 					_local_ping_location = Steam.convertPingLocationToString(ping_location)
 					Steam.setLobbyData(new_lobby_id, "Location", str(ping_location))
+					Steam.setLobbyData(new_lobby_id, "IsGameInProgress", str(false))
 					create_steam_socket()
 				else:
 					push_error("Error on create lobby!")
@@ -301,7 +301,7 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 func start_game():
 	assert(multiplayer.is_server())
 	
-	set_lobby_joinable(false)
+	set_is_game_in_progress(false)
 	
 	load_game()
 	
@@ -519,7 +519,7 @@ func quit_game(quitting_player: int):
 	elif multiplayer.get_unique_id() == 1:
 		# Someone other than the host quit to the main menu, so the lobby is still active.
 		# Make this lobby joinable again.
-		set_lobby_joinable(true)
+		set_is_game_in_progress(true)
 
 
 # Load the main game scene and hide the menu.

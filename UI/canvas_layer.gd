@@ -233,7 +233,7 @@ func _return_to_lobby():
 	
 	# Allow others to join this lobby since we're going back to the character select screen.
 	if multiplayer.get_unique_id() == 1:
-		GameState.set_lobby_joinable(true)
+		GameState.set_is_game_in_progress(true)
 
 
 ## Returns the Container for dislaying Powerup icons.

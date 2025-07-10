@@ -254,10 +254,15 @@ func setup_lobby_screen() -> void:
 					lobby_button.set_playercount(str(player_count))
 					lobby_button.set_ping(Steam.getLobbyData(lobby_id, "Location"))
 					lobbies_list_container.add_child(lobby_button)
-					lobby_button.pressed.connect(
-						func():
-							_on_lobby_button_pressed(lobby_id)
-					)
+					
+					if not str_to_var(Steam.getLobbyData(lobby_id, "IsGameInProgress")):
+						lobby_button.pressed.connect(
+							func():
+								_on_lobby_button_pressed(lobby_id)
+						)
+					else:
+						# This lobby is in a game, so disable the button.
+						lobby_button.disabled = true
 				lobbies_list_searching_overlay.hide()
 		)
 	
