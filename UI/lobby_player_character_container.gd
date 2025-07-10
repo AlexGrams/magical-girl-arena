@@ -75,3 +75,8 @@ func update_username_text(new_text:String) -> void:
 	username.text = new_text
 	for child in username.get_children():
 		child.text = new_text
+
+
+## Clicking on a portal brings up a Steam overlay to invite a friend that's online.
+func _on_invite_friend_button_down() -> void:
+	Steam.activateGameOverlayInviteDialog(GameState.lobby_id)
