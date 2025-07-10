@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="2_cm2v4"]
 [ext_resource type="Script" path="res://UI/lobby_button_visual.gd" id="2_esu1h"]
 
-[node name="LobbyButton" type="Button" node_paths=PackedStringArray("username_label", "playercount_label", "texture_box", "ping_label")]
+[node name="LobbyButton" type="Button" node_paths=PackedStringArray("username_label", "playercount_label", "texture_box", "ping_label", "host_label")]
 custom_minimum_size = Vector2(962, 158)
 offset_right = 962.0
 offset_bottom = 128.0
@@ -16,6 +16,7 @@ username_label = NodePath("TextureRect/Username_Label")
 playercount_label = NodePath("TextureRect/PlayerCount_Label")
 texture_box = NodePath("TextureRect")
 ping_label = NodePath("TextureRect/Ping_Label")
+host_label = NodePath("TextureRect/Host_Label")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
