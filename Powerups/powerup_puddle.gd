@@ -5,6 +5,8 @@ extends Powerup
 @export var _fire_interval = 1.0
 ## Number of bullets that are created each firiing.
 @export var _puddles: int = 5
+## Minimum distance from the player that a puddle can spawn.
+@export var _min_range: float = 200.0
 ## Farthest that a bullet can be spawned from the player.
 @export var _max_range: float = 500.0
 ## Time in seconds before each puddle is destroyed.
@@ -31,7 +33,7 @@ func _process(delta: float) -> void:
 	if _fire_timer > _fire_interval:
 		for i in range(_puddles):
 			# Each mine is moved to a random position in a circle around the player.
-			var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(0, _max_range)
+			var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(_min_range, _max_range)
 			_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
