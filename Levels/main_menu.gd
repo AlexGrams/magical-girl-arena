@@ -262,7 +262,7 @@ func setup_lobby_screen() -> void:
 						)
 					else:
 						# This lobby is in a game, so disable the button.
-						lobby_button.disabled = true
+						lobby_button.set_lobby_button_disabled(true)
 				lobbies_list_searching_overlay.hide()
 		)
 	
@@ -283,8 +283,11 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 	# Async wait until the lobby information is returned.
 	await Steam.lobby_data_update
 	
-	# Don't join a lobby that nobody is in.
-	if Steam.getNumLobbyMembers(lobby_id) <= 0:
+	# Don't join a lobby that nobody is in or that is in progress.
+	if (
+			Steam.getNumLobbyMembers(lobby_id) <= 0 
+			or str_to_var(Steam.getLobbyData(lobby_id, "isGameInProgress"))
+	):
 		connecting_screen.hide()
 		request_lobby_list()
 		return
