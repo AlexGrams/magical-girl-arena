@@ -24,12 +24,10 @@ func _process(delta: float) -> void:
 ## Temporarily boost owning player's speed and health regen.
 func activate() -> void:
 	_player = get_parent()
-	_player._on_stat_upgrade_chosen(Constants.StatUpgrades.HEALTH_REGEN)
 	_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
 
 
 ## Revert speed and health regen changes.
 func deactivate() -> void:
-	_player.decrement_stat(Constants.StatUpgrades.HEALTH_REGEN)
 	_player.decrement_stat(Constants.StatUpgrades.SPEED)
 	_player.remove_status(self)

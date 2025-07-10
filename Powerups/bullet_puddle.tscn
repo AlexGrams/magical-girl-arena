@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2ism1apur5x4"]
+[gd_scene load_steps=6 format=3 uid="uid://d2ism1apur5x4"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_puddle.gd" id="1_i3mkf"]
 [ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_lb4cl"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_0nkov"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jj0wr"]
 size = Vector2(167, 166)
 
-[node name="BulletPuddle" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_rok3p"]
+radius = 300.0
+
+[node name="BulletPuddle" type="Node2D" node_paths=PackedStringArray("_splash_area", "collider", "sprite")]
 script = ExtResource("1_i3mkf")
+_splash_area = NodePath("SplashArea2D")
 speed = 0.0
 lifetime = 5.0
 destroy_on_hit = false
@@ -20,20 +25,21 @@ scale = Vector2(0.38, 0.38)
 texture = ExtResource("2_lb4cl")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 10
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jj0wr")
 
-[node name="AllyArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
+[node name="SplashArea2D" type="Area2D" parent="."]
+collision_mask = 10
+script = ExtResource("3_0nkov")
 
-[node name="AllyCollisionShape2D" type="CollisionShape2D" parent="AllyArea2D"]
-shape = SubResource("RectangleShape2D_jj0wr")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SplashArea2D"]
+shape = SubResource("CircleShape2D_rok3p")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_splash_area_2d_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_exited"]
-[connection signal="area_entered" from="AllyArea2D" to="." method="_on_ally_area_2d_entered"]
-[connection signal="area_exited" from="AllyArea2D" to="." method="_on_ally_area_2d_exited"]
+[connection signal="area_entered" from="SplashArea2D" to="." method="_on_ally_area_2d_entered"]
+[connection signal="area_entered" from="SplashArea2D" to="." method="_on_area_2d_area_entered"]
