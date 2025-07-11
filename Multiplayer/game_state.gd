@@ -241,11 +241,20 @@ func _ready() -> void:
 		)
 		
 		# User tries to join a lobby from their friends list or accepts a lobby invite.
-		Steam.join_requested.connect(
-			func(join_lobby_id: int, _friends_steam_id: int):
-				get_tree().root.get_node("MainMenu").switch_any_to_lobby() 
-				join_lobby(join_lobby_id, Steam.getPersonaName())
-		)
+		Steam.join_requested.connect(_join_requested)
+		
+		# See if the user launched the game by accepting an invite. If so, join the passed lobby.
+		var commandline_arguments: Array = OS.get_cmdline_args()
+		print(commandline_arguments)
+		if commandline_arguments.size() > 0:
+			for i in range(len(commandline_arguments) - 1):
+				# See if a Steam connection argument exists. If so, join the desired lobby.
+				if (
+						commandline_arguments[i] == "+connect_lobby"
+						and int(commandline_arguments[i+1]) > 0
+				):
+					print("Command line lobby ID: %s" % commandline_arguments[i+1])
+					_join_requested(int(commandline_arguments[i+1]), 0)
 	
 	SaveManager.load_game()
 
@@ -288,6 +297,12 @@ func host_lobby(host_player_name: String) -> void:
 		player_name = host_player_name
 		register_player(multiplayer.get_unique_id(), host_player_name, 1, Constants.Character.GOTH)
 		Steam.createLobby(Steam.LOBBY_TYPE_FRIENDS_ONLY, MAX_PLAYERS)
+
+
+## User tries to join a lobby from their friends list or accepts a lobby invite.
+func _join_requested(join_lobby_id: int, _friends_steam_id: int):
+	get_tree().root.get_node("MainMenu").switch_any_to_lobby() 
+	join_lobby(join_lobby_id, Steam.getPersonaName())
 
 
 # Join an existing multiplayer lobby

@@ -22,6 +22,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobbies_list_container: VBoxContainer
 ## The screen showing players in the current lobby.
 @export var lobby: Control
+## The image of the game logo on the main menu.
+@export var main_menu_logo: TextureRect
 ## The screen telling the player that they're connecting to a game
 @export var connecting_screen: Control
 ## Parent of the UI elements displaying lobby visibility option.
@@ -158,6 +160,7 @@ func switch_any_to_lobby() -> void:
 	lobby_list.hide()
 	lobby.hide()
 	main_menu.show()
+	main_menu_logo.scale_to_half()
 	_switch_screen_animation(main_menu, lobby, _lobby_original_pos)
 
 #endregion
