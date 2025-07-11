@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
-						[_puddle_lifetime]
+						[_puddle_lifetime, current_level >= 3]
 					]
 				)
 		
@@ -64,7 +64,3 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-	
-	## TODO: Extra bonus here.
-	if current_level >= 3:
-		pass

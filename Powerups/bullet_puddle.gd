@@ -57,6 +57,27 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 	_splash_area.owner_id = owner_id
 	_splash_area.powerup_index = powerup_index
 
+# Set up other properties for this bullet
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
+	if (
+		data.size() != 2
+		or (typeof(data[0])) != TYPE_FLOAT	# Lifetime
+		or (typeof(data[1])) != TYPE_BOOL	# Is level 3+ or not
+	):
+		push_error("Malformed bullet setup data Array for bullet_puddle.gd.")
+		return
+	
+	lifetime = data[0]
+	_has_level_3_upgrade = data[1]
+	
+	# Make the bullet hurt players
+	if not is_owned_by_player:
+		_modify_collider_to_harm_players()
+	
+	# Disable process and collision signals for non-owners.
+	if not is_multiplayer_authority():
+		set_physics_process(false)
+		set_process(false)
 
 ## If a player touches this bullet, make an explosion that damages enemies and buffs allies.
 func _on_splash_area_2d_entered(area: Area2D) -> void:
@@ -75,12 +96,14 @@ func _on_splash_area_2d_entered(area: Area2D) -> void:
 ## Applies StatusPuddle to allies that overlap if they don't have the status already. Status is only
 ## spawned on the client that owns the colliding player.
 func _on_ally_area_2d_entered(area: Area2D) -> void:
-	var player: Node = area.get_parent()
-	if player != null and GameState.get_local_player() == player:
-		var status_puddle: Status = player.get_status("Puddle")
-		if status_puddle == null:
-			status_puddle = StatusPuddle.new()
-			status_puddle.duration = _status_duration
-			player.add_status(status_puddle)
-		else:
-			status_puddle.duration = _status_duration
+	# This is the level 3 effect.
+	if _has_level_3_upgrade:
+		var player: Node = area.get_parent()
+		if player != null and GameState.get_local_player() == player:
+			var status_puddle: Status = player.get_status("Puddle")
+			if status_puddle == null:
+				status_puddle = StatusPuddle.new()
+				status_puddle.duration = _status_duration
+				player.add_status(status_puddle)
+			else:
+				status_puddle.duration = _status_duration
