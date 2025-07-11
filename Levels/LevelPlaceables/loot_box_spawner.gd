@@ -6,6 +6,9 @@ extends AreaSpawner
 const MAX_POSITION_CHECKS: int = 30
 ## At least how far the LootBox will be spawned from any player. Prevents the LootBox from spawning on top of someone.
 const MIN_DISTANCE_FROM_NEAREST_PLAYER: float = 400.0
+## The radius of the physics query used to determine if the chosen spawn location collides with obstacles.
+## Should be at least as big as the size of a LootBox.
+const COLLISION_CHECK_RADIUS: float = 100.0
 
 ## Time in seconds between spawning LootBoxes
 @export var spawn_interval: float = 1.0
@@ -13,12 +16,22 @@ const MIN_DISTANCE_FROM_NEAREST_PLAYER: float = 400.0
 
 var _time: float = 0.0
 var _min_distance_squared
+## Used to see if the randomly generated position to spawn a lootbox is colliding with a map obstacle.
+var _spawn_collision_check_params: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
 
 
 func _ready() -> void:
 	super()
 	
 	_min_distance_squared = MIN_DISTANCE_FROM_NEAREST_PLAYER * MIN_DISTANCE_FROM_NEAREST_PLAYER
+	
+	_spawn_collision_check_params.collide_with_areas = false
+	_spawn_collision_check_params.collide_with_bodies = true
+	# The 8th layer/7th bit is the "obstacle" collision layer
+	_spawn_collision_check_params.collision_mask = 1 << 7
+	var circle_shape: CircleShape2D = CircleShape2D.new()
+	circle_shape.radius = COLLISION_CHECK_RADIUS
+	_spawn_collision_check_params.shape = circle_shape
 
 
 func _process(delta: float) -> void:
@@ -41,10 +54,19 @@ func _process(delta: float) -> void:
 				randf_range(_spawn_x_min, _spawn_x_max), 
 				randf_range(_spawn_y_min, _spawn_y_max)
 			)
+			
+			# See if the random position is too close to a player.
 			for player: PlayerCharacterBody2D in GameState.player_characters.values():
 				if player.position.distance_squared_to(spawn_pos) < _min_distance_squared:
 					found_good_position = false
 					break
+			
+			# See if the random position is colliding with obstacles.
+			if found_good_position:
+				var space_state = get_world_2d().direct_space_state
+				_spawn_collision_check_params.transform = Transform2D(0.0, spawn_pos)
+				if not space_state.intersect_shape(_spawn_collision_check_params, 1).is_empty():
+					found_good_position = false
 			
 			checks += 1
 		
