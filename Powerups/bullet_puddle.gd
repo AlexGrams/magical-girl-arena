@@ -2,7 +2,7 @@ extends BulletContinuous
 
 
 ## Time in seconds that ally buff this puddle applies stays on the player.
-@export var _status_duration: float = 1.0
+@export var _status_duration: float = 0.5
 ## Used to apply status to allies when this bullet is stepped on and detonates.
 @export var _splash_area: BulletHitbox = null
 @export var _puddle_sprite: Sprite2D = null
@@ -12,6 +12,7 @@ extends BulletContinuous
 var _splash_area_collision_layer: int = 0
 var _splash_area_collision_mask: int = 0
 var _exploded_frame_count: int = -1
+var _has_level_3_upgrade: bool = false
 
 
 func set_damage(damage: float):
@@ -26,7 +27,7 @@ func _ready() -> void:
 	_puddle_sprite.scale = Vector2.ZERO
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(_puddle_sprite, "scale", full_scale, 0.25)
+	tween.tween_property(_puddle_sprite, "scale", full_scale, 0.5)
 	super()
 	
 	_splash_area_collision_layer = _splash_area.collision_layer
