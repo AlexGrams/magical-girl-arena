@@ -1,25 +1,98 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2syl66o48prq"]
+[gd_scene load_steps=9 format=3 uid="uid://c2syl66o48prq"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pulse.gd" id="1_4nyg4"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_od4xw"]
+[ext_resource type="Texture2D" uid="uid://cn44qvy0arfo1" path="res://Sprites/Powerups/Pulse_Staff_Ring.png" id="2_at6i8"]
+[ext_resource type="Texture2D" uid="uid://o0bobejpm1ai" path="res://Sprites/Powerups/Pulse_Note_Ring.png" id="3_eeofs"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_xoslf"]
+
+[sub_resource type="Animation" id="Animation_kjoy0"]
+resource_name = "spinning"
+length = 0.27
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5omtm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2t2l"]
+_data = {
+"RESET": SubResource("Animation_5omtm"),
+"spinning": SubResource("Animation_kjoy0")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
 radius = 72.26
 
-[node name="BulletPulse" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletPulse" type="Node2D" node_paths=PackedStringArray("_notes_ring_sprite", "collider", "sprite")]
 script = ExtResource("1_4nyg4")
 _knockback_speed = 250.0
+_notes_ring_sprite = NodePath("Staff_Ring/Notes_Ring")
 speed = 10.0
 lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("Staff_Ring")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Staff_Ring" type="Sprite2D" parent="."]
 z_index = -1
-scale = Vector2(0.327273, 0.327273)
-texture = ExtResource("2_od4xw")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_at6i8")
+
+[node name="Notes_Ring" type="Sprite2D" parent="Staff_Ring"]
+texture = ExtResource("3_eeofs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Staff_Ring/Notes_Ring"]
+libraries = {
+"": SubResource("AnimationLibrary_g2t2l")
+}
+autoplay = "spinning"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

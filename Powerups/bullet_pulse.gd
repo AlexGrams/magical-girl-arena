@@ -5,12 +5,13 @@ extends Bullet
 @export var _knockback_speed: float = 500.0
 ## Time in seconds that knockback is applied.
 @export var _knockback_duration: float = 0.25
+@export var _notes_ring_sprite: Sprite2D
 
 var _owner: Node2D = null
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	_notes_ring_sprite.rotation_degrees = randi_range(0, 360)
 
 
 func _process(delta: float) -> void:
