@@ -346,6 +346,9 @@ func _input(event: InputEvent) -> void:
 			# Level up
 			if event.keycode == KEY_KP_1:
 				GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
+			# Die
+			if event.keycode == KEY_KP_3:
+				take_damage(health)
 
 
 func get_rerolls() -> int:
