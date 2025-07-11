@@ -6,6 +6,8 @@ extends Bullet
 @export var _turret_bullet_scene: String = ""
 ## Used to get possible targets within range.
 @export var _range_area: Area2D = null
+## Turret sprite
+@export var _turret_sprite: Sprite2D = null
 
 ## Time in seconds between when this Turret shoots.
 var _fire_interval: float = 0.0
@@ -16,9 +18,18 @@ var _damage: float = 0.0
 ## Properties for analytics
 var _owner_id: int = -1
 var _powerup_index: int = -1
+## Whether or not the turret is going through the removal animation
+var _is_being_removed: bool = false
 
 
 func _ready() -> void:
+	## Animate spawning in
+	var full_scale = _turret_sprite.scale
+	_turret_sprite.scale = Vector2.ZERO
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(_turret_sprite, "scale", full_scale, 0.5)
+	
 	if not is_multiplayer_authority():
 		set_process(false)
 
@@ -31,8 +42,14 @@ func _process(delta: float) -> void:
 		_fire_timer = 0.0
 	
 	death_timer += delta
-	if death_timer >= lifetime:
-		queue_free()
+	if death_timer >= lifetime and !_is_being_removed:
+		_is_being_removed = true
+		## Play removing animation
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(_turret_sprite, "scale", Vector2.ZERO, 0.5)
+		# Remove after animation finishes
+		tween.tween_callback(queue_free)
 
 
 # Set up other properties for this bullet

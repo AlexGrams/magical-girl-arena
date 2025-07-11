@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cm7xkgcutvo85"]
 
 [ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_j0368"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_67mo1"]
+[ext_resource type="Texture2D" uid="uid://cu3p2kyk46it3" path="res://Sprites/Powerups/Turret_Gem.png" id="2_qwxxb"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hsojb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
@@ -17,8 +17,8 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.316667, 0.316667)
-texture = ExtResource("2_67mo1")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_qwxxb")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
