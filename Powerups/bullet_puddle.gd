@@ -6,6 +6,8 @@ extends BulletContinuous
 ## Used to apply status to allies when this bullet is stepped on and detonates.
 @export var _splash_area: BulletHitbox = null
 @export var _puddle_sprite: Sprite2D = null
+## Splash explosion effect for when stepping on the puddle
+@export var _splash_particles_scene: Resource = null
 
 var _splash_area_collision_layer: int = 0
 var _splash_area_collision_mask: int = 0
@@ -61,6 +63,12 @@ func _on_splash_area_2d_entered(area: Area2D) -> void:
 		_exploded_frame_count = 0
 		_splash_area.collision_layer = _splash_area_collision_layer
 		_splash_area.collision_mask = _splash_area_collision_mask
+		
+		# Play splash effect
+		var splash_explosion = _splash_particles_scene.instantiate()
+		splash_explosion.global_position = global_position
+		get_tree().root.add_child(splash_explosion)
+	
 
 
 ## Applies StatusPuddle to allies that overlap if they don't have the status already. Status is only
