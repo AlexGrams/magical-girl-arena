@@ -1,18 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2ism1apur5x4"]
+[gd_scene load_steps=7 format=3 uid="uid://d2ism1apur5x4"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_puddle.gd" id="1_i3mkf"]
-[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_lb4cl"]
+[ext_resource type="Texture2D" uid="uid://fcsg3jfovdfw" path="res://Sprites/Powerups/Puddle2.png" id="2_mvcwx"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_0nkov"]
+[ext_resource type="PackedScene" uid="uid://cls2l7os386jm" path="res://Sprites/sparkles.tscn" id="3_nq375"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jj0wr"]
-size = Vector2(167, 166)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_md63j"]
+radius = 44.11
+height = 200.05
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rok3p"]
 radius = 300.0
 
-[node name="BulletPuddle" type="Node2D" node_paths=PackedStringArray("_splash_area", "collider", "sprite")]
+[node name="BulletPuddle" type="Node2D" node_paths=PackedStringArray("_splash_area", "_puddle_sprite", "collider", "sprite")]
 script = ExtResource("1_i3mkf")
 _splash_area = NodePath("SplashArea2D")
+_puddle_sprite = NodePath("Sprite")
 speed = 0.0
 lifetime = 5.0
 destroy_on_hit = false
@@ -20,18 +23,28 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+clip_children = 2
 z_index = -1
-scale = Vector2(0.38, 0.38)
-texture = ExtResource("2_lb4cl")
+position = Vector2(1.99999, 0)
+scale = Vector2(0.484706, 0.75)
+texture = ExtResource("2_mvcwx")
+
+[node name="Sparkles" parent="Sprite" instance=ExtResource("3_nq375")]
+scale = Vector2(2.63158, 2.63158)
+
+[node name="Type1" parent="Sprite/Sparkles" index="0"]
+amount = 30
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 10
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_jj0wr")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_md63j")
 
 [node name="SplashArea2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 10
 script = ExtResource("3_0nkov")
 
@@ -43,3 +56,5 @@ shape = SubResource("CircleShape2D_rok3p")
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_exited"]
 [connection signal="area_entered" from="SplashArea2D" to="." method="_on_ally_area_2d_entered"]
 [connection signal="area_entered" from="SplashArea2D" to="." method="_on_area_2d_area_entered"]
+
+[editable path="Sprite/Sparkles"]
