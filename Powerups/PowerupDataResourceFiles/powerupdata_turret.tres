@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_7kfaq"]
 [ext_resource type="PackedScene" uid="uid://kwhpuyl4a3p4" path="res://Powerups/powerup_turret.tscn" id="1_ytsoh"]
-[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="3_hoife"]
+[ext_resource type="Texture2D" uid="uid://cbqk50mm5uf3f" path="res://Sprites/Powerups/Turret.png" id="3_s24m2"]
 
 [resource]
 script = ExtResource("1_7kfaq")
 is_multiplayer = false
-upgrade_description = "Make turrets around you that shoot nearby enemies."
-upgrade_description_list = Array[String](["Make turrets around you that shoot nearby enemies.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
+upgrade_description = "Create turrets that shoot enemies within range."
+upgrade_description_list = Array[String](["Create turrets that shoot enemies within range.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_ytsoh")
 name = "Turret"
-sprite = ExtResource("3_hoife")
+sprite = ExtResource("3_s24m2")

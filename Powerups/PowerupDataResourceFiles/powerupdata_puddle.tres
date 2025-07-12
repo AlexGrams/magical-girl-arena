@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_dw73q"]
 [ext_resource type="PackedScene" uid="uid://dcw00nyk52gro" path="res://Powerups/powerup_puddle.tscn" id="1_r6heo"]
-[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="3_hrd4e"]
+[ext_resource type="Texture2D" uid="uid://cqu5hs6l4byhl" path="res://Sprites/Powerups/Puddle_Icon.png" id="3_oox5r"]
 
 [resource]
 script = ExtResource("1_dw73q")
 is_multiplayer = false
-upgrade_description = "Create puddles around you that continuously damage enemies and give allies a speed boost and health regeneration."
-upgrade_description_list = Array[String](["Create puddles around you that continuously damage enemies and give allies a speed boost and health regeneration.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
+upgrade_description = "Create damaging puddles. When stepped on, puddles splash and deal burst damage."
+upgrade_description_list = Array[String](["Create damaging puddles. When stepped on, puddles splash and deal burst damage.", "Increase damage.", "Splashing in puddles will give a brief speed boost.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_r6heo")
 name = "Puddle"
-sprite = ExtResource("3_hrd4e")
+sprite = ExtResource("3_oox5r")

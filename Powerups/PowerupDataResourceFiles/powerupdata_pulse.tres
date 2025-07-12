@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_ojfe4"]
 [ext_resource type="PackedScene" uid="uid://c5heqi2q2j60p" path="res://Powerups/powerup_pulse.tscn" id="1_qe2r1"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="3_lbvvt"]
+[ext_resource type="Texture2D" uid="uid://ctcfydsgnbumv" path="res://Sprites/Powerups/Pulse_Icon.png" id="3_orugp"]
 
 [resource]
 script = ExtResource("1_ojfe4")
@@ -11,4 +11,4 @@ upgrade_description = "Create a shockwave that damages and pushes back enemies."
 upgrade_description_list = Array[String](["Create a shockwave that damages and pushes back enemies.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_qe2r1")
 name = "Pulse"
-sprite = ExtResource("3_lbvvt")
+sprite = ExtResource("3_orugp")

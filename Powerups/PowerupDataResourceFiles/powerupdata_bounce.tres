@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://k8lgo7vfe3e7" path="res://Powerups/powerup_bounce.tscn" id="1_h5pdf"]
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="2_agki6"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="3_elea0"]
+[ext_resource type="Texture2D" uid="uid://cmj7jpnfdhv3s" path="res://Sprites/Powerups/Bounce.png" id="3_b6g2d"]
 
 [resource]
 script = ExtResource("2_agki6")
@@ -11,4 +11,4 @@ upgrade_description = "Shoot a projectile that bounces between enemies."
 upgrade_description_list = Array[String](["Shoot a projectile that bounces between enemies.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_h5pdf")
 name = "Bounce"
-sprite = ExtResource("3_elea0")
+sprite = ExtResource("3_b6g2d")

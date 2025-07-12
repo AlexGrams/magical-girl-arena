@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_d6ndq")
 is_multiplayer = false
-upgrade_description = "Mr. Bee attacks nearby enemies and occasionally taunts."
+upgrade_description = "Mr. Bee attacks nearby enemies."
 upgrade_description_list = Array[String](["Mr. Bee attacks nearby enemies.", "Increase damage", "Mr. Bee occasionally taunts nearby enemies.", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_rkbn8")
 name = "Mr. Bee"
