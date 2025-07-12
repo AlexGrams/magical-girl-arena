@@ -42,6 +42,7 @@ func buy_reroll() -> void:
 ## Update the displayed quantity of all item buttons.
 func update_all_quantities() -> void:
 	reroll_item.update_quantity(GameState.rerolls)
+	set_gold_display(GameState.get_gold())
 
 
 func spend_gold(item:Control) -> void:
@@ -50,14 +51,18 @@ func spend_gold(item:Control) -> void:
 		update_coins()
 		item.play_purchase_animation()
 
+
 func get_price(item:Control) -> int:
 	return item.item_data.price
+
 
 func get_max_quantity(item:Control) -> int:
 	return item.item_data.max_quantity
 
+
 func has_enough_gold(item:Control) -> bool:
 	return GameState.get_gold() >= item.item_data.price
+
 
 func set_gold_display(new_value:int) -> void:
 	coins_label.text = str(new_value)
