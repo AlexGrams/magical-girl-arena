@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ciabp031fl7yx"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_bounce.gd" id="1_dhf7l"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_vem0q"]
+[ext_resource type="Texture2D" uid="uid://cmj7jpnfdhv3s" path="res://Sprites/Powerups/Bounce.png" id="2_eytkm"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_vubhm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2iod"]
@@ -13,7 +13,7 @@ radius = 1000.0
 [node name="BulletBounce" type="Node2D" node_paths=PackedStringArray("_enemy_mask_collision_shape", "collider", "sprite")]
 script = ExtResource("1_dhf7l")
 _enemy_mask_collision_shape = NodePath("EnemyMaskArea2D")
-speed = 1000.0
+speed = 1500.0
 lifetime = 0.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
@@ -21,8 +21,8 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
-scale = Vector2(0.0863636, 0.0863636)
-texture = ExtResource("2_vem0q")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_eytkm")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

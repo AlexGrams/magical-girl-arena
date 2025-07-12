@@ -16,15 +16,18 @@ var _target: Node = null
 var _update_target: bool = false
 
 
+
 func _ready() -> void:
 	pass
 
 
 func _process(delta: float) -> void:
 	if _target != null:
-		global_position += (_target.global_position - global_position).normalized() * speed * delta
+		var direction = (_target.global_position - global_position).normalized()
+		global_position += direction * speed * delta
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
 			_update_target = true
+		sprite.rotation = direction.angle() + deg_to_rad(0)
 	else:
 		_update_target = true
 
