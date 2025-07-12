@@ -50,33 +50,18 @@ func level_up():
 		activate_piercing.emit()
 	if current_level == 5 and is_signature:
 		# Add 2 extra lasers
-		var laser_pos_1:Node2D = get_parent().get_node("LaserPos")
-		var laser_pos_2:Node2D = get_parent().get_node("LaserPos2")
-		laser_pos_1.show()
-		laser_pos_2.show()
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1,
-			[
-				bullet_scene, 
-				Vector2.ZERO, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[get_parent().get_path(), max_range, laser_pos_1.get_path(), true]
-			]
-		)
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1,
-			[
-				bullet_scene, 
-				Vector2.ZERO, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[get_parent().get_path(), max_range, laser_pos_2.get_path(), true]
-			]
-		)
+		get_parent().show_lasers.rpc()
+		for laser: Node in get_parent().get_lasers():
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1,
+				[
+					bullet_scene, 
+					Vector2.ZERO, 
+					Vector2.ZERO, 
+					_get_damage_from_curve(), 
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[get_parent().get_path(), max_range, laser.get_path(), true]
+				]
+			)

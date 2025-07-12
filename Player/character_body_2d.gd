@@ -36,6 +36,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _health_label: Label = null
 @export var _temp_health_bar: Control = null
 @export var _temp_health_label: Label = null
+@export var _laser_holder: Node2D = null
 
 ## All Powerups that this player has.
 var powerups: Array[Powerup] = []
@@ -100,6 +101,11 @@ func get_status(status_name: String) -> Status:
 		if status.get_status_name() == status_name:
 			return status
 	return null
+
+
+## Returns the extra laser objects that are turned on for the Laser powerup signature.
+func get_lasers() -> Array[Node]:
+	return _laser_holder.get_children()
 
 
 @rpc("authority", "call_local")
@@ -712,3 +718,17 @@ func spawn_pet_and_set_up(pet_scene: String, parent_path: String, starting_posit
 	var pet: BulletPet = load(pet_scene).instantiate()
 	get_tree().root.get_node("Playground").add_child(pet, true)
 	pet.set_up.rpc(parent_path, starting_position, damage, owner_id, powerup_index, pet_level)
+
+
+## Shows the extra laser drones granted by the signature Laser powerup.
+@rpc("authority", "call_local")
+func show_lasers() -> void:
+	for laser: Node in _laser_holder.get_children():
+		laser.show()
+
+
+## Hides the extra laser drones granted by the signature Laser powerup.
+@rpc("authority", "call_local")
+func hide_lasers() -> void:
+	for laser: Node in _laser_holder.get_children():
+		laser.hide()
