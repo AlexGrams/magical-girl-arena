@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://j115lnwcarmj"]
+[gd_scene load_steps=12 format=3 uid="uid://j115lnwcarmj"]
 
 [ext_resource type="Script" path="res://UI/lobby_player_character_container.gd" id="1_j20e6"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="2_fkd01"]
 [ext_resource type="Texture2D" uid="uid://bovqghaxd3wsw" path="res://Sprites/UI/Portal_Open.png" id="3_ykegb"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="4_1wacc"]
 [ext_resource type="Texture2D" uid="uid://b8jnl5vgqvcwr" path="res://Sprites/UI/Portal_Closed.png" id="4_rqb5g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu4s4"]
@@ -31,24 +32,17 @@ Button/styles/hover = SubResource("StyleBoxTexture_fqska")
 Button/styles/normal = SubResource("StyleBoxTexture_lm6ld")
 Button/styles/pressed = SubResource("StyleBoxFlat_usrbf")
 
-[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("id", "username", "character_sprite_location", "portal_open", "portal_closed")]
+[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("_username", "_character_sprite_location", "_portal_open", "_portal_closed", "_kick_button")]
 offset_left = 413.0
 offset_top = 213.0
 offset_right = 688.0
 offset_bottom = 552.0
 script = ExtResource("1_j20e6")
-id = NodePath("ID")
-username = NodePath("Username")
-character_sprite_location = NodePath("CharacterSpriteLocation")
-portal_open = NodePath("Portal_Open")
-portal_closed = NodePath("Portal_Closed")
-
-[node name="ID" type="Label" parent="."]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "ID Goes here"
-horizontal_alignment = 1
+_username = NodePath("Username")
+_character_sprite_location = NodePath("CharacterSpriteLocation")
+_portal_open = NodePath("Portal_Open")
+_portal_closed = NodePath("Portal_Closed")
+_kick_button = NodePath("Portal_Open/KickButton")
 
 [node name="Username" type="Label" parent="."]
 z_index = 2
@@ -107,6 +101,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_ykegb")
 
+[node name="KickButton" type="Button" parent="Portal_Open"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = 53.0
+offset_right = 97.715
+offset_bottom = 94.235
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_1wacc")
+theme_override_font_sizes/font_size = 30
+text = "Kick Player"
+
 [node name="Portal_Closed" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -130,4 +142,5 @@ grow_vertical = 2
 theme = SubResource("Theme_jad8j")
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="button_down" from="Portal_Open/KickButton" to="." method="_on_kick_button_down"]
 [connection signal="button_down" from="Portal_Closed/InviteFriendButton" to="." method="_on_invite_friend_button_down"]

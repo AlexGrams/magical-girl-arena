@@ -338,14 +338,21 @@ func _on_lobby_visibility_option_button_item_selected(index: int) -> void:
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PRIVATE)
 
 
-# Leave a game lobby. Goes back to the lobby list.
 func _on_leave_button_down() -> void:
-	GameState.disconnect_local_player()
-	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
-	request_lobby_list()
+	leave_lobby()
+
 
 # Show shop, but don't leave lobby.
 func _on_shop_button_down_from_lobby() -> void:
+	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
+	request_lobby_list()
+
+
+## Leave a game lobby. Goes back to the lobby list. If called remotely, should only be done by
+## the lobby host.
+@rpc("any_peer", "call_local", "reliable")
+func leave_lobby() -> void:
+	GameState.disconnect_local_player()
 	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
 
