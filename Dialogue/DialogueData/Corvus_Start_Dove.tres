@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://bviv84om4xtns"]
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://bviv84om4xtns"]
 
 [ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_hr6d7"]
 [ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_q4k5l"]
@@ -25,18 +25,8 @@ script = ExtResource("1_hr6d7")
 speaker = 3
 dialogue = "Oh. I see the problem now."
 
-[sub_resource type="Resource" id="Resource_clcus"]
-script = ExtResource("1_hr6d7")
-speaker = -1
-dialogue = "asdasdas"
-
-[sub_resource type="Resource" id="Resource_ip5xr"]
-script = ExtResource("1_hr6d7")
-speaker = -1
-dialogue = "asdfsdgdfhfdgdfgdfgfdgfdgdfgdfgdfgdfgdfgdfgw"
-
 [resource]
 script = ExtResource("2_q7b3b")
-lines = Array[ExtResource("1_hr6d7")]([SubResource("Resource_v7iei"), SubResource("Resource_06cky"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_clcus"), SubResource("Resource_ip5xr")])
+lines = Array[ExtResource("1_hr6d7")]([SubResource("Resource_v7iei"), SubResource("Resource_06cky"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb")])
 play_trigger = 1
 extra_play_trigger = 0

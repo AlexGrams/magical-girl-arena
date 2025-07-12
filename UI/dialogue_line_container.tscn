@@ -6,19 +6,32 @@
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="4_ge4jx"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="4_uypca"]
 
-[node name="DialogueLineContainer" type="Panel" node_paths=PackedStringArray("_portrait", "_portrait_bg", "_text")]
+[node name="DialogueLineContainer" type="Control" node_paths=PackedStringArray("_main_control", "_portrait", "_portrait_bg", "_text")]
 clip_children = 2
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 3
+anchors_preset = 0
 offset_right = 1091.0
 offset_bottom = 250.0
 pivot_offset = Vector2(0, 125)
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme = ExtResource("1_nyfvi")
 script = ExtResource("1_up2r7")
-_portrait = NodePath("HBoxContainer/Portrait_BG/Portrait")
-_portrait_bg = NodePath("HBoxContainer/Portrait_BG")
-_text = NodePath("HBoxContainer/Label")
+_main_control = NodePath("MainPanel")
+_portrait = NodePath("MainPanel/HBoxContainer/Portrait_BG/Portrait")
+_portrait_bg = NodePath("MainPanel/HBoxContainer/Portrait_BG")
+_text = NodePath("MainPanel/HBoxContainer/Label")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MainPanel" type="Panel" parent="."]
+clip_children = 2
+custom_minimum_size = Vector2(0, 250)
+offset_right = 1091.0
+offset_bottom = 250.0
+pivot_offset = Vector2(0, 125)
+size_flags_horizontal = 0
+theme = ExtResource("1_nyfvi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainPanel"]
 layout_mode = 2
 offset_left = 38.0
 offset_top = 44.0
@@ -26,7 +39,7 @@ offset_right = 1050.0
 offset_bottom = 194.0
 theme_override_constants/separation = 15
 
-[node name="Portrait_BG" type="TextureRect" parent="HBoxContainer"]
+[node name="Portrait_BG" type="TextureRect" parent="MainPanel/HBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(150, 150)
 layout_direction = 2
@@ -37,7 +50,7 @@ texture = ExtResource("3_yf0ur")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Portrait" type="TextureRect" parent="HBoxContainer/Portrait_BG"]
+[node name="Portrait" type="TextureRect" parent="MainPanel/HBoxContainer/Portrait_BG"]
 custom_minimum_size = Vector2(130, 130)
 layout_mode = 1
 anchors_preset = 8
@@ -56,7 +69,7 @@ texture = ExtResource("4_ge4jx")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="MainPanel/HBoxContainer"]
 custom_minimum_size = Vector2(800, 150)
 layout_mode = 2
 size_flags_horizontal = 0

@@ -3,6 +3,8 @@ extends Control
 ## Displays a line of dialogue with a speaker portrait.
 
 
+## Contains all UI elements of this object that need to tween together.
+@export var _main_control: Control = null
 ## Image of who is speaking.
 @export var _portrait: TextureRect = null
 ## Speaker background
@@ -24,22 +26,23 @@ func _ready() -> void:
 	var text_size = _text.custom_minimum_size
 	var portrait_bg_size = _portrait_bg.custom_minimum_size
 	var portrait_size = _portrait.custom_minimum_size
-	var full_size = size
-	var full_scale = scale
+	var full_size = _main_control.size
+	var full_scale = _main_control.scale
 	
 	# Start all sizes at 0
 	_text.custom_minimum_size = Vector2.ZERO
 	_portrait_bg.custom_minimum_size = Vector2.ZERO
 	_portrait.custom_minimum_size = Vector2.ZERO
-	size = Vector2.ZERO
-	scale = Vector2.ZERO
+	_main_control.size = Vector2.ZERO
+	_main_control.scale = Vector2.ZERO
+	
 	
 	### Play animation
 	var tween = create_tween().set_parallel()
 	tween.set_trans(Tween.TRANS_BACK)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "scale", full_scale, 0.5)
-	tween.tween_property(self, "custom_minimum_size", full_size, 0.5)
+	tween.tween_property(_main_control, "scale", full_scale, 0.5)
+	tween.tween_property(_main_control, "custom_minimum_size", full_size, 0.5)
 	tween.tween_property(_text, "scale", full_scale, 0.5)
 	tween.tween_property(_text, "custom_minimum_size", text_size, 0.5)
 	tween.tween_property(_portrait_bg, "scale", full_scale, 0.5)
@@ -69,6 +72,6 @@ func delete() -> void:
 		## Play removing animation
 		var tween = create_tween()
 		tween.set_trans(Tween.TRANS_ELASTIC)
-		tween.tween_property(self, "scale", Vector2.ZERO, 0.5)
+		tween.tween_property(_main_control, "scale", Vector2.ZERO, 0.5)
 		# Remove after animation finishes
 		tween.tween_callback(queue_free)
