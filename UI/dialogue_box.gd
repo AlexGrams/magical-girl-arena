@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 		# Delete lines of dialogue after we've finished playing a dialogue.
 		_dialogue_timer -= delta
 		if _dialogue_timer <= 0.0:
-			get_child(0).delete()
+			_delete_oldest_child()
 			_dialogue_timer = DESTROY_LINE_WAIT_AFTER_DIALOGUE
 
 
@@ -113,4 +113,12 @@ func _show_line(line: DialogueLine) -> void:
 	_dialogue_timer = len(line.dialogue) * PER_CHARACTER_LINE_WAIT + BASE_LINE_WAIT
 	
 	if get_child_count() > MAX_LINES:
-		get_child(0).delete()
+		_delete_oldest_child()
+
+
+## Calls function to remove the oldest DialogueLineContainer.
+func _delete_oldest_child() -> void:
+	for child: Node in get_children():
+		if child is DialogueLineContainer and not child.get_is_being_removed():
+			child.delete()
+			break
