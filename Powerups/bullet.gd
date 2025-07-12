@@ -96,4 +96,3 @@ func _modify_collider_to_harm_players() -> void:
 	
 	if sprite != null:
 		sprite.self_modulate = Color.RED
-		

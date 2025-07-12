@@ -5,6 +5,8 @@ extends Powerup
 @export var _fire_interval = 1.0
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
+## The visual for this powerup. Doesn't do anything.
+@export var _fan_visual_scene: String = ""
 ## Path to the PowerupData resource file for this Powerup.
 @export var _powerup_data_file_path: String = ""
 
@@ -51,6 +53,21 @@ func _process(delta: float) -> void:
 func activate_powerup():
 	is_on = true
 	_owning_character = get_parent()
+	
+	# Spawn fan visual
+	_bullet_spawner.request_spawn_bullet.rpc_id(
+		1,
+		[
+			_fan_visual_scene, 
+			global_position, 
+			Vector2.ZERO, 
+			0.0, 
+			_is_owned_by_player,
+			multiplayer.get_unique_id(),
+			_powerup_index,
+			[_owning_character.get_path()]
+		]
+	)
 
 
 func deactivate_powerup():

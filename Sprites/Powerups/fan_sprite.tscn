@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://b78d5x0c8cxde"]
+[gd_scene load_steps=8 format=3 uid="uid://b78d5x0c8cxde"]
 
 [ext_resource type="Texture2D" uid="uid://qr42cbclbxl0" path="res://Sprites/Powerups/Fan.png" id="1_beju1"]
+[ext_resource type="Script" path="res://Sprites/Powerups/fan_sprite.gd" id="1_n2fsk"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_xugt7"]
 
 [sub_resource type="Animation" id="Animation_4or33"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:skew")
+tracks/0/path = NodePath("OffsetNode2D/Sprite2D2:skew")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
+tracks/1/path = NodePath("OffsetNode2D/Sprite2D2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -31,7 +33,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/path = NodePath("OffsetNode2D/Sprite2D2:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -47,7 +49,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:skew")
+tracks/0/path = NodePath("OffsetNode2D/Sprite2D2:skew")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
+tracks/1/path = NodePath("OffsetNode2D/Sprite2D2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -71,7 +73,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/path = NodePath("OffsetNode2D/Sprite2D2:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -87,14 +89,33 @@ _data = {
 "wave fan": SubResource("Animation_8es65")
 }
 
-[node name="Fan" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2x46"]
+size = Vector2(0, 0)
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Fan" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_n2fsk")
+collider = NodePath("OffsetNode2D/Area2D")
+sprite = NodePath("OffsetNode2D/Sprite2D2")
+
+[node name="OffsetNode2D" type="Node2D" parent="."]
+position = Vector2(150, -30)
+
+[node name="Sprite2D2" type="Sprite2D" parent="OffsetNode2D"]
+rotation = 1.5708
 texture = ExtResource("1_beju1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OffsetNode2D"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_vsfie")
 }
 autoplay = "wave fan"
 speed_scale = 1.5
+
+[node name="Area2D" type="Area2D" parent="OffsetNode2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_xugt7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OffsetNode2D/Area2D"]
+shape = SubResource("RectangleShape2D_b2x46")
