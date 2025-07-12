@@ -24,6 +24,7 @@ func activate_powerup():
 	is_on = true
 	
 	if _is_owned_by_player:
+		# Main laser
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1,
 			[
@@ -34,14 +35,22 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[get_parent().get_path(), max_range, get_parent().get_path(), false]
+				[get_parent().get_path(), max_range, get_parent().get_path(), current_level >= 3]
 			]
 		)
+		
+		if current_level == 5 and is_signature:
+			_activate_signature()
 	else:
 		pass
 
+
 func deactivate_powerup():
 	is_on = false
+	
+	if current_level == 5 and is_signature:
+		get_parent().hide_lasers.rpc()
+
 
 func level_up():
 	current_level += 1
@@ -49,19 +58,23 @@ func level_up():
 	if current_level == 3:
 		activate_piercing.emit()
 	if current_level == 5 and is_signature:
-		# Add 2 extra lasers
-		get_parent().show_lasers.rpc()
-		for laser: Node in get_parent().get_lasers():
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				1,
-				[
-					bullet_scene, 
-					Vector2.ZERO, 
-					Vector2.ZERO, 
-					_get_damage_from_curve(), 
-					_is_owned_by_player,
-					multiplayer.get_unique_id(),
-					_powerup_index,
-					[get_parent().get_path(), max_range, laser.get_path(), true]
-				]
-			)
+		_activate_signature()
+
+
+## Add 2 extra lasers
+func _activate_signature() -> void:
+	get_parent().show_lasers.rpc()
+	for laser: Node in get_parent().get_lasers():
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1,
+			[
+				bullet_scene, 
+				Vector2.ZERO, 
+				Vector2.ZERO, 
+				_get_damage_from_curve(), 
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[get_parent().get_path(), max_range, laser.get_path(), true]
+			]
+		)
