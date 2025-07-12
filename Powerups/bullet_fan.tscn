@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dq2h1yxtls48n"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_fan.gd" id="1_3q0bu"]
-[ext_resource type="Texture2D" uid="uid://c56jj5sjp47tv" path="res://Cantaloupe.png" id="2_kedfw"]
+[ext_resource type="Texture2D" uid="uid://dya0uduj0jvec" path="res://Sprites/Powerups/Fan_Wind.png" id="2_4wj5g"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_1mrrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5lou"]
@@ -18,8 +18,8 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1, 0.25)
-texture = ExtResource("2_kedfw")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_4wj5g")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
