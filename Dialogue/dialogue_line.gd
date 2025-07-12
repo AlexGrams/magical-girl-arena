@@ -6,3 +6,5 @@ extends Resource
 @export var speaker: Constants.Character = Constants.Character.NONE
 ## Text that is displayed for this line.
 @export var dialogue: String = ""
+## [Optional] Portrait for Constants.Character.None speakers
+@export var optional_portrait: Texture2D = null

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://dtbhyrxqq3ree"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_hr6d7"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_q4k5l"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_q7b3b"]
+
+[sub_resource type="Resource" id="Resource_v7iei"]
+script = ExtResource("1_hr6d7")
+speaker = 3
+dialogue = "This place is so beautiful!"
+
+[sub_resource type="Resource" id="Resource_06cky"]
+script = ExtResource("1_hr6d7")
+speaker = 3
+dialogue = "How come we need to fix it? What's wrong with it?"
+
+[sub_resource type="Resource" id="Resource_gqeyi"]
+script = ExtResource("1_hr6d7")
+speaker = -1
+dialogue = "You're currently standing in the center of Death Valley."
+optional_portrait = ExtResource("2_q4k5l")
+
+[sub_resource type="Resource" id="Resource_n74sb"]
+script = ExtResource("1_hr6d7")
+speaker = 3
+dialogue = "Oh. I see the problem now."
+
+[sub_resource type="Resource" id="Resource_clcus"]
+script = ExtResource("1_hr6d7")
+speaker = -1
+dialogue = "asdasdas"
+
+[sub_resource type="Resource" id="Resource_ip5xr"]
+script = ExtResource("1_hr6d7")
+speaker = -1
+dialogue = "asdfsdgdfhfdgdfgdfgfdgfdgdfgdfgdfgdfgdfgdfgw"
+
+[resource]
+script = ExtResource("2_q7b3b")
+lines = Array[ExtResource("1_hr6d7")]([SubResource("Resource_v7iei"), SubResource("Resource_06cky"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_clcus"), SubResource("Resource_ip5xr")])
+play_trigger = 1
+extra_play_trigger = 0

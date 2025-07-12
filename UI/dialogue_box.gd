@@ -9,9 +9,9 @@ const DIALOGUE_DATA_FOLDER_PATH: String = "res://Dialogue/DialogueData/"
 ## Minimum amount of time in seconds that we wait in between displaying lines of dialogue.
 const BASE_LINE_WAIT: float = 0.5
 ## Delay in seconds between displaying the next dialogue line per character in the current line.
-const PER_CHARACTER_LINE_WAIT: float = 0.1
+const PER_CHARACTER_LINE_WAIT: float = 0.05
 ## Delay in seconds between removing lines from the screen after a dialogue has finished.
-const DESTROY_LINE_WAIT_AFTER_DIALOGUE: float = 3.0
+const DESTROY_LINE_WAIT_AFTER_DIALOGUE: float = 0.5
 ## Most number of dialogue lines that we show at once.
 const MAX_LINES: int = 3
 
@@ -84,7 +84,7 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 				can_add = false
 			else:
 				for character: Constants.Character in dialogue.get_characters():
-					if not _player_character_set.has(character):
+					if not _player_character_set.has(character) and character != Constants.Character.NONE:
 						can_add = false
 						break
 			if can_add:
