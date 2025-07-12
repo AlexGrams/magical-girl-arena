@@ -2,14 +2,20 @@ class_name DialogueLineContainer
 extends Control
 ## Displays a line of dialogue with a speaker portrait.
 
+
 ## Image of who is speaking.
 @export var _portrait: TextureRect = null
 ## Speaker background
 @export var _portrait_bg: TextureRect = null
 ## Dialogue text.
 @export var _text: Label = null
+
 ## Tracks if line is already in the middle of being deleted
 var _is_being_removed: bool = false
+
+
+func get_is_being_removed() -> bool:
+	return _is_being_removed
 
 
 # Called when the node enters the scene tree for the first time.
