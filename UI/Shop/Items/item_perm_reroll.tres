@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://cibbn8bcqvx6e"]
+
+[ext_resource type="Texture2D" uid="uid://bchq18hkloumb" path="res://Sprites/UI/Shop_Reroll_Icon_Disabled.png" id="1_lg5b5"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="2_0f0ru"]
+[ext_resource type="Script" path="res://UI/Shop/shop_item_data.gd" id="3_inccf"]
+
+[resource]
+script = ExtResource("3_inccf")
+item_name = "Permanent Reroll"
+item_desc = "Permanently gain 1 reroll."
+icon = ExtResource("2_0f0ru")
+disabled_icon = ExtResource("1_lg5b5")
+price = 500
+max_quantity = 3
+_sold_message = 0

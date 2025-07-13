@@ -34,7 +34,8 @@ func save_game() -> void:
 	
 	var save_data := {
 		"gold": GameState.get_gold(),
-		"rerolls": GameState.rerolls
+		"rerolls": GameState.rerolls,
+		"perm_rerolls": GameState.perm_rerolls
 	}
 	
 	var json_string := JSON.stringify(save_data)
@@ -84,3 +85,5 @@ func load_game() -> void:
 	GameState.set_gold(save_data["gold"])
 	if save_data.has("rerolls"):
 		GameState.rerolls = save_data["rerolls"]
+	if save_data.has("perm_rerolls"):
+		GameState.perm_rerolls = save_data["perm_rerolls"]

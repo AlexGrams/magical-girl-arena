@@ -75,8 +75,12 @@ var _prevent_death: bool = false
 var _spectate_characters: Array[PlayerCharacterBody2D] = []
 ## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
 var _spectate_index: int = 0
-# Temporary rerolls that only become available in rare situations
+## Starts as Permanent + bought rerolls. Decreases as player uses rerolls
+var _current_rerolls: int = 0
+## Temporary rerolls that only become available in rare situations
 var _temp_rerolls: int = 0
+## How many rerolls have been used this round (not including temp rerolls)
+var _used_rerolls: int = 0
 # Stat levels
 var _stat_health: int = 1
 var _stat_health_regen: int = 1
@@ -131,6 +135,8 @@ func set_exp_pickup_enabled(value: bool) -> void:
 func _ready():
 	_revive_collision_area.hide()
 	
+	# Setup rerolls
+	_current_rerolls = GameState.rerolls + GameState.perm_rerolls
 	## No longer using stats.
 	#if is_multiplayer_authority():
 		#$"../CanvasLayer".update_stats(self)
@@ -358,7 +364,7 @@ func _input(event: InputEvent) -> void:
 
 
 func get_rerolls() -> int:
-	return GameState.rerolls + _temp_rerolls
+	return _current_rerolls + _temp_rerolls
 
 
 func increment_temp_rerolls() -> void:
@@ -369,7 +375,16 @@ func decrement_rerolls() -> void:
 	if _temp_rerolls > 0:
 		_temp_rerolls -= 1
 	else:
-		GameState.rerolls -= 1
+		# Decide whether a permanent or bought reroll was used
+		# Permanent rerolls are used FIRST
+		_used_rerolls += 1
+		if _used_rerolls > GameState.perm_rerolls:
+			GameState.rerolls -= 1
+		_current_rerolls -= 1
+		print("Temp rerolls: " + str(_temp_rerolls))
+		print("Bought rerolls: " + str(GameState.rerolls))
+		print("Perm rerolls: " + str(GameState.perm_rerolls))
+		print("Current rerolls: " + str(_current_rerolls))
 		SaveManager.save_game()
 
 

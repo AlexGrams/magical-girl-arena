@@ -6,6 +6,12 @@ extends Control
 
 ## Buttons for items available for purchase
 @export var reroll_item:Control
+@export var perm_reroll_item:Control
+
+### TO ADD A NEW ITEM:
+## Connect button in _ready()
+## Create buy function in #region Buying Functions
+## Update quantity in update_all_quantities()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +20,7 @@ func _ready() -> void:
 	
 	## Connect all item buttons
 	reroll_item.button.button_down.connect(buy_reroll)
+	perm_reroll_item.button.button_down.connect(buy_perm_reroll)
 
 # Updates the coin display text over time
 func update_coins() -> void:
@@ -34,6 +41,18 @@ func buy_reroll() -> void:
 	reroll_item.update_quantity(GameState.rerolls)
 	
 	SaveManager.save_game()
+
+## Used to buy permanent rerolls
+func buy_perm_reroll() -> void:
+	# Don't buy if at max quantity or if not enough money
+	if GameState.perm_rerolls >= get_max_quantity(perm_reroll_item) or !has_enough_gold(perm_reroll_item):
+		return
+	
+	spend_gold(perm_reroll_item)
+	GameState.perm_rerolls += 1
+	perm_reroll_item.update_quantity(GameState.perm_rerolls)
+	
+	SaveManager.save_game()
 #endregion
 
 #region Helper Functions
@@ -42,6 +61,7 @@ func buy_reroll() -> void:
 ## Update the displayed quantity of all item buttons.
 func update_all_quantities() -> void:
 	reroll_item.update_quantity(GameState.rerolls)
+	perm_reroll_item.update_quantity(GameState.perm_rerolls)
 	set_gold_display(GameState.get_gold())
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=50 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
+[ext_resource type="Resource" uid="uid://cibbn8bcqvx6e" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
 
 [sub_resource type="Curve" id="Curve_28jnp"]
 _data = [Vector2(0, 0), 0.0, 3.49332, 0, 0, Vector2(0.496815, 1), 0.0, 0.0, 0, 0, Vector2(0.541401, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0737917, 0.0, 0, 0]
@@ -1125,7 +1126,7 @@ popup/item_2/text = "Closed"
 popup/item_2/id = 2
 script = ExtResource("13_r3p63")
 
-[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item")]
+[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item")]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -1137,6 +1138,7 @@ grow_vertical = 2
 script = ExtResource("17_rr20q")
 coins_label = NodePath("PlayerCoins_Container/Label")
 reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem")
+perm_reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem2")
 
 [node name="DimBackground" type="Panel" parent="Shop"]
 visible = false
@@ -1221,6 +1223,10 @@ columns = 4
 
 [node name="ShopItem" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer" instance=ExtResource("17_y7mn5")]
 layout_mode = 2
+
+[node name="ShopItem2" parent="Shop/LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer" instance=ExtResource("17_y7mn5")]
+layout_mode = 2
+item_data = ExtResource("31_qx1iw")
 
 [node name="TemporaryMessage" parent="Shop" instance=ExtResource("18_5ybm4")]
 layout_mode = 2

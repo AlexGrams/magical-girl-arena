@@ -8,8 +8,8 @@
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_wc8mt"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="4_6uss8"]
 [ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="5_rebb8"]
-[ext_resource type="Theme" path="res://Sprites/UI/disabled_description_text.tres" id="5_vljwb"]
-[ext_resource type="Theme" path="res://Sprites/UI/disabled_description_white_with_shadow_text.tres" id="7_wkrqi"]
+[ext_resource type="Theme" uid="uid://d2on3aykhw23b" path="res://Sprites/UI/disabled_description_text.tres" id="5_vljwb"]
+[ext_resource type="Theme" uid="uid://clh6n34b206us" path="res://Sprites/UI/disabled_description_white_with_shadow_text.tres" id="7_wkrqi"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="9_lpyi2"]
 [ext_resource type="PackedScene" uid="uid://bv8573qr7ucnf" path="res://UI/Shop/shop_coin_particles.tscn" id="12_7dale"]
 
@@ -64,15 +64,19 @@ offset_bottom = 145.0
 theme_override_constants/separation = 10
 
 [node name="Name" type="Label" parent="BackgroundPanel/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_wc8mt")
 theme_override_font_sizes/font_size = 18
 text = "Item Name"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Description" type="Label" parent="BackgroundPanel/VBoxContainer"]
 custom_minimum_size = Vector2(126, 63)
 layout_mode = 2
+size_flags_horizontal = 0
 theme = ExtResource("4_6uss8")
 theme_override_font_sizes/font_size = 16
 text = "This is a description of this item"
