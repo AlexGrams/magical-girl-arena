@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cm7xkgcutvo85"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_j0368"]
+[ext_resource type="Script" path="res://Powerups/bullet_turret_bullet.gd" id="1_uomo1"]
 [ext_resource type="Texture2D" uid="uid://cu3p2kyk46it3" path="res://Sprites/Powerups/Turret_Gem.png" id="2_qwxxb"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hsojb"]
 
@@ -9,7 +9,7 @@ size = Vector2(38, 38)
 
 [node name="BulletTurretBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_j0368")
+script = ExtResource("1_uomo1")
 speed = 1000.0
 lifetime = 1.0
 destroy_on_hit = false
