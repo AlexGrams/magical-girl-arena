@@ -8,7 +8,7 @@
 script = ExtResource("1_h3sdd")
 is_multiplayer = false
 upgrade_description = "Shoot a marble in the direction you aim. Can critically hit."
-upgrade_description_list = Array[String](["Shoot a marble in the direction you aim. Can critically hit.", "Increase damage", "Shoot 4 additional marbles in random directions.", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Shoot a marble in the direction you aim. Can critically hit.", "Increase damage", "Shoot 4 additional marbles in random directions", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_l0fl7")
 name = "Marble Slingshot"
 sprite = ExtResource("3_lrcip")

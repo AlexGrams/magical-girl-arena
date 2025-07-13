@@ -8,7 +8,7 @@
 script = ExtResource("1_dw73q")
 is_multiplayer = false
 upgrade_description = "Create damaging puddles. When stepped on, puddles splash and deal burst damage."
-upgrade_description_list = Array[String](["Create damaging puddles. When stepped on, puddles splash and deal burst damage.", "Increase damage.", "Splashing in puddles will give a brief speed boost.", "Increase damage.", "Increase damage.", "Increase damage."])
+upgrade_description_list = Array[String](["Create damaging puddles. When stepped on, puddles splash and deal burst damage", "Increase damage", "Splashing in puddles will give a brief speed boost", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_r6heo")
 name = "Puddle"
 sprite = ExtResource("3_oox5r")
