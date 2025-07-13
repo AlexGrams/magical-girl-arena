@@ -10,6 +10,7 @@ extends Powerup
 
 var _fire_timer: float = 0.0
 var _owner: PlayerCharacterBody2D = null
+var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
@@ -47,7 +48,7 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[target.get_path()]
+					[target.get_path(), _has_level_3_upgrade]
 				]
 			)
 		
@@ -70,4 +71,4 @@ func level_up():
 	
 	## TODO: Extra bonus here.
 	if current_level >= 3:
-		pass
+		_has_level_3_upgrade = true

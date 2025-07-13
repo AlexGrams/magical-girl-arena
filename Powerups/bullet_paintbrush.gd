@@ -41,12 +41,17 @@ func start_death_timer() -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 2
 		or (typeof(data[0])) != TYPE_NODE_PATH	# Target node path
+		or (typeof(data[1])) != TYPE_BOOL		# Has level 3 upgrade or not
 	):
 		push_error("Malformed bullet data.")
 		return
-	
+
+	# Level 3 upgrade
+	if data[1]:
+		scale.y = scale.y * 2
+
 	_ending_point = get_node(data[0]).global_position
 	var final_direction: Vector2 = _ending_point - global_position
 	# How long the paintbrush is at default scale (1, y)
