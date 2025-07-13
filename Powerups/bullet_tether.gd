@@ -148,3 +148,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
 	_area.damage = new_damage
+	if _new_level == 3: 
+		_max_range *= 2
+		_max_range_squared = _max_range ** 2

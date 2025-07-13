@@ -58,7 +58,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 ## Set up other properties for this bullet
-func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 	# Make the bullet hurt players
 	if not is_owned_by_player:
 		_is_owned_by_player = false
