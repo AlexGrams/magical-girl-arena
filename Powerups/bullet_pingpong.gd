@@ -10,6 +10,8 @@ const touching_distance_threshold: float = 30.0
 
 ## Target enemy must be within this range
 @export var max_range: float = 750
+## How much the damage increases per second since the last bounce, expressed as a fraction.
+@export var _damage_percent_increase_per_second: float = 0.25
 ## How much temp HP is granted to allies.
 @export var _shield_amount: int = 10
 ## Minimum time in seconds that the bullets needs to be traveling for in order to grant temp HP.
@@ -33,6 +35,10 @@ var _all_targets: Array[Node2D] = []
 var _target_index: int = 0
 ## How long the bullet has been moving for since it last reached a target
 var _travel_time: float = 0.0
+## How much damage the shuttle does without travel time.
+var _base_damage: float = 0.0
+## How much damage increases per second of travel time.
+var _damage_increase_per_second: float = 0.0
 
 
 func _ready() -> void:
@@ -71,6 +77,10 @@ func _process(delta: float) -> void:
 		_target_index = (_target_index + 1) % len(_all_targets)
 		_target = _all_targets[_target_index]
 		_travel_time = 0.0
+	
+	# Scale damage based off of time since last bounce.
+	if is_multiplayer_authority():
+		$Area2D.damage = _base_damage + _travel_time * _damage_increase_per_second
 
 
 # Set up other properties for this bullet
@@ -119,7 +129,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 
 func set_damage(damage:float):
-	$Area2D.damage = damage
+	_base_damage = damage
+	_damage_increase_per_second = _damage_percent_increase_per_second * damage
 
 
 @rpc("authority", "call_remote")
@@ -150,7 +161,8 @@ func set_all_targets(targets: Array[NodePath], current_index: int, current_posit
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(new_level: int, new_damage: float):
-	$Area2D.damage = new_damage
+	_base_damage = new_damage
+	_damage_increase_per_second = _damage_percent_increase_per_second * new_damage
 	if new_level == 3:
 		# Increase size
 		scale = scale * 2
