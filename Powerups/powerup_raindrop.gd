@@ -13,7 +13,7 @@ extends Powerup
 ## Area for finding groups of Enemies near the player.
 @export var _nearby_collision_area: Area2D = null
 
-var _shoot_timer: float = 0.0
+@onready var _shoot_timer: float = _shoot_interval
 var _bullet_spawner: BulletSpawner = null
 var _range_squared: float = 1.0
 var _lifetime: float = 1.5

@@ -10,7 +10,7 @@ extends Powerup
 ## Path to the PowerupData resource file for this Powerup.
 @export var _powerup_data_file_path: String = ""
 
-var _fire_timer: float = 0.0
+@onready var _fire_timer: float = _fire_interval
 ## The last nonzero movement direction input.
 var _direction: Vector2 = Vector2.RIGHT
 var _bullet_spawner: BulletSpawner = null

@@ -10,9 +10,9 @@ extends Powerup
 ## Bullets are angled at most _fire_angle/2 degrees away from the target.
 @export var _fire_angle: float = 45.0
 
+@onready var shoot_timer: float = shoot_interval
 # Toggles between left and right directions
 var direction_toggle: bool = false
-var shoot_timer: float = 0
 ## Angle in radians of far apart each bullet is spread.
 var _fire_angle_rad_delta: float = 0
 

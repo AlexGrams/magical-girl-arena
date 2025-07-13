@@ -5,8 +5,8 @@ extends Powerup
 ## Path to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
 
+@onready var shoot_timer: float = shoot_interval
 var bullet
-var shoot_timer: float = 0.0
 
 
 func _ready() -> void:

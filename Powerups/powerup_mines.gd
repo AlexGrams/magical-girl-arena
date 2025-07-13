@@ -11,7 +11,7 @@ extends Powerup
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
 
-var _shoot_timer: float = 0.0
+@onready var _shoot_timer: float = shoot_interval
 var _bullet_spawner: BulletSpawner = null
 
 

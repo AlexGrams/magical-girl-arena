@@ -10,7 +10,7 @@ extends Powerup
 ## How long between double pulses (level 3+)
 @export var _double_pulse_interval: float = 0.1
 
-var _fire_timer: float = 0.0
+@onready var _fire_timer: float = _fire_interval
 var _owner: Node = null
 var _double_pulse_started: bool = false
 

@@ -13,7 +13,7 @@ extends Powerup
 ## Time in seconds that each turret lasts.
 @export var _turret_lifetime: float = 10.0
 
-var _shoot_timer: float = 0.0
+@onready var _shoot_timer: float = shoot_interval
 var _bullet_spawner: BulletSpawner = null
 
 
