@@ -71,6 +71,10 @@ func _physics_process(_delta: float) -> void:
 			_find_new_target()
 		else:
 			move_and_slide()
+	
+	# Continuous damage 
+	if is_multiplayer_authority() and _continuous_damage > 0.0:
+		_take_damage(_continuous_damage)
 
 
 ## Move this enemy to a location.

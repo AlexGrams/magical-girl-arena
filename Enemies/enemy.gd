@@ -122,10 +122,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 		if is_multiplayer_authority():
-			# Continuous damage 
-			if _continuous_damage > 0.0:
-				_take_damage(_continuous_damage)
-			
 			# Retargeting check: Occasionally see if we should attack a player that is closer than our
 			# current target.
 			if not is_ally:
@@ -141,7 +137,11 @@ func _physics_process(delta: float) -> void:
 			# the new target
 			move_and_slide()
 	
+	# Continuous damage 
+	if is_multiplayer_authority() and _continuous_damage > 0.0:
+		_take_damage(_continuous_damage)
 	
+
 	# Analytics: Continuous damage. Right now, we assume that continuous damage only comes from one 
 	# local powerup.
 	if not _continuous_damage_analytic_data.is_empty():

@@ -247,7 +247,7 @@ func _ready() -> void:
 		
 		# See if the user launched the game by accepting an invite. If so, join the passed lobby.
 		var commandline_arguments: Array = OS.get_cmdline_args()
-		print(commandline_arguments)
+		
 		if commandline_arguments.size() > 0:
 			for i in range(len(commandline_arguments) - 1):
 				# See if a Steam connection argument exists. If so, join the desired lobby.
@@ -255,7 +255,6 @@ func _ready() -> void:
 						commandline_arguments[i] == "+connect_lobby"
 						and int(commandline_arguments[i+1]) > 0
 				):
-					print("Command line lobby ID: %s" % commandline_arguments[i+1])
 					_join_requested(int(commandline_arguments[i+1]), 0)
 	
 	SaveManager.load_game()
