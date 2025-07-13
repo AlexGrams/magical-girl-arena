@@ -8,7 +8,7 @@
 script = ExtResource("2_75avm")
 is_multiplayer = true
 upgrade_description = "Connect a ribbon between you and your nearest ally."
-upgrade_description_list = Array[String](["Connect a ribbon between you and your nearest ally.", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Connect a ribbon between you and your nearest ally.", "Increase damage", "Doubles the maximum range of the Ribbon.", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_8hjfb")
 name = "Ribbon"
 sprite = ExtResource("3_pk8s0")
