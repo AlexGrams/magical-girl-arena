@@ -45,11 +45,16 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 2
 		or (typeof(data[0])) != TYPE_NODE_PATH	# Target endpoint
+		or (typeof(data[1])) != TYPE_BOOL		# Has level 3 upgrade or not
 	):
 		push_error("Malformed data array")
 		return
+	
+	# Level 3 upgrade
+	if data[1]:
+		scale.y = scale.y * 2
 	
 	_is_owned_by_player = is_owned_by_player
 	
