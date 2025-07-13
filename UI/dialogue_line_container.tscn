@@ -25,6 +25,7 @@ _text = NodePath("MainPanel/HBoxContainer/Label")
 [node name="MainPanel" type="Panel" parent="."]
 clip_children = 2
 custom_minimum_size = Vector2(0, 250)
+layout_mode = 0
 offset_right = 1091.0
 offset_bottom = 250.0
 pivot_offset = Vector2(0, 125)

@@ -32,11 +32,11 @@ func _process(delta: float) -> void:
 				spawn(spawn_event[0].enemy)
 			
 			# If this event is done repeating, then remove it
-			if GameState.time - spawn_event[0].spawn_interval < spawn_event[0].end_time_seconds:
+			if GameState.time - spawn_event[0].spawn_interval * _get_spawn_scale() < spawn_event[0].end_time_seconds:
 				_active_spawn_events.remove_at(i)
 				continue
 			else:
-				_active_spawn_events[i][1] = spawn_event[0].spawn_interval
+				_active_spawn_events[i][1] = spawn_event[0].spawn_interval * _get_spawn_scale()
 			
 		spawn_event[1] -= delta
 		i += 1
@@ -44,5 +44,4 @@ func _process(delta: float) -> void:
 
 # Function to spawn enemies repeatedly from this spawner.
 func spawn_repeating(spawn_event: EnemySpawnEventData, start_time: float = 0.0) -> void:
-	spawn_event.spawn_interval *= _get_spawn_scale()
 	_active_spawn_events.append([spawn_event, start_time])
