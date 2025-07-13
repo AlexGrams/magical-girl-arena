@@ -10,5 +10,5 @@ is_multiplayer = true
 upgrade_description = "Paints a damaging line from you to your farthest ally."
 upgrade_description_list = Array[String](["Paints a damaging line from you to your farthest ally.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_w6uhb")
-name = "Paintbrush"
+name = "Painted Lady"
 sprite = ExtResource("3_333qt")
