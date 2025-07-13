@@ -69,6 +69,8 @@ func _process(delta: float) -> void:
 ## Randomly selects a dialogue to run. Only call on server.
 func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Constants.DialoguePlayTriggerExtra.NONE) -> void:
 	var dialogue_choices: Array[DialogueData] = []
+	# Dialogue with the highest amount of character triggers met will always be used.
+	var highest_trigger: int = 0
 	
 	# Get all the characters that are in the game if we don't have it already.
 	if _player_character_set.is_empty():
@@ -78,6 +80,7 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 	if _dialogue.has(trigger):
 		for dialogue: DialogueData in _dialogue[trigger]:
 			var can_add: bool = true
+			var trigger_count: int = 0
 			
 			if extra_trigger != Constants.DialoguePlayTriggerExtra.NONE and extra_trigger != dialogue.extra_play_trigger:
 				# The extra trigger for this dialogue is set and is not fulfilled right now.
@@ -87,8 +90,15 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 					if not _player_character_set.has(character) and character != Constants.Character.NONE:
 						can_add = false
 						break
+					elif character != Constants.Character.NONE:
+						trigger_count += 1
 			if can_add:
-				dialogue_choices.append(dialogue)
+				if trigger_count > highest_trigger:
+					highest_trigger = trigger_count
+					dialogue_choices.clear() # Only use the dialogue with most triggers met
+					dialogue_choices.append(dialogue)
+				elif trigger_count == highest_trigger:
+					dialogue_choices.append(dialogue)
 	
 	if len(dialogue_choices) <= 0:
 		return
