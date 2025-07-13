@@ -25,11 +25,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if _target != null:
-		var direction = (_target.global_position - global_position).normalized()
-		global_position += direction * speed * delta
+		var target_direction = (_target.global_position - global_position).normalized()
+		global_position += target_direction * speed * delta
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
 			_update_target = true
-		sprite.rotation = direction.angle() + deg_to_rad(_sprite_rotation)
+		sprite.rotation = target_direction.angle() + deg_to_rad(_sprite_rotation)
 	else:
 		_update_target = true
 
