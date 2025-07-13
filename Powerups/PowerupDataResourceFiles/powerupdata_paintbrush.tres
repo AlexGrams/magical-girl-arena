@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_hi3lf"]
 [ext_resource type="PackedScene" uid="uid://dsk8cc2485fv4" path="res://Powerups/powerup_paintbrush.tscn" id="1_w6uhb"]
-[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="3_mioo6"]
+[ext_resource type="Texture2D" uid="uid://b7tdevonh3yia" path="res://Sprites/Powerups/Paintbrush_Butterfly.png" id="3_333qt"]
 
 [resource]
 script = ExtResource("1_hi3lf")
@@ -11,4 +11,4 @@ upgrade_description = "Paints a damaging line from you to your farthest ally."
 upgrade_description_list = Array[String](["Paints a damaging line from you to your farthest ally.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage.", "Increase damage."])
 scene = ExtResource("1_w6uhb")
 name = "Paintbrush"
-sprite = ExtResource("3_mioo6")
+sprite = ExtResource("3_333qt")

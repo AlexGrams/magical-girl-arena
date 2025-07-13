@@ -1,31 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://depvpf4b2w2si"]
+[gd_scene load_steps=5 format=3 uid="uid://depvpf4b2w2si"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_paintbrush.gd" id="1_cvlpg"]
-[ext_resource type="Texture2D" uid="uid://cr74afhy2vrby" path="res://Sprites/Powerups/Laser.png" id="2_l2nf3"]
+[ext_resource type="Texture2D" uid="uid://cmfglyx6xbhnl" path="res://Sprites/Powerups/Paintbrush_Paint.png" id="2_4qg2h"]
+[ext_resource type="PackedScene" uid="uid://bmewpkgs6o8th" path="res://Sprites/Powerups/paintbrush_butterfly_sprite.tscn" id="2_e7bp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6577"]
-size = Vector2(1, 70)
+size = Vector2(646, 150)
 
-[node name="BulletPaintbrush" type="Node2D" node_paths=PackedStringArray("_paintbrush", "collider", "sprite")]
+[node name="BulletPaintbrush" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_cvlpg")
-_paintbrush = NodePath("PainbrushNode2D")
-speed = 1250.0
+_paint_speed = 2.5
+_butterfly_sprite = ExtResource("2_e7bp6")
+speed = 1500.0
+lifetime = 10.0
 destroy_on_hit = false
-collider = NodePath("PainbrushNode2D/Area2D")
+collider = NodePath("PainbrushNode2D/Sprite/Area2D")
 sprite = NodePath("PainbrushNode2D/Sprite")
 
 [node name="PainbrushNode2D" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="PainbrushNode2D"]
 z_index = -1
-scale = Vector2(0.02, 0.233333)
-texture = ExtResource("2_l2nf3")
+texture = ExtResource("2_4qg2h")
+offset = Vector2(323, 0)
 
-[node name="Area2D" type="Area2D" parent="PainbrushNode2D"]
+[node name="Area2D" type="Area2D" parent="PainbrushNode2D/Sprite"]
+position = Vector2(323, 0)
 collision_mask = 2
 
-[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="PainbrushNode2D/Area2D"]
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="PainbrushNode2D/Sprite/Area2D"]
 shape = SubResource("RectangleShape2D_y6577")
 
-[connection signal="area_entered" from="PainbrushNode2D/Area2D" to="." method="_on_area_2d_entered"]
-[connection signal="area_exited" from="PainbrushNode2D/Area2D" to="." method="_on_area_2d_exited"]
+[connection signal="area_entered" from="PainbrushNode2D/Sprite/Area2D" to="." method="_on_area_2d_entered"]
+[connection signal="area_exited" from="PainbrushNode2D/Sprite/Area2D" to="." method="_on_area_2d_exited"]
