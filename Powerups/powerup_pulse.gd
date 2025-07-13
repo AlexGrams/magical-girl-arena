@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 	
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
-		print("HELLO")
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, 
 			[
