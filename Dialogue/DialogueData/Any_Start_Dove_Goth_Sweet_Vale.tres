@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3 uid="uid://c25yihl5apn86"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_xqntc"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_trjts"]
+
+[sub_resource type="Resource" id="Resource_rqktl"]
+script = ExtResource("1_xqntc")
+speaker = 3
+dialogue = "Vale, don't tell anyone else but..."
+
+[sub_resource type="Resource" id="Resource_1gwbs"]
+script = ExtResource("1_xqntc")
+speaker = 3
+dialogue = "Goth and Sweet have such overwhelming emotions!!!"
+
+[sub_resource type="Resource" id="Resource_cbpgp"]
+script = ExtResource("1_xqntc")
+speaker = 3
+dialogue = "I'm glad my powers don't work on you."
+
+[sub_resource type="Resource" id="Resource_hnmat"]
+script = ExtResource("1_xqntc")
+speaker = 3
+dialogue = "Otherwise I'd have such a bad headache..."
+
+[sub_resource type="Resource" id="Resource_3wvg7"]
+script = ExtResource("1_xqntc")
+speaker = 2
+dialogue = "Even the one with the scythe? That surprises me."
+
+[sub_resource type="Resource" id="Resource_pwuka"]
+script = ExtResource("1_xqntc")
+speaker = 3
+dialogue = "Yes. You won't believe it, but hers are the strongest."
+
+[resource]
+script = ExtResource("2_trjts")
+lines = Array[ExtResource("1_xqntc")]([SubResource("Resource_rqktl"), SubResource("Resource_1gwbs"), SubResource("Resource_cbpgp"), SubResource("Resource_hnmat"), SubResource("Resource_3wvg7"), SubResource("Resource_pwuka")])
+play_trigger = 1
+extra_play_trigger = 0

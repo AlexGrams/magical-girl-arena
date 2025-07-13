@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://bviv84om4xtns"]
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://dtbhyrxqq3ree"]
 
 [ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_hr6d7"]
 [ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_q4k5l"]

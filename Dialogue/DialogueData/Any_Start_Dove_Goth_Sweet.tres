@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=12 format=3 uid="uid://bv6cgmjbqm5fp"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_q2s7n"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_i3c23"]
+
+[sub_resource type="Resource" id="Resource_lkfst"]
+script = ExtResource("1_q2s7n")
+speaker = 3
+dialogue = "Wow... You two really are madly in love!"
+
+[sub_resource type="Resource" id="Resource_xtew4"]
+script = ExtResource("1_q2s7n")
+speaker = 1
+dialogue = "You only just noticed? I try to make it obvious."
+
+[sub_resource type="Resource" id="Resource_mmmaf"]
+script = ExtResource("1_q2s7n")
+speaker = 1
+dialogue = "Maybe I should try harder?"
+
+[sub_resource type="Resource" id="Resource_p8g8d"]
+script = ExtResource("1_q2s7n")
+speaker = 3
+dialogue = "NO! ...Sorry, it's just that with my powers,"
+
+[sub_resource type="Resource" id="Resource_y30xv"]
+script = ExtResource("1_q2s7n")
+speaker = 3
+dialogue = "It's a little overwhelming."
+
+[sub_resource type="Resource" id="Resource_n3cgf"]
+script = ExtResource("1_q2s7n")
+speaker = 0
+dialogue = "You can feel others' emotions? Like an empath?"
+
+[sub_resource type="Resource" id="Resource_wryup"]
+script = ExtResource("1_q2s7n")
+speaker = 1
+dialogue = "How cool! I wish I had those powers!"
+
+[sub_resource type="Resource" id="Resource_scurw"]
+script = ExtResource("1_q2s7n")
+speaker = 1
+dialogue = "Then I could be even closer to Goth! 😍"
+
+[sub_resource type="Resource" id="Resource_gusgc"]
+script = ExtResource("1_q2s7n")
+speaker = 3
+dialogue = "Oh no... I can feel the headache starting..."
+
+[resource]
+script = ExtResource("2_i3c23")
+lines = Array[ExtResource("1_q2s7n")]([SubResource("Resource_lkfst"), SubResource("Resource_xtew4"), SubResource("Resource_mmmaf"), SubResource("Resource_p8g8d"), SubResource("Resource_y30xv"), SubResource("Resource_n3cgf"), SubResource("Resource_wryup"), SubResource("Resource_scurw"), SubResource("Resource_gusgc")])
+play_trigger = 1
+extra_play_trigger = 0

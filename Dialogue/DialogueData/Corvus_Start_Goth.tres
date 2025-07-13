@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=11 format=3 uid="uid://5hqiyloss4t8"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_2vnqn"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_bw7bv"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_nwskn"]
+
+[sub_resource type="Resource" id="Resource_v7iei"]
+script = ExtResource("1_2vnqn")
+speaker = 0
+dialogue = "So we defeat this Corvus creature,"
+
+[sub_resource type="Resource" id="Resource_kda75"]
+script = ExtResource("1_2vnqn")
+speaker = 0
+dialogue = "and then we can return home?"
+
+[sub_resource type="Resource" id="Resource_gqeyi"]
+script = ExtResource("1_2vnqn")
+speaker = -1
+dialogue = "This is only the first step."
+optional_portrait = ExtResource("2_bw7bv")
+
+[sub_resource type="Resource" id="Resource_n74sb"]
+script = ExtResource("1_2vnqn")
+speaker = -1
+dialogue = "But yes, that is the goal:"
+optional_portrait = ExtResource("2_bw7bv")
+
+[sub_resource type="Resource" id="Resource_ljsad"]
+script = ExtResource("1_2vnqn")
+speaker = -1
+dialogue = "To restore everyone to their original space and time."
+optional_portrait = ExtResource("2_bw7bv")
+
+[sub_resource type="Resource" id="Resource_m7ybj"]
+script = ExtResource("1_2vnqn")
+speaker = 0
+dialogue = "Good enough for me."
+
+[sub_resource type="Resource" id="Resource_pgddn"]
+script = ExtResource("1_2vnqn")
+speaker = 0
+dialogue = "We better make it back in time for my date."
+
+[resource]
+script = ExtResource("3_nwskn")
+lines = Array[ExtResource("1_2vnqn")]([SubResource("Resource_v7iei"), SubResource("Resource_kda75"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_ljsad"), SubResource("Resource_m7ybj"), SubResource("Resource_pgddn")])
+play_trigger = 1
+extra_play_trigger = 0

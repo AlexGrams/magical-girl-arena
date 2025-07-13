@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://c838du3n8lgs5"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_t1tif"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_xl4od"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_hkvet"]
+
+[sub_resource type="Resource" id="Resource_v7iei"]
+script = ExtResource("1_t1tif")
+speaker = 1
+dialogue = "You know, the cards told me this would happen!"
+
+[sub_resource type="Resource" id="Resource_gqeyi"]
+script = ExtResource("1_t1tif")
+speaker = -1
+dialogue = "You can predict the future?"
+optional_portrait = ExtResource("2_xl4od")
+
+[sub_resource type="Resource" id="Resource_n74sb"]
+script = ExtResource("1_t1tif")
+speaker = 1
+dialogue = "Well, not exactly like that."
+
+[sub_resource type="Resource" id="Resource_41ejt"]
+script = ExtResource("1_t1tif")
+speaker = 1
+dialogue = "They said I would face an \"unexpected challenge\"."
+
+[sub_resource type="Resource" id="Resource_gaaa5"]
+script = ExtResource("1_t1tif")
+speaker = 1
+dialogue = "Usually that means I'll forget the grocery list."
+
+[sub_resource type="Resource" id="Resource_dpi8k"]
+script = ExtResource("1_t1tif")
+speaker = 1
+dialogue = "But I guess this is more interesting!"
+
+[resource]
+script = ExtResource("3_hkvet")
+lines = Array[ExtResource("1_t1tif")]([SubResource("Resource_v7iei"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_41ejt"), SubResource("Resource_gaaa5"), SubResource("Resource_dpi8k")])
+play_trigger = 1
+extra_play_trigger = 0

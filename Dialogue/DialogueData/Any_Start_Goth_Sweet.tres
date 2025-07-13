@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3 uid="uid://l3dng2qbs2sy"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_v8ec6"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_t3wnn"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_pxe4t"]
+
+[sub_resource type="Resource" id="Resource_v7iei"]
+script = ExtResource("1_v8ec6")
+speaker = 1
+dialogue = "Goth!!! I'm so glad you're here with me."
+
+[sub_resource type="Resource" id="Resource_kda75"]
+script = ExtResource("1_v8ec6")
+speaker = 1
+dialogue = "Imagine if we had gotten separated!"
+
+[sub_resource type="Resource" id="Resource_gqeyi"]
+script = ExtResource("1_v8ec6")
+speaker = 0
+dialogue = "I would never let that happen."
+optional_portrait = ExtResource("2_t3wnn")
+
+[sub_resource type="Resource" id="Resource_n74sb"]
+script = ExtResource("1_v8ec6")
+speaker = 1
+dialogue = "You would've looked for me? 🥺"
+
+[sub_resource type="Resource" id="Resource_ljsad"]
+script = ExtResource("1_v8ec6")
+speaker = 0
+dialogue = "I would search every universe for you."
+
+[resource]
+script = ExtResource("3_pxe4t")
+lines = Array[ExtResource("1_v8ec6")]([SubResource("Resource_v7iei"), SubResource("Resource_kda75"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_ljsad")])
+play_trigger = 1
+extra_play_trigger = 0

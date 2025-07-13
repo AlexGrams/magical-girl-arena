@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://dt1g4u41laatl"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_26qgj"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_cbn3p"]
+
+[sub_resource type="Resource" id="Resource_ed0xj"]
+script = ExtResource("1_26qgj")
+speaker = 3
+dialogue = "A real life robot! Jay would be so excited!"
+
+[sub_resource type="Resource" id="Resource_geyue"]
+script = ExtResource("1_26qgj")
+speaker = 3
+dialogue = "...My powers aren't detecting anything from you."
+
+[sub_resource type="Resource" id="Resource_roadf"]
+script = ExtResource("1_26qgj")
+speaker = 3
+dialogue = "Does that mean you can't feel emotions?"
+
+[sub_resource type="Resource" id="Resource_4xus8"]
+script = ExtResource("1_26qgj")
+speaker = 2
+dialogue = "I believe that I experience emotions like you."
+
+[sub_resource type="Resource" id="Resource_iydkq"]
+script = ExtResource("1_26qgj")
+speaker = 2
+dialogue = "But I cannot provide proof that would satisfy you."
+
+[resource]
+script = ExtResource("2_cbn3p")
+lines = Array[ExtResource("1_26qgj")]([SubResource("Resource_ed0xj"), SubResource("Resource_geyue"), SubResource("Resource_roadf"), SubResource("Resource_4xus8"), SubResource("Resource_iydkq")])
+play_trigger = 1
+extra_play_trigger = 0
