@@ -7,7 +7,7 @@ extends BulletContinuous
 @export var _splash_area: BulletHitbox = null
 @export var _puddle_sprite: Sprite2D = null
 ## Splash explosion effect for when stepping on the puddle
-@export var _splash_particles_scene: Resource = null
+@export var _splash_particles_scene: String = ""
 
 var _splash_area_collision_layer: int = 0
 var _splash_area_collision_mask: int = 0
@@ -35,6 +35,9 @@ func _ready() -> void:
 	_splash_area.collision_layer = 0
 	_splash_area.collision_mask = 0
 	
+	# Asynchronously load the splash VFX to prevent a lag spike
+	ResourceLoader.load_threaded_request(_splash_particles_scene, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
+	
 	if not is_multiplayer_authority():
 		set_physics_process(false)
 
@@ -56,6 +59,7 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 	_powerup_index = powerup_index
 	_splash_area.owner_id = owner_id
 	_splash_area.powerup_index = powerup_index
+
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
@@ -79,6 +83,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		set_physics_process(false)
 		set_process(false)
 
+
 ## If a player touches this bullet, make an explosion that damages enemies and buffs allies.
 func _on_splash_area_2d_entered(area: Area2D) -> void:
 	if _exploded_frame_count <= -1 and area.get_parent() is PlayerCharacterBody2D:
@@ -87,10 +92,9 @@ func _on_splash_area_2d_entered(area: Area2D) -> void:
 		_splash_area.collision_mask = _splash_area_collision_mask
 		
 		# Play splash effect
-		var splash_explosion = _splash_particles_scene.instantiate()
+		var splash_explosion = ResourceLoader.load_threaded_get(_splash_particles_scene).instantiate()
 		splash_explosion.global_position = global_position
 		get_tree().root.add_child(splash_explosion)
-	
 
 
 ## Applies StatusPuddle to allies that overlap if they don't have the status already. Status is only

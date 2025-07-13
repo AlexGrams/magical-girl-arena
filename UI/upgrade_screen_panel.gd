@@ -284,6 +284,7 @@ func _show_random_upgrade_choices(upgrade_names: Array[String]) -> void:
 		i += 1
 	
 	upgrade_panels_holder.show()
+	_update_reroll_button()
 
 
 func _on_reroll_button_down() -> void:
@@ -309,7 +310,6 @@ func _request_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> v
 			_assigned_unique_artifacts.erase(upgrade_name)
 	
 	_show_random_upgrade_choices.rpc_id(id, _make_valid_random_upgrade_choices(id))
-	_update_reroll_button()
 
 
 ## Update the text on the Reroll button

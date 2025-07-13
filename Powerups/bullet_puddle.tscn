@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2ism1apur5x4"]
+[gd_scene load_steps=7 format=3 uid="uid://d2ism1apur5x4"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_puddle.gd" id="1_i3mkf"]
-[ext_resource type="PackedScene" uid="uid://c70byufnj6h4t" path="res://Sprites/puddle_splash.tscn" id="2_8amcg"]
 [ext_resource type="Texture2D" uid="uid://fcsg3jfovdfw" path="res://Sprites/Powerups/Puddle2.png" id="2_mvcwx"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_0nkov"]
 [ext_resource type="PackedScene" uid="uid://cls2l7os386jm" path="res://Sprites/sparkles.tscn" id="3_nq375"]
@@ -17,7 +16,7 @@ radius = 300.0
 script = ExtResource("1_i3mkf")
 _splash_area = NodePath("SplashArea2D")
 _puddle_sprite = NodePath("Sprite")
-_splash_particles_scene = ExtResource("2_8amcg")
+_splash_particles_scene = "res://Sprites/puddle_splash.tscn"
 speed = 0.0
 lifetime = 5.0
 destroy_on_hit = false
