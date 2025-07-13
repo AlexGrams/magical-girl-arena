@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cs01rw60pouyn"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_lightning.gd" id="1_38lrb"]
-[ext_resource type="Texture2D" uid="uid://iprqwu1pflth" path="res://Sprites/Powerups/Ribbon.png" id="2_o5eyx"]
+[ext_resource type="Texture2D" uid="uid://c15qy5ow2rtlh" path="res://Sprites/Powerups/Lightning.png" id="2_02yuy"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_up1gn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksfcb"]
-size = Vector2(1, 74)
+size = Vector2(686, 372)
 
 [node name="BulletLightning" type="Node2D" node_paths=PackedStringArray("_area", "_lightning", "collider", "sprite")]
 script = ExtResource("1_38lrb")
@@ -20,8 +20,8 @@ sprite = NodePath("LightningNode2D/Sprite2D")
 [node name="LightningNode2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="LightningNode2D"]
-scale = Vector2(0.024, 0.100271)
-texture = ExtResource("2_o5eyx")
+rotation = 1.5708
+texture = ExtResource("2_02yuy")
 
 [node name="Area2D" type="Area2D" parent="LightningNode2D"]
 collision_mask = 2
@@ -29,6 +29,7 @@ script = ExtResource("3_up1gn")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightningNode2D/Area2D"]
+position = Vector2(4, -11)
 shape = SubResource("RectangleShape2D_ksfcb")
 
 [connection signal="area_entered" from="LightningNode2D/Area2D" to="." method="_on_area_2d_entered"]

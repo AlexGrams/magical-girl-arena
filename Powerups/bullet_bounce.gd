@@ -7,6 +7,8 @@ const TOUCHING_DISTANCE_THRESHOLD: float = 25.0
 ## The collision shape for finding enemies within range.
 @export var _enemy_mask_collision_shape: Area2D = null
 @onready var _squared_touching_distance_threshold: float = TOUCHING_DISTANCE_THRESHOLD ** 2
+# Rotation in degrees for any necessary rotation offsets
+@export var _sprite_rotation: float = 0.0
 ## Current remaining number of enemies this bullet can hit before it is destroyed.
 var _bounces: int
 
@@ -27,7 +29,7 @@ func _process(delta: float) -> void:
 		global_position += direction * speed * delta
 		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
 			_update_target = true
-		sprite.rotation = direction.angle() + deg_to_rad(0)
+		sprite.rotation = direction.angle() + deg_to_rad(_sprite_rotation)
 	else:
 		_update_target = true
 
