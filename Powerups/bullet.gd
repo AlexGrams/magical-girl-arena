@@ -58,7 +58,18 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 ## Set up other properties for this bullet
-func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
+func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
+	if (
+		data.size() != 1
+		or typeof(data[0]) != TYPE_BOOL 	# Level 3 upgrade or not
+	):
+		push_error("Malformed data array")
+		return
+
+	# Level 3 upgrade - increase in size
+	if data[0]:
+		scale = scale * 2
+	
 	# Make the bullet hurt players
 	if not is_owned_by_player:
 		_is_owned_by_player = false

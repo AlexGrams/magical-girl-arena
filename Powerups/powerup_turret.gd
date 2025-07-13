@@ -15,6 +15,7 @@ extends Powerup
 
 @onready var _shoot_timer: float = shoot_interval
 var _bullet_spawner: BulletSpawner = null
+var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
@@ -42,7 +43,7 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[_turret_fire_interval, _turret_lifetime]
+					[_turret_fire_interval, _turret_lifetime, _has_level_3_upgrade]
 				]
 			)
 		
@@ -67,5 +68,5 @@ func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
 	# TODO: Midlevel boost.
-	if current_level == 3:
-		pass
+	if current_level >= 3:
+		_has_level_3_upgrade = true

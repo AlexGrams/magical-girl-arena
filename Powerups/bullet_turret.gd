@@ -20,6 +20,8 @@ var _owner_id: int = -1
 var _powerup_index: int = -1
 ## Whether or not the turret is going through the removal animation
 var _is_being_removed: bool = false
+## Has level 3 upgrade or not
+var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
@@ -55,16 +57,25 @@ func _process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
+		data.size() != 3
 		or typeof(data[0]) != TYPE_FLOAT		# Fire interval 
 		or typeof(data[1]) != TYPE_FLOAT 		# Lifetime
+		or typeof(data[2]) != TYPE_BOOL 		# Level 3 upgrade or not
 	):
 		push_error("Malformed data array")
 		return
 	
+	
 	_fire_interval = data[0]
 	lifetime = data[1]
 	_is_owned_by_player = is_owned_by_player
+	
+	# Level 3 upgrade
+	if data[2]:
+		_has_level_3_upgrade = true
+		scale = scale * 2
+		_fire_interval = _fire_interval * 0.8
+		get_tree().create_timer(2).timeout.connect(_shrink)
 
 
 func set_damage(damage:float):
@@ -91,7 +102,7 @@ func _shoot() -> void:
 				_is_owned_by_player,
 				_owner_id,
 				_powerup_index,
-				[]
+				[_has_level_3_upgrade]
 			]
 		)
 
@@ -111,3 +122,13 @@ func _find_nearest_target_position() -> Vector2:
 	else:
 		push_warning("Not implemented for enemies")
 	return Vector2.UP
+
+## Shrinks in size if it was the level 3 upgrade
+func _shrink() -> void:
+	# Return bullet effects to normal
+	_fire_interval = _fire_interval * 2
+	_has_level_3_upgrade = false
+	
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(self, "scale", scale * 0.5, 0.25)
