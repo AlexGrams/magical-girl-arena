@@ -381,10 +381,6 @@ func decrement_rerolls() -> void:
 		if _used_rerolls > GameState.perm_rerolls:
 			GameState.rerolls -= 1
 		_current_rerolls -= 1
-		print("Temp rerolls: " + str(_temp_rerolls))
-		print("Bought rerolls: " + str(GameState.rerolls))
-		print("Perm rerolls: " + str(GameState.perm_rerolls))
-		print("Current rerolls: " + str(_current_rerolls))
 		SaveManager.save_game()
 
 
