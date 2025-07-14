@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_54icb"]
 [ext_resource type="PackedScene" uid="uid://b5ddduq3h6vbx" path="res://Powerups/powerup_lightning.tscn" id="1_vu6m4"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="3_ihp8h"]
+[ext_resource type="Texture2D" uid="uid://c15qy5ow2rtlh" path="res://Sprites/Powerups/Lightning.png" id="3_fr0sg"]
 
 [resource]
 script = ExtResource("1_54icb")
@@ -11,4 +11,4 @@ upgrade_description = "Shoot a bolt of lightning to your allies which bounces be
 upgrade_description_list = Array[String](["Shoot a bolt of lightning to all allies, enemies hit will spread lightning arcs.", "Increase damage", "Increase size of lightning strike", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_vu6m4")
 name = "Lightning"
-sprite = ExtResource("3_ihp8h")
+sprite = ExtResource("3_fr0sg")
