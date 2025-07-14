@@ -103,47 +103,41 @@ func _process(delta: float) -> void:
 		if _status_slow_duration <= 0.0:
 			_status_slow_percent = 0.0
 	
-	# Update allied lifetime
-	if is_multiplayer_authority() and is_ally:
-		lifetime -= delta
-		if lifetime <= 0.0:
-			take_damage(health)
+	if is_multiplayer_authority():
+		# Retargeting check: Occasionally see if we should attack a player that is closer than our
+		# current target.
+		if not is_ally:
+			_retarget_timer -= delta
+			if _retarget_timer <= 0.0:
+				_find_new_target()
+				_retarget_timer = retarget_check_interval
+		
+		# Update allied lifetime
+		if is_ally:
+			lifetime -= delta
+			if lifetime <= 0.0:
+				take_damage(health)
 
 
 func _physics_process(delta: float) -> void:
-	if target != null:
-		if _knockback_duration >= 0.0:
-			# Knockback movement: go in direction of knockback
-			velocity = _knockback
-			_knockback_duration -= delta
-		else:
-			# Normal movement: go towards target.
-			velocity = (target.global_position - global_position).normalized() * speed * (1.0 - _status_slow_percent)
-		move_and_slide()
-		
-		if is_multiplayer_authority():
-			# Retargeting check: Occasionally see if we should attack a player that is closer than our
-			# current target.
-			if not is_ally:
-				_retarget_timer -= delta
-				if _retarget_timer <= 0.0:
-					_find_new_target()
-					_retarget_timer = retarget_check_interval
-	else:
-		if is_multiplayer_authority():
-			_find_new_target()
-		else:
-			# Continue moving in the same direction until we are notified by the server of
-			# the new target
-			move_and_slide()
+	# Movement:
+	if _knockback_duration >= 0.0:
+		# Knockback movement: go in direction of knockback
+		velocity = _knockback
+		_knockback_duration -= delta
+	elif target != null:
+		# Normal movement: go towards target.
+		velocity = (target.global_position - global_position).normalized() * speed * (1.0 - _status_slow_percent)
+	elif is_multiplayer_authority():
+		# Invalid target. Try to find a new one.
+		_find_new_target()
+	move_and_slide()
 	
 	# Continuous damage 
 	if is_multiplayer_authority() and _continuous_damage > 0.0:
 		_take_damage(_continuous_damage)
 	
-
-	# Analytics: Continuous damage. Right now, we assume that continuous damage only comes from one 
-	# local powerup.
+	# Analytics: Record continuous damage from the local player. 
 	if not _continuous_damage_analytic_data.is_empty():
 		for index: int in _continuous_damage_analytic_data:
 			Analytics.add_powerup_damage(_continuous_damage_analytic_data[index], index)
