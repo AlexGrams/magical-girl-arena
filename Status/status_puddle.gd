@@ -31,7 +31,6 @@ func _process(delta: float) -> void:
 	## Speed boost depletes over time, rather than suddenly
 	_speed_decay_counter += delta
 	# (SPEED_AMOUNT / lifetime) evenly decays the speed
-	print(SPEED_AMOUNT / lifetime)
 	if _speed_decay_counter >= (SPEED_AMOUNT / lifetime):
 		_player.decrement_stat(Constants.StatUpgrades.SPEED)
 		_total_decay_count += 1
