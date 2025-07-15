@@ -10,7 +10,7 @@ extends Powerup
 ## How long between double pulses (level 3+)
 @export var _double_pulse_interval: float = 0.1
 
-@onready var _fire_timer: float = _fire_interval
+var _fire_timer: float = 0.0
 var _owner: Node = null
 var _double_pulse_started: bool = false
 
@@ -66,6 +66,7 @@ func _process(delta: float) -> void:
 
 func activate_powerup():
 	is_on = true
+	_fire_timer = 1.0 - (GameState.time - int(GameState.time))
 
 
 func deactivate_powerup():

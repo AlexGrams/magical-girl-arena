@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_ojfe4")
-is_multiplayer = false
+is_multiplayer = true
 upgrade_description = "Create a shockwave that damages and pushes back enemies."
 upgrade_description_list = Array[String](["Create a shockwave that damages and pushes back enemies.", "Increase damage", "Create an additional shockwave", "Increase damage", "Increase damage", "Increase damage"])
 scene = ExtResource("1_qe2r1")
