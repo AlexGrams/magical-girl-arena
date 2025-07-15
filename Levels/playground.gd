@@ -6,6 +6,8 @@ extends Node2D
 ## Time in seconds before we stop waiting for all clients to tell the Playground if it can spawn
 ## the Powerup Pickup. Powerup is spawned when time expires.
 const _POWERUP_POOLING_TIMEOUT: float = 3.0
+## How many DamageIndicators are spawned in our object pool.
+const _DAMAGE_INDICATOR_POOL_SIZE: int = 200
 
 ## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
 @export var spawn_events: Array[EnemySpawnEventData] = []
@@ -25,6 +27,9 @@ const _POWERUP_POOLING_TIMEOUT: float = 3.0
 @export var hud_canvas_layer: HUDCanvasLayer = null
 ## Light to create darkness when boss spawns
 @export var point_light: PointLight2D = null
+
+## Path to the DamageIndicator scene.
+@export var _damage_indicator_scene: String = ""
 
 ## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
 var drop_weight_exp: float = 15.0
@@ -47,6 +52,10 @@ var _powerup_pickup_path: String = ""
 var _powerup_pickup_location: Vector2
 ## True while awaiting responses from clients about if their local player can pick up the Powerup we are trying to spawn.
 var _is_pooling_clients_for_powerup_pickup = false
+## Object pool of damage indicators.
+var _damage_indicator_pool: Array[DamageIndicator] = []
+## Index of next damage indicator to be used from the pool.
+var _damage_indicator_index: int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -74,6 +83,13 @@ func _ready() -> void:
 	spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
 		return a.start_time_seconds > b.start_time_seconds
 	)
+	
+	# Set up DamageIndicator pool
+	var damage_indicator_resource: Resource = load(_damage_indicator_scene)
+	for i in range(_DAMAGE_INDICATOR_POOL_SIZE):
+		var damage_indicator: DamageIndicator = damage_indicator_resource.instantiate()
+		add_child(damage_indicator, true)
+		_damage_indicator_pool.append(damage_indicator)
 	
 	# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
 	# TODO: Remove once we have loading screens working.
@@ -297,6 +313,15 @@ func _spawn_big_exp_orb() -> void:
 func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb, powerup_path: String, orb_position: Vector2) -> void:
 	signature_powerup_orb.teleport.rpc(orb_position)
 	signature_powerup_orb.set_powerup.rpc(powerup_path)
+
+
+## Create a damage indicator VFX at a location
+@rpc("authority", "call_local")
+func create_damage_indicator(pos: Vector2, damage: float) -> void:
+	_damage_indicator_pool[_damage_indicator_index].animate(pos, damage)
+	_damage_indicator_index += 1
+	if _damage_indicator_index >= _DAMAGE_INDICATOR_POOL_SIZE:
+		_damage_indicator_index = 0
 
 
 func get_hud_canvas_layer() -> HUDCanvasLayer:
