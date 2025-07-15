@@ -60,30 +60,6 @@ var _damage_indicator_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not is_multiplayer_authority():
-		return
-	
-	# Convert spawn event times from string to int
-	for event: EnemySpawnEventData in spawn_events:
-		var split: int = event.start_time.find(":")
-		event.start_time_seconds = (
-			int(event.start_time.substr(0, split)) * 60 + 
-			int(event.start_time.substr(split + 1, len(event.start_time) - split))
-		)
-		split = event.end_time.find(":")
-		if len(event.end_time) != 0:
-			event.end_time_seconds  = (
-				int(event.end_time.substr(0, split)) * 60 + 
-				int(event.end_time.substr(split + 1, len(event.end_time) - split))
-			)
-		else:
-			event.end_time_seconds = event.start_time_seconds
-	
-	# Sort the spawn events by decreasing start time.
-	spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
-		return a.start_time_seconds > b.start_time_seconds
-	)
-	
 	# Set up DamageIndicator pool
 	var damage_indicator_resource: Resource = load(_damage_indicator_scene)
 	for i in range(_DAMAGE_INDICATOR_POOL_SIZE):
@@ -91,10 +67,32 @@ func _ready() -> void:
 		add_child(damage_indicator, true)
 		_damage_indicator_pool.append(damage_indicator)
 	
-	# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
-	# TODO: Remove once we have loading screens working.
-	await get_tree().create_timer(2.0).timeout
-	hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.START)
+	if is_multiplayer_authority():
+		# Convert spawn event times from string to int
+		for event: EnemySpawnEventData in spawn_events:
+			var split: int = event.start_time.find(":")
+			event.start_time_seconds = (
+				int(event.start_time.substr(0, split)) * 60 + 
+				int(event.start_time.substr(split + 1, len(event.start_time) - split))
+			)
+			split = event.end_time.find(":")
+			if len(event.end_time) != 0:
+				event.end_time_seconds  = (
+					int(event.end_time.substr(0, split)) * 60 + 
+					int(event.end_time.substr(split + 1, len(event.end_time) - split))
+				)
+			else:
+				event.end_time_seconds = event.start_time_seconds
+		
+		# Sort the spawn events by decreasing start time.
+		spawn_events.sort_custom(func(a: EnemySpawnEventData, b: EnemySpawnEventData):
+			return a.start_time_seconds > b.start_time_seconds
+		)
+		
+		# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
+		# TODO: Remove once we have loading screens working.
+		await get_tree().create_timer(2.0).timeout
+		hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.START)
 
 
 ## Only process on the server.
