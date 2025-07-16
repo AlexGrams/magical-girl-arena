@@ -60,6 +60,9 @@ var _damage_indicator_index: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameState.pause_game(true)
+	GameState.client_game_loaded.rpc()
+	
 	# Set up DamageIndicator pool
 	var damage_indicator_resource: Resource = load(_damage_indicator_scene)
 	for i in range(_DAMAGE_INDICATOR_POOL_SIZE):
@@ -67,6 +70,7 @@ func _ready() -> void:
 		add_child(damage_indicator, true)
 		_damage_indicator_pool.append(damage_indicator)
 	
+	# Authority-only functionality
 	if is_multiplayer_authority():
 		# Convert spawn event times from string to int
 		for event: EnemySpawnEventData in spawn_events:

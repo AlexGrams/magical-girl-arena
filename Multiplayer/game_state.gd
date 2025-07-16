@@ -27,10 +27,13 @@ const lobby_list_path := "MainMenu/LobbyList"
 const lobby_path := "MainMenu/Lobby"
 const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 
+
 # Number of permanent rerolls the player currently has.
 var perm_rerolls: int = 0
 # Number of rerolls the player currently has.
 var rerolls: int = 0
+## Number of players that have finished loading the main game scene.
+var _players_loaded_in: int = 0
 # All the gold the player has.
 var _gold: int = 0
 # How much gold the player has gotten this round. Added to their total gold after the game ends.
@@ -126,7 +129,6 @@ func set_gold(new_gold: int) -> void:
 func set_game_running(value: bool):
 	AudioManager.play_map_one_music()
 	game_running = value
-	get_tree().paused = not value
 
 
 ## Sets a lobby data variable saying if this lobby is in a game.
@@ -355,6 +357,14 @@ func start_game():
 	set_game_running.rpc(true)
 
 
+## Call after any connected player has finished loading the game locally.
+@rpc("any_peer", "call_local")
+func client_game_loaded() -> void:
+	_players_loaded_in += 1
+	if _players_loaded_in >= len(players):
+		pause_game(false)
+
+
 # Called when the game ends, either by the players winning or losing
 @rpc("authority", "call_local", "reliable")
 func _game_over(has_won_game: bool = false):
@@ -388,6 +398,7 @@ func end_game():
 
 # Only affects variables related to gameplay. Multiplayer properties are not changed.
 func reset_game_variables():
+	_players_loaded_in = 0
 	player_characters.clear()
 	players_down = 0
 	_gold_this_game = 0
@@ -547,8 +558,6 @@ func load_game():
 	world = load(start_game_scene).instantiate()
 	get_tree().get_root().add_child(world, true)
 	get_tree().get_root().get_node(main_menu_node_path).hide()
-
-	get_tree().paused = false
 
 
 # Add exp to this player. Offer Powerups when leveling up.
