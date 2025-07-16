@@ -13,11 +13,14 @@ extends Powerup
 var _fire_timer: float = 0.0
 var _owner: Node = null
 var _double_pulse_started: bool = false
+## Powerup owner's multiplayer ID.
+var _id: int = 0
 
 
 func _ready() -> void:
 	powerup_name = load(_powerup_data_file_path).name
 	_owner = get_parent()
+	_id = multiplayer.get_unique_id()
 
 
 func _process(delta: float) -> void:
@@ -34,9 +37,9 @@ func _process(delta: float) -> void:
 				Vector2.UP, 
 				_get_damage_from_curve(), 
 				_is_owned_by_player,
-				multiplayer.get_unique_id(),
+				_id,
 				_powerup_index,
-				[_owner.get_path()]
+				[_owner.get_path(), _id]
 			]
 		)
 		if current_level >= 3 and !_double_pulse_started:
@@ -45,17 +48,17 @@ func _process(delta: float) -> void:
 			_double_pulse_started = true
 			await get_tree().create_timer(_double_pulse_interval).timeout
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, 
-			[
-				_bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				_get_damage_from_curve(), 
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[_owner.get_path()]
-			]
+				1, 
+				[
+					_bullet_scene, 
+					global_position, 
+					Vector2.UP, 
+					_get_damage_from_curve(), 
+					_is_owned_by_player,
+					_id,
+					_powerup_index,
+					[_owner.get_path(), _id]
+				]
 			)
 			_double_pulse_started = false
 		
