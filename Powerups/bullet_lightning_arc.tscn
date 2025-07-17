@@ -1,42 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqxs4hl46ig4d"]
+[gd_scene load_steps=5 format=3 uid="uid://dqxs4hl46ig4d"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_bounce.gd" id="1_e3qtl"]
+[ext_resource type="Script" path="res://Powerups/bullet_lightning_arc.gd" id="1_s82iu"]
 [ext_resource type="Texture2D" uid="uid://c15qy5ow2rtlh" path="res://Sprites/Powerups/Lightning.png" id="2_71exp"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_x76w1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2iod"]
-size = Vector2(24, 24)
+size = Vector2(140, 38)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mlimj"]
-radius = 1000.0
-
-[node name="BulletLightningArc" type="Node2D" node_paths=PackedStringArray("_enemy_mask_collision_shape", "collider", "sprite")]
-script = ExtResource("1_e3qtl")
-_enemy_mask_collision_shape = NodePath("EnemyMaskArea2D")
-_sprite_rotation = 90.0
+[node name="BulletLightningArc" type="Node2D" node_paths=PackedStringArray("_lightning", "_area", "_collision_shape", "collider", "sprite")]
+script = ExtResource("1_s82iu")
+_lightning = NodePath("LightningNode2D")
+_area = NodePath("LightningNode2D/Area2D")
+_collision_shape = NodePath("LightningNode2D/Area2D/CollisionShape2D")
+_lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 speed = 2000.0
 lifetime = 0.0
 destroy_on_hit = false
-collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+collider = NodePath("LightningNode2D/Area2D")
+sprite = NodePath("LightningNode2D/Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="LightningNode2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="LightningNode2D"]
 position = Vector2(1.90735e-06, 1.90735e-06)
 rotation = 1.5708
-scale = Vector2(0.0863636, 0.0863636)
+scale = Vector2(0.190321, 0.190321)
 texture = ExtResource("2_71exp")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="LightningNode2D"]
 collision_mask = 2
 script = ExtResource("3_x76w1")
 damage = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightningNode2D/Area2D"]
 shape = SubResource("RectangleShape2D_b2iod")
-
-[node name="EnemyMaskArea2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="EnemyMaskCollisionShape2D" type="CollisionShape2D" parent="EnemyMaskArea2D"]
-shape = SubResource("CircleShape2D_mlimj")
