@@ -7,5 +7,4 @@ script = ExtResource("1_c5ibc")
 _fire_interval = 1.0
 _bullet_scene = "res://Powerups/bullet_pulse.tscn"
 _powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_pulse.tres"
-_double_pulse_interval = 0.2
 damage_levels = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])

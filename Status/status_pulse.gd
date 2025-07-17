@@ -10,6 +10,8 @@ const _PULSE_BULLET_SCENE: String = "res://Powerups/bullet_pulse.tscn"
 var _owner_id: int = 0
 ## Damage of the resulting Pulse bullet.
 var _damage: float = 0.0
+## True if resulting bullet will knock back enemies.
+var _has_knockback: bool = false
 ## How many stacks of this status there are.
 var _stacks: int = 1
 
@@ -18,10 +20,11 @@ func get_status_name() -> String:
 	return "Pulse"
 
 
-func set_properties(id: int, damage: float) -> void:
+func set_properties(id: int, damage: float, has_knockback: bool) -> void:
 	_owner_id = id
 	duration = GameState.time - int(GameState.time)
 	_damage = damage 
+	_has_knockback = has_knockback
 	GameState.player_characters[_owner_id].delay_pulse.rpc_id(_owner_id)
 
 
@@ -47,7 +50,7 @@ func deactivate() -> void:
 			true,
 			-1,
 			-1,
-			[get_parent().get_path(), _owner_id, _stacks]
+			[get_parent().get_path(), _owner_id, _stacks, _has_knockback]
 		]
 	)
 
