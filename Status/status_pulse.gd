@@ -18,13 +18,12 @@ func get_status_name() -> String:
 
 func set_properties(id: int, damage: float) -> void:
 	_owner_id = id
-	duration = 1.0 - (GameState.time - int(GameState.time))
+	duration = GameState.time - int(GameState.time)
 	_damage = damage 
 
 
 func _ready() -> void:
-	pass # Replace with function body.
-	print("Pulse status")
+	pass
 
 
 func _process(delta: float) -> void:
@@ -35,16 +34,16 @@ func _process(delta: float) -> void:
 func deactivate() -> void:
 	get_parent().remove_status(self)
 	
-	#get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		#1, 
-		#[
-			#_PULSE_BULLET_SCENE, 
-			#get_parent().global_position, 
-			#Vector2.ZERO, 
-			#_damage, 
-			#true,
-			#-1,
-			#-1,
-			#[_owner_id]
-		#]
-	#)
+	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+		1, 
+		[
+			_PULSE_BULLET_SCENE, 
+			get_parent().global_position, 
+			Vector2.ZERO, 
+			_damage, 
+			true,
+			-1,
+			-1,
+			[get_parent().get_path(), _owner_id]
+		]
+	)

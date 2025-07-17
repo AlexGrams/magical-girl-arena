@@ -47,7 +47,6 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			other.set_knockback((other.global_position - global_position).normalized() * _knockback_speed, _knockback_duration)
 		elif other is PlayerCharacterBody2D and other != _owner and other == GameState.get_local_player():
 			# Apply StatusPulse to the other character
-			print("Hit another person " + other.name)
 			var status_pulse: Status = other.get_status("Pulse")
 			if status_pulse == null:
 				status_pulse = StatusPulse.new()
