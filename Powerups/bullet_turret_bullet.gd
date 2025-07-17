@@ -1,4 +1,4 @@
-class_name Bullet_Turret_Bullet
+class_name BulletTurretBullet
 extends Bullet
 ## Bullet that is shot by turrets.
 ## Designed to allow for additional level 3 upgrade effects
