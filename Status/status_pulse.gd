@@ -10,6 +10,8 @@ const _PULSE_BULLET_SCENE: String = "res://Powerups/bullet_pulse.tscn"
 var _owner_id: int = 0
 ## Damage of the resulting Pulse bullet.
 var _damage: float = 0.0
+## How many stacks of this status there are.
+var _stacks: int = 1
 
 
 func get_status_name() -> String:
@@ -45,6 +47,12 @@ func deactivate() -> void:
 			true,
 			-1,
 			-1,
-			[get_parent().get_path(), _owner_id]
+			[get_parent().get_path(), _owner_id, _stacks]
 		]
 	)
+
+
+## Stack this status effect, where each unique hit causes the Pulse created after this status wears off
+## to be larger.
+func stack() -> void:
+	_stacks += 1

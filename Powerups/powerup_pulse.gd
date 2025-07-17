@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				_id,
 				_powerup_index,
-				[_owner.get_path(), _id]
+				[_owner.get_path(), _id, 1]
 			]
 		)
 		if current_level >= 3 and !_double_pulse_started:
@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					_id,
 					_powerup_index,
-					[_owner.get_path(), _id]
+					[_owner.get_path(), _id, 1]
 				]
 			)
 			_double_pulse_started = false

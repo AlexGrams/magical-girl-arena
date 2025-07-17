@@ -28,15 +28,17 @@ func _process(delta: float) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
+		data.size() != 3
 		or typeof(data[0]) != TYPE_NODE_PATH	# Parent node path 
 		or typeof(data[1]) != TYPE_INT			# Original player ID
+		or typeof(data[2]) != TYPE_INT			# Power level
 	):
 		push_error("Malformed data array")
 		return
 	
 	_owner = get_tree().root.get_node(data[0])
 	_original_character_id = data[1]
+	speed *= 1.0 + 0.5 * (data[2] - 1)
 	_is_owned_by_player = is_owned_by_player
 
 
@@ -53,5 +55,4 @@ func _on_area_2d_entered(area: Area2D) -> void:
 				status_pulse.set_properties(_original_character_id, collider.damage)
 				other.add_status(status_pulse)
 			else:
-				# TODO: Boost the existing status after performing other duplicate checks.
-				pass
+				status_pulse.stack()
