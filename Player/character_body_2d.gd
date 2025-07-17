@@ -743,3 +743,12 @@ func show_lasers() -> void:
 func hide_lasers() -> void:
 	for laser: Node in _laser_holder.get_children():
 		laser.hide()
+
+
+## Related to Pulse powerup. Tells this character to not create a new Pulse bullet at this interval
+## as there is still an ongoing pulse chain. 
+@rpc("any_peer", "call_local")
+func delay_pulse() -> void:
+	for powerup: Powerup in powerups:
+		if powerup is PowerupPulse:
+			powerup.delay()

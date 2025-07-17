@@ -1,3 +1,4 @@
+class_name PowerupPulse
 extends Powerup
 
 
@@ -79,3 +80,9 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
+
+
+## Delay this Pulse's firing to the next time interval.
+func delay() -> void:
+	if _fire_timer >= 0.0:
+		_fire_timer -= _fire_interval
