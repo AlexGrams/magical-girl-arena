@@ -4,6 +4,8 @@ extends Bullet
 
 ## The maximum range which this arc will seek another Enemy to bounce to.
 @export var _max_bounce_range: float = 500.0
+## Time until this arc bounces to another enemy.
+@export var _bounce_delay: float = 0.1
 ## Contains the visuals and collision for the bullet.
 @export var _lightning: Node2D = null
 ## Bullet collision area.
@@ -50,71 +52,73 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func _physics_process(_delta: float) -> void:
-	if not _processed:
-		# Bounce to the next nearest Enemy.
-		_processed = true
-		sprite.flip_h = true
-		
-		var next_bounce: Node2D = null
-		var nearest_distance_squared: float = INF
-		
-		if _bounces > 0:
-			var space_state = get_world_2d().direct_space_state
-			var bounce_query_params := PhysicsShapeQueryParameters2D.new()
-			var circle_shape: CircleShape2D = CircleShape2D.new()
+func _physics_process(delta: float) -> void:
+	death_timer += delta
+	if death_timer >= _bounce_delay:
+		if not _processed:
+			# Bounce to the next nearest Enemy.
+			_processed = true
+			sprite.flip_h = true
 			
-			bounce_query_params.collide_with_areas = true
-			bounce_query_params.collide_with_bodies = false
-			# The 2nd layer/1st bit is the "enemy" collision layer
-			bounce_query_params.collision_mask = 1 << 1
-			circle_shape.radius = _bounce_range
-			bounce_query_params.shape = circle_shape
-			bounce_query_params.transform = Transform2D(0.0, global_position)
+			var next_bounce: Node2D = null
+			var nearest_distance_squared: float = INF
 			
-			var nearby_enemies: Array[Dictionary] = space_state.intersect_shape(bounce_query_params)
-			for hit: Dictionary in nearby_enemies:
-				var hit_enemy: Node = hit["collider"].get_parent()
-				if hit_enemy != _origin_enemy and hit_enemy is Enemy:
-					var dist: float = hit_enemy.global_position.distance_squared_to(global_position)
-					if dist < nearest_distance_squared:
-						nearest_distance_squared = dist
-						next_bounce = hit_enemy
-		
-		if next_bounce != null:
-			# There is a valid next bounce target, so stretch this arc towards it and create a new 
-			# arc from that enemy.
-			var rotation_direction: Vector2 = next_bounce.global_position - global_position
-			global_position += rotation_direction / 2
-			rotation = rotation_direction.angle()
-			var length_of_lightning = _collision_shape.shape.size.x
-			_lightning.scale.x = rotation_direction.length() / length_of_lightning
-			
-			sprite.flip_h = false
-			show()
-			
-			# Only the server will create the next bullet bounce.
-			if is_multiplayer_authority():
-				_area.collision_layer = _collision_layer
-				_area.collision_mask = _collision_mask
+			if _bounces > 0:
+				var space_state = get_world_2d().direct_space_state
+				var bounce_query_params := PhysicsShapeQueryParameters2D.new()
+				var circle_shape: CircleShape2D = CircleShape2D.new()
 				
-				GameState.playground.create_lightning_arc.rpc(
-					next_bounce.global_position, 
-					collider.damage, 
-					_is_owned_by_player,
-					collider.owner_id,
-					collider.powerup_index,
-					[_bounces - 1, _is_level_three, sqrt(nearest_distance_squared), next_bounce.get_path()]
-				)
+				bounce_query_params.collide_with_areas = true
+				bounce_query_params.collide_with_bodies = false
+				# The 2nd layer/1st bit is the "enemy" collision layer
+				bounce_query_params.collision_mask = 1 << 1
+				circle_shape.radius = _bounce_range
+				bounce_query_params.shape = circle_shape
+				bounce_query_params.transform = Transform2D(0.0, global_position)
+				
+				var nearby_enemies: Array[Dictionary] = space_state.intersect_shape(bounce_query_params)
+				for hit: Dictionary in nearby_enemies:
+					var hit_enemy: Node = hit["collider"].get_parent()
+					if hit_enemy != _origin_enemy and hit_enemy is Enemy:
+						var dist: float = hit_enemy.global_position.distance_squared_to(global_position)
+						if dist < nearest_distance_squared:
+							nearest_distance_squared = dist
+							next_bounce = hit_enemy
+			
+			if next_bounce != null:
+				# There is a valid next bounce target, so stretch this arc towards it and create a new 
+				# arc from that enemy.
+				var rotation_direction: Vector2 = next_bounce.global_position - global_position
+				global_position += rotation_direction / 2
+				rotation = rotation_direction.angle()
+				var length_of_lightning = _collision_shape.shape.size.x
+				_lightning.scale.x = rotation_direction.length() / length_of_lightning
+				
+				sprite.flip_h = false
+				show()
+				
+				# Only the server will create the next bullet bounce.
+				if is_multiplayer_authority():
+					_area.collision_layer = _collision_layer
+					_area.collision_mask = _collision_mask
+					
+					GameState.playground.create_lightning_arc.rpc(
+						next_bounce.global_position, 
+						collider.damage, 
+						_is_owned_by_player,
+						collider.owner_id,
+						collider.powerup_index,
+						[_bounces - 1, _is_level_three, sqrt(nearest_distance_squared), next_bounce.get_path()]
+					)
+			else:
+				# No next valid bounce target
+				_lightning.scale.x = 0.0
 		else:
-			# No next valid bounce target
-			_lightning.scale.x = 0.0
-	elif not _freed_area:
-		# Only delete the collision, but let the lightning fade out
-		_freed_area = true
-		_area.collision_layer = 0
-		_area.collision_mask = 0
-		set_physics_process(false)
+			# One frame after the bounce, turn off collision.
+			_freed_area = true
+			_area.collision_layer = 0
+			_area.collision_mask = 0
+			set_physics_process(false)
 
 
 # Set up other properties for this bullet
@@ -147,6 +151,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_fade_out_tween.set_trans(Tween.TRANS_QUINT)
 	_fade_out_tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 0.5)
 	
+	death_timer = 0.0
 	_processed = false
 	_freed_area = false
 	set_physics_process(true)
