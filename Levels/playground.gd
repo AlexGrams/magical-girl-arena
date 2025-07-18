@@ -8,6 +8,8 @@ extends Node2D
 const _POWERUP_POOLING_TIMEOUT: float = 3.0
 ## How many DamageIndicators are spawned in our object pool.
 const _DAMAGE_INDICATOR_POOL_SIZE: int = 200
+## How many BulletLightningArc objects are in the pool.
+const _LIGHTNING_ARC_POOL_SIZE: int = 150
 
 ## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
 @export var spawn_events: Array[EnemySpawnEventData] = []
@@ -30,6 +32,7 @@ const _DAMAGE_INDICATOR_POOL_SIZE: int = 200
 
 ## Path to the DamageIndicator scene.
 @export var _damage_indicator_scene: String = ""
+@export var _lightning_arc_scene: String = ""
 
 ## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
 var drop_weight_exp: float = 15.0
@@ -52,10 +55,14 @@ var _powerup_pickup_path: String = ""
 var _powerup_pickup_location: Vector2
 ## True while awaiting responses from clients about if their local player can pick up the Powerup we are trying to spawn.
 var _is_pooling_clients_for_powerup_pickup = false
+
 ## Object pool of damage indicators.
 var _damage_indicator_pool: Array[DamageIndicator] = []
 ## Index of next damage indicator to be used from the pool.
 var _damage_indicator_index: int = 0
+## Lightning arc bullet object pool
+var _lightning_arc_pool: Array[BulletLightningArc] = []
+var _lightning_arc_index: int = 0
 
 
 func get_hud_canvas_layer() -> HUDCanvasLayer:
@@ -73,6 +80,12 @@ func _ready() -> void:
 		var damage_indicator: DamageIndicator = damage_indicator_resource.instantiate()
 		add_child(damage_indicator, true)
 		_damage_indicator_pool.append(damage_indicator)
+	
+	# Lightning arc object pool
+	var lightning_arc_resource: Resource = load(_lightning_arc_scene)
+	for i in range(_LIGHTNING_ARC_POOL_SIZE):
+		_lightning_arc_pool.append(lightning_arc_resource.instantiate())
+		add_child(_lightning_arc_pool[-1], true)
 	
 	# Authority-only functionality
 	if is_multiplayer_authority():
@@ -330,5 +343,20 @@ func create_damage_indicator(pos: Vector2, damage: float) -> void:
 	_damage_indicator_index += 1
 	if _damage_indicator_index >= _DAMAGE_INDICATOR_POOL_SIZE:
 		_damage_indicator_index = 0
+
+
+## Create a BulletLightningArc object using an object pool, which is better than spawning new objects.
+@rpc("authority", "call_local")
+func create_lightning_arc(pos: Vector2, damage: float, is_owned_by_player: bool, owner_id: int,
+			powerup_index: int, data: Array) -> void:
+	_lightning_arc_pool[_lightning_arc_index].position = pos
+	_lightning_arc_pool[_lightning_arc_index].set_damage(damage)
+	_lightning_arc_pool[_lightning_arc_index].setup_bullet(is_owned_by_player, data)
+	if owner_id > 0 and powerup_index > -1:
+		_lightning_arc_pool[_lightning_arc_index].setup_analytics(owner_id, powerup_index)
+	
+	_lightning_arc_index += 1
+	if _lightning_arc_index >= _LIGHTNING_ARC_POOL_SIZE:
+		_lightning_arc_index = 0
 
 #endregion ObjectPools

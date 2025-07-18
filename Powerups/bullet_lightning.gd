@@ -5,8 +5,6 @@ extends Bullet
 @export var _area: Area2D = null
 ## Contains the visuals and collision for the bullet.
 @export var _lightning: Node2D = null
-## Bullet for lightning arcs.
-@export var _lightning_arc_scene: String = ""
 
 var _is_level_three: bool = false
 ## True after the one frame that this bullet lasts for.
@@ -72,15 +70,11 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
 	
 	if enemy != null and enemy is Enemy:
-		get_tree().root.get_node("Playground/BulletSpawner").call_deferred("request_spawn_bullet",
-			[
-				_lightning_arc_scene, 
-				enemy.global_position, 
-				Vector2.UP, 
-				collider.damage, 
-				_is_owned_by_player,
-				collider.owner_id,
-				collider.powerup_index,
-				[3, _is_level_three, -1.0, enemy.get_path()]
-			]
+		GameState.playground.create_lightning_arc.rpc(
+			enemy.global_position, 
+			collider.damage, 
+			_is_owned_by_player,
+			collider.owner_id,
+			collider.powerup_index,
+			[3, _is_level_three, -1.0, enemy.get_path()]
 		)

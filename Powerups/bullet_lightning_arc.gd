@@ -1,3 +1,4 @@
+class_name BulletLightningArc
 extends Bullet
 
 
@@ -9,8 +10,17 @@ extends Bullet
 @export var _area: Area2D = null
 ## Bullet collision shape.
 @export var _collision_shape: CollisionShape2D = null
-@export var _lightning_arc_scene: String = ""
 
+## Original collision layer
+var _collision_layer: int = 0
+## Original collision mask
+var _collision_mask: int = 0
+## Original sprite color
+var _sprite_modulate: Color = Color.WHITE
+## Animation tween for this bullet.
+var _fade_out_tween: Tween = null
+## The current range of this bounce.
+var _bounce_range: float = 0.0
 ## Number of bounces remaining after this arc.
 var _bounces: int = 0
 var _is_level_three: bool = false
@@ -22,11 +32,17 @@ var _freed_area: bool = false
 
 
 func _ready() -> void:
-	# Play fading out animation
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 0.5)
+	hide()
+	
+	_collision_layer = _area.collision_layer
+	_collision_mask = _area.collision_mask
+	_area.collision_layer = 0
+	_area.collision_mask = 0
+	_sprite_modulate = sprite.modulate
+	
+	# Only physics process will be started when this bullet is active.
+	set_physics_process(false)
+	set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -35,9 +51,6 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
-	
 	if not _processed:
 		# Bounce to the next nearest Enemy.
 		_processed = true
@@ -55,7 +68,7 @@ func _physics_process(_delta: float) -> void:
 			bounce_query_params.collide_with_bodies = false
 			# The 2nd layer/1st bit is the "enemy" collision layer
 			bounce_query_params.collision_mask = 1 << 1
-			circle_shape.radius = _max_bounce_range
+			circle_shape.radius = _bounce_range
 			bounce_query_params.shape = circle_shape
 			bounce_query_params.transform = Transform2D(0.0, global_position)
 			
@@ -77,25 +90,31 @@ func _physics_process(_delta: float) -> void:
 			var length_of_lightning = _collision_shape.shape.size.x
 			_lightning.scale.x = rotation_direction.length() / length_of_lightning
 			
-			get_tree().root.get_node("Playground/BulletSpawner").call_deferred("request_spawn_bullet",
-				[
-					_lightning_arc_scene, 
+			sprite.flip_h = false
+			show()
+			
+			# Only the server will create the next bullet bounce.
+			if is_multiplayer_authority():
+				_area.collision_layer = _collision_layer
+				_area.collision_mask = _collision_mask
+				
+				GameState.playground.create_lightning_arc.rpc(
 					next_bounce.global_position, 
-					Vector2.UP, 
 					collider.damage, 
 					_is_owned_by_player,
 					collider.owner_id,
 					collider.powerup_index,
 					[_bounces - 1, _is_level_three, sqrt(nearest_distance_squared), next_bounce.get_path()]
-				]
-			)
+				)
 		else:
 			# No next valid bounce target
 			_lightning.scale.x = 0.0
 	elif not _freed_area:
 		# Only delete the collision, but let the lightning fade out
 		_freed_area = true
-		_area.queue_free()
+		_area.collision_layer = 0
+		_area.collision_mask = 0
+		set_physics_process(false)
 
 
 # Set up other properties for this bullet
@@ -113,6 +132,21 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_bounces = data[0]
 	_is_level_three = data[1]
 	if data[2] >= 0.0:
-		_max_bounce_range = data[2]
+		_bounce_range = data[2]
+	else:
+		_bounce_range = _max_bounce_range
 	_origin_enemy = get_node(data[3])
 	_is_owned_by_player = is_owned_by_player
+	
+	# Play fading out animation
+	sprite.modulate = _sprite_modulate
+	if _fade_out_tween != null:
+		_fade_out_tween.kill()
+	_fade_out_tween = create_tween()
+	_fade_out_tween.set_ease(Tween.EASE_OUT)
+	_fade_out_tween.set_trans(Tween.TRANS_QUINT)
+	_fade_out_tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 0.5)
+	
+	_processed = false
+	_freed_area = false
+	set_physics_process(true)
