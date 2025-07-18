@@ -61,8 +61,8 @@ var peer: SteamMultiplayerPeer = null
 # The Steam lobby ID of the lobby that this player is in.
 var lobby_id: int = 0
 
-# The parent node of all objects in the main portion of the game.
-var world: Node = null
+## The parent node of all objects in the main portion of the game. Should never be set by other objects.
+var playground: Playground = null
 # Experience to next level
 var experience: float = 0.0
 var exp_for_next_level: float = 0.0
@@ -391,9 +391,9 @@ func end_game():
 		# Possibly fix this by unparenting other players (presumably the thing being 
 		# illegally freed) from the world, then freeing the world. Each player frees
 		# their own character or whatever it is that the server doesn't have authority over.
-		if world != null:
-			world.queue_free()
-	world = null
+		if playground != null:
+			playground.queue_free()
+	playground = null
 
 
 # Only affects variables related to gameplay. Multiplayer properties are not changed.
@@ -555,8 +555,8 @@ func load_game():
 	if not multiplayer.is_server():
 		return
 	
-	world = load(start_game_scene).instantiate()
-	get_tree().get_root().add_child(world, true)
+	playground = load(start_game_scene).instantiate()
+	get_tree().get_root().add_child(playground, true)
 	get_tree().get_root().get_node(main_menu_node_path).hide()
 
 

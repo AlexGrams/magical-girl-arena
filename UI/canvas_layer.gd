@@ -204,7 +204,7 @@ func _update_retry_votes(voting_retry: bool, id: int) -> void:
 		if multiplayer.get_unique_id() == 1 and _votes_to_retry >= GameState.connected_players:
 			_votes_to_retry = 0
 			
-			var world_tree_exited: Signal = GameState.world.tree_exited
+			var world_tree_exited: Signal = GameState.playground.tree_exited
 			GameState.end_game.rpc()
 			await world_tree_exited
 			
