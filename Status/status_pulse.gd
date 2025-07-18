@@ -25,7 +25,6 @@ func set_properties(id: int, damage: float, has_knockback: bool) -> void:
 	duration = GameState.time - int(GameState.time)
 	_damage = damage 
 	_has_knockback = has_knockback
-	GameState.player_characters[_owner_id].delay_pulse.rpc_id(_owner_id)
 
 
 func _ready() -> void:

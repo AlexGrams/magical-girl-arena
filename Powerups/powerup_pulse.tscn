@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Powerups/powerup_pulse.gd" id="1_c5ibc"]
 
 [node name="PowerupPulse" type="Node2D"]
+process_priority = 1
 script = ExtResource("1_c5ibc")
 _fire_interval = 1.0
 _bullet_scene = "res://Powerups/bullet_pulse.tscn"

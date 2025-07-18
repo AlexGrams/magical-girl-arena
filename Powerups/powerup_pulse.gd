@@ -10,7 +10,7 @@ extends Powerup
 @export var _powerup_data_file_path: String = ""
 
 var _fire_timer: float = 0.0
-var _owner: Node = null
+var _owner: PlayerCharacterBody2D = null
 ## Powerup owner's multiplayer ID.
 var _id: int = 0
 
@@ -27,19 +27,14 @@ func _process(delta: float) -> void:
 	
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, 
-			[
-				_bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				_get_damage_from_curve(), 
-				_is_owned_by_player,
-				_id,
-				_powerup_index,
-				[_owner.get_path(), _id, 1, current_level >= 3]
-			]
-		)
+		# Apply StatusPulse to the other character
+		var status_pulse: Status = _owner.get_status("Pulse")
+		if status_pulse == null:
+			status_pulse = StatusPulse.new()
+			status_pulse.set_properties(_id, _get_damage_from_curve(), current_level >= 3)
+			_owner.add_status(status_pulse)
+		else:
+			status_pulse.stack()
 		
 		# TODO: Play sound effect
 		# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
@@ -58,9 +53,3 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
-
-
-## Delay this Pulse's firing to the next time interval.
-func delay() -> void:
-	if _fire_timer >= 0.0:
-		_fire_timer -= _fire_interval
