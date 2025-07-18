@@ -58,6 +58,10 @@ var _damage_indicator_pool: Array[DamageIndicator] = []
 var _damage_indicator_index: int = 0
 
 
+func get_hud_canvas_layer() -> HUDCanvasLayer:
+	return hud_canvas_layer
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameState.pause_game(true)
@@ -317,6 +321,8 @@ func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb, p
 	signature_powerup_orb.set_powerup.rpc(powerup_path)
 
 
+#region ObjectPools
+
 ## Create a damage indicator VFX at a location
 @rpc("authority", "call_local")
 func create_damage_indicator(pos: Vector2, damage: float) -> void:
@@ -325,6 +331,4 @@ func create_damage_indicator(pos: Vector2, damage: float) -> void:
 	if _damage_indicator_index >= _DAMAGE_INDICATOR_POOL_SIZE:
 		_damage_indicator_index = 0
 
-
-func get_hud_canvas_layer() -> HUDCanvasLayer:
-	return hud_canvas_layer
+#endregion ObjectPools
