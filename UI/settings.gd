@@ -13,6 +13,10 @@ const max_volume_slider_value: float = 1.25
 @export var _sfx_volume_slider: Slider = null
 ## Spinbox for setting the sfx volume
 @export var _sfx_spinbox: SpinBox = null
+## Slider for setting how transparent other players' bullets are.
+@export var _bullet_opacity_slider: Slider = null
+## Spinbox for setting how transparent other player' bullets are.
+@export var _bullet_opacity_spinbox: SpinBox = null
 
 var _screen_modes := [DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED]
 
@@ -56,7 +60,20 @@ func _on_music_spin_box_value_changed(spinbox_value: float) -> void:
 	SettingsManager.apply_music_volume(slider_volume * max_volume_slider_value)
 	if slider_volume != _music_volume_slider.value:
 		_music_volume_slider.value = slider_volume
-		
+
+
+## Slider for BULLET OPACITY 
+func _on_bullet_opacity_slider_drag_ended(_value_changed: bool) -> void:
+	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100
+
+
+## Spinbox for BULLET OPACITY
+func _on_bullet_opacity_spin_box_value_changed(spinbox_value: float) -> void:
+	var slider_opacity: float = spinbox_value / 100.0
+	SettingsManager.apply_bullet_opacity(slider_opacity)
+	if slider_opacity != _bullet_opacity_slider.value:
+		_bullet_opacity_slider.value = slider_opacity
+
 
 ## Writes values set on this screen to disk.
 func _save_settings_changes() -> void:

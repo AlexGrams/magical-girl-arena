@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
-[ext_resource type="Resource" uid="uid://cibbn8bcqvx6e" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
+[ext_resource type="Resource" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
 
 [sub_resource type="Curve" id="Curve_28jnp"]
 _data = [Vector2(0, 0), 0.0, 3.49332, 0, 0, Vector2(0.496815, 1), 0.0, 0.0, 0, 0, Vector2(0.541401, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0737917, 0.0, 0, 0]
@@ -376,8 +376,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox")]
-visible = false
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -390,6 +389,8 @@ _music_volume_slider = NodePath("VBoxContainer/MusicVolumeContainer/Music_Volume
 _music_spinbox = NodePath("VBoxContainer/MusicVolumeContainer/Music_SpinBox")
 _sfx_volume_slider = NodePath("VBoxContainer/SFXVolumeContainer/VolumeHSlider")
 _sfx_spinbox = NodePath("VBoxContainer/SFXVolumeContainer/SpinBox")
+_bullet_opacity_slider = NodePath("VBoxContainer/BulletOpacityContainer/OpacityHSlider")
+_bullet_opacity_spinbox = NodePath("VBoxContainer/BulletOpacityContainer/SpinBox")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -525,6 +526,54 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("4_wqh84")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="BulletOpacityContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Opacity" type="Label" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+layout_mode = 2
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 90
+text = "SFX Volume"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(159, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="OpacityHSlider" type="HSlider" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("14_ddmg2")
+theme_override_icons/grabber_highlight = ExtResource("14_ddmg2")
+theme_override_icons/grabber_disabled = ExtResource("14_ddmg2")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 1.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/BulletOpacityContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1380,6 +1429,8 @@ vertical_alignment = 1
 [connection signal="value_changed" from="Settings/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]
