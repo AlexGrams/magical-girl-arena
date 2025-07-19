@@ -29,6 +29,8 @@ func _ready() -> void:
 	_sfx_spinbox.value = _slider_to_spinbox_value(_sfx_volume_slider.value)
 	_music_volume_slider.value = settings.get_value("music", "volume") / max_volume_slider_value
 	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
+	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
+	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
 
 
 func _on_screen_mode_item_selected(index: int) -> void:
@@ -77,7 +79,12 @@ func _on_bullet_opacity_spin_box_value_changed(spinbox_value: float) -> void:
 
 ## Writes values set on this screen to disk.
 func _save_settings_changes() -> void:
-	SaveManager.save_settings(_screen_modes[_screen_mode_option.selected], _sfx_volume_slider.value * max_volume_slider_value, _music_volume_slider.value * max_volume_slider_value)
+	SaveManager.save_settings(
+		_screen_modes[_screen_mode_option.selected], 
+		_sfx_volume_slider.value * max_volume_slider_value, 
+		_music_volume_slider.value * max_volume_slider_value,
+		_bullet_opacity_slider.value
+	)
 
 ## Helper functions
 func _spinbox_to_slider_value(spinbox_value: float) -> float:

@@ -31,4 +31,4 @@ func apply_music_volume(volume: float):
 
 ## Changes the current BULLET OPACITY for other players' bullets.
 func apply_bullet_opacity(opacity: float) -> void:
-	pass
+	GameState.other_players_bullet_opacity = opacity

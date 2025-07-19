@@ -61,6 +61,9 @@ var peer: SteamMultiplayerPeer = null
 # The Steam lobby ID of the lobby that this player is in.
 var lobby_id: int = 0
 
+## How visible bullets owned by other players will be to the client. Makes it easier for the local
+## player to see their own bullets.
+var other_players_bullet_opacity: float = 1.0
 ## The parent node of all objects in the main portion of the game. Should never be set by other objects.
 var playground: Playground = null
 # Experience to next level
