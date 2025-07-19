@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
-[ext_resource type="Resource" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
+[ext_resource type="Resource" uid="uid://cibbn8bcqvx6e" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
 
 [sub_resource type="Curve" id="Curve_28jnp"]
 _data = [Vector2(0, 0), 0.0, 3.49332, 0, 0, Vector2(0.496815, 1), 0.0, 0.0, 0, 0, Vector2(0.541401, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0737917, 0.0, 0, 0]
@@ -377,6 +377,7 @@ text = "Version ???"
 horizontal_alignment = 2
 
 [node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -541,12 +542,12 @@ layout_mode = 2
 [node name="Opacity" type="Label" parent="Settings/VBoxContainer/BulletOpacityContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 90
-text = "SFX Volume"
+theme_override_font_sizes/font_size = 42
+text = "Other players' bullet opacity"
 metadata/_edit_group_ = true
 
 [node name="Spacer" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
-custom_minimum_size = Vector2(159, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -579,7 +580,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme = ExtResource("4_wqh84")
-value = 80.0
+value = 100.0
 rounded = true
 alignment = 1
 
