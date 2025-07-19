@@ -9,13 +9,14 @@ radius = 100.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntv7y"]
 radius = 1000.0
 
-[node name="BulletTurret" type="Node2D" node_paths=PackedStringArray("_range_area", "_turret_sprite")]
+[node name="BulletTurret" type="Node2D" node_paths=PackedStringArray("_range_area", "_turret_sprite", "sprite")]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_3dwxv")
 _turret_bullet_scene = "res://Powerups/bullet_turret_bullet.tscn"
 _range_area = NodePath("RangeArea2D")
 _turret_sprite = NodePath("Sprite2D")
 speed = 10.0
+sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)

@@ -59,3 +59,8 @@ func _on_area_2d_entered(area: Area2D) -> void:
 				other.add_status(status_pulse)
 			else:
 				status_pulse.stack()
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

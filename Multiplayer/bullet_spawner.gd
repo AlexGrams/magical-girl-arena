@@ -32,9 +32,9 @@ func _spawn_bullet(data):
 	
 	# Call the setup function on the bullet once it is added to the scene, but only once.
 	bullet.tree_entered.connect(func():
-		bullet.setup_bullet(data[4], data[7])
 		if data[5] > 0 and data[6] > -1:
 			bullet.setup_analytics(data[5], data[6])
+		bullet.setup_bullet(data[4], data[7])
 	, CONNECT_ONE_SHOT)
 	
 	return bullet

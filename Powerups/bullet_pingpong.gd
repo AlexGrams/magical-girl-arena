@@ -166,3 +166,8 @@ func level_up(new_level: int, new_damage: float):
 	if new_level == 3:
 		# Increase size
 		scale = scale * 2
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

@@ -53,6 +53,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 func setup_analytics(owner_id: int, powerup_index: int) -> void:
 	_owner_id = owner_id
 	_powerup_index = powerup_index
+	
+	if owner_id != multiplayer.get_unique_id():
+		_update_bullet_opacity()
 
 
 ## Apply damage continually to any overlapping Enemies.
@@ -76,3 +79,11 @@ func _on_area_2d_exited(area: Area2D) -> void:
 			other.add_continuous_damage(-_damage)
 		if multiplayer.get_unique_id() == _owner_id:
 			other.continuous_damage_analytics(-_damage, -1)
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	sprite.self_modulate.a = GameState.other_players_bullet_opacity
+	$TrailSprite/Flower1.self_modulate.a = GameState.other_players_bullet_opacity
+	$TrailSprite/Flower2.self_modulate.a = GameState.other_players_bullet_opacity
+	$TrailSprite/Flower3.self_modulate.a = GameState.other_players_bullet_opacity

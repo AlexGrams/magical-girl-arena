@@ -111,3 +111,8 @@ func _on_ally_area_2d_entered(area: Area2D) -> void:
 				player.add_status(status_puddle)
 			else:
 				status_puddle.duration = _status_duration
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

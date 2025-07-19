@@ -115,6 +115,7 @@ func _spawn_boomerang() -> void:
 			[_boomerang_owner_path, self.get_path()]
 		]
 	)
+	spawned_bullet.setup_analytics(_owner_id, _powerup_index)
 	_boomerangs.append(spawned_bullet)
 
 

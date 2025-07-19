@@ -9,12 +9,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 79.25)
 
-[node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("area", "collider")]
+[node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("area", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
 area = NodePath("BulletOffset/ScytheSprite/Area2D")
 lifetime = 0.75
 collider = NodePath("BulletOffset/ScytheSprite/Area2D")
+sprite = NodePath("BulletOffset/ScytheSprite")
 
 [node name="BulletOffset" type="Node2D" parent="." node_paths=PackedStringArray("base_sprite")]
 z_index = 1

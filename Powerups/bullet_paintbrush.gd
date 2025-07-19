@@ -67,3 +67,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# Disable process and collision signals for non-owners.
 	if not is_multiplayer_authority():
 		set_physics_process(false)
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

@@ -151,3 +151,8 @@ func level_up(_new_level: int, new_damage: float):
 	if _new_level == 3: 
 		_max_range *= 2
 		_max_range_squared = _max_range ** 2
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

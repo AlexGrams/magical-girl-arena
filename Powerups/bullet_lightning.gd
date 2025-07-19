@@ -78,3 +78,8 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			collider.powerup_index,
 			[3, _is_level_three, -1.0, enemy.get_path()]
 		)
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

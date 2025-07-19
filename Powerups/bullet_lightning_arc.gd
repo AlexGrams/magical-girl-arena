@@ -155,3 +155,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_processed = false
 	_freed_area = false
 	set_physics_process(true)
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	pass

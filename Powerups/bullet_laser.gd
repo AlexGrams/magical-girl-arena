@@ -159,3 +159,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
 	_area.damage = new_damage
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	# Laser's passive animation dictates its opacity.
+	pass

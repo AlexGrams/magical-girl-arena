@@ -67,9 +67,13 @@ func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 
 
 ## Initialize properties used by the bullet for analytics on how much damage each of the player's powerups has done.
+## Also set the local bullet opacity since we now know who owns this bullet.
 func setup_analytics(owner_id: int, powerup_index: int) -> void:
 	collider.owner_id = owner_id
 	collider.powerup_index = powerup_index
+	
+	if owner_id != multiplayer.get_unique_id():
+		_update_bullet_opacity()
 
 
 ## Do damage to this bullet. Bullets owned by enemies can be destroyed. Only call on 
@@ -96,3 +100,8 @@ func _modify_collider_to_harm_players() -> void:
 	
 	if sprite != null:
 		sprite.self_modulate = Color.RED
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	sprite.self_modulate.a = GameState.other_players_bullet_opacity

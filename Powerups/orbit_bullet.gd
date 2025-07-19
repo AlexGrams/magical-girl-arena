@@ -70,6 +70,13 @@ func level_up(_new_level: int, new_damage: float):
 	$BulletOffset/Area2D.damage = new_damage
 
 
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	sprite.self_modulate.a = GameState.other_players_bullet_opacity
+	$BulletOffset/Sprite2D/Rainbow.self_modulate.a = GameState.other_players_bullet_opacity
+
+
 # Must be done through RPC because clients run functionality to spawn the bullet, but bullets'
 # authority is the server.
 @rpc("any_peer", "call_remote")

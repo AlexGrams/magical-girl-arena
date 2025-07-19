@@ -10,3 +10,10 @@ func set_angry():
 func set_happy():
 	$Bee.self_modulate = Color.WHITE
 	$Mouth.rotation = deg_to_rad(0)
+
+
+func set_opacity():
+	$Wing2.self_modulate.a = GameState.other_players_bullet_opacity
+	$Bee.self_modulate.a = GameState.other_players_bullet_opacity
+	$Wing1.self_modulate.a = GameState.other_players_bullet_opacity
+	$Mouth.self_modulate.a = GameState.other_players_bullet_opacity

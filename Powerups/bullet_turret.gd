@@ -86,6 +86,9 @@ func set_damage(damage:float):
 func setup_analytics(owner_id: int, powerup_index: int) -> void:
 	_owner_id = owner_id
 	_powerup_index = powerup_index
+	
+	if owner_id != multiplayer.get_unique_id():
+		_update_bullet_opacity()
 
 
 func _shoot() -> void:

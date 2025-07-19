@@ -57,6 +57,10 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	_bullet_hitbox.owner_id = owner_id
 	_bullet_hitbox.powerup_index = powerup_index
 	
+	if owner_id != multiplayer.get_unique_id():
+		_sprite.set_opacity()
+
+	
 	# Level up functionality
 	var pet_powerup = _owner_node.get_node_or_null("PowerupPet")
 	if pet_powerup != null and pet_powerup is Powerup:
