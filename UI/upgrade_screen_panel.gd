@@ -15,11 +15,11 @@ const ARTIFACT_DATA_PATH: String = "res://Artifacts/ArtifactDataResourceFiles/"
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
 ## Button for rerolling the provided upgrades.
-@export var reroll_button: Button = null
-## Text for reroll button
-@export var reroll_label: Label = null
-## Box visual for the reroll button
-@export var reroll_texture: TextureRect = null
+@export var reroll_button: ButtonHover = null
+## Button for rerolling and getting only Powerups.
+@export var powerup_reroll_button: ButtonHover = null
+## Button for rerolling and getting only Artifacts.
+@export var artifact_reroll_button: ButtonHover = null
 ## Window that shows up saying how many players are still choosing upgrades.
 @export var players_selecting_upgrades_window: Control = null
 ## Parent of the PlayReadyIndicators
@@ -112,6 +112,8 @@ func setup():
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
 	reroll_button.show()
+	powerup_reroll_button.show()
+	artifact_reroll_button.show()
 	
 	# Set up PlayerReadyIndicator icons
 	for i in range(GameState.connected_players):
@@ -198,6 +200,8 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		upgrade_choice_names.append(upgrade.name)
 	
 	_update_reroll_button()
+	_update_powerup_reroll_button()
+	_update_artifact_reroll_button()
 	upgrade_panels_holder.hide()
 	
 	_report_upgrade_choices.rpc_id(1, upgrade_choice_names)
@@ -285,6 +289,8 @@ func _show_random_upgrade_choices(upgrade_names: Array[String]) -> void:
 	
 	upgrade_panels_holder.show()
 	_update_reroll_button()
+	_update_powerup_reroll_button()
+	_update_artifact_reroll_button()
 
 
 func _on_reroll_button_down() -> void:
@@ -295,6 +301,14 @@ func _on_reroll_button_down() -> void:
 		upgrade_panel.hide()
 	
 	_request_reroll_upgrade_choices.rpc_id(1, _displayed_upgrade_names)
+
+
+func _on_powerup_reroll_button_down() -> void:
+	print("Powerup")
+
+
+func _on_artifact_reroll_button_down() -> void:
+	print("artifact")
 
 
 ## Get a new selection of upgrade choices, taking into account unique Artifacts that were assigned
@@ -315,13 +329,22 @@ func _request_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> v
 ## Update the text on the Reroll button
 func _update_reroll_button() -> void:
 	var rerolls = GameState.get_local_player().get_rerolls()
-	reroll_label.text = "Reroll (" + str(rerolls) + " remaining)"
-	if rerolls <= 0:
-		reroll_button.disabled = true
-		reroll_texture.modulate = Color.DIM_GRAY
-	else:
-		reroll_button.disabled = false
-		reroll_texture.modulate = Color.WHITE
+	reroll_button.set_text("Reroll (" + str(rerolls) + " remaining)")
+	reroll_button.set_interactable(rerolls > 0)
+
+
+## Update the text on the Powerup Reroll button.
+func _update_powerup_reroll_button() -> void:
+	var powerup_rerolls = GameState.powerup_rerolls
+	powerup_reroll_button.set_text("Powerup Reroll (" + str(powerup_rerolls) + " remaining)")
+	powerup_reroll_button.set_interactable(powerup_rerolls > 0)
+
+
+## Update the text on the Artifact Reroll button.
+func _update_artifact_reroll_button() -> void:
+	var artifact_rerolls = GameState.artifact_rerolls
+	artifact_reroll_button.set_text("Artifact Reroll (" + str(artifact_rerolls) + " remaining)")
+	artifact_reroll_button.set_interactable(artifact_rerolls > 0)
 
 
 ## Notify relevant systems that this player has selected an upgrade.
@@ -342,6 +365,8 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
 	reroll_button.hide()
+	powerup_reroll_button.hide()
+	artifact_reroll_button.hide()
 	
 	_update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
@@ -368,6 +393,8 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
 	reroll_button.hide()
+	powerup_reroll_button.hide()
+	artifact_reroll_button.hide()
 	
 	_update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()

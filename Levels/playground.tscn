@@ -6828,7 +6828,6 @@ layout_mode = 2
 theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
 toggle_mode = true
-text = "Retry"
 script = ExtResource("55_sk2pv")
 label = NodePath("Box")
 
@@ -6894,8 +6893,6 @@ custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
-text = "Back to Lobby
-"
 script = ExtResource("55_sk2pv")
 label = NodePath("Box")
 
@@ -6935,8 +6932,6 @@ custom_minimum_size = Vector2(500, 80)
 layout_mode = 2
 theme = ExtResource("55_bjgvv")
 theme_override_font_sizes/font_size = 30
-text = "Quit to Main Menu
-"
 script = ExtResource("55_sk2pv")
 label = NodePath("Box")
 
