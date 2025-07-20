@@ -4,7 +4,8 @@ extends BaseButton
 
 
 @export var label:Control
-@export var texture:Control = null
+@export var texture:TextureRect = null
+@export var text:Label = null
 
 var original_scale:Vector2
 
@@ -20,8 +21,8 @@ func set_interactable(interactable: bool) -> void:
 
 
 ## Set the text on this button's label.
-func set_text(text: String) -> void:
-	label.text = text
+func set_text(new_text: String) -> void:
+	text.text = new_text
 
 
 # Called when the node enters the scene tree for the first time.
