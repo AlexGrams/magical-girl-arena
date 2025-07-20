@@ -1,7 +1,29 @@
+class_name ButtonHover
 extends BaseButton
+## A button that does a growing and shrinking animation when you hover over it.
+
 
 @export var label:Control
+@export var texture:Control = null
+
 var original_scale:Vector2
+
+
+## True if this button should be clickable, false otherwise. Changes the displayed texture to match.
+func set_interactable(interactable: bool) -> void:
+	disabled = not interactable
+	if texture != null:
+		if disabled:
+			texture.modulate = Color.DIM_GRAY
+		else:
+			texture.modulate = Color.WHITE
+
+
+## Set the text on this button's label.
+func set_text(text: String) -> void:
+	label.text = text
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	connect("button_down", _on_pressed)
