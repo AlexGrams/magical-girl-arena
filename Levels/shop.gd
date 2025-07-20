@@ -62,12 +62,26 @@ func buy_perm_reroll() -> void:
 
 ## Buy a reroll that only shows powerups.
 func buy_powerup_reroll() -> void:
-	print("Powerup")
+	if GameState.powerup_rerolls >= get_max_quantity(powerup_reroll_item) or !has_enough_gold(powerup_reroll_item):
+		return
+	
+	spend_gold(powerup_reroll_item)
+	GameState.powerup_rerolls += 1
+	powerup_reroll_item.update_quantity(GameState.powerup_rerolls)
+	
+	SaveManager.save_game()
 
 
 ## Buy a reroll that only shows artifacts.
 func buy_artifact_reroll() -> void:
-	print("Artifact")
+	if GameState.artifact_rerolls >= get_max_quantity(artifact_reroll_item) or !has_enough_gold(artifact_reroll_item):
+		return
+	
+	spend_gold(artifact_reroll_item)
+	GameState.artifact_rerolls += 1
+	artifact_reroll_item.update_quantity(GameState.artifact_rerolls)
+	
+	SaveManager.save_game()
 #endregion
 
 #region Helper Functions
@@ -77,6 +91,8 @@ func buy_artifact_reroll() -> void:
 func update_all_quantities() -> void:
 	reroll_item.update_quantity(GameState.rerolls)
 	perm_reroll_item.update_quantity(GameState.perm_rerolls)
+	powerup_reroll_item.update_quantity(GameState.powerup_rerolls)
+	artifact_reroll_item.update_quantity(GameState.artifact_rerolls)
 	set_gold_display(GameState.get_gold())
 
 

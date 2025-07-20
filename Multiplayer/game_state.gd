@@ -32,6 +32,10 @@ const exp_per_level_curve_path := "res://Curves/exp_per_level.tres"
 var perm_rerolls: int = 0
 # Number of rerolls the player currently has.
 var rerolls: int = 0
+## Number of powerup-only rerolls the player currently has.
+var powerup_rerolls: int = 0
+## Number of artifact-only rerolls the player currently has.
+var artifact_rerolls: int = 0
 ## Number of players that have finished loading the main game scene.
 var _players_loaded_in: int = 0
 # All the gold the player has.
