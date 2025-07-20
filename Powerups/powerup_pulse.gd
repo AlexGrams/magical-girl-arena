@@ -4,8 +4,6 @@ extends Powerup
 
 ## Time in seconds between firing.
 @export var _fire_interval = 3.0
-## Path to the Bullet-derived bullet scene.
-@export var _bullet_scene := ""
 ## Path to the PowerupData resource file for this Powerup.
 @export var _powerup_data_file_path: String = ""
 
