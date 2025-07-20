@@ -89,7 +89,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="RerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(520, 70)
+custom_minimum_size = Vector2(540, 70)
 layout_mode = 2
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32
@@ -126,7 +126,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PowerupRerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(520, 70)
+custom_minimum_size = Vector2(540, 70)
 layout_mode = 2
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32
@@ -163,7 +163,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ArtifactRerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(520, 70)
+custom_minimum_size = Vector2(540, 70)
 layout_mode = 2
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32

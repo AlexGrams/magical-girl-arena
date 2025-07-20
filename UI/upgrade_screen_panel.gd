@@ -235,7 +235,7 @@ func _report_upgrade_choices(upgrade_names: Array[String]) -> void:
 func _make_valid_random_upgrade_choices(id: int) -> Array[String]:
 	# Names of upgrades that will be given to the current player.
 	var selected_upgrades: Array[String] = []
-	# Assigne upgrades to this player, making sure that unique Artifacts that are assigned haven't
+	# Assigned upgrades to this player, making sure that unique Artifacts that are assigned haven't
 	# already been given to someone else.
 	var current_upgrade_names: Array[String] = _player_possible_upgrades[id]
 	
@@ -244,6 +244,47 @@ func _make_valid_random_upgrade_choices(id: int) -> Array[String]:
 	var i: int = 0
 	while i < len(current_upgrade_names) and len(selected_upgrades) < MAX_NORMAL_UPGRADES:
 		if not _assigned_unique_artifacts.has(current_upgrade_names[i]):
+			selected_upgrades.append(current_upgrade_names[i])
+			# If the upgrade we just added was a unique Artifact, than add it to our set
+			# of assigned unique upgrades.
+			if (
+					_artifact_name_to_artifactdata.has(current_upgrade_names[i])
+					and _artifact_name_to_artifactdata[current_upgrade_names[i]].is_unique
+			):
+				_assigned_unique_artifacts[current_upgrade_names[i]] = true
+		i += 1
+	
+	return selected_upgrades
+
+
+func _make_valid_random_powerup_upgrade_choices(id: int) -> Array[String]:
+	var selected_upgrades: Array[String] = []
+	var current_upgrade_names: Array[String] = _player_possible_upgrades[id]
+	
+	# Get only powerup upgrades.
+	current_upgrade_names.shuffle()
+	for upgrade_name: String in current_upgrade_names:
+		if _powerup_name_to_powerupdata.has(upgrade_name):
+			selected_upgrades.append(upgrade_name)
+			if len(selected_upgrades) >= MAX_NORMAL_UPGRADES:
+				break
+	
+	return selected_upgrades
+
+
+func _make_valid_random_artifact_upgrade_choices(id: int) -> Array[String]:
+	var selected_upgrades: Array[String] = []
+	var current_upgrade_names: Array[String] = _player_possible_upgrades[id]
+	
+	current_upgrade_names.shuffle()
+	
+	var i: int = 0
+	while i < len(current_upgrade_names) and len(selected_upgrades) < MAX_NORMAL_UPGRADES:
+		# Only add artifacts.
+		if (
+				_artifact_name_to_artifactdata.has(current_upgrade_names[i])
+				and not _assigned_unique_artifacts.has(current_upgrade_names[i])
+		):
 			selected_upgrades.append(current_upgrade_names[i])
 			# If the upgrade we just added was a unique Artifact, than add it to our set
 			# of assigned unique upgrades.
@@ -304,11 +345,23 @@ func _on_reroll_button_down() -> void:
 
 
 func _on_powerup_reroll_button_down() -> void:
-	print("Powerup")
+	GameState.powerup_rerolls -= 1
+	
+	for upgrade_panel: UpgradePanel in upgrade_panels:
+		upgrade_panel.hide()
+	
+	_request_powerup_reroll_upgrade_choices.rpc_id(1, _displayed_upgrade_names)
+	SaveManager.save_game()
 
 
 func _on_artifact_reroll_button_down() -> void:
-	print("artifact")
+	GameState.artifact_rerolls -= 1
+	
+	for upgrade_panel: UpgradePanel in upgrade_panels:
+		upgrade_panel.hide()
+	
+	_request_artifact_reroll_upgrade_choices.rpc_id(1, _displayed_upgrade_names)
+	SaveManager.save_game()
 
 
 ## Get a new selection of upgrade choices, taking into account unique Artifacts that were assigned
@@ -324,6 +377,32 @@ func _request_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> v
 			_assigned_unique_artifacts.erase(upgrade_name)
 	
 	_show_random_upgrade_choices.rpc_id(id, _make_valid_random_upgrade_choices(id))
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _request_powerup_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> void:
+	# ID of player who is rerolling.
+	var id: int = multiplayer.get_remote_sender_id()
+	
+	# Free up unique artifacts that were assigned to the player requesting a reroll.
+	for upgrade_name: String in previous_upgrade_names:
+		if _assigned_unique_artifacts.has(upgrade_name):
+			_assigned_unique_artifacts.erase(upgrade_name)
+	
+	_show_random_upgrade_choices.rpc_id(id, _make_valid_random_powerup_upgrade_choices(id))
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _request_artifact_reroll_upgrade_choices(previous_upgrade_names: Array[String]) -> void:
+	# ID of player who is rerolling.
+	var id: int = multiplayer.get_remote_sender_id()
+	
+	# Free up unique artifacts that were assigned to the player requesting a reroll.
+	for upgrade_name: String in previous_upgrade_names:
+		if _assigned_unique_artifacts.has(upgrade_name):
+			_assigned_unique_artifacts.erase(upgrade_name)
+	
+	_show_random_upgrade_choices.rpc_id(id, _make_valid_random_artifact_upgrade_choices(id))
 
 
 ## Update the text on the Reroll button
