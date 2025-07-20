@@ -8,6 +8,7 @@
 size = Vector2(300, 75)
 
 [node name="BulletFan" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+scale = Vector2(1e-05, 1)
 script = ExtResource("1_3q0bu")
 _knockback_speed = 900.0
 _knockback_duration = 0.25
@@ -15,7 +16,7 @@ speed = 2000.0
 lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("Area2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)

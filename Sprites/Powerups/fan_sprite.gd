@@ -15,6 +15,8 @@ func set_damage(_damage: float):
 func _ready() -> void:
 	pass
 
+func play_wind() -> void:
+	$Wind/AnimationPlayer.play("wind")
 
 func _process(_delta: float) -> void:
 	if _owner != null:
