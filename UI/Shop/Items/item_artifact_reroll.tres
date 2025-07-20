@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://cxp74tfxo5kxf"]
+
+[ext_resource type="Texture2D" uid="uid://bchq18hkloumb" path="res://Sprites/UI/Shop_Reroll_Icon_Disabled.png" id="1_0u5o5"]
+[ext_resource type="Script" path="res://UI/Shop/shop_item_data.gd" id="1_rurv3"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="2_rfx0f"]
+
+[resource]
+script = ExtResource("1_rurv3")
+item_name = "Artifact Reroll"
+item_desc = "Use once to roll 3 new artifacts."
+icon = ExtResource("2_rfx0f")
+disabled_icon = ExtResource("1_0u5o5")
+price = 100
+max_quantity = 5
+_sold_message = 0

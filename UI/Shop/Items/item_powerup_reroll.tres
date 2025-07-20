@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://c1lyy8f7275d4"]
+
+[ext_resource type="Texture2D" uid="uid://bchq18hkloumb" path="res://Sprites/UI/Shop_Reroll_Icon_Disabled.png" id="1_k8rji"]
+[ext_resource type="Script" path="res://UI/Shop/shop_item_data.gd" id="1_lhgnp"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="2_nsr8f"]
+
+[resource]
+script = ExtResource("1_lhgnp")
+item_name = "Powerup Reroll"
+item_desc = "Use once to roll 3 new powerups."
+icon = ExtResource("2_nsr8f")
+disabled_icon = ExtResource("1_k8rji")
+price = 100
+max_quantity = 5
+_sold_message = 0

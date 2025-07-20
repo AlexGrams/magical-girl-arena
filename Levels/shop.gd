@@ -7,6 +7,8 @@ extends Control
 ## Buttons for items available for purchase
 @export var reroll_item:Control
 @export var perm_reroll_item:Control
+@export var powerup_reroll_item:Control = null
+@export var artifact_reroll_item:Control = null
 
 ### TO ADD A NEW ITEM:
 ## Connect button in _ready()
@@ -21,6 +23,9 @@ func _ready() -> void:
 	## Connect all item buttons
 	reroll_item.button.button_down.connect(buy_reroll)
 	perm_reroll_item.button.button_down.connect(buy_perm_reroll)
+	powerup_reroll_item.button.button_down.connect(buy_powerup_reroll)
+	artifact_reroll_item.button.button_down.connect(buy_artifact_reroll)
+
 
 # Updates the coin display text over time
 func update_coins() -> void:
@@ -53,6 +58,16 @@ func buy_perm_reroll() -> void:
 	perm_reroll_item.update_quantity(GameState.perm_rerolls)
 	
 	SaveManager.save_game()
+
+
+## Buy a reroll that only shows powerups.
+func buy_powerup_reroll() -> void:
+	print("Powerup")
+
+
+## Buy a reroll that only shows artifacts.
+func buy_artifact_reroll() -> void:
+	print("Artifact")
 #endregion
 
 #region Helper Functions
