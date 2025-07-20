@@ -3,7 +3,7 @@ extends Bullet
 
 
 ## Magnitude of knockback in units/second.
-@export var _knockback_speed: float = 500.0
+var _knockback_speed: float = 500.0
 ## Time in seconds that knockback is applied.
 @export var _knockback_duration: float = 0.5
 ## Width that the bullet should scale to (including sprite)
@@ -29,13 +29,15 @@ func _on_area_2d_entered(area: Area2D) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 2
 		or typeof(data[0]) != TYPE_FLOAT	# Bullet width
+		or typeof(data[1]) != TYPE_FLOAT	# Knockback speed
 	):
 		push_error("Malformed data array")
 		return
 		
 	bullet_width = data[0]
+	_knockback_speed = data[1]
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
 func _update_bullet_opacity() -> void:

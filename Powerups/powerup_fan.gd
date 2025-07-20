@@ -1,6 +1,7 @@
 extends Powerup
 
-
+## Magnitude of knockback per player character speed.
+@export var _knockback_speed_per_velocity = 2.25
 ## Time in seconds between firing.
 @export var _fire_interval = 1.0
 ## Bullet width
@@ -44,7 +45,7 @@ func _process(delta: float) -> void:
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
-						[_bullet_width]
+						[_bullet_width, _knockback_speed_per_velocity * _owning_character.speed]
 					]
 				)
 
