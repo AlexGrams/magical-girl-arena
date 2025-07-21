@@ -7,8 +7,3 @@ func _ready() -> void:
 	var animation_length: float = animation_player.get_animation("wing flap").length
 	animation_player.play("wing flap")
 	animation_player.seek(randf_range(0.0, animation_length))
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

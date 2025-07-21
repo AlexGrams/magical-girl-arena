@@ -12,8 +12,3 @@ func _ready() -> void:
 	tween.set_parallel()
 	tween.tween_property(process_material, "emission_box_extents", final_box, paint_speed)
 	tween.tween_property(process_material, "emission_shape_offset", final_offset, paint_speed)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
