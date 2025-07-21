@@ -42,4 +42,4 @@ func level_up():
 	
 	# At level 3, double max range.
 	if current_level == 3:
-		max_range *= 2.0
+		max_range = 999999
