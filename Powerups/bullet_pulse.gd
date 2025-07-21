@@ -39,7 +39,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		or typeof(data[0]) != TYPE_NODE_PATH	# Parent node path 
 		or typeof(data[1]) != TYPE_INT			# Original player ID
 		or typeof(data[2]) != TYPE_INT			# Power level
-		or typeof(data[3]) != TYPE_BOOL			# Has knockback
+		or typeof(data[3]) != TYPE_BOOL			# Is level three
 	):
 		push_error("Malformed data array")
 		return
@@ -61,9 +61,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_owner = get_tree().root.get_node(data[0])
 	_original_character_id = data[1]
 	_is_owned_by_player = is_owned_by_player
-
-	_has_knockback = data[3]
 	
+	# Only apply knockback on Pulses originating from the owning player.
+	if data[3] and GameState.player_characters[_original_character_id] == _owner:
+		_has_knockback = true
 
 
 func _on_area_2d_entered(area: Area2D) -> void:
