@@ -13,7 +13,7 @@ radius = 1000.0
 [node name="BulletBounce" type="Node2D" node_paths=PackedStringArray("_enemy_mask_collision_shape", "collider", "sprite")]
 script = ExtResource("1_dhf7l")
 _enemy_mask_collision_shape = NodePath("EnemyMaskArea2D")
-speed = 1500.0
+speed = 2000.0
 lifetime = 0.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
@@ -21,7 +21,7 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_eytkm")
 
 [node name="Area2D" type="Area2D" parent="."]
