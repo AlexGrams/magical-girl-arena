@@ -13,6 +13,9 @@ var sprite_color:String = "ffffff"
 var _owner: Node2D = null
 ## Multiplayer ID of the player from which this Pulse originates from.
 var _original_character_id: int = 0
+## Is this powerup owned by a player level three or higher?
+var _is_level_three: bool = false
+## Does this powerup apply knockback? Only applies for Pulses centered at the Powerup owner.
 var _has_knockback: bool = false
 
 
@@ -60,10 +63,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	_owner = get_tree().root.get_node(data[0])
 	_original_character_id = data[1]
+	_is_level_three = data[3]
 	_is_owned_by_player = is_owned_by_player
 	
 	# Only apply knockback on Pulses originating from the owning player.
-	if data[3] and GameState.player_characters[_original_character_id] == _owner:
+	if _is_level_three and GameState.player_characters[_original_character_id] == _owner:
 		_has_knockback = true
 
 
@@ -72,7 +76,12 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	if other != null:
 		if other is Enemy and _has_knockback:
 			other.set_knockback((other.global_position - global_position).normalized() * _knockback_speed, _knockback_duration)
-		elif other is PlayerCharacterBody2D and other != _owner and other == GameState.get_local_player():
+		elif (
+				other is PlayerCharacterBody2D
+				and _is_level_three 
+				and other != _owner 
+				and other == GameState.get_local_player()
+		):
 			# Apply StatusPulse to the other character
 			var status_pulse: Status = other.get_status("Pulse")
 			if status_pulse == null:
