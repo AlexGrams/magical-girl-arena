@@ -4,6 +4,8 @@ extends BulletContinuous
 @export var _paint_speed: float = 10
 # Butterfly sprite that is summoned
 @export var _butterfly_sprite: PackedScene
+# Sparkles
+@export var _particles: PackedScene
 
 # Global position of where the paint line should end
 var _ending_point: Vector2
@@ -26,6 +28,11 @@ func _ready() -> void:
 	butterfly.paint_speed = tween_time
 	add_child(butterfly)
 	butterfly.global_position = global_position
+	
+	var particles = _particles.instantiate()
+	particles.length = (_ending_point - global_position).length() / 2.0
+	particles.paint_speed = tween_time
+	add_child(particles)
 
 
 func _process(delta: float) -> void:
@@ -37,6 +44,10 @@ func _process(delta: float) -> void:
 
 func start_death_timer() -> void:
 	_death_timer_is_on = true
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(sprite, "modulate", Color.html("aaaaaa00"), lifetime - 0.5)
 
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:

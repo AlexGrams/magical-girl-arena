@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://depvpf4b2w2si"]
+[gd_scene load_steps=6 format=3 uid="uid://depvpf4b2w2si"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_paintbrush.gd" id="1_cvlpg"]
 [ext_resource type="Texture2D" uid="uid://cmfglyx6xbhnl" path="res://Sprites/Powerups/Paintbrush_Paint.png" id="2_4qg2h"]
-[ext_resource type="PackedScene" uid="uid://bmewpkgs6o8th" path="res://Sprites/Powerups/paintbrush_butterfly_sprite.tscn" id="2_e7bp6"]
+[ext_resource type="PackedScene" uid="uid://dq118ndrqgvkv" path="res://Sprites/Powerups/paintbrush_butterfly_group.tscn" id="2_ii4gv"]
+[ext_resource type="PackedScene" uid="uid://bp0756v0tmlgw" path="res://Sprites/Powerups/paintbrush_particles.tscn" id="3_2cfdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6577"]
 size = Vector2(646, 150)
@@ -10,7 +11,8 @@ size = Vector2(646, 150)
 [node name="BulletPaintbrush" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_cvlpg")
 _paint_speed = 2.5
-_butterfly_sprite = ExtResource("2_e7bp6")
+_butterfly_sprite = ExtResource("2_ii4gv")
+_particles = ExtResource("3_2cfdu")
 speed = 1500.0
 lifetime = 10.0
 destroy_on_hit = false
