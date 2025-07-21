@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2syl66o48prq"]
+[gd_scene load_steps=10 format=3 uid="uid://c2syl66o48prq"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_pulse.gd" id="1_4nyg4"]
 [ext_resource type="Texture2D" uid="uid://cn44qvy0arfo1" path="res://Sprites/Powerups/Pulse_Staff_Ring.png" id="2_at6i8"]
@@ -68,7 +68,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n81gy"]
-radius = 72.26
+radius = 71.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qwglh"]
+radius = 140.0
 
 [node name="BulletPulse" type="Node2D" node_paths=PackedStringArray("_notes_ring_sprite", "collider", "sprite")]
 script = ExtResource("1_4nyg4")
@@ -77,7 +80,7 @@ _notes_ring_sprite = NodePath("Staff_Ring/Notes_Ring")
 speed = 10.0
 lifetime = 0.25
 destroy_on_hit = false
-collider = NodePath("Area2D")
+collider = NodePath("DamageArea2D")
 sprite = NodePath("Staff_Ring")
 
 [node name="Staff_Ring" type="Sprite2D" parent="."]
@@ -94,13 +97,23 @@ libraries = {
 }
 autoplay = "spinning"
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_mask = 10
+[node name="DamageArea2D" type="Area2D" parent="."]
+collision_mask = 2
 script = ExtResource("4_xoslf")
 damage = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
 top_level = true
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_n81gy")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
+[node name="SpreadArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="SpreadCollisionShape2D" type="CollisionShape2D" parent="SpreadArea2D"]
+top_level = true
+shape = SubResource("CircleShape2D_qwglh")
+
+[connection signal="area_entered" from="DamageArea2D" to="." method="_on_area_2d_entered"]
+[connection signal="area_entered" from="SpreadArea2D" to="." method="_on_spread_area_2d_entered"]

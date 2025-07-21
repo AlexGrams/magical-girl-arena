@@ -71,25 +71,31 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		_has_knockback = true
 
 
+## Damaging area for Enemies. Apply knockback to damaged Enemies.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var other = area.get_parent()
-	if other != null:
-		if other is Enemy and _has_knockback:
-			other.set_knockback((other.global_position - global_position).normalized() * _knockback_speed, _knockback_duration)
-		elif (
-				other is PlayerCharacterBody2D
-				and _is_level_three 
-				and other != _owner 
-				and other == GameState.get_local_player()
-		):
-			# Apply StatusPulse to the other character
-			var status_pulse: Status = other.get_status("Pulse")
-			if status_pulse == null:
-				status_pulse = StatusPulse.new()
-				status_pulse.set_properties(_original_character_id, collider.damage, _has_knockback)
-				other.add_status(status_pulse)
-			else:
-				status_pulse.stack()
+	if other != null and _has_knockback:
+		other.set_knockback((other.global_position - global_position).normalized() * _knockback_speed, _knockback_duration)
+
+
+## Spread area for allies. Apply a status to allies that causes a Pulse bullet at their location
+## on the next Pulse interval.
+func _on_spread_area_2d_entered(area: Area2D) -> void:
+	var other = area.get_parent()
+	
+	if (
+			_is_level_three 
+			and other != _owner 
+			and other == GameState.get_local_player()
+	):
+		# Apply StatusPulse to the other character
+		var status_pulse: Status = other.get_status("Pulse")
+		if status_pulse == null:
+			status_pulse = StatusPulse.new()
+			status_pulse.set_properties(_original_character_id, collider.damage, _has_knockback)
+			other.add_status(status_pulse)
+		else:
+			status_pulse.stack()
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
