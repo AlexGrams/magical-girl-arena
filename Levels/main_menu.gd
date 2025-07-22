@@ -60,6 +60,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 var _lobby_list_refresh_timer: float = 0.0
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
+## Path to the Playground-derived .tscn resource file for the level that is currently selected.
+var _selected_playground: String = ""
 ## The location that these menus should be in when in focus. 
 ## Used for animating the UI when switching screens.
 var _main_menu_original_pos: Vector2
@@ -194,6 +196,7 @@ func _on_host_button_button_down() -> void:
 	lobby_visibility_holder.visible = true
 	map_holder.visible = true
 	lobby_visibility_option_button.selected = 1
+	_on_map_option_button_item_selected(0)
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
 	update_character_description()
@@ -322,7 +325,7 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 # The button that only the lobby host can press to begin the shooting part of the game.
 func _on_start_game_button_down() -> void:
 	_hide_main_menu.rpc()
-	GameState.start_game()
+	GameState.start_game(_selected_playground)
 
 
 @rpc("any_peer", "call_local")
@@ -348,10 +351,10 @@ func _on_map_option_button_item_selected(index: int) -> void:
 	match(index):
 		0:
 			# Garden
-			pass
+			_selected_playground = "res://Levels/playground.tscn"
 		1:
 			# Something else.
-			pass
+			_selected_playground = "res://Levels/playground2.tscn"
 
 
 func _on_leave_button_down() -> void:

@@ -19,7 +19,6 @@ const HOST_CLOSE_RPC_TIMEOUT := 5.0
 const MAX_TIME := 15.0 * 60.0
 # The highest level that players can be in the game.
 const MAX_LEVEL: int = 30
-const start_game_scene := "res://Levels/playground.tscn"
 const player_scene := "res://Player/player_character_body.tscn"
 # Path from the root, not the path in the file system.
 const main_menu_node_path := "MainMenu"
@@ -87,6 +86,8 @@ var players_down: int = 0
 var _has_online_connection: bool = false
 ## The location information of the lobby being hosted. Only has data if the local player is hosting.
 var _local_ping_location: String = ""
+## Path to the selected Playground-derived .tscn resource.
+var _current_playground: String = ""
 
 signal player_list_changed()
 # Called when the host leaves the lobby.
@@ -323,12 +324,14 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 
 # Entry point for setting up the shooting portion of the game. 
 # Switches the scene and loads the players.
-func start_game():
+func start_game(selected_playground: String = ""):
 	assert(multiplayer.is_server())
 	
 	set_is_game_in_progress(true)
 	
-	load_game()
+	if selected_playground != "":
+		_current_playground = selected_playground
+	load_game(_current_playground)
 	
 	# Analytics: Generate a random ID for this match. It is possible but unlikely that two different
 	# matches will have the same ID.
@@ -558,11 +561,11 @@ func quit_game(quitting_player: int):
 
 # Load the main game scene and hide the menu.
 @rpc("authority", "call_local", "reliable")
-func load_game():
+func load_game(selected_playground: String):
 	if not multiplayer.is_server():
 		return
 	
-	playground = load(start_game_scene).instantiate()
+	playground = load(selected_playground).instantiate()
 	get_tree().get_root().add_child(playground, true)
 	get_tree().get_root().get_node(main_menu_node_path).hide()
 
