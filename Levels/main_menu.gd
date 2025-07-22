@@ -30,6 +30,10 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobby_visibility_holder: Control 
 ## For selecting who can join this lobby.
 @export var lobby_visibility_option_button: OptionButton
+## Parent of UI elements displaying selected map.
+@export var map_holder: Control
+## For selecting which map to load.
+@export var map_option_button: OptionButton
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Contains buttons for selecting a character
@@ -188,6 +192,7 @@ func _on_host_button_button_down() -> void:
 	
 	# Show the lobby that you're in after clicking the "Host" button.
 	lobby_visibility_holder.visible = true
+	map_holder.visible = true
 	lobby_visibility_option_button.selected = 1
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
@@ -307,6 +312,7 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 	
 	refresh_lobby()
 	lobby_visibility_holder.visible = false
+	map_holder.visible = false
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	start_game_label.hide()
 
@@ -336,6 +342,16 @@ func _on_lobby_visibility_option_button_item_selected(index: int) -> void:
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_FRIENDS_ONLY)
 		2: # Closed
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PRIVATE)
+
+
+func _on_map_option_button_item_selected(index: int) -> void:
+	match(index):
+		0:
+			# Garden
+			pass
+		1:
+			# Something else.
+			pass
 
 
 func _on_leave_button_down() -> void:
