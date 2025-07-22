@@ -167,7 +167,7 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 			break
 	
 	# If we don't have the chosen powerup, then add it to the player.
-	if !powerup_found:
+	if !powerup_found and len(powerups) < MAX_POWERUPS:
 		add_powerup(powerup_data, is_signature)
 
 
@@ -358,6 +358,9 @@ func _input(event: InputEvent) -> void:
 			# Level up
 			if event.keycode == KEY_KP_1:
 				GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
+			# Add Powerup cheat screen
+			if event.keycode == KEY_KP_2:
+				GameState.playground.hud_canvas_layer.toggle_add_powerup_cheat_screen() 
 			# Die
 			if event.keycode == KEY_KP_3:
 				take_damage(health)

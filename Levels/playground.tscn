@@ -6186,7 +6186,7 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4422)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_add_powerup_cheat_screen", "_add_powerup_cheat_screen_button_container")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -6202,6 +6202,9 @@ _stat_level_container = NodePath("AbilitiesAndStatsContainer/Artifacts")
 _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 _dialogue_box = NodePath("DialogueBox")
+_add_powerup_cheat_screen = NodePath("AddPowerupCheatScreen")
+_add_powerup_cheat_screen_button_container = NodePath("AddPowerupCheatScreen/ScrollContainer/AddPowerupGridContainer")
+_add_powerup_cheat_button = "res://UI/add_powerup_cheat_button.tscn"
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -6307,6 +6310,34 @@ offset_bottom = -29.0
 grow_vertical = 0
 theme = ExtResource("34_po6dc")
 text = "Level: 1"
+
+[node name="AddPowerupCheatScreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/AddPowerupCheatScreen"]
+custom_minimum_size = Vector2(1216, 720)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -608.0
+offset_top = -393.0
+offset_right = 697.0
+offset_bottom = 327.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("55_bjgvv")
+
+[node name="AddPowerupGridContainer" type="GridContainer" parent="CanvasLayer/AddPowerupCheatScreen/ScrollContainer"]
+layout_mode = 2
+columns = 5
 
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
 process_mode = 2
