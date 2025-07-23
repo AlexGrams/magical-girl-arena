@@ -376,8 +376,8 @@ func leave_lobby() -> void:
 	request_lobby_list()
 
 
-## Updates the lobby view to show connected players, their characters, and the local player's
-## character information.
+## Updates the lobby view to show connected players, their characters, the local player's
+## character information, and what maps are available to play.
 @rpc("any_peer", "call_local")
 func refresh_lobby() -> void:
 	# Don't try to refresh the lobby if we're in a game right now.
@@ -399,6 +399,9 @@ func refresh_lobby() -> void:
 		i += 1
 	
 	update_character_description()
+	
+	# Update available maps
+	map_option_button.set_item_disabled(1, not GameState.map_complete_garden)
 
 
 # Updates the displayed sprite to represent the player's currently selected character.

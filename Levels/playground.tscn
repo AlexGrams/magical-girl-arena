@@ -532,6 +532,7 @@ corrupted_enemy_choices = {
 "sweet": ExtResource("2_v45ga")
 }
 boss_choices = Array[PackedScene]([ExtResource("4_8t8qx")])
+map_win_save_variable_name = "map_complete_garden"
 regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4")]
 corrupted_enemy_spawner = NodePath("CorruptedEnemySpawner")
 hud_canvas_layer = NodePath("CanvasLayer")

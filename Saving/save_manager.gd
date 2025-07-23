@@ -44,7 +44,8 @@ func save_game() -> void:
 		"rerolls": GameState.rerolls,
 		"perm_rerolls": GameState.perm_rerolls,
 		"powerup_rerolls": GameState.powerup_rerolls,
-		"artifact_rerolls": GameState.artifact_rerolls
+		"artifact_rerolls": GameState.artifact_rerolls,
+		"map_complete_garden": GameState.map_complete_garden
 	}
 	
 	var json_string := JSON.stringify(save_data)
@@ -106,3 +107,5 @@ func load_game() -> void:
 		GameState.powerup_rerolls = save_data["powerup_rerolls"]
 	if save_data.has("artifact_rerolls"):
 		GameState.artifact_rerolls = save_data["artifact_rerolls"]
+	if save_data.has("map_complete_garden"):
+		GameState.map_complete_garden = save_data["map_complete_garden"]

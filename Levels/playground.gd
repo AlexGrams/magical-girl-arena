@@ -21,6 +21,9 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 @export var corrupted_enemy_choices := {} 
 ## List of possible EnemyBoss scenes that can spawn at the end of the game.
 @export var boss_choices: Array[PackedScene] = []
+## The name of the boolean variable in GameState that is set to "true" when the players
+## beat this map.
+@export var map_win_save_variable_name: String = ""
 ## Spawners around the map that create enemies from spawn events. 
 @export var regular_enemy_spawners: Array[EnemySpawner] = []
 ## The EnemySpawner for spawning the corrupted magical girl.
@@ -199,8 +202,10 @@ func _spawn_boss() -> void:
 			and boss_to_spawn != null
 	):
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
+		# Functionality after you defeat the boss.
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
+			_update_map_complete_variable.rpc()
 			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.WIN)
 		)
 	AudioManager.play_boss_music()
@@ -244,6 +249,12 @@ func _move_camera(to_pos:Vector2) -> void:
 func _reset_camera() -> void:
 	if point_light != null:
 		point_light.reset_camera()
+
+
+## Set the variable indicating that this player has beaten this map to "true".
+@rpc("authority", "call_local", "reliable")
+func _update_map_complete_variable() -> void:
+	GameState.set(map_win_save_variable_name, true)
 
 
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
