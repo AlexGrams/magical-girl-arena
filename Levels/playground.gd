@@ -19,12 +19,12 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 @export var corrupted_enemy_spawn_time_fraction: float = 0.0
 ## Maps character name to the resource file of that character's corrupted Enemy object.
 @export var corrupted_enemy_choices := {} 
-## The EnemySpawner for spawning the corrupted magical girl.
-@export var corrupted_enemy_spawner: EnemySpawner = null
 ## List of possible EnemyBoss scenes that can spawn at the end of the game.
 @export var boss_choices: Array[PackedScene] = []
 ## Spawners around the map that create enemies from spawn events. 
 @export var regular_enemy_spawners: Array[EnemySpawner] = []
+## The EnemySpawner for spawning the corrupted magical girl.
+@export var corrupted_enemy_spawner: EnemySpawner = null
 ## The HUD for the local player
 @export var hud_canvas_layer: HUDCanvasLayer = null
 ## Light to create darkness when boss spawns
