@@ -250,6 +250,10 @@ func setup_lobby_screen() -> void:
 							lobbies.append(lobby_id)
 							Steam.requestLobbyData(lobby_id)
 				
+				# Store buttons for lobbies that are in progress since they need to be added at
+				# the end of the lobby list.
+				var in_progress_lobbies: Array[LobbyButton] = []
+				
 				for lobby_id: int in lobbies:
 					var lobby_name: String = Steam.getLobbyData(lobby_id, "Name")
 					var player_count: int = Steam.getNumLobbyMembers(lobby_id)
@@ -266,14 +270,25 @@ func setup_lobby_screen() -> void:
 					lobby_button.set_ping(Steam.getLobbyData(lobby_id, "Location"))
 					lobbies_list_container.add_child(lobby_button)
 					
-					if not str_to_var(Steam.getLobbyData(lobby_id, "IsGameInProgress")):
+					if str_to_var(Steam.getLobbyData(lobby_id, "IsGameInProgress")):
+						# This lobby is in a game, so disable the button.
+						lobby_button.set_lobby_button_disabled(true)
+						in_progress_lobbies.append(lobby_button)
+					elif player_count >= GameState.MAX_PLAYERS:
+						# This lobby is full
+						lobby_button.set_lobby_button_disabled(true)
+					else:
+						# This lobby is joinable
+						move_child(lobby_button, 0)
 						lobby_button.pressed.connect(
 							func():
 								_on_lobby_button_pressed(lobby_id)
 						)
-					else:
-						# This lobby is in a game, so disable the button.
-						lobby_button.set_lobby_button_disabled(true)
+				
+				# Place all in progress lobbies at the end of the lobby list.
+				for lobby_button: LobbyButton in in_progress_lobbies:
+					move_child(lobby_button, -1)
+				
 				lobbies_list_searching_overlay.hide()
 		)
 	
