@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://kvd7ehldfynl"]
+
+[ext_resource type="Texture2D" uid="uid://bwvj736th2f3v" path="res://Sprites/Powerups/Trail_Icon.png" id="1_qsn6e"]
+[ext_resource type="Script" path="res://Player/character_data.gd" id="2_sukoj"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_mgbqf"]
+
+[resource]
+script = ExtResource("2_sukoj")
+name = "MotherNature"
+display_name = "Mother Nature"
+description = "XX"
+base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres"
+base_powerup_name = "Nature's Path"
+base_powerup_texture = ExtResource("1_qsn6e")
+ult_name = "XX"
+ult_description = "XX"
+ult_texture = ExtResource("3_mgbqf")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+model_scale_multiplier = 0.3
+offset_height = -25.0
+ultimate_ability = ""
+icon_uid = "uid://bw7bs1ov0n768"

@@ -11,7 +11,13 @@ enum Character {
 	SWEET,
 	VALE,
 	DOVE,
-	NONE = -1
+	NONE = -1,
+	MARIGOLD,
+	AMBER,
+	AZURE_JAY,
+	MOTHER_NATURE,
+	LUNA,
+	SAND_WITCH
 }
 
 enum EnemySpriteType {

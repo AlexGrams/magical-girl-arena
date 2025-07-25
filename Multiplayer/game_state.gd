@@ -598,6 +598,7 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
 
+
 # Add gold to all players.
 @rpc("any_peer", "call_local")
 func collect_gold(sound_position: Vector2) -> void:

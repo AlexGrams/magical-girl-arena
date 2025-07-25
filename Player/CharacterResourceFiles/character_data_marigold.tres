@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://rqjl64ofxabu"]
+
+[ext_resource type="Texture2D" uid="uid://cbqk50mm5uf3f" path="res://Sprites/Powerups/Turret.png" id="1_t2pg1"]
+[ext_resource type="Script" path="res://Player/character_data.gd" id="2_cjv5c"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_qahck"]
+
+[resource]
+script = ExtResource("2_cjv5c")
+name = "Marigold"
+display_name = ""
+description = "XX"
+base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_turret.tres"
+base_powerup_name = "Turret"
+base_powerup_texture = ExtResource("1_t2pg1")
+ult_name = "XX"
+ult_description = "XX"
+ult_texture = ExtResource("3_qahck")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+model_scale_multiplier = 0.3
+offset_height = -25.0
+ultimate_ability = ""
+icon_uid = "uid://bw7bs1ov0n768"

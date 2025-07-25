@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://bxho6v8jpkrag"]
+
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="1_t1rk1"]
+[ext_resource type="Script" path="res://Player/character_data.gd" id="2_j507h"]
+
+[resource]
+script = ExtResource("2_j507h")
+name = "Luna"
+display_name = ""
+description = "XX"
+base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres"
+base_powerup_name = "XX"
+base_powerup_texture = ExtResource("1_t1rk1")
+ult_name = "XX"
+ult_description = "XX"
+ult_texture = ExtResource("1_t1rk1")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+model_scale_multiplier = 0.3
+offset_height = -25.0
+ultimate_ability = ""
+icon_uid = "uid://bw7bs1ov0n768"

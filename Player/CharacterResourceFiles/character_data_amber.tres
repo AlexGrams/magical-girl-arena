@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://b6thuiind1l2n"]
+
+[ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="1_f7vol"]
+[ext_resource type="Script" path="res://Player/character_data.gd" id="2_4jxhc"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_ak7g1"]
+
+[resource]
+script = ExtResource("2_4jxhc")
+name = "Amber"
+display_name = ""
+description = "XX"
+base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres"
+base_powerup_name = "Jeweled Boomerang"
+base_powerup_texture = ExtResource("1_f7vol")
+ult_name = "XX"
+ult_description = "XX"
+ult_texture = ExtResource("3_ak7g1")
+model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
+model_scale_multiplier = 0.3
+offset_height = -25.0
+ultimate_ability = ""
+icon_uid = "uid://bw7bs1ov0n768"
