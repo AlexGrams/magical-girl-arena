@@ -122,8 +122,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	var current_time = GameState.time
+	if current_time < 0.0:
+		current_time = 0.0
 	_timer_text.change_text((
-		"%02d:%02d" % [int(ceil(GameState.time)) / 60.0, int(ceil(GameState.time)) % 60]
+		"%02d:%02d" % [int(ceil(current_time)) / 60.0, int(ceil(current_time)) % 60]
 	))
 	
 	# Update pointers that indicate the direction of players not on the screen.

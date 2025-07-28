@@ -79,7 +79,7 @@ var exp_per_level_curve: Curve = null
 var level: int = 1
 var players_selecting_upgrades: int = -1
 var game_running := false
-# The time remaining in the game.
+## The time remaining in the game. Becoems a negative value once the timer reaches 0 and the boss spawns.
 var time: float = MAX_TIME
 # How many players are currently dead.
 var players_down: int = 0
@@ -115,7 +115,10 @@ func get_local_player() -> PlayerCharacterBody2D:
 
 # Returns the current percentage of MAX_TIME elapsed / 100.
 func get_game_progress_as_fraction() -> float:
-	return (MAX_TIME - time) / MAX_TIME
+	if time > 0.0:
+		return (MAX_TIME - time) / MAX_TIME
+	else:
+		return 1.0
 
 
 func get_gold() -> int:
@@ -149,7 +152,6 @@ func set_is_game_in_progress(value: bool) -> void:
 	Steam.setLobbyData(lobby_id, "IsGameInProgress", str(value))
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if OS.has_feature("release") and not USING_GODOT_STEAM:
 		push_error("Steam support is turned off! Ensure game_state.USING_GODOT_STEAM is true before making release build.")
@@ -272,12 +274,11 @@ func _ready() -> void:
 	SaveManager.load_game()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
 	
-	if game_running and time > 0.0:
-		time = max(time - delta, 0.0)
+	if game_running:
+		time -= delta
 	
 	# Refresh this lobby's location if it hasn't been set yet. Sort of a hack.
 	if lobby_id != 0 and multiplayer.get_unique_id() == 1 and _local_ping_location == "":
