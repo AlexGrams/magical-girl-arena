@@ -44,7 +44,3 @@ func deactivate_powerup():
 	is_on = false
 	_revolving_powerup.deactivate_powerup()
 	_raindrop_powerup.deactivate_powerup()
-
-
-func _shoot() -> void:
-	pass

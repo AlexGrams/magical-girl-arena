@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcryyeixf4685"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_summon.gd" id="1_844uk"]
+
+[node name="PowerupBossSummon" type="Node2D"]
+script = ExtResource("1_844uk")
+_enemy_scene = "res://Enemies/enemy_supergiant.tscn"
