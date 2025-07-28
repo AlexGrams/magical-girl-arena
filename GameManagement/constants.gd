@@ -7,11 +7,11 @@ const ENEMY_BULLET_COLLISION_LAYER: int = 6
 const ENEMY_BULLET_COLLISION_MASK: Array[int] = [1, 4]
 
 enum Character {
+	NONE = -1,
 	GOTH,
 	SWEET,
 	VALE,
 	DOVE,
-	NONE = -1,
 	MARIGOLD,
 	AMBER,
 	AZURE_JAY,
@@ -61,5 +61,11 @@ var CHARACTER_DATA: Dictionary = {
 	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),
 	Character.SWEET: load("res://Player/CharacterResourceFiles/character_data_sweet.tres"),
 	Character.VALE: load("res://Player/CharacterResourceFiles/character_data_vale.tres"),
-	Character.DOVE: load("res://Player/CharacterResourceFiles/character_data_dove.tres")
+	Character.DOVE: load("res://Player/CharacterResourceFiles/character_data_dove.tres"),
+	#Character.MARIGOLD: load("res://Player/CharacterResourceFiles/character_data_marigold.tres"),
+	#Character.AMBER: load("res://Player/CharacterResourceFiles/character_data_amber.tres"),
+	#Character.AZURE_JAY: load("res://Player/CharacterResourceFiles/character_data_jay.tres"),
+	#Character.MOTHER_NATURE: load("res://Player/CharacterResourceFiles/character_data_mothernature.tres"),
+	#Character.LUNA: load("res://Player/CharacterResourceFiles/character_data_luna.tres"),
+	#Character.SAND_WITCH: load("res://Player/CharacterResourceFiles/character_data_sandwitch.tres")
 }
