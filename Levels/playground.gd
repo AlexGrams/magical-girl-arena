@@ -143,6 +143,14 @@ func _process(_delta: float) -> void:
 			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.BOSS)
 
 
+## Add a new EnemySpawnEventData to all spawners on the map. 
+func spawn_enemies(spawn_event: EnemySpawnEventData) -> void:
+	var spawn_start_time: float = 0.0
+	for spawner: EnemySpawner in regular_enemy_spawners:
+		spawner.spawn_repeating(spawn_event, spawn_start_time)
+		spawn_start_time += spawn_event.spawn_interval_offset
+
+
 # Spawn the corrupted magical girl enemy.
 func _spawn_corrupted_enemy() -> void:
 	# Choose a character at random to spawn that wasn't picked by any of the players.
