@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dnrrauox6iyqg" path="res://Tree.png" id="3_no5jd"]
 [ext_resource type="PackedScene" uid="uid://dx43gaa0rr7q1" path="res://Enemies/enemy_ranged.tscn" id="4_2ptoj"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="4_4ivfi"]
-[ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_test.tscn" id="4_8t8qx"]
+[ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_corvus.tscn" id="4_8t8qx"]
 [ext_resource type="PackedScene" uid="uid://be2cldfe4eb6y" path="res://Enemies/enemy_brown-dwarf.tscn" id="4_bckfe"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="5_b8hlh"]
 [ext_resource type="PackedScene" uid="uid://cfy5r3rayhatg" path="res://Enemies/enemy.tscn" id="6_5l6y0"]
@@ -7042,7 +7042,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_boss_test.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn", "res://Pickups/signature_powerup_orb.tscn", "res://Pickups/exp_orb_big.tscn", "res://Powerups/bullet_pet.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn", "res://Pickups/signature_powerup_orb.tscn", "res://Pickups/exp_orb_big.tscn", "res://Powerups/bullet_pet.tscn", "res://Enemies/enemy_boss_corvus.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch7sjmtttp01p"]
 
-[ext_resource type="Script" path="res://Enemies/enemy_boss_test.gd" id="1_te4ea"]
-[ext_resource type="PackedScene" uid="uid://dju3v7744yb5v" path="res://UI/constellation_animated_sprite.tscn" id="2_hxoe2"]
+[ext_resource type="Script" path="res://Enemies/enemy_boss_corvus.gd" id="1_te4ea"]
+[ext_resource type="PackedScene" path="res://UI/constellation_animated_sprite.tscn" id="2_hxoe2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dw6tt"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -25,7 +25,7 @@ _data = {
 "take_damage": SubResource("Animation_xsep2")
 }
 
-[node name="EnemyBossTest" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemy"]]
+[node name="EnemyBossCorvus" type="CharacterBody2D" node_paths=PackedStringArray("collider_area", "sprite") groups=["enemy"]]
 collision_layer = 256
 collision_mask = 1408
 motion_mode = 1
@@ -35,6 +35,7 @@ _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
 powerups_to_add = Array[String](["uid://biltdrxoxjfk0", "uid://b3bbiu1hy1i50", "uid://bxxhhnehdl0df"])
 base_health = 50000
 speed = 200.0
+collider_area = NodePath("Area2D")
 sprite = NodePath("ConstellationAnimatedSprite")
 
 [node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_hxoe2")]
