@@ -10,13 +10,21 @@ const _squared_destination_theshold: float = 100.0
 @export var _movement_radius: float = 500.0
 ## Multiplier by which to increase boss health by depending on the number of players in the game.
 @export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
-## UIDs of Powerup scenes to add to the boss.
-@export var powerups_to_add: Array[String] = []
+## When the boss is at this fraction of its max health, switch to phase 2.
+@export var _phase_two_health_fraction: float = 0.15
+## Paths to Powerup scenes for the boss's phase one attacks.
+@export var _powerup_paths_phase_one: Array[String] = []
+## Paths to Powerup scenes for the boss's phase two attacks.
+@export var _powerup_paths_phase_two: Array[String] = []
 
+## Phase one powerups
+var _powerups_one: Array[Powerup]
+## Phase two powerups 
+var _powerups_two: Array[Powerup]
 ## Time in seconds until the next pattern switch.
 var _pattern_switch_timer: float = 0.0
 ## Which attack pattern the boss is currently doing.
-var _pattern_index: int = 0
+var _current_attack: Powerup = null
 ## The five points of the star that the boss moves between as its regular movement pattern.
 var _movement_points: Array[Vector2] = []
 var _current_movement_point: int = 0
@@ -33,10 +41,19 @@ func _ready() -> void:
 		set_process(false)
 		return
 	
-	for powerup_uid: String in powerups_to_add:
-		var powerup: PackedScene = load(powerup_uid)
+	# Instantiating phase one powerups
+	for powerup_path: String in _powerup_paths_phase_one:
+		var powerup: PackedScene = load(powerup_path)
 		if powerup != null:
 			_add_powerup(powerup)
+			_powerups_one.append(_powerups[-1])
+	# Instantiating phase two powerups
+	for powerup_path: String in _powerup_paths_phase_two:
+		var powerup: PackedScene = load(powerup_path)
+		if powerup != null:
+			_add_powerup(powerup)
+			_powerups_two.append(_powerups[-1])
+	
 	for powerup: Powerup in _powerups:
 		powerup.deactivate_powerup()
 
@@ -46,15 +63,24 @@ func _process(delta: float) -> void:
 	_pattern_switch_timer -= delta
 	if _pattern_switch_timer <= 0:
 		# Choose a random new attack pattern
-		_powerups[_pattern_index].deactivate_powerup()
+		if _current_attack != null:
+			_current_attack.deactivate_powerup()
 		
-		var new_pattern_choices: Array[int] = []
-		for i in range(len(_powerups)):
-			if i != _pattern_index:
-				new_pattern_choices.append(i)
-		_pattern_index = new_pattern_choices.pick_random()
-		_powerups[_pattern_index].activate_powerup()
+		var new_attack_choices: Array[Powerup] = []
+		if float(health) / max_health > _phase_two_health_fraction:
+			for powerup: Powerup in _powerups_one:
+				if powerup != _current_attack:
+					new_attack_choices.append(powerup)
+		else:
+			for powerup: Powerup in _powerups_two:
+				if powerup != _current_attack:
+					new_attack_choices.append(powerup)
 		
+		if len(new_attack_choices) > 0:
+			_current_attack = new_attack_choices.pick_random()
+			_current_attack.activate_powerup()
+		else:
+			_current_attack = null
 		_pattern_switch_timer = _pattern_interval
 
 
