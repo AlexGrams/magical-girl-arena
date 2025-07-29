@@ -40,9 +40,9 @@ func activate_powerup():
 	GameState.playground.spawn_enemies(_new_spawn_event)
 
 
+## Only set _is_owned_by_player so that we don't spawn enemies immediately when the boss spawns in.
 func activate_powerup_for_enemy():
 	_is_owned_by_player = false
-	activate_powerup()
 
 
 func deactivate_powerup():
