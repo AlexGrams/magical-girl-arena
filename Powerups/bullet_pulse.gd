@@ -74,7 +74,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 ## Damaging area for Enemies. Apply knockback to damaged Enemies.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var other = area.get_parent()
-	if other != null and _has_knockback:
+	if other != null and _has_knockback and other is Enemy:
 		other.set_knockback((other.global_position - global_position).normalized() * _knockback_speed, _knockback_duration)
 
 
