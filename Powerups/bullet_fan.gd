@@ -38,6 +38,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		
 	bullet_width = data[0]
 	_knockback_speed = data[1]
+	_is_owned_by_player = is_owned_by_player
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
 func _update_bullet_opacity() -> void:
