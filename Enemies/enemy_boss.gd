@@ -10,6 +10,10 @@ extends Enemy
 func _ready() -> void:
 	super()
 	
+	# Scale health for number of players. Overrides how base Enemy scales health.
+	max_health = int(base_health * _health_scale[GameState.connected_players - 1])
+	health = max_health
+	
 	_hud_canvas_layer = get_tree().root.get_node("Playground/CanvasLayer")
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
 	
