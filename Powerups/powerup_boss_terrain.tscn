@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8xu80bm2cy2b"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_terrain.gd" id="1_7xpt7"]
+
+[node name="PowerupBossTerrain" type="Node2D"]
+script = ExtResource("1_7xpt7")
+_bullet_scene = "res://Powerups/bullet_boss_terrain.tscn"
+powerup_name = "Flame Line"
