@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc56c13oalmc8"]
+
+[ext_resource type="Script" path="res://Enemies/enemy_boss_andromeda.gd" id="1_fsr1i"]
+[ext_resource type="PackedScene" path="res://UI/constellation_animated_sprite.tscn" id="2_5t64f"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dw6tt"]
+viewport_path = NodePath("GDCubismUserModel")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifklo"]
+size = Vector2(206, 241)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beu2y"]
+size = Vector2(555, 240)
+
+[sub_resource type="Animation" id="Animation_u5q41"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_xsep2"]
+resource_name = "take_damage"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lewke"]
+_data = {
+"RESET": SubResource("Animation_u5q41"),
+"take_damage": SubResource("Animation_xsep2")
+}
+
+[node name="EnemyBossAndromeda" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 256
+collision_mask = 1408
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_fsr1i")
+_health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
+base_health = 50000
+speed = 200.0
+
+[node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_5t64f")]
+texture = SubResource("ViewportTexture_dw6tt")
+
+[node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ifklo")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_beu2y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lewke")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

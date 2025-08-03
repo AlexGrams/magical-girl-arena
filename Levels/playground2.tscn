@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://745psetp0fi1" path="res://Enemies/enemy_supergiant_special.tscn" id="13_ijrp7"]
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="14_4abyf"]
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="15_pci6o"]
-[ext_resource type="PackedScene" uid="uid://ch7sjmtttp01p" path="res://Enemies/enemy_boss_corvus.tscn" id="16_vew2u"]
+[ext_resource type="PackedScene" uid="uid://bc56c13oalmc8" path="res://Enemies/enemy_boss_andromeda.tscn" id="16_w5lva"]
 [ext_resource type="PackedScene" uid="uid://djb77wkpsn7pr" path="res://Levels/LevelPlaceables/grass_group.tscn" id="17_jrtad"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="18_swg8e"]
 [ext_resource type="Texture2D" uid="uid://5jne2i7m67kq" path="res://Sprites/Map/Patch_Light_Grass.png" id="19_ia8pd"]
@@ -523,7 +523,7 @@ modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
-[node name="Playground" type="Node2D" node_paths=PackedStringArray("corrupted_enemy_spawner", "regular_enemy_spawners", "hud_canvas_layer", "point_light")]
+[node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "point_light")]
 script = ExtResource("1_imc2f")
 spawn_events = Array[ExtResource("2_rbx1x")]([SubResource("Resource_02unt"), SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n"), SubResource("Resource_vldl0"), SubResource("Resource_6aw3t"), SubResource("Resource_mfuhu"), SubResource("Resource_78ycx"), SubResource("Resource_m52uj"), SubResource("Resource_adt63"), SubResource("Resource_0x4hh"), SubResource("Resource_x61u4"), SubResource("Resource_rmv4j"), SubResource("Resource_hl8mk"), SubResource("Resource_6knml"), SubResource("Resource_8m1bh"), SubResource("Resource_l370t"), SubResource("Resource_urtt0"), SubResource("Resource_kd2aa"), SubResource("Resource_e3av4"), SubResource("Resource_kccnh"), SubResource("Resource_ewkyv"), SubResource("Resource_6jgps"), SubResource("Resource_gru2f"), SubResource("Resource_e6ft2"), SubResource("Resource_xg45h"), SubResource("Resource_g68ak"), SubResource("Resource_omxcd"), SubResource("Resource_r1kj5")])
 corrupted_enemy_spawn_time_fraction = 0.4
@@ -531,9 +531,9 @@ corrupted_enemy_choices = {
 "goth": ExtResource("14_4abyf"),
 "sweet": ExtResource("15_pci6o")
 }
-corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
-boss_choices = Array[PackedScene]([ExtResource("16_vew2u")])
+boss_choices = Array[PackedScene]([ExtResource("16_w5lva")])
 regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4")]
+corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 hud_canvas_layer = NodePath("CanvasLayer")
 point_light = NodePath("PointLight2D")
 _damage_indicator_scene = "res://UI/damage_indicator.tscn"
@@ -7041,7 +7041,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_boss_test.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn", "res://Pickups/signature_powerup_orb.tscn", "res://Pickups/exp_orb_big.tscn", "res://Powerups/bullet_pet.tscn")
+_spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn", "res://Enemies/enemy_ranged.tscn", "res://Enemies/enemy.tscn", "res://Pickups/exp_orb.tscn", "res://Pickups/gold.tscn", "res://Enemies/enemy_corrupted_goth.tscn", "res://Enemies/enemy_corrupted_sweet.tscn", "res://Enemies/enemy_brown-dwarf.tscn", "res://Enemies/enemy_brown-dwarf_special.tscn", "res://Enemies/enemy_red-giant.tscn", "res://Enemies/enemy_red-giant_special.tscn", "res://Enemies/enemy_special.tscn", "res://Enemies/enemy_supergiant.tscn", "res://Enemies/enemy_supergiant_special.tscn", "res://Enemies/enemy_white-dwarf.tscn", "res://Enemies/enemy_white-dwarf_special.tscn", "res://Pickups/health_orb.tscn", "res://Levels/LevelPlaceables/loot_box.tscn", "res://Pickups/signature_powerup_orb.tscn", "res://Pickups/exp_orb_big.tscn", "res://Powerups/bullet_pet.tscn", "res://Enemies/enemy_boss_andromeda.tscn")
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
