@@ -8,8 +8,6 @@ const _squared_destination_theshold: float = 100.0
 @export var _pattern_interval: float = 5.0
 ## The distance of the points that the boss moves between from its spawn position
 @export var _movement_radius: float = 500.0
-## Multiplier by which to increase boss health by depending on the number of players in the game.
-@export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
 ## When the boss is at this fraction of its max health, switch to phase 2.
 @export var _phase_two_health_fraction: float = 0.15
 ## Paths to Powerup scenes for the boss's phase one attacks.

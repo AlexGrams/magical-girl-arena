@@ -3,6 +3,10 @@ extends Enemy
 ## A special enemy that ends the game when it is defeated.
 
 
+## Multiplier by which to increase boss health by depending on the number of players in the game.
+@export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
+
+
 func _ready() -> void:
 	super()
 	
