@@ -18,6 +18,12 @@ func _process(delta: float) -> void:
 	
 	global_position = owning_player.global_position
 	rotate(speed * delta)
+	
+	# Orbit powerup owned by enemy despawns after some time.
+	if not _is_owned_by_player and is_multiplayer_authority():
+		lifetime -= delta
+		if lifetime <= 0.0:
+			queue_free()
 
 
 # Set up other properties for this bullet
@@ -29,6 +35,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	):
 		return
 	
+	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		owning_player = GameState.player_characters.get(data[0])
 	

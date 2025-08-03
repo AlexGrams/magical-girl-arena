@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctrx62lsh3n6u"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_flameline.gd" id="1_mh0yy"]
+
+[node name="PowerupBossFlameLine" type="Node2D"]
+script = ExtResource("1_mh0yy")
+_bullet_scene = "res://Powerups/bullet_boss_flameline.tscn"
+powerup_name = "Flame Line"

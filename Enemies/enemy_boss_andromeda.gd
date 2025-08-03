@@ -35,13 +35,13 @@ func _ready() -> void:
 	for powerup_path: String in _powerup_paths_phase_one:
 		var powerup: PackedScene = load(powerup_path)
 		if powerup != null:
-			_add_powerup(powerup)
+			_add_powerup(powerup, false)
 			_powerups_one.append(_powerups[-1])
 	# Instantiating phase two powerups
 	for powerup_path: String in _powerup_paths_phase_two:
 		var powerup: PackedScene = load(powerup_path)
 		if powerup != null:
-			_add_powerup(powerup)
+			_add_powerup(powerup, false)
 			_powerups_two.append(_powerups[-1])
 	
 	for powerup: Powerup in _powerups:

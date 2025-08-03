@@ -151,14 +151,15 @@ func teleport(pos: Vector2) -> void:
 
 # Spawn in and add a Powerup to this Enemy. The Powerup may need extra functionality to 
 # account for it not being on the Player. Only call on the server.
-func _add_powerup(powerup_scene: PackedScene) -> void:
+func _add_powerup(powerup_scene: PackedScene, activate_on_spawn: bool = true) -> void:
 	if not multiplayer.is_server():
 		return
 	
 	var powerup: Powerup = powerup_scene.instantiate()
 	powerup.set_authority(get_multiplayer_authority())
 	add_child(powerup)
-	powerup.activate_powerup_for_enemy()
+	if activate_on_spawn:
+		powerup.activate_powerup_for_enemy()
 	_powerups.append(powerup)
 
 
