@@ -18,7 +18,6 @@ func _ready() -> void:
 
 
 func activate_powerup():
-	print("Flame line active")
 	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 		1,
 		[

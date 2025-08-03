@@ -6147,7 +6147,7 @@ speed_scale = 0.5
 [node name="PlayerSpawnPoints" type="Node2D" parent="."]
 
 [node name="PlayerSpawnPoint1" type="Node2D" parent="PlayerSpawnPoints"]
-position = Vector2(915, 3182)
+position = Vector2(915, 2058)
 
 [node name="ColorRect" type="ColorRect" parent="PlayerSpawnPoints/PlayerSpawnPoint1"]
 visible = false
@@ -7045,7 +7045,7 @@ _spawnable_scenes = PackedStringArray("res://Player/player_character_body.tscn",
 spawn_path = NodePath("..")
 
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/bullet_boomerang.tscn", "res://Powerups/bullet_pingpong.tscn", "res://Powerups/bullet_tether.tscn", "res://Powerups/bullet_turret.tscn", "res://Powerups/bullet_turret_bullet.tscn", "res://Powerups/bullet_bounce.tscn", "res://Powerups/bullet_puddle.tscn", "res://Powerups/bullet_fan.tscn", "res://Powerups/bullet_pulse.tscn", "res://Powerups/bullet_lightning.tscn", "res://Powerups/bullet_paintbrush.tscn", "res://Sprites/Powerups/fan_sprite.tscn", "res://Powerups/bullet_boss_flameline.tscn")
+_spawnable_scenes = PackedStringArray("res://Powerups/orbit_bullet.tscn", "res://Powerups/revolving_bullet.tscn", "res://Powerups/orbit_bullet.tscn", "res://EnemyProjectiles/bullet_enemy_ranged.tscn", "res://Powerups/powerup_trail.tscn", "res://Powerups/bullet_boss_circle.tscn", "res://Powerups/bullet_boss_raindrop.tscn", "res://Powerups/bullet_grenade.tscn", "res://Powerups/bullet_shotgun.tscn", "res://Powerups/bullet_mines.tscn", "res://Powerups/bullet_raindrop.tscn", "res://Abilities/bullet_ult_vale.tscn", "res://Powerups/bullet_laser.tscn", "res://Powerups/bullet_boomerang.tscn", "res://Powerups/bullet_pingpong.tscn", "res://Powerups/bullet_tether.tscn", "res://Powerups/bullet_turret.tscn", "res://Powerups/bullet_turret_bullet.tscn", "res://Powerups/bullet_bounce.tscn", "res://Powerups/bullet_puddle.tscn", "res://Powerups/bullet_fan.tscn", "res://Powerups/bullet_pulse.tscn", "res://Powerups/bullet_lightning.tscn", "res://Powerups/bullet_paintbrush.tscn", "res://Sprites/Powerups/fan_sprite.tscn", "res://Powerups/bullet_boss_flameline.tscn", "res://Powerups/bullet_boss_chain_lines.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("47_psi5u")
 
