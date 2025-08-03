@@ -52,6 +52,8 @@ var _continuous_damage_analytic_data: Dictionary = {}
 var _knockback: Vector2 = Vector2.ZERO
 ## Current remaining knockback duration. 
 var _knockback_duration: float = 0.0
+## True if this Enemy doesn't take damage when attacked.
+var _is_invulnerable: bool = false
 ## Status to make this Enemy an ally when it dies.
 var _status_goth_ult: bool = false
 ## Properties to apply to this Enemy if it is converted to an ally by Goth's ult status.
@@ -72,6 +74,10 @@ signal allied(enemy: Enemy)
 func set_knockback(vector: Vector2, duration: float) -> void:
 	_knockback = vector
 	_knockback_duration = duration
+
+
+func set_is_invulnerable(value: bool) -> void:
+	_is_invulnerable = value
 
 
 func _ready() -> void:
@@ -269,6 +275,10 @@ func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TY
 @rpc("any_peer", "call_local")
 func _take_damage(damage: float) -> void:
 	if not is_multiplayer_authority() or health <= 0:
+		return
+	
+	# Don't take damage if invulnerable.
+	if _is_invulnerable:
 		return
 	
 	health -= snapped(damage, 1)
