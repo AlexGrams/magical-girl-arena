@@ -16,8 +16,11 @@ var _powerups_one: Array[Powerup]
 var _powerups_two: Array[Powerup]
 ## Time in seconds until the next pattern switch.
 var _pattern_switch_timer: float = 0.0
+## Phase one powerup attack index.
+var _powerup_index_one: int = 0
 ## Which attack pattern the boss is currently doing.
 var _current_attack: Powerup = null
+var _phase_two_active: bool = false
 
 
 func _ready() -> void:
@@ -52,25 +55,51 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_pattern_switch_timer -= delta
 	if _pattern_switch_timer <= 0:
-		# Choose a random new attack pattern
-		if _current_attack != null:
-			_current_attack.deactivate_powerup()
-		
-		var new_attack_choices: Array[Powerup] = []
+		# Do the next attack in the pattern
 		if float(health) / max_health > _phase_two_health_fraction:
-			for powerup: Powerup in _powerups_one:
-				if powerup != _current_attack:
-					new_attack_choices.append(powerup)
+			# Phase one attack pattern
+			match _powerup_index_one:
+				0:
+					# Regular attacks while immune
+					set_is_invulnerable(true)
+					_powerups_one[0].activate_powerup()
+				1:
+					# Create terrain
+					set_is_invulnerable(false)
+					_powerups_one[0].deactivate_powerup()
+					_powerups_one[1].activate_powerup()
+				2:
+					# Scream, destroy terrain
+					_powerups_one[2].activate_powerup()
+				3:
+					# Chains + regular attacks
+					_powerups_one[3].activate_powerup()
+					_powerups_one[0].activate_powerup()
 		else:
-			for powerup: Powerup in _powerups_two:
-				if powerup != _current_attack:
-					new_attack_choices.append(powerup)
+			# Phase two attack pattern. Regular attacks are always active.
+			if not _phase_two_active:
+				_phase_two_active = true
+				for powerup: Powerup in _powerups_one:
+					powerup.deactivate_powerup()
+				_powerups_one[0].activate_powerup()
+				_powerup_index_one = 0
+			
+			match _powerup_index_one:
+				0:
+					# Regular attacks while immune
+					set_is_invulnerable(true)
+				1:
+					# Create terrain
+					set_is_invulnerable(false)
+					_powerups_one[1].activate_powerup()
+				2:
+					# Scream, destroy terrain
+					_powerups_one[2].activate_powerup()
+				3:
+					# Chains + regular attacks
+					_powerups_one[3].activate_powerup()
 		
-		if len(new_attack_choices) > 0:
-			_current_attack = new_attack_choices.pick_random()
-			_current_attack.activate_powerup()
-		else:
-			_current_attack = null
+		_powerup_index_one = (_powerup_index_one + 1) % 4
 		_pattern_switch_timer = _pattern_interval
 
 

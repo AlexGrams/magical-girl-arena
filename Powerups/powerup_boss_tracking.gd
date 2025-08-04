@@ -54,6 +54,7 @@ func _process(delta: float) -> void:
 
 func activate_powerup():
 	is_on = true
+	_is_owned_by_player = false
 	_shoot_timer = 0.0
 
 
