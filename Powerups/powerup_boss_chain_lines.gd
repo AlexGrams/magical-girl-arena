@@ -11,12 +11,8 @@ extends Powerup
 @export var _chain_separation: float = 500.0
 @export var _bullet_scene := ""
 
-## True if the lines are horizontal on the map, false if they are vertical.
-var _is_horizontal = true
-
-
-func set_is_horizontal(value: bool) -> void:
-	_is_horizontal = value
+## How many times this powerup has been activated. Does different things depending on number.
+var _activations: int = 0
 
 
 func _ready() -> void:
@@ -24,11 +20,26 @@ func _ready() -> void:
 
 
 func activate_powerup():
+	_activations += 1
+	if _activations == 1:
+		shoot(true)
+	elif _activations == 2:
+		shoot(false)
+	elif _activations >= 3:
+		shoot(true)
+		shoot(false)
+
+
+func deactivate_powerup():
+	pass
+
+
+func shoot(is_horizontal: bool) -> void:
 	# Chains are spaced evenly apart
-	var chain_rotation: Vector2 = Vector2.RIGHT if _is_horizontal else Vector2.UP
+	var chain_rotation: Vector2 = Vector2.RIGHT if is_horizontal else Vector2.UP
 	var chain_position: Vector2 = get_parent().global_position
 	var half_total_distance_covered = _chain_separation * (_count - 1) / 2
-	if _is_horizontal:
+	if is_horizontal:
 		chain_position.y -= half_total_distance_covered
 	else:
 		chain_position.x -= half_total_distance_covered
@@ -48,11 +59,7 @@ func activate_powerup():
 			]
 		)
 		
-		if _is_horizontal:
+		if is_horizontal:
 			chain_position.y += _chain_separation
 		else:
 			chain_position.x += _chain_separation
-
-
-func deactivate_powerup():
-	pass
