@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://yj2fdnxjt1d2"]
+[gd_scene load_steps=99 format=3 uid="uid://yj2fdnxjt1d2"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_imc2f"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
@@ -49,16 +49,6 @@
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="48_5852u"]
 [ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="49_2n1oq"]
-
-[sub_resource type="Resource" id="Resource_02unt"]
-script = ExtResource("2_rbx1x")
-start_time = "15:00"
-end_time = "14:00"
-enemy = ExtResource("3_0p75o")
-spawn_interval = 8.0
-spawn_interval_offset = 0.0
-min_spawn_count = 2
-max_spawn_count = 2
 
 [sub_resource type="Resource" id="Resource_hea4i"]
 script = ExtResource("2_rbx1x")
@@ -525,7 +515,7 @@ bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "point_light")]
 script = ExtResource("1_imc2f")
-spawn_events = Array[ExtResource("2_rbx1x")]([SubResource("Resource_02unt"), SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n"), SubResource("Resource_vldl0"), SubResource("Resource_6aw3t"), SubResource("Resource_mfuhu"), SubResource("Resource_78ycx"), SubResource("Resource_m52uj"), SubResource("Resource_adt63"), SubResource("Resource_0x4hh"), SubResource("Resource_x61u4"), SubResource("Resource_rmv4j"), SubResource("Resource_hl8mk"), SubResource("Resource_6knml"), SubResource("Resource_8m1bh"), SubResource("Resource_l370t"), SubResource("Resource_urtt0"), SubResource("Resource_kd2aa"), SubResource("Resource_e3av4"), SubResource("Resource_kccnh"), SubResource("Resource_ewkyv"), SubResource("Resource_6jgps"), SubResource("Resource_gru2f"), SubResource("Resource_e6ft2"), SubResource("Resource_xg45h"), SubResource("Resource_g68ak"), SubResource("Resource_omxcd"), SubResource("Resource_r1kj5")])
+spawn_events = Array[ExtResource("2_rbx1x")]([SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n"), SubResource("Resource_vldl0"), SubResource("Resource_6aw3t"), SubResource("Resource_mfuhu"), SubResource("Resource_78ycx"), SubResource("Resource_m52uj"), SubResource("Resource_adt63"), SubResource("Resource_0x4hh"), SubResource("Resource_x61u4"), SubResource("Resource_rmv4j"), SubResource("Resource_hl8mk"), SubResource("Resource_6knml"), SubResource("Resource_8m1bh"), SubResource("Resource_l370t"), SubResource("Resource_urtt0"), SubResource("Resource_kd2aa"), SubResource("Resource_e3av4"), SubResource("Resource_kccnh"), SubResource("Resource_ewkyv"), SubResource("Resource_6jgps"), SubResource("Resource_gru2f"), SubResource("Resource_e6ft2"), SubResource("Resource_xg45h"), SubResource("Resource_g68ak"), SubResource("Resource_omxcd"), SubResource("Resource_r1kj5")])
 corrupted_enemy_spawn_time_fraction = 0.4
 corrupted_enemy_choices = {
 "goth": ExtResource("14_4abyf"),

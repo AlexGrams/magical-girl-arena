@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc5xlffuj3slm"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_scream.gd" id="1_npgic"]
+
+[node name="PowerupBossScream" type="Node2D"]
+script = ExtResource("1_npgic")
+_bullet_scene = "res://Powerups/bullet_boss_scream.tscn"
+powerup_name = "Scream"

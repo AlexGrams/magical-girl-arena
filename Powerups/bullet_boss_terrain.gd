@@ -1,3 +1,4 @@
+class_name BulletBossTerrain
 extends Bullet
 
 
@@ -13,7 +14,7 @@ var _static_body_collision_layer: int = 0
 
 
 func _ready() -> void:
-	pass 
+	add_to_group("bullet_boss_terrain")
 
 
 func _process(delta: float) -> void:
@@ -47,3 +48,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		_tell_timer = _tell_time
 		_static_body_collision_layer = _static_body.collision_layer
 		_static_body.collision_layer = 0
+
+
+## Remove this object. Only call on server.
+func destroy() -> void:
+	queue_free()

@@ -99,6 +99,10 @@ signal died()
 signal revived()
 
 
+func get_player_collision_area() -> Area2D:
+	return _player_collision_area
+
+
 ## Returns a Status object if it exists on this player, or null if it does not.
 func get_status(status_name: String) -> Status:
 	for status in _statuses:
