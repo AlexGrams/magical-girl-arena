@@ -41,6 +41,8 @@ var _taunt_timer: float = 0.0
 var _bullet_collision_layer: int = 0
 ## Default collision mask for taunt effects.
 var _taunt_collision_mask: int = 0
+## Changes how fast the Pet attacks when it is boosted.
+var _attack_speed_boost: float = 1.0
 
 
 ## Initialize this pet.
@@ -94,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		# To attack, flicker the Bullet hitbox collision area for one physics frame.
 		if _attack_time == _attack_timer:
 			_bullet_hitbox.collision_layer = _bullet_collision_layer
-		_attack_timer -= delta
+		_attack_timer -= delta * _attack_speed_boost
 		if _attack_timer <= 0.0:
 			_bullet_hitbox.collision_layer = 0
 			_attack_timer = _attack_time
@@ -165,6 +167,14 @@ func level_up(new_level: int, new_damage: float):
 	if _current_level == 3:
 		_taunt_cooldown = 8
 		_attack_time = 0.75
+
+
+func boost() -> void:
+	_attack_speed_boost *= 2.0
+
+
+func unboost() -> void:
+	_attack_speed_boost /= 2.0
 
 
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
