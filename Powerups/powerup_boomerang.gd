@@ -1,3 +1,4 @@
+class_name PowerupBoomerang
 extends Powerup
 
 
@@ -9,10 +10,14 @@ extends Powerup
 @export var _upgraded_fire_interval: float = 1.0
 
 var sprite = preload("res://Peach.png")
-# The single bullet instance used by this Powerup. The boomerang is never destroyed.
-var bullet: Object
+
+var _boomerang_controller: BulletBoomerangController
 
 signal picked_up_powerup(sprite)
+
+
+func set_boomerang_controller(value: BulletBoomerangController) -> void:
+	_boomerang_controller = value
 
 
 func _ready():
@@ -57,3 +62,11 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+
+
+func boost() -> void:
+	_boomerang_controller.boost()
+
+
+func unboost() -> void:
+	_boomerang_controller.unboost()

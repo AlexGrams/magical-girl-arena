@@ -80,6 +80,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		var boomerang_powerup := boomerang_owner.get_node_or_null("PowerupBoomerang")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
+			boomerang_powerup.set_boomerang_controller(self)
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
 			)
@@ -133,3 +134,13 @@ func level_up(new_level: int, new_damage: float):
 	if is_multiplayer_authority() and new_level == 3:
 		_spawn_boomerang()
 		_spawn_boomerang()
+
+
+func boost() -> void:
+	for boomerang: BulletBoomerang in _boomerangs:
+		boomerang.boost.rpc()
+
+
+func unboost() -> void:
+	for boomerang: BulletBoomerang in _boomerangs:
+		boomerang.unboost.rpc()

@@ -117,3 +117,13 @@ func level_up(new_level: int, new_damage: float):
 	if new_level == 3:
 		# Increase size
 		scale = scale * 2
+
+
+@rpc("any_peer", "call_local")
+func boost() -> void:
+	speed *= 2.0
+
+
+@rpc("any_peer", "call_local")
+func unboost() -> void:
+	speed /= 2.0
