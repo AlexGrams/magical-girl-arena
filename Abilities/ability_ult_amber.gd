@@ -18,6 +18,10 @@ func _process(delta: float) -> void:
 
 func activate() -> void:
 	super()
+	
+	var amber_ult_status: StatusAmberUlt = StatusAmberUlt.new()
+	amber_ult_status.duration = _duration
+	_owner.add_status(amber_ult_status)
 
 
 ## Change the damage of this Ability based on its owner's level.

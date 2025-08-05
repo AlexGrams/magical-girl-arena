@@ -66,6 +66,16 @@ func deactivate_powerup():
 	push_error("Powerup.deactivate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
 
 
+## Temporarily increase the functionality of this Powerup.
+func boost() -> void:
+	pass
+
+
+## Return this Powerup to normal functionality after it has been boosted.
+func unboost() -> void:
+	pass
+
+
 # Set the multiplayer authority for this powerup
 func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)
