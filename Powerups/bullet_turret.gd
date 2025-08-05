@@ -15,13 +15,13 @@ var _fire_interval: float = 0.0
 var _fire_timer: float = 0.0
 ## How much damage each boomerang does
 var _damage: float = 0.0
+## Time remaining for this turret's boost.
+var _boost_timer: float = 0.0
 ## Properties for analytics
 var _owner_id: int = -1
 var _powerup_index: int = -1
 ## Whether or not the turret is going through the removal animation
 var _is_being_removed: bool = false
-## Has level 3 upgrade or not
-var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
@@ -52,6 +52,11 @@ func _process(delta: float) -> void:
 		tween.tween_property(_turret_sprite, "scale", Vector2.ZERO, 0.5)
 		# Remove after animation finishes
 		tween.tween_callback(queue_free)
+	elif _boost_timer > 0.0:
+		# Boost 
+		_boost_timer -= delta
+		if _boost_timer <= 0.0:
+			_shrink()
 
 
 # Set up other properties for this bullet
@@ -72,10 +77,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	# Level 3 upgrade
 	if data[2]:
-		_has_level_3_upgrade = true
-		scale = scale * 2
-		_fire_interval = _fire_interval * 0.8
-		get_tree().create_timer(2).timeout.connect(_shrink)
+		boost(2.0)
 
 
 func set_damage(damage:float):
@@ -105,7 +107,7 @@ func _shoot() -> void:
 				_is_owned_by_player,
 				_owner_id,
 				_powerup_index,
-				[_has_level_3_upgrade]
+				[_boost_timer > 0.0]
 			]
 		)
 
@@ -126,11 +128,21 @@ func _find_nearest_target_position() -> Vector2:
 		push_warning("Not implemented for enemies")
 	return Vector2.UP
 
+
+## Powers up this turret for a limited time.
+func boost(duration: float) -> void:
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(self, "scale", scale * 2.0, 0.25)
+	_fire_interval = _fire_interval * 0.8
+	if duration > _boost_timer:
+		_boost_timer = duration
+
+
 ## Shrinks in size if it was the level 3 upgrade
 func _shrink() -> void:
 	# Return bullet effects to normal
 	_fire_interval = _fire_interval * 2
-	_has_level_3_upgrade = false
 	
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
