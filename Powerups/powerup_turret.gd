@@ -1,3 +1,4 @@
+class_name PowerupTurret
 extends Powerup
 ## Creates a turret that shoots nearby targets.
 
@@ -18,7 +19,14 @@ extends Powerup
 @onready var _current_turret_lifetime: float = _turret_lifetime
 
 var _bullet_spawner: BulletSpawner = null
-var _has_level_3_upgrade: bool = false
+## How long the turret is boosted for if this powerup is level 3 or higher.
+var _level_3_boost_duration: float = 0.0
+## Time remaining that this powerup is boosted by Marigold ultimate.
+var _ultimate_boost_duration: float = 0.0
+
+
+func set_ultimate_boost_duration(value: float) -> void:
+	_ultimate_boost_duration = value
 
 
 func _ready() -> void:
@@ -28,6 +36,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not is_on:
 		return
+	
+	if _ultimate_boost_duration > 0.0:
+		_ultimate_boost_duration -= delta
 	
 	_shoot_timer += delta
 	if _shoot_timer > shoot_interval:
@@ -46,7 +57,7 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[_turret_fire_interval, _current_turret_lifetime, _has_level_3_upgrade]
+					[_turret_fire_interval, _current_turret_lifetime, max(_level_3_boost_duration, _ultimate_boost_duration)]
 				]
 			)
 		
@@ -71,6 +82,6 @@ func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
 	if current_level >= 3:
-		_has_level_3_upgrade = true
+		_level_3_boost_duration = 2.0
 	if current_level >= 5 and is_signature:
 		_current_turret_lifetime = 2.0 * _turret_lifetime

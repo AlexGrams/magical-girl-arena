@@ -25,6 +25,7 @@ var _is_being_removed: bool = false
 
 
 func _ready() -> void:
+	add_to_group("bullet_turret")
 	## Animate spawning in
 	var full_scale = _turret_sprite.scale
 	_turret_sprite.scale = Vector2.ZERO
@@ -65,7 +66,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		data.size() != 3
 		or typeof(data[0]) != TYPE_FLOAT		# Fire interval 
 		or typeof(data[1]) != TYPE_FLOAT 		# Lifetime
-		or typeof(data[2]) != TYPE_BOOL 		# Level 3 upgrade or not
+		or typeof(data[2]) != TYPE_FLOAT 		# Starting boost duration
 	):
 		push_error("Malformed data array")
 		return
@@ -75,9 +76,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	lifetime = data[1]
 	_is_owned_by_player = is_owned_by_player
 	
-	# Level 3 upgrade
-	if data[2]:
-		boost(2.0)
+	# Boost given to the turret when it spawns.
+	if data[2] > 0.0:
+		boost(data[2])
 
 
 func set_damage(damage:float):
@@ -131,12 +132,16 @@ func _find_nearest_target_position() -> Vector2:
 
 ## Powers up this turret for a limited time.
 func boost(duration: float) -> void:
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(self, "scale", scale * 2.0, 0.25)
-	_fire_interval = _fire_interval * 0.8
-	if duration > _boost_timer:
+	if _boost_timer > 0.0:
+		# Extend boost duration if already boosted.
+		if _boost_timer < duration:
+			_boost_timer = duration
+	else:
 		_boost_timer = duration
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_ELASTIC)
+		tween.tween_property(self, "scale", scale * 2.0, 0.25)
+		_fire_interval = _fire_interval * 0.8
 
 
 ## Shrinks in size if it was the level 3 upgrade

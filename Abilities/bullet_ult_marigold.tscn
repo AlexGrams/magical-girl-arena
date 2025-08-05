@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://da643xm1pr6wv"]
+
+[ext_resource type="Script" path="res://Abilities/bullet_ult_marigold.gd" id="1_efg6u"]
+[ext_resource type="Texture2D" uid="uid://rsxlf3fm1ojq" path="res://Sprites/UI/Blank.png" id="2_67ub0"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="4_bdycl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
+size = Vector2(44, 44)
+
+[node name="BulletUltMarigold" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+scale = Vector2(2, 2)
+script = ExtResource("1_efg6u")
+speed = 0.0
+lifetime = 0.0
+destroy_on_hit = false
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+sound_effect = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.087, 0.087)
+texture = ExtResource("2_67ub0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("4_bdycl")
+damage = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tg1bm")
