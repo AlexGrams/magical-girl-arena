@@ -85,3 +85,11 @@ func level_up():
 		_level_3_boost_duration = 2.0
 	if current_level >= 5 and is_signature:
 		_current_turret_lifetime = 2.0 * _turret_lifetime
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0

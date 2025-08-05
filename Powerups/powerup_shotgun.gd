@@ -102,3 +102,11 @@ func level_up():
 		signature_active = true
 		shoot_interval = 0.5
 	powerup_level_up.emit(current_level, bullet_damage)
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0

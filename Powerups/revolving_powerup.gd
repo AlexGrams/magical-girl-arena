@@ -85,3 +85,11 @@ func set_signature_settings() -> void:
 	bullet_damage = signature_damage
 	_rotation = _max_level_rotation
 	shoot_interval = max_level_shoot_interval
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0

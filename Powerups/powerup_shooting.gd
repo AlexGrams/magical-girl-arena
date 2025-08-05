@@ -81,3 +81,11 @@ func level_up():
 	current_level += 1
 	bullet_damage = _get_damage_from_curve()
 	powerup_level_up.emit(current_level, bullet_damage)
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0

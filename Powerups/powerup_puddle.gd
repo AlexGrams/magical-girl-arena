@@ -64,3 +64,11 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
+
+
+func boost() -> void:
+	_fire_interval /= 2.0
+
+
+func unboost() -> void:
+	_fire_interval *= 2.0

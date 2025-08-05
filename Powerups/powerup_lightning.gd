@@ -60,3 +60,11 @@ func level_up():
 	## TODO: Extra bonus here.
 	if current_level >= 3:
 		_has_level_3_upgrade = true
+
+
+func boost() -> void:
+	_fire_interval /= 2.0
+
+
+func unboost() -> void:
+	_fire_interval *= 2.0

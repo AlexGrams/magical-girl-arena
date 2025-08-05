@@ -60,3 +60,11 @@ func level_up():
 	if current_level == 3:
 		_trail_lifetime = _trail_lifetime * 2
 	powerup_level_up.emit(current_level, _damage)
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0

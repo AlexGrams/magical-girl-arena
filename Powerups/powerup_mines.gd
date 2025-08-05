@@ -65,3 +65,11 @@ func level_up():
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
 	if current_level == 3:
 		shoot_interval = shoot_interval / 2
+
+
+func boost() -> void:
+	shoot_interval /= 2.0
+
+
+func unboost() -> void:
+	shoot_interval *= 2.0
