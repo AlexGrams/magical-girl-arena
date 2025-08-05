@@ -32,18 +32,24 @@ func _ready() -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(_turret_sprite, "scale", full_scale, 0.5)
-	
-	if not is_multiplayer_authority():
-		set_process(false)
 
 
 ## Only server processes Turret.
 func _process(delta: float) -> void:
-	_fire_timer += delta
-	if _fire_timer >= _fire_interval:
-		_shoot()
-		_fire_timer = 0.0
+	# Boost 
+	if _boost_timer > 0.0:
+		_boost_timer -= delta
+		if _boost_timer <= 0.0:
+			_shrink()
 	
+	# Shooting
+	if is_multiplayer_authority():
+		_fire_timer += delta
+		if _fire_timer >= _fire_interval:
+			_shoot()
+			_fire_timer = 0.0
+	
+	# Removal
 	death_timer += delta
 	if death_timer >= lifetime and !_is_being_removed:
 		_is_being_removed = true
@@ -52,12 +58,8 @@ func _process(delta: float) -> void:
 		tween.set_trans(Tween.TRANS_ELASTIC)
 		tween.tween_property(_turret_sprite, "scale", Vector2.ZERO, 0.5)
 		# Remove after animation finishes
-		tween.tween_callback(queue_free)
-	elif _boost_timer > 0.0:
-		# Boost 
-		_boost_timer -= delta
-		if _boost_timer <= 0.0:
-			_shrink()
+		if is_multiplayer_authority():
+			tween.tween_callback(queue_free)
 
 
 # Set up other properties for this bullet
