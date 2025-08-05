@@ -77,6 +77,7 @@ func get_hud_canvas_layer() -> HUDCanvasLayer:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameState.pause_game(true)
+	GameState.set_playground(self)
 	GameState.client_game_loaded.rpc()
 	
 	# Set up DamageIndicator pool

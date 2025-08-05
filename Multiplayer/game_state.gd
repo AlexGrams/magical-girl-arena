@@ -69,7 +69,7 @@ var lobby_id: int = 0
 ## How visible bullets owned by other players will be to the client. Makes it easier for the local
 ## player to see their own bullets.
 var other_players_bullet_opacity: float = 1.0
-## The parent node of all objects in the main portion of the game. Should never be set by other objects.
+## The parent node of all objects in the main portion of the game.
 var playground: Playground = null
 # Experience to next level
 var experience: float = 0.0
@@ -123,6 +123,10 @@ func get_game_progress_as_fraction() -> float:
 
 func get_gold() -> int:
 	return _gold
+
+
+func set_playground(new_playground: Playground) -> void:
+	playground = new_playground
 
 
 @rpc("any_peer", "call_local")
@@ -568,8 +572,8 @@ func load_game(selected_playground: String):
 	if not multiplayer.is_server():
 		return
 	
-	playground = load(selected_playground).instantiate()
-	get_tree().get_root().add_child(playground, true)
+	var new_playground = load(selected_playground).instantiate()
+	get_tree().get_root().add_child(new_playground, true)
 	get_tree().get_root().get_node(main_menu_node_path).hide()
 
 
