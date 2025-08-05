@@ -34,9 +34,6 @@ func _process(delta: float) -> void:
 		# TODO: Place turret audio.
 		#AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_DROPPED)
 		
-		var turret_lifetime: float = _turret_lifetime
-		if current_level >= 5 && is_signature:
-			turret_lifetime *= 2.0
 		# Each turret is moved to a random position in a circle around the player.
 		var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(0, _max_range)
 		_bullet_spawner.request_spawn_bullet.rpc_id(
