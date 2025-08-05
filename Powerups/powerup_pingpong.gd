@@ -2,8 +2,12 @@ extends Powerup
 
 
 var bullet_scene := "res://Powerups/bullet_pingpong.tscn"
-# The single bullet instance used by this Powerup. The boomerang is never destroyed.
-var bullet: Object
+
+var _bullets: Array[BulletPingPong] = []
+
+
+func add_bullet(new_bullet: BulletPingPong) -> void:
+	_bullets.append(new_bullet)
 
 
 func _ready():
@@ -45,3 +49,15 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+
+
+func boost() -> void:
+	for bullet: BulletPingPong in _bullets:
+		if bullet != null:
+			bullet.boost.rpc()
+
+
+func unboost() -> void:
+	for bullet: BulletPingPong in _bullets:
+		if bullet != null:
+			bullet.unboost.rpc()

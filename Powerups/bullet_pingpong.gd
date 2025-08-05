@@ -1,3 +1,4 @@
+class_name BulletPingPong
 extends Bullet
 ## Boomerang bounces between all player characters.
 ##
@@ -107,10 +108,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := _boomerang_owner.get_node_or_null("PowerupPingPong")
+		var powerup_ping_pong := _boomerang_owner.get_node_or_null("PowerupPingPong")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
-		if boomerang_powerup != null:
-			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
+		if powerup_ping_pong != null:
+			powerup_ping_pong.add_bullet(self)
+			powerup_ping_pong.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
 			)
 	
@@ -166,6 +168,16 @@ func level_up(new_level: int, new_damage: float):
 	if new_level == 3:
 		# Increase size
 		scale = scale * 2
+
+
+@rpc("any_peer", "call_local")
+func boost() -> void:
+	speed *= 2.0
+
+
+@rpc("any_peer", "call_local")
+func unboost() -> void:
+	speed /= 2.0
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.

@@ -5,7 +5,7 @@ var bullet_scene := "res://Powerups/orbit_bullet.tscn"
 var sprite = preload("res://Coconut.png")
 ## The instantiated bullets controlled by this powerup. Orbit bullets register themselves
 ## with this powerup after they spawn.
-var _bullets: Array[Bullet] = [] 
+var _bullets: Array[BulletOrbit] = [] 
 
 signal picked_up_powerup(sprite)
 
@@ -78,6 +78,7 @@ func level_up():
 	if current_level == 3:
 		for bullet: Bullet in _bullets:
 			bullet.queue_free()
+		_bullets.clear()
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1,
 			[
@@ -107,3 +108,15 @@ func level_up():
 		
 	
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+
+
+func boost() -> void:
+	for bullet: BulletOrbit in _bullets:
+		if bullet != null:
+			bullet.boost.rpc()
+
+
+func unboost() -> void:
+	for bullet: BulletOrbit in _bullets:
+		if bullet != null:
+			bullet.unboost.rpc()

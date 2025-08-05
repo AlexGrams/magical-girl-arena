@@ -83,3 +83,11 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+
+
+func boost() -> void:
+	_lifetime /= 2.0
+
+
+func unboost() -> void:
+	_lifetime *= 2.0

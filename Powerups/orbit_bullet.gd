@@ -1,3 +1,4 @@
+class_name BulletOrbit
 extends Bullet
 
 @export var radius = 2
@@ -89,3 +90,13 @@ func _update_bullet_opacity() -> void:
 @rpc("any_peer", "call_remote")
 func destroy_orbit_bullet() -> void:
 	queue_free()
+
+
+@rpc("any_peer", "call_local")
+func boost() -> void:
+	speed *= 2.0
+
+
+@rpc("any_peer", "call_local")
+func unboost() -> void:
+	speed /= 2.0
