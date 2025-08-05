@@ -10,16 +10,19 @@ extends Powerup
 @export var _bullet_scene := ""
 ## Time in seconds between turret shooting.
 @export var _turret_fire_interval: float = 1.0
-## Time in seconds that each turret lasts.
+## Time in seconds that each turret lasts by default.
 @export var _turret_lifetime: float = 10.0
 
 @onready var _shoot_timer: float = shoot_interval
+## Modified duration that each turret lasts for.
+@onready var _current_turret_lifetime: float = _turret_lifetime
+
 var _bullet_spawner: BulletSpawner = null
 var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
-	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
+	_bullet_spawner = GameState.playground.bullet_spawner
 
 
 func _process(delta: float) -> void:
@@ -31,6 +34,9 @@ func _process(delta: float) -> void:
 		# TODO: Place turret audio.
 		#AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_DROPPED)
 		
+		var turret_lifetime: float = _turret_lifetime
+		if current_level >= 5 && is_signature:
+			turret_lifetime *= 2.0
 		# Each turret is moved to a random position in a circle around the player.
 		var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(0, _max_range)
 		_bullet_spawner.request_spawn_bullet.rpc_id(
@@ -43,7 +49,7 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[_turret_fire_interval, _turret_lifetime, _has_level_3_upgrade]
+					[_turret_fire_interval, _current_turret_lifetime, _has_level_3_upgrade]
 				]
 			)
 		
@@ -67,6 +73,7 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
-	# TODO: Midlevel boost.
 	if current_level >= 3:
 		_has_level_3_upgrade = true
+	if current_level >= 5 and is_signature:
+		_current_turret_lifetime = 2.0 * _turret_lifetime
