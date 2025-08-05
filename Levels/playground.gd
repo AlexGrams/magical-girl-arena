@@ -30,6 +30,8 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 @export var corrupted_enemy_spawner: EnemySpawner = null
 ## The HUD for the local player
 @export var hud_canvas_layer: HUDCanvasLayer = null
+## The bullet spawner on this Playground
+@export var bullet_spawner: BulletSpawner = null
 ## Light to create darkness when boss spawns
 @export var point_light: PointLight2D = null
 
