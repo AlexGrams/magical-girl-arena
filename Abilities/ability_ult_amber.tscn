@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://doe852tym4fnc"]
+
+[ext_resource type="Script" path="res://Abilities/ability_ult_amber.gd" id="1_vte7f"]
+
+[node name="AbilityUltAmber" type="Node2D"]
+script = ExtResource("1_vte7f")
+cooldown = 1.0
