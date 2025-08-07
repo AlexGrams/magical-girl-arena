@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
-	if enemy != null and enemy is Enemy:
+	if _knockback_speed > 0.0 and enemy != null and enemy is Enemy:
 		enemy.set_knockback(direction * _knockback_speed, _knockback_duration)
 
 ## Set up other properties for this bullet
