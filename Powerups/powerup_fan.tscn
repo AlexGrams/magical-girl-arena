@@ -4,7 +4,8 @@
 
 [node name="PowerupFan" type="Node2D"]
 script = ExtResource("1_4cdbl")
-_fire_interval = 0.5
+_knockback_speed_per_velocity = 1.125
+_fire_interval = 0.25
 _bullet_scene = "res://Powerups/bullet_fan.tscn"
 _fan_visual_scene = "res://Sprites/Powerups/fan_sprite.tscn"
 _powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_fan.tres"
