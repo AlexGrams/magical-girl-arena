@@ -4,6 +4,8 @@ extends Powerup
 @export var shoot_interval: float  = 0.25
 ## Time in seconds between shots when the powerup is at max level.
 @export var max_level_shoot_interval: float = 0.06
+## Time in seconds betweene shots if owned by an enemy.
+@export var enemy_shoot_interval: float = 0.75
 @export var bullet_scene := "res://Powerups/revolving_bullet.tscn"
 
 # TODO: Might not be used anymore
@@ -32,7 +34,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_on:
 		shoot_timer += delta
-		if shoot_timer > shoot_interval:
+		# Use a different shoot interval depending on if a player or enemy owns this powerup.
+		if (
+			(_is_owned_by_player and shoot_timer > shoot_interval)
+			or (not _is_owned_by_player and shoot_timer > enemy_shoot_interval)
+		):
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 				1, [bullet_scene, 
 					global_position, 
