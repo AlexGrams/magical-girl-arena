@@ -2,6 +2,8 @@ extends Powerup
 
 ## Time in seconds between creating bullets.
 @export var shoot_interval = 1.0
+## Time in seconds between creating bullets if this Powerup is owned by an enemy.
+@export var enemy_shoot_interval: float = 3.0
 ## Path to the Bullet-derived bullet scene.
 @export var bullet_scene := ""
 
@@ -18,8 +20,9 @@ func _process(delta: float) -> void:
 		return
 	
 	shoot_timer += delta
-	if shoot_timer > shoot_interval:
-		if _is_owned_by_player:
+	if _is_owned_by_player:
+		# Player behavior
+		if shoot_timer > shoot_interval:
 			# Get nearest enemy so direction can be set
 			var enemies: Array[Node] = [] 
 			if _is_owned_by_player:
@@ -65,7 +68,10 @@ func _process(delta: float) -> void:
 						[multiplayer.get_unique_id(), is_signature and current_level == max_level]
 					]
 					)
-		else:
+			shoot_timer = 0
+	else:
+		# Enemy behavior
+		if shoot_timer >= enemy_shoot_interval:
 			var owning_enemy: Node2D = get_parent()
 			
 			if (owning_enemy != null 
@@ -88,8 +94,7 @@ func _process(delta: float) -> void:
 						[owning_enemy.get_path()]
 					]
 				)
-		
-		shoot_timer = 0
+			shoot_timer = 0
 
 
 func activate_powerup():
