@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("2_4jxhc")
-name = "Amber"
-display_name = ""
+name = "Vale"
+display_name = "Amber"
 description = "XX"
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres"
 base_powerup_name = "Jeweled Boomerang"
