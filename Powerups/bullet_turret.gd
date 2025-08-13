@@ -149,7 +149,7 @@ func boost(duration: float) -> void:
 ## Shrinks in size if it was the level 3 upgrade
 func _shrink() -> void:
 	# Return bullet effects to normal
-	_fire_interval = _fire_interval * 2
+	_fire_interval = _fire_interval * 1.25
 	
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
