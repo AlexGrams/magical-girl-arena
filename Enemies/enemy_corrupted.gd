@@ -78,6 +78,20 @@ func die() -> void:
 		return
 	
 	super()
+	
+	# Start defeated dialogue
+	match _character:
+		Constants.Character.GOTH:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_GOTH)
+		Constants.Character.SWEET:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_SWEET)
+		Constants.Character.VALE:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_VALE)
+		Constants.Character.DOVE:
+			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_DOVE)
+		_:
+			push_error("Play miniboss dialogue not implemented for this character")
+	
 	_hud_canvas_layer.hide_boss_health_bar.rpc()
 
 

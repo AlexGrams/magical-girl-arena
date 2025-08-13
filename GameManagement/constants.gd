@@ -43,7 +43,8 @@ enum DialoguePlayTrigger {
 	START,
 	MINIBOSS,
 	BOSS,
-	WIN
+	WIN,
+	MINIBOSS_DEFEATED
 }
 
 ## An optional extra descriptor for a dialogue trigger. If not NONE, then this condition must also
