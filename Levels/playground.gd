@@ -11,6 +11,9 @@ const _DAMAGE_INDICATOR_POOL_SIZE: int = 200
 ## How many BulletLightningArc objects are in the pool.
 const _LIGHTNING_ARC_POOL_SIZE: int = 150
 
+@onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
+@onready var gold_scene = preload("res://Pickups/gold.tscn")
+
 ## List of events describing what enemies to spawn, when to spawn them, and how many to spawn.
 @export var spawn_events: Array[EnemySpawnEventData] = []
 ## Time in seconds from the start of the game, expressed as a ratio between the elapsed game 
@@ -161,6 +164,42 @@ func _spawn_corrupted_enemy() -> void:
 	_has_corrupted_enemy_spawned = true
 	if corrupted_enemy_spawner != null and corrupted_enemy_scene != null:
 		corrupted_enemy_spawner.spawn(corrupted_enemy_scene)
+
+
+## Asynchronously spawn a bunch of EXP and Gold around a location when the 
+## Corrupted Enemy is defeated. At most one of each is spawned per frame.
+func spawn_corrupted_enemy_loot(loot_position: Vector2, exp_amount: int, gold_amount: int) -> void:
+	var exp_spawned: int = 0
+	var gold_spawned: int = 0
+	
+	while exp_spawned < exp_amount and gold_spawned < gold_amount:
+		# Only try to spawn while the game is unpaused.
+		if not get_tree().paused:
+			# EXP
+			if exp_spawned < exp_amount:
+				var exp_orb: EXPOrb = exp_scene.instantiate()
+				var spawn_position: Vector2 = loot_position + (Vector2.UP * randf_range(0.0, 200.0)).rotated(randf_range(0.0, TAU))
+				exp_orb.global_position = spawn_position
+				exp_orb.tree_entered.connect(
+					func(): exp_orb.teleport.rpc(spawn_position)
+					, CONNECT_DEFERRED
+				)
+				add_child(exp_orb, true)
+				exp_spawned += 1
+			
+			# Gold
+			if gold_spawned < gold_amount:
+				var gold := gold_scene.instantiate()
+				var spawn_position: Vector2 = loot_position + (Vector2.UP * randf_range(0.0, 200.0)).rotated(randf_range(0.0, TAU))
+				gold.global_position = spawn_position
+				gold.tree_entered.connect(
+					func(): gold.teleport.rpc(spawn_position)
+					, CONNECT_DEFERRED
+				)
+				add_child(gold, true)
+				gold_spawned += 1
+		
+		await get_tree().process_frame
 
 
 # Spawn the boss enemy. The game ends when it is defeated.

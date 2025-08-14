@@ -4,6 +4,10 @@ extends EnemyRanged
 
 ## How long this corrupted enemy stays in the game before leaving. Doesn't drop loot if time runs out.
 @export var corrupted_lifetime: float = 0.0
+## How much EXP is spawned when defeated.
+@export var exp_reward: int = 200
+## How much gold is spawned when defeated.
+@export var gold_reward: int = 100
 ## Scene for the Powerup to give to this enemy when it spawns.
 @export var default_powerup_path: String = ""
 
@@ -109,4 +113,5 @@ func _leave() -> void:
 
 ## Makes a bunch of experience and gives everyone a free powerup of their choice.
 func _spawn_loot() -> void:
+	GameState.playground.spawn_corrupted_enemy_loot(global_position, exp_reward, gold_reward)
 	GameState.corrupted_enemy_defeated.rpc()
