@@ -347,13 +347,3 @@ func update_boss_health_bar(health_percent: float) -> void:
 ## Start a dialogue through the DialogueBox. Only call on server.
 func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Constants.DialoguePlayTriggerExtra.NONE) -> void:
 	_dialogue_box.start_dialogue(trigger, extra_trigger)
-
-
-#region UpgradeAnyScreen
-func toggle_add_any_powerup_screen() -> void:
-	# TODO: Replace
-	if not upgrade_any_screen.visible:
-		upgrade_any_screen.setup()
-	else:
-		upgrade_any_screen.visible = false
-#endregion UpgradeAnyScreen

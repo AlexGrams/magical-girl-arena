@@ -364,7 +364,7 @@ func _input(event: InputEvent) -> void:
 				GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
 			# Add Powerup cheat screen
 			if event.keycode == KEY_KP_2:
-				GameState.playground.hud_canvas_layer.toggle_add_any_powerup_screen() 
+				GameState.playground.hud_canvas_layer.upgrade_any_screen.toggle_cheat()
 			# Die
 			if event.keycode == KEY_KP_3:
 				take_damage(health)

@@ -6,8 +6,10 @@ extends Panel
 ## Folder containing all PowerupData files.
 const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
 
+## Parent of all the upgrade UI components.
 @export var _upgrades_holder: Control = null
 @export var _upgrade_any_screen_button_container: GridContainer = null
+## Parent of all the player ready UI components.
 @export var _players_selecting_upgrades_window: Control = null
 @export var _player_ready_indicator_holder: Control = null
 @export var _upgrade_any_button: String = ""
@@ -18,6 +20,8 @@ var _players_done_selecting_upgrades: int = 0
 var _ready_indicators: Array[PlayerReadyIndicator] = []
 ## Maps each connecter player's multiplayer unique ID to their corresponding PlayerReadyIndicator.
 var _player_id_to_ready_indicator: Dictionary = {}
+## True if this screen was activated in cheat mode. Allows unlimited powerup selection.
+var _cheat_mode: bool = false
 
 
 func _ready() -> void:
@@ -40,7 +44,12 @@ func _ready() -> void:
 		_ready_indicators.append(child)
 
 
-func setup():
+## Set up the upgrade screen configuration.
+func setup() -> void:
+	_cheat_mode = false
+	_players_selecting_upgrades_window.hide()
+	_upgrades_holder.show()
+	
 	# Set up PlayerReadyIndicator icons
 	for i in range(GameState.connected_players):
 		var id = GameState.players.keys()[i]
@@ -51,9 +60,24 @@ func setup():
 	show()
 
 
+## Alternate the visibility of this screen in cheat mode.
+func toggle_cheat() -> void:
+	if not visible:
+		_cheat_mode = true
+		_players_selecting_upgrades_window.hide()
+		_upgrades_holder.show()
+		show()
+	else:
+		hide()
+
+
 ## Notify relevant systems that this player has selected an upgrade.
 ## Called after one of the upgrade buttons has been clicked.
 func _on_upgrade_chosen():
+	# Do nothing if in cheat mode.
+	if _cheat_mode:
+		return
+	
 	GameState.player_selected_upgrade.rpc_id(1)
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
