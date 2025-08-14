@@ -81,6 +81,8 @@ var players_selecting_upgrades: int = -1
 var game_running := false
 ## The time remaining in the game. Becoems a negative value once the timer reaches 0 and the boss spawns.
 var time: float = MAX_TIME
+## Multiplier for how fast the in-game time progresses.
+var time_scale: float = 1.0
 # How many players are currently dead.
 var players_down: int = 0
 
@@ -282,7 +284,7 @@ func _process(delta: float) -> void:
 	Steam.run_callbacks()
 	
 	if game_running:
-		time -= delta
+		time -= delta * time_scale
 	
 	# Refresh this lobby's location if it hasn't been set yet. Sort of a hack.
 	if lobby_id != 0 and multiplayer.get_unique_id() == 1 and _local_ping_location == "":
@@ -423,6 +425,7 @@ func reset_game_variables():
 	experience = 0
 	_update_exp_for_next_level()
 	time = MAX_TIME
+	time_scale = 1.0
 	game_running = false
 
 
@@ -623,6 +626,9 @@ func _update_exp_for_next_level() -> void:
 ## acquire any Powerup.
 @rpc("any_peer", "call_local")
 func corrupted_enemy_defeated() -> void:
+	# Increase game speed
+	time_scale = 2.0
+	
 	# Show and set up the upgrade screen
 	get_tree().paused = true
 	playground.hud_canvas_layer.upgrade_any_screen.setup()

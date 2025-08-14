@@ -50,8 +50,6 @@ func _process(delta: float) -> void:
 	super(delta)
 	
 	current_lifetime -= delta
-	if is_multiplayer_authority():
-		_take_damage(health)
 	if current_lifetime <= 0.0 and is_multiplayer_authority():
 		_leave()
 

@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 			else:
 				_active_spawn_events[i][1] = spawn_event[0].spawn_interval * _get_spawn_scale()
 			
-		spawn_event[1] -= delta
+		spawn_event[1] -= delta * GameState.time_scale
 		i += 1
 
 
