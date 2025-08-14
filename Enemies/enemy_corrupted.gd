@@ -107,7 +107,6 @@ func _leave() -> void:
 	queue_free()
 
 
-## Spawns a Powerup Pickup after being defeated if at least one player can use it. 
-## Otherwise, gives a lot of experience.
+## Makes a bunch of experience and gives everyone a free powerup of their choice.
 func _spawn_loot() -> void:
-	get_tree().root.get_node("Playground").spawn_corrupted_enemy_loot(default_powerup_path, global_position)
+	GameState.playground.hud_canvas_layer.toggle_add_any_powerup_screen()

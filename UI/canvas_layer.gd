@@ -2,7 +2,7 @@ class_name HUDCanvasLayer
 extends CanvasLayer
 
 
-## Folder containing all PowerupData files. For the Add Powerup cheat screen.
+## Folder containing all PowerupData files. For the Add Any Powerup screen.
 const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
 
 @export var _game_over_screen: GameOverScreen = null
@@ -103,21 +103,20 @@ func _ready() -> void:
 	for retry_indicator in _retry_votes_container.get_children():
 		_retry_indicators.append(retry_indicator)
 	
-	# Add powerup cheat screen
-	if not OS.has_feature("release"):
-		_upgrade_any_screen.hide()
-		var upgrade_any_button_resource: Resource = load(_upgrade_any_button)
-		# Add all powerups to the cheat menu
-		for powerup_data_file_name: String in DirAccess.open(POWERUP_DATA_PATH).get_files():
-			# Exporting adds ".remap" to the end of .tres files.
-			if '.tres.remap' in powerup_data_file_name:
-				powerup_data_file_name = powerup_data_file_name.trim_suffix('.remap')
-			
-			var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
-			if powerup_data != null:
-				var upgrade_any_button: UpgradeAnyPowerupButton = upgrade_any_button_resource.instantiate()
-				upgrade_any_button.set_powerup(powerup_data)
-				_upgrade_any_screen_button_container.add_child(upgrade_any_button, true)
+	# Set up Upgrade Any Powerup screen.
+	_upgrade_any_screen.hide()
+	var upgrade_any_button_resource: Resource = load(_upgrade_any_button)
+	# Add all powerups to the screen.
+	for powerup_data_file_name: String in DirAccess.open(POWERUP_DATA_PATH).get_files():
+		# Exporting adds ".remap" to the end of .tres files.
+		if '.tres.remap' in powerup_data_file_name:
+			powerup_data_file_name = powerup_data_file_name.trim_suffix('.remap')
+		
+		var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
+		if powerup_data != null:
+			var upgrade_any_button: UpgradeAnyPowerupButton = upgrade_any_button_resource.instantiate()
+			upgrade_any_button.set_powerup(powerup_data)
+			_upgrade_any_screen_button_container.add_child(upgrade_any_button, true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -371,6 +370,6 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 
 
 #region UpgradeAnyScreen
-func toggle_add_powerup_cheat_screen() -> void:
+func toggle_add_any_powerup_screen() -> void:
 	_upgrade_any_screen.visible = not _upgrade_any_screen.visible
 #endregion UpgradeAnyScreen

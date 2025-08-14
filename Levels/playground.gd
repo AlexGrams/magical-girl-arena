@@ -50,16 +50,6 @@ var _has_boss_spawned := false
 var boss_animation: PackedScene = preload("res://Sprites/Enemy/Constellation_Summoning_Animation.tscn")
 ## The upcoming spawn event to process.
 var _current_spawn_event: int = 0
-var _signature_powerup_orb: PackedScene = preload("res://Pickups/signature_powerup_orb.tscn")
-var _big_exp_orb: PackedScene = preload("res://Pickups/exp_orb_big.tscn")
-## The number of clients that have reported if their local player can pick up the Powerup to be spawned.
-var _powerup_pickup_responses: int = 0
-## Path to PowerupData of Powerup Orb to be spawned
-var _powerup_pickup_path: String = ""
-## The location to spawn the Powerup Pickup.
-var _powerup_pickup_location: Vector2
-## True while awaiting responses from clients about if their local player can pick up the Powerup we are trying to spawn.
-var _is_pooling_clients_for_powerup_pickup = false
 
 ## Object pool of damage indicators.
 var _damage_indicator_pool: Array[DamageIndicator] = []
@@ -266,97 +256,6 @@ func _reset_camera() -> void:
 @rpc("authority", "call_local", "reliable")
 func _update_map_complete_variable() -> void:
 	GameState.set(map_win_save_variable_name, true)
-
-
- 
-
-
-## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
-## either a Powerup Pickup (more likely), or a big EXP orb (less likely).
-func spawn_corrupted_enemy_loot(powerup_path: String, orb_position: Vector2) -> void:
-	# Code flow for seeing if we can spawn the Powerup Pickup:
-	# 1. Use RPCs to query every character
-	# 2. Wait for responses, then accumulate negative responses as they come in. 
-	# 3. When all responses are in or the timeout expires, then decide which to spawn.
-	
-	_is_pooling_clients_for_powerup_pickup = true
-	_powerup_pickup_path = powerup_path
-	_powerup_pickup_location = orb_position
-	_powerup_pickup_responses = 0
-	_check_if_local_player_can_use_powerup.rpc(powerup_path)
-	
-	# Fallback in case all responses aren't received.
-	get_tree().create_timer(_POWERUP_POOLING_TIMEOUT).timeout.connect(
-		func(): _spawn_powerup_pickup()
-		, CONNECT_ONE_SHOT
-	)
-
-
-## For spawning a Powerup Orb. Conditions for using the powerup are 1. Powerups not maxed out.
-## 2. Player has powerup, but it isn't max level and signature. Returns by sending RPC to server.
-@rpc("authority", "call_local")
-func _check_if_local_player_can_use_powerup(powerup_path: String) -> void:
-	var player: PlayerCharacterBody2D = GameState.get_local_player()
-	var test_powerup: PowerupData = load(powerup_path)
-	
-	for powerup: Powerup in player.powerups:
-		if powerup.powerup_name == test_powerup.name:
-			# Result
-			_accumulate_powerup_eligibility.rpc_id(1, powerup.current_level < powerup.max_level or not powerup.is_signature)
-			return
-	
-	# Powerup was not found, but this is still viable if the player isn't maxed out on powerups
-	_accumulate_powerup_eligibility.rpc_id(1, len(player.powerups) < player.MAX_POWERUPS)
-
-
-## Callback function for other clients for the server to know if it can spawn the Powerup Orb.
-@rpc("any_peer", "call_local")
-func _accumulate_powerup_eligibility(can_acquire: bool) -> void:
-	if not _is_pooling_clients_for_powerup_pickup:
-		return
-	
-	_powerup_pickup_responses += 1
-	if can_acquire:
-		# At least one player can use the pickup, so spawn it.
-		_spawn_powerup_pickup()
-	elif _powerup_pickup_responses == GameState.connected_players:
-		# No player can use the pickup, so spawn EXP instead.
-		_spawn_big_exp_orb()
-
-
-func _spawn_powerup_pickup() -> void:
-	if not _is_pooling_clients_for_powerup_pickup:
-		return
-	_is_pooling_clients_for_powerup_pickup = false
-	
-	var signature_powerup_orb: SignaturePowerupOrb = _signature_powerup_orb.instantiate()
-	
-	signature_powerup_orb.global_position = _powerup_pickup_location
-	signature_powerup_orb.tree_entered.connect(
-		func(): _set_up_signature_powerup_orb(signature_powerup_orb, _powerup_pickup_path, _powerup_pickup_location)
-		, CONNECT_DEFERRED
-	)
-	get_tree().root.get_node("Playground").call_deferred("add_child", signature_powerup_orb, true)
-
-
-func _spawn_big_exp_orb() -> void:
-	if not _is_pooling_clients_for_powerup_pickup:
-		return
-	_is_pooling_clients_for_powerup_pickup = false
-	
-	var big_exp_orb: BigEXPOrb = _big_exp_orb.instantiate()
-	big_exp_orb.global_position = _powerup_pickup_location
-	big_exp_orb.tree_entered.connect(
-		func(): big_exp_orb.teleport(_powerup_pickup_location)
-		, CONNECT_DEFERRED
-	)
-	get_tree().root.get_node("Playground").call_deferred("add_child", big_exp_orb, true)
-
-
-## Asynchronously set up the loot orb dropped by this Corrupted Enemy.
-func _set_up_signature_powerup_orb(signature_powerup_orb: SignaturePowerupOrb, powerup_path: String, orb_position: Vector2) -> void:
-	signature_powerup_orb.teleport.rpc(orb_position)
-	signature_powerup_orb.set_powerup.rpc(powerup_path)
 
 
 #region ObjectPools
