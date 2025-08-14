@@ -29,10 +29,10 @@ const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
 @export var _boss_health_text: Label = null
 ## Control for displaying and playing dialogue.
 @export var _dialogue_box: DialogueBox = null
-## Only for the Add Powerup cheat.
-@export var _add_powerup_cheat_screen: Control = null
-@export var _add_powerup_cheat_screen_button_container: GridContainer = null
-@export var _add_powerup_cheat_button: String = ""
+## For the Upgrade Any Powerup screen.
+@export var _upgrade_any_screen: Control = null
+@export var _upgrade_any_screen_button_container: GridContainer = null
+@export var _upgrade_any_button: String = ""
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -105,8 +105,8 @@ func _ready() -> void:
 	
 	# Add powerup cheat screen
 	if not OS.has_feature("release"):
-		_add_powerup_cheat_screen.hide()
-		var cheat_button_resource: Resource = load(_add_powerup_cheat_button)
+		_upgrade_any_screen.hide()
+		var upgrade_any_button_resource: Resource = load(_upgrade_any_button)
 		# Add all powerups to the cheat menu
 		for powerup_data_file_name: String in DirAccess.open(POWERUP_DATA_PATH).get_files():
 			# Exporting adds ".remap" to the end of .tres files.
@@ -115,9 +115,9 @@ func _ready() -> void:
 			
 			var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
 			if powerup_data != null:
-				var add_powerup_cheat_button: AddPowerupCheatButton = cheat_button_resource.instantiate()
-				add_powerup_cheat_button.set_powerup(powerup_data)
-				_add_powerup_cheat_screen_button_container.add_child(add_powerup_cheat_button, true)
+				var upgrade_any_button: UpgradeAnyPowerupButton = upgrade_any_button_resource.instantiate()
+				upgrade_any_button.set_powerup(powerup_data)
+				_upgrade_any_screen_button_container.add_child(upgrade_any_button, true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -370,7 +370,7 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 	_dialogue_box.start_dialogue(trigger, extra_trigger)
 
 
-#region AddPowerupCheatScreen
+#region UpgradeAnyScreen
 func toggle_add_powerup_cheat_screen() -> void:
-	_add_powerup_cheat_screen.visible = not _add_powerup_cheat_screen.visible
-#endregion AddPowerupCheatScreen
+	_upgrade_any_screen.visible = not _upgrade_any_screen.visible
+#endregion UpgradeAnyScreen

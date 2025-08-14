@@ -268,6 +268,9 @@ func _update_map_complete_variable() -> void:
 	GameState.set(map_win_save_variable_name, true)
 
 
+ 
+
+
 ## Only call on server. Begin the process for spawning loot for a corrupted enemy, which is
 ## either a Powerup Pickup (more likely), or a big EXP orb (less likely).
 func spawn_corrupted_enemy_loot(powerup_path: String, orb_position: Vector2) -> void:

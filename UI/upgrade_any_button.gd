@@ -1,6 +1,6 @@
-class_name AddPowerupCheatButton
+class_name UpgradeAnyPowerupButton
 extends Button
-## Button for a cheat menu to add a powerup
+## Button to add or upgrade any powerup.
 
 
 @export var _texture: TextureRect = null
