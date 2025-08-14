@@ -13,6 +13,7 @@
 bg_color = Color(0, 0, 0, 0.0627451)
 
 [node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "reroll_button", "powerup_reroll_button", "artifact_reroll_button", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
+process_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

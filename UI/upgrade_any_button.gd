@@ -7,6 +7,8 @@ extends Button
 
 var _powerup: PowerupData = null
 
+signal upgrade_chosen()
+
 
 func set_powerup(powerup: PowerupData):
 	_powerup = powerup
@@ -16,4 +18,5 @@ func set_powerup(powerup: PowerupData):
 func _ready() -> void:
 	button_down.connect(func():
 		GameState.get_local_player().upgrade_or_grant_powerup(_powerup)
+		upgrade_chosen.emit()
 	)

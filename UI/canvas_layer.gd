@@ -27,7 +27,7 @@ extends CanvasLayer
 ## Control for displaying and playing dialogue.
 @export var _dialogue_box: DialogueBox = null
 ## For the Upgrade Any Powerup screen.
-@export var _upgrade_any_screen: UpgradeAnyScreenPanel = null
+@export var upgrade_any_screen: UpgradeAnyScreenPanel = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -97,9 +97,6 @@ func _ready() -> void:
 	
 	for retry_indicator in _retry_votes_container.get_children():
 		_retry_indicators.append(retry_indicator)
-	
-	# Set up Upgrade Any Powerup screen.
-	_upgrade_any_screen.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -354,5 +351,9 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 
 #region UpgradeAnyScreen
 func toggle_add_any_powerup_screen() -> void:
-	_upgrade_any_screen.visible = not _upgrade_any_screen.visible
+	# TODO: Replace
+	if not upgrade_any_screen.visible:
+		upgrade_any_screen.setup()
+	else:
+		upgrade_any_screen.visible = false
 #endregion UpgradeAnyScreen

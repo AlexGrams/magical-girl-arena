@@ -619,6 +619,18 @@ func _update_exp_for_next_level() -> void:
 	exp_for_next_level = int(exp_per_level_curve.sample(float(level - 1) / MAX_LEVEL)) * 3 * connected_players
 
 
+## Grants rewards for defeating the Corrupted Enemy to all players. Shows screen to 
+## acquire any Powerup.
+@rpc("any_peer", "call_local")
+func corrupted_enemy_defeated() -> void:
+	# Show and set up the upgrade screen
+	get_tree().paused = true
+	playground.hud_canvas_layer.upgrade_any_screen.setup()
+	
+	if multiplayer.is_server():
+		players_selecting_upgrades = player_characters.size()
+
+
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
 @rpc("any_peer", "call_local", "reliable")
 func player_selected_upgrade() -> void:

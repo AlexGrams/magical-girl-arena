@@ -6189,7 +6189,7 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4422)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_upgrade_any_screen")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "upgrade_any_screen")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -6205,7 +6205,7 @@ _stat_level_container = NodePath("AbilitiesAndStatsContainer/Artifacts")
 _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 _dialogue_box = NodePath("DialogueBox")
-_upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
+upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -6313,7 +6313,6 @@ theme = ExtResource("34_po6dc")
 text = "Level: 1"
 
 [node name="UpgradeScreenPanel" parent="CanvasLayer" instance=ExtResource("7_y7jy2")]
-process_mode = 2
 visible = false
 
 [node name="UpgradeAnyScreenPanel" parent="CanvasLayer" instance=ExtResource("34_a7i8a")]

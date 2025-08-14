@@ -109,4 +109,4 @@ func _leave() -> void:
 
 ## Makes a bunch of experience and gives everyone a free powerup of their choice.
 func _spawn_loot() -> void:
-	GameState.playground.hud_canvas_layer.toggle_add_any_powerup_screen()
+	GameState.corrupted_enemy_defeated.rpc()
