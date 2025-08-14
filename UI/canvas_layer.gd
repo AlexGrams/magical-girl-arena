@@ -2,9 +2,6 @@ class_name HUDCanvasLayer
 extends CanvasLayer
 
 
-## Folder containing all PowerupData files. For the Add Any Powerup screen.
-const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
-
 @export var _game_over_screen: GameOverScreen = null
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
@@ -30,9 +27,7 @@ const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
 ## Control for displaying and playing dialogue.
 @export var _dialogue_box: DialogueBox = null
 ## For the Upgrade Any Powerup screen.
-@export var _upgrade_any_screen: Control = null
-@export var _upgrade_any_screen_button_container: GridContainer = null
-@export var _upgrade_any_button: String = ""
+@export var _upgrade_any_screen: UpgradeAnyScreenPanel = null
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -105,18 +100,6 @@ func _ready() -> void:
 	
 	# Set up Upgrade Any Powerup screen.
 	_upgrade_any_screen.hide()
-	var upgrade_any_button_resource: Resource = load(_upgrade_any_button)
-	# Add all powerups to the screen.
-	for powerup_data_file_name: String in DirAccess.open(POWERUP_DATA_PATH).get_files():
-		# Exporting adds ".remap" to the end of .tres files.
-		if '.tres.remap' in powerup_data_file_name:
-			powerup_data_file_name = powerup_data_file_name.trim_suffix('.remap')
-		
-		var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
-		if powerup_data != null:
-			var upgrade_any_button: UpgradeAnyPowerupButton = upgrade_any_button_resource.instantiate()
-			upgrade_any_button.set_powerup(powerup_data)
-			_upgrade_any_screen_button_container.add_child(upgrade_any_button, true)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=101 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_pbc18"]
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="30_2tatt"]
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="31_ek7na"]
+[ext_resource type="PackedScene" uid="uid://b4jud6w0o3w2p" path="res://UI/upgrade_any_screen_panel.tscn" id="34_a7i8a"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="34_po6dc"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="35_8cpdn"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="35_j68h3"]
@@ -6188,7 +6189,7 @@ scale = Vector2(8, 280)
 position = Vector2(1072, 4422)
 scale = Vector2(280, 8)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_upgrade_any_screen", "_upgrade_any_screen_button_container")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_upgrade_any_screen")]
 script = ExtResource("6_b2lbv")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -6205,8 +6206,6 @@ _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 _dialogue_box = NodePath("DialogueBox")
 _upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
-_upgrade_any_screen_button_container = NodePath("UpgradeAnyScreenPanel/ScrollContainer/UpgradeAnyGridContainer")
-_upgrade_any_button = "res://UI/upgrade_any_button.tscn"
 
 [node name="PlayerPointers" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -6317,34 +6316,8 @@ text = "Level: 1"
 process_mode = 2
 visible = false
 
-[node name="UpgradeAnyScreenPanel" type="Control" parent="CanvasLayer"]
+[node name="UpgradeAnyScreenPanel" parent="CanvasLayer" instance=ExtResource("34_a7i8a")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/UpgradeAnyScreenPanel"]
-custom_minimum_size = Vector2(1216, 720)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -608.0
-offset_top = -393.0
-offset_right = 697.0
-offset_bottom = 327.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("55_bjgvv")
-
-[node name="UpgradeAnyGridContainer" type="GridContainer" parent="CanvasLayer/UpgradeAnyScreenPanel/ScrollContainer"]
-layout_mode = 2
-columns = 5
 
 [node name="SpectatorContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
