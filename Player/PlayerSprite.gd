@@ -10,10 +10,12 @@ var previous_model_scale_multiplier:float = 1
 var last_direction = "move_right"
 var is_dead:bool = false
 
-# True if this sprite changes state depending on local user input.
+## False if this sprite only plays the idle animation.
 var _read_input := true
-## Not null if this sprite is a child of a player character.
-var _owning_player: PlayerCharacterBody2D = null
+## Not null if this sprite is a child of a moving CharacterBody2D.
+var _owning_character: CharacterBody2D = null
+## True if owned by a PlayerCharacterBody2D, false if owned by an Enemy.
+var _owner_is_player: bool = false
 
 func set_character(character: Constants.Character, is_corrupted:bool = false) -> void:
 	character_data = Constants.CHARACTER_DATA[character]
@@ -47,8 +49,9 @@ func set_model_scale(new_scale: float) -> void:
 func _ready() -> void:
 	$Blinking_AnimationPlayer.play("Blinking")
 	
-	if get_parent() != null and get_parent() is PlayerCharacterBody2D:
-		_owning_player = get_parent()
+	if get_parent() != null and get_parent() is CharacterBody2D:
+		_owning_character = get_parent()
+		_owner_is_player = _owning_character is PlayerCharacterBody2D
 
 # Called by death signal
 func play_death_animation() -> void:
@@ -72,7 +75,7 @@ func _physics_process(_delta: float) -> void:
 			return
 		
 		var input_direction: Vector2 = Vector2.ZERO 
-		if is_multiplayer_authority():
+		if _owner_is_player and is_multiplayer_authority():
 			# Sprite responds to this client's input.
 			input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 			
@@ -89,9 +92,12 @@ func _physics_process(_delta: float) -> void:
 				flip_h = true
 			elif Input.is_action_pressed("move_right"):
 				flip_h = false
-		elif _owning_player != null:
-			# Sprite responds to another's client's input.
-			input_direction = _owning_player.input_direction
+		elif _owning_character != null:
+			if _owner_is_player:
+				# Sprite responds to another's client's input.
+				input_direction = _owning_character.input_direction
+			else:
+				input_direction = _owning_character.velocity
 			flip_h = input_direction.x < 0.0
 			
 		
