@@ -32,8 +32,10 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobby_visibility_option_button: OptionButton
 ## Parent of UI elements displaying selected map.
 @export var map_holder: Control
-## For selecting which map to load.
-@export var map_option_button: OptionButton
+## Button to select the previous map.
+@export var map_select_left_button: ButtonHover
+## Button to select the next map.
+@export var map_select_right_button: ButtonHover
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Contains buttons for selecting a character
@@ -195,8 +197,9 @@ func _on_host_button_button_down() -> void:
 	
 	# Show the lobby that you're in after clicking the "Host" button.
 	lobby_visibility_holder.visible = true
-	map_holder.visible = true
-	lobby_visibility_option_button.selected = 1
+	map_select_left_button.visible = true
+	map_select_right_button.visible = true
+	# TODO: Update lobby visibility functionality.
 	_on_map_option_button_item_selected(0)
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
@@ -415,9 +418,6 @@ func refresh_lobby() -> void:
 		i += 1
 	
 	update_character_description()
-	
-	# Update available maps
-	map_option_button.set_item_disabled(1, not GameState.map_complete_garden)
 
 
 # Updates the displayed sprite to represent the player's currently selected character.
