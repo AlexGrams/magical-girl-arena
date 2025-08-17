@@ -1,0 +1,289 @@
+[gd_scene load_steps=17 format=3 uid="uid://bfbm3j6d0el6h"]
+
+[ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="1_coej5"]
+[ext_resource type="Script" path="res://UI/Scenes/character_selection.gd" id="1_wf478"]
+[ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="1_xffrp"]
+[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="2_6i2c5"]
+[ext_resource type="Texture2D" uid="uid://cwpwmd20e76c2" path="res://Sprites/UI/CharacterIcons/SweetIcon.png" id="3_owfpp"]
+[ext_resource type="Texture2D" uid="uid://bw7bs1ov0n768" path="res://Sprites/UI/CharacterIcons/ValeIcon.png" id="4_745yc"]
+[ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="5_73sse"]
+[ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="7_ae74i"]
+[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="8_qif5p"]
+[ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="9_qhbeq"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="10_n8ys2"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="11_sxr6h"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="12_aghyx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ta7rr"]
+bg_color = Color(0, 0, 0, 0.7)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tyocy"]
+bg_color = Color(0.890196, 0.27451, 0.27451, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jmapv"]
+viewport_path = NodePath("GDCubismUserModel")
+
+[node name="Character_Selection" type="Control" node_paths=PackedStringArray("sprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wf478")
+sprite = NodePath("CharacterAnimatedSprite")
+
+[node name="DimBackground" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ta7rr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 158.0
+offset_right = 1628.0
+offset_bottom = 881.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tyocy")
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 30.0
+offset_right = 486.0
+offset_bottom = 693.0
+color = Color(1, 0.811765, 0.439216, 1)
+
+[node name="CharacterAnimatedSprite" parent="." instance=ExtResource("1_xffrp")]
+position = Vector2(1374, 524)
+texture = SubResource("ViewportTexture_jmapv")
+flip_h = true
+
+[node name="CharacterSelectContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 319.0
+offset_top = -924.0
+offset_right = 629.0
+offset_bottom = -204.0
+grow_vertical = 0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="CharacterSelectButton" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
+layout_mode = 2
+image = ExtResource("2_6i2c5")
+
+[node name="CharacterSelectButton2" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
+layout_mode = 2
+character = 1
+image = ExtResource("3_owfpp")
+
+[node name="CharacterSelectButton3" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
+layout_mode = 2
+character = 2
+image = ExtResource("4_745yc")
+
+[node name="CharacterSelectButton4" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
+layout_mode = 2
+character = 3
+image = ExtResource("5_73sse")
+
+[node name="CharacterInformationContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 208.0
+offset_right = 1139.0
+offset_bottom = 505.0
+
+[node name="Name" parent="CharacterInformationContainer" instance=ExtResource("7_ae74i")]
+layout_mode = 2
+theme_override_constants/outline_size = 35
+theme_override_font_sizes/font_size = 48
+text = "Goth"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterInformationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Description" type="Label" parent="CharacterInformationContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_qif5p")
+theme_override_font_sizes/font_size = 24
+text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="CharacterInformationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="CharacterInformationContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 519.0
+offset_right = 1139.0
+offset_bottom = 837.0
+
+[node name="PowerupInformation" type="VBoxContainer" parent="CharacterInformationContainer2"]
+layout_mode = 2
+
+[node name="Powerup_Header_Container" type="HBoxContainer" parent="CharacterInformationContainer2/PowerupInformation"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Powerup_Icon" type="TextureRect" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("9_qhbeq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Powerup_Image" type="TextureRect" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_n8ys2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SignatureTitle_VboxContainer" type="VBoxContainer" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
+layout_mode = 2
+
+[node name="Signature" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("7_ae74i")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Signature:"
+
+[node name="SignatureName" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("7_ae74i")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Signature Name"
+
+[node name="PowerupDescription" type="Label" parent="CharacterInformationContainer2/PowerupInformation"]
+custom_minimum_size = Vector2(439, 0)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme = ExtResource("8_qif5p")
+text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator3" type="HSeparator" parent="CharacterInformationContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="UltimateInformation" type="VBoxContainer" parent="CharacterInformationContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Ultimate_Header_Container" type="HBoxContainer" parent="CharacterInformationContainer2/UltimateInformation"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Ultimate_Icon" type="TextureRect" parent="CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
+clip_children = 2
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("9_qhbeq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Ultimate_Image" type="TextureRect" parent="CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_n8ys2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UltimateTitle_VboxContainer" type="VBoxContainer" parent="CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
+layout_mode = 2
+
+[node name="Ultimate" parent="CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("7_ae74i")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ultimate:"
+
+[node name="UltimateName" parent="CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("7_ae74i")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Ultimate Name"
+
+[node name="UltimateDescription" type="Label" parent="CharacterInformationContainer2/UltimateInformation"]
+custom_minimum_size = Vector2(439, 0)
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("8_qif5p")
+text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Leave_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 971.0
+offset_top = 892.0
+offset_right = 1625.0
+offset_bottom = 950.0
+pivot_offset = Vector2(654, 29)
+theme = ExtResource("11_sxr6h")
+theme_override_font_sizes/font_size = 50
+text = "Exit Character Selection"
+metadata/_edit_group_ = true
+
+[node name="LeaveButton" type="Button" parent="Leave_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 654.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("12_aghyx")
+label = NodePath("..")
+
+[connection signal="mouse_entered" from="Leave_Label/LeaveButton" to="Leave_Label/LeaveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Leave_Label/LeaveButton" to="Leave_Label/LeaveButton" method="_on_mouse_exited"]

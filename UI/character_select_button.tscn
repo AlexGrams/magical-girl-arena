@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="5_u12jg"]
 
 [node name="CharacterSelectButton" type="Button"]
-custom_minimum_size = Vector2(192, 192)
-offset_right = 192.0
-offset_bottom = 192.0
+custom_minimum_size = Vector2(150, 150)
+offset_right = 150.0
+offset_bottom = 150.0
 size_flags_horizontal = 3
 theme = ExtResource("1_k8brd")
 toggle_mode = true
@@ -24,8 +24,8 @@ selected_color = Color(1, 0.443137, 0.443137, 1)
 [node name="CharacterContainer" type="TextureRect" parent="."]
 clip_children = 2
 layout_mode = 0
-offset_right = 192.0
-offset_bottom = 192.0
+offset_right = 150.0
+offset_bottom = 150.0
 pivot_offset = Vector2(96, 96)
 texture = ExtResource("3_qk7ko")
 expand_mode = 1
@@ -36,9 +36,8 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -96.0
-offset_right = 88.0
-offset_bottom = -8.0
+offset_left = -75.0
+offset_right = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_u12jg")
@@ -47,9 +46,10 @@ expand_mode = 3
 [node name="Border" type="TextureRect" parent="CharacterContainer"]
 layout_mode = 0
 offset_top = -3.0
-offset_right = 192.0
-offset_bottom = 189.0
+offset_right = 150.0
+offset_bottom = 147.0
 texture = ExtResource("5_huv6i")
+expand_mode = 1
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
