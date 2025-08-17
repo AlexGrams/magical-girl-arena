@@ -1098,6 +1098,8 @@ vertical_alignment = 1
 [connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
+[connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
