@@ -9,6 +9,7 @@ const character_animated_sprite: Resource = preload("res://UI/character_animated
 @export var _portal_open: TextureRect = null
 @export var _portal_closed: TextureRect = null
 @export var _kick_button: Button = null
+@export var _flip_sprite: bool = false
 
 # The multiplayer ID of the player that this container represents
 var player_id: int = 0
@@ -47,6 +48,7 @@ func set_properties(
 		get_tree().root.add_child.call_deferred(sprite, true)
 		sprite.tree_entered.connect(func():
 			sprite.global_position = _character_sprite_location.global_position
+			sprite.flip_h = _flip_sprite
 			sprite.set_read_input(false)
 			, CONNECT_ONE_SHOT
 		)

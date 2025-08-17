@@ -1,0 +1,489 @@
+[gd_scene load_steps=19 format=3 uid="uid://c57w5wc6nd8u0"]
+
+[ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="1_mb8ss"]
+[ext_resource type="Texture2D" uid="uid://b0qlh4omx7gs1" path="res://Sprites/UI/GlowingAura.png" id="1_umvpc"]
+[ext_resource type="Texture2D" uid="uid://cas1ksd3okexv" path="res://Sprites/UI/GlowingRing2.png" id="3_esbqm"]
+[ext_resource type="Texture2D" uid="uid://c4ynfakjn1pf8" path="res://Sprites/UI/GlowingRing1.png" id="3_unyua"]
+[ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="8_gymmh"]
+[ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="9_a228v"]
+[ext_resource type="Texture2D" uid="uid://ct8h4o4nse58o" path="res://Sprites/UI/Checked_Icon.png" id="11_17p2f"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="12_0mnfm"]
+[ext_resource type="Texture2D" uid="uid://skoegfdgxc1l" path="res://Sprites/UI/Unchecked_Icon.png" id="12_gws03"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="13_6itpg"]
+[ext_resource type="ButtonGroup" uid="uid://bvwel4w7vks3a" path="res://UI/lobby_settings_button_group.tres" id="13_tpd0a"]
+[ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="14_my7cq"]
+[ext_resource type="Texture2D" uid="uid://dvapxkh0xr0lq" path="res://Sprites/UI/MapArrow_Icon.png" id="14_vbivi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_peilx"]
+bg_color = Color(0, 0, 0, 0.3)
+
+[sub_resource type="Animation" id="Animation_s6yy0"]
+resource_name = "Glowing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowingRing:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlowingRing2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlowingRing3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.785398, -5.49779]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlowingRing4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.28319, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlowingAura:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(0.825, 0.825), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_71a81"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowingRing:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlowingRing2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlowingRing3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlowingRing4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.28319]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlowingAura:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l0nj4"]
+_data = {
+"Glowing": SubResource("Animation_s6yy0"),
+"RESET": SubResource("Animation_71a81")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrbx6"]
+bg_color = Color(1, 0.443137, 0.443137, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.964706, 0.815686, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DimBackground" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_peilx")
+
+[node name="MapPreview" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GlowingAura" type="TextureRect" parent="MapPreview"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 331.0
+offset_top = -123.0
+offset_right = 1550.0
+offset_bottom = 902.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(609, 512)
+texture = ExtResource("1_umvpc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MapPreview"]
+libraries = {
+"": SubResource("AnimationLibrary_l0nj4")
+}
+autoplay = "Glowing"
+
+[node name="GlowingRing" type="TextureRect" parent="MapPreview"]
+layout_mode = 0
+offset_left = 588.0
+offset_top = 29.0
+offset_right = 1419.0
+offset_bottom = 817.0
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(431, 381)
+texture = ExtResource("3_unyua")
+
+[node name="GlowingRing2" type="TextureRect" parent="MapPreview"]
+layout_mode = 0
+offset_left = 617.0
+offset_top = -35.0
+offset_right = 1384.0
+offset_bottom = 803.0
+rotation = -6.28319
+scale = Vector2(0.85, 0.85)
+pivot_offset = Vector2(383, 419)
+texture = ExtResource("3_esbqm")
+
+[node name="GlowingRing3" type="TextureRect" parent="MapPreview"]
+layout_mode = 0
+offset_left = 527.0
+offset_top = -35.0
+offset_right = 1294.0
+offset_bottom = 803.0
+scale = Vector2(0.85, 0.85)
+pivot_offset = Vector2(383, 419)
+texture = ExtResource("3_esbqm")
+
+[node name="GlowingRing4" type="TextureRect" parent="MapPreview"]
+layout_mode = 0
+offset_left = 503.0
+offset_top = -43.0
+offset_right = 1334.0
+offset_bottom = 745.0
+rotation = -6.28319
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(431, 381)
+texture = ExtResource("3_unyua")
+
+[node name="MapPreview_Clip" type="TextureRect" parent="MapPreview"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 509.0
+offset_top = -21.0
+offset_right = 1372.0
+offset_bottom = 742.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_gymmh")
+expand_mode = 1
+
+[node name="MapPreview_Image" type="TextureRect" parent="MapPreview/MapPreview_Clip"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_a228v")
+
+[node name="GlowingRing_Border" type="TextureRect" parent="MapPreview"]
+layout_mode = 0
+offset_left = 529.0
+offset_top = -1.0
+offset_right = 1392.0
+offset_bottom = 762.0
+scale = Vector2(0.88, 0.88)
+pivot_offset = Vector2(431, 381)
+texture = ExtResource("3_unyua")
+expand_mode = 1
+
+[node name="PlayersHolder" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player1" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
+layout_mode = 0
+offset_left = 381.0
+offset_top = 401.0
+offset_right = 914.0
+offset_bottom = 844.0
+_flip_sprite = true
+
+[node name="Player2" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
+layout_mode = 0
+offset_left = 997.0
+offset_top = 401.0
+offset_right = 1530.0
+offset_bottom = 844.0
+
+[node name="Player3" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 261.0
+offset_right = 535.0
+offset_bottom = 704.0
+_flip_sprite = true
+
+[node name="Player4" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
+layout_mode = 0
+offset_left = 1387.0
+offset_top = 261.0
+offset_right = 1920.0
+offset_bottom = 704.0
+
+[node name="StartGame_Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 1321.0
+offset_top = 949.0
+offset_right = 1866.0
+offset_bottom = 1053.0
+pivot_offset = Vector2(272, 52)
+theme = ExtResource("12_0mnfm")
+theme_override_font_sizes/font_size = 90
+text = "Start Game"
+metadata/_edit_group_ = true
+
+[node name="StartGameButton" type="Button" parent="StartGame_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -272.5
+offset_top = -104.0
+offset_right = 272.5
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(272, 52)
+theme_override_font_sizes/font_size = 90
+script = ExtResource("13_6itpg")
+label = NodePath("..")
+
+[node name="LeaveLobby_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 994.0
+offset_right = 376.0
+offset_bottom = 1052.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("12_0mnfm")
+theme_override_font_sizes/font_size = 50
+text = "Leave Lobby"
+metadata/_edit_group_ = true
+
+[node name="LeaveButton" type="Button" parent="LeaveLobby_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 331.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("13_6itpg")
+label = NodePath("..")
+
+[node name="LobbySettings" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1623.0
+offset_top = 25.0
+offset_right = 1674.0
+offset_bottom = 174.0
+
+[node name="PublicLobby_Button" type="CheckButton" parent="LobbySettings"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("11_17p2f")
+theme_override_icons/unchecked = ExtResource("12_gws03")
+button_group = ExtResource("13_tpd0a")
+
+[node name="OutlineLabel" parent="LobbySettings/PublicLobby_Button" instance=ExtResource("14_my7cq")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 60.0
+offset_right = 211.0
+offset_bottom = 23.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Public Lobby"
+vertical_alignment = 1
+
+[node name="FriendsOnly_Button" type="CheckButton" parent="LobbySettings"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("11_17p2f")
+theme_override_icons/unchecked = ExtResource("12_gws03")
+button_group = ExtResource("13_tpd0a")
+
+[node name="OutlineLabel" parent="LobbySettings/FriendsOnly_Button" instance=ExtResource("14_my7cq")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 60.0
+offset_right = 212.0
+offset_bottom = 23.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Friends Only"
+vertical_alignment = 1
+
+[node name="InviteOnly_Button" type="CheckButton" parent="LobbySettings"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("11_17p2f")
+theme_override_icons/unchecked = ExtResource("12_gws03")
+button_pressed = true
+button_group = ExtResource("13_tpd0a")
+
+[node name="OutlineLabel" parent="LobbySettings/InviteOnly_Button" instance=ExtResource("14_my7cq")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 60.0
+offset_right = 211.0
+offset_bottom = 23.0
+grow_horizontal = 1
+grow_vertical = 1
+text = "Invite Only"
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 669.0
+offset_top = 866.0
+offset_right = 1236.0
+offset_bottom = 1042.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Button2" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("12_0mnfm")
+theme_override_font_sizes/font_size = 54
+theme_override_styles/normal = SubResource("StyleBoxFlat_hrbx6")
+text = "  Shop  "
+
+[node name="Button3" type="Button" parent="Buttons"]
+layout_mode = 2
+theme = ExtResource("12_0mnfm")
+theme_override_font_sizes/font_size = 54
+theme_override_styles/normal = SubResource("StyleBoxFlat_hrbx6")
+text = " Change Character "
+
+[node name="MapSelector" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 645.0
+offset_top = 27.0
+offset_right = 1269.0
+offset_bottom = 143.0
+theme_override_constants/separation = 20
+
+[node name="LeftArrow_MapSelect" type="TextureButton" parent="MapSelector"]
+layout_mode = 2
+texture_normal = ExtResource("14_vbivi")
+stretch_mode = 5
+flip_h = true
+
+[node name="OutlineLabel" parent="MapSelector" instance=ExtResource("14_my7cq")]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 84
+text = "Map Name"
+
+[node name="RightArrow_MapSelect" type="TextureButton" parent="MapSelector"]
+layout_mode = 2
+texture_normal = ExtResource("14_vbivi")
+stretch_mode = 5
+
+[connection signal="mouse_entered" from="StartGame_Label/StartGameButton" to="StartGame_Label/StartGameButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="StartGame_Label/StartGameButton" to="StartGame_Label/StartGameButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="LeaveLobby_Label/LeaveButton" to="LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LeaveLobby_Label/LeaveButton" to="LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]
