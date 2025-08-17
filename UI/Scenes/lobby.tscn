@@ -423,6 +423,7 @@ text = "Invite Only"
 vertical_alignment = 1
 
 [node name="ShopButton" type="Label" parent="."]
+layout_mode = 0
 offset_left = 891.0
 offset_top = 875.0
 offset_right = 1035.0
@@ -468,6 +469,7 @@ script = ExtResource("13_6itpg")
 label = NodePath("..")
 
 [node name="ChangeCharButton" type="Label" parent="."]
+layout_mode = 0
 offset_left = 683.0
 offset_top = 979.0
 offset_right = 1218.0

@@ -1,37 +1,29 @@
-[gd_scene load_steps=52 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=46 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
-[ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="3_bm35d"]
 [ext_resource type="Texture2D" uid="uid://dufp6oabhvclo" path="res://Sprites/UI/Sparkle.png" id="3_jnlk8"]
 [ext_resource type="Texture2D" uid="uid://d6o2bytnsyfa" path="res://Sprites/UI/Logo.png" id="3_ypdub"]
 [ext_resource type="Script" path="res://UI/logo_scale.gd" id="4_aw7yi"]
 [ext_resource type="Texture2D" uid="uid://bkxp5lgk7qnhj" path="res://Sprites/UI/Clouds.png" id="4_puq1x"]
-[ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="4_trmdt"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="4_wqh84"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="5_1w6cg"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="5_76cyy"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="7_mn14l"]
 [ext_resource type="PackedScene" uid="uid://cilsvv67hbq8f" path="res://UI/lobby_button.tscn" id="7_rqpyu"]
 [ext_resource type="PackedScene" uid="uid://bw3l43n1jry4" path="res://UI/feedback_menu.tscn" id="7_ryuk3"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="9_m305s"]
 [ext_resource type="Script" path="res://UI/settings.gd" id="12_r21tk"]
-[ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="13_flegh"]
 [ext_resource type="Script" path="res://Levels/option_button.gd" id="13_r3p63"]
 [ext_resource type="Texture2D" uid="uid://cxov8kqfns1px" path="res://Sprites/HeartPickup.png" id="14_ddmg2"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
-[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="15_e8gbh"]
-[ext_resource type="Texture2D" uid="uid://cwpwmd20e76c2" path="res://Sprites/UI/CharacterIcons/SweetIcon.png" id="16_c71yi"]
 [ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="17_1i823"]
-[ext_resource type="Texture2D" uid="uid://bw7bs1ov0n768" path="res://Sprites/UI/CharacterIcons/ValeIcon.png" id="17_2qjas"]
 [ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="17_7br78"]
 [ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="17_qad3k"]
 [ext_resource type="Script" path="res://Levels/shop.gd" id="17_rr20q"]
 [ext_resource type="PackedScene" uid="uid://pivdwl1bwb7m" path="res://UI/Shop/shop_item.tscn" id="17_y7mn5"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="18_5ybm4"]
-[ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="18_651ly"]
-[ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="18_q7thc"]
-[ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="19_7guse"]
+[ext_resource type="PackedScene" uid="uid://bfbm3j6d0el6h" path="res://UI/Scenes/character_selection.tscn" id="20_tc85m"]
+[ext_resource type="PackedScene" uid="uid://c57w5wc6nd8u0" path="res://UI/Scenes/lobby.tscn" id="29_i1nmj"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
 [ext_resource type="Resource" uid="uid://cibbn8bcqvx6e" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
 [ext_resource type="Resource" uid="uid://c1lyy8f7275d4" path="res://UI/Shop/Items/item_powerup_reroll.tres" id="32_bme4c"]
@@ -152,6 +144,11 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="Theme" id="Theme_8c3cl"]
 Panel/styles/panel = SubResource("StyleBoxFlat_i5e32")
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_1b1tj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jmapv"]
+viewport_path = NodePath("GDCubismUserModel")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
 bg_color = Color(0, 0, 0, 0.784314)
 
@@ -167,7 +164,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "lobby", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "lobby_visibility_option_button", "map_holder", "map_option_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "lobby", "main_menu_logo", "connecting_screen", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,20 +182,16 @@ lobbies_list_container = NodePath("LobbyList/LobbiesListPanelContainer/LobbiesSc
 lobby = NodePath("Lobby")
 main_menu_logo = NodePath("Background/Logo")
 connecting_screen = NodePath("Connecting")
-lobby_visibility_holder = NodePath("Lobby/LobbyVisibilityContainer")
-lobby_visibility_option_button = NodePath("Lobby/LobbyVisibilityContainer/LobbyVisibilityOptionButton")
-map_holder = NodePath("Lobby/MapContainer")
-map_option_button = NodePath("Lobby/MapContainer/MapOptionButton")
 players_holder = NodePath("Lobby/PlayersHolder")
-character_select_button_holder = NodePath("Lobby/CharacterSelectContainer")
-information_name = NodePath("Lobby/CharacterInformationContainer/Name")
-information_description = NodePath("Lobby/CharacterInformationContainer/Description")
-information_powerup_label = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer/SignatureName")
-information_powerup_texture = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon/Powerup_Image")
-information_powerup_description = NodePath("Lobby/CharacterInformationContainer2/PowerupInformation/PowerupDescription")
-information_ult_label = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
-information_ult_texture = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
-information_ult_description = NodePath("Lobby/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
+character_select_button_holder = NodePath("Character_Selection/CharacterSelectContainer")
+information_name = NodePath("Character_Selection/CharacterInformationContainer/Name")
+information_description = NodePath("Character_Selection/CharacterInformationContainer/Description")
+information_powerup_label = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer/SignatureName")
+information_powerup_texture = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon/Powerup_Image")
+information_powerup_description = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/PowerupDescription")
+information_ult_label = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
+information_ult_texture = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
+information_ult_description = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
 start_game_label = NodePath("Lobby/StartGame_Label")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
@@ -804,406 +797,25 @@ Check your device's network connection and that you're signed into Steam, then r
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Lobby" type="Control" parent="."]
+[node name="Lobby" parent="." instance=ExtResource("29_i1nmj")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="PlayersHolder" type="Control" parent="Lobby"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PublicLobby_Button" parent="Lobby/LobbySettings" index="0"]
+button_group = SubResource("ButtonGroup_1b1tj")
 
-[node name="Player1" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
-layout_mode = 0
-offset_left = 509.0
-offset_top = 582.0
-offset_right = 1042.0
-offset_bottom = 1013.0
+[node name="FriendsOnly_Button" parent="Lobby/LobbySettings" index="1"]
+button_group = SubResource("ButtonGroup_1b1tj")
 
-[node name="Player2" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
-layout_mode = 0
-offset_left = 851.0
-offset_top = 447.0
-offset_right = 1384.0
-offset_bottom = 878.0
+[node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
+button_group = SubResource("ButtonGroup_1b1tj")
 
-[node name="Player3" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
-layout_mode = 0
-offset_left = 1214.0
-offset_top = 556.0
-offset_right = 1747.0
-offset_bottom = 987.0
-
-[node name="Player4" parent="Lobby/PlayersHolder" instance=ExtResource("3_bm35d")]
-layout_mode = 0
-offset_left = 1427.0
-offset_top = 372.0
-offset_right = 1960.0
-offset_bottom = 803.0
-
-[node name="CharacterSelectContainer" type="HBoxContainer" parent="Lobby"]
+[node name="Character_Selection" parent="." instance=ExtResource("20_tc85m")]
+visible = false
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 642.0
-offset_top = -988.0
-offset_right = 1036.0
-offset_bottom = -796.0
-grow_vertical = 0
-theme_override_constants/separation = 10
 
-[node name="CharacterSelectButton" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
-layout_mode = 2
-image = ExtResource("15_e8gbh")
-
-[node name="CharacterSelectButton2" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
-layout_mode = 2
-character = 1
-image = ExtResource("16_c71yi")
-
-[node name="CharacterSelectButton3" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
-layout_mode = 2
-character = 2
-image = ExtResource("17_2qjas")
-
-[node name="CharacterSelectButton4" parent="Lobby/CharacterSelectContainer" instance=ExtResource("4_trmdt")]
-layout_mode = 2
-character = 3
-image = ExtResource("18_q7thc")
-
-[node name="CharacterInformation_Panel" type="TextureRect" parent="Lobby"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 229.0
-offset_right = 538.0
-offset_bottom = 970.0
-texture = ExtResource("13_flegh")
-
-[node name="CharacterInformationContainer" type="VBoxContainer" parent="Lobby"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 274.0
-offset_right = 497.0
-offset_bottom = 571.0
-
-[node name="Name" parent="Lobby/CharacterInformationContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_constants/outline_size = 35
-theme_override_font_sizes/font_size = 48
-text = "Goth"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="Description" type="Label" parent="Lobby/CharacterInformationContainer"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("18_651ly")
-theme_override_font_sizes/font_size = 24
-text = "Goth is Sweet’s girlfriend and a necromancer. With her double-sided scythe, she can slice down foes only to raise them from the dead to fight on her side."
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="HSeparator2" type="HSeparator" parent="Lobby/CharacterInformationContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="CharacterInformationContainer2" type="VBoxContainer" parent="Lobby"]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 585.0
-offset_right = 497.0
-offset_bottom = 903.0
-
-[node name="PowerupInformation" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2"]
-layout_mode = 2
-
-[node name="Powerup_Header_Container" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformation"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Powerup_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
-clip_children = 2
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("19_7guse")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Powerup_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_1w6cg")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SignatureTitle_VboxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container"]
-layout_mode = 2
-
-[node name="Signature" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Signature:"
-
-[node name="SignatureName" parent="Lobby/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Signature Name"
-
-[node name="PowerupDescription" type="Label" parent="Lobby/CharacterInformationContainer2/PowerupInformation"]
-custom_minimum_size = Vector2(439, 0)
-layout_direction = 2
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 6
-theme = ExtResource("18_651ly")
-text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="HSeparator3" type="HSeparator" parent="Lobby/CharacterInformationContainer2"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="UltimateInformation" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Ultimate_Header_Container" type="HBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Ultimate_Icon" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
-clip_children = 2
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("19_7guse")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Ultimate_Image" type="TextureRect" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_1w6cg")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="UltimateTitle_VboxContainer" type="VBoxContainer" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container"]
-layout_mode = 2
-
-[node name="Ultimate" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Ultimate:"
-
-[node name="UltimateName" parent="Lobby/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer" instance=ExtResource("18_5ybm4")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Ultimate Name"
-
-[node name="UltimateDescription" type="Label" parent="Lobby/CharacterInformationContainer2/UltimateInformation"]
-custom_minimum_size = Vector2(439, 0)
-layout_direction = 2
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("18_651ly")
-text = "Goth is Sweet’s girlfriend a Goth is Sweet’s girlfriend and a necromancer. With"
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="StartGame_Label" type="Label" parent="Lobby"]
-z_index = 1
-layout_mode = 0
-offset_left = 1321.0
-offset_top = 949.0
-offset_right = 1866.0
-offset_bottom = 1053.0
-pivot_offset = Vector2(272, 52)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 90
-text = "Start Game"
-metadata/_edit_group_ = true
-
-[node name="StartGameButton" type="Button" parent="Lobby/StartGame_Label" node_paths=PackedStringArray("label")]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -272.5
-offset_top = -104.0
-offset_right = 272.5
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(272, 52)
-theme_override_font_sizes/font_size = 90
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="LeaveLobby_Label" type="Label" parent="Lobby"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 994.0
-offset_right = 376.0
-offset_bottom = 1052.0
-pivot_offset = Vector2(0, 29)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 50
-text = "Leave Lobby"
-metadata/_edit_group_ = true
-
-[node name="LeaveButton" type="Button" parent="Lobby/LeaveLobby_Label" node_paths=PackedStringArray("label")]
-layout_mode = 1
-offset_right = 331.0
-offset_bottom = 58.0
-theme_override_font_sizes/font_size = 50
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="Shop_Label" type="Label" parent="Lobby"]
-layout_mode = 0
-offset_left = 485.0
-offset_top = 994.0
-offset_right = 618.0
-offset_bottom = 1052.0
-pivot_offset = Vector2(0, 29)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 50
-text = "Shop"
-horizontal_alignment = 2
-metadata/_edit_group_ = true
-
-[node name="ShopButton" type="Button" parent="Lobby/Shop_Label" node_paths=PackedStringArray("label")]
-layout_mode = 1
-offset_right = 133.0
-offset_bottom = 58.0
-theme_override_font_sizes/font_size = 50
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="Feedback_Label" type="Label" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -415.0
-offset_top = 10.0
-offset_right = -20.0
-offset_bottom = 68.0
-grow_horizontal = 0
-pivot_offset = Vector2(395, 0)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 50
-text = "Send Feedback"
-
-[node name="LobbyButton" type="Button" parent="Lobby/Feedback_Label" node_paths=PackedStringArray("label")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_wqh84")
-alignment = 0
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="LobbyVisibilityContainer" type="VBoxContainer" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -443.0
-offset_top = 118.0
-offset_right = -29.0
-offset_bottom = 262.0
-grow_horizontal = 0
-alignment = 2
-
-[node name="LobbyVisibilityLabel" type="Label" parent="Lobby/LobbyVisibilityContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 50
-text = "Lobby Type:"
-
-[node name="LobbyVisibilityOptionButton" type="OptionButton" parent="Lobby/LobbyVisibilityContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 61
-alignment = 1
-selected = 1
-item_count = 3
-popup/item_0/text = "Public"
-popup/item_1/text = "Friends Only"
-popup/item_1/id = 1
-popup/item_2/text = "Closed"
-popup/item_2/id = 2
-script = ExtResource("13_r3p63")
-
-[node name="MapContainer" type="VBoxContainer" parent="Lobby"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -446.0
-offset_top = 281.0
-offset_right = -29.0
-offset_bottom = 352.0
-grow_horizontal = 0
-alignment = 2
-
-[node name="MapOptionButton" type="OptionButton" parent="Lobby/MapContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 61
-alignment = 1
-selected = 0
-item_count = 2
-popup/item_0/text = "Garden"
-popup/item_1/text = "Not Garden"
-popup/item_1/id = 1
-script = ExtResource("13_r3p63")
+[node name="CharacterAnimatedSprite" parent="Character_Selection" index="2"]
+texture = SubResource("ViewportTexture_jmapv")
 
 [node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item", "powerup_reroll_item", "artifact_reroll_item")]
 visible = false
@@ -1486,20 +1098,6 @@ vertical_alignment = 1
 [connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
-[connection signal="mouse_entered" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/StartGame_Label/StartGameButton" to="Lobby/StartGame_Label/StartGameButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="_on_leave_button_down"]
-[connection signal="mouse_entered" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/LeaveLobby_Label/LeaveButton" to="Lobby/LeaveLobby_Label/LeaveButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Lobby/Shop_Label/ShopButton" to="." method="show_shop"]
-[connection signal="mouse_entered" from="Lobby/Shop_Label/ShopButton" to="Lobby/Shop_Label/ShopButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/Shop_Label/ShopButton" to="Lobby/Shop_Label/ShopButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="Lobby/Feedback_Label/LobbyButton" to="FeedbackMenu" method="show"]
-[connection signal="mouse_entered" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/Feedback_Label/LobbyButton" to="Lobby/Feedback_Label/LobbyButton" method="_on_mouse_exited"]
-[connection signal="item_selected" from="Lobby/LobbyVisibilityContainer/LobbyVisibilityOptionButton" to="." method="_on_lobby_visibility_option_button_item_selected"]
-[connection signal="item_selected" from="Lobby/MapContainer/MapOptionButton" to="." method="_on_map_option_button_item_selected"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
@@ -1507,3 +1105,6 @@ vertical_alignment = 1
 [connection signal="button_down" from="Shop/HideShop_Label/ShopBackButton" to="." method="hide_shop"]
 [connection signal="mouse_entered" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
+
+[editable path="Lobby"]
+[editable path="Character_Selection"]
