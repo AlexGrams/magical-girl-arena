@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://c57w5wc6nd8u0"]
+[gd_scene load_steps=22 format=3 uid="uid://c57w5wc6nd8u0"]
 
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="1_mb8ss"]
 [ext_resource type="Texture2D" uid="uid://b0qlh4omx7gs1" path="res://Sprites/UI/GlowingAura.png" id="1_umvpc"]
 [ext_resource type="Texture2D" uid="uid://cas1ksd3okexv" path="res://Sprites/UI/GlowingRing2.png" id="3_esbqm"]
 [ext_resource type="Texture2D" uid="uid://c4ynfakjn1pf8" path="res://Sprites/UI/GlowingRing1.png" id="3_unyua"]
+[ext_resource type="Shader" path="res://UI/wibbly_wobbly_shader.gdshader" id="5_nujw6"]
+[ext_resource type="Texture2D" uid="uid://bqi2drmea1eoj" path="res://Sprites/UI/Map_Icon_Corvus.png" id="5_qbusf"]
+[ext_resource type="Texture2D" uid="uid://8l47geyebhic" path="res://Sprites/UI/Camouflage.png" id="7_1gor3"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="8_gymmh"]
-[ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="9_a228v"]
 [ext_resource type="Texture2D" uid="uid://ct8h4o4nse58o" path="res://Sprites/UI/Checked_Icon.png" id="11_17p2f"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="12_0mnfm"]
 [ext_resource type="Texture2D" uid="uid://skoegfdgxc1l" path="res://Sprites/UI/Unchecked_Icon.png" id="12_gws03"]
@@ -152,6 +154,21 @@ _data = {
 "RESET": SubResource("Animation_71a81")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aybmi"]
+shader = ExtResource("5_nujw6")
+shader_parameter/waveAmplitude = 0.05
+shader_parameter/correctVertex = false
+shader_parameter/waveFrequency = 10.0
+shader_parameter/verticalWave = true
+shader_parameter/keepTransparency = true
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 0.5
+shader_parameter/secondHalf = 0.5
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
+
 [node name="Lobby" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -257,10 +274,23 @@ texture = ExtResource("8_gymmh")
 expand_mode = 1
 
 [node name="MapPreview_Image" type="TextureRect" parent="MapPreview/MapPreview_Clip"]
+material = SubResource("ShaderMaterial_aybmi")
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("9_a228v")
+offset_right = 900.0
+offset_bottom = 763.0
+texture = ExtResource("5_qbusf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Camouflage" type="TextureRect" parent="MapPreview/MapPreview_Clip"]
+material = SubResource("ShaderMaterial_aybmi")
+layout_mode = 0
+offset_right = 900.0
+offset_bottom = 763.0
+pivot_offset = Vector2(450, 381)
+texture = ExtResource("7_1gor3")
+expand_mode = 3
+stretch_mode = 1
 
 [node name="GlowingRing_Border" type="TextureRect" parent="MapPreview"]
 layout_mode = 0
