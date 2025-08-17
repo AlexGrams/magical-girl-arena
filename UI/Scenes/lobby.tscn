@@ -320,7 +320,6 @@ offset_right = 1920.0
 offset_bottom = 704.0
 
 [node name="StartGame_Label" type="Label" parent="."]
-z_index = 1
 layout_mode = 0
 offset_left = 1321.0
 offset_top = 949.0
