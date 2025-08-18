@@ -314,7 +314,6 @@ offset_left = 381.0
 offset_top = 401.0
 offset_right = 914.0
 offset_bottom = 844.0
-_flip_sprite = true
 
 [node name="Player2" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
 layout_mode = 0
@@ -322,6 +321,7 @@ offset_left = 997.0
 offset_top = 401.0
 offset_right = 1530.0
 offset_bottom = 844.0
+_flip_sprite = true
 
 [node name="Player3" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
 layout_mode = 0
@@ -329,7 +329,6 @@ offset_left = 2.0
 offset_top = 261.0
 offset_right = 535.0
 offset_bottom = 704.0
-_flip_sprite = true
 
 [node name="Player4" parent="PlayersHolder" instance=ExtResource("1_mb8ss")]
 layout_mode = 0
@@ -337,6 +336,7 @@ offset_left = 1387.0
 offset_top = 261.0
 offset_right = 1920.0
 offset_bottom = 704.0
+_flip_sprite = true
 
 [node name="StartGame_Label" type="Label" parent="."]
 layout_mode = 0
