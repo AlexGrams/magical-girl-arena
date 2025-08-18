@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgo3b8qjagkkw"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_terrain.gd" id="1_kvdab"]
-[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="2_ltcdh"]
+[ext_resource type="Texture2D" uid="uid://4d2ehixrugtb" path="res://Sprites/Map/Desert/Chain_Arc.png" id="2_e37qn"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_x0orq"]
 [ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_x57p0"]
 
@@ -19,8 +19,11 @@ collider = NodePath("DamageArea2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.42515, 1.98734)
-texture = ExtResource("2_ltcdh")
+z_index = 1
+position = Vector2(-40, 2.30926e-14)
+rotation = -1.5708
+scale = Vector2(0.31, 0.31)
+texture = ExtResource("2_e37qn")
 
 [node name="DamageArea2D" type="Area2D" parent="."]
 collision_layer = 0
