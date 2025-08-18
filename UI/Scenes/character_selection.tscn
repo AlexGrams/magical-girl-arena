@@ -32,7 +32,7 @@ corner_radius_bottom_left = 20
 [sub_resource type="ViewportTexture" id="ViewportTexture_jmapv"]
 viewport_path = NodePath("GDCubismUserModel")
 
-[node name="Character_Selection" type="Control" node_paths=PackedStringArray("sprite")]
+[node name="CharacterSelection" type="Control" node_paths=PackedStringArray("sprite")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=45 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -146,9 +146,6 @@ Panel/styles/panel = SubResource("StyleBoxFlat_i5e32")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_1b1tj"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jmapv"]
-viewport_path = NodePath("GDCubismUserModel")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
 bg_color = Color(0, 0, 0, 0.784314)
 
@@ -186,15 +183,15 @@ lobby_visibility_holder = NodePath("Lobby/LobbySettings")
 map_select_left_button = NodePath("Lobby/LeftArrow_MapSelect")
 map_select_right_button = NodePath("Lobby/RightArrow_MapSelect")
 players_holder = NodePath("Lobby/PlayersHolder")
-character_select_button_holder = NodePath("Character_Selection/CharacterSelectContainer")
-information_name = NodePath("Character_Selection/CharacterInformationContainer/Name")
-information_description = NodePath("Character_Selection/CharacterInformationContainer/Description")
-information_powerup_label = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer/SignatureName")
-information_powerup_texture = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon/Powerup_Image")
-information_powerup_description = NodePath("Character_Selection/CharacterInformationContainer2/PowerupInformation/PowerupDescription")
-information_ult_label = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
-information_ult_texture = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
-information_ult_description = NodePath("Character_Selection/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
+character_select_button_holder = NodePath("CharacterSelection/CharacterSelectContainer")
+information_name = NodePath("CharacterSelection/CharacterInformationContainer/Name")
+information_description = NodePath("CharacterSelection/CharacterInformationContainer/Description")
+information_powerup_label = NodePath("CharacterSelection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer/SignatureName")
+information_powerup_texture = NodePath("CharacterSelection/CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/Powerup_Icon/Powerup_Image")
+information_powerup_description = NodePath("CharacterSelection/CharacterInformationContainer2/PowerupInformation/PowerupDescription")
+information_ult_label = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
+information_ult_texture = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
+information_ult_description = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
 start_game_label = NodePath("Lobby/StartGame_Label")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
@@ -813,12 +810,9 @@ button_group = SubResource("ButtonGroup_1b1tj")
 [node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
 button_group = SubResource("ButtonGroup_1b1tj")
 
-[node name="Character_Selection" parent="." instance=ExtResource("20_tc85m")]
+[node name="CharacterSelection" parent="." instance=ExtResource("20_tc85m")]
 visible = false
 layout_mode = 1
-
-[node name="CharacterAnimatedSprite" parent="Character_Selection" index="2"]
-texture = SubResource("ViewportTexture_jmapv")
 
 [node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item", "powerup_reroll_item", "artifact_reroll_item")]
 visible = false
@@ -1112,4 +1106,3 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
 
 [editable path="Lobby"]
-[editable path="Character_Selection"]
