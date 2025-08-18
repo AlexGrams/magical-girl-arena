@@ -27,9 +27,7 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 ## The screen telling the player that they're connecting to a game
 @export var connecting_screen: Control
 ## Parent of the UI elements displaying lobby visibility option.
-@export var lobby_visibility_holder: Control 
-## For selecting who can join this lobby.
-@export var lobby_visibility_option_button: OptionButton
+@export var lobby_visibility_holder: Control
 ## Button to select the previous map.
 @export var map_select_left_button: ButtonHover
 ## Button to select the next map.
