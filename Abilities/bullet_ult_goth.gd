@@ -23,7 +23,7 @@ var damage: float = 0.0
 var status_duration: float = 0.0
 
 
-func set_damage(new_damage: float):
+func set_damage(new_damage: float, _is_crit: bool = false):
 	damage = new_damage
 
 

@@ -25,8 +25,9 @@ var _is_owned_by_player = true
 var _health: float = 1.0
 
 
-func set_damage(damage: float):
+func set_damage(damage: float, is_crit: bool = false):
 	collider.damage = damage
+	collider.is_crit = is_crit
 
 
 func _ready() -> void:

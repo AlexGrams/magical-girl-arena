@@ -12,8 +12,9 @@ var _half_lifetime: float = 0.0
 var _signature_behavior: bool = true
 
 
-func set_damage(damage: float):
+func set_damage(damage: float, is_crit: bool = false):
 	area.damage = damage
+	area.is_crit = is_crit
 
 
 # Called when the node enters the scene tree for the first time.

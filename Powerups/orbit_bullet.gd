@@ -5,8 +5,9 @@ extends Bullet
 var owning_player: Node2D = null
 
 
-func set_damage(damage: float):
+func set_damage(damage: float, is_crit: bool = false):
 	$BulletOffset/Area2D.damage = damage
+	$BulletOffset/Area2D.is_crit = is_crit
 
 
 func _ready() -> void:

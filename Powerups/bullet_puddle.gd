@@ -15,7 +15,7 @@ var _exploded_frame_count: int = -1
 var _has_level_3_upgrade: bool = false
 
 
-func set_damage(damage: float):
+func set_damage(damage: float, _is_crit: bool = false):
 	_damage = damage
 	# TODO: Might need to separate this later.
 	_splash_area.damage = damage * 50.0

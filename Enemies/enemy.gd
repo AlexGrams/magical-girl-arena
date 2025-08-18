@@ -263,16 +263,16 @@ func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
-func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT) -> void:
+func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, is_crit: bool = false) -> void:
 	# TODO: Maybe fix all the references to this function.
 	AudioManager.create_audio_at_location(global_position, damage_type)
-	_take_damage.rpc_id(1, damage)
+	_take_damage.rpc_id(1, damage, is_crit)
 
 
 ## Deals damage to this Enemy. Call via RPC to have effects replicated on all clients.
 ## Only call on the server
 @rpc("any_peer", "call_local")
-func _take_damage(damage: float) -> void:
+func _take_damage(damage: float, is_crit: bool = false) -> void:
 	if not is_multiplayer_authority() or health <= 0:
 		return
 	
@@ -282,7 +282,7 @@ func _take_damage(damage: float) -> void:
 	
 	health -= snapped(damage, 1)
 	
-	_playground.create_damage_indicator.rpc(global_position, damage)
+	_playground.create_damage_indicator.rpc(global_position, damage, is_crit)
 	$AnimationPlayer.play("take_damage")
 	
 	if health <= 0:
@@ -302,7 +302,7 @@ func _update_boss_health_bar(new_percent: float, is_boss: bool) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
 		if is_multiplayer_authority():
-			take_damage(area.damage)
+			take_damage(area.damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, area.is_crit)
 		
 		# Analytics: Record damage done by touching a bullet for this client only.
 		if area.owner_id == multiplayer.get_unique_id():

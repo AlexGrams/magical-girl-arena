@@ -130,7 +130,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 
 
-func set_damage(damage:float):
+func set_damage(damage: float, _is_crit: bool = false):
 	_base_damage = damage
 	_damage_increase_per_second = _damage_percent_increase_per_second * damage
 

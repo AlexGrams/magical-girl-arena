@@ -31,8 +31,9 @@ var _exploded: bool = false
 
 
 ## Special functionality: only sets the explosion damage.
-func set_damage(damage: float):
+func set_damage(damage: float, is_crit: bool = false):
 	_explosion_area.damage = damage
+	_explosion_area.is_crit = is_crit
 
 
 func _ready() -> void:

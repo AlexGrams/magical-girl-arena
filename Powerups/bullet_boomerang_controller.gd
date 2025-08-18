@@ -94,7 +94,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		pass
 
 
-func set_damage(damage:float):
+func set_damage(damage: float, _is_crit: bool = false):
 	_damage = damage
 
 

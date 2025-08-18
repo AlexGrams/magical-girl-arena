@@ -64,8 +64,8 @@ func shoot() -> void:
 
 ## Only call on the server. Deals damage to this corrupted enemy. Update health bars on all clients.
 @rpc("any_peer", "call_local")
-func _take_damage(damage: float) -> void:
-	super(damage)
+func _take_damage(damage: float, is_crit: bool = false) -> void:
+	super(damage, is_crit)
 	
 	_update_boss_health_bar.rpc(float(health) / max_health, false)
 

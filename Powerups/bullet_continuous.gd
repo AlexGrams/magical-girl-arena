@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func set_damage(damage: float):
+func set_damage(damage: float, _is_crit: bool = false):
 	_damage = damage
 
 

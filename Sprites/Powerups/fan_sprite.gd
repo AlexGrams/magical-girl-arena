@@ -8,7 +8,7 @@ var _owner: PlayerCharacterBody2D = null
 var _direction: float = 0.0
 
 
-func set_damage(_damage: float):
+func set_damage(_damage: float, _is_crit: bool = false):
 	pass
 
 
