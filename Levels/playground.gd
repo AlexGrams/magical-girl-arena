@@ -301,8 +301,8 @@ func _update_map_complete_variable() -> void:
 
 ## Create a damage indicator VFX at a location
 @rpc("authority", "call_local")
-func create_damage_indicator(pos: Vector2, damage: float) -> void:
-	_damage_indicator_pool[_damage_indicator_index].animate(pos, damage)
+func create_damage_indicator(pos: Vector2, damage: float, is_crit: bool = false) -> void:
+	_damage_indicator_pool[_damage_indicator_index].animate(pos, damage, is_crit)
 	_damage_indicator_index += 1
 	if _damage_indicator_index >= _DAMAGE_INDICATOR_POOL_SIZE:
 		_damage_indicator_index = 0

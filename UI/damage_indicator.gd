@@ -12,8 +12,10 @@ var _base_scale:float = 1
 ## The original scale of the base image.
 var _starting_texture_scale: Vector2 = Vector2.ONE
 var _starting_big_sparkle_color: Color
+var _starting_big_sparkle_crit_color: Color = Color.BLUE
 var _starting_small_sparkle_color: Color
 var _ending_big_sparkle_color: Color
+var _ending_big_sparkle_crit_color: Color
 var _ending_small_sparkle_color: Color
 var _tween: Tween = null
 
@@ -23,8 +25,10 @@ func _ready() -> void:
 	_starting_big_sparkle_color = $TextureRect.self_modulate
 	_starting_small_sparkle_color = $TextureRect/TextureRect2.self_modulate
 	_ending_big_sparkle_color = _starting_big_sparkle_color
+	_ending_big_sparkle_crit_color = _starting_big_sparkle_crit_color
 	_ending_small_sparkle_color = _starting_small_sparkle_color
 	_ending_big_sparkle_color.a = 0.0
+	_ending_big_sparkle_crit_color.a = 0.0
 	_ending_small_sparkle_color.a = 0.0
 	
 	# Randomize the position once for each indicator.
@@ -42,7 +46,7 @@ func _process(delta: float) -> void:
 
 
 ## Play the twinkle animation.
-func animate(pos: Vector2, damage_value: float) -> void:
+func animate(pos: Vector2, damage_value: float, is_crit: bool) -> void:
 	global_position = pos
 	
 	# Map damage value to texture size
@@ -63,7 +67,7 @@ func animate(pos: Vector2, damage_value: float) -> void:
 	# Set initial values
 	time_passed = 0.0
 	$TextureRect.scale = _starting_texture_scale * _base_scale
-	$TextureRect.self_modulate = _starting_big_sparkle_color
+	$TextureRect.self_modulate = _starting_big_sparkle_color if not is_crit else _starting_big_sparkle_crit_color
 	$TextureRect/TextureRect2.self_modulate = _starting_small_sparkle_color
 	
 	if _tween != null:
@@ -71,7 +75,12 @@ func animate(pos: Vector2, damage_value: float) -> void:
 	
 	_tween = create_tween()
 	_tween.set_ease(Tween.EASE_OUT)
-	_tween.parallel().tween_property($TextureRect, "self_modulate", _ending_big_sparkle_color, 1.0)
+	_tween.parallel().tween_property(
+			$TextureRect, 
+			"self_modulate", 
+			_ending_big_sparkle_color if not is_crit else _ending_big_sparkle_crit_color, 
+			1.0
+	)
 	_tween.parallel().tween_property($TextureRect/TextureRect2, "self_modulate", _ending_small_sparkle_color, 1.0)
 	_tween.set_trans(Tween.TRANS_ELASTIC)
 	_tween.parallel().tween_property($TextureRect, "scale", $TextureRect.scale * scale_multiplier, 0.3)

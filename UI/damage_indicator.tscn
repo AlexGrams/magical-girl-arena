@@ -11,6 +11,7 @@ script = ExtResource("1_bwj21")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(1, 0.32549, 0.501961, 1)
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 pivot_offset = Vector2(20, 20)
