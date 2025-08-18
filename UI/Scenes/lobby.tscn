@@ -556,6 +556,7 @@ offset_bottom = 143.0
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 84
 text = "Map Name"
+horizontal_alignment = 1
 
 [node name="LeftArrow_MapSelect" type="TextureButton" parent="." node_paths=PackedStringArray("label")]
 layout_mode = 2

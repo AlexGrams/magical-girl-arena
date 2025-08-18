@@ -60,9 +60,9 @@ enum DialoguePlayTriggerExtra {
 
 ## Paths for all the maps in the game. The order of maps in this array is the order in which
 ## they are displayed to the player.
-const MAP_PATHS: Array[String] = [
-	"res://Levels/playground.tscn",
-	"res://Levels/playground2.tscn"
+const MAP_DATA: Array[MapData] = [
+	preload("res://Levels/MapData/map_data_valley.tres"),
+	preload("res://Levels/MapData/map_data_desert.tres")
 ]
 
 

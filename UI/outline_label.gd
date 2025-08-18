@@ -1,4 +1,6 @@
+class_name OutlineLabel
 extends Label
+## Displays text with an outline.
 
 @onready var _shadow:Label = $Shadow
 @onready var _outline:Label = $Outline

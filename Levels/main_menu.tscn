@@ -161,7 +161,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "lobby", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "lobby", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "players_holder", "character_select_button_holder", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "start_game_label", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -182,6 +182,7 @@ connecting_screen = NodePath("Connecting")
 lobby_visibility_holder = NodePath("Lobby/LobbySettings")
 map_select_left_button = NodePath("Lobby/LeftArrow_MapSelect")
 map_select_right_button = NodePath("Lobby/RightArrow_MapSelect")
+map_name_label = NodePath("Lobby/OutlineLabel")
 players_holder = NodePath("Lobby/PlayersHolder")
 character_select_button_holder = NodePath("CharacterSelection/CharacterSelectContainer")
 information_name = NodePath("CharacterSelection/CharacterInformationContainer/Name")

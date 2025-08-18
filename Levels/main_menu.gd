@@ -28,14 +28,20 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var connecting_screen: Control
 ## Parent of the UI elements displaying lobby visibility option.
 @export var lobby_visibility_holder: Control
+
+@export_group("Lobby")
 ## Button to select the previous map.
 @export var map_select_left_button: ButtonHover
 ## Button to select the next map.
 @export var map_select_right_button: ButtonHover
+## Displays the map name.
+@export var map_name_label: OutlineLabel
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
+
+@export_group("")
 ## Components for displaying selected character information on the Lobby screen.
 @export var information_name: Label
 @export var information_description: Label
@@ -199,6 +205,7 @@ func _on_host_button_button_down() -> void:
 	
 	# TODO: Update lobby visibility functionality.
 	_selected_map_index = 0
+	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
 	update_character_description()
@@ -343,7 +350,7 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 # The button that only the lobby host can press to begin the shooting part of the game.
 func _on_start_game_button_down() -> void:
 	_hide_main_menu.rpc()
-	GameState.start_game(Constants.MAP_PATHS[_selected_map_index])
+	GameState.start_game(Constants.MAP_DATA[_selected_map_index].scene_path)
 
 
 @rpc("any_peer", "call_local")
@@ -371,14 +378,16 @@ func _on_lobby_visibility_option_selected(index: int) -> void:
 
 func _on_map_select_left_button_pressed() -> void:
 	_selected_map_index += 1
-	if _selected_map_index >= len(Constants.MAP_PATHS):
+	if _selected_map_index >= len(Constants.MAP_DATA):
 		_selected_map_index = 0
+	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
 
 
 func _on_map_select_right_button_pressed() -> void:
 	_selected_map_index -= 1
 	if _selected_map_index < 0:
-		_selected_map_index = len(Constants.MAP_PATHS) - 1
+		_selected_map_index = len(Constants.MAP_DATA) - 1
+	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
 
 
 func _on_leave_button_down() -> void:
