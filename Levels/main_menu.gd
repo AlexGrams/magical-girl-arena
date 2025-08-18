@@ -17,6 +17,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobby_list: Control
 ## The screen showing players in the current lobby.
 @export var lobby: Control
+## The screen for character selection
+@export var char_select: Control
 
 @export_group("Main Menu")
 ## Character that is visible on the main menu and their nametag.
@@ -358,6 +360,11 @@ func _on_start_game_button_down() -> void:
 	_hide_main_menu.rpc()
 	GameState.start_game(Constants.MAP_DATA[_selected_map_index].scene_path)
 
+func _show_char_select() -> void:
+	char_select.show()
+
+func _hide_char_select() -> void:
+	char_select.hide()
 
 @rpc("any_peer", "call_local")
 func _hide_main_menu() -> void:

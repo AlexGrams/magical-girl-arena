@@ -161,7 +161,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "players_holder", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "players_holder", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,6 +174,7 @@ settings = NodePath("Settings")
 shop = NodePath("Shop")
 lobby_list = NodePath("LobbyList")
 lobby = NodePath("Lobby")
+char_select = NodePath("CharacterSelection")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
 main_menu_button_container = NodePath("Main/VBoxContainer")
@@ -1102,8 +1103,10 @@ vertical_alignment = 1
 [connection signal="pressed" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
 [connection signal="pressed" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
 [connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
+[connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
 [connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]
 [connection signal="pressed" from="Lobby/RightArrow_MapSelect" to="." method="_on_map_select_right_button_pressed"]
+[connection signal="button_down" from="CharacterSelection/Leave_Label/LeaveButton" to="." method="_hide_char_select"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]
@@ -1113,3 +1116,4 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
 
 [editable path="Lobby"]
+[editable path="CharacterSelection"]
