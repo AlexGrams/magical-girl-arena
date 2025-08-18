@@ -24,6 +24,10 @@ var current_level: int = 1
 var is_signature: bool = false
 ## True when this Powerup is active, which usually means it is shooting bullets.
 var is_on: bool = false
+## How likely this powerup is to crit, expressed as a fraction from 0.0 to 1.0.
+var crit_chance: float = 0.0
+## Base damage is multiplied by this number to get the new damage amount when this powerup crits.
+var crit_multiplier: float = 2.0
 
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true

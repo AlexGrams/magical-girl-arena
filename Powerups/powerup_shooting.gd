@@ -5,7 +5,6 @@ extends Powerup
 @export var bullet_scene := "res://Powerups/bullet.tscn"
 
 @onready var shoot_timer: float = shoot_interval
-var crit:bool = false
 
 signal picked_up_powerup(sprite)
 
@@ -13,6 +12,8 @@ signal picked_up_powerup(sprite)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bullet_damage = _get_damage_from_curve()
+	crit_chance = 0.25
+	crit_multiplier = 2.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,9 +32,9 @@ func _process(delta: float) -> void:
 			direction = get_parent().velocity.normalized()
 		var bullet_position := self.global_position + (direction * 100)
 		
-		crit = randf() >= 0.75
+		var crit: bool = randf() <= crit_chance
+		var actual_bullet_damage = bullet_damage * crit_multiplier if crit else bullet_damage
 		
-		var actual_bullet_damage = bullet_damage * 2 if crit else bullet_damage
 		AudioManager.create_audio_at_location(bullet_position, SoundEffectSettings.SOUND_EFFECT_TYPE.SHOOTING)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, [bullet_scene, 
