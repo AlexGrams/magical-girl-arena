@@ -57,6 +57,15 @@ enum DialoguePlayTriggerExtra {
 	MINIBOSS_DOVE
 }
 
+
+## Paths for all the maps in the game. The order of maps in this array is the order in which
+## they are displayed to the player.
+const MAP_PATHS: Array[String] = [
+	"res://Levels/playground.tscn",
+	"res://Levels/playground2.tscn"
+]
+
+
 # Maps character enum to their CharacterData resource file
 var CHARACTER_DATA: Dictionary = {
 	Character.GOTH: load("res://Player/CharacterResourceFiles/character_data_goth.tres"),

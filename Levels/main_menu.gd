@@ -58,8 +58,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 var _lobby_list_refresh_timer: float = 0.0
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
-## Path to the Playground-derived .tscn resource file for the level that is currently selected.
-var _selected_playground: String = ""
+## Index of the currently selected map.
+var _selected_map_index: int = 0
 ## The location that these menus should be in when in focus. 
 ## Used for animating the UI when switching screens.
 var _main_menu_original_pos: Vector2
@@ -198,7 +198,7 @@ func _on_host_button_button_down() -> void:
 	map_select_right_button.visible = multiplayer.is_server()
 	
 	# TODO: Update lobby visibility functionality.
-	_on_map_option_button_item_selected(0)
+	_selected_map_index = 0
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
 	refresh_lobby()
 	update_character_description()
@@ -343,7 +343,7 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 # The button that only the lobby host can press to begin the shooting part of the game.
 func _on_start_game_button_down() -> void:
 	_hide_main_menu.rpc()
-	GameState.start_game(_selected_playground)
+	GameState.start_game(Constants.MAP_PATHS[_selected_map_index])
 
 
 @rpc("any_peer", "call_local")
@@ -369,14 +369,16 @@ func _on_lobby_visibility_option_selected(index: int) -> void:
 			Steam.setLobbyType(GameState.lobby_id, Steam.LOBBY_TYPE_PRIVATE)
 
 
-func _on_map_option_button_item_selected(index: int) -> void:
-	match(index):
-		0:
-			# Garden
-			_selected_playground = "res://Levels/playground.tscn"
-		1:
-			# Something else.
-			_selected_playground = "res://Levels/playground2.tscn"
+func _on_map_select_left_button_pressed() -> void:
+	_selected_map_index += 1
+	if _selected_map_index >= len(Constants.MAP_PATHS):
+		_selected_map_index = 0
+
+
+func _on_map_select_right_button_pressed() -> void:
+	_selected_map_index -= 1
+	if _selected_map_index < 0:
+		_selected_map_index = len(Constants.MAP_PATHS) - 1
 
 
 func _on_leave_button_down() -> void:
