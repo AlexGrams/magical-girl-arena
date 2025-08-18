@@ -544,19 +544,6 @@ theme_override_font_sizes/font_size = 90
 script = ExtResource("13_6itpg")
 label = NodePath("..")
 
-[node name="LeftArrow_MapSelect" type="TextureButton" parent="." node_paths=PackedStringArray("label")]
-layout_mode = 2
-offset_left = 645.0
-offset_top = 27.0
-offset_right = 708.0
-offset_bottom = 143.0
-pivot_offset = Vector2(31, 58)
-texture_normal = ExtResource("14_vbivi")
-stretch_mode = 5
-flip_h = true
-script = ExtResource("13_6itpg")
-label = NodePath(".")
-
 [node name="OutlineLabel" parent="." instance=ExtResource("14_my7cq")]
 layout_mode = 2
 anchors_preset = 0
@@ -569,6 +556,19 @@ offset_bottom = 143.0
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 84
 text = "Map Name"
+
+[node name="LeftArrow_MapSelect" type="TextureButton" parent="." node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_left = 645.0
+offset_top = 27.0
+offset_right = 708.0
+offset_bottom = 143.0
+pivot_offset = Vector2(31, 58)
+texture_normal = ExtResource("14_vbivi")
+stretch_mode = 5
+flip_h = true
+script = ExtResource("13_6itpg")
+label = NodePath(".")
 
 [node name="RightArrow_MapSelect" type="TextureButton" parent="." node_paths=PackedStringArray("label")]
 layout_mode = 2
