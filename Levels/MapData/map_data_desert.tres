@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MapData" load_steps=2 format=3 uid="uid://da1p7u4yf80st"]
+
+[ext_resource type="Script" path="res://Levels/map_data.gd" id="1_5tkdh"]
+
+[resource]
+script = ExtResource("1_5tkdh")
+name = "Desert"
+scene_path = "res://Levels/playground2.tscn"
