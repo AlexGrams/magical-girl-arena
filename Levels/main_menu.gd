@@ -6,6 +6,7 @@ const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## Time in seconds that it takes for the Lobby List to automatically refresh.
 const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 
+@export_group("Screens")
 ## The first screen shown when the game is started.
 @export var main_menu: Control
 ## The screen for changing the game's settings.
@@ -14,14 +15,25 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var shop: Shop
 ## The screen to host or join a lobby.
 @export var lobby_list: Control
+## The screen showing players in the current lobby.
+@export var lobby: Control
+
+@export_group("Main Menu")
+## Character that is visible on the main menu and their nametag.
+@export var main_menu_character_sprite: CharacterAnimatedSprite2D
+## Displays name of the character on the Main Menu
+@export var main_menu_character_label: Label
+## Container for buttons on main menu.
+@export var main_menu_button_container: VBoxContainer
+@export var version_label: Label
+
+@export_group("Lobby List")
 ## Appears on the Lobby List while waiting for the list of available lobbies.
 @export var lobbies_list_searching_overlay: Control = null
 ## Appears on the Lobby List if there's no network connection.
 @export var lobbies_list_no_connection_overlay: Control = null
 ## The scroll box showing lobbies available to join.
 @export var lobbies_list_container: VBoxContainer
-## The screen showing players in the current lobby.
-@export var lobby: Control
 ## The image of the game logo on the main menu.
 @export var main_menu_logo: TextureRect
 ## The screen telling the player that they're connecting to a game
@@ -40,8 +52,10 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var players_holder: Control
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
+## The button to begin the actual game. Disabled for clients that are not the host.
+@export var start_game_label: Label
 
-@export_group("")
+@export_group("Character Select")
 ## Components for displaying selected character information on the Lobby screen.
 @export var information_name: Label
 @export var information_description: Label
@@ -51,14 +65,6 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var information_ult_label: Label
 @export var information_ult_texture: TextureRect
 @export var information_ult_description: Label
-## The button to begin the actual game. Disabled for clients that are not the host.
-@export var start_game_label: Label
-## Character that is visible on the main menu and their nametag.
-@export var main_menu_character_sprite: CharacterAnimatedSprite2D
-@export var main_menu_character_label: Label
-## Container for buttons on main menu.
-@export var main_menu_button_container: VBoxContainer
-@export var version_label: Label
 
 ## Current time until automatically refreshing the Lobby List.
 var _lobby_list_refresh_timer: float = 0.0
