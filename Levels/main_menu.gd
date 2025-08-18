@@ -354,8 +354,12 @@ func _hide_main_menu() -> void:
 
 
 ## Change which other players can join this lobby.
-func _on_lobby_visibility_option_button_item_selected(index: int) -> void:
-	if not GameState.USING_GODOT_STEAM and not OS.has_feature("release"):
+func _on_lobby_visibility_option_selected(index: int) -> void:
+	if (
+			(not GameState.USING_GODOT_STEAM 
+			and not OS.has_feature("release"))
+			or not multiplayer.is_server()
+	):
 		return
 	
 	match(index):
