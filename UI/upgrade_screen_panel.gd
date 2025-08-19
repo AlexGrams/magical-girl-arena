@@ -141,11 +141,13 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		var artifactdata_dict: Dictionary = _artifact_name_to_artifactdata.duplicate()
 		
 		for owned_artifact: Artifact in player_character.artifacts:
-			artifactdata_dict.erase(owned_artifact.artifactdata.name)
+			if not owned_artifact.allow_duplicates:
+				artifactdata_dict.erase(owned_artifact.artifactdata.name)
 		
 		for artifact_data: ArtifactData in artifactdata_dict.values():
-			upgrade_choices.append(artifact_data)
-			_upgrade_levels[artifact_data.name] = 0
+			if artifact_data.can_acquire():
+				upgrade_choices.append(artifact_data)
+				_upgrade_levels[artifact_data.name] = 0
 	
 	# Decide which Powerups can possibly be upgraded
 	if len(player_character.powerups) >= player_character.MAX_POWERUPS:

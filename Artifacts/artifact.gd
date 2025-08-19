@@ -3,13 +3,18 @@ extends Node
 ## Abstract class for an item that provides a passive bonus when acquired by the player.
 
 
-@export_file("*.tres") var _artifactdata_path: String = ""
+## True if the player can have more than one of this charm at a time.
+@export var allow_duplicates: bool = false
 
 var artifactdata: ArtifactData = null
 
 
+func set_artifactdata(new_artifactdata: ArtifactData) -> void:
+	artifactdata = new_artifactdata
+
+
 func _ready() -> void:
-	artifactdata = load(_artifactdata_path)
+	pass
 
 
 func _process(_delta: float) -> void:

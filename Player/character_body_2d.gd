@@ -178,6 +178,7 @@ func upgrade_or_grant_powerup(powerup_data: PowerupData, is_signature: bool = fa
 ## Adds an artifact to this player
 func add_artifact(artifact_data: ArtifactData) -> void:
 	var artifact: Artifact = artifact_data.scene.instantiate()
+	artifact.set_artifactdata(artifact_data)
 	add_child(artifact, true)
 	artifacts.append(artifact)
 	artifact.activate(self)

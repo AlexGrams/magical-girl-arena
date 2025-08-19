@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://wwgkur1luk4y"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_powerup_critical.gd" id="1_fruvd"]
+
+[node name="ArtifactPowerupCritical" type="Node"]
+process_mode = 4
+script = ExtResource("1_fruvd")
+allow_duplicates = true

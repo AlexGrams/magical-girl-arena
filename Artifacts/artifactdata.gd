@@ -11,3 +11,8 @@ extends ItemData
 
 func get_upgrade_description(_level: int = 0) -> String:
 	return _description
+
+
+## Returns false if special conditions for getting this Charm are not met.
+func can_acquire() -> bool:
+	return true
