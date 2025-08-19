@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://61fbrrdpcywu"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_chain_lines.gd" id="1_q50an"]
-[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="2_daxtg"]
+[ext_resource type="Texture2D" uid="uid://b7jjqxs24jnyf" path="res://Sprites/Map/Desert/Chain_Straight.png" id="2_akbep"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hogav"]
 [ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_3ti3k"]
 
@@ -18,8 +18,9 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(7.66667, 0.0692308)
-texture = ExtResource("2_daxtg")
+visible = false
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_akbep")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
@@ -34,3 +35,12 @@ stream = ExtResource("4_3ti3k")
 volume_db = -20.0
 autoplay = true
 parameters/looping = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -1539.0
+offset_top = -25.5
+offset_right = 16571.0
+offset_bottom = 278.5
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("2_akbep")
+stretch_mode = 1
