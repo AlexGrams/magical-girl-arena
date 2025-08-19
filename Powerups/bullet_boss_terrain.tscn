@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgo3b8qjagkkw"]
+[gd_scene load_steps=7 format=3 uid="uid://dgo3b8qjagkkw"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_terrain.gd" id="1_kvdab"]
 [ext_resource type="Texture2D" uid="uid://4d2ehixrugtb" path="res://Sprites/Map/Desert/Chain_Arc.png" id="2_e37qn"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(68, 307)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e54xu"]
+polygon = PackedVector2Array(-34, -154.5, 34, -154.5, 34.5, 152.5, -34, 153.5)
 
 [node name="BulletBossTerrain" type="Node2D" node_paths=PackedStringArray("_static_body", "collider", "sprite")]
 scale = Vector2(2, 2)
@@ -46,3 +49,6 @@ stream = ExtResource("4_x57p0")
 volume_db = -20.0
 autoplay = true
 parameters/looping = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_e54xu")

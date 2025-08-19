@@ -5,6 +5,9 @@ extends Bullet
 
 ## Time between bullet spawning and dealing damage.
 @export var _tell_time: float = 2.0
+## Visual for the scream. 
+## Light source allows it to be blocked by terrain with LightOccluder2Ds
+@export var _point_light: PointLight2D
 
 var _tell_timer: float = 0.0
 
@@ -20,6 +23,10 @@ func _process(delta: float) -> void:
 		if _tell_timer <= 0.0:
 			# Stage 2: Deal damage.
 			print("Scream!")
+			var tween = create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.tween_property(_point_light, "energy", 16, 0.0001)
 			# Attempt to damage the local player.
 			var local_player: PlayerCharacterBody2D = GameState.get_local_player()
 			var query := PhysicsRayQueryParameters2D.create(
@@ -51,6 +58,7 @@ func _process(delta: float) -> void:
 			# they were behind a terrain.
 			if is_multiplayer_authority():
 				get_tree().call_group("bullet_boss_terrain", "destroy")
+				tween.tween_property(_point_light, "energy", 0, 0.25)
 
 
 # Set up other properties for this bullet
