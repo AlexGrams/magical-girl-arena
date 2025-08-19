@@ -34,6 +34,7 @@ func _process(delta: float) -> void:
 				global_position, 
 				Vector2.ZERO, 
 				_damage,
+				false,
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,

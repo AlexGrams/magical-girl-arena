@@ -37,15 +37,19 @@ func _process(delta: float) -> void:
 			var target: Node2D = _find_nearest_target()
 			if target != null and global_position.distance_squared_to(target.global_position) <= _range_squared:
 				_bullet_spawner.request_spawn_bullet.rpc_id(
-				1, [_bullet_scene_uid, 
-					target.global_position, 
-					Vector2.ZERO, 
-					_get_damage_from_curve(), 
-					_is_owned_by_player,
-					multiplayer.get_unique_id(),
-					_powerup_index,
-					[target.get_path(), _lifetime]
-				])
+				1, 
+					[
+						_bullet_scene_uid, 
+						target.global_position, 
+						Vector2.ZERO, 
+						_get_damage_from_curve(), 
+						false,
+						_is_owned_by_player,
+						multiplayer.get_unique_id(),
+						_powerup_index,
+						[target.get_path(), _lifetime]
+					]
+				)
 		else:
 			# Target at most 3 arbitrary nearby Enemies.
 			var near_enemies = _nearby_collision_area.get_overlapping_areas()
@@ -53,15 +57,19 @@ func _process(delta: float) -> void:
 				var target: Node2D = near_enemies[i].get_parent()
 				if target != null:
 					_bullet_spawner.request_spawn_bullet.rpc_id(
-					1, [_bullet_scene_uid, 
-						target.global_position, 
-						Vector2.ZERO, 
-						_get_damage_from_curve(), 
-						_is_owned_by_player,
-						multiplayer.get_unique_id(),
-						_powerup_index,
-						[target.get_path(), _lifetime]
-					])
+						1, 
+						[
+							_bullet_scene_uid, 
+							target.global_position, 
+							Vector2.ZERO, 
+							_get_damage_from_curve(), 
+							false,
+							_is_owned_by_player,
+							multiplayer.get_unique_id(),
+							_powerup_index,
+							[target.get_path(), _lifetime]
+						]
+					)
 		_shoot_timer = _shoot_interval
 
 

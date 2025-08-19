@@ -79,6 +79,7 @@ func shoot() -> void:
 				direction_normal, 
 				bullet_damage, 
 				false,
+				false,
 				-1,
 				-1,
 				[]
@@ -87,11 +88,13 @@ func shoot() -> void:
 	else:
 		# Alternate attack behavior for when this Enemy is an ally
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [
+			1, 
+			[
 				allied_bullet_scene_path, 
 				self.global_position + (direction_normal * 100), 
 				direction_normal, 
 				bullet_damage, 
+				false,
 				true,
 				-1,
 				-1,

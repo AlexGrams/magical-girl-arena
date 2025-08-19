@@ -54,6 +54,7 @@ func activate() -> void:
 				get_parent().global_position, 
 				slice_rotator.rotated(randf_range(0.0, _rad_per_slice)), 
 				_touch_damage * crit_mul,
+				false,
 				true,
 				-1,
 				-1,

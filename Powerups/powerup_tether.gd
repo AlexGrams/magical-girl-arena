@@ -22,6 +22,7 @@ func activate_powerup():
 				Vector2.ZERO, 
 				Vector2.ZERO, 
 				_get_damage_from_curve(), 
+				false,
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,

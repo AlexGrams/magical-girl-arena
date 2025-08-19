@@ -9,15 +9,16 @@ func _init():
 # Spawns a bullet replicated for all clients. Returns the new bullet.
 func _spawn_bullet(data):
 	if (
-		data.size() != 8
+		data.size() != 9
 		or typeof(data[0]) != TYPE_STRING	# Path to bullet scene or bullet scene UID
 		or typeof(data[1]) != TYPE_VECTOR2	# Position
 		or typeof(data[2]) != TYPE_VECTOR2	# Direction
 		or typeof(data[3]) != TYPE_FLOAT	# Damage
-		or typeof(data[4]) != TYPE_BOOL		# Is owned by player
-		or typeof(data[5]) != TYPE_INT		# Owning player ID, if any
-		or typeof(data[6]) != TYPE_INT		# Powerup index, if owned by player
-		or typeof(data[7]) != TYPE_ARRAY	# Bullet setup parameters
+		or typeof(data[4]) != TYPE_BOOL		# Is critical 
+		or typeof(data[5]) != TYPE_BOOL		# Is owned by player
+		or typeof(data[6]) != TYPE_INT		# Owning player ID, if any
+		or typeof(data[7]) != TYPE_INT		# Powerup index, if owned by player
+		or typeof(data[8]) != TYPE_ARRAY	# Bullet setup parameters
 	):
 		push_error("Bullet could not be instantiated because of malformed 'data' parameter.")
 		return null
@@ -28,13 +29,13 @@ func _spawn_bullet(data):
 	
 	bullet.position = data[1]
 	bullet.direction = data[2]
-	bullet.set_damage(data[3])
+	bullet.set_damage(data[3], data[4])
 	
 	# Call the setup function on the bullet once it is added to the scene, but only once.
 	bullet.tree_entered.connect(func():
-		if data[5] > 0 and data[6] > -1:
-			bullet.setup_analytics(data[5], data[6])
-		bullet.setup_bullet(data[4], data[7])
+		if data[6] > 0 and data[7] > -1:
+			bullet.setup_analytics(data[6], data[7])
+		bullet.setup_bullet(data[5], data[8])
 	, CONNECT_ONE_SHOT)
 	
 	return bullet

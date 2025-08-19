@@ -52,6 +52,7 @@ func shoot(is_horizontal: bool) -> void:
 				chain_position, 
 				chain_rotation, 
 				_damage, 
+				false,
 				_is_owned_by_player,
 				-1,
 				-1,

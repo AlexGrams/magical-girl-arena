@@ -56,6 +56,7 @@ func _shoot() -> void:
 			random_starting_point.rotated(rotation_increment * i), 
 			_damage, 
 			false,
+			false,
 			-1,
 			-1,
 			[]

@@ -110,6 +110,7 @@ func _spawn_boomerang() -> void:
 			boomerang_owner.global_position, 
 			Vector2.UP, 
 			_damage, 
+			false,
 			_is_owned_by_player,
 			_owner_id,
 			_powerup_index,

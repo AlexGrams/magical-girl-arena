@@ -46,6 +46,7 @@ func deactivate() -> void:
 			get_parent().global_position, 
 			Vector2.ZERO, 
 			_damage, 
+			false,
 			true,
 			-1,
 			-1,

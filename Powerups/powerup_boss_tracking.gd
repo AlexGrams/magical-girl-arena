@@ -38,10 +38,13 @@ func _process(delta: float) -> void:
 		var bullet_position := self.global_position + (direction * 100)
 		
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [_bullet_uid, 
+			1, 
+			[
+				_bullet_uid, 
 				bullet_position, 
 				direction, 
 				_bullet_damage, 
+				false,
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,

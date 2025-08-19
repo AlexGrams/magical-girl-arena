@@ -58,6 +58,7 @@ func _input(event: InputEvent) -> void:
 				get_global_mouse_position(), 
 				Vector2.ZERO, 
 				_damage * (1.0 if randf() > _crit_chance else 2.0), 
+				false,
 				true,
 				-1,
 				-1,

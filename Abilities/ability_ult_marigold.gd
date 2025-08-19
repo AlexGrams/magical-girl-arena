@@ -27,6 +27,7 @@ func activate() -> void:
 			_owner.global_position, 
 			Vector2.ZERO, 
 			0.0, 
+			false,
 			true,
 			multiplayer.get_unique_id(),
 			-1,

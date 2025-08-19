@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 					global_position, 
 					direction, 
 					bullet_damage, 
+					false,
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,

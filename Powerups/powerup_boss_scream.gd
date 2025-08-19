@@ -19,6 +19,7 @@ func activate_powerup():
 			global_position, 
 			Vector2.ZERO, 
 			_damage, 
+			false,
 			_is_owned_by_player,
 			-1,
 			-1,

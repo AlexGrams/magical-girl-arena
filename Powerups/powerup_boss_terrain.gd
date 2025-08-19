@@ -40,6 +40,7 @@ func activate_powerup():
 				global_position + spawn_direction * randf_range(_min_distance, _max_distance), 
 				spawn_direction * -1.0, 
 				_damage, 
+				false,
 				_is_owned_by_player,
 				-1,
 				-1,

@@ -41,6 +41,7 @@ func activate() -> void:
 			get_parent().global_position, 
 			Vector2.UP.rotated(rotation_increment * i), 
 			_damage * (1.0 if randf() > _crit_chance else 2.0), 
+			false,
 			true,
 			-1,
 			-1,

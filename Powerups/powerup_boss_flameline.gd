@@ -25,6 +25,7 @@ func activate_powerup():
 			Vector2.ZERO, 
 			Vector2.RIGHT, 
 			_damage, 
+			false,
 			_is_owned_by_player,
 			-1,
 			-1,
