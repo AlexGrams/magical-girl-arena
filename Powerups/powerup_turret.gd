@@ -58,7 +58,13 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[_turret_fire_interval, _current_turret_lifetime, max(_level_3_boost_duration, _ultimate_boost_duration)]
+					[
+						_turret_fire_interval, 
+						_current_turret_lifetime, 
+						max(_level_3_boost_duration, _ultimate_boost_duration),
+						crit_chance,
+						crit_multiplier
+					]
 				]
 			)
 		

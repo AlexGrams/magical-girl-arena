@@ -15,6 +15,8 @@ var _fire_interval: float = 0.0
 var _fire_timer: float = 0.0
 ## How much damage each boomerang does
 var _damage: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 ## Time remaining for this turret's boost.
 var _boost_timer: float = 0.0
 ## Properties for analytics
@@ -65,10 +67,12 @@ func _process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
-		or typeof(data[0]) != TYPE_FLOAT		# Fire interval 
-		or typeof(data[1]) != TYPE_FLOAT 		# Lifetime
-		or typeof(data[2]) != TYPE_FLOAT 		# Starting boost duration
+		data.size() != 5
+		or typeof(data[0]) != TYPE_FLOAT	# Fire interval 
+		or typeof(data[1]) != TYPE_FLOAT	# Lifetime
+		or typeof(data[2]) != TYPE_FLOAT	# Starting boost duration
+		or typeof(data[3]) != TYPE_FLOAT	# Crit chance
+		or typeof(data[4]) != TYPE_FLOAT	# Crit multiplier
 	):
 		push_error("Malformed data array")
 		return
@@ -76,6 +80,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	_fire_interval = data[0]
 	lifetime = data[1]
+	_crit_chance = data[3]
+	_crit_multiplier = data[4]
 	_is_owned_by_player = is_owned_by_player
 	
 	# Boost given to the turret when it spawns.
@@ -101,12 +107,15 @@ func _shoot() -> void:
 	
 	# Only shoot if there is something within range to shoot at.
 	if target_position != global_position:
+		var crit: bool = randf() < _crit_chance
+		var total_damage: float = _damage * (1.0 if not crit else _crit_multiplier)
 		get_tree().root.get_node("Playground/BulletSpawner").spawn(
 			[
 				_turret_bullet_scene, 
 				global_position, 
 				(target_position - global_position).normalized(), 
-				_damage, 
+				total_damage, 
+				crit,
 				_is_owned_by_player,
 				_owner_id,
 				_powerup_index,
