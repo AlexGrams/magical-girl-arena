@@ -22,8 +22,8 @@ func _process(delta: float) -> void:
 		_tell_timer -= delta
 		if _tell_timer <= 0.0:
 			# Stage 2: Deal damage.
-			print("Scream!")
 			var tween = create_tween()
+			tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 			tween.set_ease(Tween.EASE_OUT)
 			tween.set_trans(Tween.TRANS_SINE)
 			tween.tween_property(_point_light, "energy", 16, 0.0001)
@@ -51,14 +51,14 @@ func _process(delta: float) -> void:
 				# The attack has hit the local player.
 				local_player.take_damage(collider.damage)
 			
+			tween.tween_property(_point_light, "energy", 0, 0.25)
+			
 			# From the server, destroy all terrain bullets.
-			# TODO: Don't actually destroy all the terrain bullets at the same time as the 
-			# scream damage going off, as it is possible for the bullet to be destroyed on
-			# clients before the collision check, meaning clients could get hit even though
-			# they were behind a terrain.
 			if is_multiplayer_authority():
-				get_tree().call_group("bullet_boss_terrain", "destroy")
-				tween.tween_property(_point_light, "energy", 0, 0.25)
+				tween.tween_callback(func(): 
+					await get_tree().create_timer(0.5, false).timeout
+					get_tree().call_group("bullet_boss_terrain", "destroy")
+				)
 
 
 # Set up other properties for this bullet
