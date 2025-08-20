@@ -29,7 +29,13 @@ func _process(delta: float) -> void:
 		var status_pulse: Status = _owner.get_status("Pulse")
 		if status_pulse == null:
 			status_pulse = StatusPulse.new()
-			status_pulse.set_properties(_id, _get_damage_from_curve(), current_level >= 3)
+			status_pulse.set_properties(
+				_id, 
+				_get_damage_from_curve(), 
+				current_level >= 3,
+				crit_chance,
+				crit_multiplier
+			)
 			_owner.add_status(status_pulse)
 		else:
 			status_pulse.stack()

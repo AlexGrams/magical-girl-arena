@@ -10,6 +10,8 @@ const _PULSE_BULLET_SCENE: String = "res://Powerups/bullet_pulse.tscn"
 var _owner_id: int = 0
 ## Damage of the resulting Pulse bullet.
 var _damage: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 ## True if owning player has powerup level 3 or higher.
 var _is_level_three: bool = false
 ## How many stacks of this status there are.
@@ -20,11 +22,13 @@ func get_status_name() -> String:
 	return "Pulse"
 
 
-func set_properties(id: int, damage: float, is_level_three: bool) -> void:
+func set_properties(id: int, damage: float, is_level_three: bool, crit_chance: float, crit_multiplier: float) -> void:
 	_owner_id = id
 	duration = GameState.time - int(GameState.time)
 	_damage = damage 
 	_is_level_three = is_level_three
+	_crit_chance = crit_chance
+	_crit_multiplier = crit_multiplier
 
 
 func _ready() -> void:
@@ -39,18 +43,27 @@ func _process(delta: float) -> void:
 func deactivate() -> void:
 	get_parent().remove_status(self)
 	
+	var crit: bool = randf() < _crit_chance
+	var total_damage: float = _damage * (1.0 if not crit else _crit_multiplier)
 	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 		1, 
 		[
 			_PULSE_BULLET_SCENE, 
 			get_parent().global_position, 
 			Vector2.ZERO, 
-			_damage, 
-			false,
+			total_damage, 
+			crit,
 			true,
 			-1,
 			-1,
-			[get_parent().get_path(), _owner_id, _stacks, _is_level_three]
+			[
+				get_parent().get_path(), 
+				_owner_id, 
+				_stacks, 
+				_is_level_three,
+				_crit_chance,
+				_crit_multiplier
+			]
 		]
 	)
 
