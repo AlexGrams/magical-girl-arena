@@ -46,13 +46,16 @@ func _process(delta: float) -> void:
 			direction = get_parent().velocity.normalized()
 		
 		direction = direction.rotated(deg_to_rad(-_fire_angle / 2.0))
+		var crit: bool = randf() <= crit_chance
+		var total_damage = bullet_damage * (1.0 if not crit else crit_multiplier)
+		
 		for i in range(_num_bullets):
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 				1, [_bullet_uid, 
 					global_position, 
 					direction, 
-					bullet_damage, 
-					false,
+					total_damage, 
+					crit,
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,

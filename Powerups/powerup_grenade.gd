@@ -25,14 +25,16 @@ func _process(delta: float) -> void:
 			
 			if nearest_enemy != null:
 				var direction = (nearest_enemy.global_position - self.global_position).normalized()
+				var crit: bool = randf() <= crit_chance
+				var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 				_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
 						bullet_scene, 
 						global_position, 
 						direction, 
-						_get_damage_from_curve(), 
-						false,
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,

@@ -39,12 +39,14 @@ func _process(delta: float) -> void:
 			(_is_owned_by_player and shoot_timer > shoot_interval)
 			or (not _is_owned_by_player and shoot_timer > enemy_shoot_interval)
 		):
+			var crit: bool = randf() <= crit_chance
+			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 				1, [bullet_scene, 
 					global_position, 
 					direction, 
-					bullet_damage, 
-					false,
+					total_damage, 
+					crit,
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,

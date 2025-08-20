@@ -33,6 +33,9 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer -= delta
 	if _shoot_timer <= 0.0:
+		var crit: bool = randf() <= crit_chance
+		var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
+		
 		if current_level < 3:
 			var target: Node2D = _find_nearest_target()
 			if target != null and global_position.distance_squared_to(target.global_position) <= _range_squared:
@@ -42,8 +45,8 @@ func _process(delta: float) -> void:
 						_bullet_scene_uid, 
 						target.global_position, 
 						Vector2.ZERO, 
-						_get_damage_from_curve(), 
-						false,
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
@@ -62,8 +65,8 @@ func _process(delta: float) -> void:
 							_bullet_scene_uid, 
 							target.global_position, 
 							Vector2.ZERO, 
-							_get_damage_from_curve(), 
-							false,
+							total_damage, 
+							crit,
 							_is_owned_by_player,
 							multiplayer.get_unique_id(),
 							_powerup_index,

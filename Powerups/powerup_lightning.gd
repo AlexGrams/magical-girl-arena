@@ -24,6 +24,8 @@ func _process(delta: float) -> void:
 	
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
+		var crit: bool = randf() <= crit_chance
+		var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 		for player: PlayerCharacterBody2D in GameState.player_characters.values():
 			if player != _owner:
 				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
@@ -32,8 +34,8 @@ func _process(delta: float) -> void:
 						_bullet_scene, 
 						global_position, 
 						Vector2.UP, 
-						_get_damage_from_curve(), 
-						false,
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,

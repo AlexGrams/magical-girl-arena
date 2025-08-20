@@ -25,6 +25,8 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer += delta
 	if _shoot_timer > shoot_interval:
+		var crit: bool = randf() <= crit_chance
+		var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MINES_DROPPED)
 		for i in range(_mines):
 			# Each mine is moved to a random position in a circle around the player.
@@ -35,8 +37,8 @@ func _process(delta: float) -> void:
 						_bullet_scene, 
 						global_position + displacement, 
 						Vector2.ZERO, 
-						_get_damage_from_curve(), 
-						false,
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
