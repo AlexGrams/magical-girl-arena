@@ -1,9 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgo3b8qjagkkw"]
+[gd_scene load_steps=12 format=3 uid="uid://dgo3b8qjagkkw"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_terrain.gd" id="1_kvdab"]
 [ext_resource type="Texture2D" uid="uid://4d2ehixrugtb" path="res://Sprites/Map/Desert/Chain_Arc.png" id="2_e37qn"]
+[ext_resource type="PackedScene" uid="uid://bgcwlfs70p8mt" path="res://Sprites/dust_cloud_particles.tscn" id="2_l8x80"]
+[ext_resource type="Texture2D" uid="uid://c4afb5uhqi5et" path="res://Sprites/Map/Desert/Rumbling_Cracks.png" id="3_vpxfr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_x0orq"]
 [ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_x57p0"]
+
+[sub_resource type="Animation" id="Animation_ic46v"]
+resource_name = "rumbling"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(-0.5, -0.5, -0.5, -0.5, -0.5, -0.5),
+"update": 0,
+"values": [Vector2(0.499992, 1.82805e-11), Vector2(8.26, 20.085), Vector2(-6.385, 15.69), Vector2(-1.69, 2.37), Vector2(9.09, -6.065), Vector2(0.499992, 1.82805e-11)]
+}
+
+[sub_resource type="Animation" id="Animation_i4xto"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.499992, 1.82805e-11)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ulw8g"]
+_data = {
+"RESET": SubResource("Animation_i4xto"),
+"rumbling": SubResource("Animation_ic46v")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(68, 307)
@@ -11,22 +50,42 @@ size = Vector2(68, 307)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e54xu"]
 polygon = PackedVector2Array(-34, -154.5, 34, -154.5, 34.5, 152.5, -34, 153.5)
 
-[node name="BulletBossTerrain" type="Node2D" node_paths=PackedStringArray("_static_body", "collider", "sprite")]
+[node name="BulletBossTerrain" type="Node2D" node_paths=PackedStringArray("_static_body", "_rumbling_sprite", "_terrain_sprite", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_kvdab")
 _static_body = NodePath("StaticBody2D")
+_rumbling_sprite = NodePath("RumblingSprite")
+_terrain_sprite = NodePath("ChainArcSprite")
+_dust_cloud_particles = ExtResource("2_l8x80")
 speed = 1.25
 lifetime = 5.0
 destroy_on_hit = false
 collider = NodePath("DamageArea2D")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("ChainArcSprite")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ChainArcSprite" type="Sprite2D" parent="."]
+visible = false
 z_index = 1
-position = Vector2(-40, 2.30926e-14)
+position = Vector2(34.3924, -0.297653)
 rotation = -1.5708
-scale = Vector2(0.31, 0.31)
+scale = Vector2(0.31, 1e-05)
 texture = ExtResource("2_e37qn")
+offset = Vector2(-0.959303, -239.976)
+
+[node name="RumblingSprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(0.499992, 1.82805e-11)
+rotation = -1.5708
+scale = Vector2(1e-05, 0.31)
+texture = ExtResource("3_vpxfr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RumblingSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_ulw8g")
+}
+autoplay = "rumbling"
+speed_scale = 4.0
 
 [node name="DamageArea2D" type="Area2D" parent="."]
 collision_layer = 0
