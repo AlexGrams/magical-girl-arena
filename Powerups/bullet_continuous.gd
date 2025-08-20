@@ -32,7 +32,7 @@ func set_damage(damage: float, _is_crit: bool = false):
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
 		data.size() != 1
-		or (typeof(data[0])) != TYPE_FLOAT	# Lifetime
+		or typeof(data[0]) != TYPE_FLOAT	# Lifetime
 	):
 		push_error("Malformed bullet setup data Array for bullet_trail.gd.")
 		return

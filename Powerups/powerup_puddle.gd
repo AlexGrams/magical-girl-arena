@@ -32,16 +32,17 @@ func _process(delta: float) -> void:
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
 		for i in range(_puddles):
-			# Each mine is moved to a random position in a circle around the player.
 			var displacement: Vector2 = Vector2.UP.rotated(randf_range(0, 2 * PI)) * randf_range(_min_range, _max_range)
+			var crit: bool = randf() < crit_chance
+			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 			_bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
 						_bullet_scene, 
 						global_position + displacement, 
 						Vector2.ZERO, 
-						_get_damage_from_curve(), 
-						false,
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,

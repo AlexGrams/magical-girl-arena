@@ -50,6 +50,11 @@ func set_powerup_index(index: int) -> void:
 	_powerup_index = index
 
 
+## Can be overridden to do extra functionality when crit chance changes
+func set_crit_chance(new_crit: float) -> void:
+	crit_chance = new_crit
+
+
 # Meant to be overridden
 func level_up():
 	powerup_level_up.emit(0, 0)

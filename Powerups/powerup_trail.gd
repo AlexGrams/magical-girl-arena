@@ -26,6 +26,8 @@ func _process(delta: float) -> void:
 	
 	_shoot_timer += delta
 	if _shoot_timer > shoot_interval:
+		var crit: bool = randf() <= crit_chance
+		var total_damage: float = _damage * (1.0 if not crit else crit_multiplier)
 		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.TRAIL)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, 
@@ -33,8 +35,8 @@ func _process(delta: float) -> void:
 				bullet_scene, 
 				global_position, 
 				Vector2.ZERO, 
-				_damage,
-				false,
+				total_damage,
+				crit,
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,

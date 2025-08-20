@@ -14,6 +14,7 @@ var _final_scale: float = 0.0
 # Whether or not the paint line lifetime timer should be ticking
 var _death_timer_is_on: bool = false
 
+
 func _ready() -> void:
 	sprite.scale.x = 0.0
 	# How long it takes for the paint line to get to the end
@@ -42,12 +43,14 @@ func _process(delta: float) -> void:
 		if death_timer >= lifetime and is_multiplayer_authority():
 			queue_free()
 
+
 func start_death_timer() -> void:
 	_death_timer_is_on = true
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(sprite, "modulate", Color.html("aaaaaa00"), lifetime - 0.5)
+
 
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:

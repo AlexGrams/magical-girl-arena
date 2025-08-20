@@ -15,10 +15,11 @@ var _exploded_frame_count: int = -1
 var _has_level_3_upgrade: bool = false
 
 
-func set_damage(damage: float, _is_crit: bool = false):
+func set_damage(damage: float, is_crit: bool = false):
 	_damage = damage
 	# TODO: Might need to separate this later.
 	_splash_area.damage = damage * 50.0
+	_splash_area.is_crit = is_crit
 
 
 func _ready() -> void:
@@ -65,8 +66,8 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
 		data.size() != 2
-		or (typeof(data[0])) != TYPE_FLOAT	# Lifetime
-		or (typeof(data[1])) != TYPE_BOOL	# Is level 3+ or not
+		or typeof(data[0]) != TYPE_FLOAT	# Lifetime
+		or typeof(data[1]) != TYPE_BOOL		# Is level 3+ or not
 	):
 		push_error("Malformed bullet setup data Array for bullet_puddle.gd.")
 		return
