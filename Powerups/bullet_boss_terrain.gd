@@ -45,6 +45,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	if not is_owned_by_player:
 		rotation = direction.angle()
+		if rotation < 0:
+			rotation += PI
 		_tell_timer = _tell_time
 		_static_body_collision_layer = _static_body.collision_layer
 		_static_body.collision_layer = 0
