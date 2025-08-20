@@ -15,6 +15,8 @@ var _max_range: float = 0.0
 var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
 var _starting_position: Node2D = null
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 2.0
 ## Indicates if the tether is visually on or not
 var _visual_is_active: bool = false
 
@@ -63,11 +65,13 @@ func _physics_process(_delta: float) -> void:
 		if is_multiplayer_authority():
 			# Harm all enemies the Tether is touching.
 			var damage_done: float = 0
+			var crit: bool = randf() < _crit_chance
+			var total_damage: float = _area.damage * (1.0 if not crit else _crit_multiplier)
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
 				if hit_node is Enemy or hit_node is LootBox:
-					hit_node.take_damage(_area.damage)
-					damage_done += _area.damage
+					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+					damage_done += total_damage
 			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
 		
 		$AudioStreamPlayer2D.pitch_scale = 0.8
@@ -100,15 +104,19 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 4
-		or (typeof(data[0])) != TYPE_NODE_PATH	# Owning Node2D
-		or (typeof(data[1])) != TYPE_FLOAT		# Range
-		or (typeof(data[2])) != TYPE_NODE_PATH  # Starting position
-		or (typeof(data[3])) != TYPE_BOOL		# If piercing is active
+		data.size() != 6
+		or typeof(data[0]) != TYPE_NODE_PATH	# Owning Node2D
+		or typeof(data[1]) != TYPE_FLOAT		# Range
+		or typeof(data[2]) != TYPE_NODE_PATH	# Starting position
+		or typeof(data[3]) != TYPE_BOOL			# If piercing is active
+		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
 	):
 		return
 	
 	_starting_position = get_node(data[2])
+	_crit_chance = data[4]
+	_crit_multiplier = data[5]
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])
@@ -138,6 +146,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		tether_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
+		)
+		tether_powerup.crit_changed.connect(
+			func(new_crit_chance, new_crit_multiplier):
+				_crit_chance = new_crit_chance
+				_crit_multiplier = new_crit_multiplier
 		)
 	
 	_max_range = data[1]

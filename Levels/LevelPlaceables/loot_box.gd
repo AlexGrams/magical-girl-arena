@@ -80,7 +80,7 @@ func _destroy() -> void:
 	queue_free()
 
 
-func take_damage(damage: float) -> void:
+func take_damage(damage: float, _damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, _is_crit: bool = false) -> void:
 	if _health <= 0.0:
 		return
 	

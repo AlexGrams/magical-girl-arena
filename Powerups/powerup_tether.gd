@@ -5,6 +5,13 @@ extends Powerup
 @export var bullet_scene := "res://Powerups/bullet_tether.tscn"
 @export var max_range: float = 500
 
+signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
+
+
+func set_crit_chance(new_crit: float) -> void:
+	crit_chance = new_crit
+	crit_changed.emit(crit_chance, crit_multiplier)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,7 +33,14 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[get_parent().get_path(), max_range, get_parent().get_path(), false]
+				[
+					get_parent().get_path(), 
+					max_range, 
+					get_parent().get_path(), 
+					false,
+					crit_chance,
+					crit_multiplier
+				]
 			]
 		)
 	else:

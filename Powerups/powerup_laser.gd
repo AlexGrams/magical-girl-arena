@@ -8,6 +8,13 @@ extends Powerup
 signal update_pointer_location(new_pointer_location: Vector2)
 ## Signals to the laser bullet to activate signature functionality if this powerup is signature and max level.
 signal activate_piercing()
+## Called when the crit values for this powerup are changed.
+signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
+
+
+func set_crit_chance(new_crit: float) -> void:
+	crit_chance = new_crit
+	crit_changed.emit(crit_chance, crit_multiplier)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,7 +43,14 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[get_parent().get_path(), max_range, get_parent().get_path(), current_level >= 3]
+				[
+					get_parent().get_path(), 
+					max_range, 
+					get_parent().get_path(), 
+					current_level >= 3,
+					crit_chance,
+					crit_multiplier
+				]
 			]
 		)
 		

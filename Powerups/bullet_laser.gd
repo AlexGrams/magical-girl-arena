@@ -14,6 +14,8 @@ var _owning_character: Node2D = null
 var _pointer_location: Vector2
 var _piercing_active: bool = false
 var _starting_position: Node2D = null
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 2.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,6 +62,8 @@ func _physics_process(_delta: float) -> void:
 	# Position and scale the laser beam
 	if result and _is_owned_by_player:
 		# The laser hit something and shouldn't be its full length.
+		var crit: bool = randf() < _crit_chance
+		var total_damage: float = _area.damage * (1.0 if not crit else _crit_multiplier)
 		$AudioStreamPlayer2D.pitch_scale = 0.8
 		$AudioStreamPlayer2D.volume_db = -25
 		
@@ -72,16 +76,16 @@ func _physics_process(_delta: float) -> void:
 			if is_multiplayer_authority():
 				var hit_node: Node2D = result["collider"].get_parent()
 				if hit_node is Enemy or hit_node is LootBox:
-					hit_node.take_damage(_area.damage)
-					Analytics.add_powerup_damage.rpc_id(_area.owner_id, _area.damage, _area.powerup_index)
+					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+					Analytics.add_powerup_damage.rpc_id(_area.owner_id, total_damage, _area.powerup_index)
 		elif is_multiplayer_authority():
 			# Signature functionality: Harm all enemies the laser is touching
 			var damage_done: float = 0
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
 				if hit_node is Enemy or hit_node is LootBox:
-					hit_node.take_damage(_area.damage)
-					damage_done += _area.damage
+					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+					damage_done += total_damage
 			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
 	else:
 		# Play passive humming
@@ -98,15 +102,19 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 4
-		or (typeof(data[0])) != TYPE_NODE_PATH	# Owning Node2D
-		or (typeof(data[1])) != TYPE_FLOAT		# Range
-		or (typeof(data[2])) != TYPE_NODE_PATH  # Starting position
-		or (typeof(data[3])) != TYPE_BOOL		# If piercing is active
+		data.size() != 6
+		or typeof(data[0]) != TYPE_NODE_PATH	# Owning Node2D
+		or typeof(data[1]) != TYPE_FLOAT		# Range
+		or typeof(data[2]) != TYPE_NODE_PATH	# Starting position
+		or typeof(data[3]) != TYPE_BOOL			# If piercing is active
+		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
 	):
 		return
 	
 	_starting_position = get_node(data[2])
+	_crit_chance = data[4]
+	_crit_multiplier = data[5]
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])
@@ -150,6 +158,13 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		laser_powerup.activate_piercing.connect(
 			func():
 				_set_piercing.rpc(true)
+		)
+		
+		# Update crit values
+		laser_powerup.crit_changed.connect(
+			func(crit_chance: float, crit_multiplier: float):
+				_crit_chance = crit_chance
+				_crit_multiplier = crit_multiplier
 		)
 	
 	_max_range = data[1]
