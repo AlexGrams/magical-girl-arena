@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://61fbrrdpcywu"]
+[gd_scene load_steps=7 format=3 uid="uid://61fbrrdpcywu"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_chain_lines.gd" id="1_q50an"]
 [ext_resource type="Texture2D" uid="uid://b7jjqxs24jnyf" path="res://Sprites/Map/Desert/Chain_Straight.png" id="2_akbep"]
@@ -6,11 +6,15 @@
 [ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_3ti3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
-size = Vector2(3079, 37)
+size = Vector2(3081.5, 38.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60hle"]
+size = Vector2(3079, 35.5)
 
 [node name="BulletBossChainLines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_q50an")
+_travel_time = 3.0
 speed = 1.25
 lifetime = 5.0
 destroy_on_hit = false
@@ -28,6 +32,7 @@ script = ExtResource("3_hogav")
 damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.25, 0.75)
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -44,3 +49,11 @@ offset_bottom = 278.5
 scale = Vector2(0.17, 0.17)
 texture = ExtResource("2_akbep")
 stretch_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 64
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, 0.75)
+shape = SubResource("RectangleShape2D_60hle")
