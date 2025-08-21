@@ -39,7 +39,12 @@ func _process(delta: float) -> void:
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
-						[player.get_path(), _has_level_3_upgrade]
+						[
+							player.get_path(), 
+							_has_level_3_upgrade,
+							crit_chance,
+							crit_multiplier
+						]
 					]
 				)
 		

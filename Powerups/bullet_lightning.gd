@@ -7,6 +7,8 @@ extends Bullet
 @export var _lightning: Node2D = null
 
 var _is_level_three: bool = false
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 ## True after the one frame that this bullet lasts for.
 var _processed: bool = false
 var _freed_area: bool = false
@@ -44,9 +46,11 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
-		or (typeof(data[0])) != TYPE_NODE_PATH	# Target endpoint
-		or (typeof(data[1])) != TYPE_BOOL		# Has level 3 upgrade or not
+		data.size() != 4
+		or typeof(data[0]) != TYPE_NODE_PATH	# Target endpoint
+		or typeof(data[1]) != TYPE_BOOL			# Has level 3 upgrade or not
+		or typeof(data[2]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[3]) != TYPE_FLOAT		# Crit multiplier
 	):
 		push_error("Malformed data array")
 		return
@@ -55,6 +59,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_level_three = data[1]
 	if data[1]:
 		scale.y = scale.y * 2
+	
+	_crit_chance = data[2]
+	_crit_multiplier = data[3]
 	
 	_is_owned_by_player = is_owned_by_player
 	
@@ -68,15 +75,25 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 ## Collision only processed on server instance.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
+	var crit: bool = randf() < _crit_chance
+	var total_damage: float = collider.damage* (1.0 if not crit else _crit_multiplier)
 	
 	if enemy != null and enemy is Enemy:
 		GameState.playground.create_lightning_arc.rpc(
 			enemy.global_position, 
-			collider.damage, 
+			total_damage, 
+			crit,
 			_is_owned_by_player,
 			collider.owner_id,
 			collider.powerup_index,
-			[3, _is_level_three, -1.0, enemy.get_path()]
+			[
+				3, 
+				_is_level_three, 
+				-1.0, 
+				enemy.get_path(),
+				_crit_chance,
+				_crit_multiplier
+			]
 		)
 
 
