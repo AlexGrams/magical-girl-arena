@@ -28,6 +28,8 @@ var _bounces: int = 0
 var _is_level_three: bool = false
 ## Enemy that this arc comes from.
 var _origin_enemy: Node = null
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 ## True after the one frame that this bullet lasts for.
 var _processed: bool = false
 var _freed_area: bool = false
@@ -99,16 +101,26 @@ func _physics_process(delta: float) -> void:
 				
 				# Only the server will create the next bullet bounce.
 				if is_multiplayer_authority():
+					var crit: bool = randf() < _crit_chance
+					var total_damage: float = collider.damage * (1.0 if not crit else _crit_multiplier)
 					_area.collision_layer = _collision_layer
 					_area.collision_mask = _collision_mask
 					
 					GameState.playground.create_lightning_arc.rpc(
 						next_bounce.global_position, 
-						collider.damage, 
+						total_damage, 
+						crit,
 						_is_owned_by_player,
 						collider.owner_id,
 						collider.powerup_index,
-						[_bounces - 1, _is_level_three, sqrt(nearest_distance_squared), next_bounce.get_path()]
+						[
+							_bounces - 1, 
+							_is_level_three, 
+							sqrt(nearest_distance_squared), 
+							next_bounce.get_path(),
+							_crit_chance,
+							_crit_multiplier
+						]
 					)
 			else:
 				# No next valid bounce target
@@ -124,11 +136,13 @@ func _physics_process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 4
-		or (typeof(data[0])) != TYPE_INT		# Number of bounces remaining
-		or (typeof(data[1])) != TYPE_BOOL		# Has level 3 upgrade or not
-		or (typeof(data[2])) != TYPE_FLOAT		# Max range. -1 if the range is not limited.
-		or (typeof(data[3])) != TYPE_NODE_PATH	# Node this lightning is originating from
+		data.size() != 6
+		or typeof(data[0]) != TYPE_INT			# Number of bounces remaining
+		or typeof(data[1]) != TYPE_BOOL			# Has level 3 upgrade or not
+		or typeof(data[2]) != TYPE_FLOAT		# Max range. -1 if the range is not limited.
+		or typeof(data[3]) != TYPE_NODE_PATH	# Node this lightning is originating from
+		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
 	):
 		push_error("Malformed data array")
 		return
@@ -140,6 +154,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	else:
 		_bounce_range = _max_bounce_range
 	_origin_enemy = get_node(data[3])
+	_crit_chance = data[4]
+	_crit_multiplier = data[5]
 	_is_owned_by_player = is_owned_by_player
 	
 	# Play fading out animation

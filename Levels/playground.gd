@@ -310,10 +310,10 @@ func create_damage_indicator(pos: Vector2, damage: float, is_crit: bool = false)
 
 ## Create a BulletLightningArc object using an object pool, which is better than spawning new objects.
 @rpc("authority", "call_local")
-func create_lightning_arc(pos: Vector2, damage: float, is_owned_by_player: bool, owner_id: int,
+func create_lightning_arc(pos: Vector2, damage: float, is_crit: bool, is_owned_by_player: bool, owner_id: int,
 			powerup_index: int, data: Array) -> void:
 	_lightning_arc_pool[_lightning_arc_index].position = pos
-	_lightning_arc_pool[_lightning_arc_index].set_damage(damage)
+	_lightning_arc_pool[_lightning_arc_index].set_damage(damage, is_crit)
 	_lightning_arc_pool[_lightning_arc_index].setup_bullet(is_owned_by_player, data)
 	if owner_id > 0 and powerup_index > -1:
 		_lightning_arc_pool[_lightning_arc_index].setup_analytics(owner_id, powerup_index)
