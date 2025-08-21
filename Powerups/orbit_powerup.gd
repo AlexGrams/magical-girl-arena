@@ -7,7 +7,12 @@ var sprite = preload("res://Coconut.png")
 ## with this powerup after they spawn.
 var _bullets: Array[BulletOrbit] = [] 
 
-signal picked_up_powerup(sprite)
+signal crit_changed(new_crit_chance: float, new_crit_multiplier: float) 
+
+
+func set_crit_chance(new_crit: float) -> void:
+	crit_chance = new_crit
+	crit_changed.emit(crit_chance, crit_multiplier)
 
 
 ## Add a reference to an instantated bullet.
@@ -32,7 +37,7 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id()]
+				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
 			]
 		)
 		
@@ -48,26 +53,11 @@ func activate_powerup():
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[multiplayer.get_unique_id()]
+					[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
 				]
 			)
 	else:
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1,
-			[
-				bullet_scene, 
-				Vector2.ZERO, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				-1,
-				-1,
-				[get_parent().get_path()]
-			]
-		)
-	
-	picked_up_powerup.emit(sprite)
+		push_error("Not implemented")
 
 
 func deactivate_powerup():
@@ -93,7 +83,7 @@ func level_up():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id()]
+				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
 			]
 		)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
@@ -107,10 +97,9 @@ func level_up():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id()]
+				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
 			]
 		)
-		
 	
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
 

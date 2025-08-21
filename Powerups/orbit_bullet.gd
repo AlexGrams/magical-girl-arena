@@ -2,16 +2,23 @@ class_name BulletOrbit
 extends Bullet
 
 @export var radius = 2
+
 var owning_player: Node2D = null
+
+var _base_damage: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 
 
 func set_damage(damage: float, is_crit: bool = false):
+	_base_damage = damage
 	$BulletOffset/Area2D.damage = damage
 	$BulletOffset/Area2D.is_crit = is_crit
 
 
 func _ready() -> void:
-	pass
+	if not is_multiplayer_authority():
+		set_physics_process(false)
 
 
 func _process(delta: float) -> void:
@@ -28,18 +35,31 @@ func _process(delta: float) -> void:
 			queue_free()
 
 
+## Determines crit functionality using the server only.
+func _physics_process(_delta: float) -> void:
+	# Randomly determine if this bullet does crit damage this frame.
+	if _crit_chance > 0.0:
+		$BulletOffset/Area2D.is_crit = _crit_chance < randf()
+		$BulletOffset/Area2D.damage = _base_damage * (1.0 if not $BulletOffset/Area2D.is_crit else _crit_multiplier)
+
+
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 3
 		or (typeof(data[0]) != TYPE_INT				# Owning ID
 			and typeof(data[0]) != TYPE_NODE_PATH)	# Owning enemy
+		or typeof(data[1]) != TYPE_FLOAT			# Crit chance
+		or typeof(data[2]) != TYPE_FLOAT			# Crit multiplier
 	):
+		push_error("Malformed data array")
 		return
 	
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		owning_player = GameState.player_characters.get(data[0])
+		_crit_chance = data[1]
+		_crit_multiplier = data[2]
 	
 		# This bullet destroys itself when the player dies.
 		if is_multiplayer_authority():
@@ -63,13 +83,22 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	$BulletOffset.position.y = radius
 	rotate(direction.angle())
 	
-	var orbit_powerup := owning_player.get_node_or_null("OrbitPowerup")
+	var orbit_powerup: PowerupOrbit = owning_player.get_node_or_null("OrbitPowerup")
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	if orbit_powerup != null:
+		# Level up
 		orbit_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
+		
+		# Crit updates
+		orbit_powerup.crit_changed.connect(
+			func(new_crit_chance: float, new_crit_multiplier: float):
+				_crit_chance = new_crit_chance
+				_crit_multiplier = new_crit_multiplier
+		)
+		
 		orbit_powerup.add_bullet(self)
 
 
