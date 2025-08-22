@@ -37,7 +37,7 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
+				[multiplayer.get_unique_id()]
 			]
 		)
 		
@@ -53,7 +53,7 @@ func activate_powerup():
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
+					[multiplayer.get_unique_id()]
 				]
 			)
 	else:
@@ -83,7 +83,7 @@ func level_up():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
+				[multiplayer.get_unique_id()]
 			]
 		)
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
@@ -97,7 +97,7 @@ func level_up():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[multiplayer.get_unique_id(), crit_chance, crit_multiplier]
+				[multiplayer.get_unique_id()]
 			]
 		)
 	

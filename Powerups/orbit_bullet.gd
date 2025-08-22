@@ -16,6 +16,12 @@ func set_damage(damage: float, is_crit: bool = false):
 	$BulletOffset/Area2D.is_crit = is_crit
 
 
+@rpc("any_peer", "call_local")
+func _set_critical(new_crit_chance: float, new_crit_multiplier: float):
+	_crit_chance = new_crit_chance
+	_crit_multiplier = new_crit_multiplier
+
+
 func _ready() -> void:
 	if not is_multiplayer_authority():
 		set_physics_process(false)
@@ -39,18 +45,16 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	# Randomly determine if this bullet does crit damage this frame.
 	if _crit_chance > 0.0:
-		$BulletOffset/Area2D.is_crit = _crit_chance < randf()
+		$BulletOffset/Area2D.is_crit = randf() < _crit_chance
 		$BulletOffset/Area2D.damage = _base_damage * (1.0 if not $BulletOffset/Area2D.is_crit else _crit_multiplier)
 
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
+		data.size() != 1
 		or (typeof(data[0]) != TYPE_INT				# Owning ID
 			and typeof(data[0]) != TYPE_NODE_PATH)	# Owning enemy
-		or typeof(data[1]) != TYPE_FLOAT			# Crit chance
-		or typeof(data[2]) != TYPE_FLOAT			# Crit multiplier
 	):
 		push_error("Malformed data array")
 		return
@@ -58,8 +62,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		owning_player = GameState.player_characters.get(data[0])
-		_crit_chance = data[1]
-		_crit_multiplier = data[2]
 	
 		# This bullet destroys itself when the player dies.
 		if is_multiplayer_authority():
@@ -93,10 +95,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 		
 		# Crit updates
+		_set_critical.rpc_id(1, orbit_powerup.crit_chance, orbit_powerup.crit_multiplier)
 		orbit_powerup.crit_changed.connect(
 			func(new_crit_chance: float, new_crit_multiplier: float):
-				_crit_chance = new_crit_chance
-				_crit_multiplier = new_crit_multiplier
+				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
 		
 		orbit_powerup.add_bullet(self)

@@ -44,6 +44,12 @@ var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
 
 
+@rpc("any_peer", "call_local")
+func _set_critical(new_crit_chance: float, new_crit_multiplier: float):
+	_crit_chance = new_crit_chance
+	_crit_multiplier = new_crit_multiplier
+
+
 func _ready() -> void:
 	pass
 
@@ -94,16 +100,12 @@ func _process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
+		data.size() != 1
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning character 
-		or typeof(data[1]) != TYPE_FLOAT		# Crit chance
-		or typeof(data[2]) != TYPE_FLOAT		# Crit multiplier
 	):
 		return
 	
 	_pingpong_owner = get_tree().root.get_node(data[0])
-	_crit_chance = data[1]
-	_crit_multiplier = data[2]
 	global_position = _pingpong_owner.global_position
 	
 	# The authority over this bullet sets the order by which the pingpong bounces between targets.
@@ -130,10 +132,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 			
 			# Crit update
+			_set_critical.rpc_id(1, powerup_ping_pong.crit_chance, powerup_ping_pong.crit_multiplier)
 			powerup_ping_pong.crit_changed.connect(
 				func(new_crit_chance: float, new_crit_multiplier: float):
-					_crit_chance = new_crit_chance
-					_crit_multiplier = new_crit_multiplier
+					_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 			)
 	
 		# When the owner goes down, destroy this bullet

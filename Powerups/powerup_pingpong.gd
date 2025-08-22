@@ -35,7 +35,7 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[$"..".get_path(), crit_chance, crit_multiplier]
+				[$"..".get_path()]
 			]
 		)
 	else:
