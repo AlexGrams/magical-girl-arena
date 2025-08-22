@@ -12,8 +12,8 @@ var _crit_multiplier: float = 1.0
 
 func set_damage(damage: float, is_crit: bool = false):
 	_base_damage = damage
-	$BulletOffset/Area2D.damage = damage
-	$BulletOffset/Area2D.is_crit = is_crit
+	collider.damage = damage
+	collider.is_crit = is_crit
 
 
 @rpc("any_peer", "call_local")
@@ -45,8 +45,8 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	# Randomly determine if this bullet does crit damage this frame.
 	if _crit_chance > 0.0:
-		$BulletOffset/Area2D.is_crit = randf() < _crit_chance
-		$BulletOffset/Area2D.damage = _base_damage * (1.0 if not $BulletOffset/Area2D.is_crit else _crit_multiplier)
+		collider.is_crit = randf() < _crit_chance
+		collider.damage = _base_damage * (1.0 if not collider.is_crit else _crit_multiplier)
 
 
 # Set up other properties for this bullet
@@ -107,7 +107,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(_new_level: int, new_damage: float):
-	$BulletOffset/Area2D.damage = new_damage
+	collider.damage = new_damage
 
 
 
