@@ -1,12 +1,12 @@
 class_name BulletPingPong
 extends Bullet
-## Boomerang bounces between all player characters.
+## PingPong aka Shuttle Shuffle bounces between all player characters.
 ##
 ## NOTE: Powerup does not currently work correctly if someone (such as the host) spawns in with the 
-## boomerang before all the other characters have spawned in.
+## pingpong before all the other characters have spawned in.
 
 
-## How close the Boomerang needs to get to its destination before switching directions.
+## How close the PingPong needs to get to its destination before switching directions.
 const touching_distance_threshold: float = 30.0
 
 ## Target enemy must be within this range
@@ -27,12 +27,12 @@ const touching_distance_threshold: float = 30.0
 @onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
 ## The bullet object is replicated on all clients.
 ## This owner is the client's replicated version of the character that owns this bullet.
-var _boomerang_owner: Node2D = null
-## Which node the boomerang is currently moving towards.
+var _pingpong_owner: Node2D = null
+## Which node the pingpong is currently moving towards.
 var _target: Node2D = null
-## List of nodes that the boomerang can bounce between.
+## List of nodes that the pingpong can bounce between.
 var _all_targets: Array[Node2D] = []
-## index of _all_targets that the boomerang is currently moving towards.
+## index of _all_targets that the pingpong is currently moving towards.
 var _target_index: int = 0
 ## How long the bullet has been moving for since it last reached a target
 var _travel_time: float = 0.0
@@ -50,12 +50,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not _is_owned_by_player:
-		push_error("Boomerange not configured for use by Enemies.")
+		push_error("PingPong not configured for use by Enemies.")
 		return
 	
 	if (
-			_boomerang_owner == null
-			or _boomerang_owner.is_queued_for_deletion()
+			_pingpong_owner == null
+			or _pingpong_owner.is_queued_for_deletion()
 			or len(_all_targets) <= 0
 	):
 		return
@@ -72,7 +72,7 @@ func _process(delta: float) -> void:
 				_min_shield_duration + (_travel_time - _min_travel_time_for_shield) * _shield_duration_per_second_traveled_over_threshold
 			)
 			
-			# The exact position of the boomerang becomes desynced over time, so occasionally
+			# The exact position of the pingpong becomes desynced over time, so occasionally
 			# RPC to synchronize the position.
 			if is_multiplayer_authority() and _target_index == 0:
 				_teleport.rpc(global_position)
@@ -101,12 +101,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	):
 		return
 	
-	_boomerang_owner = get_tree().root.get_node(data[0])
+	_pingpong_owner = get_tree().root.get_node(data[0])
 	_crit_chance = data[1]
 	_crit_multiplier = data[2]
-	global_position = _boomerang_owner.global_position
+	global_position = _pingpong_owner.global_position
 	
-	# The authority over this bullet sets the order by which the boomerang bounces between targets.
+	# The authority over this bullet sets the order by which the pingpong bounces between targets.
 	if is_multiplayer_authority():
 		_all_targets.assign(GameState.player_characters.values())
 		_target_index = 0
@@ -119,7 +119,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var powerup_ping_pong: PowerupPingPong = _boomerang_owner.get_node_or_null("PowerupPingPong")
+		var powerup_ping_pong: PowerupPingPong = _pingpong_owner.get_node_or_null("PowerupPingPong")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if powerup_ping_pong != null:
 			powerup_ping_pong.add_bullet(self)
@@ -137,7 +137,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 	
 		# When the owner goes down, destroy this bullet
-		_boomerang_owner.died.connect(func():
+		_pingpong_owner.died.connect(func():
 			queue_free()
 		)
 	else:
@@ -145,7 +145,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		
 		# Destroy bullet when owning Enemy dies
 		if is_multiplayer_authority():
-			_boomerang_owner.died.connect(func(_enemy: Enemy):
+			_pingpong_owner.died.connect(func(_enemy: Enemy):
 				queue_free()
 			)
 
@@ -169,7 +169,7 @@ func request_all_targets() -> void:
 	set_all_targets.rpc_id(multiplayer.get_remote_sender_id(), node_paths, _target_index, global_position)
 
 
-## Gives a client the order in which this boomerang will bounce between targets.
+## Gives a client the order in which this PingPong will bounce between targets.
 @rpc("authority", "call_local")
 func set_all_targets(targets: Array[NodePath], current_index: int, current_position: Vector2) -> void:
 	_all_targets.clear()
