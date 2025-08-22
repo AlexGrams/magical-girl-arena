@@ -45,7 +45,6 @@ PingPongBullet = NodePath("..")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 self_modulate = Color(1, 0.982564, 0.930355, 1)
 show_behind_parent = true
-scale = Vector2(1, 1)
 process_material = SubResource("ParticleProcessMaterial_nvhkd")
 texture = ExtResource("2_su1h0")
 lifetime = 0.25

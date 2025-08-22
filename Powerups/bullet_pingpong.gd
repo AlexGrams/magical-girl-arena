@@ -40,6 +40,8 @@ var _travel_time: float = 0.0
 var _base_damage: float = 0.0
 ## How much damage increases per second of travel time.
 var _damage_increase_per_second: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 
 
 func _ready() -> void:
@@ -81,18 +83,27 @@ func _process(delta: float) -> void:
 	
 	# Scale damage based off of time since last bounce.
 	if is_multiplayer_authority():
-		$Area2D.damage = _base_damage + _travel_time * _damage_increase_per_second
+		collider.damage = _base_damage + _travel_time * _damage_increase_per_second
+		
+		# Account for critical
+		collider.is_crit = randf() < _crit_chance
+		if collider.is_crit:
+			collider.damage *= _crit_multiplier
 
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 3
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning character 
+		or typeof(data[1]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[2]) != TYPE_FLOAT		# Crit multiplier
 	):
 		return
 	
 	_boomerang_owner = get_tree().root.get_node(data[0])
+	_crit_chance = data[1]
+	_crit_multiplier = data[2]
 	global_position = _boomerang_owner.global_position
 	
 	# The authority over this bullet sets the order by which the boomerang bounces between targets.
@@ -108,12 +119,21 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var powerup_ping_pong := _boomerang_owner.get_node_or_null("PowerupPingPong")
+		var powerup_ping_pong: PowerupPingPong = _boomerang_owner.get_node_or_null("PowerupPingPong")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if powerup_ping_pong != null:
 			powerup_ping_pong.add_bullet(self)
+			
+			# Level up
 			powerup_ping_pong.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
+			)
+			
+			# Crit update
+			powerup_ping_pong.crit_changed.connect(
+				func(new_crit_chance: float, new_crit_multiplier: float):
+					_crit_chance = new_crit_chance
+					_crit_multiplier = new_crit_multiplier
 			)
 	
 		# When the owner goes down, destroy this bullet
