@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfk6cmdntwar5"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_crit_boost.gd" id="1_bp1kx"]
+
+[node name="ArtifactCritBoost" type="Node"]
+script = ExtResource("1_bp1kx")

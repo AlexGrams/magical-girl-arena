@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ArtifactDataCritBoost" load_steps=4 format=3 uid="uid://dktiypl1fuc0n"]
+
+[ext_resource type="Script" path="res://Artifacts/artifactdata_crit_boost.gd" id="1_1r3kk"]
+[ext_resource type="PackedScene" uid="uid://dfk6cmdntwar5" path="res://Artifacts/artifact_crit_boost.tscn" id="1_jduc8"]
+[ext_resource type="Texture2D" uid="uid://dqr866l0cyn1p" path="res://Peach.png" id="3_j4uhu"]
+
+[resource]
+script = ExtResource("1_1r3kk")
+_description = "Increases the critical chance and critical damage of Powerups that can crit."
+is_unique = false
+scene = ExtResource("1_jduc8")
+name = "Critical Boost"
+sprite = ExtResource("3_j4uhu")

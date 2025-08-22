@@ -24,11 +24,8 @@ func get_upgrade_description(_level: int = 0) -> String:
 
 ## Returns false if all of the player's powerups already have critical hits enabled.
 func can_acquire() -> bool:
-	var result: bool = false
-	
 	for powerup: Powerup in GameState.get_local_player().powerups:
 		if powerup.crit_chance <= 0.0:
-			result = true
-			break
+			return true
 	
-	return result
+	return false
