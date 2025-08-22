@@ -14,10 +14,16 @@ var sprite = preload("res://Peach.png")
 var _boomerang_controller: BulletBoomerangController
 
 signal picked_up_powerup(sprite)
+signal crit_changed(new_crit_chance: float, new_crit_multiplier: float) 
 
 
 func set_boomerang_controller(value: BulletBoomerangController) -> void:
 	_boomerang_controller = value
+
+
+func set_crit_chance(new_crit: float) -> void:
+	crit_chance = new_crit
+	crit_changed.emit(crit_chance, crit_multiplier)
 
 
 func _ready():
@@ -35,23 +41,15 @@ func activate_powerup():
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[$"..".get_path(), _upgraded_fire_interval, _boomerang_bullet_scene]
+				[
+					$"..".get_path(), 
+					_upgraded_fire_interval, 
+					_boomerang_bullet_scene
+				]
 			]
 		)
 	else:
-		push_warning("Not implemented!")
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, [_controller_bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				-1,
-				-1,
-				[$"..".get_path()]
-			]
-		)
+		push_error("Boomerang not implemented for enemies!")
 	
 	picked_up_powerup.emit(sprite)
 

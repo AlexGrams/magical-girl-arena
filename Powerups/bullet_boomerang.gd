@@ -15,14 +15,29 @@ const touching_distance_threshold: float = 30.0
 var _boomerang_owner: Node2D = null
 ## This boomerang's controller bullet.
 var _controller: BulletBoomerangController = null
+var _damage: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 ## Object that this boomerang is moving towards.
 var _target: Node
 ## True if this boomerang is not idling at the player.
 var _active: bool = true
 
 
+
+func set_damage(damage: float, _is_crit: bool = false):
+	_damage = damage
+
+
+@rpc("any_peer", "call_local")
+func _set_critical(new_crit_chance: float, new_crit_multiplier: float):
+	_crit_chance = new_crit_chance
+	_crit_multiplier = new_crit_multiplier
+
+
 func _ready() -> void:
-	pass
+	if not is_multiplayer_authority():
+		set_physics_process(false)
 
 
 func _process(delta: float) -> void:
@@ -45,6 +60,12 @@ func _process(delta: float) -> void:
 			else:
 				# We have hit the object that we were aiming at, so return back to the owner.
 				_target = _boomerang_owner
+
+
+## Only physics process on the server, who also controls damage.
+func _physics_process(_delta: float) -> void:
+	collider.is_crit = randf() < _crit_chance
+	collider.damage = _damage * (1.0 if not collider.is_crit else _crit_multiplier)
 
 
 ## Sets this boomerang's target to the farthest Enemy within range.
@@ -85,11 +106,20 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := _boomerang_owner.get_node_or_null("BoomerangPowerup")
+		var boomerang_powerup: PowerupBoomerang = _boomerang_owner.get_node_or_null("PowerupBoomerang")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
+			# Level up
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
+			)
+			
+			# Crit changed: Crit value changes are caused by the owning player, but only
+			# the host controls damage.
+			_set_critical.rpc_id(1, boomerang_powerup.crit_chance, boomerang_powerup.crit_multiplier)
+			boomerang_powerup.crit_changed.connect(
+				func(new_crit_chance: float, new_crit_multiplier: float):
+					_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 			)
 	
 		# When the owner goes down, destroy this bullet
@@ -106,14 +136,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			)
 
 
-func set_damage(damage: float, _is_crit: bool = false):
-	$Area2D.damage = damage
-
-
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
 func level_up(new_level: int, new_damage: float):
-	$Area2D.damage = new_damage
+	_damage = new_damage
 	if new_level == 3:
 		# Increase size
 		scale = scale * 2
