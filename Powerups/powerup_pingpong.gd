@@ -10,7 +10,12 @@ signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
 
 
 func set_crit_chance(new_crit: float) -> void:
-	crit_chance = new_crit
+	super(new_crit)
+	crit_changed.emit(crit_chance, crit_multiplier)
+
+
+func set_crit_multiplier(new_multiplier: float) -> void:
+	super(new_multiplier)
 	crit_changed.emit(crit_chance, crit_multiplier)
 
 

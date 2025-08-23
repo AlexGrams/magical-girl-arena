@@ -93,6 +93,8 @@ var _stat_pickup_radius: int = 1
 
 signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
+## Called after an Item (either Powerup or Artifact) has been instantiated and added to this player.
+signal upgrade_added()
 ## Was saved from taking lethal damage because _prevent_death was true.
 signal death_prevented()
 signal died()
@@ -152,6 +154,8 @@ func _on_upgrade_chosen(itemdata: ItemData):
 		upgrade_or_grant_powerup(itemdata, false)
 	elif itemdata is ArtifactData:
 		add_artifact(itemdata)
+	
+	upgrade_added.emit()
 
 
 ## Increases the level of a Powerup, or adds it to the player if they don't have it already.

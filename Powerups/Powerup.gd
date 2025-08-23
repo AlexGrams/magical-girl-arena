@@ -55,6 +55,10 @@ func set_crit_chance(new_crit: float) -> void:
 	crit_chance = new_crit
 
 
+func set_crit_multiplier(new_multiplier: float) -> void:
+	crit_multiplier = new_multiplier
+
+
 # Meant to be overridden
 func level_up():
 	powerup_level_up.emit(0, 0)
