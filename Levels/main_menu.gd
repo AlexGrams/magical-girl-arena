@@ -34,6 +34,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobbies_list_searching_overlay: Control = null
 ## Appears on the Lobby List if there's no network connection.
 @export var lobbies_list_no_connection_overlay: Control = null
+## Appears on the Lobby List if no game lobbies were found.
+@export var lobbies_list_no_lobbies_overlay: Control = null
 ## The scroll box showing lobbies available to join.
 @export var lobbies_list_container: VBoxContainer
 ## The image of the game logo on the main menu.
@@ -233,6 +235,7 @@ func request_lobby_list() -> void:
 	if not GameState.get_has_online_connection():
 		lobbies_list_no_connection_overlay.show()
 		return
+	lobbies_list_no_lobbies_overlay.hide()
 	lobbies_list_searching_overlay.show()
 	
 	if GameState.USING_GODOT_STEAM:
@@ -305,6 +308,10 @@ func setup_lobby_screen() -> void:
 				# Place all in progress lobbies at the end of the lobby list.
 				for lobby_button: LobbyButton in in_progress_lobbies:
 					move_child(lobby_button, -1)
+				
+				# Display some text if there were no lobbies found.
+				if len(lobbies_list_container.get_children()) == 0:
+					lobbies_list_no_lobbies_overlay.show()
 				
 				lobbies_list_searching_overlay.hide()
 		)

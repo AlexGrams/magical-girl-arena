@@ -161,7 +161,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "players_holder", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "players_holder", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,6 +181,7 @@ main_menu_button_container = NodePath("Main/VBoxContainer")
 version_label = NodePath("Main/VersionLabel")
 lobbies_list_searching_overlay = NodePath("LobbyList/LobbiesListPanelContainer/SearchingPanel")
 lobbies_list_no_connection_overlay = NodePath("LobbyList/LobbiesListPanelContainer/NoConnectionPanel")
+lobbies_list_no_lobbies_overlay = NodePath("LobbyList/LobbiesListPanelContainer/NoLobbiesPanel")
 lobbies_list_container = NodePath("LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList")
 main_menu_logo = NodePath("Background/Logo")
 connecting_screen = NodePath("Connecting")
@@ -796,6 +797,28 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "No internet connection! 
 Check your device's network connection and that you're signed into Steam, then restart the game."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NoLobbiesPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_8c3cl")
+
+[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoLobbiesPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.5
+offset_top = -57.5
+offset_right = 406.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No lobbies found!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
