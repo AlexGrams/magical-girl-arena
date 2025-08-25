@@ -16,6 +16,10 @@ var _has_level_3_upgrade: bool = false
 func _ready() -> void:
 	powerup_name = load(_powerup_data_file_path).name
 	_owner = get_parent()
+	
+	# Crits by default
+	crit_chance = 0.25
+	crit_multiplier = 2.0
 
 
 func _process(delta: float) -> void:
