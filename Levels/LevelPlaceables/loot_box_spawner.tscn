@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="2_qtmxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
+size = Vector2(0.0854167, 20)
 
 [node name="LootBoxSpawner" type="Node2D" node_paths=PackedStringArray("spawn_area")]
 script = ExtResource("1_d6j4y")

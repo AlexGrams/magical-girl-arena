@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://yj2fdnxjt1d2"]
+[gd_scene load_steps=79 format=3 uid="uid://yj2fdnxjt1d2"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_imc2f"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
@@ -29,9 +29,9 @@
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_13cnm"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="28_juc7p"]
 [ext_resource type="PackedScene" uid="uid://divvdkhiu21h6" path="res://UI/canvas_layer.tscn" id="29_hhkov"]
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="32_2n8q1"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="48_5852u"]
-[ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="49_2n1oq"]
 [ext_resource type="PackedScene" uid="uid://cxfh0tkiqm2gs" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
 
 [sub_resource type="Resource" id="Resource_hea4i"]
@@ -486,6 +486,9 @@ _data = {
 "grow_darkness": SubResource("Animation_8sgrb"),
 "shrink_darkness": SubResource("Animation_oqn7p")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
+size = Vector2(0.0854167, 20)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "bullet_spawner", "point_light")]
 script = ExtResource("1_imc2f")
@@ -6188,14 +6191,32 @@ scale = Vector2(46.8, 0.945)
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
 
-[node name="LootBoxSpawner" parent="." instance=ExtResource("49_2n1oq")]
-position = Vector2(1062, 1816)
+[node name="LootBoxSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_area")]
+position = Vector2(-1628, 1793)
 scale = Vector2(240, 240)
-spawn_interval = 1.0
+script = ExtResource("32_2n8q1")
+spawn_interval = 16.0
 loot_box_scene = ExtResource("50_wxip1")
+spawn_area = NodePath("Area2D/SpawnArea")
 
-[node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
-position = Vector2(0.0458333, 0.175)
+[node name="Area2D" type="Area2D" parent="LootBoxSpawner"]
+
+[node name="SpawnArea" type="CollisionShape2D" parent="LootBoxSpawner/Area2D"]
+position = Vector2(-0.0166664, -0.0416673)
+shape = SubResource("RectangleShape2D_y6uu2")
 debug_color = Color(0, 0.435294, 0.403922, 0)
 
-[editable path="LootBoxSpawner"]
+[node name="LootBoxSpawner2" type="Node2D" parent="." node_paths=PackedStringArray("spawn_area")]
+position = Vector2(3926, 1793)
+scale = Vector2(240, 240)
+script = ExtResource("32_2n8q1")
+spawn_interval = 16.0
+loot_box_scene = ExtResource("50_wxip1")
+spawn_area = NodePath("Area2D/SpawnArea")
+
+[node name="Area2D" type="Area2D" parent="LootBoxSpawner2"]
+
+[node name="SpawnArea" type="CollisionShape2D" parent="LootBoxSpawner2/Area2D"]
+position = Vector2(-0.0166664, -0.0416673)
+shape = SubResource("RectangleShape2D_y6uu2")
+debug_color = Color(0, 0.435294, 0.403922, 0)
