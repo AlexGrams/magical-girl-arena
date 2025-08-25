@@ -47,6 +47,7 @@ func _process(delta: float) -> void:
 				0:
 					# Regular attacks while immune
 					set_is_invulnerable(true)
+					_powerups[4].deactivate_powerup()
 					_powerups[0].activate_powerup()
 				1:
 					# Create terrain
@@ -57,9 +58,9 @@ func _process(delta: float) -> void:
 					# Scream, destroy terrain
 					_powerups[2].activate_powerup()
 				3:
-					# Chains + regular attacks
+					# Chains + revolving attacks
 					_powerups[3].activate_powerup()
-					_powerups[0].activate_powerup()
+					_powerups[4].activate_powerup()
 		else:
 			# Phase two attack pattern. Regular attacks are always active.
 			if not _phase_two_active:
