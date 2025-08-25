@@ -1,0 +1,87 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Breathe",
+			"GroupId": "",
+			"Name": "Breathe"
+		},
+		{
+			"Id": "Blink",
+			"GroupId": "",
+			"Name": "Blink"
+		},
+		{
+			"Id": "Frown",
+			"GroupId": "",
+			"Name": "Frown"
+		},
+		{
+			"Id": "Earring_Left",
+			"GroupId": "",
+			"Name": "Earring_Left"
+		},
+		{
+			"Id": "Earring_Right",
+			"GroupId": "",
+			"Name": "Earring_Right"
+		},
+		{
+			"Id": "Head_Rot",
+			"GroupId": "",
+			"Name": "Head_Rot"
+		},
+		{
+			"Id": "Arm_Left_Rot",
+			"GroupId": "",
+			"Name": "Arm_Left_Rot"
+		},
+		{
+			"Id": "Arm_Right",
+			"GroupId": "",
+			"Name": "Arm_Right_Rot"
+		},
+		{
+			"Id": "Torso_Ro",
+			"GroupId": "",
+			"Name": "Torso_Rot"
+		},
+		{
+			"Id": "Torso_UpDown",
+			"GroupId": "",
+			"Name": "Torso_UpDown"
+		},
+		{
+			"Id": "Torso_Sway",
+			"GroupId": "",
+			"Name": "Torso_Sway"
+		},
+		{
+			"Id": "Pant_L_Top_Rot",
+			"GroupId": "",
+			"Name": "Pant_L_Top_Rot"
+		},
+		{
+			"Id": "Pant_R_Top_Rot",
+			"GroupId": "",
+			"Name": "Pant_R_Top_Rot"
+		},
+		{
+			"Id": "Pant_L_Bot_Rot",
+			"GroupId": "",
+			"Name": "Pant_L_Bot_Rot"
+		},
+		{
+			"Id": "Pant_R_Bot_Rot",
+			"GroupId": "",
+			"Name": "Pant_R_Bot_Rot"
+		},
+		{
+			"Id": "Hair_War",
+			"GroupId": "",
+			"Name": "Hair_Warp"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": []
+}
