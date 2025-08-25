@@ -35,8 +35,8 @@ func activate_powerup():
 	
 	# Activate the spawn event
 	var _new_spawn_event: EnemySpawnEventData = _spawn_event_data.duplicate()
-	_new_spawn_event.start_time_seconds = GameState.time
-	_new_spawn_event.end_time_seconds = GameState.time - _duration
+	_new_spawn_event.start_time_seconds = int(GameState.time)
+	_new_spawn_event.end_time_seconds = int(GameState.time - _duration)
 	GameState.playground.spawn_enemies(_new_spawn_event)
 
 
