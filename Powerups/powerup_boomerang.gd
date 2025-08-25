@@ -67,6 +67,8 @@ func deactivate_powerup():
 func level_up():
 	current_level += 1
 	powerup_level_up.emit(current_level, _get_damage_from_curve())
+	if current_level == max_level:
+		_boomerang_controller.activate_signature.rpc_id(1)
 
 
 func boost() -> void:

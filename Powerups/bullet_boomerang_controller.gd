@@ -137,6 +137,13 @@ func level_up(new_level: int, new_damage: float):
 		_spawn_boomerang()
 
 
+## Turn on signature functionality for all Boomerangs. Only call on server.
+@rpc("any_peer", "call_local")
+func activate_signature() -> void:
+	for boomerang: BulletBoomerang in _boomerangs:
+		boomerang.make_bigger.rpc()
+
+
 func boost() -> void:
 	for boomerang: BulletBoomerang in _boomerangs:
 		boomerang.boost.rpc()

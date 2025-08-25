@@ -18,6 +18,8 @@ var _controller: BulletBoomerangController = null
 var _damage: float = 0.0
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
+## True if this Boomerang has increased in size.
+var _is_enhanced: bool = false
 ## Object that this boomerang is moving towards.
 var _target: Node
 ## True if this boomerang is not idling at the player.
@@ -141,8 +143,15 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 func level_up(new_level: int, new_damage: float):
 	_damage = new_damage
 	if new_level == 3:
-		# Increase size
-		scale = scale * 2
+		make_bigger()
+
+
+## Grow this Boomerang. Activated when the powerup's functionality is stronger.
+@rpc("any_peer", "call_local")
+func make_bigger() -> void:
+	if not _is_enhanced:
+		_is_enhanced = true
+		scale = scale * 2.0
 
 
 @rpc("any_peer", "call_local")
