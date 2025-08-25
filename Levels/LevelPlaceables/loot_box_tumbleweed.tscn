@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxfh0tkiqm2gs"]
+
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.gd" id="1_e28bt"]
+[ext_resource type="PackedScene" uid="uid://btvqnd35r2gbw" path="res://Pickups/health_orb.tscn" id="2_gn8dj"]
+[ext_resource type="PackedScene" uid="uid://cqcar2b10ptof" path="res://Pickups/gold.tscn" id="3_1o7gm"]
+[ext_resource type="PackedScene" uid="uid://jyy16gs6xyi8" path="res://Sprites/Map/leaf_explosion.tscn" id="4_di2iy"]
+[ext_resource type="Texture2D" uid="uid://0qdkpv588cox" path="res://Sprites/Map/Bush.png" id="5_3e2e8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57c2n"]
+size = Vector2(105, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owpg8"]
+size = Vector2(127, 129)
+
+[node name="LootBoxTumbleweed" type="CharacterBody2D" node_paths=PackedStringArray("_character_body_2d")]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_e28bt")
+_character_body_2d = NodePath(".")
+max_health = 75.0
+drop_weight_health = 100.0
+health_scene = ExtResource("2_gn8dj")
+gold_scene = ExtResource("3_1o7gm")
+leaf_explosion_scene = ExtResource("4_di2iy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("5_3e2e8")
+
+[node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_57c2n")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_owpg8")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
