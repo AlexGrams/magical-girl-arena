@@ -1,5 +1,5 @@
 extends Powerup
-# Shoots a bunch of projectiles out in a circle
+## Shoots a bunch of projectiles out in circular waves.
 
 
 ## Bullets are spaced evenly around in a circle
@@ -7,8 +7,8 @@ extends Powerup
 @export var _damage: float = 25.0
 ## Time in seconds between activations
 @export var _shoot_interval: float = 1.0
-## UID of the scene for the powerup bullets
-@export var _bullet_scene_uid := ""
+## Path to the scene for the powerup bullets
+@export var _bullet_scene := ""
 
 var _shoot_timer: float = 0.0
 
@@ -51,13 +51,16 @@ func _shoot() -> void:
 	var random_starting_point = Vector2(randf(), randf()).normalized()
 	for i in range(_num_bullets):
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-		1, [_bullet_scene_uid, 
-			get_parent().global_position, 
-			random_starting_point.rotated(rotation_increment * i), 
-			_damage, 
-			false,
-			false,
-			-1,
-			-1,
-			[]
-		])
+			1, 
+			[
+				_bullet_scene, 
+				get_parent().global_position, 
+				random_starting_point.rotated(rotation_increment * i), 
+				_damage, 
+				false,
+				false,
+				-1,
+				-1,
+				[]
+			]
+		)

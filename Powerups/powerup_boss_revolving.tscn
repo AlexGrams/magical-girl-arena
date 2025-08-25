@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://biltdrxoxjfk0"]
-
-[ext_resource type="Script" path="res://Powerups/powerup_boss_revolving.gd" id="1_axhtr"]
-
-[node name="PowerupBossRevolving" type="Node2D"]
-script = ExtResource("1_axhtr")
-_bullet_scene_uid = "uid://elgo77ntpany"

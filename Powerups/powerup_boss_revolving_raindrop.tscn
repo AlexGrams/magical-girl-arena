@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bii2dpnusry26"]
-
-[ext_resource type="Script" path="res://Powerups/powerup_boss_revolving_raindrop.gd" id="1_hxa5c"]
-
-[node name="PowerupBossRevolvingRaindrop" type="Node2D"]
-script = ExtResource("1_hxa5c")
-_revolving_powerup_scene = "res://Powerups/powerup_boss_raindrop.tscn"
-_raindrop_powerup_scene = "res://Powerups/powerup_boss_revolving.tscn"

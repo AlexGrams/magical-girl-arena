@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://biltdrxoxjfk0"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_circle.gd" id="1_tcfqe"]
+
+[node name="PowerupBossCircle" type="Node2D"]
+script = ExtResource("1_tcfqe")
+_bullet_scene = "res://Powerups/bullet_boss_circle.tscn"
