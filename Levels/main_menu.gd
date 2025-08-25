@@ -393,14 +393,14 @@ func _on_map_select_left_button_pressed() -> void:
 	_selected_map_index += 1
 	if _selected_map_index >= len(Constants.MAP_DATA):
 		_selected_map_index = 0
-	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
+	map_name_label.change_text(Constants.MAP_DATA[_selected_map_index].name)
 
 
 func _on_map_select_right_button_pressed() -> void:
 	_selected_map_index -= 1
 	if _selected_map_index < 0:
 		_selected_map_index = len(Constants.MAP_DATA) - 1
-	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
+	_update_map.rpc(_selected_map_index)
 
 
 func _on_leave_button_down() -> void:
@@ -411,6 +411,12 @@ func _on_leave_button_down() -> void:
 func _on_shop_button_down_from_lobby() -> void:
 	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
+
+
+## Change the displayed map on the Lobby screen.
+@rpc("authority", "call_local")
+func _update_map(map_index: int) -> void:
+	map_name_label.change_text(Constants.MAP_DATA[map_index].name)
 
 
 ## Leave a game lobby. Goes back to the lobby list. If called remotely, should only be done by
