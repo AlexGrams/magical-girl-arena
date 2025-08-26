@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://g8qmluk0vmtb" path="res://Sprites/Powerups/Boomerang.png" id="1_f7vol"]
 [ext_resource type="Script" path="res://Player/character_data.gd" id="2_4jxhc"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_ak7g1"]
+[ext_resource type="Texture2D" uid="uid://dugtcb7o0li56" path="res://Sprites/Powerups/AmberUltIcon.png" id="3_e7emr"]
 
 [resource]
 script = ExtResource("2_4jxhc")
@@ -14,7 +14,7 @@ base_powerup_name = "Jeweled Boomerang"
 base_powerup_texture = ExtResource("1_f7vol")
 ult_name = "Fiery Spirit"
 ult_description = "Amber powers up for a duration, gaining speed and increasing her powerup fire rate"
-ult_texture = ExtResource("3_ak7g1")
+ult_texture = ExtResource("3_e7emr")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Amber/runtime/Amber.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
