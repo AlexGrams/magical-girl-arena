@@ -7,6 +7,8 @@ extends Powerup
 @export var _max_bounces: int = 3
 ## Same as _max_bounces, but for level 3+
 @export var _max_bounces_upgraded: int = 5
+## Number of additional bounce bullets that are created each time the Bounce hits something.
+@export var _max_splits: int = 1
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
 ## Path to the PowerupData resource file for this Powerup.
@@ -14,6 +16,7 @@ extends Powerup
 
 @onready var _fire_timer: float = _fire_interval
 @onready var _bounces: int = _max_bounces
+@onready var _splits: int = _max_splits
 
 
 func _ready() -> void:
@@ -39,7 +42,11 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[_find_nearest_target().get_path(), _bounces]
+				[
+					_find_nearest_target().get_path(), 
+					_bounces,
+					_splits
+				]
 			]
 		)
 		

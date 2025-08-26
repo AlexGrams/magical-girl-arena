@@ -13,6 +13,7 @@ radius = 1000.0
 [node name="BulletBounce" type="Node2D" node_paths=PackedStringArray("_enemy_mask_collision_shape", "collider", "sprite")]
 script = ExtResource("1_dhf7l")
 _enemy_mask_collision_shape = NodePath("EnemyMaskArea2D")
+_bullet_scene = "res://Powerups/bullet_bounce.tscn"
 speed = 2000.0
 lifetime = 0.0
 destroy_on_hit = false

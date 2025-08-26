@@ -9,9 +9,13 @@ const TOUCHING_DISTANCE_THRESHOLD: float = 25.0
 @onready var _squared_touching_distance_threshold: float = TOUCHING_DISTANCE_THRESHOLD ** 2
 # Rotation in degrees for any necessary rotation offsets
 @export var _sprite_rotation: float = 0.0
+## Path to this bullet's scene.
+@export var _bullet_scene := ""
+
 ## Current remaining number of enemies this bullet can hit before it is destroyed.
 var _bounces: int
-
+## How many extra bullets are created at most when this bullet hits something.
+var _splits: int = 0
 ## Enemy that this bullet is moving towards.
 var _target: Node = null
 ## True when we need to update this bullet's target next physics frame.
@@ -53,10 +57,20 @@ func _find_new_target() -> void:
 			return
 	
 	var enemies: Array[Area2D] = _enemy_mask_collision_shape.get_overlapping_areas()
+	# The squared distances of the nearest nodes in increasing order.
+	var distances: Array[float] = [] 
+	# The nearest nodes in increasing distance.
+	var nodes: Array[Node2D] = []
 	
 	if !enemies.is_empty():
-		var nearest_enemy: Node2D = null
-		var nearest_distance = INF 
+		# Find the n nearest enemies, where n = _splits + 1
+		# This bullet will target the nearest enemy.
+		# Nearest enemies after the first will have a new bullet be created for them.
+		var n: int = _splits + 1
+		
+		for i in range(n):
+			distances.append(INF)
+			nodes.append(null)
 		
 		for enemy_area: Area2D in enemies:
 			var enemy: Node = enemy_area.get_parent()
@@ -64,11 +78,40 @@ func _find_new_target() -> void:
 				continue
 			if enemy is Enemy:
 				var distance = global_position.distance_squared_to(enemy.global_position)
-				if distance < nearest_distance:
-					nearest_enemy = enemy
-					nearest_distance = distance
+				
+				# Insert the new enemy in sorted order into our lists of enemies and distances.
+				for i in range(n):
+					if distance < distances[i]:
+						distances.insert(i, distance)
+						nodes.insert(i, enemy)
+						distances.pop_back()
+						nodes.pop_back()
+						break
 		
-		_target = nearest_enemy
+		_target = nodes[0]
+		# Create a new Bounce bullet for each split.
+		for i: int in range(1, n):
+			if nodes[i] != null:
+				GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+					1, 
+					[
+						_bullet_scene, 
+						global_position, 
+						Vector2.UP, 
+						collider.damage, 
+						collider.is_crit,
+						_is_owned_by_player,
+						collider.owner_id,
+						collider.powerup_index,
+						[
+							nodes[i].get_path(), 
+							_bounces,
+							_splits
+						]
+					]
+				)
+			else:
+				break
 	
 	# There were no valid enemies within range, so destroy this bullet.
 	if _target == null and is_multiplayer_authority():
@@ -78,14 +121,16 @@ func _find_new_target() -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
+		data.size() != 3
 		or typeof(data[0]) != TYPE_NODE_PATH	# Path to first target
-		or typeof(data[1]) != TYPE_INT			# Max # of bounces
+		or typeof(data[1]) != TYPE_INT			# Max number of bounces
+		or typeof(data[2]) != TYPE_INT			# Max number of splits
 	):
 		push_error("Malformed data array")
 		return
 	
 	_bounces = data[1]
+	_splits = data[2]
 	_target = get_tree().root.get_node(data[0])
 	_is_owned_by_player = is_owned_by_player
 	if not is_owned_by_player:
