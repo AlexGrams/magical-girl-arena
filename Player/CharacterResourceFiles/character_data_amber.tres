@@ -18,6 +18,6 @@ ult_texture = ExtResource("3_ak7g1")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Amber/runtime/Amber.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
-offset_height = -25.0
+offset_height = -50.0
 ultimate_ability = "res://Abilities/ability_ult_amber.tscn"
 icon_uid = "uid://bw7bs1ov0n768"
