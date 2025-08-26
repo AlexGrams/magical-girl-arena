@@ -194,9 +194,11 @@ theme_override_font_sizes/font_size = 32
 text = "Signature:"
 
 [node name="SignatureName" parent="CharacterInformationContainer2/PowerupInformation/Powerup_Header_Container/SignatureTitle_VboxContainer" instance=ExtResource("7_ae74i")]
+custom_minimum_size = Vector2(323, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Signature Name"
+autowrap_mode = 2
 
 [node name="PowerupDescription" type="Label" parent="CharacterInformationContainer2/PowerupInformation"]
 custom_minimum_size = Vector2(439, 0)
