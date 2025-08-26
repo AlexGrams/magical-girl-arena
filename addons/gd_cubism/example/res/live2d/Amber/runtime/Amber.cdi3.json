@@ -80,6 +80,21 @@
 			"Id": "Hair_War",
 			"GroupId": "",
 			"Name": "Hair_Warp"
+		},
+		{
+			"Id": "Belt_Warp",
+			"GroupId": "",
+			"Name": "Belt_Warp"
+		},
+		{
+			"Id": "Pants_Base_Warp",
+			"GroupId": "",
+			"Name": "Pants_Base_Warp"
+		},
+		{
+			"Id": "Pants_Base_Warp_Horizontal",
+			"GroupId": "",
+			"Name": "Pants_Base_Warp_Horizontal"
 		}
 	],
 	"ParameterGroups": [],
