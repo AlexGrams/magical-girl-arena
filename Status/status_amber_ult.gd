@@ -4,6 +4,8 @@ extends Status
 
 
 var _owning_player: PlayerCharacterBody2D = null
+var _fire_vfx: Resource = load("res://Sprites/fire.tscn")
+var fire:Sprite2D
 
 
 func get_status_name() -> String:
@@ -23,6 +25,15 @@ func activate() -> void:
 		_owning_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
 		_owning_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
 		_owning_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
+		
+		# Add fire visual
+		fire = _fire_vfx.instantiate()
+		# Position and scale are just hard coded after testing on character_animated_sprite
+		var sprite = _owning_player._character_animated_sprite
+		fire.scale = Vector2(400, 500)
+		fire.position = Vector2(0, -sprite.texture.get_height()/8.0)
+		fire.z_index = -1
+		sprite.add_child(fire)
 
 
 ## Get rid of the effects of this status.
@@ -36,3 +47,5 @@ func deactivate() -> void:
 		_owning_player.decrement_stat(Constants.StatUpgrades.SPEED)
 		_owning_player.decrement_stat(Constants.StatUpgrades.SPEED)
 		_owning_player.decrement_stat(Constants.StatUpgrades.SPEED)
+		
+		_owning_player._character_animated_sprite.remove_child(fire)
