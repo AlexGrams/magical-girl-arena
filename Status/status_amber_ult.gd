@@ -4,6 +4,7 @@ extends Status
 
 
 var _owning_player: PlayerCharacterBody2D = null
+var _boosted_powerups: Array[Powerup] = []
 var _fire_vfx: Resource = load("res://Sprites/fire.tscn")
 var fire:Sprite2D
 
@@ -19,6 +20,15 @@ func activate() -> void:
 		_owning_player = get_parent()
 		for powerup: Powerup in _owning_player.powerups:
 			powerup.boost()
+			_boosted_powerups.append(powerup)
+		
+		# Boost powerups that are added while this Ult is active.
+		_owning_player.upgrade_added.connect(func():
+			for powerup: Powerup in _owning_player.powerups:
+				if powerup not in _boosted_powerups:
+					powerup.boost()
+					_boosted_powerups.append(powerup)
+		)
 		
 		_owning_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
 		_owning_player._on_stat_upgrade_chosen(Constants.StatUpgrades.SPEED)
@@ -39,7 +49,7 @@ func activate() -> void:
 ## Get rid of the effects of this status.
 func deactivate() -> void:
 	if _owning_player != null:
-		for powerup: Powerup in _owning_player.powerups:
+		for powerup: Powerup in _boosted_powerups:
 			powerup.unboost()
 		
 		_owning_player.decrement_stat(Constants.StatUpgrades.SPEED)
