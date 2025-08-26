@@ -1,0 +1,41 @@
+[gd_scene load_steps=12 format=3 uid="uid://bokdfry3mbcl3"]
+
+[ext_resource type="Shader" uid="uid://b3pbfqa7ryw3p" path="res://Sprites/fire_shader.tres" id="1_gv0x3"]
+[ext_resource type="Texture2D" uid="uid://d4kg1uuhpgwat" path="res://Sprites/T_VFX_Noise_465.png" id="2_3wuvw"]
+[ext_resource type="Texture2D" uid="uid://ojbggcvodc7q" path="res://Sprites/T_1_pixel.jpg" id="2_4m0lo"]
+[ext_resource type="Texture2D" uid="uid://bk8eumdrq40xn" path="res://Sprites/T_Gradient_circle22.jpg" id="3_hbr56"]
+
+[sub_resource type="Gradient" id="Gradient_2ewbc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u7s05"]
+gradient = SubResource("Gradient_2ewbc")
+fill_from = Vector2(0.517094, 0)
+fill_to = Vector2(0.512821, 1)
+
+[sub_resource type="Gradient" id="Gradient_thdyy"]
+offsets = PackedFloat32Array(0.295139, 0.305556, 0.378472, 0.399306, 0.673611, 0.871528, 0.888889)
+colors = PackedColorArray(0.95, 0, 0.0949999, 0, 0.494114, 0.000526153, 0.000288351, 1, 0.494118, 0, 0, 1, 0.8, 0.192157, 0, 1, 0.8, 0.237374, 0, 1, 0.8, 0.392157, 0, 1, 1, 0.803922, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2d12h"]
+gradient = SubResource("Gradient_thdyy")
+
+[sub_resource type="Gradient" id="Gradient_i07fv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f0dfb"]
+gradient = SubResource("Gradient_i07fv")
+fill_from = Vector2(0.521368, 1)
+fill_to = Vector2(0.529915, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgrcr"]
+shader = ExtResource("1_gv0x3")
+shader_parameter/Speed = Vector2(0, 1)
+shader_parameter/Main_Texture = ExtResource("2_3wuvw")
+shader_parameter/Add_Texture = SubResource("GradientTexture2D_u7s05")
+shader_parameter/Multiply_Texture = ExtResource("3_hbr56")
+shader_parameter/Subtract_Texture = SubResource("GradientTexture2D_f0dfb")
+shader_parameter/Color_Texture = SubResource("GradientTexture1D_2d12h")
+
+[node name="Fire" type="Sprite2D"]
+material = SubResource("ShaderMaterial_hgrcr")
+scale = Vector2(100, 100)
+texture = ExtResource("2_4m0lo")
