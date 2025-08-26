@@ -8,12 +8,12 @@
 script = ExtResource("2_4jxhc")
 name = "Amber"
 display_name = "Amber"
-description = "XX"
+description = "As one of the five guardians of Seraphine, Amber is a revered hero in her hometown. She's stylish and confident, and when a battle heats up, she'll fight back with a fiery spirit."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres"
 base_powerup_name = "Jeweled Boomerang"
 base_powerup_texture = ExtResource("1_f7vol")
-ult_name = "XX"
-ult_description = "XX"
+ult_name = "Fiery Spirit"
+ult_description = "Amber powers up for a duration, gaining speed and increasing her powerup fire rate"
 ult_texture = ExtResource("3_ak7g1")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/Amber/runtime/Amber.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
