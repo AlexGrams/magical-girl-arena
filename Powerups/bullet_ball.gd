@@ -135,29 +135,38 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 		if other.health - collider.damage <= 0:
 			# The Ball probably just got a kill, so increase its size.
 			_kills += 1
-			
 			if _kills < _max_kills:
-				# Grow bigger
-				_sprite_holder.scale += _scale_increment_vector
-				collider.scale += _scale_increment_vector
-				_kick_area.scale += _scale_increment_vector
-				_physics_collision_shape.scale += _scale_increment_vector
-				_rigidbody.mass += _mass_increment
+				_grow.rpc()
 			else:
-				# Explode and return to original size.
-				_explosion_active = true
-				
-				# VFX
-				if _explosion_scene == null:
-					_explosion_scene = ResourceLoader.load_threaded_get(_explosion_vfx_scene_path)
-				var explosion_vfx = _explosion_scene.instantiate()
-				explosion_vfx.global_position = global_position
-				GameState.playground.add_child(explosion_vfx)
-				
-				_sprite_holder.scale = Vector2.ONE
-				collider.scale = Vector2.ONE
-				_kick_area.scale = Vector2.ONE
-				_physics_collision_shape.scale = Vector2.ONE
-				_rigidbody.mass = _original_mass
-				_kills = 0
+				_explode.rpc()
 		other.take_damage(collider.damage)
+
+
+## Make the ball bigger.
+@rpc("authority", "call_local")
+func _grow() -> void:
+	_sprite_holder.scale += _scale_increment_vector
+	collider.scale += _scale_increment_vector
+	_kick_area.scale += _scale_increment_vector
+	_physics_collision_shape.scale += _scale_increment_vector
+	_rigidbody.mass += _mass_increment
+
+
+## Return the ball to its original size and instantiate explosion particle effects.
+@rpc("authority", "call_local")
+func _explode() -> void:
+	_explosion_active = true
+	
+	# VFX
+	if _explosion_scene == null:
+		_explosion_scene = ResourceLoader.load_threaded_get(_explosion_vfx_scene_path)
+	var explosion_vfx = _explosion_scene.instantiate()
+	explosion_vfx.global_position = global_position
+	GameState.playground.add_child(explosion_vfx)
+	
+	_sprite_holder.scale = Vector2.ONE
+	collider.scale = Vector2.ONE
+	_kick_area.scale = Vector2.ONE
+	_physics_collision_shape.scale = Vector2.ONE
+	_rigidbody.mass = _original_mass
+	_kills = 0

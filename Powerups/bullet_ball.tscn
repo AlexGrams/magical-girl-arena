@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://03t7bik2w3e7"]
+[gd_scene load_steps=10 format=3 uid="uid://03t7bik2w3e7"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_ball.gd" id="1_m1a7e"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_52mfi"]
@@ -18,6 +18,14 @@ radius = 600.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujiyy"]
 radius = 43.0465
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mgtxu"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:linear_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "_sprite_holder", "_kick_area", "_explosion_bullet_hitbox", "_physics_collision_shape", "collider", "sprite")]
 collision_layer = 0
@@ -69,6 +77,9 @@ shape = SubResource("CircleShape2D_gjp3l")
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ujiyy")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mgtxu")
 
 [connection signal="area_entered" from="BulletHitbox" to="." method="_on_bullet_hitbox_entered"]
 [connection signal="area_entered" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_entered"]
