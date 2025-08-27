@@ -64,7 +64,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_final_position = global_position + direction * speed * lifetime
 
 
-## Suck in Enemies that it touches by knocking it towards the bubble's final position.
+## Suck in Enemies that it touches by knocking them towards the bubble's final position.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var node: Node2D = area.get_parent()
 	if node != null and node is Enemy:

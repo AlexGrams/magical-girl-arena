@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerupData" load_steps=4 format=3 uid="uid://bl3qt15pfilrp"]
+
+[ext_resource type="PackedScene" uid="uid://dfrq1u8l80tj" path="res://Powerups/powerup_ball.tscn" id="1_5phu8"]
+[ext_resource type="Script" path="res://Powerups/powerupdata.gd" id="1_gn607"]
+[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="3_cy5tj"]
+
+[resource]
+script = ExtResource("1_gn607")
+is_multiplayer = true
+upgrade_description = "Ball."
+upgrade_description_list = Array[String](["Ball.", "", "", "", "", ""])
+scene = ExtResource("1_5phu8")
+name = "Ball"
+sprite = ExtResource("3_cy5tj")

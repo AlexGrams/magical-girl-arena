@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfrq1u8l80tj"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_ball.gd" id="1_pekuw"]
+
+[node name="PowerupBall" type="Node2D"]
+script = ExtResource("1_pekuw")
+_bullet_scene = "res://Powerups/bullet_ball.tscn"
+_powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_ball.tres"
+powerup_name = "Ball"
