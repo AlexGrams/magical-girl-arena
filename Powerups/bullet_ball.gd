@@ -2,21 +2,43 @@ class_name BulletBall
 extends Bullet
 
 
+## Ball is not considered to be moving if its squared speed is less than this value.
+const MOVING_THRESHOLD_SQUARED: float = 1.0
+
 ## Impulse applied to the ball when it touches a player.
 @export var _kick_impulse: float = 10000.0
 ## Torque impule applied to the ball when it is kicked.
 @export var _kick_torque: float = 900.0
+## Number of enemies the ball can defeat before exploding and returning to normal size.
+@export var _max_kills: int = 10
+## How much the bigger the ball gets with each kill.
+@export var _scale_increment: float = 1.0
+## How much the mass of the Ball increases with each kill in kg.
+@export var _mass_increment: float = 0.05
 @export var _rigidbody: RigidBody2D = null
+@export var _sprite_holder: Node2D = null
+@export var _kick_area: Area2D = null
+@export var _physics_collision_shape: CollisionShape2D
 
+@onready var _scale_increment_vector: Vector2 = Vector2.ONE * _scale_increment
+@onready var _original_mass: float = _rigidbody.mass
+var _kills: int = 0
+var _original_scale: Vector2 = Vector2.ONE
 var _owning_player: PlayerCharacterBody2D = null
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
+
+
+func set_damage(damage: float, is_crit: bool = false):
+	collider.damage = damage
+	collider.is_crit = is_crit
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not is_multiplayer_authority():
 		set_process(false)
+		collider.area_entered.disconnect(_on_bullet_hitbox_entered)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,6 +93,7 @@ func _update_bullet_opacity() -> void:
 func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other is PlayerCharacterBody2D:
+		# Kick the ball by applying force and torque. Torque is only for visuals.
 		var direction: Vector2 = (global_position - other.global_position).normalized()
 		_rigidbody.apply_force(direction * _kick_impulse)
 		
@@ -78,13 +101,22 @@ func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 			_rigidbody.apply_torque_impulse(_kick_torque)
 		else:
 			_rigidbody.apply_torque_impulse(-_kick_torque)
-		print("KICK")
-		
-			
-		#for i: int in range(get_slide_collision_count()):
-			#var collision: KinematicCollision2D = get_slide_collision(i)
-			#var collider: Object = collision.get_collider()
-			#var colliding_object: Node = collider.get_parent()
-			#if collider is RigidBody2D and collider is BulletBall:
-				#print("Kick")
-				#collider.apply_force(collision.get_normal() * -300.0)
+
+
+## Damage hit Enemies. Only called on server.
+func _on_bullet_hitbox_entered(area: Area2D) -> void:
+	# Can only deal damage while moving.
+	if _rigidbody.linear_velocity.length_squared() < MOVING_THRESHOLD_SQUARED:
+		return
+	
+	var other: Node2D = area.get_parent()
+	if other is Enemy:
+		if other.health - collider.damage <= 0:
+			# The Ball probably just got a kill, so increase its size.
+			_kills += 1
+			_sprite_holder.scale += _scale_increment_vector
+			collider.scale += _scale_increment_vector
+			_kick_area.scale += _scale_increment_vector
+			_physics_collision_shape.scale += _scale_increment_vector
+			_rigidbody.mass += _mass_increment
+		other.take_damage(collider.damage)

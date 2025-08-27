@@ -6,4 +6,5 @@
 script = ExtResource("1_pekuw")
 _bullet_scene = "res://Powerups/bullet_ball.tscn"
 _powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_ball.tres"
+damage_levels = Array[float]([100.0, 100.0, 100.0, 100.0, 100.0])
 powerup_name = "Ball"

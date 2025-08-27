@@ -16,7 +16,7 @@ radius = 49.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujiyy"]
 radius = 43.0465
 
-[node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "collider", "sprite")]
+[node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "_sprite_holder", "_kick_area", "_physics_collision_shape", "collider", "sprite")]
 collision_layer = 0
 collision_mask = 192
 mass = 0.1
@@ -24,17 +24,24 @@ physics_material_override = SubResource("PhysicsMaterial_2vfia")
 linear_damp = 2.0
 script = ExtResource("1_m1a7e")
 _rigidbody = NodePath(".")
+_sprite_holder = NodePath("SpriteHolderNode2D")
+_kick_area = NodePath("PlayerKickArea2D")
+_physics_collision_shape = NodePath("PhysicsCollisionShape2D")
 speed = 0.0
 lifetime = 0.0
 destroy_on_hit = false
 collider = NodePath("BulletHitbox")
-sprite = NodePath("Sprite2D")
+sprite = NodePath("SpriteHolderNode2D/Sprite2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteHolderNode2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteHolderNode2D"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_52mfi")
 
 [node name="BulletHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("3_awor3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHitbox"]
@@ -50,4 +57,5 @@ shape = SubResource("CircleShape2D_x85vt")
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ujiyy")
 
+[connection signal="area_entered" from="BulletHitbox" to="." method="_on_bullet_hitbox_entered"]
 [connection signal="area_entered" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_entered"]
