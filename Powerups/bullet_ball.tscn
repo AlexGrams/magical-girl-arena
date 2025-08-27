@@ -23,6 +23,7 @@ mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_2vfia")
 linear_damp = 2.0
 script = ExtResource("1_m1a7e")
+_max_kills = 5
 _rigidbody = NodePath(".")
 _sprite_holder = NodePath("SpriteHolderNode2D")
 _kick_area = NodePath("PlayerKickArea2D")

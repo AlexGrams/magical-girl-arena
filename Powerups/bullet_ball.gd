@@ -23,7 +23,6 @@ const MOVING_THRESHOLD_SQUARED: float = 1.0
 @onready var _scale_increment_vector: Vector2 = Vector2.ONE * _scale_increment
 @onready var _original_mass: float = _rigidbody.mass
 var _kills: int = 0
-var _original_scale: Vector2 = Vector2.ONE
 var _owning_player: PlayerCharacterBody2D = null
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
@@ -94,10 +93,10 @@ func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other is PlayerCharacterBody2D:
 		# Kick the ball by applying force and torque. Torque is only for visuals.
-		var direction: Vector2 = (global_position - other.global_position).normalized()
-		_rigidbody.apply_force(direction * _kick_impulse)
+		var kick_direction: Vector2 = (global_position - other.global_position).normalized()
+		_rigidbody.apply_force(kick_direction * _kick_impulse)
 		
-		if direction.x > 0:
+		if kick_direction.x > 0:
 			_rigidbody.apply_torque_impulse(_kick_torque)
 		else:
 			_rigidbody.apply_torque_impulse(-_kick_torque)
@@ -114,9 +113,18 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 		if other.health - collider.damage <= 0:
 			# The Ball probably just got a kill, so increase its size.
 			_kills += 1
-			_sprite_holder.scale += _scale_increment_vector
-			collider.scale += _scale_increment_vector
-			_kick_area.scale += _scale_increment_vector
-			_physics_collision_shape.scale += _scale_increment_vector
-			_rigidbody.mass += _mass_increment
+			
+			if _kills >= _max_kills:
+				_sprite_holder.scale = Vector2.ONE
+				collider.scale = Vector2.ONE
+				_kick_area.scale = Vector2.ONE
+				_physics_collision_shape.scale = Vector2.ONE
+				_rigidbody.mass = _original_mass
+				_kills = 0
+			else:
+				_sprite_holder.scale += _scale_increment_vector
+				collider.scale += _scale_increment_vector
+				_kick_area.scale += _scale_increment_vector
+				_physics_collision_shape.scale += _scale_increment_vector
+				_rigidbody.mass += _mass_increment
 		other.take_damage(collider.damage)
