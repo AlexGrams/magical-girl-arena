@@ -1,14 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://03t7bik2w3e7"]
+[gd_scene load_steps=8 format=3 uid="uid://03t7bik2w3e7"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_ball.gd" id="1_m1a7e"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_52mfi"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_awor3"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2vfia"]
+bounce = 0.5
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_wqnbr"]
 radius = 43.1856
 
-[node name="BulletBall" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x85vt"]
+radius = 49.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujiyy"]
+radius = 43.0465
+
+[node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "collider", "sprite")]
+collision_layer = 0
+collision_mask = 192
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_2vfia")
+linear_damp = 2.0
 script = ExtResource("1_m1a7e")
+_rigidbody = NodePath(".")
 speed = 0.0
 lifetime = 0.0
 destroy_on_hit = false
@@ -24,3 +39,15 @@ script = ExtResource("3_awor3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHitbox"]
 shape = SubResource("CircleShape2D_wqnbr")
+
+[node name="PlayerKickArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="PlayerKickCollisionShape2D" type="CollisionShape2D" parent="PlayerKickArea2D"]
+shape = SubResource("CircleShape2D_x85vt")
+
+[node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ujiyy")
+
+[connection signal="area_entered" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_entered"]
