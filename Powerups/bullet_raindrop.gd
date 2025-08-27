@@ -1,12 +1,16 @@
 extends Bullet
 
 
+## The speed at which hit enemies are brought towards the bullet's center.
+@export var _suck_in_speed: float = 400.0
 ## Particles to spawn when damage activates.
 @export var _vfx_path: String = ""
 
 var _max_scale: Vector2 = Vector2.ONE
 ## Collision layer this bullet will use to damage targets.
 var _collision_layer: int = 0
+## The global position that this bubble will explode at.
+var _final_position: Vector2 = Vector2.ZERO
 ## True for the one frame for which the bullet's collider is active.
 var _is_collision_active = false
 
@@ -56,3 +60,15 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	_is_owned_by_player = is_owned_by_player
+	
+	_final_position = global_position + direction * speed * lifetime
+
+
+## Suck in Enemies that it touches by knocking it towards the bubble's final position.
+func _on_area_2d_entered(area: Area2D) -> void:
+	var node: Node2D = area.get_parent()
+	if node != null and node is Enemy:
+		node.set_knockback(
+			(_final_position - node.global_position).normalized() * _suck_in_speed, 
+			lifetime - death_timer
+		)
