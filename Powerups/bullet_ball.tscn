@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://03t7bik2w3e7"]
+[gd_scene load_steps=9 format=3 uid="uid://03t7bik2w3e7"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_ball.gd" id="1_m1a7e"]
 [ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_52mfi"]
@@ -13,10 +13,13 @@ radius = 43.1856
 [sub_resource type="CircleShape2D" id="CircleShape2D_x85vt"]
 radius = 49.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjp3l"]
+radius = 600.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ujiyy"]
 radius = 43.0465
 
-[node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "_sprite_holder", "_kick_area", "_physics_collision_shape", "collider", "sprite")]
+[node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "_sprite_holder", "_kick_area", "_explosion_bullet_hitbox", "_physics_collision_shape", "collider", "sprite")]
 collision_layer = 0
 collision_mask = 192
 mass = 0.1
@@ -24,9 +27,11 @@ physics_material_override = SubResource("PhysicsMaterial_2vfia")
 linear_damp = 2.0
 script = ExtResource("1_m1a7e")
 _max_kills = 5
+_explosion_vfx_scene_path = "res://Sprites/Map/heart_explosion.tscn"
 _rigidbody = NodePath(".")
 _sprite_holder = NodePath("SpriteHolderNode2D")
 _kick_area = NodePath("PlayerKickArea2D")
+_explosion_bullet_hitbox = NodePath("ExplosionBulletHitbox")
 _physics_collision_shape = NodePath("PhysicsCollisionShape2D")
 speed = 0.0
 lifetime = 0.0
@@ -54,6 +59,13 @@ collision_mask = 8
 
 [node name="PlayerKickCollisionShape2D" type="CollisionShape2D" parent="PlayerKickArea2D"]
 shape = SubResource("CircleShape2D_x85vt")
+
+[node name="ExplosionBulletHitbox" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_awor3")
+
+[node name="ExplosionCollisionShape2D" type="CollisionShape2D" parent="ExplosionBulletHitbox"]
+shape = SubResource("CircleShape2D_gjp3l")
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ujiyy")

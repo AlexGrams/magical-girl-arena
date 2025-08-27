@@ -3,8 +3,9 @@ extends Bullet
 
 
 ## Ball is not considered to be moving if its squared speed is less than this value.
-const MOVING_THRESHOLD_SQUARED: float = 1.0
+const MOVING_THRESHOLD_SQUARED: float = 4.0
 
+@export var _explosion_damage: float = 50.0
 ## Impulse applied to the ball when it touches a player.
 @export var _kick_impulse: float = 10000.0
 ## Torque impule applied to the ball when it is kicked.
@@ -15,14 +16,21 @@ const MOVING_THRESHOLD_SQUARED: float = 1.0
 @export var _scale_increment: float = 1.0
 ## How much the mass of the Ball increases with each kill in kg.
 @export var _mass_increment: float = 0.05
+@export var _explosion_vfx_scene_path: String = ""
 @export var _rigidbody: RigidBody2D = null
 @export var _sprite_holder: Node2D = null
 @export var _kick_area: Area2D = null
+@export var _explosion_bullet_hitbox: BulletHitbox = null
 @export var _physics_collision_shape: CollisionShape2D
 
 @onready var _scale_increment_vector: Vector2 = Vector2.ONE * _scale_increment
 @onready var _original_mass: float = _rigidbody.mass
+## The original collision layer of the BulletHitbox for explosion damage.
+var _explosion_hitbox_collision_layer: int = 0
 var _kills: int = 0
+## True when the explosion hitbox has collision enabled and can deal damage.
+var _explosion_active: bool = false
+var _explosion_scene: PackedScene = null
 var _owning_player: PlayerCharacterBody2D = null
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
@@ -37,12 +45,24 @@ func set_damage(damage: float, is_crit: bool = false):
 func _ready() -> void:
 	if not is_multiplayer_authority():
 		set_process(false)
+		set_physics_process(false)
 		collider.area_entered.disconnect(_on_bullet_hitbox_entered)
+	_explosion_hitbox_collision_layer = _explosion_bullet_hitbox.collision_layer
+	_explosion_bullet_hitbox.collision_layer = 0
+	ResourceLoader.load_threaded_request(_explosion_vfx_scene_path, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func _physics_process(_delta: float) -> void:
+	if _explosion_active:
+		if _explosion_bullet_hitbox.collision_layer != _explosion_hitbox_collision_layer:
+			_explosion_bullet_hitbox.collision_layer = _explosion_hitbox_collision_layer
+		else:
+			_explosion_bullet_hitbox.collision_layer = 0
+			_explosion_active = false
 
 
 ## Set up other properties for this bullet
@@ -56,6 +76,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	_owning_player = get_node(data[0])
 	_is_owned_by_player = is_owned_by_player
+	
+	_explosion_bullet_hitbox.damage = _explosion_damage
 	
 	if _owning_player != null and is_multiplayer_authority():
 		_owning_player.died.connect(func():
@@ -114,17 +136,28 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 			# The Ball probably just got a kill, so increase its size.
 			_kills += 1
 			
-			if _kills >= _max_kills:
+			if _kills < _max_kills:
+				# Grow bigger
+				_sprite_holder.scale += _scale_increment_vector
+				collider.scale += _scale_increment_vector
+				_kick_area.scale += _scale_increment_vector
+				_physics_collision_shape.scale += _scale_increment_vector
+				_rigidbody.mass += _mass_increment
+			else:
+				# Explode and return to original size.
+				_explosion_active = true
+				
+				# VFX
+				if _explosion_scene == null:
+					_explosion_scene = ResourceLoader.load_threaded_get(_explosion_vfx_scene_path)
+				var explosion_vfx = _explosion_scene.instantiate()
+				explosion_vfx.global_position = global_position
+				GameState.playground.add_child(explosion_vfx)
+				
 				_sprite_holder.scale = Vector2.ONE
 				collider.scale = Vector2.ONE
 				_kick_area.scale = Vector2.ONE
 				_physics_collision_shape.scale = Vector2.ONE
 				_rigidbody.mass = _original_mass
 				_kills = 0
-			else:
-				_sprite_holder.scale += _scale_increment_vector
-				collider.scale += _scale_increment_vector
-				_kick_area.scale += _scale_increment_vector
-				_physics_collision_shape.scale += _scale_increment_vector
-				_rigidbody.mass += _mass_increment
 		other.take_damage(collider.damage)
