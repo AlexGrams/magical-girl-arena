@@ -207,13 +207,16 @@ func _on_host_button_button_down() -> void:
 		if not multiplayer.is_server():
 			start_game_label.hide()
 	
+	# When a new player connects to the lobby, the server tells them what the currently selected map is.
+	if multiplayer.is_server():
+		multiplayer.peer_connected.connect(_update_map_for_client)
+	
 	# Show the lobby that you're in after clicking the "Host" button.
 	# Make some buttons only selectable to the host.
 	lobby_visibility_holder.visible = multiplayer.is_server()
 	map_select_left_button.visible = multiplayer.is_server()
 	map_select_right_button.visible = multiplayer.is_server()
 	
-	# TODO: Update lobby visibility functionality.
 	_selected_map_index = 0
 	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
 	_switch_screen_animation(lobby_list, lobby, _lobby_original_pos)
@@ -244,7 +247,7 @@ func request_lobby_list() -> void:
 	_lobby_list_refresh_timer = LOBBY_LIST_AUTO_REFRESH_INTERVAL
 
 
-# Adds list of joinable lobbies to the lobby screen.
+## Adds list of joinable lobbies to the lobby screen.
 func setup_lobby_screen() -> void:
 	if GameState.USING_GODOT_STEAM:
 		# TODO: Maybe make the region a setting? This current one is the most restrictive.
@@ -400,7 +403,7 @@ func _on_map_select_left_button_pressed() -> void:
 	_selected_map_index += 1
 	if _selected_map_index >= len(Constants.MAP_DATA):
 		_selected_map_index = 0
-	map_name_label.change_text(Constants.MAP_DATA[_selected_map_index].name)
+	_update_map.rpc(_selected_map_index)
 
 
 func _on_map_select_right_button_pressed() -> void:
@@ -426,10 +429,18 @@ func _update_map(map_index: int) -> void:
 	map_name_label.change_text(Constants.MAP_DATA[map_index].name)
 
 
+## RPCs a certain client to update their displayed map.
+func _update_map_for_client(id: int) -> void:
+	_update_map.rpc_id(id, _selected_map_index)
+
+
 ## Leave a game lobby. Goes back to the lobby list. If called remotely, should only be done by
 ## the lobby host.
 @rpc("any_peer", "call_local", "reliable")
 func leave_lobby() -> void:
+	if multiplayer.is_server():
+		multiplayer.peer_connected.disconnect(_update_map_for_client)
+	
 	GameState.disconnect_local_player()
 	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
