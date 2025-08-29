@@ -299,7 +299,7 @@ func setup_lobby_screen() -> void:
 						lobby_button.set_lobby_button_disabled(true)
 					else:
 						# This lobby is joinable
-						move_child(lobby_button, 0)
+						lobbies_list_container.move_child(lobby_button, 0)
 						lobby_button.pressed.connect(
 							func():
 								_on_lobby_button_pressed(lobby_id)
@@ -307,7 +307,7 @@ func setup_lobby_screen() -> void:
 				
 				# Place all in progress lobbies at the end of the lobby list.
 				for lobby_button: LobbyButton in in_progress_lobbies:
-					move_child(lobby_button, -1)
+					lobbies_list_container.move_child(lobby_button, -1)
 				
 				# Display some text if there were no lobbies found.
 				if len(lobbies_list_container.get_children()) == 0:
