@@ -108,7 +108,7 @@ func get_player_collision_area() -> Area2D:
 ## Returns a Status object if it exists on this player, or null if it does not.
 func get_status(status_name: String) -> Status:
 	for status in _statuses:
-		if status.get_status_name() == status_name:
+		if status != null and status.get_status_name() == status_name:
 			return status
 	return null
 
