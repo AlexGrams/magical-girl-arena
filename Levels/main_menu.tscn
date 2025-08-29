@@ -349,6 +349,9 @@ position = Vector2(1394, 619)
 texture = SubResource("ViewportTexture_k0lfe")
 flip_h = true
 
+[node name="GDCubismUserModel" parent="Main/CharacterAnimatedSprite" index="0"]
+size = Vector2i(1000, 1500)
+
 [node name="CharacterLabel" type="Label" parent="Main"]
 layout_direction = 3
 layout_mode = 0
@@ -1138,5 +1141,6 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
 
+[editable path="Main/CharacterAnimatedSprite"]
 [editable path="Lobby"]
 [editable path="CharacterSelection"]
