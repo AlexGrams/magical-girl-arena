@@ -118,6 +118,11 @@ func get_lasers() -> Array[Node]:
 	return _laser_holder.get_children()
 
 
+## The player's speed stat level.
+func get_stat_speed() -> int:
+	return _stat_speed
+
+
 @rpc("authority", "call_local")
 func _set_speed(new_speed: float) -> void:
 	speed = new_speed

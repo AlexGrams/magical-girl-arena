@@ -17,8 +17,7 @@ var _speed_multiplier: float = 1.0
 ## used to boost bullet expansion speed.
 var _growth_speed_multiplier: float = 1.0
 var _bullet_spawner: BulletSpawner = null
-var _range_squared: float = 1.0
-var _lifetime: float = 1.5
+var _owner: PlayerCharacterBody2D = null
 
 
 func _ready() -> void:
@@ -26,7 +25,7 @@ func _ready() -> void:
 		set_process(false)
 	
 	_bullet_spawner = GameState.playground.bullet_spawner
-	_range_squared = _range * _range
+	_owner = get_parent()
 
 
 func _process(delta: float) -> void:
@@ -47,6 +46,8 @@ func _process(delta: float) -> void:
 		
 		if target != null:
 			var direction: Vector2 = (target.global_position - global_position).normalized()
+			# bullet speed is increased depending on the owner's speed stat.
+			var speed_boost: float = float(_owner.get_stat_speed() - 1) * 0.2
 			var crit: bool = randf() <= crit_chance
 			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
 			_bullet_spawner.request_spawn_bullet.rpc_id(
@@ -61,7 +62,7 @@ func _process(delta: float) -> void:
 					multiplayer.get_unique_id(),
 					_powerup_index,
 					[
-						_speed_multiplier, 
+						_speed_multiplier + speed_boost, 
 						_growth_speed_multiplier
 					]
 				]
@@ -82,7 +83,7 @@ func _process(delta: float) -> void:
 							multiplayer.get_unique_id(),
 							_powerup_index,
 							[
-								_speed_multiplier, 
+								_speed_multiplier + speed_boost, 
 								_growth_speed_multiplier
 							]
 						]
@@ -112,11 +113,11 @@ func level_up():
 
 func boost() -> void:
 	_shoot_interval /= 2.0
-	_speed_multiplier *= 2.0
+	_speed_multiplier *= 1.5
 	_growth_speed_multiplier *= 2.0
 
 
 func unboost() -> void:
 	_shoot_interval *= 2.0
-	_speed_multiplier /= 2.0
+	_speed_multiplier /= 1.5
 	_growth_speed_multiplier /= 2.0
