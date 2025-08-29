@@ -72,8 +72,10 @@ func level_up():
 
 
 func boost() -> void:
-	_boomerang_controller.boost()
+	if _boomerang_controller != null:
+		_boomerang_controller.boost()
 
 
 func unboost() -> void:
-	_boomerang_controller.unboost()
+	if _boomerang_controller != null:
+		_boomerang_controller.unboost()
