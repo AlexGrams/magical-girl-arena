@@ -1,11 +1,12 @@
 extends Bullet
 
 
-## The speed at which hit enemies are brought towards the bullet's center.
-@export var _suck_in_speed: float = 400.0
+## The highest speed at which hit enemies can be brought towards the bullet's center.
+@export var _max_suck_in_speed: float = 400.0
 ## Particles to spawn when damage activates.
 @export var _vfx_path: String = ""
 
+@onready var _max_sqaured_suck_in_speed: float = _max_suck_in_speed * _max_suck_in_speed
 var _max_scale: Vector2 = Vector2.ONE
 ## Collision layer this bullet will use to damage targets.
 var _collision_layer: int = 0
@@ -68,7 +69,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 func _on_area_2d_entered(area: Area2D) -> void:
 	var node: Node2D = area.get_parent()
 	if node != null and node is Enemy:
+		# Limit the speed at which enemies are pulled in. 
+		var knockback: Vector2 = (_final_position - node.global_position) / (lifetime - death_timer)
+		if knockback.length_squared() >= _max_sqaured_suck_in_speed:
+			knockback = knockback.normalized() * _max_suck_in_speed
+		
 		node.set_knockback(
-			(_final_position - node.global_position).normalized() * _suck_in_speed, 
+			knockback, 
 			lifetime - death_timer
 		)
