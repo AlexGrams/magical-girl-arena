@@ -12,6 +12,10 @@ extends Powerup
 @export var _nearby_collision_area: Area2D = null
 
 @onready var _shoot_timer: float = _shoot_interval
+## Used to boost bullet speed.
+var _speed_multiplier: float = 1.0
+## used to boost bullet expansion speed.
+var _growth_speed_multiplier: float = 1.0
 var _bullet_spawner: BulletSpawner = null
 var _range_squared: float = 1.0
 var _lifetime: float = 1.5
@@ -56,7 +60,10 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[]
+					[
+						_speed_multiplier, 
+						_growth_speed_multiplier
+					]
 				]
 			)
 			if current_level >= 3:
@@ -74,7 +81,10 @@ func _process(delta: float) -> void:
 							_is_owned_by_player,
 							multiplayer.get_unique_id(),
 							_powerup_index,
-							[]
+							[
+								_speed_multiplier, 
+								_growth_speed_multiplier
+							]
 						]
 					)
 		_shoot_timer = _shoot_interval
@@ -101,8 +111,12 @@ func level_up():
 
 
 func boost() -> void:
-	_lifetime /= 2.0
+	_shoot_interval /= 2.0
+	_speed_multiplier *= 2.0
+	_growth_speed_multiplier *= 2.0
 
 
 func unboost() -> void:
-	_lifetime *= 2.0
+	_shoot_interval *= 2.0
+	_speed_multiplier /= 2.0
+	_growth_speed_multiplier /= 2.0

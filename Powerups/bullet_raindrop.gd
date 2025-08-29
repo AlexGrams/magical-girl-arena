@@ -6,7 +6,7 @@ extends Bullet
 ## Particles to spawn when damage activates.
 @export var _vfx_path: String = ""
 
-@onready var _max_sqaured_suck_in_speed: float = _max_suck_in_speed * _max_suck_in_speed
+var _max_sqaured_suck_in_speed: float = 0.0
 var _max_scale: Vector2 = Vector2.ONE
 ## Collision layer this bullet will use to damage targets.
 var _collision_layer: int = 0
@@ -17,7 +17,6 @@ var _is_collision_active = false
 
 
 func _ready() -> void:
-	_max_scale = scale
 	scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
@@ -55,14 +54,19 @@ func _physics_process(_delta: float) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 0
+		data.size() != 2
+		or typeof(data[0]) != TYPE_FLOAT	# Speed multiplier
+		or typeof(data[1]) != TYPE_FLOAT	# Growth speed multiplier
 	):
 		push_error("Malformed bullet setup data Array.")
 		return
 	
+	speed *= data[0]
+	_max_scale = scale * data[1]
 	_is_owned_by_player = is_owned_by_player
 	
 	_final_position = global_position + direction * speed * lifetime
+	_max_sqaured_suck_in_speed = (_max_suck_in_speed * data[0]) ** 2
 
 
 ## Suck in Enemies that it touches by knocking them towards the bubble's final position.
