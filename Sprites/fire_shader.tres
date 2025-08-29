@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=24 format=3 uid="uid://b3pbfqa7ryw3p"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_rjogv"]
-size = Vector2(373, 630)
+size = Vector2(284, 358)
 title = "Add_Texture"
 attached_nodes = PackedInt32Array(12, 11)
 
@@ -15,7 +15,7 @@ linked_parent_graph_frame = 10
 source = 5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_846g5"]
-size = Vector2(373, 630)
+size = Vector2(284, 358)
 title = "Multiply_Texture"
 attached_nodes = PackedInt32Array(14, 15)
 
@@ -29,7 +29,7 @@ linked_parent_graph_frame = 13
 source = 5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6eogm"]
-size = Vector2(373, 630)
+size = Vector2(284, 358)
 title = "Subtract_Texture"
 attached_nodes = PackedInt32Array(17, 18)
 
@@ -43,7 +43,7 @@ linked_parent_graph_frame = 16
 source = 5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_7ae1y"]
-size = Vector2(373, 630)
+size = Vector2(284, 358)
 title = "Color_Texture"
 attached_nodes = PackedInt32Array(21, 20)
 
@@ -71,7 +71,7 @@ operator = 1
 output_port_for_preview = 0
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_fh63y"]
-size = Vector2(373, 630)
+size = Vector2(284, 358)
 title = "Main_Texture"
 attached_nodes = PackedInt32Array(2, 4)
 
@@ -179,7 +179,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(440.598, -173.142)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(2380, -40)
