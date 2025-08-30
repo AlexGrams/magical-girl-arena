@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dffoj6fex44q3" path="res://Sprites/Enemy/WhiteDwarf_Enemy/WhiteDwarf_Glow.png" id="1_j7alv"]
 [ext_resource type="Texture2D" uid="uid://b0y0n4nn31jyr" path="res://Sprites/Enemy/Goth_AtomEnemy/Goth_Atom_Aura.png" id="2_42cfb"]
-[ext_resource type="PackedScene" uid="uid://dju3v7744yb5v" path="res://UI/constellation_animated_sprite.tscn" id="3_mawbp"]
+[ext_resource type="PackedScene" uid="uid://dju3v7744yb5v" path="res://UI/corvus_animated_sprite.tscn" id="3_mawbp"]
 [ext_resource type="Texture2D" uid="uid://dufp6oabhvclo" path="res://Sprites/UI/Sparkle.png" id="3_xhdwg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ff78h"]

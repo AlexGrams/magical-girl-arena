@@ -1,0 +1,322 @@
+[gd_scene load_steps=15 format=3 uid="uid://cdvb1imb8ny34"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hhwuh"]
+viewport_path = NodePath("GDCubismUserModel")
+
+[sub_resource type="Animation" id="Animation_je33f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Breathe")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_khc4d"]
+resource_name = "breathe"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Breathe")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 4, 7),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [0.0, 30.0, 30.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jp85l"]
+_data = {
+"RESET": SubResource("Animation_je33f"),
+"breathe": SubResource("Animation_khc4d")
+}
+
+[sub_resource type="Animation" id="Animation_18s32"]
+resource_name = "veil_idle"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [0.0, 6.0, 0.0, 6.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+
+[sub_resource type="Animation" id="Animation_amlmy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+
+[sub_resource type="Animation" id="Animation_iaybq"]
+resource_name = "scream_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 0.1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [0.0, 30.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [15.0, 26.471]
+}
+
+[sub_resource type="Animation" id="Animation_2vpu6"]
+resource_name = "scream_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 0.1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [0.0, 30.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [15.0, 5.295]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ubxi"]
+_data = {
+"RESET": SubResource("Animation_amlmy"),
+"scream_1": SubResource("Animation_iaybq"),
+"scream_2": SubResource("Animation_2vpu6"),
+"veil_idle": SubResource("Animation_18s32")
+}
+
+[sub_resource type="Animation" id="Animation_dl6db"]
+resource_name = "hand_idle"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 4, 4.25, 8),
+"transitions": PackedFloat32Array(-0.5, -0.5, -0.5, -0.5, -0.5),
+"update": 0,
+"values": [14.0, 14.0, 16.0, 16.0, 14.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [13.0]
+}
+
+[sub_resource type="Animation" id="Animation_gp2kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [12.348]
+}
+
+[sub_resource type="Animation" id="Animation_nhu8q"]
+resource_name = "sudden_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [15.0, 13.611]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [12.0, 4.541]
+}
+
+[sub_resource type="Animation" id="Animation_ddml6"]
+resource_name = "sudden_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [15.0, 18.754]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [12.0, 20.482]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wa8d3"]
+_data = {
+"RESET": SubResource("Animation_gp2kd"),
+"hand_idle": SubResource("Animation_dl6db"),
+"sudden_left": SubResource("Animation_nhu8q"),
+"sudden_right": SubResource("Animation_ddml6")
+}
+
+[node name="ConstellationAnimatedSprite" type="Sprite2D"]
+texture = SubResource("ViewportTexture_hhwuh")
+
+[node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
+assets = "res://addons/gd_cubism/example/res/live2d/Constellation_Andromeda/runtime/Andromeda.model3.json"
+load_expressions = false
+load_motions = false
+parameter_mode = 1
+auto_scale = false
+adjust_position = Vector2(0, 5)
+anim_loop = false
+anim_loop_fade_in = true
+anim_expression = "exp_01"
+anim_motion = "Idle_0"
+Breathe = 0.0
+Head_Rotation = 15.0
+Arm_Rotation = 15.0
+Hand_Rotation = 12.348
+Veil_Warp = 15.0
+disable_3d = true
+transparent_bg = true
+gui_disable_input = true
+size = Vector2i(1000, 1000)
+render_target_update_mode = 4
+
+[node name="Breathe_AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jp85l")
+}
+autoplay = "breathe"
+
+[node name="Veil_AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ubxi")
+}
+autoplay = "veil_idle"
+
+[node name="Hand_AnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wa8d3")
+}
+autoplay = "hand_idle"
+speed_scale = 2.0

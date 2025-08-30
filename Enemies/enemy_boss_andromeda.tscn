@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bc56c13oalmc8"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_boss_andromeda.gd" id="1_fsr1i"]
-[ext_resource type="PackedScene" path="res://UI/constellation_animated_sprite.tscn" id="2_5t64f"]
+[ext_resource type="PackedScene" uid="uid://dju3v7744yb5v" path="res://UI/corvus_animated_sprite.tscn" id="2_5t64f"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dw6tt"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -39,6 +39,13 @@ speed = 200.0
 [node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_5t64f")]
 texture = SubResource("ViewportTexture_dw6tt")
 
+[node name="GDCubismUserModel" parent="ConstellationAnimatedSprite" index="0"]
+assets = "res://addons/gd_cubism/example/res/live2d/Constellation_Andromeda/runtime/Andromeda.model3.json"
+Breathe = 0.0
+Arm_Rotation = 15.0
+Hand_Rotation = 15.0
+Veil_Warp = 15.0
+
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ifklo")
 
@@ -57,3 +64,5 @@ libraries = {
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+
+[editable path="ConstellationAnimatedSprite"]
