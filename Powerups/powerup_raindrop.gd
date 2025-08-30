@@ -4,8 +4,6 @@ extends Powerup
 
 ## Time in seconds between activation of bullets directly on the players.
 @export var _shoot_interval: float = 2.0
-## Maximum distance at which an Enemy can be from the player in order for this powerup to target them.
-@export var _range: float = 1000.0
 ## UID of the scene for the powerup bullets
 @export var _bullet_scene_uid := ""
 ## Area for finding groups of Enemies near the player.
