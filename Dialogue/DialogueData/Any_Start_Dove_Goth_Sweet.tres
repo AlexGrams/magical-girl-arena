@@ -51,5 +51,4 @@ dialogue = "Oh no... I can feel the headache starting..."
 [resource]
 script = ExtResource("2_i3c23")
 lines = Array[ExtResource("1_q2s7n")]([SubResource("Resource_lkfst"), SubResource("Resource_xtew4"), SubResource("Resource_mmmaf"), SubResource("Resource_p8g8d"), SubResource("Resource_y30xv"), SubResource("Resource_n3cgf"), SubResource("Resource_wryup"), SubResource("Resource_scurw"), SubResource("Resource_gusgc")])
-play_trigger = 1
-extra_play_trigger = 0
+play_conditions = Array[int]([3])

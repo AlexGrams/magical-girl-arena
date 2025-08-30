@@ -20,6 +20,12 @@ enum Character {
 	SAND_WITCH
 }
 
+enum Map {
+	NONE,
+	VALLEY,
+	DESERT
+}
+
 enum EnemySpriteType {
 	STANDARD,
 	SPECIAL,
@@ -37,24 +43,20 @@ enum StatUpgrades {
 	#ULTIMATE_CHARGE_RATE
 }
 
-## Different times throughout a game in which dialogue can play.
-enum DialoguePlayTrigger {
+## A condition which must be met in order to play a dialogue.
+enum DialoguePlayCondition {
 	NONE,
+	MAP_VALLEY,
+	MAP_DESERT,
 	START,
-	MINIBOSS,
-	BOSS,
-	WIN,
-	MINIBOSS_DEFEATED
-}
-
-## An optional extra descriptor for a dialogue trigger. If not NONE, then this condition must also
-## be met in order to play the dialogue.
-enum DialoguePlayTriggerExtra {
-	NONE,
+	MINIBOSS_SPAWN,
 	MINIBOSS_GOTH,
 	MINIBOSS_SWEET,
 	MINIBOSS_VALE,
-	MINIBOSS_DOVE
+	MINIBOSS_DOVE,
+	MINIBOSS_DEFEATED,
+	BOSS,
+	WIN
 }
 
 

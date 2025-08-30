@@ -33,5 +33,4 @@ dialogue = "But balance must be restored."
 [resource]
 script = ExtResource("3_knxoe")
 lines = Array[ExtResource("1_10jpf")]([SubResource("Resource_v7iei"), SubResource("Resource_kda75"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_ljsad")])
-play_trigger = 1
-extra_play_trigger = 0
+play_conditions = Array[int]([3])

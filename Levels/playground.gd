@@ -112,7 +112,7 @@ func _ready() -> void:
 		# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
 		# TODO: Remove once we have loading screens working.
 		await get_tree().create_timer(2.0).timeout
-		hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.START)
+		hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.START])
 
 
 ## Only process on the server.
@@ -136,7 +136,7 @@ func _process(_delta: float) -> void:
 	elif not _has_boss_spawned:
 		if GameState.get_game_progress_as_fraction() >= 1.0:
 			_spawn_boss.rpc()
-			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.BOSS)
+			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.BOSS])
 
 
 ## Add a new EnemySpawnEventData to all spawners on the map. 
@@ -246,7 +246,7 @@ func _spawn_boss() -> void:
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
 			_update_map_complete_variable.rpc()
-			hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.WIN)
+			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.WIN])
 		)
 	AudioManager.play_boss_music()
 

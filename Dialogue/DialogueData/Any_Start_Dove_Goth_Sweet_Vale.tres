@@ -36,5 +36,4 @@ dialogue = "Yes. You won't believe it, but hers are the strongest."
 [resource]
 script = ExtResource("2_trjts")
 lines = Array[ExtResource("1_xqntc")]([SubResource("Resource_rqktl"), SubResource("Resource_1gwbs"), SubResource("Resource_cbpgp"), SubResource("Resource_hnmat"), SubResource("Resource_3wvg7"), SubResource("Resource_pwuka")])
-play_trigger = 1
-extra_play_trigger = 0
+play_conditions = Array[int]([3])

@@ -29,17 +29,19 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		# Start dialogue
+		var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [Constants.DialoguePlayCondition.MINIBOSS_SPAWN]
 		match _character:
 			Constants.Character.GOTH:
-				_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_GOTH)
+				dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_GOTH)
 			Constants.Character.SWEET:
-				_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_SWEET)
+				dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_SWEET)
 			Constants.Character.VALE:
-				_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_VALE)
+				dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_VALE)
 			Constants.Character.DOVE:
-				_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS, Constants.DialoguePlayTriggerExtra.MINIBOSS_DOVE)
+				dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_DOVE)
 			_:
 				push_error("Play miniboss dialogue not implemented for this character")
+		_hud_canvas_layer.start_dialogue(dialogue_play_conditions)
 		
 		var default_powerup: PowerupData = load(default_powerup_path)
 		if default_powerup != null:
@@ -84,17 +86,19 @@ func die() -> void:
 	super()
 	
 	# Start defeated dialogue
+	var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [Constants.DialoguePlayCondition.MINIBOSS_DEFEATED]
 	match _character:
 		Constants.Character.GOTH:
-			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_GOTH)
+			dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_GOTH)
 		Constants.Character.SWEET:
-			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_SWEET)
+			dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_SWEET)
 		Constants.Character.VALE:
-			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_VALE)
+			dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_VALE)
 		Constants.Character.DOVE:
-			_hud_canvas_layer.start_dialogue(Constants.DialoguePlayTrigger.MINIBOSS_DEFEATED, Constants.DialoguePlayTriggerExtra.MINIBOSS_DOVE)
+			dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_DOVE)
 		_:
 			push_error("Play miniboss dialogue not implemented for this character")
+	_hud_canvas_layer.start_dialogue(dialogue_play_conditions)
 	
 	_hud_canvas_layer.hide_boss_health_bar.rpc()
 

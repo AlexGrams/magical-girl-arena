@@ -6,9 +6,7 @@ extends Resource
 ## All parts of this dialogue.
 @export var lines: Array[DialogueLine] = []
 ## At what point in the game can this dialogue be played. 
-@export var play_trigger: Constants.DialoguePlayTrigger = Constants.DialoguePlayTrigger.NONE
-## An optional additional parameter that need to be fulfilled in order to play this dialogue.
-@export var extra_play_trigger: Constants.DialoguePlayTriggerExtra = Constants.DialoguePlayTriggerExtra.NONE
+@export var play_conditions: Array[Constants.DialoguePlayCondition] = []
 
 
 ## Returns list of characters that participate in this dialogue.

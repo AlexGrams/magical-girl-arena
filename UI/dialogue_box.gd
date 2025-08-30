@@ -18,7 +18,7 @@ const MAX_LINES: int = 3
 ## Map containing DialogueData for all dialogue sequences in the game.
 ## Key: Constants.DialoguePlayTrigger - When the dialogue can be played.
 ## Value: Array[DialogueData] - List of dialogues that can be played at that trigger.
-var _dialogue: Dictionary = {}
+var _dialogue: Array[DialogueData] = []
 ## Maps instantiated DialogueData to String path to the DialogueData's .tres file.
 var _dialogue_paths: Dictionary = {}
 var _dialogue_line_container: PackedScene = preload("res://UI/dialogue_line_container.tscn")
@@ -41,9 +41,7 @@ func _ready() -> void:
 		
 		var full_path: String = DIALOGUE_DATA_FOLDER_PATH + dialogue_data_file_name
 		var dialogue_data: DialogueData = ResourceLoader.load(full_path)
-		if not _dialogue.has(dialogue_data.play_trigger):
-			_dialogue[dialogue_data.play_trigger] = []
-		_dialogue[dialogue_data.play_trigger].append(dialogue_data)
+		_dialogue.append(dialogue_data)
 		_dialogue_paths[dialogue_data] = full_path
 
 
@@ -67,7 +65,7 @@ func _process(delta: float) -> void:
 
 
 ## Randomly selects a dialogue to run. Only call on server.
-func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Constants.DialoguePlayTriggerExtra.NONE) -> void:
+func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	var dialogue_choices: Array[DialogueData] = []
 	# Dialogue with the highest amount of character triggers met will always be used.
 	var highest_trigger: int = 0
@@ -77,31 +75,39 @@ func start_dialogue(trigger: Constants.DialoguePlayTrigger, extra_trigger := Con
 		for data: Dictionary in GameState.players.values():
 			_player_character_set[data["character"]] = true
 	
-	if _dialogue.has(trigger):
-		for dialogue: DialogueData in _dialogue[trigger]:
-			var can_add: bool = true
-			var trigger_count: int = 0
-			
-			if extra_trigger != Constants.DialoguePlayTriggerExtra.NONE and extra_trigger != dialogue.extra_play_trigger:
-				# The extra trigger for this dialogue is set and is not fulfilled right now.
-				can_add = false
-			else:
-				for character: Constants.Character in dialogue.get_characters():
-					if not _player_character_set.has(character) and character != Constants.Character.NONE:
-						can_add = false
-						break
-					elif character != Constants.Character.NONE:
-						trigger_count += 1
-			if can_add:
-				if trigger_count > highest_trigger:
-					highest_trigger = trigger_count
-					dialogue_choices.clear() # Only use the dialogue with most triggers met
-					dialogue_choices.append(dialogue)
-				elif trigger_count == highest_trigger:
-					dialogue_choices.append(dialogue)
+	for dialogue: DialogueData in _dialogue:
+		var can_add: bool = true
+		var trigger_count: int = 0
+		
+		# See if all conditions to play this dialogue are present in the input conditions. 
+		if dialogue.play_conditions.all(func(required_condition): 
+				return required_condition in conditions
+		):
+			# See if all characters in the dialogue are present in the game.
+			for character: Constants.Character in dialogue.get_characters():
+				if not _player_character_set.has(character) and character != Constants.Character.NONE:
+					can_add = false
+					break
+				elif character != Constants.Character.NONE:
+					trigger_count += 1
+		else:
+			can_add = false
+		
+		# Only add dialogues for which the most characters in the dialogue are present in the game.
+		if can_add:
+			if trigger_count > highest_trigger:
+				highest_trigger = trigger_count
+				dialogue_choices.clear() # Only use the dialogue with most triggers met
+				dialogue_choices.append(dialogue)
+			elif trigger_count == highest_trigger:
+				dialogue_choices.append(dialogue)
 	
 	if len(dialogue_choices) <= 0:
 		return
+	
+	# TODO: Testing
+	for dialogue: DialogueData in dialogue_choices:
+		print(dialogue.resource_name)
 	
 	_run_dialogue.rpc(_dialogue_paths[dialogue_choices.pick_random()])
 
