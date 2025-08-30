@@ -17,10 +17,13 @@ extends Powerup
 @onready var _fire_timer: float = _fire_interval
 @onready var _bounces: int = _max_bounces
 @onready var _splits: int = _max_splits
+## Path to owning node.
+var _owner_path: NodePath
 
 
 func _ready() -> void:
 	powerup_name = load(_powerup_data_file_path).name
+	_owner_path = get_parent().get_path()
 
 
 func _process(delta: float) -> void:
@@ -29,29 +32,33 @@ func _process(delta: float) -> void:
 	
 	_fire_timer += delta
 	if _fire_timer > _fire_interval:
-		var crit: bool = randf() <= crit_chance
-		var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, 
-			[
-				_bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				total_damage, 
-				crit,
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
+		var target_node: Node = _find_nearest_target()
+		if target_node != null:
+			var target_path: NodePath = target_node.get_path()
+			var crit: bool = randf() <= crit_chance
+			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
+			GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+				1, 
 				[
-					_find_nearest_target().get_path(), 
-					_bounces,
-					_splits
+					_bullet_scene, 
+					global_position, 
+					Vector2.UP, 
+					total_damage, 
+					crit,
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[
+						target_path, 
+						_bounces,
+						_splits,
+						_owner_path
+					]
 				]
-			]
-		)
+			)
 		
-		# TODO: Play sound effect
-		# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
+			# TODO: Play sound effect
+			# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
 		_fire_timer = 0.0
 
 

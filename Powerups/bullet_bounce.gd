@@ -1,12 +1,14 @@
 extends Bullet
+## NOTE: Bullet position is not replicated completely on clients. Damage is only done
+## by the server, and clients' views of the bullets can be desynced. Shouldn't be a 
+## big issue since it's just visual, and it shouldn't happen all the time.
+
 
 ## How close this bullet needs to get to its destination before switching targets.
 const TOUCHING_DISTANCE_THRESHOLD: float = 25.0
 
-
 ## The collision shape for finding enemies within range.
 @export var _enemy_mask_collision_shape: Area2D = null
-@onready var _squared_touching_distance_threshold: float = TOUCHING_DISTANCE_THRESHOLD ** 2
 # Rotation in degrees for any necessary rotation offsets
 @export var _sprite_rotation: float = 0.0
 ## Path to this bullet's scene.
@@ -18,6 +20,8 @@ var _bounces: int
 var _splits: int = 0
 ## Enemy that this bullet is moving towards.
 var _target: Node = null
+## Node that this bullet last hit.
+var _last_hit: Node = null
 ## True when we need to update this bullet's target next physics frame.
 var _update_target: bool = false
 
@@ -31,11 +35,9 @@ func _process(delta: float) -> void:
 	if _target != null:
 		var target_direction = (_target.global_position - global_position).normalized()
 		global_position += target_direction * speed * delta
-		if _target.global_position.distance_squared_to(global_position) <= _squared_touching_distance_threshold:
-			_update_target = true
 		sprite.rotation = target_direction.angle() + deg_to_rad(_sprite_rotation)
 	else:
-		_update_target = true
+		_find_new_target()
 
 
 func _physics_process(_delta: float) -> void:
@@ -88,30 +90,32 @@ func _find_new_target() -> void:
 						nodes.pop_back()
 						break
 		
+		_last_hit = _target
 		_target = nodes[0]
-		# Create a new Bounce bullet for each split.
-		for i: int in range(1, n):
-			if nodes[i] != null:
-				GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
-					1, 
-					[
-						_bullet_scene, 
-						global_position, 
-						Vector2.UP, 
-						collider.damage, 
-						collider.is_crit,
-						_is_owned_by_player,
-						collider.owner_id,
-						collider.powerup_index,
+		# Server create a new Bounce bullet for each split.
+		if is_multiplayer_authority():
+			for i: int in range(1, n):
+				if nodes[i] != null:
+					GameState.playground.bullet_spawner.request_spawn_bullet.call_deferred(
 						[
-							nodes[i].get_path(), 
-							_bounces,
-							_splits
+							_bullet_scene, 
+							global_position, 
+							Vector2.UP, 
+							collider.damage, 
+							collider.is_crit,
+							_is_owned_by_player,
+							collider.owner_id,
+							collider.powerup_index,
+							[
+								nodes[i].get_path(), 
+								_bounces,
+								_splits,
+								_target.get_path()
+							]
 						]
-					]
-				)
-			else:
-				break
+					)
+				else:
+					break
 	
 	# There were no valid enemies within range, so destroy this bullet.
 	if _target == null and is_multiplayer_authority():
@@ -121,18 +125,32 @@ func _find_new_target() -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
+		data.size() != 4
 		or typeof(data[0]) != TYPE_NODE_PATH	# Path to first target
 		or typeof(data[1]) != TYPE_INT			# Max number of bounces
 		or typeof(data[2]) != TYPE_INT			# Max number of splits
+		or typeof(data[3]) != TYPE_NODE_PATH	# Path to node last hit
 	):
 		push_error("Malformed data array")
 		return
 	
+	_target = get_tree().root.get_node_or_null(data[0])
 	_bounces = data[1]
 	_splits = data[2]
-	_target = get_tree().root.get_node(data[0])
+	_last_hit = get_tree().root.get_node_or_null(data[3])
 	_is_owned_by_player = is_owned_by_player
 	if not is_owned_by_player:
 		push_warning("Not implemented for enemies.")
 		return
+
+
+## Deal damage to overlapping Enemies. Bounce and split if the hit Enemy is the current target.
+func _on_hitbox_area_2d_entered(area: Area2D) -> void:
+	var other: Node2D = area.get_parent()
+	
+	# Do not damage the Enemy that the bullet previously hit.
+	if other != _last_hit and (other is Enemy or other is LootBox):
+		if is_multiplayer_authority():
+			other.take_damage(collider.damage)
+		if other == _target:
+			_find_new_target()
