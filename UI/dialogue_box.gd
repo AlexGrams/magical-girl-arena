@@ -105,10 +105,6 @@ func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	if len(dialogue_choices) <= 0:
 		return
 	
-	# TODO: Testing
-	for dialogue: DialogueData in dialogue_choices:
-		print(dialogue.resource_name)
-	
 	_run_dialogue.rpc(_dialogue_paths[dialogue_choices.pick_random()])
 
 

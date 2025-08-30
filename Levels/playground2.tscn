@@ -504,6 +504,7 @@ corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 hud_canvas_layer = NodePath("CanvasLayer")
 bullet_spawner = NodePath("BulletSpawner")
 point_light = NodePath("PointLight2D")
+_map_data_path = "res://Levels/MapData/map_data_desert.tres"
 _damage_indicator_scene = "res://UI/damage_indicator.tscn"
 _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 

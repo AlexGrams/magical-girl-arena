@@ -6,3 +6,4 @@
 script = ExtResource("1_4b870")
 name = "Valley"
 scene_path = "res://Levels/playground.tscn"
+map_dialogue_condition = 1

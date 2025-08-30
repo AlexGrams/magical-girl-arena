@@ -38,6 +38,8 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 ## Light to create darkness when boss spawns
 @export var point_light: PointLight2D = null
 
+## Path to this map's MapData resource file.
+@export var _map_data_path: String = ""
 ## Path to the DamageIndicator scene.
 @export var _damage_indicator_scene: String = ""
 @export var _lightning_arc_scene: String = ""
@@ -47,6 +49,8 @@ var drop_weight_exp: float = 15.0
 var drop_weight_gold: float = 4.0
 var drop_weight_nothing: float = 1.0
 
+## The dialogue condition specfic to this map.
+var _map_dialogue_condition: Constants.DialoguePlayCondition
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
 ## Animation to play when the boss spawns
@@ -67,11 +71,18 @@ func get_hud_canvas_layer() -> HUDCanvasLayer:
 	return hud_canvas_layer
 
 
+func get_map_dialogue_condition() -> Constants.DialoguePlayCondition:
+	return _map_dialogue_condition
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameState.pause_game(true)
 	GameState.set_playground(self)
 	GameState.client_game_loaded.rpc()
+	
+	# Map-specific DialoguePlayCondition
+	_map_dialogue_condition = load(_map_data_path).map_dialogue_condition
 	
 	# Set up DamageIndicator pool
 	var damage_indicator_resource: Resource = load(_damage_indicator_scene)
@@ -112,7 +123,7 @@ func _ready() -> void:
 		# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
 		# TODO: Remove once we have loading screens working.
 		await get_tree().create_timer(2.0).timeout
-		hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.START])
+		hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.START, _map_dialogue_condition])
 
 
 ## Only process on the server.
@@ -136,7 +147,7 @@ func _process(_delta: float) -> void:
 	elif not _has_boss_spawned:
 		if GameState.get_game_progress_as_fraction() >= 1.0:
 			_spawn_boss.rpc()
-			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.BOSS])
+			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.BOSS, _map_dialogue_condition])
 
 
 ## Add a new EnemySpawnEventData to all spawners on the map. 
@@ -246,7 +257,7 @@ func _spawn_boss() -> void:
 		boss.died.connect(func(_boss: Node2D): 
 			_shrink_darkness.rpc()
 			_update_map_complete_variable.rpc()
-			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.WIN])
+			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.WIN, _map_dialogue_condition])
 		)
 	AudioManager.play_boss_music()
 

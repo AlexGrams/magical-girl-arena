@@ -29,7 +29,10 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		# Start dialogue
-		var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [Constants.DialoguePlayCondition.MINIBOSS_SPAWN]
+		var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [
+			Constants.DialoguePlayCondition.MINIBOSS_SPAWN,
+			GameState.playground.get_map_dialogue_condition()
+		]
 		match _character:
 			Constants.Character.GOTH:
 				dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_GOTH)
@@ -86,7 +89,10 @@ func die() -> void:
 	super()
 	
 	# Start defeated dialogue
-	var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [Constants.DialoguePlayCondition.MINIBOSS_DEFEATED]
+	var dialogue_play_conditions: Array[Constants.DialoguePlayCondition] = [
+		Constants.DialoguePlayCondition.MINIBOSS_DEFEATED,
+		GameState.playground.get_map_dialogue_condition()
+	]
 	match _character:
 		Constants.Character.GOTH:
 			dialogue_play_conditions.append(Constants.DialoguePlayCondition.MINIBOSS_GOTH)
