@@ -4,6 +4,7 @@ extends LootBox
 ## Speed in units per second.
 @export var _speed: float = 200.0 
 @export var _character_body_2d: CharacterBody2D = null
+@export var _animation_player:AnimationPlayer
 
 
 func _physics_process(_delta: float) -> void:
@@ -22,5 +23,7 @@ func teleport(pos: Vector2) -> void:
 	# Sort of a hack to move in the opposite direction across the arena.
 	if global_position.x > 0:
 		_character_body_2d.velocity = Vector2.LEFT * _speed
+		_animation_player.play("rolling_left")
 	else:
 		_character_body_2d.velocity = Vector2.RIGHT * _speed
+		_animation_player.play("rolling_right")

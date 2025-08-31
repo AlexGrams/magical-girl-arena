@@ -1,10 +1,102 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxfh0tkiqm2gs"]
+[gd_scene load_steps=12 format=3 uid="uid://bn4b70hxg5xd5"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.gd" id="1_e28bt"]
 [ext_resource type="PackedScene" uid="uid://btvqnd35r2gbw" path="res://Pickups/health_orb.tscn" id="2_gn8dj"]
 [ext_resource type="PackedScene" uid="uid://cqcar2b10ptof" path="res://Pickups/gold.tscn" id="3_1o7gm"]
 [ext_resource type="PackedScene" uid="uid://jyy16gs6xyi8" path="res://Sprites/Map/leaf_explosion.tscn" id="4_di2iy"]
-[ext_resource type="Texture2D" uid="uid://0qdkpv588cox" path="res://Sprites/Map/Bush.png" id="5_3e2e8"]
+[ext_resource type="Texture2D" uid="uid://cixvknshjx78t" path="res://Sprites/Map/Tumbleweed.png" id="5_2q1mk"]
+
+[sub_resource type="Animation" id="Animation_7ctxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cufgp"]
+resource_name = "rolling_right"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, -50)]
+}
+
+[sub_resource type="Animation" id="Animation_vsl7w"]
+resource_name = "rolling_left"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.28319, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -50), Vector2(0, 0), Vector2(0, -50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ki8w5"]
+_data = {
+"RESET": SubResource("Animation_7ctxa"),
+"rolling_left": SubResource("Animation_vsl7w"),
+"rolling_right": SubResource("Animation_cufgp")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57c2n"]
 size = Vector2(105, 108)
@@ -12,11 +104,12 @@ size = Vector2(105, 108)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owpg8"]
 size = Vector2(127, 129)
 
-[node name="LootBoxTumbleweed" type="CharacterBody2D" node_paths=PackedStringArray("_character_body_2d")]
+[node name="LootBoxTumbleweed" type="CharacterBody2D" node_paths=PackedStringArray("_character_body_2d", "_animation_player")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_e28bt")
 _character_body_2d = NodePath(".")
+_animation_player = NodePath("Sprite2D/AnimationPlayer")
 max_health = 75.0
 drop_weight_health = 100.0
 health_scene = ExtResource("2_gn8dj")
@@ -24,13 +117,22 @@ gold_scene = ExtResource("3_1o7gm")
 leaf_explosion_scene = ExtResource("4_di2iy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("5_3e2e8")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_2q1mk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ki8w5")
+}
+autoplay = "rolling_right"
+speed_scale = 2.0
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1)
+position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_57c2n")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -23)
 collision_layer = 2
 collision_mask = 9
 
