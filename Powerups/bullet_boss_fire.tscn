@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bitqx7lomigas"]
+
+[ext_resource type="Script" path="res://Powerups/bullet_boss_circle.gd" id="1_m1a0p"]
+[ext_resource type="Texture2D" uid="uid://yoa4wiy71po5" path="res://Sprites/Powerups/Andromeda_Spike.png" id="2_cu2ue"]
+[ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_yqv0m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ts17p"]
+radius = 9.0
+height = 126.0
+
+[node name="BulletBossCircle" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_m1a0p")
+speed = 500.0
+collider = NodePath("Area2D")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cu2ue")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 8
+script = ExtResource("3_yqv0m")
+damage = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_ts17p")

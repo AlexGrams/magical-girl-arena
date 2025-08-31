@@ -6,4 +6,4 @@
 script = ExtResource("1_axhtr")
 _num_bullets_per_revolution = 16
 _shoot_interval = 0.25
-_bullet_scene = "res://Powerups/bullet_boss_circle.tscn"
+_bullet_scene = "res://Powerups/bullet_boss_fire.tscn"
