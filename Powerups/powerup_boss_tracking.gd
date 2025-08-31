@@ -1,3 +1,4 @@
+class_name PowerupBossTracking
 extends Powerup
 ## A boss powerup that always shoots at the nearest player. Similar to powerup_shooting
 
