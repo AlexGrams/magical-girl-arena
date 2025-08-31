@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_vubhm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2iod"]
-size = Vector2(100, 38)
+size = Vector2(168, 38)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sol11"]
 radius = 1000.0

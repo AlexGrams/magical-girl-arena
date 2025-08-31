@@ -19,12 +19,9 @@ var _bounces: int
 ## How many extra bullets are created at most when this bullet hits something.
 var _splits: int = 0
 ## Enemy that this bullet is moving towards.
-var _target: Node = null
+var _target: Enemy = null
 ## Node that this bullet last hit.
 var _last_hit: Node = null
-## True when we need to update this bullet's target next physics frame.
-var _update_target: bool = false
-
 
 
 func _ready() -> void:
@@ -32,7 +29,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if _target != null:
+	if _target != null and not _target.is_ally:
 		var target_direction = (_target.global_position - global_position).normalized()
 		global_position += target_direction * speed * delta
 		sprite.rotation = target_direction.angle() + deg_to_rad(_sprite_rotation)
@@ -40,23 +37,14 @@ func _process(delta: float) -> void:
 		_find_new_target()
 
 
-func _physics_process(_delta: float) -> void:
-	# _find_new_target is called in the physics process since it is possible for it to be destroyed
-	# this frame. If it is destroyed before collisions are updated, then the last enemy that it 
-	# touched won't take damage.
-	if _update_target:
-		_find_new_target()
-		_update_target = false
-
-
 ## Set this bullet's target to the nearest enemy that isn't the current target.
 func _find_new_target() -> void:
 	# Destroy this bullet if we're out of bounces.
-	if is_multiplayer_authority():
-		_bounces -= 1
-		if _bounces <= 0:
+	_bounces -= 1
+	if _bounces <= 0:
+		if is_multiplayer_authority():
 			queue_free()
-			return
+		return
 	
 	var enemies: Array[Area2D] = _enemy_mask_collision_shape.get_overlapping_areas()
 	# The squared distances of the nearest nodes in increasing order.
@@ -117,9 +105,16 @@ func _find_new_target() -> void:
 				else:
 					break
 	
-	# There were no valid enemies within range, so destroy this bullet.
-	if _target == null and is_multiplayer_authority():
-		queue_free()
+	if _target == null:
+		# Destroy this bullet if there are not valid enemies within range.
+		if is_multiplayer_authority():
+			queue_free()
+	elif collider.get_overlapping_areas().any(func(area: Area2D):
+			return area.get_parent() == _target
+	):
+		# If we happen to already be colliding with our target, then immediately bounce
+		# and find a new one.
+		_find_new_target()
 
 
 ## Set up other properties for this bullet
