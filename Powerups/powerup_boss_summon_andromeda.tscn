@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2ve46dsr8tol"]
+
+[ext_resource type="Script" path="res://Powerups/powerup_boss_summon.gd" id="1_0rgp3"]
+
+[node name="PowerupBossSummonAndromeda" type="Node2D"]
+script = ExtResource("1_0rgp3")
+_enemy_scene = "res://Enemies/enemy_white-dwarf.tscn"
+_min_spawn_count = 5
+_max_spawn_count = 5
+_spawn_interval = 5.0
+_duration = 99999.0

@@ -13,6 +13,8 @@ extends EnemyBoss
 var _pattern_switch_timer: float = 0.0
 ## Powerup attack index.
 var _powerup_index: int = 0
+## How many times the boss's full attack cycle has been gone through.
+var _pattern_repetitions: int = 0
 var _phase_two_active: bool = false
 
 
@@ -49,6 +51,10 @@ func _process(delta: float) -> void:
 					# Chains + revolving attacks
 					_powerups[0].activate_powerup()
 					_powerups[1].activate_powerup()
+					
+					# Spawn enemies for the rest of the fight at the start of the third repetition.
+					if _pattern_repetitions == 2:
+						_powerups[5].activate_powerup()
 				1:
 					# Tracking attack on everyone
 					_powerups[1].deactivate_powerup()
@@ -64,32 +70,10 @@ func _process(delta: float) -> void:
 				4: 
 					# Revolving
 					_powerups[1].activate_powerup()
+					_pattern_repetitions += 1
 		else:
-			# Phase two attack pattern. Regular attacks are always active.
-			if not _phase_two_active:
-				_phase_two_active = true
-				for powerup: Powerup in _powerups:
-					powerup.deactivate_powerup()
-				_powerups[0].activate_powerup()
-				_powerup_index = 0
-			
-			match _powerup_index:
-				0:
-					# Regular attacks while immune
-					set_is_invulnerable(true)
-				1:
-					# Create terrain
-					set_is_invulnerable(false)
-					_powerups[1].activate_powerup()
-				2:
-					# Scream, destroy terrain
-					_sprite.play_scream_anim()
-					_powerups[2].activate_powerup()
-				3:
-					# Chains + regular attacks
-					_powerups[3].activate_powerup()
-				4:
-					pass
+			# Phase two attack pattern not used for this boss.
+			pass
 		
 		_powerup_index = (_powerup_index + 1) % 5
 		_pattern_switch_timer = _pattern_interval
