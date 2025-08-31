@@ -46,23 +46,24 @@ func _process(delta: float) -> void:
 			# Phase one attack pattern
 			match _powerup_index:
 				0:
-					# Regular attacks while immune
-					set_is_invulnerable(true)
-					_powerups[4].deactivate_powerup()
+					# Chains + revolving attacks
 					_powerups[0].activate_powerup()
-				1:
-					# Create terrain
-					set_is_invulnerable(false)
-					_powerups[0].deactivate_powerup()
 					_powerups[1].activate_powerup()
+				1:
+					# Tracking attack on everyone
+					_powerups[1].deactivate_powerup()
+					_powerups[2].activate_powerup()
 				2:
+					# Create terrain
+					_powerups[2].deactivate_powerup()
+					_powerups[3].activate_powerup()
+				3:
 					# Scream, destroy terrain
 					_sprite.play_scream_anim()
-					_powerups[2].activate_powerup()
-				3:
-					# Chains + revolving attacks
-					_powerups[3].activate_powerup()
 					_powerups[4].activate_powerup()
+				4: 
+					# Revolving
+					_powerups[1].activate_powerup()
 		else:
 			# Phase two attack pattern. Regular attacks are always active.
 			if not _phase_two_active:
@@ -87,8 +88,10 @@ func _process(delta: float) -> void:
 				3:
 					# Chains + regular attacks
 					_powerups[3].activate_powerup()
+				4:
+					pass
 		
-		_powerup_index = (_powerup_index + 1) % 4
+		_powerup_index = (_powerup_index + 1) % 5
 		_pattern_switch_timer = _pattern_interval
 
 

@@ -4,7 +4,7 @@ extends Powerup
 
 @export var _shoot_interval: float = 1.0
 @export var _bullet_damage: float = 20.0
-@export var _bullet_uid := ""
+@export var _bullet_scene: String = ""
 
 var _shoot_timer: float = 0
 
@@ -37,10 +37,10 @@ func _process(delta: float) -> void:
 		
 		var bullet_position := self.global_position + (direction * 100)
 		
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 			1, 
 			[
-				_bullet_uid, 
+				_bullet_scene, 
 				bullet_position, 
 				direction, 
 				_bullet_damage, 
