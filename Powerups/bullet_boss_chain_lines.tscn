@@ -14,9 +14,8 @@ size = Vector2(3079, 35.5)
 [node name="BulletBossChainLines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_q50an")
-_travel_time = 3.0
 speed = 1.25
-lifetime = 5.0
+lifetime = 4.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
