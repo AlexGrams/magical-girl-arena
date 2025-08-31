@@ -1,16 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc56c13oalmc8"]
+[gd_scene load_steps=8 format=3 uid="uid://bc56c13oalmc8"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_boss_andromeda.gd" id="1_fsr1i"]
-[ext_resource type="PackedScene" uid="uid://dju3v7744yb5v" path="res://UI/corvus_animated_sprite.tscn" id="2_5t64f"]
+[ext_resource type="PackedScene" uid="uid://cdvb1imb8ny34" path="res://UI/andromeda_animated_sprite.tscn" id="2_4cru4"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dw6tt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n671r"]
 viewport_path = NodePath("GDCubismUserModel")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ifklo"]
-size = Vector2(206, 241)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_beu2y"]
-size = Vector2(555, 240)
+size = Vector2(351, 367)
 
 [sub_resource type="Animation" id="Animation_u5q41"]
 length = 0.001
@@ -25,37 +22,31 @@ _data = {
 "take_damage": SubResource("Animation_xsep2")
 }
 
-[node name="EnemyBossAndromeda" type="CharacterBody2D" groups=["enemy"]]
+[node name="EnemyBossAndromeda" type="CharacterBody2D" node_paths=PackedStringArray("_sprite") groups=["enemy"]]
 collision_layer = 256
 collision_mask = 1408
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_fsr1i")
 _powerup_paths = Array[String](["res://Powerups/powerup_boss_tracking_fire.tscn", "res://Powerups/powerup_boss_terrain.tscn", "res://Powerups/powerup_boss_scream.tscn", "res://Powerups/powerup_boss_chain_lines.tscn", "res://Powerups/powerup_boss_revolving.tscn"])
+_sprite = NodePath("ConstellationAnimatedSprite")
 _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
 base_health = 50000
 speed = 200.0
 
-[node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_5t64f")]
-texture = SubResource("ViewportTexture_dw6tt")
-
-[node name="GDCubismUserModel" parent="ConstellationAnimatedSprite" index="0"]
-assets = "res://addons/gd_cubism/example/res/live2d/Constellation_Andromeda/runtime/Andromeda.model3.json"
-Breathe = 0.0
-Arm_Rotation = 15.0
-Hand_Rotation = 15.0
-Veil_Warp = 15.0
+[node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_4cru4")]
+texture = SubResource("ViewportTexture_n671r")
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, 23.5)
 shape = SubResource("RectangleShape2D_ifklo")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-7.5, 0)
-shape = SubResource("RectangleShape2D_beu2y")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(65, -119, 96.7036, -129.365, 139, -123, 164, -108, 175, -30, 165, -1, 179, 185, 125, 195, 105, 155, 135, 123, 132, 75, 103, 54, 57, 92, -22, 134, -139, 239, -143, 188, -154, 167, -172, 156, -205, 162, -174, 118, -156, 80, -132, -7, -83, -17, -35, -6, 8, 36, 20, -12, -26, -59, -97, -74, -81, -165, 25, -160, 25, -103, 44, -68)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -64,5 +55,3 @@ libraries = {
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
-
-[editable path="ConstellationAnimatedSprite"]

@@ -7,6 +7,7 @@ extends EnemyBoss
 @export var _phase_two_health_fraction: float = 0.15
 ## Paths to Powerup scenes for the boss's phase one attacks.
 @export var _powerup_paths: Array[String] = []
+@export var _sprite: Sprite2D
 
 ## Time in seconds until the next pattern switch.
 var _pattern_switch_timer: float = 0.0
@@ -56,6 +57,7 @@ func _process(delta: float) -> void:
 					_powerups[1].activate_powerup()
 				2:
 					# Scream, destroy terrain
+					_sprite.play_scream_anim()
 					_powerups[2].activate_powerup()
 				3:
 					# Chains + revolving attacks
@@ -80,6 +82,7 @@ func _process(delta: float) -> void:
 					_powerups[1].activate_powerup()
 				2:
 					# Scream, destroy terrain
+					_sprite.play_scream_anim()
 					_powerups[2].activate_powerup()
 				3:
 					# Chains + regular attacks

@@ -1,4 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdvb1imb8ny34"]
+[gd_scene load_steps=16 format=3 uid="uid://cdvb1imb8ny34"]
+
+[ext_resource type="Script" path="res://UI/andromeda_animated_sprite.gd" id="1_2bwso"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hhwuh"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -39,35 +41,6 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_je33f"),
 "breathe": SubResource("Animation_khc4d")
-}
-
-[sub_resource type="Animation" id="Animation_18s32"]
-resource_name = "veil_idle"
-length = 8.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 2, 4, 6, 8),
-"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
-"update": 0,
-"values": [0.0, 6.0, 0.0, 6.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [15.0]
 }
 
 [sub_resource type="Animation" id="Animation_amlmy"]
@@ -151,12 +124,68 @@ tracks/1/keys = {
 "values": [15.0, 5.295]
 }
 
+[sub_resource type="Animation" id="Animation_18s32"]
+resource_name = "veil_idle"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Veil_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [0.0, 6.0, 0.0, 6.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Head_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ubxi"]
 _data = {
 "RESET": SubResource("Animation_amlmy"),
 "scream_1": SubResource("Animation_iaybq"),
 "scream_2": SubResource("Animation_2vpu6"),
 "veil_idle": SubResource("Animation_18s32")
+}
+
+[sub_resource type="Animation" id="Animation_gp2kd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [12.348]
 }
 
 [sub_resource type="Animation" id="Animation_dl6db"]
@@ -186,33 +215,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [13.0]
-}
-
-[sub_resource type="Animation" id="Animation_gp2kd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GDCubismUserModel:Arm_Rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [15.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GDCubismUserModel:Hand_Rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [12.348]
 }
 
 [sub_resource type="Animation" id="Animation_nhu8q"]
@@ -277,8 +279,12 @@ _data = {
 "sudden_right": SubResource("Animation_ddml6")
 }
 
-[node name="ConstellationAnimatedSprite" type="Sprite2D"]
+[node name="ConstellationAnimatedSprite" type="Sprite2D" node_paths=PackedStringArray("breathe_animplayer", "veil_animplayer", "hand_animplayer")]
 texture = SubResource("ViewportTexture_hhwuh")
+script = ExtResource("1_2bwso")
+breathe_animplayer = NodePath("Breathe_AnimPlayer")
+veil_animplayer = NodePath("Veil_AnimPlayer")
+hand_animplayer = NodePath("Hand_AnimPlayer")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
 assets = "res://addons/gd_cubism/example/res/live2d/Constellation_Andromeda/runtime/Andromeda.model3.json"
