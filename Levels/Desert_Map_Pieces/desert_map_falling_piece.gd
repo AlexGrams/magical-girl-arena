@@ -18,10 +18,7 @@ class_name DesertMapPiece
 ## Node that has all of the triangles as children
 @export var triangles:Node2D
 var _original_base_scale:Vector2
-
-# TESTING: _has_fallen and _time_since_last_try ARE ONLY FOR _process TESTING
 var _has_fallen:bool = false
-var _time_since_last_try:float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -15,7 +15,6 @@ var _pattern_switch_timer: float = 0.0
 var _powerup_index: int = 0
 ## How many times the boss's full attack cycle has been gone through.
 var _pattern_repetitions: int = 0
-var _phase_two_active: bool = false
 
 
 func _ready() -> void:
