@@ -26,6 +26,7 @@ var _time_since_last_try:float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_original_base_scale = base.scale
+	reset_cracks()
 
 # TESTING: _process IS BEING USED FOR TESTING ONLY. NOT NEEDED IN BUILD.
 func _process(delta:float) -> void:
