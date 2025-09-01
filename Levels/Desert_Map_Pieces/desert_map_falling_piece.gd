@@ -19,12 +19,27 @@ class_name DesertMapPiece
 @export var triangles:Node2D
 var _original_base_scale:Vector2
 
+# TESTING: _has_fallen and _time_since_last_try ARE ONLY FOR _process TESTING
+var _has_fallen:bool = false
+var _time_since_last_try:float = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_original_base_scale = base.scale
-	initiate_falling()
-	await get_tree().create_timer(time_to_crack + fall_time * 2).timeout
-	rise()
+
+# TESTING: _process IS BEING USED FOR TESTING ONLY. NOT NEEDED IN BUILD.
+func _process(delta:float) -> void:
+	_time_since_last_try += 1 * delta
+	if _time_since_last_try > 1:
+		var random_num = randf()
+		if not _has_fallen and random_num > 0.95:
+			_has_fallen = true
+			initiate_falling()
+			await get_tree().create_timer(time_to_crack + fall_time + 5).timeout
+			rise()
+			_has_fallen = false
+		_time_since_last_try = 0
+		
 
 # Use to start the cracking and falling visual on its own
 func initiate_falling() -> void:
@@ -51,8 +66,7 @@ func fall() -> void:
 	tween.tween_property(base, "scale", Vector2.ZERO, fall_time)
 	tween.tween_property(base, "modulate", Color.html("241a13"), fall_time)
 	for child in triangles.get_children():
-		tween.tween_property(child, "scale", Vector2.ZERO, fall_time)
-		tween.tween_property(child, "self_modulate", Color.html("241a1300"), fall_time)
+		child.scale = Vector2.ZERO
 
 func rise() -> void:
 	reset_cracks()
@@ -63,9 +77,9 @@ func rise() -> void:
 	tween.set_parallel()
 	tween.tween_property(base, "scale", _original_base_scale, rise_time)
 	tween.tween_property(base, "modulate", Color.WHITE, rise_time)
+	await get_tree().create_timer(rise_time).timeout
 	for child in triangles.get_children():
-		tween.tween_property(child, "scale", Vector2.ONE, rise_time)
-		tween.tween_property(child, "self_modulate", Color.WHITE, rise_time)
+		child.scale = Vector2.ONE
 
 # Hide cracks again
 func reset_cracks() -> void:

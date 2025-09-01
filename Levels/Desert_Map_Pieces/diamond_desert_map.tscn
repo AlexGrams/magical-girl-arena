@@ -8,8 +8,8 @@
 [node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "triangles")]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_vq07k")
-time_to_crack = 1.5
-total_crack_num = 4
+time_to_crack = 3.0
+total_crack_num = 5
 fall_time = 1.0
 rise_time = 1.0
 clip_mask = NodePath("Base/Clip")
@@ -19,6 +19,7 @@ triangles = NodePath("Base/Triangles")
 
 [node name="Abyss" type="Sprite2D" parent="."]
 self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
+z_index = -2
 texture = ExtResource("4_nw0dq")
 
 [node name="Base" type="Sprite2D" parent="."]
@@ -34,6 +35,7 @@ texture = ExtResource("4_nw0dq")
 texture = ExtResource("2_0td5v")
 
 [node name="Triangles" type="Node2D" parent="Base"]
+z_index = -1
 
 [node name="Triangle_1" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(-554, 277)
