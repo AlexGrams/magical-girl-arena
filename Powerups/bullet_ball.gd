@@ -79,6 +79,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	_explosion_bullet_hitbox.damage = _explosion_damage
 	
+	# Make a pointer for the Ball when it goes offscreen
+	GameState.playground.hud_canvas_layer.add_node_to_point_to(self, sprite.texture)
+	
 	if _owning_player != null and is_multiplayer_authority():
 		_owning_player.died.connect(func():
 			queue_free()
