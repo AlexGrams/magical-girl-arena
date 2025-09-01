@@ -43,6 +43,8 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 ## Path to the DamageIndicator scene.
 @export var _damage_indicator_scene: String = ""
 @export var _lightning_arc_scene: String = ""
+## Animation to play when the boss spawns
+@export var boss_animation: PackedScene = preload("res://Sprites/Enemy/Corvus_Summoning_Animation.tscn")
 
 ## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
 var drop_weight_exp: float = 15.0
@@ -53,8 +55,7 @@ var drop_weight_nothing: float = 1.0
 var _map_dialogue_condition: Constants.DialoguePlayCondition
 var _has_corrupted_enemy_spawned := false
 var _has_boss_spawned := false
-## Animation to play when the boss spawns
-var boss_animation: PackedScene = preload("res://Sprites/Enemy/Constellation_Summoning_Animation.tscn")
+
 ## The upcoming spawn event to process.
 var _current_spawn_event: int = 0
 

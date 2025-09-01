@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://yj2fdnxjt1d2"]
+[gd_scene load_steps=74 format=3 uid="uid://yj2fdnxjt1d2"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_imc2f"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
@@ -16,13 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="14_4abyf"]
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="15_pci6o"]
 [ext_resource type="PackedScene" uid="uid://bc56c13oalmc8" path="res://Enemies/enemy_boss_andromeda.tscn" id="16_w5lva"]
+[ext_resource type="PackedScene" uid="uid://dcm01xbycjlb2" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
 [ext_resource type="PackedScene" uid="uid://dfwiw6uvxq585" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.tscn" id="19_yf7s2"]
 [ext_resource type="PackedScene" uid="uid://dhpv3m2wsop5y" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.tscn" id="26_50c1r"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="26_fi80v"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_13cnm"]
 [ext_resource type="PackedScene" uid="uid://ik0b55wb1tvq" path="res://Levels/Desert_Map_Pieces/square_desert_map.tscn" id="27_loxqj"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="28_juc7p"]
-[ext_resource type="PackedScene" path="res://UI/canvas_layer.tscn" id="29_hhkov"]
+[ext_resource type="PackedScene" uid="uid://divvdkhiu21h6" path="res://UI/canvas_layer.tscn" id="29_hhkov"]
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="32_2n8q1"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="48_5852u"]
@@ -501,6 +502,7 @@ point_light = NodePath("PointLight2D")
 _map_data_path = "res://Levels/MapData/map_data_desert.tres"
 _damage_indicator_scene = "res://UI/damage_indicator.tscn"
 _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
+boss_animation = ExtResource("17_xxu3m")
 
 [node name="Background_Abyss" type="ColorRect" parent="."]
 z_index = -3
