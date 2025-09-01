@@ -42,6 +42,8 @@ var _artifact_textures: Array[TextureRect] = []
 var _pointers: Array[TextureRect] = []
 ## Guttered character icons used with the player pointers.
 var _pointer_icons: Array[TextureRect] = []
+## Maps each other player's multiplayer ID to their character's icon texture. Used for pointers.
+var _pointer_player_id_to_icon: Dictionary = {}
 var _spectator_icons: Array[TextureRect] = []
 ## Maps Powerup name to which index its UI components are in _powerup_level_text
 ## and _powerup_textures.
@@ -120,6 +122,10 @@ func _process(_delta: float) -> void:
 		):
 			continue
 		
+		# Load each player's icon
+		if id not in _pointer_player_id_to_icon:
+			_pointer_player_id_to_icon[id] = load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid)
+		
 		var _pointer = _pointers[used_pointers]
 		var _pointer_icon = _pointer_icons[used_pointers]
 		_pointer.show()
@@ -157,7 +163,7 @@ func _process(_delta: float) -> void:
 			_pointer.modulate = Color.WHITE
 		
 		# Position the character icon
-		_pointer_icon.texture = load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid)
+		_pointer_icon.texture = _pointer_player_id_to_icon[id] 
 		_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))
 	
 	while used_pointers < len(_pointers):
