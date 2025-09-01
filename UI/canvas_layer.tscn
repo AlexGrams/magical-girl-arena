@@ -40,13 +40,11 @@ modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_pointer_parent", "_pointer_icon_parent", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "upgrade_any_screen")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "upgrade_any_screen")]
 script = ExtResource("1_miafi")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
 _timer_text = NodePath("Timer")
-_pointer_parent = NodePath("PlayerPointers")
-_pointer_icon_parent = NodePath("PlayerPointerIcons")
 _spectator_container = NodePath("SpectatorContainer")
 _spectator_icon_parent = NodePath("SpectatorContainer/SpectatorPlayerIconsContainer")
 _powerup_container = NodePath("AbilitiesAndStatsContainer/Abilities")
@@ -57,84 +55,8 @@ _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 _dialogue_box = NodePath("DialogueBox")
 upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
-
-[node name="PlayerPointers" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Pointer1" type="TextureRect" parent="PlayerPointers"]
-visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 103.0
-offset_bottom = 146.0
-pivot_offset = Vector2(40, 40)
-texture = ExtResource("2_awuf7")
-expand_mode = 1
-
-[node name="Pointer2" type="TextureRect" parent="PlayerPointers"]
-visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 103.0
-offset_bottom = 146.0
-pivot_offset = Vector2(40, 40)
-texture = ExtResource("2_awuf7")
-expand_mode = 1
-
-[node name="Pointer3" type="TextureRect" parent="PlayerPointers"]
-visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 103.0
-offset_bottom = 146.0
-pivot_offset = Vector2(40, 40)
-texture = ExtResource("2_awuf7")
-expand_mode = 1
-
-[node name="PlayerPointerIcons" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PointerIcon1" type="TextureRect" parent="PlayerPointerIcons"]
-visible = false
-layout_mode = 0
-offset_right = 60.0
-offset_bottom = 60.0
-pivot_offset = Vector2(30, 30)
-texture = ExtResource("3_bnjve")
-expand_mode = 1
-
-[node name="PointerIcon2" type="TextureRect" parent="PlayerPointerIcons"]
-visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 83.0
-offset_bottom = 126.0
-pivot_offset = Vector2(30, 30)
-texture = ExtResource("3_bnjve")
-expand_mode = 1
-
-[node name="PointerIcon3" type="TextureRect" parent="PlayerPointerIcons"]
-visible = false
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 83.0
-offset_bottom = 126.0
-pivot_offset = Vector2(30, 30)
-texture = ExtResource("3_bnjve")
-expand_mode = 1
+_pointer_scene = "res://UI/pointer_texture_rect.tscn"
+_pointer_icon_scene = "res://UI/pointer_icon_texture_rect.tscn"
 
 [node name="ExperienceBar" type="ProgressBar" parent="."]
 anchors_preset = 12

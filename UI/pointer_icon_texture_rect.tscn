@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://0cpsxcv0oxyr"]
+
+[ext_resource type="Texture2D" uid="uid://cy3wg1sq3tv87" path="res://Sprites/UI/CharacterIcons/GothIcon.png" id="1_wnrr6"]
+
+[node name="PointerIconTextureRect" type="TextureRect"]
+visible = false
+offset_right = 60.0
+offset_bottom = 60.0
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("1_wnrr6")
+expand_mode = 1

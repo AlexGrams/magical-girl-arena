@@ -83,5 +83,7 @@ shape = SubResource("CircleShape2D_ujiyy")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_mgtxu")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="area_entered" from="BulletHitbox" to="." method="_on_bullet_hitbox_entered"]
 [connection signal="area_entered" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_entered"]

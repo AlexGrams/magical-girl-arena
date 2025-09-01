@@ -6,8 +6,6 @@ extends CanvasLayer
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
-@export var _pointer_parent: Control = null
-@export var _pointer_icon_parent: Control = null
 ## Contains UI elements for spectator mode
 @export var _spectator_container: Control = null
 ## Parent of the character icons for displaying which character is being spectated.
@@ -28,6 +26,8 @@ extends CanvasLayer
 @export var _dialogue_box: DialogueBox = null
 ## For the Upgrade Any Powerup screen.
 @export var upgrade_any_screen: UpgradeAnyScreenPanel = null
+@export var _pointer_scene: String = ""
+@export var _pointer_icon_scene: String = ""
 
 # TODO: Testing
 var fraction: float = 0.0
@@ -59,10 +59,6 @@ func _ready() -> void:
 	_boss_health_bar.hide()
 	
 	# Pointer setup
-	for pointer in _pointer_parent.get_children():
-		_pointers.append(pointer)
-	_pointer_icons.assign(_pointer_icon_parent.get_children())
-	
 	for id: int in GameState.player_characters:
 		var node: Node2D = GameState.player_characters[id]
 		if (
@@ -127,64 +123,79 @@ func _process(_delta: float) -> void:
 		"%02d:%02d" % [int(ceil(current_time)) / 60.0, int(ceil(current_time)) % 60]
 	))
 	
-	# Update pointers that indicate the direction of players not on the screen.
-	var used_pointers: int = 0
-	for node: Node2D in _pointer_node_to_icon:
-		if (
-			node == null or 
-			node.find_child("VisibleOnScreenNotifier2D").is_on_screen()
-		):
-			continue
+	# Update pointers that indicate the direction of objects not on the screen.
+	if GameState.get_local_player() != null:
+		var used_pointers: int = 0
+		for node: Node2D in _pointer_node_to_icon:
+			if (
+				node == null
+				or node.find_child("VisibleOnScreenNotifier2D").is_on_screen()
+			):
+				continue
+			
+			var _pointer = _pointers[used_pointers]
+			var _pointer_icon = _pointer_icons[used_pointers]
+			_pointer.show()
+			_pointer_icon.show()
+			used_pointers += 1
+			
+			# The angle in radians from the local player to the other player character
+			var angle_to_other_player: float = (
+				(node.position - GameState.get_local_player().position).angle()
+			)
+			
+			var screen_x = get_viewport().get_visible_rect().size.x
+			var screen_y = get_viewport().get_visible_rect().size.y
+			var pointer_size_x = _pointer.size.x
+			var pointer_size_y = _pointer.size.y
+			
+			# Since the tangent function used to calculate the arrow's position is discontinuous at 
+			# +/- PI/2, we need two different equations for setting the y-position of the pointer.
+			if angle_to_other_player >= -PI / 2 and angle_to_other_player <= PI / 2:
+				_pointer.set_position(Vector2(
+					clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
+					clamp((0.5 * screen_x) * tan(angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
+				))
+			else:
+				_pointer.set_position(Vector2(
+					clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
+					clamp((0.5 * screen_x) * tan(PI - angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
+				))
+			
+			_pointer.rotation = angle_to_other_player
+			
+			# Grey out pointers for players that are down.
+			if node is PlayerCharacterBody2D and node.is_down:
+				_pointer.modulate = Color.DIM_GRAY
+			else:
+				_pointer.modulate = Color.WHITE
+			
+			# Position the object icon
+			_pointer_icon.texture = _pointer_node_to_icon[node]
+			_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))
 		
-		var _pointer = _pointers[used_pointers]
-		var _pointer_icon = _pointer_icons[used_pointers]
-		_pointer.show()
-		_pointer_icon.show()
-		used_pointers += 1
-		
-		# The angle in radians from the local player to the other player character
-		var angle_to_other_player: float = (
-			(node.position - GameState.get_local_player().position).angle()
-		)
-		
-		var screen_x = get_viewport().get_visible_rect().size.x
-		var screen_y = get_viewport().get_visible_rect().size.y
-		var pointer_size_x = _pointer.size.x
-		var pointer_size_y = _pointer.size.y
-		
-		# Since the tangent function used to calculate the arrow's position is discontinuous at 
-		# +/- PI/2, we need two different equations for setting the y-position of the pointer.
-		if angle_to_other_player >= -PI / 2 and angle_to_other_player <= PI / 2:
-			_pointer.set_position(Vector2(
-				clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
-				clamp((0.5 * screen_x) * tan(angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
-			))
-		else:
-			_pointer.set_position(Vector2(
-				clamp((0.5 * screen_y) / tan(abs(angle_to_other_player)) + (0.5 * screen_x), 0.0, screen_x - pointer_size_x),
-				clamp((0.5 * screen_x) * tan(PI - angle_to_other_player) + (0.5 * screen_y), 0.0, screen_y - pointer_size_y)
-			))
-		
-		_pointer.rotation = angle_to_other_player
-		
-		if node.is_down:
-			_pointer.modulate = Color.DIM_GRAY
-		else:
-			_pointer.modulate = Color.WHITE
-		
-		# Position the character icon
-		_pointer_icon.texture = _pointer_node_to_icon[node]
-		_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))
-	
-	while used_pointers < len(_pointers):
-		_pointers[used_pointers].hide()
-		_pointer_icons[used_pointers].hide()
-		used_pointers += 1
+		while used_pointers < len(_pointers):
+			_pointers[used_pointers].hide()
+			_pointer_icons[used_pointers].hide()
+			used_pointers += 1
 
 
 ## Add a node for which the UI will display a pointer to when it goes offscreen.
 func add_node_to_point_to(node: Node2D, texture: Texture2D) -> void:
+	# Create pointer and pointer icons.
+	var pointer: TextureRect = load(_pointer_scene).instantiate()
+	var pointer_icon: TextureRect = load(_pointer_icon_scene).instantiate()
+	add_child(pointer, true)
+	add_child(pointer_icon, true)
+	move_child(pointer, 0)
+	move_child(pointer_icon, 0)
+	_pointers.append(pointer)
+	_pointer_icons.append(pointer_icon)
+	
 	_pointer_node_to_icon[node] = texture
+	node.tree_exiting.connect(func():
+		_pointer_node_to_icon.erase(node)
+	)
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:

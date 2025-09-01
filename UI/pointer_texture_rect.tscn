@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf6beped11rlw"]
+
+[ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="1_6151l"]
+
+[node name="PointerTextureRect" type="TextureRect"]
+visible = false
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 103.0
+offset_bottom = 146.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("1_6151l")
+expand_mode = 1
