@@ -26,29 +26,11 @@ var _time_since_last_try:float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_original_base_scale = base.scale
-	reset_cracks()
+	_reset_cracks()
 
-# TESTING: _process IS BEING USED FOR TESTING ONLY. NOT NEEDED IN BUILD.
-func _process(delta:float) -> void:
-	_time_since_last_try += 1 * delta
-	if _time_since_last_try > 1:
-		var random_num = randf()
-		if not _has_fallen and random_num > 0.95:
-			_has_fallen = true
-			initiate_falling()
-			await get_tree().create_timer(time_to_crack + fall_time + 5).timeout
-			rise()
-			_has_fallen = false
-		_time_since_last_try = 0
-		
-
-# Use to start the cracking and falling visual on its own
+## Call to begin the process for cracking, falling, and returning this map piece.
 func initiate_falling() -> void:
-	show_cracks()
-	await get_tree().create_timer(time_to_crack).timeout
-	fall()
-	
-func show_cracks() -> void:
+	_has_fallen = true
 	# How long between cracks
 	var crack_interval:float = time_to_crack/float(total_crack_num)
 	for i in total_crack_num:
@@ -57,9 +39,11 @@ func show_cracks() -> void:
 		# Scale is the reciprocal, because cracks is a child of clip_mask
 		# We don't want cracks to scale with clip_mask
 		cracks.scale = Vector2(1.0/scale_size, 1.0/scale_size)
-		await get_tree().create_timer(crack_interval).timeout
+		await get_tree().create_timer(crack_interval, false).timeout
+	_fall()
 
-func fall() -> void:
+## Animate and remove this piece from the map.
+func _fall() -> void:
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
@@ -68,9 +52,13 @@ func fall() -> void:
 	tween.tween_property(base, "modulate", Color.html("241a13"), fall_time)
 	for child in triangles.get_children():
 		child.scale = Vector2.ZERO
+	await get_tree().create_timer(time_to_crack + fall_time + 5, false).timeout
+	_rise()
 
-func rise() -> void:
-	reset_cracks()
+## Animate and return this piece to the map.
+func _rise() -> void:
+	_reset_cracks()
+	_has_fallen = false
 	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
@@ -78,11 +66,11 @@ func rise() -> void:
 	tween.set_parallel()
 	tween.tween_property(base, "scale", _original_base_scale, rise_time)
 	tween.tween_property(base, "modulate", Color.WHITE, rise_time)
-	await get_tree().create_timer(rise_time).timeout
+	await get_tree().create_timer(rise_time, false).timeout
 	for child in triangles.get_children():
 		child.scale = Vector2.ONE
 
 # Hide cracks again
-func reset_cracks() -> void:
+func _reset_cracks() -> void:
 	clip_mask.scale = Vector2.ZERO
 	cracks.scale = Vector2.ONE
