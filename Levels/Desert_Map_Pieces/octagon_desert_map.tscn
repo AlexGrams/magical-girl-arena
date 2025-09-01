@@ -50,7 +50,6 @@ z_index = -2
 [node name="Triangle_S" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(0, 1892)
 rotation = -3.14159
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_ul6p4")
 offset = Vector2(0, -947)
 flip_h = true
@@ -58,14 +57,12 @@ flip_h = true
 [node name="Triangle_SW_Small" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(-1336.43, 1336.43)
 rotation = -3.14159
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Triangle_W" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(-1890, -0.00012207)
 rotation = -1.5708
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_ul6p4")
 offset = Vector2(0, -945)
 flip_h = true
@@ -73,27 +70,23 @@ flip_h = true
 [node name="Triangle_NW_Small" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(-1336.43, -1336.43)
 rotation = -1.5708
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Triangle_N" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(0.000244141, -1890)
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_ul6p4")
 offset = Vector2(0, -945)
 flip_h = true
 
 [node name="Triangle_NE_Small" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(1336.43, -1336.43)
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Triangle_E" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(1890, -0.00012207)
 rotation = 1.5708
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_ul6p4")
 offset = Vector2(-0.00012207, -945)
 flip_h = true
@@ -101,6 +94,5 @@ flip_h = true
 [node name="Triangle_SE_Small" type="Sprite2D" parent="Base/Triangles"]
 position = Vector2(1336.43, 1336.43)
 rotation = 1.5708
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_emnor")
 flip_h = true

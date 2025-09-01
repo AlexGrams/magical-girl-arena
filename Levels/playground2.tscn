@@ -27,7 +27,7 @@
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="32_2n8q1"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="48_5852u"]
-[ext_resource type="PackedScene" uid="uid://bn4b70hxg5xd5" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
+[ext_resource type="PackedScene" uid="uid://cxfh0tkiqm2gs" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
 
 [sub_resource type="Resource" id="Resource_hea4i"]
 script = ExtResource("2_rbx1x")
@@ -516,77 +516,77 @@ color = Color(0.141176, 0.101961, 0.0745098, 1)
 position = Vector2(1051, 1832)
 
 [node name="Octagon_DesertMap2" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(2946, 1832)
+position = Vector2(2938.53, 1832)
 hidden_type = 8
 
 [node name="Octagon_DesertMap3" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(-843, 1832)
+position = Vector2(-836.73, 1832)
 hidden_type = 6
 
 [node name="Octagon_DesertMap4" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(-843, -63)
+position = Vector2(-841, -52)
 hidden_type = 2
 
 [node name="Octagon_DesertMap5" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(1072, -63)
+position = Vector2(1045, -50.62)
 hidden_type = 5
 
 [node name="Octagon_DesertMap6" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(2939, -63)
+position = Vector2(2922.78, -50)
 hidden_type = 1
 
 [node name="Octagon_DesertMap7" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(2939, 3736)
+position = Vector2(2932.16, 3714.54)
 hidden_type = 3
 
 [node name="Octagon_DesertMap8" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(1045, 3736)
+position = Vector2(1045, 3715.9)
 hidden_type = 7
 
 [node name="Octagon_DesertMap9" parent="." instance=ExtResource("26_50c1r")]
-position = Vector2(-860, 3736)
+position = Vector2(-840, 3718)
 hidden_type = 4
 
 [node name="Square_DesertMap" parent="." instance=ExtResource("27_loxqj")]
-position = Vector2(113, 884)
+position = Vector2(108, 889)
 
 [node name="Square_DesertMap2" parent="." instance=ExtResource("27_loxqj")]
-position = Vector2(1994, 884)
+position = Vector2(1994.95, 887.9)
 
 [node name="Square_DesertMap3" parent="." instance=ExtResource("27_loxqj")]
-position = Vector2(1994, 2783)
+position = Vector2(1988, 2771)
 
 [node name="Square_DesertMap4" parent="." instance=ExtResource("27_loxqj")]
-position = Vector2(102, 2783)
+position = Vector2(107, 2776)
 
 [node name="Diamond_DesertMap" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(119, -863)
+position = Vector2(107.19, -863)
 
 [node name="Diamond_DesertMap2" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(2017, -863)
+position = Vector2(1988.06, -864.24)
 
 [node name="Diamond_DesertMap3" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(3751, 867)
+position = Vector2(3737.77, 880.615)
 rotation = 1.5708
 
 [node name="Diamond_DesertMap4" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(3751, 2791)
+position = Vector2(3742.27, 2778.63)
 rotation = 1.5708
 
 [node name="Diamond_DesertMap5" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(1990, 4564)
+position = Vector2(1990, 4520.63)
 rotation = 3.14159
 
 [node name="Diamond_DesertMap6" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(85, 4564)
+position = Vector2(103.325, 4524.98)
 rotation = 3.14159
 
 [node name="Diamond_DesertMap7" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(-1665, 2777)
+position = Vector2(-1644.8, 2771.28)
 rotation = -1.5708
 
 [node name="Diamond_DesertMap8" parent="." instance=ExtResource("19_yf7s2")]
-position = Vector2(-1660, 894)
+position = Vector2(-1647, 886.35)
 rotation = -1.5708
 
 [node name="PointLight2D" type="PointLight2D" parent="." node_paths=PackedStringArray("boss_enemy_spawner")]
