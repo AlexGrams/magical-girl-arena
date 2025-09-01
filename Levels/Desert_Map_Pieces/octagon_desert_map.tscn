@@ -1,0 +1,131 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhpv3m2wsop5y"]
+
+[ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.gd" id="1_pp61m"]
+[ext_resource type="Texture2D" uid="uid://bwil4iuj0dlp4" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Shape.png" id="2_vft7v"]
+[ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="3_ul6p4"]
+[ext_resource type="Texture2D" uid="uid://cke1a48ync1ky" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_TriangleAbyss.png" id="4_emnor"]
+[ext_resource type="Texture2D" uid="uid://d1ajwa60jk81l" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Cracks.png" id="4_hcd15"]
+
+[node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("tri_n", "tri_ne", "tri_e", "tri_se", "tri_s", "tri_sw", "tri_w", "tri_nw", "tri_sw_small", "tri_se_small", "tri_nw_small", "tri_ne_small", "clip_mask", "cracks", "base", "triangles")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_pp61m")
+tri_n = NodePath("Base/Triangles/Triangle_N")
+tri_ne = NodePath("Base/Triangles/Triangle_NE")
+tri_e = NodePath("Base/Triangles/Triangle_E")
+tri_se = NodePath("Base/Triangles/Triangle_SE")
+tri_s = NodePath("Base/Triangles/Triangle_S")
+tri_sw = NodePath("Base/Triangles/Triangle_SW")
+tri_w = NodePath("Base/Triangles/Triangle_W")
+tri_nw = NodePath("Base/Triangles/Triangle_NW")
+tri_sw_small = NodePath("Base/Triangles/Triangle_SW_Small")
+tri_se_small = NodePath("Base/Triangles/Triangle_SE_Small")
+tri_nw_small = NodePath("Base/Triangles/Triangle_NW_Small")
+tri_ne_small = NodePath("Base/Triangles/Triangle_NE_Small")
+time_to_crack = 1.5
+total_crack_num = 4
+fall_time = 1.0
+rise_time = 1.0
+clip_mask = NodePath("Base/Clip")
+cracks = NodePath("Base/Clip/Cracks")
+base = NodePath("Base")
+triangles = NodePath("Base/Triangles")
+
+[node name="Abyss" type="Sprite2D" parent="."]
+self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
+texture = ExtResource("2_vft7v")
+
+[node name="Base" type="Sprite2D" parent="."]
+self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
+texture = ExtResource("2_vft7v")
+
+[node name="Clip" type="Sprite2D" parent="Base"]
+clip_children = 1
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_vft7v")
+
+[node name="Cracks" type="Sprite2D" parent="Base/Clip"]
+texture = ExtResource("4_hcd15")
+
+[node name="Triangles" type="Node2D" parent="Base"]
+
+[node name="Triangle_S" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(0, 1892)
+rotation = -3.14159
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0, -947)
+flip_h = true
+
+[node name="Triangle_SW" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-1336.43, 1336.43)
+rotation = -2.35619
+texture = ExtResource("3_ul6p4")
+offset = Vector2(-0.000488281, -945)
+flip_h = true
+
+[node name="Triangle_SW_Small" type="Sprite2D" parent="Base/Triangles"]
+visible = false
+position = Vector2(-1336.43, 1336.43)
+rotation = -3.14159
+texture = ExtResource("4_emnor")
+flip_h = true
+
+[node name="Triangle_W" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-1890, -0.00012207)
+rotation = -1.5708
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0, -945)
+flip_h = true
+
+[node name="Triangle_NW" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-1336.43, -1336.43)
+rotation = -0.785398
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0.00012207, -945)
+flip_h = true
+
+[node name="Triangle_NW_Small" type="Sprite2D" parent="Base/Triangles"]
+visible = false
+position = Vector2(-1336.43, -1336.43)
+rotation = -1.5708
+texture = ExtResource("4_emnor")
+flip_h = true
+
+[node name="Triangle_N" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(0.000244141, -1890)
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0, -945)
+flip_h = true
+
+[node name="Triangle_NE" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(1336.43, -1336.43)
+rotation = 0.785398
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0.000488281, -945)
+flip_h = true
+
+[node name="Triangle_NE_Small" type="Sprite2D" parent="Base/Triangles"]
+visible = false
+position = Vector2(1336.43, -1336.43)
+texture = ExtResource("4_emnor")
+flip_h = true
+
+[node name="Triangle_E" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(1890, -0.00012207)
+rotation = 1.5708
+texture = ExtResource("3_ul6p4")
+offset = Vector2(-0.00012207, -945)
+flip_h = true
+
+[node name="Triangle_SE" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(1336.43, 1336.43)
+rotation = 2.35619
+texture = ExtResource("3_ul6p4")
+offset = Vector2(0.00012207, -945.001)
+flip_h = true
+
+[node name="Triangle_SE_Small" type="Sprite2D" parent="Base/Triangles"]
+visible = false
+position = Vector2(1336.43, 1336.43)
+rotation = 1.5708
+texture = ExtResource("4_emnor")
+flip_h = true

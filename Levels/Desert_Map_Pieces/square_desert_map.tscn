@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://ik0b55wb1tvq"]
+
+[ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/desert_map_falling_piece.gd" id="1_io1ub"]
+[ext_resource type="Texture2D" uid="uid://di6sbwyascpf8" path="res://Sprites/Map/Desert/Map_Pieces/Square_Shape.png" id="2_knfhr"]
+[ext_resource type="Texture2D" uid="uid://doae4ruvdbvmc" path="res://Sprites/Map/Desert/Map_Pieces/Square_Cracks.png" id="3_1ppf6"]
+[ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="4_yhw1i"]
+
+[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "triangles")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_io1ub")
+time_to_crack = 1.5
+total_crack_num = 4
+fall_time = 1.0
+rise_time = 1.0
+clip_mask = NodePath("Base/Clip")
+cracks = NodePath("Base/Clip/Cracks")
+base = NodePath("Base")
+triangles = NodePath("Base/Triangles")
+
+[node name="Abyss" type="Sprite2D" parent="."]
+self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
+texture = ExtResource("2_knfhr")
+
+[node name="Base" type="Sprite2D" parent="."]
+self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
+texture = ExtResource("2_knfhr")
+
+[node name="Clip" type="Sprite2D" parent="Base"]
+clip_children = 1
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_knfhr")
+
+[node name="Cracks" type="Sprite2D" parent="Base/Clip"]
+texture = ExtResource("3_1ppf6")
+
+[node name="Triangles" type="Node2D" parent="Base"]
+
+[node name="Triangle_1" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-555, 555)
+rotation = -2.35619
+texture = ExtResource("4_yhw1i")
+offset = Vector2(0, -945)
+
+[node name="Triangle_2" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(555, 555)
+rotation = 2.35619
+texture = ExtResource("4_yhw1i")
+offset = Vector2(0, -945)
+
+[node name="Triangle_3" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(555, -555)
+rotation = 0.785398
+texture = ExtResource("4_yhw1i")
+offset = Vector2(0, -945)
+
+[node name="Triangle_4" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-555, -555)
+rotation = -0.785398
+texture = ExtResource("4_yhw1i")
+offset = Vector2(0, -945)

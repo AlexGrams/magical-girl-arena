@@ -2,31 +2,24 @@
 
 [ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/desert_map_falling_piece.gd" id="1_vq07k"]
 [ext_resource type="Texture2D" uid="uid://btrw6euj5cojh" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_Cracks.png" id="2_0td5v"]
-[ext_resource type="Texture2D" uid="uid://cke1a48ync1ky" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_TriangleAbyss.png" id="4_3syqb"]
+[ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="4_k66p4"]
 [ext_resource type="Texture2D" uid="uid://ds0wkb85e86er" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_Shape.png" id="4_nw0dq"]
 
-[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base")]
+[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "triangles")]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_vq07k")
 time_to_crack = 1.5
 total_crack_num = 4
 fall_time = 1.0
+rise_time = 1.0
 clip_mask = NodePath("Base/Clip")
 cracks = NodePath("Base/Clip/Cracks")
 base = NodePath("Base")
+triangles = NodePath("Base/Triangles")
 
 [node name="Abyss" type="Sprite2D" parent="."]
 self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
 texture = ExtResource("4_nw0dq")
-
-[node name="Triangle_1" type="Sprite2D" parent="Abyss"]
-position = Vector2(-554, 277)
-texture = ExtResource("4_3syqb")
-flip_h = true
-
-[node name="Triangle_2" type="Sprite2D" parent="Abyss"]
-position = Vector2(554, 277)
-texture = ExtResource("4_3syqb")
 
 [node name="Base" type="Sprite2D" parent="."]
 self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
@@ -39,3 +32,17 @@ texture = ExtResource("4_nw0dq")
 
 [node name="Cracks" type="Sprite2D" parent="Base/Clip"]
 texture = ExtResource("2_0td5v")
+
+[node name="Triangles" type="Node2D" parent="Base"]
+
+[node name="Triangle_1" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(-554, 277)
+rotation = -2.35619
+texture = ExtResource("4_k66p4")
+offset = Vector2(0, -945)
+
+[node name="Triangle_2" type="Sprite2D" parent="Base/Triangles"]
+position = Vector2(554, 277)
+rotation = 2.35619
+texture = ExtResource("4_k66p4")
+offset = Vector2(0, -945)
