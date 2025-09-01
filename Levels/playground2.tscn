@@ -1,6 +1,6 @@
 [gd_scene load_steps=74 format=3 uid="uid://yj2fdnxjt1d2"]
 
-[ext_resource type="Script" path="res://Levels/playground.gd" id="1_imc2f"]
+[ext_resource type="Script" path="res://Levels/playground_desert.gd" id="1_nupuk"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
 [ext_resource type="PackedScene" uid="uid://dqw82ihqw3hlq" path="res://Enemies/enemy_white-dwarf.tscn" id="3_0p75o"]
 [ext_resource type="PackedScene" uid="uid://be2cldfe4eb6y" path="res://Enemies/enemy_brown-dwarf.tscn" id="4_ayi0w"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://byntc2n136ytr" path="res://Enemies/enemy_corrupted_goth.tscn" id="14_4abyf"]
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="15_pci6o"]
 [ext_resource type="PackedScene" uid="uid://bc56c13oalmc8" path="res://Enemies/enemy_boss_andromeda.tscn" id="16_w5lva"]
-[ext_resource type="PackedScene" uid="uid://dcm01xbycjlb2" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
+[ext_resource type="PackedScene" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
 [ext_resource type="PackedScene" uid="uid://dfwiw6uvxq585" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.tscn" id="19_yf7s2"]
 [ext_resource type="PackedScene" uid="uid://dhpv3m2wsop5y" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.tscn" id="26_50c1r"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="26_fi80v"]
@@ -485,8 +485,13 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
 size = Vector2(0.0854167, 20)
 
-[node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "bullet_spawner", "point_light")]
-script = ExtResource("1_imc2f")
+[node name="Playground" type="Node2D" node_paths=PackedStringArray("_pieces_outer_diamonds", "_pieces_squares", "_pieces_corners", "_pieces_sides", "_pieces_center", "regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "bullet_spawner", "point_light")]
+script = ExtResource("1_nupuk")
+_pieces_outer_diamonds = [NodePath("Diamond_DesertMap"), NodePath("Diamond_DesertMap2"), NodePath("Diamond_DesertMap3"), NodePath("Diamond_DesertMap4"), NodePath("Diamond_DesertMap5"), NodePath("Diamond_DesertMap6"), NodePath("Diamond_DesertMap7"), NodePath("Diamond_DesertMap8")]
+_pieces_squares = [NodePath("Square_DesertMap"), NodePath("Square_DesertMap2"), NodePath("Square_DesertMap3"), NodePath("Square_DesertMap4")]
+_pieces_corners = [NodePath("Octagon_DesertMap4"), NodePath("Octagon_DesertMap6"), NodePath("Octagon_DesertMap7"), NodePath("Octagon_DesertMap9")]
+_pieces_sides = [NodePath("Octagon_DesertMap3"), NodePath("Octagon_DesertMap5"), NodePath("Octagon_DesertMap2"), NodePath("Octagon_DesertMap8")]
+_pieces_center = [NodePath("Octagon_DesertMap")]
 spawn_events = Array[ExtResource("2_rbx1x")]([SubResource("Resource_hea4i"), SubResource("Resource_cecx1"), SubResource("Resource_umgxi"), SubResource("Resource_7nwkt"), SubResource("Resource_cdwm2"), SubResource("Resource_2wc4c"), SubResource("Resource_m2ago"), SubResource("Resource_qlxwo"), SubResource("Resource_k0nve"), SubResource("Resource_w70e6"), SubResource("Resource_fl7sj"), SubResource("Resource_o2m7c"), SubResource("Resource_jaqg3"), SubResource("Resource_uev5n"), SubResource("Resource_vldl0"), SubResource("Resource_6aw3t"), SubResource("Resource_mfuhu"), SubResource("Resource_78ycx"), SubResource("Resource_m52uj"), SubResource("Resource_adt63"), SubResource("Resource_0x4hh"), SubResource("Resource_x61u4"), SubResource("Resource_rmv4j"), SubResource("Resource_hl8mk"), SubResource("Resource_6knml"), SubResource("Resource_8m1bh"), SubResource("Resource_l370t"), SubResource("Resource_urtt0"), SubResource("Resource_kd2aa"), SubResource("Resource_e3av4"), SubResource("Resource_kccnh"), SubResource("Resource_ewkyv"), SubResource("Resource_6jgps"), SubResource("Resource_gru2f"), SubResource("Resource_e6ft2"), SubResource("Resource_xg45h"), SubResource("Resource_g68ak"), SubResource("Resource_omxcd"), SubResource("Resource_r1kj5"), SubResource("Resource_4307f")])
 corrupted_enemy_spawn_time_fraction = 0.4
 corrupted_enemy_choices = {
