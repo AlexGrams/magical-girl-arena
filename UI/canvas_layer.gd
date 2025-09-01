@@ -42,8 +42,8 @@ var _artifact_textures: Array[TextureRect] = []
 var _pointers: Array[TextureRect] = []
 ## Guttered character icons used with the player pointers.
 var _pointer_icons: Array[TextureRect] = []
-## Maps each other player's multiplayer ID to their character's icon texture. Used for pointers.
-var _pointer_player_id_to_icon: Dictionary = {}
+## Maps each Node2D that has a pointer to the Texture2D icon that should be displayed for that Node2D.
+var _pointer_node_to_icon: Dictionary = {}
 var _spectator_icons: Array[TextureRect] = []
 ## Maps Powerup name to which index its UI components are in _powerup_level_text
 ## and _powerup_textures.
@@ -58,9 +58,26 @@ var _retry_indicator_index = {}
 func _ready() -> void:
 	_boss_health_bar.hide()
 	
+	# Pointer setup
 	for pointer in _pointer_parent.get_children():
 		_pointers.append(pointer)
 	_pointer_icons.assign(_pointer_icon_parent.get_children())
+	
+	for id: int in GameState.player_characters:
+		var node: Node2D = GameState.player_characters[id]
+		if (
+			id == multiplayer.get_unique_id()
+			or node == null
+		):
+			continue
+		
+		# Load each player's icon
+		add_node_to_point_to(node, load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid))
+	# Load icons for players that could be instantiated in the future.
+	GameState.player_characters_added.connect(func(id: int, player_character: PlayerCharacterBody2D):
+		if id != multiplayer.get_unique_id():
+			add_node_to_point_to(player_character, load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid))
+	)
 	
 	_spectator_icons.assign(_spectator_icon_parent.get_children())
 	_spectator_container.hide()
@@ -112,19 +129,12 @@ func _process(_delta: float) -> void:
 	
 	# Update pointers that indicate the direction of players not on the screen.
 	var used_pointers: int = 0
-	for id: int in GameState.player_characters:
-		var node: Node2D = GameState.player_characters[id]
+	for node: Node2D in _pointer_node_to_icon:
 		if (
-			id == multiplayer.get_unique_id() or 
 			node == null or 
-			GameState.get_local_player() == null or 
 			node.find_child("VisibleOnScreenNotifier2D").is_on_screen()
 		):
 			continue
-		
-		# Load each player's icon
-		if id not in _pointer_player_id_to_icon:
-			_pointer_player_id_to_icon[id] = load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid)
 		
 		var _pointer = _pointers[used_pointers]
 		var _pointer_icon = _pointer_icons[used_pointers]
@@ -163,13 +173,18 @@ func _process(_delta: float) -> void:
 			_pointer.modulate = Color.WHITE
 		
 		# Position the character icon
-		_pointer_icon.texture = _pointer_player_id_to_icon[id] 
+		_pointer_icon.texture = _pointer_node_to_icon[node]
 		_pointer_icon.set_position(_pointer.position + (Vector2.from_angle(angle_to_other_player) * -60.0))
 	
 	while used_pointers < len(_pointers):
 		_pointers[used_pointers].hide()
 		_pointer_icons[used_pointers].hide()
 		used_pointers += 1
+
+
+## Add a node for which the UI will display a pointer to when it goes offscreen.
+func add_node_to_point_to(node: Node2D, texture: Texture2D) -> void:
+	_pointer_node_to_icon[node] = texture
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:

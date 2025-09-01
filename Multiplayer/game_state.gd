@@ -96,6 +96,8 @@ var _current_playground: String = ""
 signal player_list_changed()
 # Called when the host leaves the lobby.
 signal lobby_closed()
+# Emitted when a new PlayerCharacterBody2D is added to player_characters
+signal player_characters_added(id: int, player_character: PlayerCharacterBody2D)
 # Emitted when all players are down
 signal game_over(has_won_game: bool)
 
@@ -441,6 +443,8 @@ func add_player_character(player_id: int, player_character: CharacterBody2D) -> 
 	player_character.tree_exiting.connect(func():
 		connected_players -= 1
 	)
+	
+	player_characters_added.emit(player_id, player_character)
 
 
 # Notifies this client that the lobby closed and disconnects the client.
