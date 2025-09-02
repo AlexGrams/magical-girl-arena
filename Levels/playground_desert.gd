@@ -13,6 +13,8 @@ extends Playground
 var _fall_timer: float = 0.0
 var _pieces_phase_1: Array[DesertMapPiece] = []
 var _pieces_phase_2: Array[DesertMapPiece] = []
+## What part of the phase 3 piece removal is happening right now.
+var _phase_3_index: int = 0
 
 
 func _ready() -> void:
@@ -57,9 +59,24 @@ func _process(delta: float) -> void:
 				_pieces_phase_2[i].initiate_falling()
 				_pieces_phase_2[i].returned.connect(_append_to_pieces_phase_2)
 				_pieces_phase_2.remove_at(i)
-		else:
+		elif _phase_3_index < 4:
 			# 3:00 - 0:00: Every piece but the center
-			pass
+			var _pieces_to_remove: Array[DesertMapPiece] = []
+			match _phase_3_index:
+				0:
+					_pieces_to_remove = _pieces_outer_diamonds
+				1:
+					_pieces_to_remove = _pieces_squares
+				2:
+					_pieces_to_remove = _pieces_corners
+				3:
+					_pieces_to_remove = _pieces_sides
+				_:
+					push_error("Desert map phase out of bounds!")
+			_phase_3_index += 1
+			
+			for piece: DesertMapPiece in _pieces_to_remove:
+				piece.initiate_falling(true)
 		
 		_fall_timer = 0
 

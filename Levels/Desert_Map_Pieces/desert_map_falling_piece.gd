@@ -19,6 +19,8 @@ class_name DesertMapPiece
 @export var triangles:Node2D
 var _original_base_scale:Vector2
 var _has_fallen:bool = false
+## True if this piece will not come back after it has fallen.
+var _permanent:bool = false
 
 ## Emitted once this piece has risen back to its starting position.
 signal returned(piece: DesertMapPiece)
@@ -30,7 +32,12 @@ func _ready() -> void:
 	_reset_cracks()
 
 ## Call to begin the process for cracking, falling, and returning this map piece.
-func initiate_falling() -> void:
+func initiate_falling(permanent: bool = false) -> void:
+	if permanent:
+		_permanent = permanent
+	if _has_fallen:
+		return
+	
 	_has_fallen = true
 	# How long between cracks
 	var crack_interval:float = time_to_crack/float(total_crack_num)
@@ -54,7 +61,10 @@ func _fall() -> void:
 	for child in triangles.get_children():
 		child.scale = Vector2.ZERO
 	await get_tree().create_timer(time_to_crack + fall_time + 5, false).timeout
-	_rise()
+	
+	# Don't come back if this piece should be removed permanently.
+	if not _permanent:
+		_rise()
 
 ## Animate and return this piece to the map.
 func _rise() -> void:
