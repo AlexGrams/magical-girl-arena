@@ -1,6 +1,9 @@
 extends Node2D
 class_name DesertMapPiece
 
+## The place where players who are on a falling map piece are teleported to.
+const MAP_CENTER: Vector2 = Vector2(1020, 2370)
+
 ## How long it takes for the cracks to fully appear
 @export var time_to_crack:float
 ## How many times it cracks. Greater increments = smaller and smoother cracking
@@ -59,6 +62,15 @@ func initiate_falling(permanent: bool = false) -> void:
 func _fall() -> void:
 	_collider.disabled = false
 	
+	# If the local player is touching this piece, instakill them and teleport them to the 
+	# center of the map.
+	for area: Area2D in _area.get_overlapping_areas():
+		var other: Node = area.get_parent()
+		if other != null and other == GameState.get_local_player():
+			other.kill()
+			other.teleport(MAP_CENTER)
+	
+	# Animation
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
