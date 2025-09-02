@@ -14,7 +14,7 @@ var _fall_timer: float = 0.0
 var _pieces_phase_1: Array[DesertMapPiece] = []
 var _pieces_phase_2: Array[DesertMapPiece] = []
 ## What part of the phase 3 piece removal is happening right now.
-var _phase_3_index: int = 0
+var _phase_3_counter: int = 0
 
 
 func _ready() -> void:
@@ -59,21 +59,20 @@ func _process(delta: float) -> void:
 				_pieces_phase_2[i].initiate_falling.rpc()
 				_pieces_phase_2[i].returned.connect(_append_to_pieces_phase_2)
 				_pieces_phase_2.remove_at(i)
-		elif _phase_3_index < 4:
+		elif _phase_3_counter < 13:
 			# 3:00 - 0:00: Every piece but the center
+			# Wait multiple counts betweeen each section falling.
 			var _pieces_to_remove: Array[DesertMapPiece] = []
-			match _phase_3_index:
+			match _phase_3_counter:
 				0:
 					_pieces_to_remove = _pieces_outer_diamonds
-				1:
+				4:
 					_pieces_to_remove = _pieces_squares
-				2:
+				8:
 					_pieces_to_remove = _pieces_corners
-				3:
+				12:
 					_pieces_to_remove = _pieces_sides
-				_:
-					push_error("Desert map phase out of bounds!")
-			_phase_3_index += 1
+			_phase_3_counter += 1
 			
 			for piece: DesertMapPiece in _pieces_to_remove:
 				piece.initiate_falling.rpc(true)
