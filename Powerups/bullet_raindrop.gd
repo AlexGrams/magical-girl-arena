@@ -16,6 +16,12 @@ var _final_position: Vector2 = Vector2.ZERO
 var _is_collision_active = false
 
 
+## Raindrop explosion always done critical damage.
+func set_damage(damage: float, _is_crit: bool = false):
+	collider.damage = damage
+	collider.is_crit = true
+
+
 func _ready() -> void:
 	scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
@@ -73,6 +79,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 func _on_area_2d_entered(area: Area2D) -> void:
 	var node: Node2D = area.get_parent()
 	if node != null and node is Enemy:
+		# Enemies take damage on entering the bullet.
+		node.take_damage(collider.damage)
+		
 		# Limit the speed at which enemies are pulled in. 
 		var knockback: Vector2 = (_final_position - node.global_position) / (lifetime - death_timer)
 		if knockback.length_squared() >= _max_sqaured_suck_in_speed:
