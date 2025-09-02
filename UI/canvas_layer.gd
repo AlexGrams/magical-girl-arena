@@ -71,7 +71,7 @@ func _ready() -> void:
 		add_node_to_point_to(node, load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid))
 	# Load icons for players that could be instantiated in the future.
 	GameState.player_characters_added.connect(func(id: int, player_character: PlayerCharacterBody2D):
-		if id != multiplayer.get_unique_id():
+		if multiplayer != null and id != multiplayer.get_unique_id():
 			add_node_to_point_to(player_character, load(Constants.CHARACTER_DATA[GameState.players[id]["character"]].icon_uid))
 	)
 	

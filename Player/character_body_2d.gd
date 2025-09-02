@@ -377,7 +377,7 @@ func _input(event: InputEvent) -> void:
 				GameState.playground.hud_canvas_layer.upgrade_any_screen.toggle_cheat()
 			# Die
 			if event.keycode == KEY_KP_3:
-				take_damage(health)
+				kill()
 
 
 func get_rerolls() -> int:
@@ -540,6 +540,14 @@ func remove_status(status: Status) -> void:
 	var index: int = _statuses.find(status)
 	if index != -1:
 		_statuses.remove_at(index)
+
+
+## Deplete all of this player's health and temp health.
+func kill():
+	var damage: float = health
+	for segment: StatusTempHealth in _temp_health_segments:
+		damage += segment.value
+	take_damage(damage)
 
 
 # The player becomes incapacitated. Their abilities no longer work, and they must wait some
