@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bld0xklw18umg"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_fire_rate.gd" id="1_aoct6"]
+
+[node name="ArtifactFireRate" type="Node"]
+script = ExtResource("1_aoct6")
