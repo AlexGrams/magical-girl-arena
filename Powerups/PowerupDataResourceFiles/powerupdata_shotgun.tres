@@ -9,6 +9,7 @@ script = ExtResource("2_7ar2v")
 is_multiplayer = false
 upgrade_description = "Shoot arrows in a cone towards the nearest enemy"
 upgrade_description_list = Array[String](["Shoot arrows in a cone towards the nearest enemy", "Increase damage", "Shoot 2 additional arrows", "Increase damage", "Increase damage", "Shoot a second volley of arrows"])
+types = Array[int]([1])
 scene = ExtResource("1_r0epx")
 name = "Cupid Arrows"
 sprite = ExtResource("3_0rnpc")
