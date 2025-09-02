@@ -32,6 +32,7 @@ func _ready() -> void:
 	_reset_cracks()
 
 ## Call to begin the process for cracking, falling, and returning this map piece.
+@rpc("authority", "call_local")
 func initiate_falling(permanent: bool = false) -> void:
 	if permanent:
 		_permanent = permanent

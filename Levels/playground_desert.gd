@@ -49,14 +49,14 @@ func _process(delta: float) -> void:
 			# 12:00 - 8:00: Squares and diamonds
 			if len(_pieces_phase_1) > 0:
 				var i: int = randi_range(0, len(_pieces_phase_1) - 1)
-				_pieces_phase_1[i].initiate_falling()
+				_pieces_phase_1[i].initiate_falling.rpc()
 				_pieces_phase_1[i].returned.connect(_append_to_pieces_phase_1)
 				_pieces_phase_1.remove_at(i)
 		elif GameState.time > 3 * 60.0:
 			# 8:00 - 3:00: Any piece
 			if len(_pieces_phase_2) > 0:
 				var i: int = randi_range(0, len(_pieces_phase_2) - 1)
-				_pieces_phase_2[i].initiate_falling()
+				_pieces_phase_2[i].initiate_falling.rpc()
 				_pieces_phase_2[i].returned.connect(_append_to_pieces_phase_2)
 				_pieces_phase_2.remove_at(i)
 		elif _phase_3_index < 4:
@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 			_phase_3_index += 1
 			
 			for piece: DesertMapPiece in _pieces_to_remove:
-				piece.initiate_falling(true)
+				piece.initiate_falling.rpc(true)
 		
 		_fall_timer = 0
 
