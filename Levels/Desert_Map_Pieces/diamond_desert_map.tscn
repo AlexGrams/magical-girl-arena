@@ -49,3 +49,8 @@ position = Vector2(554, 277)
 rotation = 2.35619
 texture = ExtResource("4_k66p4")
 offset = Vector2(0, -945)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-1110, -280, -550, -835, 550, -835, 1110, -280, 0, 832)

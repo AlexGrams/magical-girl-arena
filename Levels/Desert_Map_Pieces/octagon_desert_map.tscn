@@ -96,3 +96,8 @@ position = Vector2(1336.43, 1336.43)
 rotation = 1.5708
 texture = ExtResource("4_emnor")
 flip_h = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-1886, -784, -765, -1894, 765, -1894, 1886, -784, 1886, 784, 784, 1886, -784, 1886, -1886, 784)
