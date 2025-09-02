@@ -17,6 +17,10 @@ class_name DesertMapPiece
 @export var base:Sprite2D
 ## Node that has all of the triangles as children
 @export var triangles:Node2D
+## For detecting player overlaps
+@export var _area:Area2D = null
+## For preventing player movement
+@export var _collider:Node2D = null
 var _original_base_scale:Vector2
 var _has_fallen:bool = false
 ## True if this piece will not come back after it has fallen.
@@ -53,6 +57,8 @@ func initiate_falling(permanent: bool = false) -> void:
 
 ## Animate and remove this piece from the map.
 func _fall() -> void:
+	_collider.disabled = false
+	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_EXPO)
@@ -87,3 +93,4 @@ func _rise() -> void:
 func _reset_cracks() -> void:
 	clip_mask.scale = Vector2.ZERO
 	cracks.scale = Vector2.ONE
+	_collider.disabled = true

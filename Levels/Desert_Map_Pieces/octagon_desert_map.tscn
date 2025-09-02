@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cke1a48ync1ky" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_TriangleAbyss.png" id="4_emnor"]
 [ext_resource type="Texture2D" uid="uid://d1ajwa60jk81l" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Cracks.png" id="4_hcd15"]
 
-[node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("tri_n", "tri_ne", "tri_e", "tri_se", "tri_s", "tri_sw", "tri_w", "tri_nw", "clip_mask", "cracks", "base", "triangles")]
+[node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("tri_n", "tri_ne", "tri_e", "tri_se", "tri_s", "tri_sw", "tri_w", "tri_nw", "clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
 z_index = -1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_pp61m")
@@ -26,6 +26,8 @@ clip_mask = NodePath("Base/Clip")
 cracks = NodePath("Base/Clip/Cracks")
 base = NodePath("Base")
 triangles = NodePath("Base/Triangles")
+_area = NodePath("Area2D")
+_collider = NodePath("StaticBody2D/CollisionPolygon2D")
 
 [node name="Abyss" type="Sprite2D" parent="."]
 self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
@@ -98,6 +100,16 @@ texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-1886, -784, -765, -1894, 765, -1894, 1886, -784, 1886, 784, 784, 1886, -784, 1886, -1886, 784)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1886, -784, -765, -1894, 765, -1894, 1886, -784, 1886, 784, 784, 1886, -784, 1886, -1886, 784)
+disabled = true
