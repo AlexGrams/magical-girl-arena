@@ -142,8 +142,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 @rpc("any_peer", "call_local")
 func level_up(new_level: int, new_damage: float):
 	_damage = new_damage
-	if new_level == 3:
-		make_bigger()
 
 
 ## Grow this Boomerang. Activated when the powerup's functionality is stronger.
