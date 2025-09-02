@@ -76,6 +76,10 @@ func _process(delta: float) -> void:
 			
 			for piece: DesertMapPiece in _pieces_to_remove:
 				piece.initiate_falling.rpc(true)
+		elif GameState.time <= 0.0 and _pieces_squares[0].get_has_fallen():
+			# 0:00: Squares return when the boss spawns.
+			for piece: DesertMapPiece in _pieces_squares:
+				piece.rise.rpc()
 		
 		_fall_timer = 0
 

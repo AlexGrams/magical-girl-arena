@@ -33,6 +33,10 @@ var _permanent:bool = false
 signal returned(piece: DesertMapPiece)
 
 
+func get_has_fallen() -> bool:
+	return _has_fallen
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_original_base_scale = base.scale
@@ -84,10 +88,11 @@ func _fall() -> void:
 	
 	# Don't come back if this piece should be removed permanently.
 	if not _permanent:
-		_rise()
+		rise()
 
 ## Animate and return this piece to the map.
-func _rise() -> void:
+@rpc("authority", "call_local")
+func rise() -> void:
 	_reset_cracks()
 	_has_fallen = false
 	
