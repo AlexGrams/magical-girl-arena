@@ -12,6 +12,8 @@ extends ItemData
 ## 2: Level 3 upgrade
 ## 5: Signature functionality
 @export var upgrade_description_list: Array[String]
+## Collection of tags used to describe this Powerup.
+@export var types: Array[Powerup.Type]
 
 
 func get_upgrade_description(level: int = 0) -> String:

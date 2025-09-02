@@ -8,6 +8,12 @@ extends Node2D
 ## its properties.
 ## TODO: Maybe also change the script name to match capitalization scheme.
 
+## Tags used to describe different Powerups.
+enum Type {
+	NULL,
+	FireRate
+}
+
 ## The highest level that this powerup can be upgraded to.
 const max_level: int = 5
 
@@ -33,6 +39,8 @@ var crit_multiplier: float = 2.0
 var _is_owned_by_player := true
 ## The index of this powerup in the player's array of powerups, if this is owned by a player.
 var _powerup_index: int = -1
+## Collection of tags used to describe this Powerup.
+var _types: Array[Type] = []
 
 # Emitted after increasing this Powerup's level
 signal powerup_level_up(new_level: int, new_damage: float)
