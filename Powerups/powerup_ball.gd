@@ -6,8 +6,6 @@ extends Powerup
 
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
-## Path to the PowerupData resource file for this Powerup.
-@export var _powerup_data_file_path: String = ""
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
 
@@ -18,7 +16,7 @@ func set_crit_chance(new_crit: float) -> void:
 
 
 func _ready() -> void:
-	powerup_name = load(_powerup_data_file_path).name
+	super()
 
 
 func _process(_delta: float) -> void:

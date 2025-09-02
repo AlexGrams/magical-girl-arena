@@ -10,7 +10,7 @@ script = ExtResource("1_f4ceg")
 _bullet_scene_uid = "uid://ci3oql3ckphvh"
 _nearby_collision_area = NodePath("NearbyArea2D")
 damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
-powerup_name = "Bubble Pop"
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres"
 
 [node name="NearbyArea2D" type="Area2D" parent="."]
 collision_layer = 0

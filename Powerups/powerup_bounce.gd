@@ -11,8 +11,6 @@ extends Powerup
 @export var _max_splits: int = 1
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
-## Path to the PowerupData resource file for this Powerup.
-@export var _powerup_data_file_path: String = ""
 
 @onready var _fire_timer: float = _fire_interval
 @onready var _bounces: int = _max_bounces
@@ -22,7 +20,7 @@ var _owner_path: NodePath
 
 
 func _ready() -> void:
-	powerup_name = load(_powerup_data_file_path).name
+	super()
 	_owner_path = get_parent().get_path()
 
 

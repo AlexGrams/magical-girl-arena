@@ -4,8 +4,6 @@ extends Powerup
 
 ## Time in seconds between firing.
 @export var _fire_interval = 3.0
-## Path to the PowerupData resource file for this Powerup.
-@export var _powerup_data_file_path: String = ""
 
 var _fire_timer: float = 0.0
 var _owner: PlayerCharacterBody2D = null
@@ -14,7 +12,7 @@ var _id: int = 0
 
 
 func _ready() -> void:
-	powerup_name = load(_powerup_data_file_path).name
+	super()
 	_owner = get_parent()
 	_id = multiplayer.get_unique_id()
 

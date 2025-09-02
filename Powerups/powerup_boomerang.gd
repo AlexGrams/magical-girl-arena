@@ -32,7 +32,7 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 
 
 func _ready():
-	pass
+	super()
 
 
 func activate_powerup():

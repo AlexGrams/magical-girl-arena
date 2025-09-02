@@ -9,4 +9,4 @@ _bullet_scene = "res://Powerups/bullet_turret.tscn"
 _turret_fire_interval = 0.5
 _turret_lifetime = 6.0
 damage_levels = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
-powerup_name = "Turret"
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_turret.tres"

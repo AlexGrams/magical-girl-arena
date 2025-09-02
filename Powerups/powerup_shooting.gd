@@ -11,6 +11,7 @@ signal picked_up_powerup(sprite)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	bullet_damage = _get_damage_from_curve()
 	crit_chance = 0.25
 	crit_multiplier = 2.0

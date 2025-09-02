@@ -12,7 +12,7 @@ var bullet
 
 
 func _ready() -> void:
-	pass
+	super()
 
 
 func _process(delta: float) -> void:

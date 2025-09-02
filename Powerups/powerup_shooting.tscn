@@ -7,4 +7,4 @@ script = ExtResource("1_a0uoa")
 shoot_interval = 0.5
 damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
 signature_damage = 130.0
-powerup_name = "Marble Slingshot"
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_shooting.tres"

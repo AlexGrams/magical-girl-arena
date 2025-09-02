@@ -140,7 +140,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
 @rpc("any_peer", "call_local")
-func level_up(new_level: int, new_damage: float):
+func level_up(_new_level: int, new_damage: float):
 	_damage = new_damage
 
 

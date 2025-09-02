@@ -6,5 +6,5 @@
 script = ExtResource("1_s3dn3")
 _max_bounces_upgraded = 6
 _bullet_scene = "res://Powerups/bullet_bounce.tscn"
-_powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_bounce.tres"
 damage_levels = Array[float]([25.0, 50.0, 75.0, 100.0, 150.0])
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_bounce.tres"

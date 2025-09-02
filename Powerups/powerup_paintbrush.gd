@@ -5,8 +5,6 @@ extends Powerup
 @export var _fire_interval = 3.0
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
-## Path to the PowerupData resource file for this Powerup.
-@export var _powerup_data_file_path: String = ""
 
 @onready var _fire_timer: float = _fire_interval
 var _owner: PlayerCharacterBody2D = null
@@ -14,7 +12,7 @@ var _has_level_3_upgrade: bool = false
 
 
 func _ready() -> void:
-	powerup_name = load(_powerup_data_file_path).name
+	super()
 	_owner = get_parent()
 
 

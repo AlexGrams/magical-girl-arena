@@ -7,4 +7,3 @@ script = ExtResource("1_sscvp")
 _shoot_interval = 0.5
 _bullet_scene = "res://Powerups/bullet_boss_fire.tscn"
 signature_damage = 73.0
-powerup_name = "Boss Tracking Fire"

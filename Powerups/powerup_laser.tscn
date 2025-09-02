@@ -7,4 +7,4 @@ script = ExtResource("1_oytnp")
 max_range = 750.0
 damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 signature_damage = 5.0
-powerup_name = "Laser"
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres"

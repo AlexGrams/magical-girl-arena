@@ -19,6 +19,8 @@ var _owner: PlayerCharacterBody2D = null
 
 
 func _ready() -> void:
+	super()
+	
 	if not is_multiplayer_authority():
 		set_process(false)
 	

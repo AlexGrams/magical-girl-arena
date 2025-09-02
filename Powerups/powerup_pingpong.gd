@@ -24,7 +24,7 @@ func add_bullet(new_bullet: BulletPingPong) -> void:
 
 
 func _ready():
-	pass
+	super()
 
 
 func activate_powerup():

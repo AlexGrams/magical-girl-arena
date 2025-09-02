@@ -6,5 +6,5 @@
 script = ExtResource("1_l3uqi")
 _fire_interval = 2.0
 _bullet_scene = "res://Powerups/bullet_lightning.tscn"
-_powerup_data_file_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_lightning.tres"
 damage_levels = Array[float]([10.0, 20.0, 30.0, 40.0, 50.0])
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_lightning.tres"

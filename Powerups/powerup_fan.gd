@@ -12,8 +12,6 @@ extends Powerup
 @export var _bullet_scene := ""
 ## The visual for this powerup. Doesn't do anything.
 @export var _fan_visual_scene: String = ""
-## Path to the PowerupData resource file for this Powerup.
-@export var _powerup_data_file_path: String = ""
 @onready var _fire_timer: float = _fire_interval
 ## The last nonzero movement direction input.
 var _direction: Vector2 = Vector2.RIGHT
@@ -22,7 +20,7 @@ var _owning_character: PlayerCharacterBody2D = null
 
 
 func _ready() -> void:
-	powerup_name = load(_powerup_data_file_path).name
+	super()
 	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
 
 

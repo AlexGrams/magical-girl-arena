@@ -30,6 +30,7 @@ func set_ultimate_boost_duration(value: float) -> void:
 
 
 func _ready() -> void:
+	super()
 	_bullet_spawner = GameState.playground.bullet_spawner
 
 

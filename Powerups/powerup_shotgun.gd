@@ -23,6 +23,7 @@ signal picked_up_powerup(sprite)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	bullet_damage = _get_damage_from_curve()
 	_fire_angle_rad_delta = deg_to_rad(_fire_angle / _num_bullets)
 

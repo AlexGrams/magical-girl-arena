@@ -9,4 +9,4 @@ shoot_interval = 0.2
 bullet_scene = "res://Powerups/bullet_trail.tscn"
 damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 signature_damage = 0.61
-powerup_name = "Nature's Path"
+_powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres"

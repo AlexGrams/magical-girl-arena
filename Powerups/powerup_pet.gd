@@ -9,7 +9,7 @@ var pet: BulletPet
 
 
 func _ready():
-	pass
+	super()
 
 
 func activate_powerup():

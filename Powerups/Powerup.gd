@@ -21,9 +21,12 @@ const max_level: int = 5
 @export var damage_levels: Array[float] = [0, 0, 0, 0, 0]
 ## How much damage this Powerup does at max level as a signature Powerup.
 @export var signature_damage: float = 0.0
-## Name used to uniquely identify this Powerup.
-@export var powerup_name := ""
 
+## Path to this Powerup's PowerupData.
+@export var _powerup_data_path: String = ""
+
+## Name used to uniquely identify this Powerup.
+var powerup_name := ""
 ## What level the powerup is at. Values are [1, max_level].
 var current_level: int = 1
 ## True if the owning player has access to this Powerup's signature behavior when it reaches max level.
@@ -35,6 +38,8 @@ var crit_chance: float = 0.0
 ## Base damage is multiplied by this number to get the new damage amount when this powerup crits.
 var crit_multiplier: float = 2.0
 
+## Loaded PowerupData resource file.
+var _powerupdata: PowerupData = null
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true
 ## The index of this powerup in the player's array of powerups, if this is owned by a player.
@@ -65,6 +70,13 @@ func set_crit_chance(new_crit: float) -> void:
 
 func set_crit_multiplier(new_multiplier: float) -> void:
 	crit_multiplier = new_multiplier
+
+
+func _ready() -> void:
+	if _powerup_data_path != "":
+		_powerupdata = load(_powerup_data_path)
+		powerup_name = _powerupdata.name
+		_types = _powerupdata.types
 
 
 # Meant to be overridden

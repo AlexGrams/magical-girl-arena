@@ -10,6 +10,7 @@ var _bullet_spawner: BulletSpawner = null
 
 
 func _ready() -> void:
+	super()
 	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
 
 
