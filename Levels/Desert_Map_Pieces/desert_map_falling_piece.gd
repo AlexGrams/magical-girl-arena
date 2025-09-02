@@ -20,6 +20,10 @@ class_name DesertMapPiece
 var _original_base_scale:Vector2
 var _has_fallen:bool = false
 
+## Emitted once this piece has risen back to its starting position.
+signal returned(piece: DesertMapPiece)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_original_base_scale = base.scale
@@ -66,6 +70,7 @@ func _rise() -> void:
 	await get_tree().create_timer(rise_time, false).timeout
 	for child in triangles.get_children():
 		child.scale = Vector2.ONE
+	returned.emit(self)
 
 # Hide cracks again
 func _reset_cracks() -> void:
