@@ -47,3 +47,8 @@ func boost() -> void:
 func unboost() -> void:
 	if pet != null:
 		pet.unboost()
+
+
+func boost_fire_rate() -> void:
+	if pet != null:
+		pet.boost()

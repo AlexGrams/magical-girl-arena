@@ -121,3 +121,7 @@ func unboost() -> void:
 	_shoot_interval *= 2.0
 	_speed_multiplier /= 1.5
 	_growth_speed_multiplier /= 2.0
+
+
+func boost_fire_rate() -> void:
+	_shoot_interval /= 2.0

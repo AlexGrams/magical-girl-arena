@@ -23,7 +23,7 @@ signal picked_up_powerup(sprite)
 
 
 func _ready() -> void:
-	# TODO: Make these properties read from the PowerupData instead of setting them here.
+	super()
 	bullet_damage = _get_damage_from_curve()
 	if is_signature and current_level >= max_level:
 		_rotation = _max_level_rotation
@@ -102,3 +102,7 @@ func boost() -> void:
 
 func unboost() -> void:
 	shoot_interval *= 2.0
+
+
+func boost_fire_rate() -> void:
+	shoot_interval /= 2.0

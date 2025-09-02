@@ -72,6 +72,11 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 	crit_multiplier = new_multiplier
 
 
+## Returns true if this Powerup is a certain type.
+func has_type(type: Type) -> bool:
+	return _types.has(type)
+
+
 func _ready() -> void:
 	if _powerup_data_path != "":
 		_powerupdata = load(_powerup_data_path)
@@ -107,6 +112,11 @@ func boost() -> void:
 ## Return this Powerup to normal functionality after it has been boosted.
 func unboost() -> void:
 	pass
+
+
+## A boost specific to Fire Rate Powerups.
+func boost_fire_rate() -> void:
+	push_warning("Fire rate boost not implemented for this Powerup!")
 
 
 # Set the multiplayer authority for this powerup

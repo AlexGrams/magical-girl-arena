@@ -95,6 +95,8 @@ signal took_damage(health:int, health_max:int, temp_health: int)
 signal gained_experience(experience: float, level: int)
 ## Called after an Item (either Powerup or Artifact) has been instantiated and added to this player.
 signal upgrade_added()
+## Called after a new Powerup has been instantiated and added to this player.
+signal powerup_added(powerup: Powerup)
 ## Was saved from taking lethal damage because _prevent_death was true.
 signal death_prevented()
 signal died()
@@ -415,6 +417,8 @@ func add_powerup(powerup_data: PowerupData, is_signature: bool = false):
 	
 	if not is_down:
 		powerup.activate_powerup()
+	
+	powerup_added.emit(powerup)
 
 
 # Enable all equipped powerups.
