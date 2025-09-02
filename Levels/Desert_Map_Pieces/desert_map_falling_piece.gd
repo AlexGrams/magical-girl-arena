@@ -37,6 +37,7 @@ signal returned(piece: DesertMapPiece)
 func _ready() -> void:
 	_original_base_scale = base.scale
 	_reset_cracks()
+	_collider.disabled = true
 
 ## Call to begin the process for cracking, falling, and returning this map piece.
 @rpc("authority", "call_local")
@@ -97,12 +98,13 @@ func _rise() -> void:
 	tween.tween_property(base, "scale", _original_base_scale, rise_time)
 	tween.tween_property(base, "modulate", Color.WHITE, rise_time)
 	await get_tree().create_timer(rise_time, false).timeout
+	
 	for child in triangles.get_children():
 		child.scale = Vector2.ONE
+	_collider.disabled = true
 	returned.emit(self)
 
 # Hide cracks again
 func _reset_cracks() -> void:
 	clip_mask.scale = Vector2.ZERO
 	cracks.scale = Vector2.ONE
-	_collider.disabled = true
