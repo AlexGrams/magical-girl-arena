@@ -8,7 +8,8 @@
 script = ExtResource("1_gn607")
 is_multiplayer = true
 upgrade_description = "Ball."
-upgrade_description_list = Array[String](["Ball.", "", "", "", "", ""])
+upgrade_description_list = Array[String](["Ball.", "Increase damage", "Increase damage", "Increase damage", "Increase damage", "Increase damage"])
+types = Array[int]([])
 scene = ExtResource("1_5phu8")
 name = "Ball"
 sprite = ExtResource("3_cy5tj")

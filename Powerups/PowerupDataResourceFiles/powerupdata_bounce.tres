@@ -8,7 +8,7 @@
 script = ExtResource("2_agki6")
 is_multiplayer = false
 upgrade_description = "Shoot a projectile that bounces between enemies."
-upgrade_description_list = Array[String](["Shoot a projectile that bounces between enemies", "Increase damage", "Increase number of bounces", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Shoot a projectile that bounces and splits between enemies", "Increase damage", "Increase number of bounces", "Increase damage", "Increase damage", "Increase damage"])
 types = Array[int]([1])
 scene = ExtResource("1_h5pdf")
 name = "Bounce"
