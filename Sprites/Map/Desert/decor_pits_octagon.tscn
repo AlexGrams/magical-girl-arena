@@ -1,0 +1,216 @@
+[gd_scene load_steps=5 format=3 uid="uid://h64f3l3set4v"]
+
+[ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="1_0e40t"]
+[ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="2_qneep"]
+[ext_resource type="Texture2D" uid="uid://dx46lb6saqxe" path="res://Sprites/Map/Desert/Desert_Sand.png" id="3_c7ae1"]
+[ext_resource type="Texture2D" uid="uid://c21kegj5mf4fi" path="res://Sprites/Map/Desert/Desert_Sand2.png" id="4_g7h65"]
+
+[node name="Decor" type="Node2D"]
+
+[node name="Tufts_1" type="Node2D" parent="."]
+
+[node name="Sprite2D14" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-1114, 660)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-192, 1002)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D16" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(916, 708)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D17" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(798, 1170)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D18" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(342, 328)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D19" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(1540, 90)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D20" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(1302, -690)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D21" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(246, -952)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D22" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(664, -1636)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D23" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-948, -1218)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D24" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-948, -1218)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D25" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-748, -1838)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D26" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-1638, -926)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D27" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-1760, 798)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D28" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-328, 1818)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D29" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(940, 1598)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D30" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-276, 254)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D31" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-1370, -168)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D32" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-350, -628)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D33" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(300, -424)
+texture = ExtResource("1_0e40t")
+
+[node name="Sprite2D34" type="Sprite2D" parent="Tufts_1"]
+position = Vector2(-1792, 264)
+texture = ExtResource("1_0e40t")
+
+[node name="Tufts_2" type="Node2D" parent="."]
+
+[node name="Sprite2D30" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(1646, 886)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D31" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(1810, -526)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D32" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(926, 258)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D33" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(234, 1426)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D34" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-928, 1262)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D35" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-350, 620)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D36" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-1220, -1332)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D37" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-66, -1838)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D38" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(1310, -1274)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D39" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(812, -1088)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D40" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-336, -1324)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D41" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-94, -1460)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D42" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-1392, 906)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D43" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-1030, 76)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D44" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-916, -580)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D45" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-530, -58)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D46" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(580, -292)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D47" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(112, 342)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D48" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(240, 908)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D49" type="Sprite2D" parent="Tufts_2"]
+position = Vector2(-606, 1626)
+texture = ExtResource("2_qneep")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(628, -704)
+texture = ExtResource("3_c7ae1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-1168, 348)
+texture = ExtResource("3_c7ae1")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(204, 1678)
+texture = ExtResource("3_c7ae1")
+flip_h = true
+flip_v = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(968, 1000)
+texture = ExtResource("3_c7ae1")
+flip_v = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(-1440, -508)
+texture = ExtResource("4_g7h65")
+flip_v = true
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(-474, -966)
+texture = ExtResource("4_g7h65")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(196, 26)
+texture = ExtResource("4_g7h65")
+flip_h = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(-780, 966)
+texture = ExtResource("4_g7h65")
+flip_h = true
+flip_v = true

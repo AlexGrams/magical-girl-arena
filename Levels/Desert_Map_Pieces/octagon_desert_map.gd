@@ -13,6 +13,9 @@ enum hide_type {SHOW_ALL, HIDE_NORTH_EAST, HIDE_NORTH_WEST, HIDE_SOUTH_EAST, HID
 		hidden_type = value
 		setup_triangles()
 
+## Contains visual-only map elements such as grass, rocks, etc
+@export var decor_scene:PackedScene
+
 @export_group("Triangles")
 @export var tri_n:Sprite2D
 @export var tri_ne:Sprite2D
@@ -23,10 +26,13 @@ enum hide_type {SHOW_ALL, HIDE_NORTH_EAST, HIDE_NORTH_WEST, HIDE_SOUTH_EAST, HID
 @export var tri_w:Sprite2D
 @export var tri_nw:Sprite2D
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
 	setup_triangles()
+	base.add_child(decor_scene.instantiate())
 	
 
 func setup_triangles():

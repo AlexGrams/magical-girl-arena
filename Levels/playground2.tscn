@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://yj2fdnxjt1d2"]
+[gd_scene load_steps=82 format=3 uid="uid://yj2fdnxjt1d2"]
 
 [ext_resource type="Script" path="res://Levels/playground_desert.gd" id="1_nupuk"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
@@ -17,7 +17,15 @@
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="15_pci6o"]
 [ext_resource type="PackedScene" uid="uid://bc56c13oalmc8" path="res://Enemies/enemy_boss_andromeda.tscn" id="16_w5lva"]
 [ext_resource type="PackedScene" uid="uid://dcm01xbycjlb2" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
+[ext_resource type="PackedScene" uid="uid://nyg4qhq25jmb" path="res://Sprites/Map/Desert/decor_grass_octagon.tscn" id="19_y55mt"]
 [ext_resource type="PackedScene" uid="uid://dfwiw6uvxq585" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.tscn" id="19_yf7s2"]
+[ext_resource type="PackedScene" uid="uid://c3yrusmd38vta" path="res://Sprites/Map/Desert/decor_purple_octagon.tscn" id="20_iavsd"]
+[ext_resource type="PackedScene" uid="uid://bvc6aocjemuvh" path="res://Sprites/Map/Desert/decor_purple_long_octagon.tscn" id="21_udcfo"]
+[ext_resource type="PackedScene" uid="uid://dvrgfe2qfa8o1" path="res://Sprites/Map/Desert/decor_dunes_octagon.tscn" id="22_wcbn1"]
+[ext_resource type="PackedScene" uid="uid://b7nixhj7p80g7" path="res://Sprites/Map/Desert/decor_rocks_octagon.tscn" id="23_orb3d"]
+[ext_resource type="PackedScene" uid="uid://h64f3l3set4v" path="res://Sprites/Map/Desert/decor_pits_octagon.tscn" id="24_ydd72"]
+[ext_resource type="PackedScene" uid="uid://jalpugfeb1qn" path="res://Sprites/Map/Desert/decor_cracks_octagon.tscn" id="25_nvexr"]
+[ext_resource type="PackedScene" uid="uid://oa0151ye0kc5" path="res://Sprites/Map/Desert/decor_pits_light_octagon.tscn" id="26_41vkd"]
 [ext_resource type="PackedScene" uid="uid://dhpv3m2wsop5y" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.tscn" id="26_50c1r"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="26_fi80v"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_13cnm"]
@@ -27,7 +35,7 @@
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="32_2n8q1"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
 [ext_resource type="PackedScene" uid="uid://dt5e62yjm628l" path="res://Levels/LevelPlaceables/wall.tscn" id="48_5852u"]
-[ext_resource type="PackedScene" uid="uid://cxfh0tkiqm2gs" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
+[ext_resource type="PackedScene" uid="uid://bn4b70hxg5xd5" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
 
 [sub_resource type="Resource" id="Resource_hea4i"]
 script = ExtResource("2_rbx1x")
@@ -524,34 +532,42 @@ position = Vector2(1051, 1832)
 [node name="Octagon_DesertMap2" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2938.53, 1832)
 hidden_type = 8
+decor_scene = ExtResource("19_y55mt")
 
 [node name="Octagon_DesertMap3" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-836.73, 1832)
 hidden_type = 6
+decor_scene = ExtResource("20_iavsd")
 
 [node name="Octagon_DesertMap4" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-841, -52)
 hidden_type = 2
+decor_scene = ExtResource("21_udcfo")
 
 [node name="Octagon_DesertMap5" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(1045, -50.62)
 hidden_type = 5
+decor_scene = ExtResource("22_wcbn1")
 
 [node name="Octagon_DesertMap6" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2922.78, -50)
 hidden_type = 1
+decor_scene = ExtResource("23_orb3d")
 
 [node name="Octagon_DesertMap7" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2932.16, 3714.54)
 hidden_type = 3
+decor_scene = ExtResource("24_ydd72")
 
 [node name="Octagon_DesertMap8" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(1045, 3715.9)
 hidden_type = 7
+decor_scene = ExtResource("25_nvexr")
 
 [node name="Octagon_DesertMap9" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-840, 3718)
 hidden_type = 4
+decor_scene = ExtResource("26_41vkd")
 
 [node name="Square_DesertMap" parent="." instance=ExtResource("27_loxqj")]
 position = Vector2(108, 889)
