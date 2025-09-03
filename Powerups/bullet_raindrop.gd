@@ -67,7 +67,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		push_error("Malformed bullet setup data Array.")
 		return
 	
-	speed *= data[0]
+	#speed *= data[0]
 	_max_scale = scale * data[1]
 	_is_owned_by_player = is_owned_by_player
 	

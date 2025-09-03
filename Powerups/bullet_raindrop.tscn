@@ -9,9 +9,9 @@ radius = 195.0
 
 [node name="BulletRaindrop" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 script = ExtResource("1_gj4rb")
-_max_suck_in_speed = 300.0
+_max_suck_in_speed = 450.0
 _vfx_path = "res://Sprites/Map/bubble_explosion.tscn"
-speed = 300.0
+speed = 600.0
 lifetime = 1.5
 destroy_on_hit = false
 collider = NodePath("Area2D")
