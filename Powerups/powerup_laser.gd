@@ -96,6 +96,13 @@ func _activate_signature() -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[get_parent().get_path(), max_range, laser.get_path(), true]
+				[
+					get_parent().get_path(), 
+					max_range, 
+					laser.get_path(), 
+					true,
+					crit_chance,
+					crit_multiplier
+				]
 			]
 		)

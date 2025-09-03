@@ -110,6 +110,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
 		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
 	):
+		push_error("Malformed setup array")
 		return
 	
 	_starting_position = get_node(data[2])
