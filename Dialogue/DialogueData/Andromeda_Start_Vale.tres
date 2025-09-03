@@ -18,7 +18,7 @@ optional_portrait = ExtResource("2_k062r")
 [sub_resource type="Resource" id="Resource_vg6cd"]
 script = ExtResource("1_rssgx")
 speaker = 2
-dialogue = "Do all of the constellations have control over natural elements?"
+dialogue = "Can all the constellations control natural elements?"
 
 [sub_resource type="Resource" id="Resource_uc4xu"]
 script = ExtResource("1_rssgx")

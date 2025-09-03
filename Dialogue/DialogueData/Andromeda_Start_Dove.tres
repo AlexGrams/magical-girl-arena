@@ -12,12 +12,12 @@ dialogue = "It’s kind of spooky here!"
 [sub_resource type="Resource" id="Resource_fspdb"]
 script = ExtResource("1_h0ipb")
 speaker = 3
-dialogue = "There’s hardly any life at all."
+dialogue = "At least it’s pretty straightforward. "
 
 [sub_resource type="Resource" id="Resource_fdjuh"]
 script = ExtResource("1_h0ipb")
 speaker = 3
-dialogue = "At least it’s pretty straightforward. Just dirt and monsters."
+dialogue = "Just dirt and monsters."
 
 [sub_resource type="Resource" id="Resource_wmrp4"]
 script = ExtResource("1_h0ipb")

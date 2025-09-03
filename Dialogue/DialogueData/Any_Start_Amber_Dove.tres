@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_0pe2o"]
 script = ExtResource("1_0kddc")
 speaker = 3
-dialogue = "Wow it’s so nice to meet an experienced magical girl like you!"
+dialogue = "Wow it’s so nice to meet a pro magical girl like you!"
 
 [sub_resource type="Resource" id="Resource_vhf4b"]
 script = ExtResource("1_0kddc")
@@ -36,7 +36,7 @@ dialogue = "You’ve got style, girl!"
 [sub_resource type="Resource" id="Resource_aleel"]
 script = ExtResource("1_0kddc")
 speaker = 3
-dialogue = "Oh wow, thank you so much! That means a lot coming from you!"
+dialogue = "Oh wow, thank you so much!"
 
 [resource]
 script = ExtResource("2_32a0d")
