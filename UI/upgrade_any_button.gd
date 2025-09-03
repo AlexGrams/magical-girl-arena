@@ -10,6 +10,10 @@ var _powerup: PowerupData = null
 signal upgrade_chosen()
 
 
+func get_powerup() -> PowerupData:
+	return _powerup
+
+
 func set_powerup(powerup: PowerupData):
 	_powerup = powerup
 	_texture.texture = powerup.sprite

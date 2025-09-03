@@ -44,11 +44,30 @@ func _ready() -> void:
 		_ready_indicators.append(child)
 
 
-## Set up the upgrade screen configuration.
+## Set up and show the upgrade screen configuration.
 func setup() -> void:
 	_cheat_mode = false
 	_players_selecting_upgrades_window.hide()
 	_upgrades_holder.show()
+	
+	# Disable buttons if the player can't upgrade or select them.
+	var player: PlayerCharacterBody2D = GameState.get_local_player()
+	var max_level_powerups: Array[String] = []
+	var owned_upgradable_powerups: Array[String] = []
+	var max_powerups: bool = len(player.powerups) == PlayerCharacterBody2D.MAX_POWERUPS
+	
+	for powerup: Powerup in player.powerups:
+		if powerup.current_level == powerup.max_level:
+			max_level_powerups.append(powerup.powerup_name)
+		else:
+			owned_upgradable_powerups.append(powerup.powerup_name)
+	
+	for upgrade_button: UpgradeAnyPowerupButton in _upgrade_any_screen_button_container.get_children():
+		if (
+				(max_powerups and upgrade_button.get_powerup().name not in owned_upgradable_powerups)
+				or (upgrade_button.get_powerup().name in max_level_powerups)
+		):
+			upgrade_button.hide()
 	
 	# Set up PlayerReadyIndicator icons
 	for i in range(GameState.connected_players):
