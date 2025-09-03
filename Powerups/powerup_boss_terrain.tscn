@@ -5,4 +5,3 @@
 [node name="PowerupBossTerrain" type="Node2D"]
 script = ExtResource("1_7xpt7")
 _bullet_scene = "res://Powerups/bullet_boss_terrain.tscn"
-powerup_name = "Flame Line"
