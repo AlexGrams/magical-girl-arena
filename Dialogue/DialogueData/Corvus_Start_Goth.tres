@@ -45,4 +45,4 @@ dialogue = "We better make it back in time for my date."
 [resource]
 script = ExtResource("3_nwskn")
 lines = Array[ExtResource("1_2vnqn")]([SubResource("Resource_v7iei"), SubResource("Resource_kda75"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb"), SubResource("Resource_ljsad"), SubResource("Resource_m7ybj"), SubResource("Resource_pgddn")])
-play_conditions = Array[int]([3])
+play_conditions = Array[int]([3, 1])

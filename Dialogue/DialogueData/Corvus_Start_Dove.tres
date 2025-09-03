@@ -28,4 +28,4 @@ dialogue = "Oh. I see the problem now."
 [resource]
 script = ExtResource("2_q7b3b")
 lines = Array[ExtResource("1_hr6d7")]([SubResource("Resource_v7iei"), SubResource("Resource_06cky"), SubResource("Resource_gqeyi"), SubResource("Resource_n74sb")])
-play_conditions = Array[int]([3])
+play_conditions = Array[int]([3, 1])
