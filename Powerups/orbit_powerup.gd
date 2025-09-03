@@ -26,7 +26,7 @@ func add_bullet(bullet: Bullet) -> void:
 
 
 func _ready() -> void:
-	pass
+	super()
 
 
 func activate_powerup():
