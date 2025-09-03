@@ -4,8 +4,8 @@
 
 [node name="PowerupBossSummonAndromeda" type="Node2D"]
 script = ExtResource("1_0rgp3")
-_enemy_scene = "res://Enemies/enemy_white-dwarf.tscn"
-_min_spawn_count = 5
-_max_spawn_count = 5
-_spawn_interval = 5.0
+_enemy_scene = "res://Enemies/enemy_supergiant.tscn"
+_min_spawn_count = 2
+_max_spawn_count = 4
+_spawn_interval = 15.0
 _duration = 99999.0
