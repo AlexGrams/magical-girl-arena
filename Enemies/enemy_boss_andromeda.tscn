@@ -32,7 +32,7 @@ _phase_two_health_fraction = 0.0
 _powerup_paths = Array[String](["res://Powerups/powerup_boss_chain_lines.tscn", "res://Powerups/powerup_boss_revolving.tscn", "res://Powerups/powerup_boss_tracking_fire.tscn", "res://Powerups/powerup_boss_terrain.tscn", "res://Powerups/powerup_boss_scream.tscn", "res://Powerups/powerup_boss_summon_andromeda.tscn"])
 _sprite = NodePath("ConstellationAnimatedSprite")
 _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
-base_health = 50000
+base_health = 75000
 speed = 200.0
 
 [node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_4cru4")]
