@@ -7,5 +7,7 @@ extends Resource
 @export var name: String = ""
 ## Path to the scene to load for this map.
 @export var scene_path: String = ""
+## Name of the GameState variable that has to be true in order to unlock this map, if any.
+@export var required_map_save_variable_name: String = ""
 ## The dialogue play condition specfic to this map.
 @export var map_dialogue_condition: Constants.DialoguePlayCondition = Constants.DialoguePlayCondition.NONE

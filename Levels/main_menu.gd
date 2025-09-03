@@ -52,6 +52,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var map_select_right_button: ButtonHover
 ## Displays the map name.
 @export var map_name_label: OutlineLabel
+## Shows when the selected map is locked.
+@export var map_locked_label: Label
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Contains buttons for selecting a character
@@ -427,6 +429,17 @@ func _on_shop_button_down_from_lobby() -> void:
 @rpc("authority", "call_local")
 func _update_map(map_index: int) -> void:
 	map_name_label.change_text(Constants.MAP_DATA[map_index].name)
+	if (
+			Constants.MAP_DATA[map_index].required_map_save_variable_name == "" 
+			or GameState.get(Constants.MAP_DATA[map_index].required_map_save_variable_name)
+	):
+		start_game_label.self_modulate = Color.WHITE
+		start_game_label.get_child(0).set_interactable(true)
+		map_locked_label.visible = false
+	else:
+		start_game_label.self_modulate = Color.DIM_GRAY
+		start_game_label.get_child(0).set_interactable(false)
+		map_locked_label.visible = true
 
 
 ## RPCs a certain client to update their displayed map.

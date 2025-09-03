@@ -292,6 +292,15 @@ texture = ExtResource("7_1gor3")
 expand_mode = 3
 stretch_mode = 1
 
+[node name="LockedOutlineLabel" parent="MapPreview/MapPreview_Clip" instance=ExtResource("14_my7cq")]
+visible = false
+layout_mode = 1
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 84
+text = "Locked"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="GlowingRing_Border" type="TextureRect" parent="MapPreview"]
 layout_mode = 0
 offset_left = 529.0

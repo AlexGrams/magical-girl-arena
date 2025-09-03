@@ -6,4 +6,5 @@
 script = ExtResource("1_5tkdh")
 name = "Desert"
 scene_path = "res://Levels/playground2.tscn"
+required_map_save_variable_name = "map_complete_garden"
 map_dialogue_condition = 2
