@@ -9,5 +9,5 @@ _controller_bullet_scene = "res://Powerups/bullet_boomerang_controller.tscn"
 _boomerang_bullet_scene = "res://Powerups/bullet_boomerang.tscn"
 _upgraded_fire_interval = 0.2
 damage_levels = Array[float]([35.0, 55.0, 55.0, 75.0, 95.0])
-signature_damage = 29.0
+signature_damage = 95.0
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_boomerang.tres"
