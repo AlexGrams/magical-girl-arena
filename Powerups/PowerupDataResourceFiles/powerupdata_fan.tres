@@ -8,7 +8,7 @@
 script = ExtResource("1_lx4ni")
 is_multiplayer = false
 upgrade_description = "Shoot a gust of wind in front of you, damaging and pushing back enemies."
-upgrade_description_list = Array[String](["Shoot a gust of wind in front of you, damaging and pushing back enemies", "Increase damage", "Add 2 angled gusts of wind", "Increase damage", "Increase damage", "Increase damage"])
+upgrade_description_list = Array[String](["Shoot a gust of wind in front of you, damaging and pushing back enemies", "Increase damage", "Increases area size", "Increase damage", "Increase damage", "Increase damage"])
 types = Array[int]([])
 scene = ExtResource("1_o8v66")
 name = "Fan"
