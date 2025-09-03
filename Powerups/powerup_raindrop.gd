@@ -26,6 +26,10 @@ func _ready() -> void:
 	
 	_bullet_spawner = GameState.playground.bullet_spawner
 	_owner = get_parent()
+	
+	# This powerup cannot crit, but set these variables so the crit charm for it doesn't appear.
+	crit_chance = 1.0
+	crit_multiplier = 1.0
 
 
 func _process(delta: float) -> void:
@@ -48,8 +52,7 @@ func _process(delta: float) -> void:
 			var direction: Vector2 = (target.global_position - global_position).normalized()
 			# bullet speed is increased depending on the owner's speed stat.
 			var speed_boost: float = float(_owner.get_stat_speed() - 1) * 0.2
-			var crit: bool = randf() <= crit_chance
-			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
+			var total_damage: float = _get_damage_from_curve()
 			_bullet_spawner.request_spawn_bullet.rpc_id(
 				1, 
 				[
@@ -57,7 +60,7 @@ func _process(delta: float) -> void:
 					global_position, 
 					direction, 
 					total_damage, 
-					crit,
+					false,
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
@@ -78,7 +81,7 @@ func _process(delta: float) -> void:
 							global_position, 
 							direction, 
 							total_damage, 
-							crit,
+							false,
 							_is_owned_by_player,
 							multiplayer.get_unique_id(),
 							_powerup_index,
