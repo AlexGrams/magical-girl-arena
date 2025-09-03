@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("1_rurv3")
-item_name = "Artifact Reroll"
-item_desc = "Use once to roll 3 new artifacts."
+item_name = "Charm Reroll"
+item_desc = "Use once to roll 3 new charms."
 icon = ExtResource("2_rfx0f")
 disabled_icon = ExtResource("1_0u5o5")
 price = 100
