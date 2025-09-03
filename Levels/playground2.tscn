@@ -499,6 +499,7 @@ corrupted_enemy_choices = {
 "sweet": ExtResource("15_pci6o")
 }
 boss_choices = Array[PackedScene]([ExtResource("16_w5lva")])
+map_win_save_variable_name = "map_complete_desert"
 regular_enemy_spawners = [NodePath("EnemySpawner"), NodePath("EnemySpawner2"), NodePath("EnemySpawner3"), NodePath("EnemySpawner4")]
 corrupted_enemy_spawner = NodePath("TEMP_EnemySpawner5")
 hud_canvas_layer = NodePath("CanvasLayer")

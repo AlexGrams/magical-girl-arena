@@ -37,6 +37,8 @@ var powerup_rerolls: int = 0
 var artifact_rerolls: int = 0
 ## Has this player beaten the Garden map?
 var map_complete_garden: bool = false
+## Completed map 2
+var map_complete_desert: bool = false
 ## Number of players that have finished loading the main game scene.
 var _players_loaded_in: int = 0
 # All the gold the player has.
