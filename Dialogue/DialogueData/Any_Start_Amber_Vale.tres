@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://n70cgxc7pja1"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_sqq7d"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_med2l"]
+
+[sub_resource type="Resource" id="Resource_g0rpl"]
+script = ExtResource("1_sqq7d")
+speaker = 5
+dialogue = "A girl made out of metal? Now that’s a first."
+
+[sub_resource type="Resource" id="Resource_yssse"]
+script = ExtResource("1_sqq7d")
+speaker = 2
+dialogue = "Do you not have robots at home?"
+
+[sub_resource type="Resource" id="Resource_08l6m"]
+script = ExtResource("1_sqq7d")
+speaker = 5
+dialogue = "Is that what you’re called?"
+
+[sub_resource type="Resource" id="Resource_2f1u7"]
+script = ExtResource("1_sqq7d")
+speaker = 5
+dialogue = "Goldie has her trinkets, but even she would never have imagined something like you."
+
+[sub_resource type="Resource" id="Resource_vsl2p"]
+script = ExtResource("1_sqq7d")
+speaker = 2
+dialogue = "Yet you do not seem alarmed by my presence."
+
+[sub_resource type="Resource" id="Resource_n5b63"]
+script = ExtResource("1_sqq7d")
+speaker = 5
+dialogue = "As long as you can get the job done, what’s the difference between you and me?"
+
+[sub_resource type="Resource" id="Resource_gsq1v"]
+script = ExtResource("1_sqq7d")
+speaker = 2
+dialogue = "Ha, now that is a first."
+
+[resource]
+script = ExtResource("2_med2l")
+lines = Array[ExtResource("1_sqq7d")]([SubResource("Resource_g0rpl"), SubResource("Resource_yssse"), SubResource("Resource_08l6m"), SubResource("Resource_2f1u7"), SubResource("Resource_vsl2p"), SubResource("Resource_n5b63"), SubResource("Resource_gsq1v")])
+play_conditions = Array[int]([3])

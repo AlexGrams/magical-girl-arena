@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=11 format=3 uid="uid://dq0t4ikixjw8n"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_lmgr2"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_3cmxj"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_bv8bc"]
+
+[sub_resource type="Resource" id="Resource_n44oh"]
+script = ExtResource("1_lmgr2")
+speaker = 5
+dialogue = "So what’s the story on this one?"
+
+[sub_resource type="Resource" id="Resource_773i5"]
+script = ExtResource("1_lmgr2")
+speaker = -1
+dialogue = "She is called Andromeda."
+optional_portrait = ExtResource("2_3cmxj")
+
+[sub_resource type="Resource" id="Resource_21d0c"]
+script = ExtResource("1_lmgr2")
+speaker = 5
+dialogue = "Ah, a lady this time."
+
+[sub_resource type="Resource" id="Resource_ky8l8"]
+script = ExtResource("1_lmgr2")
+speaker = -1
+dialogue = "Her motivations are unclear."
+optional_portrait = ExtResource("2_3cmxj")
+
+[sub_resource type="Resource" id="Resource_sr0b3"]
+script = ExtResource("1_lmgr2")
+speaker = -1
+dialogue = "It is possible she is here against her will."
+optional_portrait = ExtResource("2_3cmxj")
+
+[sub_resource type="Resource" id="Resource_ilqf6"]
+script = ExtResource("1_lmgr2")
+speaker = 5
+dialogue = "*sigh*"
+
+[sub_resource type="Resource" id="Resource_vmqmp"]
+script = ExtResource("1_lmgr2")
+speaker = 5
+dialogue = "We have too many women like that."
+
+[resource]
+script = ExtResource("2_bv8bc")
+lines = Array[ExtResource("1_lmgr2")]([SubResource("Resource_n44oh"), SubResource("Resource_773i5"), SubResource("Resource_21d0c"), SubResource("Resource_ky8l8"), SubResource("Resource_sr0b3"), SubResource("Resource_ilqf6"), SubResource("Resource_vmqmp")])
+play_conditions = Array[int]([3, 2])

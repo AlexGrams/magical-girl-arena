@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://xgj8dtv6ad80"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_olb0y"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_0r2x2"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_607a3"]
+
+[sub_resource type="Resource" id="Resource_qhhtk"]
+script = ExtResource("1_olb0y")
+speaker = 0
+dialogue = "It’s quiet here."
+
+[sub_resource type="Resource" id="Resource_w8xuy"]
+script = ExtResource("1_olb0y")
+speaker = -1
+dialogue = "I take it you appreciate the calm?"
+optional_portrait = ExtResource("2_0r2x2")
+
+[sub_resource type="Resource" id="Resource_xdscm"]
+script = ExtResource("1_olb0y")
+speaker = 0
+dialogue = "I’m used to listening to Sweet talk nonstop."
+
+[sub_resource type="Resource" id="Resource_mruvo"]
+script = ExtResource("1_olb0y")
+speaker = 0
+dialogue = "The silence only makes me miss her."
+
+[resource]
+script = ExtResource("2_607a3")
+lines = Array[ExtResource("1_olb0y")]([SubResource("Resource_qhhtk"), SubResource("Resource_w8xuy"), SubResource("Resource_xdscm"), SubResource("Resource_mruvo")])
+play_conditions = Array[int]([3, 2])

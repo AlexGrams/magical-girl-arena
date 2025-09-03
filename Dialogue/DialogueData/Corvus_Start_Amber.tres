@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://vviv4bfrbopq"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_ob140"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_1ftu6"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_68moi"]
+
+[sub_resource type="Resource" id="Resource_47wx1"]
+script = ExtResource("1_ob140")
+speaker = 5
+dialogue = "This doesn’t seem bad."
+
+[sub_resource type="Resource" id="Resource_d7wcj"]
+script = ExtResource("1_ob140")
+speaker = 5
+dialogue = "Wander around trees and fight monsters."
+
+[sub_resource type="Resource" id="Resource_3oire"]
+script = ExtResource("1_ob140")
+speaker = 5
+dialogue = "I do this all the time."
+
+[sub_resource type="Resource" id="Resource_tdxxn"]
+script = ExtResource("1_ob140")
+speaker = -1
+dialogue = "This is a dangerous mission."
+optional_portrait = ExtResource("2_68moi")
+
+[sub_resource type="Resource" id="Resource_3k0q5"]
+script = ExtResource("1_ob140")
+speaker = -1
+dialogue = "Do not be overconfident."
+optional_portrait = ExtResource("2_68moi")
+
+[sub_resource type="Resource" id="Resource_cfet0"]
+script = ExtResource("1_ob140")
+speaker = 5
+dialogue = "Ha, trust me. I know what I’m doing."
+
+[resource]
+script = ExtResource("2_1ftu6")
+lines = Array[ExtResource("1_ob140")]([SubResource("Resource_47wx1"), SubResource("Resource_d7wcj"), SubResource("Resource_3oire"), SubResource("Resource_tdxxn"), SubResource("Resource_3k0q5"), SubResource("Resource_cfet0")])
+play_conditions = Array[int]([3, 1])

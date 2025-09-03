@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3 uid="uid://h70o2legbn6w"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_h0ipb"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_cx3al"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_sgtfn"]
+
+[sub_resource type="Resource" id="Resource_fb4oq"]
+script = ExtResource("1_h0ipb")
+speaker = 3
+dialogue = "It’s kind of spooky here!"
+
+[sub_resource type="Resource" id="Resource_fspdb"]
+script = ExtResource("1_h0ipb")
+speaker = 3
+dialogue = "There’s hardly any life at all."
+
+[sub_resource type="Resource" id="Resource_fdjuh"]
+script = ExtResource("1_h0ipb")
+speaker = 3
+dialogue = "At least it’s pretty straightforward. Just dirt and monsters."
+
+[sub_resource type="Resource" id="Resource_wmrp4"]
+script = ExtResource("1_h0ipb")
+speaker = -1
+dialogue = "e cautious. The ground may collapse at any moment."
+optional_portrait = ExtResource("2_cx3al")
+
+[sub_resource type="Resource" id="Resource_crrwj"]
+script = ExtResource("1_h0ipb")
+speaker = 3
+dialogue = "Aw you just had to go and ruin it!!!"
+
+[resource]
+script = ExtResource("2_sgtfn")
+lines = Array[ExtResource("1_h0ipb")]([SubResource("Resource_fb4oq"), SubResource("Resource_fspdb"), SubResource("Resource_fdjuh"), SubResource("Resource_wmrp4"), SubResource("Resource_crrwj")])
+play_conditions = Array[int]([3, 2])

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://l5b6ryvvff8y"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_d8cha"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_wojkw"]
+
+[sub_resource type="Resource" id="Resource_4bfp6"]
+script = ExtResource("1_d8cha")
+speaker = 5
+dialogue = "A scythe, hm? Not the most practical, but I get it."
+
+[sub_resource type="Resource" id="Resource_f0ovf"]
+script = ExtResource("1_d8cha")
+speaker = 5
+dialogue = "Sometimes you gotta make sacrifices for your aesthetic."
+
+[sub_resource type="Resource" id="Resource_svfqu"]
+script = ExtResource("1_d8cha")
+speaker = 0
+dialogue = "You’re the one who fights with a boomerang."
+
+[sub_resource type="Resource" id="Resource_30jcw"]
+script = ExtResource("1_d8cha")
+speaker = 5
+dialogue = "Haha, that’s true."
+
+[sub_resource type="Resource" id="Resource_sqqqi"]
+script = ExtResource("1_d8cha")
+speaker = 5
+dialogue = "But you had a choice."
+
+[resource]
+script = ExtResource("2_wojkw")
+lines = Array[ExtResource("1_d8cha")]([SubResource("Resource_4bfp6"), SubResource("Resource_f0ovf"), SubResource("Resource_svfqu"), SubResource("Resource_30jcw"), SubResource("Resource_sqqqi")])
+play_conditions = Array[int]([3])

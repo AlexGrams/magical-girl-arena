@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://cnxep7lhovm6k"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_0kddc"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_32a0d"]
+
+[sub_resource type="Resource" id="Resource_0pe2o"]
+script = ExtResource("1_0kddc")
+speaker = 3
+dialogue = "Wow it’s so nice to meet an experienced magical girl like you!"
+
+[sub_resource type="Resource" id="Resource_vhf4b"]
+script = ExtResource("1_0kddc")
+speaker = 5
+dialogue = "Aw aren’t you a cutie?"
+
+[sub_resource type="Resource" id="Resource_6vmf1"]
+script = ExtResource("1_0kddc")
+speaker = 5
+dialogue = "I love your hair puffs. I’ll have to try that myself."
+
+[sub_resource type="Resource" id="Resource_724bn"]
+script = ExtResource("1_0kddc")
+speaker = 3
+dialogue = "Really? Thank you! I just copied a video tutorial."
+
+[sub_resource type="Resource" id="Resource_yondd"]
+script = ExtResource("1_0kddc")
+speaker = 5
+dialogue = "You did them yourself? Now that’s impressive!"
+
+[sub_resource type="Resource" id="Resource_wwn3f"]
+script = ExtResource("1_0kddc")
+speaker = 5
+dialogue = "You’ve got style, girl!"
+
+[sub_resource type="Resource" id="Resource_aleel"]
+script = ExtResource("1_0kddc")
+speaker = 3
+dialogue = "Oh wow, thank you so much! That means a lot coming from you!"
+
+[resource]
+script = ExtResource("2_32a0d")
+lines = Array[ExtResource("1_0kddc")]([SubResource("Resource_0pe2o"), SubResource("Resource_vhf4b"), SubResource("Resource_6vmf1"), SubResource("Resource_724bn"), SubResource("Resource_yondd"), SubResource("Resource_wwn3f"), SubResource("Resource_aleel")])
+play_conditions = Array[int]([3])

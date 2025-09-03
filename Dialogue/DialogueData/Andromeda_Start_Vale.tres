@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=10 format=3 uid="uid://b521i2hrgfeu3"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_rssgx"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="2_g7uxt"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_k062r"]
+
+[sub_resource type="Resource" id="Resource_jfknc"]
+script = ExtResource("1_rssgx")
+speaker = 2
+dialogue = "This area is increasingly unstable."
+
+[sub_resource type="Resource" id="Resource_8cnrq"]
+script = ExtResource("1_rssgx")
+speaker = -1
+dialogue = "Yes, it is Andromeda’s doing."
+optional_portrait = ExtResource("2_k062r")
+
+[sub_resource type="Resource" id="Resource_vg6cd"]
+script = ExtResource("1_rssgx")
+speaker = 2
+dialogue = "Do all of the constellations have control over natural elements?"
+
+[sub_resource type="Resource" id="Resource_uc4xu"]
+script = ExtResource("1_rssgx")
+speaker = -1
+dialogue = "With their combined power over space and time,"
+optional_portrait = ExtResource("2_k062r")
+
+[sub_resource type="Resource" id="Resource_5dj0a"]
+script = ExtResource("1_rssgx")
+speaker = -1
+dialogue = "nothing seems outside of their possibility."
+optional_portrait = ExtResource("2_k062r")
+
+[sub_resource type="Resource" id="Resource_encls"]
+script = ExtResource("1_rssgx")
+speaker = 2
+dialogue = "And yet we fight on."
+
+[resource]
+script = ExtResource("2_g7uxt")
+lines = Array[ExtResource("1_rssgx")]([SubResource("Resource_jfknc"), SubResource("Resource_8cnrq"), SubResource("Resource_vg6cd"), SubResource("Resource_uc4xu"), SubResource("Resource_5dj0a"), SubResource("Resource_encls")])
+play_conditions = Array[int]([3, 2])
