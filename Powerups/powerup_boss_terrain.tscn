@@ -4,7 +4,7 @@
 
 [node name="PowerupBossTerrain" type="Node2D"]
 script = ExtResource("1_7xpt7")
-_attacks = 3
+_attacks = 2
 _min_distance = 300.0
 _max_distance = 600.0
 _bullet_scene = "res://Powerups/bullet_boss_terrain.tscn"
