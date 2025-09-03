@@ -22,7 +22,7 @@ dialogue = "Just dirt and monsters."
 [sub_resource type="Resource" id="Resource_wmrp4"]
 script = ExtResource("1_h0ipb")
 speaker = -1
-dialogue = "e cautious. The ground may collapse at any moment."
+dialogue = "Be cautious. The ground may collapse at any moment."
 optional_portrait = ExtResource("2_cx3al")
 
 [sub_resource type="Resource" id="Resource_crrwj"]
