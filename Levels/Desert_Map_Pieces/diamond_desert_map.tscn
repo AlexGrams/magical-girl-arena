@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfwiw6uvxq585"]
+[gd_scene load_steps=7 format=3 uid="uid://dfwiw6uvxq585"]
 
-[ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/desert_map_falling_piece.gd" id="1_vq07k"]
+[ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.gd" id="1_4ypuc"]
 [ext_resource type="Texture2D" uid="uid://btrw6euj5cojh" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_Cracks.png" id="2_0td5v"]
 [ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="4_k66p4"]
 [ext_resource type="Texture2D" uid="uid://ds0wkb85e86er" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_Shape.png" id="4_nw0dq"]
+[ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="5_3dv8x"]
+[ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="6_l1mnw"]
 
-[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
+[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("decor", "clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
 z_index = -1
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_vq07k")
+script = ExtResource("1_4ypuc")
+decor = NodePath("Base/Decor")
 time_to_crack = 3.0
 total_crack_num = 5
 fall_time = 1.0
@@ -51,6 +54,68 @@ position = Vector2(554, 277)
 rotation = 2.35619
 texture = ExtResource("4_k66p4")
 offset = Vector2(0, -945)
+
+[node name="Decor" type="Node2D" parent="Base"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-986, -328)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(324, -788)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(980, -300)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(338, 156)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-248, -422)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-376, 238)
+texture = ExtResource("5_3dv8x")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-376, 238)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(114, 654)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-788, -22)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(810, -86)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-96, -60)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(24, 264)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(508, -358)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-538, -476)
+texture = ExtResource("6_l1mnw")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Base/Decor"]
+position = Vector2(-112, -540)
+texture = ExtResource("6_l1mnw")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

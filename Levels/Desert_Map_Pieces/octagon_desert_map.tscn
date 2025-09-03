@@ -102,7 +102,6 @@ texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -110,7 +109,6 @@ collision_mask = 8
 polygon = PackedVector2Array(-1886, -784, -765, -1894, 765, -1894, 1886, -784, 1886, 784, 784, 1886, -784, 1886, -1886, 784)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 64
 collision_mask = 0
 
