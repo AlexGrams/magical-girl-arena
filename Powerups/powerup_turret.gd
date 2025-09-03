@@ -104,4 +104,4 @@ func unboost() -> void:
 
 
 func boost_fire_rate() -> void:
-	_turret_fire_interval /= 2.0
+	_turret_fire_interval *= 0.75

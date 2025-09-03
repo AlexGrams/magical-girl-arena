@@ -105,4 +105,4 @@ func unboost() -> void:
 
 
 func boost_fire_rate() -> void:
-	shoot_interval /= 2.0
+	shoot_interval *= 0.75
