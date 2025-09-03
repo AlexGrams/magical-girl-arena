@@ -2,6 +2,8 @@ extends Bullet
 
 ## Final scale
 @export var _final_scale:float = 2.5
+## How much the max size increases when this Powerup is level 3.
+@export var _level_3_size_multiplier: float = 1.25
 ## Magnitude of knockback in units/second.
 @export var _knockback_speed: float = 500.0
 ## Time in seconds that knockback is applied.
@@ -63,7 +65,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			sprite.modulate = Color.html("3dfff5")
 		5:
 			sprite.modulate = Color.html("e15cff")
-	_final_scale = _final_scale + (1 * (data[2] - 1))
 	
 	_owner = get_tree().root.get_node(data[0])
 	_original_character_id = data[1]
@@ -71,6 +72,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_crit_chance = data[4]
 	_crit_multiplier = data[5]
 	_is_owned_by_player = is_owned_by_player
+	
+	# TODO: Stacking scaling
+	#_final_scale = _final_scale + (1 * (data[2] - 1))
+	if _is_level_three:
+		_final_scale *= _level_3_size_multiplier
 	
 	# Only apply knockback on Pulses originating from the owning player.
 	if GameState.player_characters[_original_character_id] == _owner:
