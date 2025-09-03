@@ -73,7 +73,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	
 	# Only apply knockback on Pulses originating from the owning player.
-	if _is_level_three and GameState.player_characters[_original_character_id] == _owner:
+	if GameState.player_characters[_original_character_id] == _owner:
 		_has_knockback = true
 
 
@@ -90,8 +90,7 @@ func _on_spread_area_2d_entered(area: Area2D) -> void:
 	var other = area.get_parent()
 	
 	if (
-			_is_level_three 
-			and other != _owner 
+			other != _owner 
 			and other == GameState.get_local_player()
 	):
 		# Apply StatusPulse to the other character
@@ -101,12 +100,12 @@ func _on_spread_area_2d_entered(area: Area2D) -> void:
 			status_pulse.set_properties(
 				_original_character_id, 
 				collider.damage, 
-				_has_knockback,
+				_is_level_three,
 				_crit_chance,
 				_crit_multiplier
 			)
 			other.add_status(status_pulse)
-		else:
+		elif _is_level_three:
 			status_pulse.stack()
 
 

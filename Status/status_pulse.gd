@@ -71,4 +71,6 @@ func deactivate() -> void:
 ## Stack this status effect, where each unique hit causes the Pulse created after this status wears off
 ## to be larger.
 func stack() -> void:
-	_stacks += 1
+	pass
+	# TODO: Figure out what to do for this powerup stacking.
+	#_stacks += 1

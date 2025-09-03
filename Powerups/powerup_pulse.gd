@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 				crit_multiplier
 			)
 			_owner.add_status(status_pulse)
-		else:
+		elif current_level >= 3:
 			status_pulse.stack()
 		
 		# TODO: Play sound effect
