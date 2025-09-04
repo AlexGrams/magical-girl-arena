@@ -93,6 +93,10 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	var ball_powerup: PowerupBall = _owning_player.get_node_or_null("PowerupBall")
 	if ball_powerup != null:
+		# Apply level 3 upgrade upon respawning the Ball.
+		if ball_powerup.current_level >= 3:
+			_size_increment *= 0.5
+		
 		ball_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				_level_up.rpc(new_level, new_damage)
