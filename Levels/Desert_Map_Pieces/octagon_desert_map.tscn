@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhpv3m2wsop5y"]
+[gd_scene load_steps=8 format=3 uid="uid://dhpv3m2wsop5y"]
 
 [ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.gd" id="1_pp61m"]
 [ext_resource type="Texture2D" uid="uid://bwil4iuj0dlp4" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Shape.png" id="2_vft7v"]
 [ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="3_ul6p4"]
 [ext_resource type="Texture2D" uid="uid://cke1a48ync1ky" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_TriangleAbyss.png" id="4_emnor"]
+[ext_resource type="Texture2D" uid="uid://1upw8sxwduf0" path="res://Sprites/Desert_Texture.png" id="4_f0wuy"]
 [ext_resource type="Texture2D" uid="uid://d1ajwa60jk81l" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Cracks.png" id="4_hcd15"]
 [ext_resource type="PackedScene" uid="uid://bd0kkk3qfxux6" path="res://Sprites/Map/Desert/decor_default_octagon.tscn" id="6_c7ba6"]
 
@@ -38,7 +39,16 @@ texture = ExtResource("2_vft7v")
 
 [node name="Base" type="Sprite2D" parent="."]
 self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
+clip_children = 2
 texture = ExtResource("2_vft7v")
+
+[node name="TextureRect" type="TextureRect" parent="Base"]
+offset_left = -2020.0
+offset_top = -1940.0
+offset_right = 2200.0
+offset_bottom = 2082.0
+texture = ExtResource("4_f0wuy")
+stretch_mode = 1
 
 [node name="Clip" type="Sprite2D" parent="Base"]
 clip_children = 1

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ik0b55wb1tvq"]
+[gd_scene load_steps=9 format=3 uid="uid://ik0b55wb1tvq"]
 
 [ext_resource type="Script" path="res://Levels/Desert_Map_Pieces/desert_map_falling_piece.gd" id="1_io1ub"]
 [ext_resource type="Texture2D" uid="uid://di6sbwyascpf8" path="res://Sprites/Map/Desert/Map_Pieces/Square_Shape.png" id="2_knfhr"]
 [ext_resource type="Texture2D" uid="uid://doae4ruvdbvmc" path="res://Sprites/Map/Desert/Map_Pieces/Square_Cracks.png" id="3_1ppf6"]
+[ext_resource type="Texture2D" uid="uid://1upw8sxwduf0" path="res://Sprites/Desert_Texture.png" id="3_bkex3"]
 [ext_resource type="Texture2D" uid="uid://b54c555vhq4wf" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_TriangleAbyss.png" id="4_yhw1i"]
 [ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="5_ff7gc"]
 [ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="6_tpf8s"]
@@ -32,7 +33,16 @@ texture = ExtResource("2_knfhr")
 
 [node name="Base" type="Sprite2D" parent="."]
 self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
+clip_children = 2
 texture = ExtResource("2_knfhr")
+
+[node name="TextureRect" type="TextureRect" parent="Base"]
+offset_left = -2020.0
+offset_top = -1940.0
+offset_right = 2200.0
+offset_bottom = 2082.0
+texture = ExtResource("3_bkex3")
+stretch_mode = 1
 
 [node name="Clip" type="Sprite2D" parent="Base"]
 clip_children = 1
