@@ -10,10 +10,9 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _kick_impulse: float = 10000.0
 ## Torque impule applied to the ball when it is kicked.
 @export var _kick_torque: float = 900.0
-## Number of enemies the ball can defeat before exploding and returning to normal size.
-@export var _max_kills: int = 10
 ## How much the bigger the ball gets with each kill.
-@export var _scale_increment: float = 1.0
+@export var _size_increment: float = 1.0
+@export var _max_size: float = 10.0
 ## How much the mass of the Ball increases with each kill in kg.
 @export var _mass_increment: float = 0.05
 @export var _explosion_vfx_scene_path: String = ""
@@ -23,11 +22,15 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _explosion_bullet_hitbox: BulletHitbox = null
 @export var _physics_collision_shape: CollisionShape2D
 
-@onready var _scale_increment_vector: Vector2 = Vector2.ONE * _scale_increment
+@onready var _size_increment_vector: Vector2 = Vector2.ONE * _size_increment
 @onready var _original_mass: float = _rigidbody.mass
 ## The original collision layer of the BulletHitbox for explosion damage.
 var _explosion_hitbox_collision_layer: int = 0
+## Number of Enemies that the Ball has killed, meaning it did the final amount of damage to them.
+## Each kill increases the Ball's damage.
 var _kills: int = 0
+## How much extra growth has been added to the Ball so far.
+var _total_growth: float = 0.0
 ## True when the explosion hitbox has collision enabled and can deal damage.
 var _explosion_active: bool = false
 var _explosion_scene: PackedScene = null
@@ -105,8 +108,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 ## This bullet's owner has leveled up its corresponding powerup.
 @rpc("any_peer", "call_local")
-func _level_up(_new_level: int, new_damage: float):
-	collider.damage = new_damage
+func _level_up(new_level: int, new_damage: float):
+	collider.damage = new_damage + _kills
+	
+	# Level 3: Increase growth rate.
+	if new_level == 3:
+		_size_increment *= 0.5
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
@@ -138,7 +145,8 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 		if other.health - collider.damage <= 0:
 			# The Ball probably just got a kill, so increase its size.
 			_kills += 1
-			if _kills < _max_kills:
+			collider.damage += 1.0
+			if _total_growth < _max_size:
 				_grow.rpc()
 			else:
 				pass
@@ -150,10 +158,11 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 ## Make the ball bigger.
 @rpc("authority", "call_local")
 func _grow() -> void:
-	_sprite_holder.scale += _scale_increment_vector
-	collider.scale += _scale_increment_vector
-	_kick_area.scale += _scale_increment_vector
-	_physics_collision_shape.scale += _scale_increment_vector
+	_total_growth += _size_increment
+	_sprite_holder.scale += _size_increment_vector
+	collider.scale += _size_increment_vector
+	_kick_area.scale += _size_increment_vector
+	_physics_collision_shape.scale += _size_increment_vector
 	_rigidbody.mass += _mass_increment
 
 
