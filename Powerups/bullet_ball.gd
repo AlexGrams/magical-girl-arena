@@ -141,7 +141,9 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 			if _kills < _max_kills:
 				_grow.rpc()
 			else:
-				_explode.rpc()
+				pass
+				# TODO: Disabling Ball explosion.
+				#_explode.rpc()
 		other.take_damage(collider.damage)
 
 
