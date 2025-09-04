@@ -80,7 +80,10 @@ func _find_new_target() -> void:
 		
 		_last_hit = _target
 		_target = nodes[0]
-		# Server create a new Bounce bullet for each split.
+		# Bounce and each split reduces subsequent damage.
+		collider.damage *= 0.5
+		
+		# Server create a new Bounce bullet that does half damage for each split.
 		if is_multiplayer_authority():
 			for i: int in range(1, n):
 				if nodes[i] != null:
