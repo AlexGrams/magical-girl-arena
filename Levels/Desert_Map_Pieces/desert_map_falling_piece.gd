@@ -73,8 +73,20 @@ func _fall() -> void:
 	for area: Area2D in _area.get_overlapping_areas():
 		var other: Node = area.get_parent()
 		if other != null and other == GameState.get_local_player():
+			# Kill player, have them visually fall, then teleport
 			other.kill()
-			other.teleport(MAP_CENTER)
+			# TODO: Make sure player is immune to damage until after teleporting
+			var tween = create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_CUBIC)
+			var original_scale = other.scale
+			tween.tween_property(other, "scale", Vector2.ZERO, 0.5)
+			tween.tween_callback(func(): 
+				await get_tree().create_timer(0.5, false).timeout
+				other.teleport(MAP_CENTER)
+			)
+			tween.tween_property(other, "scale", original_scale, 0.5)
+			
 	
 	# Animation
 	var tween = create_tween()
