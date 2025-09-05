@@ -7,13 +7,13 @@ extends Bullet
 @export var _tell_time: float = 2.0
 ## Visual for the scream. 
 ## Light source allows it to be blocked by terrain with LightOccluder2Ds
-@export var _point_light: PointLight2D
+@export var _point_light: Node2D
 
 var _tell_timer: float = 0.0
 
 
 func _ready() -> void:
-	pass 
+	_point_light.set_tell_time(_tell_time)
 
 
 func _process(delta: float) -> void:
@@ -22,11 +22,7 @@ func _process(delta: float) -> void:
 		_tell_timer -= delta
 		if _tell_timer <= 0.0:
 			# Stage 2: Deal damage.
-			var tween = create_tween()
-			tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-			tween.set_ease(Tween.EASE_OUT)
-			tween.set_trans(Tween.TRANS_SINE)
-			tween.tween_property(_point_light, "energy", 16, 0.0001)
+			_point_light.play_scream()
 			# Attempt to damage the local player.
 			var local_player: PlayerCharacterBody2D = GameState.get_local_player()
 			var query := PhysicsRayQueryParameters2D.create(
@@ -51,14 +47,11 @@ func _process(delta: float) -> void:
 				# The attack has hit the local player.
 				local_player.take_damage(collider.damage)
 			
-			tween.tween_property(_point_light, "energy", 0, 0.25)
 			
 			# From the server, destroy all terrain bullets.
 			if is_multiplayer_authority():
-				tween.tween_callback(func(): 
-					await get_tree().create_timer(0.5, false).timeout
-					get_tree().call_group("bullet_boss_terrain", "destroy")
-				)
+				await get_tree().create_timer(0.5, false).timeout
+				get_tree().call_group("bullet_boss_terrain", "destroy")
 
 
 # Set up other properties for this bullet
