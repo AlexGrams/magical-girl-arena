@@ -33,14 +33,17 @@ texture = ExtResource("2_knfhr")
 
 [node name="Base" type="Sprite2D" parent="."]
 self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
-clip_children = 2
 texture = ExtResource("2_knfhr")
 
-[node name="TextureRect" type="TextureRect" parent="Base"]
-offset_left = -2020.0
-offset_top = -1940.0
-offset_right = 2200.0
-offset_bottom = 2082.0
+[node name="Texture_Clip" type="Sprite2D" parent="Base"]
+clip_children = 1
+texture = ExtResource("2_knfhr")
+
+[node name="TextureRect" type="TextureRect" parent="Base/Texture_Clip"]
+offset_left = -2.02e+08
+offset_top = -1.94e+08
+offset_right = -2.01996e+08
+offset_bottom = -1.93996e+08
 texture = ExtResource("3_bkex3")
 stretch_mode = 1
 
@@ -162,6 +165,7 @@ position = Vector2(530, -396)
 texture = ExtResource("6_tpf8s")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 rotation = 0.785398
 collision_layer = 0
 collision_mask = 8
@@ -171,6 +175,7 @@ position = Vector2(7.07102, -2.82839)
 shape = SubResource("RectangleShape2D_rkp35")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 0
 
