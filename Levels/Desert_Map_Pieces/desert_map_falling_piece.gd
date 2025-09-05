@@ -61,6 +61,7 @@ func initiate_falling(permanent: bool = false) -> void:
 		# We don't want cracks to scale with clip_mask
 		cracks.scale = Vector2(1.0/scale_size, 1.0/scale_size)
 		await get_tree().create_timer(crack_interval, false).timeout
+	await get_tree().create_timer(crack_interval, false).timeout
 	_fall()
 
 ## Animate and remove this piece from the map.
