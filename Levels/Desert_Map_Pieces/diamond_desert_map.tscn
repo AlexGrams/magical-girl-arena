@@ -38,10 +38,10 @@ clip_children = 1
 texture = ExtResource("4_nw0dq")
 
 [node name="TextureRect" type="TextureRect" parent="Base/Texture_Clip"]
-offset_left = -2.02e+08
-offset_top = -1.94e+08
-offset_right = -2.01996e+08
-offset_bottom = -1.93996e+08
+offset_left = -2000.0
+offset_top = -2000.0
+offset_right = 2000.0
+offset_bottom = 2000.0
 texture = ExtResource("3_kqhke")
 stretch_mode = 1
 
