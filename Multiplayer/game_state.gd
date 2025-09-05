@@ -632,9 +632,6 @@ func _update_exp_for_next_level() -> void:
 ## acquire any Powerup.
 @rpc("any_peer", "call_local")
 func corrupted_enemy_defeated() -> void:
-	# Increase game speed
-	time_scale = 2.0
-	
 	# Show and set up the upgrade screen
 	get_tree().paused = true
 	playground.hud_canvas_layer.upgrade_any_screen.setup()
