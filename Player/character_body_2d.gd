@@ -71,6 +71,8 @@ var _health_regen: float = 0.0
 var _health_regen_timer: float = 0.0
 ## If true, the next time health is brought to 0, set it to 1 instead.
 var _prevent_death: bool = false
+## If true, the player cannot take any damage.
+var _is_invulnerable: bool = false
 ## For spectating. All the players in the game.
 var _spectate_characters: Array[PlayerCharacterBody2D] = []
 ## Index of the character in _spectate_characters that the local player is currently spectating if they are down.
@@ -133,6 +135,10 @@ func _set_speed(new_speed: float) -> void:
 @rpc("authority", "call_local")
 func set_prevent_death(value: bool) -> void:
 	_prevent_death = value
+
+
+func set_is_invulnerable(value: bool) -> void:
+	_is_invulnerable = value
 
 
 func set_ultimate_crit_chance(value: float) -> void:
@@ -439,10 +445,10 @@ func scale_ultimate_cooldown(percent: float) -> void:
 	abilities[0].cooldown *= percent
 
 
-# Deal damage to the player. Should be RPC'd on everyone.
+# Deal damage to the player.
 @rpc("authority", "call_local")
 func take_damage(damage: float) -> void:
-	if is_down or not is_multiplayer_authority():
+	if is_down or not is_multiplayer_authority() or _is_invulnerable:
 		return
 	
 	# Deplete temp health before regular health.

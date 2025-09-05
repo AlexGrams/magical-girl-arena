@@ -75,6 +75,7 @@ func _fall() -> void:
 		if other != null and other == GameState.get_local_player():
 			# Kill player, have them visually fall, then teleport
 			other.kill()
+			other.set_is_invulnerable(true)
 			# TODO: Make sure player is immune to damage until after teleporting
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_OUT)
@@ -84,6 +85,7 @@ func _fall() -> void:
 			tween.tween_callback(func(): 
 				await get_tree().create_timer(0.5, false).timeout
 				other.teleport(MAP_CENTER)
+				other.set_is_invulnerable(false)
 			)
 			tween.tween_property(other, "scale", original_scale, 0.5)
 			
