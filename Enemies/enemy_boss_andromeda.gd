@@ -58,6 +58,10 @@ func _process(delta: float) -> void:
 					# Tracking attack on everyone
 					_powerups[1].deactivate_powerup()
 					_powerups[2].activate_powerup()
+					
+					# If this is the first attack cycle, skip the terrain attack. Sort of a hack. 
+					if _pattern_repetitions == 0:
+						_powerup_index += 2
 				2:
 					# Create terrain
 					_powerups[2].deactivate_powerup()
