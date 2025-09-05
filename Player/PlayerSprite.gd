@@ -41,6 +41,11 @@ func _set_sprite(is_corrupted:bool = false) -> void:
 	# Some models have different heights, but models are centered,
 	# so this offsets their y position so their feet are all at the same spot
 	gdcubism_user_model.adjust_position.y = character_data.offset_height
+	
+	# Force render_target_update_mode to only update when this animated sprite is visible.
+	# NOTE: The GDCubism plugin source sets this to always render (see gd_cubism/src/private/internal_cubism_renderer_2d.cpp).
+	# Manually resetting this to the default value and seeing if this breaks anything?
+	gdcubism_user_model.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
 
 func set_model_scale(new_scale: float) -> void:
 	gdcubism_user_model.adjust_scale = new_scale * character_data.model_scale_multiplier
