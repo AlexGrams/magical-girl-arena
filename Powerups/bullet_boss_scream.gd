@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 		if _tell_timer <= 0.0:
 			# Stage 2: Deal damage.
 			_point_light.play_scream()
+			await get_tree().create_timer(0.2).timeout
 			# Attempt to damage the local player.
 			var local_player: PlayerCharacterBody2D = GameState.get_local_player()
 			var query := PhysicsRayQueryParameters2D.create(
