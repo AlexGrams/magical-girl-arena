@@ -76,7 +76,6 @@ func _fall() -> void:
 			# Kill player, have them visually fall, then teleport
 			other.kill()
 			other.set_is_invulnerable(true)
-			# TODO: Make sure player is immune to damage until after teleporting
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_OUT)
 			tween.set_trans(Tween.TRANS_CUBIC)
@@ -88,7 +87,6 @@ func _fall() -> void:
 				other.set_is_invulnerable(false)
 			)
 			tween.tween_property(other, "scale", original_scale, 0.5)
-			
 	
 	# Animation
 	var tween = create_tween()
