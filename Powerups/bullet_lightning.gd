@@ -22,7 +22,7 @@ func _ready() -> void:
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 0.5)
+	tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 1.0)
 
 
 func _process(_delta: float) -> void:

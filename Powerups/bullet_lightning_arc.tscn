@@ -23,7 +23,7 @@ sprite = NodePath("LightningNode2D/Sprite2D")
 [node name="Sprite2D" type="Sprite2D" parent="LightningNode2D"]
 position = Vector2(1.90735e-06, 1.90735e-06)
 rotation = 1.5708
-scale = Vector2(0.190321, 0.190321)
+scale = Vector2(0.265, 0.265)
 texture = ExtResource("2_71exp")
 
 [node name="Area2D" type="Area2D" parent="LightningNode2D"]

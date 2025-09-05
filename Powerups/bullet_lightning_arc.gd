@@ -165,7 +165,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_fade_out_tween = create_tween()
 	_fade_out_tween.set_ease(Tween.EASE_OUT)
 	_fade_out_tween.set_trans(Tween.TRANS_QUINT)
-	_fade_out_tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 0.5)
+	_fade_out_tween.tween_property(sprite, "modulate", Color.html("ffffff00"), 1.0)
 	
 	death_timer = 0.0
 	_processed = false
