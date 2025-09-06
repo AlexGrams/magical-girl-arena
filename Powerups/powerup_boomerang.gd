@@ -79,3 +79,7 @@ func boost() -> void:
 func unboost() -> void:
 	if _boomerang_controller != null:
 		_boomerang_controller.unboost()
+
+
+func boost_fire_rate() -> void:
+	_boomerang_controller.boost_fire_rate()

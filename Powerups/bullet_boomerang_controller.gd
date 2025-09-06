@@ -152,3 +152,8 @@ func boost() -> void:
 func unboost() -> void:
 	for boomerang: BulletBoomerang in _boomerangs:
 		boomerang.unboost.rpc()
+
+
+## Called by PowerupBoomerang if owner gets the Fire Rate charm.
+func boost_fire_rate() -> void:
+	_fire_interval *= 0.75
