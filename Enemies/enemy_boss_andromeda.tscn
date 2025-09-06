@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc56c13oalmc8"]
+[gd_scene load_steps=9 format=3 uid="uid://bc56c13oalmc8"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_boss_andromeda.gd" id="1_fsr1i"]
 [ext_resource type="PackedScene" uid="uid://cdvb1imb8ny34" path="res://UI/andromeda_animated_sprite.tscn" id="2_4cru4"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_juii0"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_n671r"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -32,6 +33,7 @@ _phase_two_health_fraction = 0.0
 _powerup_paths = Array[String](["res://Powerups/powerup_boss_chain_lines.tscn", "res://Powerups/powerup_boss_revolving.tscn", "res://Powerups/powerup_boss_tracking_fire.tscn", "res://Powerups/powerup_boss_terrain.tscn", "res://Powerups/powerup_boss_scream.tscn", "res://Powerups/powerup_boss_summon_andromeda.tscn"])
 _sprite = NodePath("ConstellationAnimatedSprite")
 _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
+_icon = ExtResource("2_juii0")
 base_health = 75000
 speed = 200.0
 
@@ -53,6 +55,8 @@ polygon = PackedVector2Array(65, -119, 96.7036, -129.365, 139, -123, 164, -108, 
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch7sjmtttp01p"]
+[gd_scene load_steps=10 format=3 uid="uid://ch7sjmtttp01p"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_boss_corvus.gd" id="1_te4ea"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_a34qn"]
 [ext_resource type="PackedScene" path="res://UI/corvus_animated_sprite.tscn" id="2_hxoe2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dw6tt"]
@@ -34,6 +35,7 @@ script = ExtResource("1_te4ea")
 _powerup_paths_phase_one = Array[String](["res://Powerups/powerup_boss_raindrop.tscn", "res://Powerups/powerup_boss_circle.tscn", "res://Powerups/powerup_boss_tracking.tscn", "res://Powerups/powerup_boss_summon.tscn"])
 _powerup_paths_phase_two = Array[String](["res://Powerups/powerup_boss_circle_raindrop.tscn", "res://Powerups/powerup_boss_summon.tscn"])
 _health_scale = Array[float]([1.0, 2.0, 3.0, 4.0])
+_icon = ExtResource("2_a34qn")
 base_health = 50000
 speed = 200.0
 collider_area = NodePath("Area2D")
@@ -57,6 +59,8 @@ shape = SubResource("RectangleShape2D_beu2y")
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

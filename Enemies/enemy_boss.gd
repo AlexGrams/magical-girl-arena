@@ -5,6 +5,8 @@ extends Enemy
 
 ## Multiplier by which to increase boss health by depending on the number of players in the game.
 @export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
+## Pointer icon for this Boss.
+@export var _icon: Texture2D = null
 
 
 func set_knockback(_vector: Vector2, _duration: float) -> void:
@@ -18,8 +20,9 @@ func _ready() -> void:
 	max_health = int(base_health * _health_scale[GameState.connected_players - 1])
 	health = max_health
 	
-	_hud_canvas_layer = get_tree().root.get_node("Playground/CanvasLayer")
+	_hud_canvas_layer = GameState.playground.hud_canvas_layer
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
+	_hud_canvas_layer.add_node_to_point_to(self, _icon)
 	
 	# Win the game when the boss dies
 	died.connect(func(_enemy):

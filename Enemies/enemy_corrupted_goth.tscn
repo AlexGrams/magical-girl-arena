@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://byntc2n136ytr"]
+[gd_scene load_steps=11 format=3 uid="uid://byntc2n136ytr"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_lnner"]
+[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_dd0mr"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="2_jeu8l"]
 [ext_resource type="PackedScene" uid="uid://cwisr0ykkkrhm" path="res://Sprites/Enemy/darkness_particles.tscn" id="2_lacjf"]
 
@@ -58,6 +59,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_lnner")
 corrupted_lifetime = 60.0
 default_powerup_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_scythe.tres"
+_icon = ExtResource("2_dd0mr")
 max_range = 200.0
 allied_bullet_scene_path = ""
 base_health = 10000
@@ -86,6 +88,8 @@ shape = SubResource("RectangleShape2D_beu2y")
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

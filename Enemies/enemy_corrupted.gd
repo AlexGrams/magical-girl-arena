@@ -11,6 +11,8 @@ extends EnemyRanged
 ## Scene for the Powerup to give to this enemy when it spawns.
 @export var default_powerup_path: String = ""
 
+## Pointer icon for this Enemy.
+@export var _icon: Texture2D = null
 @export var _character: Constants.Character
 
 # How much time this corrupted enemy has left in the game.
@@ -28,8 +30,9 @@ func _ready() -> void:
 	
 	current_lifetime = corrupted_lifetime
 	
-	_hud_canvas_layer = get_tree().root.get_node("Playground/CanvasLayer")
+	_hud_canvas_layer = GameState.playground.hud_canvas_layer
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
+	_hud_canvas_layer.add_node_to_point_to(self, _icon)
 	
 	if is_multiplayer_authority():
 		# Start dialogue
