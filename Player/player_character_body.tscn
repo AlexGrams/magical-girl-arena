@@ -224,7 +224,6 @@ texture_progress = ExtResource("6_0llbf")
 tint_under = Color(0.388235, 0.388235, 0.388235, 0.501961)
 
 [node name="CharacterAnimatedSprite" parent="." instance=ExtResource("7_7w7dn")]
-process_mode = 3
 scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_6vtl0")
 
