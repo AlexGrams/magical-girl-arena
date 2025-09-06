@@ -30,6 +30,8 @@ var upgrade_panels: Array[UpgradePanel] = []
 # How many players are done choosing upgrades.
 var players_done_selecting_upgrades: int = 0
 
+## The local player.
+var _player_character: PlayerCharacterBody2D = null
 ## Every powerup that can be acquired in the game. Chosen from at random when upgrading.
 var _all_powerup_data: Array[PowerupData] = []
 ## Every artifact that can be acquired in the game.
@@ -108,6 +110,7 @@ func _ready() -> void:
 
 # Show the upgrade screen and set up the options provided to the player.
 func setup():
+	_player_character = GameState.get_local_player()
 	players_done_selecting_upgrades = 0
 	players_selecting_upgrades_window.hide()
 	upgrade_panels_holder.show()
@@ -129,7 +132,6 @@ func setup():
 
 ## Makes a random list of powerups to obtain or upgrade, and update the stats upgrade panel.
 func _generate_and_show_random_upgrade_choices() -> void:
-	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
 	# Powerups or Artifacts that can be upgraded 
 	var upgrade_choices: Array[ItemData] = []
 	
@@ -137,10 +139,10 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	_upgrade_levels.clear()
 	
 	# Add artifact choices that the player doesn't have already.
-	if len(player_character.artifacts) < player_character.MAX_ARTIFACTS:
+	if len(_player_character.artifacts) < _player_character.MAX_ARTIFACTS:
 		var artifactdata_dict: Dictionary = _artifact_name_to_artifactdata.duplicate()
 		
-		for owned_artifact: Artifact in player_character.artifacts:
+		for owned_artifact: Artifact in _player_character.artifacts:
 			if not owned_artifact.allow_duplicates:
 				artifactdata_dict.erase(owned_artifact.artifactdata.name)
 		
@@ -150,11 +152,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 				_upgrade_levels[artifact_data.name] = 0
 	
 	# Decide which Powerups can possibly be upgraded
-	if len(player_character.powerups) >= player_character.MAX_POWERUPS:
+	if len(_player_character.powerups) >= _player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
 		# choose some amount (3 in this case) to upgrade randomly.
 		
-		for powerup: Powerup in player_character.powerups:
+		for powerup: Powerup in _player_character.powerups:
 			if powerup.current_level < powerup.max_level:
 				upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
 				if powerup.current_level == 4 and powerup.is_signature:
@@ -169,7 +171,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 		# If in inventory, get current level for each powerup
 		for data: PowerupData in _all_powerup_data:
 			var found_powerup := false
-			for powerup in player_character.powerups:
+			for powerup in _player_character.powerups:
 				if data.name == powerup.powerup_name:
 					found_powerup = true
 					if powerup.current_level == 4 and powerup.is_signature:
@@ -185,7 +187,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 				_upgrade_levels[data.name] = 0
 
 		# Remove powerups from the random list that can't be upgraded anymore.
-		for powerup: Powerup in player_character.powerups:
+		for powerup: Powerup in _player_character.powerups:
 			if powerup.current_level >= powerup.max_level:
 				powerups_to_remove.append(powerup.powerup_name)
 		if len(powerups_to_remove) > 0:
@@ -337,8 +339,7 @@ func _show_random_upgrade_choices(upgrade_names: Array[String]) -> void:
 
 
 func _on_reroll_button_down() -> void:
-	var player_character: PlayerCharacterBody2D = GameState.get_local_player()
-	player_character.decrement_rerolls()
+	_player_character.decrement_rerolls()
 	
 	for upgrade_panel: UpgradePanel in upgrade_panels:
 		upgrade_panel.hide()
@@ -409,7 +410,7 @@ func _request_artifact_reroll_upgrade_choices(previous_upgrade_names: Array[Stri
 
 ## Update the text on the Reroll button
 func _update_reroll_button() -> void:
-	var rerolls = GameState.get_local_player().get_rerolls()
+	var rerolls = _player_character.get_rerolls()
 	reroll_button.set_text("Reroll (" + str(rerolls) + " remaining)")
 	reroll_button.set_interactable(rerolls > 0)
 
@@ -425,7 +426,10 @@ func _update_powerup_reroll_button() -> void:
 func _update_artifact_reroll_button() -> void:
 	var artifact_rerolls = GameState.artifact_rerolls
 	artifact_reroll_button.set_text("Charm Reroll (" + str(artifact_rerolls) + " remaining)")
-	artifact_reroll_button.set_interactable(artifact_rerolls > 0)
+	artifact_reroll_button.set_interactable(
+			artifact_rerolls > 0 
+			and len(_player_character.artifacts) < PlayerCharacterBody2D.MAX_ARTIFACTS
+	)
 
 
 ## Notify relevant systems that this player has selected an upgrade.
