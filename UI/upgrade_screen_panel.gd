@@ -424,7 +424,7 @@ func _update_powerup_reroll_button() -> void:
 ## Update the text on the Artifact Reroll button.
 func _update_artifact_reroll_button() -> void:
 	var artifact_rerolls = GameState.artifact_rerolls
-	artifact_reroll_button.set_text("Artifact Reroll (" + str(artifact_rerolls) + " remaining)")
+	artifact_reroll_button.set_text("Charm Reroll (" + str(artifact_rerolls) + " remaining)")
 	artifact_reroll_button.set_interactable(artifact_rerolls > 0)
 
 
