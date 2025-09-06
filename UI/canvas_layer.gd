@@ -187,8 +187,8 @@ func add_node_to_point_to(node: Node2D, texture: Texture2D) -> void:
 	var pointer_icon: TextureRect = load(_pointer_icon_scene).instantiate()
 	add_child(pointer, true)
 	add_child(pointer_icon, true)
-	move_child(pointer, 0)
-	move_child(pointer_icon, 0)
+	move_child(pointer, -1)
+	move_child(pointer_icon, -1)
 	_pointers.append(pointer)
 	_pointer_icons.append(pointer_icon)
 	

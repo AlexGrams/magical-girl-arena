@@ -4,7 +4,7 @@ extends Node
 # Controls spawning players and related functionality. 
 
 # Should only be false in debugging builds.
-const USING_GODOT_STEAM := true
+const USING_GODOT_STEAM := false
 ## The unique identifier used to find lobbies through the Steamworks API.
 ## Main: 3689240
 ## Playtest: 3705120
