@@ -26,6 +26,7 @@ var _crit_multiplier: float = 1.0
 func _ready() -> void:
 	_notes_ring_sprite.rotation_degrees = randi_range(0, 360)
 	var tween = create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	tween.set_parallel()
 	tween.tween_property(self, "scale", Vector2(_final_scale, _final_scale), lifetime)
 	tween.tween_property(sprite, "modulate", Color.html(sprite_color + "00"), lifetime)
