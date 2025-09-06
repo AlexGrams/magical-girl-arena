@@ -41,8 +41,10 @@ func _process(delta: float) -> void:
 		):
 			var crit: bool = randf() <= crit_chance
 			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				1, [bullet_scene, 
+			GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+				1, 
+				[
+					bullet_scene, 
 					global_position, 
 					direction, 
 					total_damage, 
@@ -53,6 +55,22 @@ func _process(delta: float) -> void:
 					[]
 				]
 			)
+			# Level 3: Shoot twice in opposite directions.
+			if current_level >= 3:
+				GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+					1, 
+					[
+						bullet_scene, 
+						global_position, 
+						direction * -1.0, 
+						total_damage, 
+						crit,
+						_is_owned_by_player,
+						multiplayer.get_unique_id(),
+						_powerup_index,
+						[]
+					]
+				)
 			
 			direction = direction.rotated(deg_to_rad(_rotation)).normalized()
 			
@@ -77,9 +95,7 @@ func level_up():
 	current_level += 1
 	bullet_damage = _get_damage_from_curve()
 	
-	if current_level == 3:
-		shoot_interval = shoot_interval + ((max_level_shoot_interval - shoot_interval) / 2)
-	# Shoot way faster at 5th level
+	# Signature: Shoot way faster.
 	if is_signature and current_level >= max_level:
 		set_signature_settings()
 	
