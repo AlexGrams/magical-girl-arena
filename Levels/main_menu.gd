@@ -382,6 +382,7 @@ func _hide_char_select() -> void:
 
 @rpc("any_peer", "call_local")
 func _hide_main_menu() -> void:
+	shop.hide()
 	self.hide()
 
 
@@ -419,12 +420,6 @@ func _on_map_select_right_button_pressed() -> void:
 
 func _on_leave_button_down() -> void:
 	leave_lobby()
-
-
-# Show shop, but don't leave lobby.
-func _on_shop_button_down_from_lobby() -> void:
-	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
-	request_lobby_list()
 
 
 ## Change the displayed map on the Lobby screen.
