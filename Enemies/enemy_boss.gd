@@ -7,6 +7,10 @@ extends Enemy
 @export var _health_scale: Array[float] = [1.0, 1.0, 1.0, 1.0]
 
 
+func set_knockback(_vector: Vector2, _duration: float) -> void:
+	pass
+
+
 func _ready() -> void:
 	super()
 	

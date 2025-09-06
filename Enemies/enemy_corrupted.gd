@@ -17,6 +17,10 @@ extends EnemyRanged
 var current_lifetime: float = 0.0
 
 
+func set_knockback(_vector: Vector2, _duration: float) -> void:
+	pass
+
+
 func _ready() -> void:
 	super()
 	
