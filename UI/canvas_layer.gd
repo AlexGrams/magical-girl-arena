@@ -24,6 +24,8 @@ extends CanvasLayer
 @export var _boss_health_text: Label = null
 ## Control for displaying and playing dialogue.
 @export var _dialogue_box: DialogueBox = null
+## When visible, turns the screen gray.
+@export var _grayscale_filter: ColorRect = null
 ## For the Upgrade Any Powerup screen.
 @export var upgrade_any_screen: UpgradeAnyScreenPanel = null
 @export var _pointer_scene: String = ""
@@ -57,6 +59,7 @@ var _retry_indicator_index = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_boss_health_bar.hide()
+	_grayscale_filter.hide()
 	
 	# Pointer setup
 	for id: int in GameState.player_characters:
@@ -307,10 +310,12 @@ func setup_spectator_mode(characters: Array[PlayerCharacterBody2D], starting_spe
 		_spectator_icons[i].hide()
 	
 	set_spectated_character(starting_spectate_index)
+	_grayscale_filter.show()
 	_spectator_container.show()
 
 
 func hide_spectator_mode() -> void:
+	_grayscale_filter.hide()
 	_spectator_container.hide()
 
 

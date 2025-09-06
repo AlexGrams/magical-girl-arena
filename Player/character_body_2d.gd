@@ -608,7 +608,7 @@ func _setup_spectator_mode() -> void:
 			_spectate_index = len(_spectate_characters)
 		_spectate_characters.append(character)
 	
-	$"..".get_hud_canvas_layer().setup_spectator_mode(_spectate_characters, _spectate_index)
+	GameState.playground.hud_canvas_layer.setup_spectator_mode(_spectate_characters, _spectate_index)
 
 
 ## Set the name that appears above this character.
