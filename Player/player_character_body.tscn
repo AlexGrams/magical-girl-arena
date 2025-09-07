@@ -152,6 +152,7 @@ collision_layer = 8
 collision_mask = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visibility_layer = 31
 position = Vector2(0, 0.5)
 shape = SubResource("CapsuleShape2D_wl3r2")
 
@@ -226,6 +227,12 @@ tint_under = Color(0.388235, 0.388235, 0.388235, 0.501961)
 [node name="CharacterAnimatedSprite" parent="." instance=ExtResource("7_7w7dn")]
 scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_6vtl0")
+
+[node name="HitboxOutlineLine2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(-25, -25, -21.5, -37, -13, -46, 0, -49.5, 13, -46, 21.5, -37, 25, -25, 25, 25, 22, 38, 13, 47, 0, 50.5, -13, 47, -22, 38, -25, 25, -25, -25)
+width = 4.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(1.5, 1.5)
