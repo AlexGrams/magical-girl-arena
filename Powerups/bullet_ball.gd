@@ -13,8 +13,8 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 ## How much the bigger the ball gets with each kill.
 @export var _size_increment: float = 1.0
 @export var _max_size: float = 10.0
-## How much the mass of the Ball increases with each kill in kg.
-@export var _mass_increment: float = 0.05
+## Time in seconds after which the ball teleports to its owning player if it hasn't been hit.
+@export var _max_recall_time: float = 20.0
 @export var _explosion_vfx_scene_path: String = ""
 @export var _rigidbody: RigidBody2D = null
 @export var _sprite_holder: Node2D = null
@@ -23,7 +23,6 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _physics_collision_shape: CollisionShape2D
 
 @onready var _size_increment_vector: Vector2 = Vector2.ONE * _size_increment
-@onready var _original_mass: float = _rigidbody.mass
 ## The original collision layer of the BulletHitbox for explosion damage.
 var _explosion_hitbox_collision_layer: int = 0
 ## Number of Enemies that the Ball has killed, meaning it did the final amount of damage to them.
@@ -31,6 +30,7 @@ var _explosion_hitbox_collision_layer: int = 0
 var _kills: int = 0
 ## How much extra growth has been added to the Ball so far.
 var _total_growth: float = 0.0
+var _recall_timer: float = 0.0
 ## True when the explosion hitbox has collision enabled and can deal damage.
 var _explosion_active: bool = false
 var _explosion_scene: PackedScene = null
@@ -55,8 +55,11 @@ func _ready() -> void:
 	ResourceLoader.load_threaded_request(_explosion_vfx_scene_path, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
 
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	# Teleport back to owner if we haven't been hit in a while.
+	_recall_timer += delta
+	if _recall_timer > _max_recall_time:
+		global_position = _owning_player.global_position
 
 
 func _physics_process(_delta: float) -> void:
@@ -136,6 +139,8 @@ func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 			_rigidbody.apply_torque_impulse(_kick_torque)
 		else:
 			_rigidbody.apply_torque_impulse(-_kick_torque)
+		
+		_recall_timer = 0.0
 
 
 ## Damage hit Enemies. Only called on server.
@@ -167,7 +172,6 @@ func _grow() -> void:
 	collider.scale += _size_increment_vector
 	_kick_area.scale += _size_increment_vector
 	_physics_collision_shape.scale += _size_increment_vector
-	_rigidbody.mass += _mass_increment
 
 
 ## Return the ball to its original size and instantiate explosion particle effects.
@@ -186,5 +190,4 @@ func _explode() -> void:
 	collider.scale = Vector2.ONE
 	_kick_area.scale = Vector2.ONE
 	_physics_collision_shape.scale = Vector2.ONE
-	_rigidbody.mass = _original_mass
 	_kills = 0
