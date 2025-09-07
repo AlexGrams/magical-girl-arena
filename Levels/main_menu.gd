@@ -58,6 +58,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var map_locked_label: Label
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
+## Appears if the player can buy rerolls.
+@export var can_buy_rerolls_icon: Control 
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
 ## The button to begin the actual game. Disabled for clients that are not the host.
@@ -114,7 +116,7 @@ func _ready() -> void:
 	for container in players_holder.get_children():
 		_player_containers.append(container)
 	
-	# TODO: Bind events to each button to change the character when button is pressed.
+	# Bind events to each button to change the character when button is pressed.
 	for button: Button in character_select_button_holder.get_children():
 		_character_select_buttons.append(button)
 		button.pressed.connect(func():
@@ -125,7 +127,11 @@ func _ready() -> void:
 	# This is done here because it cannot be set in the inspector
 	for label in main_menu_button_container.get_children():
 		label.pivot_offset = Vector2(0, label.size.y / 2)
-
+	
+	# When the shop is closed from the Lobby screen, refresh the icon saying if the player can
+	# buy rerolls.
+	shop.hide_button.button_down.connect(update_can_buy_rerolls_icon_visibility)
+	
 	_main_menu_original_pos = main_menu.position
 	_settings_original_pos = settings.position
 	_lobby_list_original_pos = lobby_list.position
@@ -482,6 +488,7 @@ func refresh_lobby() -> void:
 		i += 1
 	
 	update_character_description()
+	update_can_buy_rerolls_icon_visibility()
 
 
 # Updates the displayed sprite to represent the player's currently selected character.
@@ -524,6 +531,23 @@ func update_character_description() -> void:
 	information_ult_texture.texture = data.ult_texture
 	information_ult_label.change_text(data.ult_name)
 	information_ult_description.text = data.ult_description
+
+
+## Displays an icon depending on if the player is able to buy more rerolls.
+func update_can_buy_rerolls_icon_visibility() -> void:
+	# Hack way of setting up how we determine if the player can buy rerolls. Will be a problem
+	# later if we change any of the numbers or add different types of rerolls.
+	if (
+			(
+				GameState.powerup_rerolls < 5
+				or GameState.rerolls < 5
+				or GameState.artifact_rerolls < 5
+			)
+			and GameState.get_gold() >= 100
+	):
+		can_buy_rerolls_icon.show()
+	else:
+		can_buy_rerolls_icon.hide()
 
 
 ## Switches from the lobby screen to the main menu

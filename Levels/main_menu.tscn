@@ -161,7 +161,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "players_holder", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,6 +192,7 @@ map_name_label = NodePath("Lobby/OutlineLabel")
 map_preview_texture_rect = NodePath("Lobby/MapPreview/MapPreview_Clip/MapPreview_Image")
 map_locked_label = NodePath("Lobby/MapPreview/MapPreview_Clip/LockedOutlineLabel")
 players_holder = NodePath("Lobby/PlayersHolder")
+can_buy_rerolls_icon = NodePath("Lobby/ShopButton/CanBuyRerollsIcon")
 character_select_button_holder = NodePath("CharacterSelection/CharacterSelectContainer")
 start_game_label = NodePath("Lobby/StartGame_Label")
 information_name = NodePath("CharacterSelection/CharacterInformationContainer/Name")
@@ -844,7 +845,7 @@ button_group = SubResource("ButtonGroup_1b1tj")
 visible = false
 layout_mode = 1
 
-[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item", "powerup_reroll_item", "artifact_reroll_item")]
+[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item", "powerup_reroll_item", "artifact_reroll_item", "hide_button")]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -859,6 +860,7 @@ reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/G
 perm_reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ShopItem2")
 powerup_reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/PowerupRerollShopItem")
 artifact_reroll_item = NodePath("LobbiesScrollContainer/VBoxContainer/Rerolls_Container/GridContainer/ArtifactRerollShopItem")
+hide_button = NodePath("HideShop_Label/ShopBackButton")
 
 [node name="DimBackground" type="Panel" parent="Shop"]
 visible = false
@@ -1127,9 +1129,6 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
-[connection signal="pressed" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
-[connection signal="pressed" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
-[connection signal="pressed" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
 [connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
 [connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
 [connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]

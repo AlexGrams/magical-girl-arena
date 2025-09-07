@@ -9,6 +9,8 @@ extends Control
 @export var perm_reroll_item:Control
 @export var powerup_reroll_item:Control = null
 @export var artifact_reroll_item:Control = null
+## Appears when the Shop is brought up from the Lobby screen.
+@export var hide_button: Button = null
 
 ### TO ADD A NEW ITEM:
 ## Connect button in _ready()

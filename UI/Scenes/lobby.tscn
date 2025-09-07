@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c57w5wc6nd8u0"]
+[gd_scene load_steps=23 format=3 uid="uid://c57w5wc6nd8u0"]
 
 [ext_resource type="PackedScene" uid="uid://j115lnwcarmj" path="res://UI/lobby_player_character_container.tscn" id="1_mb8ss"]
 [ext_resource type="Texture2D" uid="uid://b0qlh4omx7gs1" path="res://Sprites/UI/GlowingAura.png" id="1_umvpc"]
@@ -16,6 +16,7 @@
 [ext_resource type="ButtonGroup" uid="uid://bvwel4w7vks3a" path="res://UI/lobby_settings_button_group.tres" id="13_tpd0a"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="14_my7cq"]
 [ext_resource type="Texture2D" uid="uid://dvapxkh0xr0lq" path="res://Sprites/UI/MapArrow_Icon.png" id="14_vbivi"]
+[ext_resource type="Texture2D" uid="uid://cgafnvqutwwlx" path="res://Sprites/UI/Shop_Reroll_Icon.png" id="16_xu15y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_peilx"]
 bg_color = Color(0, 0, 0, 0.3)
@@ -506,6 +507,22 @@ pivot_offset = Vector2(272, 52)
 theme_override_font_sizes/font_size = 90
 script = ExtResource("13_6itpg")
 label = NodePath("..")
+
+[node name="CanBuyRerollsIcon" type="TextureRect" parent="ShopButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -29.5
+offset_right = 106.0
+offset_bottom = 40.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("16_xu15y")
+expand_mode = 4
 
 [node name="ChangeCharButton" type="Label" parent="."]
 layout_mode = 0
