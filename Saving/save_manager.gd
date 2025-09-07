@@ -7,6 +7,7 @@ const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 const DEFAULT_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 1.0
 const DEFAULT_BULLET_OPACITY := 1.0
+const DEFAULT_CURSOR_SIZE := 0
 
 
 func _ready() -> void:
@@ -18,7 +19,8 @@ func save_settings(
 		display_mode: DisplayServer.WindowMode, 
 		volume: float, 
 		music_volume: float,
-		bullet_opacity: float
+		bullet_opacity: float,
+		cursor_size: int
 	) -> void:
 	var config = ConfigFile.new()
 
@@ -26,6 +28,7 @@ func save_settings(
 	config.set_value("sound", "volume", volume)
 	config.set_value("music", "volume", music_volume)
 	config.set_value("gameplay", "bullet_opacity", bullet_opacity)
+	config.set_value("display", "cursor_size", cursor_size)
 
 	config.save(SETTINGS_PATH)
 
@@ -61,7 +64,8 @@ func load_settings() -> void:
 			DEFAULT_DISPLAY_MODE, 
 			DEFAULT_VOLUME, 
 			DEFAULT_MUSIC_VOLUME,
-			DEFAULT_BULLET_OPACITY
+			DEFAULT_BULLET_OPACITY,
+			DEFAULT_CURSOR_SIZE
 		)
 
 	var settings = ConfigFile.new()
@@ -77,6 +81,7 @@ func load_settings() -> void:
 		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
 	SettingsManager.apply_music_volume(settings.get_value("music", "volume"))
 	SettingsManager.apply_bullet_opacity(settings.get_value("gameplay", "bullet_opacity", DEFAULT_BULLET_OPACITY))
+	SettingsManager.apply_cursor_size(settings.get_value("display", "cursor_size", DEFAULT_CURSOR_SIZE))
 	SettingsManager.set_settings(settings)
 
 

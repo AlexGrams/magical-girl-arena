@@ -19,6 +19,17 @@ func apply_display_mode(display_mode: DisplayServer.WindowMode):
 	DisplayServer.window_set_mode(display_mode)
 
 
+func apply_cursor_size(index: int) -> void:
+	_settings.set_value("display", "cursor_size", index)
+	match index:
+		0:
+			Input.set_custom_mouse_cursor(load("res://Sprites/UI/ArrowSmall.png"))
+		1:
+			Input.set_custom_mouse_cursor(load("res://Sprites/UI/ArrowLarge.png"))
+		_:
+			push_error("No mouse cursor for this setting!")
+
+
 ## Changes the current SFX volume multiplier setting.
 func apply_volume(volume: float):
 	AudioManager.set_volume_multiplier(volume)

@@ -382,7 +382,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_cursor_size_option")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -398,6 +398,7 @@ _sfx_volume_slider = NodePath("VBoxContainer/SFXVolumeContainer/VolumeHSlider")
 _sfx_spinbox = NodePath("VBoxContainer/SFXVolumeContainer/SpinBox")
 _bullet_opacity_slider = NodePath("VBoxContainer/BulletOpacityContainer/OpacityHSlider")
 _bullet_opacity_spinbox = NodePath("VBoxContainer/BulletOpacityContainer/SpinBox")
+_cursor_size_option = NodePath("VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -589,6 +590,32 @@ theme = ExtResource("4_wqh84")
 value = 100.0
 rounded = true
 alignment = 1
+
+[node name="CursorSizeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="CursorSize" type="Label" parent="Settings/VBoxContainer/CursorSizeContainer"]
+layout_mode = 2
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 90
+text = "Cursor Size"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VBoxContainer/CursorSizeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CursorSizeOptionButton" type="OptionButton" parent="Settings/VBoxContainer/CursorSizeContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("4_wqh84")
+selected = 0
+item_count = 2
+popup/item_0/text = "Small"
+popup/item_1/text = "Large"
+popup/item_1/id = 1
+script = ExtResource("13_r3p63")
 
 [node name="ReturntoMainMenu_Label" type="Label" parent="Settings"]
 layout_mode = 0
@@ -1112,6 +1139,7 @@ vertical_alignment = 1
 [connection signal="value_changed" from="Settings/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]
+[connection signal="item_selected" from="Settings/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton" to="Settings" method="_on_cursor_size_item_selected"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]

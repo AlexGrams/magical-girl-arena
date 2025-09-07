@@ -12,7 +12,6 @@ extends Ability
 @export var active_time: float = 10.0
 @export var bullet_scene_path := ""
 
-var _mouse_cursor = load("res://Sprites/UI/ArrowSmall.png")
 var _target_cursor = load("res://Sprites/UI/Target.png")
 ## How much damage each bomb does
 var _damage: float = 100.0
@@ -35,7 +34,7 @@ func _process(delta: float) -> void:
 		_current_active_time -= delta
 		if _current_active_time <= 0.0:
 			## Disable ult
-			Input.set_custom_mouse_cursor(_mouse_cursor)
+			SettingsManager.apply_cursor_size(SettingsManager.get_settings().get_value("display", "cursor_size", 0))
 
 
 func activate() -> void:
@@ -72,7 +71,7 @@ func _input(event: InputEvent) -> void:
 			_bombs_remaining -= 1
 			if _bombs_remaining <= 0:
 				_current_active_time = 0.0
-				Input.set_custom_mouse_cursor(_mouse_cursor)
+				SettingsManager.apply_cursor_size(SettingsManager.get_settings().get_value("display", "cursor_size", 0))
 
 
 ## Change the damage of this Ability based on its owner's level.
