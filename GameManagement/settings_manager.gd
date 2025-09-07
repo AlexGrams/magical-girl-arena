@@ -43,3 +43,8 @@ func apply_music_volume(volume: float):
 ## Changes the current BULLET OPACITY for other players' bullets.
 func apply_bullet_opacity(opacity: float) -> void:
 	GameState.other_players_bullet_opacity = opacity
+
+
+## Shows an outline of the local player's hitbox.
+func apply_hitbox_visible(hitbox_visible: bool) -> void:
+	GameState.hitbox_visible = hitbox_visible

@@ -119,7 +119,7 @@ properties/2/path = NodePath(".:input_direction")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label", "_laser_holder") groups=["player"]]
+[node name="PlayerCharacterBody" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_player_collision_area", "_pickup_area", "_revive_collision_area", "_revive_progress_bar", "_revive_progress_bar_2", "_on_screen_notifier", "_character_animated_sprite", "_nametag", "_health_bar", "_health_label", "_temp_health_bar", "_temp_health_label", "_hitbox_outline", "_laser_holder") groups=["player"]]
 z_index = 1
 collision_layer = 0
 collision_mask = 194
@@ -138,6 +138,7 @@ _health_bar = NodePath("HealthBar")
 _health_label = NodePath("HealthBar/HealthLabel")
 _temp_health_bar = NodePath("TempHealthBar")
 _temp_health_label = NodePath("TempHealthBar/TempHealthLabel")
+_hitbox_outline = NodePath("HitboxOutlineLine2D")
 _laser_holder = NodePath("LaserHolder")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

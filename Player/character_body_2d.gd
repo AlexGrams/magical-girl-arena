@@ -36,6 +36,7 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 @export var _health_label: Label = null
 @export var _temp_health_bar: Control = null
 @export var _temp_health_label: Label = null
+@export var _hitbox_outline: Node2D = null
 @export var _laser_holder: Node2D = null
 
 ## All Powerups that this player has.
@@ -156,9 +157,10 @@ func _ready():
 	
 	# Setup rerolls
 	_current_rerolls = GameState.rerolls + GameState.perm_rerolls
-	## No longer using stats.
-	#if is_multiplayer_authority():
-		#$"../CanvasLayer".update_stats(self)
+	
+	# Hitbox outline setting
+	if is_multiplayer_authority():
+		_hitbox_outline.visible = GameState.hitbox_visible
 
 
 ## Called when a Powerup is selected on the level up screen.

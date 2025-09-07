@@ -19,6 +19,7 @@ const max_volume_slider_value: float = 1.25
 @export var _bullet_opacity_spinbox: SpinBox = null
 ## Dropdown for setting cursor size.
 @export var _cursor_size_option: OptionButton = null
+@export var _hitbox_visible_checkbox: CheckBox = null
 
 var _screen_modes := [DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED]
 
@@ -34,6 +35,7 @@ func _ready() -> void:
 	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
 	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
 	_cursor_size_option.selected = settings.get_value("display", "cursor_size", 0)
+	_hitbox_visible_checkbox.button_pressed = settings.get_value("gameplay", "hitbox_visible", false)
 
 
 func _on_screen_mode_item_selected(index: int) -> void:
@@ -84,6 +86,11 @@ func _on_bullet_opacity_spin_box_value_changed(spinbox_value: float) -> void:
 		_bullet_opacity_slider.value = slider_opacity
 
 
+## Player hitbox visibility setting was changed.
+func _on_show_hitbox_check_box_toggled(toggled_on: bool) -> void:
+	SettingsManager.apply_hitbox_visible(toggled_on) 
+
+
 ## Writes values set on this screen to disk.
 func _save_settings_changes() -> void:
 	SaveManager.save_settings(
@@ -91,7 +98,8 @@ func _save_settings_changes() -> void:
 		_sfx_volume_slider.value * max_volume_slider_value, 
 		_music_volume_slider.value * max_volume_slider_value,
 		_bullet_opacity_slider.value,
-		_cursor_size_option.selected
+		_cursor_size_option.selected,
+		_hitbox_visible_checkbox.button_pressed
 	)
 
 ## Helper functions
