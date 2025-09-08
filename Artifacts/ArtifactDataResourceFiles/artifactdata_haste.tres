@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="ArtifactDataHaste" load_steps=4 format=3 uid="uid://ca5u4ih5j7x7b"]
+[gd_resource type="Resource" script_class="ArtifactDataHaste" load_steps=4 format=3 uid="uid://cybiu8ljr6ol2"]
 
 [ext_resource type="Script" path="res://Artifacts/artifactdata_haste.gd" id="1_nkamw"]
-[ext_resource type="PackedScene" uid="uid://fcwurxry0pqg" path="res://Artifacts/artifact_haste.tscn" id="1_yx682"]
-[ext_resource type="Texture2D" uid="uid://dy7o4uwtjynmm" path="res://Pineapple.png" id="2_0aqxh"]
+[ext_resource type="PackedScene" path="res://Artifacts/artifact_haste.tscn" id="1_yx682"]
+[ext_resource type="Texture2D" uid="uid://bn4tq5s7cptjj" path="res://Sprites/Powerups/Stats/Haste_Icon.png" id="3_wplbt"]
 
 [resource]
 script = ExtResource("1_nkamw")
@@ -10,4 +10,4 @@ _description = "Increases the activation rate of Haste Powerups."
 is_unique = false
 scene = ExtResource("1_yx682")
 name = "Haste"
-sprite = ExtResource("2_0aqxh")
+sprite = ExtResource("3_wplbt")
