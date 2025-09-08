@@ -72,3 +72,7 @@ func boost() -> void:
 
 func unboost() -> void:
 	_fire_interval *= 2.0
+
+
+func boost_haste() -> void:
+	_fire_interval *= 0.75

@@ -122,6 +122,11 @@ func boost_fire_rate() -> void:
 	push_warning("Fire rate boost not implemented for this Powerup!")
 
 
+## A boost for Powerups with the "Haste" type.
+func boost_haste() -> void:
+	push_warning("Haste boost not implemented for this Powerup!")
+
+
 # Set the multiplayer authority for this powerup
 func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)

@@ -47,3 +47,8 @@ func boost() -> void:
 func unboost() -> void:
 	if pet != null:
 		pet.unboost()
+
+
+func boost_haste() -> void:
+	if pet != null:
+		pet.boost()

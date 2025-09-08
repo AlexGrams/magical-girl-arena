@@ -119,3 +119,9 @@ func unboost() -> void:
 	for bullet: BulletOrbit in _bullets:
 		if bullet != null:
 			bullet.unboost.rpc()
+
+
+func boost_haste() -> void:
+	for bullet: BulletOrbit in _bullets:
+		if bullet != null:
+			bullet.boost.rpc()

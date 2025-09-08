@@ -77,3 +77,7 @@ func boost() -> void:
 
 func unboost() -> void:
 	shoot_interval *= 2.0
+
+
+func boost_haste() -> void:
+	shoot_interval *= 0.75
