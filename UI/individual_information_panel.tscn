@@ -1,0 +1,276 @@
+[gd_scene load_steps=13 format=3 uid="uid://wpyn7rbaht3m"]
+
+[ext_resource type="Script" path="res://UI/individual_information_panel.gd" id="1_vo6g6"]
+[ext_resource type="Texture2D" uid="uid://xvisucisatwi" path="res://Sprites/UI/Upgrade_Background_Red.png" id="2_xumxt"]
+[ext_resource type="Texture2D" uid="uid://dcoo48xjf05ma" path="res://Sprites/UI/Upgrade_Background_Lavender.png" id="3_tcwvq"]
+[ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="5_e2d1t"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="6_q617t"]
+[ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="7_nga17"]
+[ext_resource type="Texture2D" uid="uid://dj7v1d6k471eq" path="res://Sprites/UI/Upgrade_Panel_Border.png" id="8_vj5r6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ylfp"]
+bg_color = Color(0.709804, 0.533333, 0.866667, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vxh4"]
+bg_color = Color(1, 0.552941, 0.67451, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tkcw"]
+bg_color = Color(0.686275, 0.858824, 0.678431, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3tr4"]
+bg_color = Color(1, 0.905882, 0.52549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mtyp"]
+bg_color = Color(0.615686, 0.768627, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Box" type="Control" node_paths=PackedStringArray("_item_label", "_item_image", "_item_desc", "_item_traits", "_card_border")]
+custom_minimum_size = Vector2(338, 464)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1582.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vo6g6")
+_item_label = NodePath("Box/Name_Label")
+_item_image = NodePath("Box/TextureRect")
+_item_desc = NodePath("Box/Description_Label")
+_item_traits = NodePath("Box/Traits_Container")
+_card_border = NodePath("Box/Border")
+_powerup_card_texture = ExtResource("2_xumxt")
+_charm_card_texture = ExtResource("3_tcwvq")
+
+[node name="Box" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 464.0
+texture = ExtResource("2_xumxt")
+
+[node name="TextureRect" type="TextureRect" parent="Box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -140.0
+offset_right = 140.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_e2d1t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name_Label" type="Label" parent="Box"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+offset_left = 30.0
+offset_top = 22.0
+offset_right = 310.0
+offset_bottom = 60.0
+theme = ExtResource("6_q617t")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.666667, 0.207843, 0.207843, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 32
+text = "Powerup_Name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description_Label" type="Label" parent="Box"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 18.0
+offset_top = 278.0
+offset_right = 318.0
+offset_bottom = 383.0
+theme = ExtResource("7_nga17")
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "This is a long powerup description that the player would read and learn what it does"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Traits_Container" type="HFlowContainer" parent="Box"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 389.0
+offset_right = 318.0
+offset_bottom = 472.0
+alignment = 1
+
+[node name="Fire_Rate" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ylfp")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Fire_Rate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_nga17")
+theme_override_colors/font_color = Color(0.215686, 0.160784, 0.262745, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Fire Rate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Haste" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3vxh4")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Haste"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_nga17")
+theme_override_colors/font_color = Color(0.45098, 0.145098, 0.231373, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Haste"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area_Size" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4tkcw")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Area_Size"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_nga17")
+theme_override_colors/font_color = Color(0.262745, 0.34902, 0.258824, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Area Size"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Critical" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3tr4")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Critical"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_nga17")
+theme_override_colors/font_color = Color(0.486275, 0.396078, 0.027451, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Critical"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Energy" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mtyp")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Energy"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_nga17")
+theme_override_colors/font_color = Color(0.176471, 0.313726, 0.517647, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Border" type="TextureRect" parent="Box"]
+self_modulate = Color(0.666667, 0.207843, 0.207843, 1)
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 464.0
+texture = ExtResource("8_vj5r6")

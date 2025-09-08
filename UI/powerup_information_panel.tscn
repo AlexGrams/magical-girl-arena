@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2b1awtmh6bsu"]
+
+[ext_resource type="PackedScene" uid="uid://wpyn7rbaht3m" path="res://UI/individual_information_panel.tscn" id="1_0gtxb"]
+
+[node name="Information_Panel" type="Panel"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Powerup_HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = 36.0
+offset_right = 1100.0
+offset_bottom = -41.0
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="Box" parent="Powerup_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box2" parent="Powerup_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box3" parent="Powerup_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box4" parent="Powerup_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box5" parent="Powerup_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Charm_HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -775.0
+offset_top = 35.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+alignment = 1
+
+[node name="Box" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box2" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
+
+[node name="Box3" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+layout_mode = 2
