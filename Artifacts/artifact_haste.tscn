@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fcwurxry0pqg"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_haste.gd" id="1_unmmt"]
+
+[node name="ArtifactHaste" type="Node"]
+script = ExtResource("1_unmmt")
