@@ -10,21 +10,6 @@
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="5_nxuy7"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="7_s8mrw"]
 
-[sub_resource type="Animation" id="Animation_ye1f3"]
-resource_name = "hover"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Box:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10)]
-}
-
 [sub_resource type="Animation" id="Animation_2p8fq"]
 length = 0.001
 tracks/0/type = "value"
@@ -50,6 +35,21 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 0.811765, 0.439216, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ye1f3"]
+resource_name = "hover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
 }
 
 [sub_resource type="Animation" id="Animation_kgxny"]
@@ -79,6 +79,21 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_vwuve"]
+resource_name = "unhover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_pwk74"]
 resource_name = "unpress"
 tracks/0/type = "value"
@@ -104,21 +119,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 0.811765, 0.439216, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vwuve"]
-resource_name = "unhover"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Box:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(0, -10), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3sdlt"]
@@ -240,6 +240,7 @@ offset_bottom = 383.0
 theme = ExtResource("5_nxuy7")
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 20
 text = "This is a long powerup description that the player would read and learn what it does"
 horizontal_alignment = 1
