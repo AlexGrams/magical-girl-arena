@@ -157,10 +157,6 @@ func _ready():
 	
 	# Setup rerolls
 	_current_rerolls = GameState.rerolls + GameState.perm_rerolls
-	
-	# Hitbox outline setting
-	if is_multiplayer_authority():
-		_hitbox_outline.visible = GameState.hitbox_visible
 
 
 ## Called when a Powerup is selected on the level up screen.
@@ -723,6 +719,9 @@ func setup_authority(id: int, character: Constants.Character) -> void:
 		# Sort of jank, but we notify all other client's about this character's nametag here.
 		if GameState.USING_GODOT_STEAM:
 			set_nametag.rpc(Steam.getPersonaName())
+		
+		# Hitbox outline setting
+		_hitbox_outline.visible = GameState.hitbox_visible
 
 
 # Emits the signal for gaining experience on all clients.
