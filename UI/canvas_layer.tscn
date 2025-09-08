@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://divvdkhiu21h6"]
+[gd_scene load_steps=30 format=3 uid="uid://divvdkhiu21h6"]
 
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="1_miafi"]
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="2_awuf7"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b3soomipi2ecq" path="res://Sprites/UI/UltimateBorder.png" id="10_eop5y"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="11_uh3n8"]
 [ext_resource type="Script" path="res://Levels/game_over_screen.gd" id="12_ypicj"]
+[ext_resource type="Texture2D" uid="uid://dw7mdun2rx2xk" path="res://Sprites/UI/CharmIconBackground.png" id="13_0myie"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="13_vv0nx"]
 [ext_resource type="Script" path="res://UI/button_hover.gd" id="14_yhpvr"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="15_50vjx"]
@@ -28,8 +29,8 @@ shader = ExtResource("20_frtdc")
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 
 [sub_resource type="Gradient" id="Gradient_vn3oc"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(1, 0.964706, 0.776471, 1, 1, 0.811765, 0.439216, 1, 1, 0.611765, 0.419608, 1, 1, 0.4, 0.333333, 1, 0.937255, 0.388235, 0.537255, 1)
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.937255, 0.388235, 0.537255, 1, 1, 0.611765, 0.419608, 1, 1, 0.815686, 0.423529, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_nc5ny"]
 gradient = SubResource("Gradient_vn3oc")
@@ -40,6 +41,9 @@ texture = SubResource("GradientTexture1D_nc5ny")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8jyi"]
 texture = ExtResource("8_lxk64")
 modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hg4wy"]
+texture = SubResource("GradientTexture1D_nc5ny")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(0.901961, 0.25098, 0.25098, 1)
@@ -218,7 +222,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxTexture_i8jyi")
-theme_override_styles/fill = SubResource("StyleBoxTexture_obhx2")
+theme_override_styles/fill = SubResource("StyleBoxTexture_hg4wy")
 max_value = 1.0
 value = 1.0
 fill_mode = 3
@@ -494,7 +498,7 @@ clip_children = 2
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("11_uh3n8")
+texture = ExtResource("13_0myie")
 expand_mode = 1
 stretch_mode = 5
 
@@ -519,7 +523,7 @@ clip_children = 2
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("11_uh3n8")
+texture = ExtResource("13_0myie")
 expand_mode = 1
 stretch_mode = 5
 
@@ -544,7 +548,7 @@ clip_children = 2
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("11_uh3n8")
+texture = ExtResource("13_0myie")
 expand_mode = 1
 stretch_mode = 5
 

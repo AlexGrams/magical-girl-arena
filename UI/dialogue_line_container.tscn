@@ -8,12 +8,12 @@
 
 [node name="DialogueLineContainer" type="Control" node_paths=PackedStringArray("_main_control", "_portrait", "_portrait_bg", "_text")]
 clip_children = 2
-custom_minimum_size = Vector2(0, 250)
+custom_minimum_size = Vector2(0, 198)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1091.0
-offset_bottom = 250.0
-pivot_offset = Vector2(0, 125)
+offset_bottom = 198.0
+pivot_offset = Vector2(0, 99)
 size_flags_horizontal = 0
 theme = ExtResource("1_nyfvi")
 script = ExtResource("1_up2r7")
@@ -24,20 +24,23 @@ _text = NodePath("MainPanel/HBoxContainer/Label")
 
 [node name="MainPanel" type="Panel" parent="."]
 clip_children = 2
-custom_minimum_size = Vector2(0, 250)
 layout_mode = 0
 offset_right = 1091.0
-offset_bottom = 250.0
-pivot_offset = Vector2(0, 125)
+offset_bottom = 198.0
+pivot_offset = Vector2(0, 99)
 size_flags_horizontal = 0
 theme = ExtResource("1_nyfvi")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainPanel"]
-layout_mode = 2
-offset_left = 38.0
-offset_top = 44.0
-offset_right = 1050.0
-offset_bottom = 194.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 27.0
+offset_top = -75.0
+offset_right = 992.0
+offset_bottom = 75.0
+grow_vertical = 2
 theme_override_constants/separation = 15
 
 [node name="Portrait_BG" type="TextureRect" parent="MainPanel/HBoxContainer"]
@@ -75,6 +78,9 @@ custom_minimum_size = Vector2(800, 150)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("4_uypca")
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 48
 text = "Text Text Text Text Text Text Text Text Text Text Text  Text Text "
 vertical_alignment = 1

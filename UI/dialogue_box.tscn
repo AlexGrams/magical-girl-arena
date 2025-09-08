@@ -13,5 +13,6 @@ offset_bottom = 1481.0
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
 mouse_filter = 2
+theme_override_constants/separation = 10
 alignment = 2
 script = ExtResource("1_2008t")
