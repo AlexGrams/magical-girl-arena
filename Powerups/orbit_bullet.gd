@@ -126,9 +126,9 @@ func destroy_orbit_bullet() -> void:
 
 @rpc("any_peer", "call_local")
 func boost() -> void:
-	speed *= 2.0
+	speed *= 1.25
 
 
 @rpc("any_peer", "call_local")
 func unboost() -> void:
-	speed /= 2.0
+	speed /= 1.25
