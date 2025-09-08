@@ -6,6 +6,6 @@
 script = ExtResource("1_dvav4")
 bullet_damage = 10.0
 _bullet_uid = "res://Powerups/bullet_shotgun.tscn"
-damage_levels = Array[float]([8.0, 13.0, 15.0, 18.0, 21.0])
-signature_damage = 18.0
+damage_levels = Array[float]([9.0, 15.0, 17.0, 19.0, 23.0])
+signature_damage = 19.0
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_shotgun.tres"
