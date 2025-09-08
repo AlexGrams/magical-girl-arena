@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_o8d3m")
-_description = "Increases max health by 20. The first time your health reaches 0 after getting this artifact, stay at 1 HP and gain a 50 HP temporary shield."
+_description = "Increases max health by 20. The first time you die with Hearty, revive with 1 HP and a 50 HP shield."
 is_unique = false
 scene = ExtResource("1_kn0x6")
 name = "Hearty"
