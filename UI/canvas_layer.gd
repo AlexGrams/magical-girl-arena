@@ -287,6 +287,8 @@ func get_powerup_container() -> Container:
 # Sets up the UI for the local player's ultimate ability. The icon updates depending on the ult cooldown.
 func set_up_ultimate_ui(character_data: CharacterData, ultimate: Ability) -> void:
 	_ultimate_texture.texture = character_data.ult_texture
+	if _ultimate_progress_bar.value / _ultimate_progress_bar.max_value == 1:
+		_ultimate_anim_player.play("spin")
 	# Update progress bar fill percent and visibility.
 	ultimate.cooldown_time_updated.connect(func(cooldown_time_remaining_fraction):
 		_ultimate_progress_bar.value = (1 - cooldown_time_remaining_fraction)
