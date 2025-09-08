@@ -203,13 +203,32 @@ offset_right = 338.0
 offset_bottom = 464.0
 texture = ExtResource("2_1mke6")
 
+[node name="TextureRect" type="TextureRect" parent="Box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -140.0
+offset_right = 140.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_ux83s")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Name_Label" type="Label" parent="Box"]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
-offset_left = 18.0
-offset_top = 28.0
-offset_right = 320.0
-offset_bottom = 66.0
+offset_left = 30.0
+offset_top = 22.0
+offset_right = 310.0
+offset_bottom = 60.0
 theme = ExtResource("3_e82gu")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.666667, 0.207843, 0.207843, 1)
@@ -219,16 +238,6 @@ theme_override_font_sizes/font_size = 32
 text = "Powerup_Name"
 horizontal_alignment = 1
 autowrap_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Box"]
-custom_minimum_size = Vector2(150, 150)
-layout_mode = 2
-offset_top = 91.0
-offset_right = 338.0
-offset_bottom = 241.0
-texture = ExtResource("1_ux83s")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Description_Label" type="Label" parent="Box"]
 custom_minimum_size = Vector2(200, 0)
