@@ -16,6 +16,8 @@ extends CanvasLayer
 @export var _ultimate_texture: TextureRect = null
 ## Displays the cooldown for the player's ultimate ability.
 @export var _ultimate_progress_bar: ProgressBar = null
+## Plays animation when ultimate is ready to use
+@export var _ultimate_anim_player: AnimationPlayer = null
 ## Displays the player's current stat levels.
 @export var _stat_level_container: Control = null
 ## Health bar for bosses.
@@ -289,8 +291,10 @@ func set_up_ultimate_ui(character_data: CharacterData, ultimate: Ability) -> voi
 	ultimate.cooldown_time_updated.connect(func(cooldown_time_remaining_fraction):
 		_ultimate_progress_bar.value = (1 - cooldown_time_remaining_fraction)
 		if cooldown_time_remaining_fraction > 0:
+			_ultimate_anim_player.stop()
 			_ultimate_texture.modulate = Color.DIM_GRAY
 		else:
+			_ultimate_anim_player.play("spin")
 			_ultimate_texture.modulate = Color.WHITE
 	)
 
