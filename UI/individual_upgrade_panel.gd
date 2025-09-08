@@ -54,6 +54,12 @@ func _set_display(upgrade_name: String, texture: Texture2D, description: String)
 			match powerup_trait:
 				Powerup.Type.ProjectileFireRate:
 					$Box/Traits_Container/Fire_Rate.show()
+				Powerup.Type.Haste:
+					$Box/Traits_Container/Haste.show()
+				Powerup.Type.AreaSize:
+					$Box/Traits_Container/Area_Size.show()
+				Powerup.Type.Critical:
+					$Box/Traits_Container/Critical.show()
 
 
 func _on_button_pressed() -> void:
