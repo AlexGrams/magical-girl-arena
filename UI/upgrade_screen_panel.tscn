@@ -1,13 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=13 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="3_2mijq"]
+[ext_resource type="Texture2D" uid="uid://detn242vmsnju" path="res://Sprites/UI/Reroll_Background.png" id="7_01par"]
+[ext_resource type="Script" path="res://UI/button_block_press.gd" id="7_5h60w"]
+[ext_resource type="Texture2D" uid="uid://bkkymx04casfx" path="res://Sprites/UI/Reroll_Border.png" id="8_qckrs"]
+[ext_resource type="Texture2D" uid="uid://0l6whn8y0hsi" path="res://Sprites/UI/Reroll_Powerup_Background.png" id="10_12af0"]
+[ext_resource type="Texture2D" uid="uid://bv2lhuaqshowy" path="res://Sprites/UI/Reroll_Powerup_Border.png" id="11_qvsua"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="13_giirl"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="15_g80km"]
-[ext_resource type="Texture2D" uid="uid://c5pei4ynutwlh" path="res://Sprites/UI/LobbyButton.png" id="15_hy6ya"]
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="16_12wdd"]
-[ext_resource type="Script" path="res://UI/button_hover.gd" id="16_513rf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
@@ -22,9 +25,9 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qovy7")
 script = ExtResource("1_cnujf")
 upgrade_panels_holder = NodePath("PowerupUpgradesContainer")
-reroll_button = NodePath("RerollsHBoxContainer/RerollButton")
-powerup_reroll_button = NodePath("RerollsHBoxContainer/PowerupRerollButton")
-artifact_reroll_button = NodePath("RerollsHBoxContainer/ArtifactRerollButton")
+reroll_button = NodePath("RerollsHBoxContainer/Reroll_Button")
+powerup_reroll_button = NodePath("RerollsHBoxContainer/Powerup_Reroll_Button")
+artifact_reroll_button = NodePath("RerollsHBoxContainer/Charm_Reroll_Button")
 players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 player_ready_indicator_holder = NodePath("PlayersSelectingUpgrades/ReadyIndicatorContainer")
 
@@ -53,13 +56,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PowerupUpgradesContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 50.0
-offset_top = 270.0
-offset_right = 1850.0
-offset_bottom = 668.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -268.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 150
+theme_override_constants/separation = 100
 alignment = 1
 
 [node name="IndividualUpgradePanel" parent="PowerupUpgradesContainer" instance=ExtResource("1_0s0gu")]
@@ -76,81 +83,92 @@ layout_mode = 2
 
 [node name="RerollsHBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -730.0
-offset_top = -330.0
-offset_right = 770.0
-offset_bottom = -250.0
+offset_top = -284.0
+offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 50
 alignment = 1
 
-[node name="RerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(540, 70)
+[node name="Powerup_Reroll_Button" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("box", "label")]
+custom_minimum_size = Vector2(424, 61)
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32
-text = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":15,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":2,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":ExtResource("16_12wdd"),"theme_type_variation":&"","theme_override_font_sizes/font_size":32,"text":"Reroll (1 remaining)","label_settings":null,"horizontal_alignment":1,"vertical_alignment":1,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+script = ExtResource("7_5h60w")
+box = NodePath("Box")
+height = 5.0
+label = NodePath("Box/Reroll_Label")
 
-script = ExtResource("16_513rf")
-label = NodePath("TextureRect")
-texture = NodePath("TextureRect")
-text = NodePath("TextureRect/Reroll_Label")
+[node name="Shadow" type="TextureRect" parent="RerollsHBoxContainer/Powerup_Reroll_Button"]
+self_modulate = Color(0.698039, 0.584314, 0.45098, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_top = 5.0
+offset_right = 424.0
+offset_bottom = 66.0
+texture = ExtResource("10_12af0")
 
-[node name="TextureRect" type="TextureRect" parent="RerollsHBoxContainer/RerollButton"]
+[node name="Box" type="TextureRect" parent="RerollsHBoxContainer/Powerup_Reroll_Button"]
+self_modulate = Color(0.890196, 0.278431, 0.278431, 1)
+custom_minimum_size = Vector2(424, 61)
+layout_mode = 1
+offset_right = 424.0
+offset_bottom = 61.0
+texture = ExtResource("10_12af0")
+
+[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/Powerup_Reroll_Button/Box"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(300, 50)
-texture = ExtResource("15_hy6ya")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/RerollButton/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("16_12wdd")
-theme_override_font_sizes/font_size = 32
-text = "Reroll (1 remaining)"
+theme_override_font_sizes/font_size = 36
+text = "Powerup Reroll (1)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PowerupRerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(540, 70)
+[node name="Border" type="TextureRect" parent="RerollsHBoxContainer/Powerup_Reroll_Button/Box"]
+self_modulate = Color(1, 0.964706, 0.815686, 1)
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 61.0
+texture = ExtResource("11_qvsua")
+
+[node name="Reroll_Button" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("box", "label")]
+custom_minimum_size = Vector2(399, 109)
 layout_mode = 2
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32
-text = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":15,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":2,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":ExtResource("16_12wdd"),"theme_type_variation":&"","theme_override_font_sizes/font_size":28,"text":"Powerup Reroll (1 remaining)","label_settings":null,"horizontal_alignment":1,"vertical_alignment":1,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+script = ExtResource("7_5h60w")
+box = NodePath("Box")
+height = 5.0
+label = NodePath("Box/Reroll_Label")
 
-script = ExtResource("16_513rf")
-label = NodePath("TextureRect")
-texture = NodePath("TextureRect")
-text = NodePath("TextureRect/Reroll_Label")
+[node name="Shadow" type="TextureRect" parent="RerollsHBoxContainer/Reroll_Button"]
+self_modulate = Color(0.698039, 0.584314, 0.45098, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(338, 86)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 399.0
+offset_bottom = 114.0
+texture = ExtResource("7_01par")
 
-[node name="TextureRect" type="TextureRect" parent="RerollsHBoxContainer/PowerupRerollButton"]
+[node name="Box" type="TextureRect" parent="RerollsHBoxContainer/Reroll_Button"]
+self_modulate = Color(0.941176, 0.388235, 0.533333, 1)
+custom_minimum_size = Vector2(399, 109)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(300, 50)
-texture = ExtResource("15_hy6ya")
-expand_mode = 1
-stretch_mode = 5
+texture = ExtResource("7_01par")
 
-[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/PowerupRerollButton/TextureRect"]
+[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/Reroll_Button/Box"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,36 +176,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("16_12wdd")
-theme_override_font_sizes/font_size = 28
-text = "Powerup Reroll (1 remaining)"
+theme_override_font_sizes/font_size = 64
+text = "Reroll (1)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ArtifactRerollButton" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("label", "texture", "text")]
-custom_minimum_size = Vector2(540, 70)
+[node name="Border" type="TextureRect" parent="RerollsHBoxContainer/Reroll_Button/Box"]
+self_modulate = Color(1, 0.964706, 0.815686, 1)
+layout_mode = 0
+offset_right = 399.0
+offset_bottom = 109.0
+texture = ExtResource("8_qckrs")
+
+[node name="Charm_Reroll_Button" type="Button" parent="RerollsHBoxContainer" node_paths=PackedStringArray("box", "label")]
+custom_minimum_size = Vector2(424, 61)
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("16_12wdd")
 theme_override_font_sizes/font_size = 32
-text = Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":2,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":15,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":0.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":2,"grow_vertical":2,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":ExtResource("16_12wdd"),"theme_type_variation":&"","theme_override_font_sizes/font_size":28,"text":"Charm Reroll (1 remaining)","label_settings":null,"horizontal_alignment":1,"vertical_alignment":1,"autowrap_mode":0,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"ellipsis_char":"…","uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+script = ExtResource("7_5h60w")
+box = NodePath("Box")
+height = 5.0
+label = NodePath("Box/Reroll_Label")
 
-script = ExtResource("16_513rf")
-label = NodePath("TextureRect")
-texture = NodePath("TextureRect")
-text = NodePath("TextureRect/Reroll_Label")
+[node name="Shadow" type="TextureRect" parent="RerollsHBoxContainer/Charm_Reroll_Button"]
+self_modulate = Color(0.698039, 0.584314, 0.45098, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_top = 5.0
+offset_right = 424.0
+offset_bottom = 66.0
+texture = ExtResource("10_12af0")
 
-[node name="TextureRect" type="TextureRect" parent="RerollsHBoxContainer/ArtifactRerollButton"]
+[node name="Box" type="TextureRect" parent="RerollsHBoxContainer/Charm_Reroll_Button"]
+self_modulate = Color(0.807843, 0.513726, 0.803922, 1)
+custom_minimum_size = Vector2(424, 61)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(300, 50)
-texture = ExtResource("15_hy6ya")
-expand_mode = 1
-stretch_mode = 5
+offset_right = 424.0
+offset_bottom = 61.0
+texture = ExtResource("10_12af0")
 
-[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/ArtifactRerollButton/TextureRect"]
+[node name="Reroll_Label" type="Label" parent="RerollsHBoxContainer/Charm_Reroll_Button/Box"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -195,10 +224,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("16_12wdd")
-theme_override_font_sizes/font_size = 28
-text = "Charm Reroll (1 remaining)"
+theme_override_font_sizes/font_size = 36
+text = "Charm Reroll (1)"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Border" type="TextureRect" parent="RerollsHBoxContainer/Charm_Reroll_Button/Box"]
+self_modulate = Color(1, 0.964706, 0.815686, 1)
+layout_mode = 0
+offset_right = 424.0
+offset_bottom = 61.0
+texture = ExtResource("11_qvsua")
 
 [node name="PlayersSelectingUpgrades" type="Control" parent="."]
 visible = false
@@ -260,12 +296,6 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_vertical = 4
 
-[connection signal="button_down" from="RerollsHBoxContainer/RerollButton" to="." method="_on_reroll_button_down"]
-[connection signal="mouse_entered" from="RerollsHBoxContainer/RerollButton" to="RerollsHBoxContainer/RerollButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="RerollsHBoxContainer/RerollButton" to="RerollsHBoxContainer/RerollButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="RerollsHBoxContainer/PowerupRerollButton" to="." method="_on_powerup_reroll_button_down"]
-[connection signal="mouse_entered" from="RerollsHBoxContainer/PowerupRerollButton" to="RerollsHBoxContainer/PowerupRerollButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="RerollsHBoxContainer/PowerupRerollButton" to="RerollsHBoxContainer/PowerupRerollButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="RerollsHBoxContainer/ArtifactRerollButton" to="." method="_on_artifact_reroll_button_down"]
-[connection signal="mouse_entered" from="RerollsHBoxContainer/ArtifactRerollButton" to="RerollsHBoxContainer/ArtifactRerollButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="RerollsHBoxContainer/ArtifactRerollButton" to="RerollsHBoxContainer/ArtifactRerollButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="RerollsHBoxContainer/Powerup_Reroll_Button" to="." method="_on_powerup_reroll_button_down"]
+[connection signal="button_down" from="RerollsHBoxContainer/Reroll_Button" to="." method="_on_reroll_button_down"]
+[connection signal="button_down" from="RerollsHBoxContainer/Charm_Reroll_Button" to="." method="_on_artifact_reroll_button_down"]

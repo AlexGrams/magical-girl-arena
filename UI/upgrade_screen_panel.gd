@@ -15,11 +15,11 @@ const ARTIFACT_DATA_PATH: String = "res://Artifacts/ArtifactDataResourceFiles/"
 ## Parent of the upgrade panel UI objects.
 @export var upgrade_panels_holder: Control = null
 ## Button for rerolling the provided upgrades.
-@export var reroll_button: ButtonHover = null
+@export var reroll_button: Button = null
 ## Button for rerolling and getting only Powerups.
-@export var powerup_reroll_button: ButtonHover = null
+@export var powerup_reroll_button: Button = null
 ## Button for rerolling and getting only Artifacts.
-@export var artifact_reroll_button: ButtonHover = null
+@export var artifact_reroll_button: Button = null
 ## Window that shows up saying how many players are still choosing upgrades.
 @export var players_selecting_upgrades_window: Control = null
 ## Parent of the PlayReadyIndicators
@@ -411,21 +411,21 @@ func _request_artifact_reroll_upgrade_choices(previous_upgrade_names: Array[Stri
 ## Update the text on the Reroll button
 func _update_reroll_button() -> void:
 	var rerolls = _player_character.get_rerolls()
-	reroll_button.set_text("Reroll (" + str(rerolls) + " remaining)")
+	reroll_button.set_new_text("Reroll (" + str(rerolls) + ")")
 	reroll_button.set_interactable(rerolls > 0)
 
 
 ## Update the text on the Powerup Reroll button.
 func _update_powerup_reroll_button() -> void:
 	var powerup_rerolls = GameState.powerup_rerolls
-	powerup_reroll_button.set_text("Powerup Reroll (" + str(powerup_rerolls) + " remaining)")
+	powerup_reroll_button.set_new_text("Powerup Reroll (" + str(powerup_rerolls) + ")")
 	powerup_reroll_button.set_interactable(powerup_rerolls > 0)
 
 
 ## Update the text on the Artifact Reroll button.
 func _update_artifact_reroll_button() -> void:
 	var artifact_rerolls = GameState.artifact_rerolls
-	artifact_reroll_button.set_text("Charm Reroll (" + str(artifact_rerolls) + " remaining)")
+	artifact_reroll_button.set_new_text("Charm Reroll (" + str(artifact_rerolls) + ")")
 	artifact_reroll_button.set_interactable(
 			artifact_rerolls > 0 
 			and len(_player_character.artifacts) < PlayerCharacterBody2D.MAX_ARTIFACTS

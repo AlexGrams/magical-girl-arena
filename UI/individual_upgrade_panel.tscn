@@ -1,68 +1,406 @@
-[gd_scene load_steps=10 format=3 uid="uid://14cc171vx3nh"]
+[gd_scene load_steps=21 format=3 uid="uid://14cc171vx3nh"]
 
 [ext_resource type="Script" path="res://UI/individual_upgrade_panel.gd" id="1_if0al"]
 [ext_resource type="Texture2D" uid="uid://congsqapd8rjp" path="res://icon.svg" id="1_ux83s"]
-[ext_resource type="Texture2D" uid="uid://rmyvbbsb57l4" path="res://Sprites/UI/CharacterInfoPanel.png" id="3_5aaq8"]
+[ext_resource type="Texture2D" uid="uid://xvisucisatwi" path="res://Sprites/UI/Upgrade_Background_Red.png" id="2_1mke6"]
+[ext_resource type="Texture2D" uid="uid://dcoo48xjf05ma" path="res://Sprites/UI/Upgrade_Background_Lavender.png" id="3_0cvw4"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_e82gu"]
+[ext_resource type="Texture2D" uid="uid://dd1s86sfpx4kf" path="res://Sprites/UI/Upgrade_Shadow_White.png" id="4_io14r"]
+[ext_resource type="Texture2D" uid="uid://dj7v1d6k471eq" path="res://Sprites/UI/Upgrade_Panel_Border.png" id="4_pppdp"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="5_nxuy7"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="7_s8mrw"]
-[ext_resource type="Script" path="res://UI/button_hover.gd" id="8_51mjh"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckqs1"]
+[sub_resource type="Animation" id="Animation_ye1f3"]
+resource_name = "hover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10)]
+}
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_arx2e"]
-texture = ExtResource("3_5aaq8")
+[sub_resource type="Animation" id="Animation_2p8fq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Box/Border:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.811765, 0.439216, 1)]
+}
 
-[node name="IndividualUpgradePanel" type="Panel"]
-custom_minimum_size = Vector2(240, 348)
-offset_right = 240.0
-offset_bottom = 348.0
-size_flags_vertical = 9
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ckqs1")
-script = ExtResource("1_if0al")
+[sub_resource type="Animation" id="Animation_kgxny"]
+resource_name = "press"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Box/Border:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[node name="Box" type="PanelContainer" parent="."]
-layout_mode = 1
+[sub_resource type="Animation" id="Animation_pwk74"]
+resource_name = "unpress"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Box/Border:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.811765, 0.439216, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vwuve"]
+resource_name = "unhover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sdlt"]
+_data = {
+"RESET": SubResource("Animation_2p8fq"),
+"hover": SubResource("Animation_ye1f3"),
+"press": SubResource("Animation_kgxny"),
+"unhover": SubResource("Animation_vwuve"),
+"unpress": SubResource("Animation_pwk74")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ylfp"]
+bg_color = Color(1, 0.905882, 0.52549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vxh4"]
+bg_color = Color(1, 0.552941, 0.67451, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tkcw"]
+bg_color = Color(0.686275, 0.858824, 0.678431, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3tr4"]
+bg_color = Color(0.709804, 0.533333, 0.866667, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mtyp"]
+bg_color = Color(0.615686, 0.768627, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Box" type="Control" node_paths=PackedStringArray("_item_label", "_item_image", "_item_desc", "_item_traits")]
+custom_minimum_size = Vector2(338, 464)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1582.0
+offset_bottom = -616.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(119, 174)
-theme_override_styles/panel = SubResource("StyleBoxTexture_arx2e")
+script = ExtResource("1_if0al")
+_item_label = NodePath("Box/Name_Label")
+_item_image = NodePath("Box/TextureRect")
+_item_desc = NodePath("Box/Description_Label")
+_item_traits = NodePath("Box/Traits_Container")
+_powerup_card_texture = ExtResource("2_1mke6")
+_charm_card_texture = ExtResource("3_0cvw4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Box"]
-z_index = 3
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3sdlt")
+}
+speed_scale = 6.667
 
-[node name="Name_Label" type="Label" parent="Box/VBoxContainer"]
-custom_minimum_size = Vector2(0, 19)
+[node name="Shadow" type="TextureRect" parent="."]
+self_modulate = Color(0.486275, 0.396078, 0.027451, 1)
+layout_mode = 0
+offset_top = 10.0
+offset_right = 338.0
+offset_bottom = 474.0
+texture = ExtResource("4_io14r")
+
+[node name="Box" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 464.0
+texture = ExtResource("2_1mke6")
+
+[node name="Name_Label" type="Label" parent="Box"]
+custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
+offset_left = 18.0
+offset_top = 28.0
+offset_right = 320.0
+offset_bottom = 66.0
 theme = ExtResource("3_e82gu")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.666667, 0.207843, 0.207843, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 32
 text = "Powerup_Name"
 horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Box/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Box"]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+offset_top = 91.0
+offset_right = 338.0
+offset_bottom = 241.0
 texture = ExtResource("1_ux83s")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Box/VBoxContainer"]
-layout_mode = 2
-
-[node name="Description_Label" type="Label" parent="Box/VBoxContainer/MarginContainer"]
+[node name="Description_Label" type="Label" parent="Box"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+offset_left = 18.0
+offset_top = 278.0
+offset_right = 318.0
+offset_bottom = 383.0
 theme = ExtResource("5_nxuy7")
-text = "Description of powerup and its effects (or, description of upgraded stats)"
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "This is a long powerup description that the player would read and learn what it does"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="." node_paths=PackedStringArray("label")]
+[node name="Traits_Container" type="HFlowContainer" parent="Box"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 389.0
+offset_right = 318.0
+offset_bottom = 472.0
+alignment = 1
+
+[node name="Fire_Rate" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6ylfp")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Fire_Rate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nxuy7")
+theme_override_colors/font_color = Color(0.486275, 0.396078, 0.027451, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Fire Rate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Haste" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3vxh4")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Haste"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nxuy7")
+theme_override_colors/font_color = Color(0.45098, 0.145098, 0.231373, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Haste"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area_Size" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4tkcw")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Area_Size"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nxuy7")
+theme_override_colors/font_color = Color(0.262745, 0.34902, 0.258824, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Area Size"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Critical" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3tr4")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Critical"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nxuy7")
+theme_override_colors/font_color = Color(0.215686, 0.160784, 0.262745, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Critical"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Energy" type="Panel" parent="Box/Traits_Container"]
+visible = false
+custom_minimum_size = Vector2(95, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mtyp")
+
+[node name="Label" type="Label" parent="Box/Traits_Container/Energy"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -11.5
+offset_right = 39.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nxuy7")
+theme_override_colors/font_color = Color(0.176471, 0.313726, 0.517647, 1)
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+text = "Energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Border" type="TextureRect" parent="Box"]
+self_modulate = Color(1, 0.811765, 0.439216, 1)
+layout_mode = 0
+offset_right = 338.0
+offset_bottom = 464.0
+texture = ExtResource("4_pppdp")
+
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,9 +408,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_s8mrw")
-script = ExtResource("8_51mjh")
-label = NodePath("../Box")
 
-[connection signal="mouse_entered" from="Button" to="Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="Button" method="_on_mouse_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_hover"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_hover_exit"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
