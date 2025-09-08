@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Artifacts/artifactdata.gd" id="1_0lx7s"]
 [ext_resource type="PackedScene" uid="uid://dqxfe2epc4k6v" path="res://Artifacts/artifact_ultimate_cooldown.tscn" id="1_nwajm"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="3_vlyn3"]
+[ext_resource type="Texture2D" uid="uid://5r6ltbyiei5l" path="res://Sprites/Powerups/Stats/Ultimate_Cooldown_Icon.png" id="3_tndlm"]
 
 [resource]
 script = ExtResource("1_0lx7s")
@@ -10,4 +10,4 @@ _description = "Reduces the cooldown of your ultimate by half."
 is_unique = false
 scene = ExtResource("1_nwajm")
 name = "Ultimate Cooldown"
-sprite = ExtResource("3_vlyn3")
+sprite = ExtResource("3_tndlm")
