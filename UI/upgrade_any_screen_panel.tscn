@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4jud6w0o3w2p"]
+[gd_scene load_steps=6 format=3 uid="uid://b4jud6w0o3w2p"]
 
 [ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="1_avhuc"]
 [ext_resource type="Script" path="res://UI/upgrade_any_screen_panel.gd" id="1_i4xxx"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="3_85148"]
 [ext_resource type="Theme" uid="uid://16ovb44akcwm" path="res://Sprites/UI/description_white_text.tres" id="3_w0w2l"]
 [ext_resource type="PackedScene" uid="uid://b4qjjq0v6o2kw" path="res://UI/player_ready_indicator.tscn" id="4_7fkfb"]
 
@@ -14,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i4xxx")
 _upgrades_holder = NodePath("ScrollContainer")
-_upgrade_any_screen_button_container = NodePath("ScrollContainer/UpgradeAnyGridContainer")
+_upgrade_any_screen_button_container = NodePath("ScrollContainer/VBoxContainer/UpgradeAnyGridContainer")
 _players_selecting_upgrades_window = NodePath("PlayersSelectingUpgrades")
 _player_ready_indicator_holder = NodePath("PlayersSelectingUpgrades/ReadyIndicatorContainer")
 _upgrade_any_button = "res://UI/upgrade_any_button.tscn"
@@ -34,10 +35,22 @@ offset_bottom = 327.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_avhuc")
+horizontal_scroll_mode = 0
 
-[node name="UpgradeAnyGridContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
-columns = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_85148")
+theme_override_font_sizes/font_size = 64
+text = "Choose any powerup!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeAnyGridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+columns = 4
 
 [node name="PlayersSelectingUpgrades" type="Control" parent="."]
 visible = false

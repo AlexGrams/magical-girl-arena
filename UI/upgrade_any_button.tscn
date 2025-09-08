@@ -1,16 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://1bskhek3pxh0"]
+[gd_scene load_steps=6 format=3 uid="uid://1bskhek3pxh0"]
 
 [ext_resource type="Script" path="res://UI/upgrade_any_button.gd" id="1_0cbwf"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="1_dvryy"]
+[ext_resource type="Texture2D" uid="uid://dd1s86sfpx4kf" path="res://Sprites/UI/Upgrade_Shadow_White.png" id="2_0v78e"]
 [ext_resource type="Texture2D" uid="uid://fcsg3jfovdfw" path="res://Sprites/Powerups/Puddle2.png" id="2_pmp2f"]
+[ext_resource type="Texture2D" uid="uid://dj7v1d6k471eq" path="res://Sprites/UI/Upgrade_Panel_Border.png" id="3_lb3va"]
 
-[node name="UpgradeAnyPowerupButton" type="Button" node_paths=PackedStringArray("_texture")]
-custom_minimum_size = Vector2(240, 240)
+[node name="UpgradeAnyPowerupButton" type="Button" node_paths=PackedStringArray("_texture", "box")]
+custom_minimum_size = Vector2(300, 300)
 offset_right = 300.0
 offset_bottom = 300.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_dvryy")
 script = ExtResource("1_0cbwf")
-_texture = NodePath("TextureRect")
+_texture = NodePath("Background/TextureRect")
+box = NodePath("Background")
+height = 10.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Shadow" type="TextureRect" parent="."]
+self_modulate = Color(0.486275, 0.396078, 0.027451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_0v78e")
+expand_mode = 1
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.890196, 0.278431, 0.278431, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +41,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("2_0v78e")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_pmp2f")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Border" type="TextureRect" parent="Background"]
+self_modulate = Color(1, 0.811765, 0.439216, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_lb3va")
+expand_mode = 1

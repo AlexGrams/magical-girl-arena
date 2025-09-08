@@ -1,5 +1,5 @@
 class_name UpgradeAnyPowerupButton
-extends Button
+extends ButtonBlockPress
 ## Button to add or upgrade any powerup.
 
 
@@ -20,6 +20,7 @@ func set_powerup(powerup: PowerupData):
 
 
 func _ready() -> void:
+	super()
 	button_down.connect(func():
 		GameState.get_local_player().upgrade_or_grant_powerup(_powerup)
 		upgrade_chosen.emit()

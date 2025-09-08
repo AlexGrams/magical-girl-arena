@@ -1,3 +1,4 @@
+class_name ButtonBlockPress
 extends BaseButton
 ## A button that looks like a physical keyboard button.
 
@@ -28,7 +29,8 @@ func set_interactable(is_interactable:bool) -> void:
 
 ## Set the text on this button's label.
 func set_new_text(new_text: String) -> void:
-	label.text = new_text
+	if label != null:
+		label.text = new_text
 
 func _on_button_hover() -> void:
 	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER, true)
