@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://wwgkur1luk4y" path="res://Artifacts/artifact_powerup_critical.tscn" id="1_xmf2y"]
 [ext_resource type="Script" path="res://Artifacts/artifactdata_powerup_critical.gd" id="2_nrsy5"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_1fmrp"]
+[ext_resource type="Texture2D" uid="uid://b7oieuc0dgcu2" path="res://Sprites/Powerups/Stats/Powerup_Critical_Icon.png" id="3_pgi8c"]
 
 [resource]
 script = ExtResource("2_nrsy5")
@@ -10,4 +10,4 @@ _description = "Powerup can now critically hit."
 is_unique = false
 scene = ExtResource("1_xmf2y")
 name = "Powerup Critical"
-sprite = ExtResource("3_1fmrp")
+sprite = ExtResource("3_pgi8c")
