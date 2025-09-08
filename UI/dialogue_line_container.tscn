@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://pwy6ptllctsm"]
+[gd_scene load_steps=8 format=3 uid="uid://pwy6ptllctsm"]
 
 [ext_resource type="Theme" uid="uid://cueel4op712bq" path="res://Sprites/UI/dialogue_line_container.tres" id="1_nyfvi"]
 [ext_resource type="Script" path="res://UI/dialogue_line_container.gd" id="1_up2r7"]
+[ext_resource type="Texture2D" uid="uid://tfkngy66aejj" path="res://Sprites/UI/DialogueBox.png" id="3_wjcwe"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="3_yf0ur"]
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="4_ge4jx"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="4_uypca"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_djc8x"]
+texture = ExtResource("3_wjcwe")
 
 [node name="DialogueLineContainer" type="Control" node_paths=PackedStringArray("_main_control", "_portrait", "_portrait_bg", "_text")]
 clip_children = 2
@@ -30,6 +34,7 @@ offset_bottom = 198.0
 pivot_offset = Vector2(0, 99)
 size_flags_horizontal = 0
 theme = ExtResource("1_nyfvi")
+theme_override_styles/panel = SubResource("StyleBoxTexture_djc8x")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainPanel"]
 layout_mode = 1
