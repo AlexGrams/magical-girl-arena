@@ -25,7 +25,7 @@ var _last_hit: Node = null
 
 
 func _ready() -> void:
-	pass
+	sprite.scale = Vector2(0.15 * _bounces, 0.6) 
 
 
 func _process(delta: float) -> void:
