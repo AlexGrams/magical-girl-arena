@@ -11,7 +11,10 @@ extends Node2D
 ## Tags used to describe different Powerups.
 enum Type {
 	NULL,
-	ProjectileFireRate
+	ProjectileFireRate,
+	Haste,
+	AreaSize,
+	Critical
 }
 
 ## The highest level that this powerup can be upgraded to.
