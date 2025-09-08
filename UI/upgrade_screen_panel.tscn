@@ -296,6 +296,6 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_vertical = 4
 
-[connection signal="button_down" from="RerollsHBoxContainer/Powerup_Reroll_Button" to="." method="_on_powerup_reroll_button_down"]
-[connection signal="button_down" from="RerollsHBoxContainer/Reroll_Button" to="." method="_on_reroll_button_down"]
-[connection signal="button_down" from="RerollsHBoxContainer/Charm_Reroll_Button" to="." method="_on_artifact_reroll_button_down"]
+[connection signal="pressed" from="RerollsHBoxContainer/Powerup_Reroll_Button" to="." method="_on_powerup_reroll_button_down"]
+[connection signal="pressed" from="RerollsHBoxContainer/Reroll_Button" to="." method="_on_reroll_button_down"]
+[connection signal="pressed" from="RerollsHBoxContainer/Charm_Reroll_Button" to="." method="_on_artifact_reroll_button_down"]
