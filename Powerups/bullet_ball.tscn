@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://03t7bik2w3e7"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_ball.gd" id="1_m1a7e"]
-[ext_resource type="Texture2D" uid="uid://7bntobsawxb1" path="res://Coconut.png" id="2_52mfi"]
+[ext_resource type="Texture2D" uid="uid://cwr3r4086n1w" path="res://Watermelon.png" id="2_2dku0"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_awor3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2vfia"]
@@ -51,7 +51,7 @@ sprite = NodePath("SpriteHolderNode2D/Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteHolderNode2D"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_52mfi")
+texture = ExtResource("2_2dku0")
 
 [node name="BulletHitbox" type="Area2D" parent="."]
 collision_layer = 0
