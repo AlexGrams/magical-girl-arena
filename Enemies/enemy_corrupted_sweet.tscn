@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://cwxh1lqgmuu3q"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_corrupted.gd" id="1_akkuy"]
+[ext_resource type="Texture2D" uid="uid://btglro3q8qj50" path="res://Sprites/UI/CharacterIcons/SweetCorruptedIcon.png" id="2_2jwgb"]
 [ext_resource type="PackedScene" uid="uid://cwisr0ykkkrhm" path="res://Sprites/Enemy/darkness_particles.tscn" id="2_w4lhd"]
 [ext_resource type="PackedScene" uid="uid://5k17n100mrgw" path="res://UI/character_animated_sprite.tscn" id="2_ween3"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="2_xcuvf"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5dc1m"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -59,7 +59,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_akkuy")
 corrupted_lifetime = 60.0
 default_powerup_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_revolving.tres"
-_icon = ExtResource("2_xcuvf")
+_icon = ExtResource("2_2jwgb")
 _character = 1
 max_range = 200.0
 allied_bullet_scene_path = ""
