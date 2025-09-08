@@ -5,5 +5,5 @@
 [node name="PowerupBall" type="Node2D"]
 script = ExtResource("1_pekuw")
 _bullet_scene = "res://Powerups/bullet_ball.tscn"
-damage_levels = Array[float]([75.0, 100.0, 125.0, 150.0, 175.0])
+damage_levels = Array[float]([75.0, 125.0, 175.0, 225.0, 275.0])
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_ball.tres"
