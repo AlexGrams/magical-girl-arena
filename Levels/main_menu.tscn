@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=47 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -16,7 +16,8 @@
 [ext_resource type="Script" path="res://Levels/option_button.gd" id="13_r3p63"]
 [ext_resource type="Texture2D" uid="uid://cxov8kqfns1px" path="res://Sprites/HeartPickup.png" id="14_ddmg2"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="14_kechk"]
-[ext_resource type="Texture2D" uid="uid://gmw05mw84nou" path="res://Blueberry.png" id="15_r5lin"]
+[ext_resource type="Texture2D" uid="uid://cq3fw4fw8gv43" path="res://Sprites/UI/Checkbox_Checked.png" id="15_40lvl"]
+[ext_resource type="Texture2D" uid="uid://cx48v0id4pw6e" path="res://Sprites/UI/Checkbox_Unchecked.png" id="16_3yib8"]
 [ext_resource type="Texture2D" uid="uid://gqmq0xcaf7f0" path="res://Sprites/Revive_Ring_Glowing.png" id="17_1i823"]
 [ext_resource type="Texture2D" uid="uid://3mlclc2wm64s" path="res://Sprites/GoldCoin.png" id="17_7br78"]
 [ext_resource type="Texture2D" uid="uid://d34o8l8qhaix1" path="res://Sprites/Revive_Ring.png" id="17_qad3k"]
@@ -551,8 +552,8 @@ layout_mode = 2
 [node name="Opacity" type="Label" parent="Settings/VBoxContainer/BulletOpacityContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
-theme_override_font_sizes/font_size = 42
-text = "Other players' bullet opacity"
+theme_override_font_sizes/font_size = 56
+text = "Ally Powerup Opacity"
 metadata/_edit_group_ = true
 
 [node name="Spacer" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
@@ -637,8 +638,8 @@ size_flags_horizontal = 4
 [node name="ShowHitboxCheckBox" type="CheckBox" parent="Settings/VBoxContainer/ShowHitboxContainer"]
 layout_mode = 2
 theme_override_constants/icon_max_width = 0
-theme_override_icons/checked = ExtResource("14_ddmg2")
-theme_override_icons/unchecked = ExtResource("15_r5lin")
+theme_override_icons/checked = ExtResource("15_40lvl")
+theme_override_icons/unchecked = ExtResource("16_3yib8")
 
 [node name="ReturntoMainMenu_Label" type="Label" parent="Settings"]
 layout_mode = 0
