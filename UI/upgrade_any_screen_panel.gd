@@ -48,6 +48,7 @@ func _ready() -> void:
 func setup() -> void:
 	_cheat_mode = false
 	_players_selecting_upgrades_window.hide()
+	GameState.playground.hud_canvas_layer.hide_information_panel()
 	_upgrades_holder.show()
 	
 	# Disable buttons if the player can't upgrade or select them.

@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vp378")
 _powerup_panels = [NodePath("Powerup_HFlowContainer/Box"), NodePath("Powerup_HFlowContainer/Box2"), NodePath("Powerup_HFlowContainer/Box3"), NodePath("Powerup_HFlowContainer/Box4"), NodePath("Powerup_HFlowContainer/Box5")]
 _charm_panels = [NodePath("Charm_HFlowContainer/CharmBox"), NodePath("Charm_HFlowContainer/CharmBox2"), NodePath("Charm_HFlowContainer/CharmBox3")]

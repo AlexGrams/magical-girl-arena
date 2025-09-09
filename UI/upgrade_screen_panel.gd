@@ -117,6 +117,7 @@ func setup():
 	reroll_button.show()
 	powerup_reroll_button.show()
 	artifact_reroll_button.show()
+	GameState.playground.hud_canvas_layer.hide_information_panel()
 	
 	# Set up PlayerReadyIndicator icons
 	for i in range(GameState.connected_players):
