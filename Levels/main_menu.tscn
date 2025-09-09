@@ -355,6 +355,9 @@ texture = SubResource("ViewportTexture_k0lfe")
 flip_h = true
 
 [node name="GDCubismUserModel" parent="Main/CharacterAnimatedSprite" index="0"]
+Blink = 0.0
+Torso_UpDown = 0.5
+Torso_Sway = 0.5
 size = Vector2i(1000, 1500)
 
 [node name="CharacterLabel" type="Label" parent="Main"]
