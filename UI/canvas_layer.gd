@@ -28,6 +28,8 @@ extends CanvasLayer
 @export var _dialogue_box: DialogueBox = null
 ## When visible, turns the screen gray.
 @export var _grayscale_filter: ColorRect = null
+## Shows information about owned Powerups and Charms.
+@export var _powerup_information: PowerupInformationPanel = null
 ## For the Upgrade Any Powerup screen.
 @export var upgrade_any_screen: UpgradeAnyScreenPanel = null
 @export var _pointer_scene: String = ""
@@ -385,6 +387,14 @@ func hide_boss_health_bar() -> void:
 func update_boss_health_bar(health_percent: float) -> void:
 	_boss_health_bar.value = health_percent
 	_boss_health_text.text = str(ceil(health_percent * 100.0)) + "%"
+
+
+func show_information_panel() -> void:
+	_powerup_information.show()
+
+
+func hide_information_panel() -> void:
+	_powerup_information.hide()
 
 
 ## Start a dialogue through the DialogueBox. Only call on server.

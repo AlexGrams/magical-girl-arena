@@ -363,6 +363,12 @@ func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
 	
+	# Powerup information
+	if event.is_action_pressed("show_powerup_information"):
+		GameState.playground.hud_canvas_layer.show_information_panel()
+	elif event.is_action_released("show_powerup_information"):
+		GameState.playground.hud_canvas_layer.hide_information_panel()
+	
 	if is_down:
 		return
 	

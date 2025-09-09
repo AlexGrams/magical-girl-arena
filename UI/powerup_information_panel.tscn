@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2b1awtmh6bsu"]
+[gd_scene load_steps=3 format=3 uid="uid://d2b1awtmh6bsu"]
 
 [ext_resource type="PackedScene" uid="uid://wpyn7rbaht3m" path="res://UI/individual_information_panel.tscn" id="1_0gtxb"]
+[ext_resource type="Script" path="res://UI/powerup_information_panel.gd" id="1_vp378"]
 
 [node name="Information_Panel" type="Panel"]
 process_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vp378")
 
 [node name="Powerup_HFlowContainer" type="HFlowContainer" parent="."]
 layout_mode = 1

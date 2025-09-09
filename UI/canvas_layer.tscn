@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://divvdkhiu21h6"]
+[gd_scene load_steps=34 format=3 uid="uid://divvdkhiu21h6"]
 
 [ext_resource type="Script" path="res://UI/canvas_layer.gd" id="1_miafi"]
 [ext_resource type="Texture2D" uid="uid://dpw7xkercpex7" path="res://Sprites/UI/ArrowHUD.png" id="2_awuf7"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cyi3kj48dlj1x" path="res://UI/dialogue_box.tscn" id="18_pupem"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="19_a0q6r"]
 [ext_resource type="Shader" path="res://UI/canvas_layer_gray.gdshader" id="20_frtdc"]
+[ext_resource type="PackedScene" uid="uid://d2b1awtmh6bsu" path="res://UI/powerup_information_panel.tscn" id="22_abwgo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_42vy1"]
 shader = ExtResource("20_frtdc")
@@ -44,6 +45,45 @@ modulate_color = Color(0.392157, 0.392157, 0.392157, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hg4wy"]
 texture = SubResource("GradientTexture1D_nc5ny")
+
+[sub_resource type="Animation" id="Animation_oqmab"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ultimate_Icon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ultimate_Icon:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_kly4r"]
 resource_name = "spin"
@@ -97,45 +137,6 @@ tracks/3/keys = {
 "values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_oqmab"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ultimate_Icon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Ultimate_Icon:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_erabh"]
 _data = {
 "RESET": SubResource("Animation_oqmab"),
@@ -145,7 +146,7 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_ultimate_anim_player", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_grayscale_filter", "upgrade_any_screen")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("_game_over_screen", "_retry_votes_container", "_timer_text", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_ultimate_anim_player", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_grayscale_filter", "_powerup_information", "upgrade_any_screen")]
 script = ExtResource("1_miafi")
 _game_over_screen = NodePath("GameOverScreen")
 _retry_votes_container = NodePath("GameOverScreen/ButtonContainer/RetryButton/RetryVotesContainer")
@@ -161,6 +162,7 @@ _boss_health_bar = NodePath("BossHealthBar")
 _boss_health_text = NodePath("BossHealthBar/BossHealthLabel")
 _dialogue_box = NodePath("DialogueBox")
 _grayscale_filter = NodePath("GrayscaleColorRect")
+_powerup_information = NodePath("Information_Panel")
 upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
 _pointer_scene = "res://UI/pointer_texture_rect.tscn"
 _pointer_icon_scene = "res://UI/pointer_icon_texture_rect.tscn"
@@ -717,7 +719,6 @@ vertical_alignment = 1
 
 [node name="GameOverScreen" type="Control" parent="." node_paths=PackedStringArray("text")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -912,6 +913,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DialogueBox" parent="." instance=ExtResource("18_pupem")]
+
+[node name="Information_Panel" parent="." instance=ExtResource("22_abwgo")]
+visible = false
 
 [connection signal="mouse_entered" from="GameOverScreen/ButtonContainer/RetryButton" to="GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="GameOverScreen/ButtonContainer/RetryButton" to="GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_exited"]
