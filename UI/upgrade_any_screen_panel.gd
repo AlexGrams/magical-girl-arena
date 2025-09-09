@@ -52,6 +52,8 @@ func setup() -> void:
 	_upgrades_holder.show()
 	
 	# Disable buttons if the player can't upgrade or select them.
+	# Conditions are 1. Player is maxed on powerups and can't get a new one, 2. Powerup is 
+	# owned by is max level, 3. Powerup is multiplayer but player is in singleplayer.
 	var player: PlayerCharacterBody2D = GameState.get_local_player()
 	var max_level_powerups: Array[String] = []
 	var owned_upgradable_powerups: Array[String] = []
@@ -67,6 +69,7 @@ func setup() -> void:
 		if (
 				(max_powerups and upgrade_button.get_powerup().name not in owned_upgradable_powerups)
 				or (upgrade_button.get_powerup().name in max_level_powerups)
+				or (GameState.connected_players == 1 and upgrade_button.get_powerup().is_multiplayer)
 		):
 			upgrade_button.hide()
 	
