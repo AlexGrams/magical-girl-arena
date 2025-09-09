@@ -1,3 +1,4 @@
+class_name IndividualInformationPanel
 extends Control
 
 ## Powerup/charm name

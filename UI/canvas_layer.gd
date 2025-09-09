@@ -351,6 +351,8 @@ func add_powerup(powerup_data: PowerupData) -> void:
 			_powerup_display_index[powerup_data.name] = i
 			
 			break
+	
+	_powerup_information.add_powerup_information(powerup_data)
 
 
 ## Update the UI display for a Powerup's level
@@ -367,6 +369,8 @@ func add_artifact(artifact_data: ArtifactData) -> void:
 		if icon.texture == null:
 			icon.texture = artifact_data.sprite
 			break
+	
+	_powerup_information.add_charm_information(artifact_data)
 
 
 ## Display the boss health bar. Health percent = [0, 1].

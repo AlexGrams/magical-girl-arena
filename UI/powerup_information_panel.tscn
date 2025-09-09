@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://wpyn7rbaht3m" path="res://UI/individual_information_panel.tscn" id="1_0gtxb"]
 [ext_resource type="Script" path="res://UI/powerup_information_panel.gd" id="1_vp378"]
 
-[node name="Information_Panel" type="Panel"]
+[node name="Information_Panel" type="Panel" node_paths=PackedStringArray("_powerup_panels", "_charm_panels")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vp378")
+_powerup_panels = [NodePath("Powerup_HFlowContainer/Box"), NodePath("Powerup_HFlowContainer/Box2"), NodePath("Powerup_HFlowContainer/Box3"), NodePath("Powerup_HFlowContainer/Box4"), NodePath("Powerup_HFlowContainer/Box5")]
+_charm_panels = [NodePath("Charm_HFlowContainer/CharmBox"), NodePath("Charm_HFlowContainer/CharmBox2"), NodePath("Charm_HFlowContainer/CharmBox3")]
 
 [node name="Powerup_HFlowContainer" type="HFlowContainer" parent="."]
 layout_mode = 1
@@ -55,11 +57,11 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 alignment = 1
 
-[node name="Box" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+[node name="CharmBox" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
 layout_mode = 2
 
-[node name="Box2" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+[node name="CharmBox2" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
 layout_mode = 2
 
-[node name="Box3" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
+[node name="CharmBox3" parent="Charm_HFlowContainer" instance=ExtResource("1_0gtxb")]
 layout_mode = 2
