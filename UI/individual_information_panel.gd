@@ -22,10 +22,13 @@ var _itemdata: ItemData = null
 ## Displays which Powerup or Stat this button will upgrade when clicked.
 func set_upgrade(upgrade: ItemData) -> void:
 	_itemdata = upgrade
+	
+	# Special hack logic for displaying description if item is the critical artifact since the
+	# same artifact can have multiple descriptions.
 	_set_display(
 			_itemdata.name, 
 			_itemdata.sprite, 
-			_itemdata.get_upgrade_description()
+			_itemdata.get_upgrade_description() if not _itemdata is PowerupCriticalArtifactData else _itemdata._description
 	)
 
 

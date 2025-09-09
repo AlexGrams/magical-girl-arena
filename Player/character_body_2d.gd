@@ -199,7 +199,7 @@ func add_artifact(artifact_data: ArtifactData) -> void:
 	artifact.activate(self)
 	
 	# Add artifact sprite to UI
-	$"../CanvasLayer".add_artifact(artifact_data)
+	GameState.playground.hud_canvas_layer.add_artifact(artifact_data)
 
 
 ## Returns which character this player is.

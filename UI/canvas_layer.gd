@@ -370,7 +370,7 @@ func add_artifact(artifact_data: ArtifactData) -> void:
 			icon.texture = artifact_data.sprite
 			break
 	
-	_powerup_information.add_charm_information(artifact_data)
+	_powerup_information.add_charm_information(artifact_data.duplicate())
 
 
 ## Display the boss health bar. Health percent = [0, 1].

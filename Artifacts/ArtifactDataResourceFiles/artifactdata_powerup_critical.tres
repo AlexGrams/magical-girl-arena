@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_nrsy5")
-_description = "Powerup can now critically hit."
+_description = ""
 is_unique = false
 scene = ExtResource("1_xmf2y")
 name = "Powerup Critical"

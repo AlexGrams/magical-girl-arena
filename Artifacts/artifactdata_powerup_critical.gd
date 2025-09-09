@@ -1,3 +1,4 @@
+class_name PowerupCriticalArtifactData
 extends ArtifactData
 ## Contains custom check for the Powerup Critical Charm's unique acquisition condition.
 
@@ -18,8 +19,9 @@ func get_upgrade_description(_level: int = 0) -> String:
 	
 	crit_powerup_choices.shuffle()
 	powerup_index_to_make_crit = crit_powerup_choices[0]
+	_description = _local_player.powerups[powerup_index_to_make_crit].powerup_name + " has a random chance to do critical damage."
 	
-	return _local_player.powerups[powerup_index_to_make_crit].powerup_name + " has a random chance to do critical damage."
+	return _description
 
 
 ## Returns false if all of the player's powerups already have critical hits enabled.
