@@ -53,6 +53,7 @@ offset_right = -1582.0
 offset_bottom = -616.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vo6g6")
 _item_label = NodePath("Box/Name_Label")
 _item_image = NodePath("Box/TextureRect")
@@ -66,6 +67,7 @@ _charm_card_texture = ExtResource("3_tcwvq")
 layout_mode = 0
 offset_right = 338.0
 offset_bottom = 464.0
+mouse_filter = 2
 texture = ExtResource("2_xumxt")
 
 [node name="TextureRect" type="TextureRect" parent="Box"]
@@ -83,6 +85,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("5_e2d1t")
 expand_mode = 1
 stretch_mode = 5
@@ -126,12 +129,14 @@ offset_left = 19.0
 offset_top = 389.0
 offset_right = 318.0
 offset_bottom = 472.0
+mouse_filter = 2
 alignment = 1
 
 [node name="Fire_Rate" type="Panel" parent="Box/Traits_Container"]
 visible = false
 custom_minimum_size = Vector2(95, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6ylfp")
 
 [node name="Label" type="Label" parent="Box/Traits_Container/Fire_Rate"]
@@ -160,6 +165,7 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(95, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3vxh4")
 
 [node name="Label" type="Label" parent="Box/Traits_Container/Haste"]
@@ -188,6 +194,7 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(95, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4tkcw")
 
 [node name="Label" type="Label" parent="Box/Traits_Container/Area_Size"]
@@ -216,6 +223,7 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(95, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_e3tr4")
 
 [node name="Label" type="Label" parent="Box/Traits_Container/Critical"]
@@ -244,6 +252,7 @@ vertical_alignment = 1
 visible = false
 custom_minimum_size = Vector2(95, 25)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5mtyp")
 
 [node name="Label" type="Label" parent="Box/Traits_Container/Energy"]
@@ -273,4 +282,5 @@ self_modulate = Color(0.666667, 0.207843, 0.207843, 1)
 layout_mode = 0
 offset_right = 338.0
 offset_bottom = 464.0
+mouse_filter = 2
 texture = ExtResource("8_vj5r6")

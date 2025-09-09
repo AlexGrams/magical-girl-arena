@@ -393,14 +393,6 @@ func update_boss_health_bar(health_percent: float) -> void:
 	_boss_health_text.text = str(ceil(health_percent * 100.0)) + "%"
 
 
-func show_information_panel() -> void:
-	_powerup_information.show()
-
-
-func hide_information_panel() -> void:
-	_powerup_information.hide()
-
-
 func update_information_panel(data: ItemData) -> void:
 	_powerup_information.update_information_panel(data)
 

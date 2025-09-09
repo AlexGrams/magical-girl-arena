@@ -19,6 +19,13 @@ func _ready() -> void:
 		panel.hide()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("show_powerup_information"):
+		show()
+	elif event.is_action_released("show_powerup_information"):
+		hide()
+
+
 func add_powerup_information(data: ItemData) -> void:
 	if _powerup_panel_index >= len(_powerup_panels):
 		return
