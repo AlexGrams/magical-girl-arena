@@ -401,6 +401,10 @@ func hide_information_panel() -> void:
 	_powerup_information.hide()
 
 
+func update_information_panel(data: ItemData) -> void:
+	_powerup_information.update_information_panel(data)
+
+
 ## Start a dialogue through the DialogueBox. Only call on server.
 func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	_dialogue_box.start_dialogue(conditions)

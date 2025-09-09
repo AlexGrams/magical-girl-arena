@@ -75,6 +75,13 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 	crit_multiplier = new_multiplier
 
 
+## Give this Powerup an additional type.
+func add_type(type: Type) -> void:
+	_types.append(type)
+	_powerupdata.types.append(type)
+	GameState.playground.hud_canvas_layer.update_information_panel(_powerupdata)
+
+
 ## Returns true if this Powerup is a certain type.
 func has_type(type: Type) -> bool:
 	return _types.has(type)
@@ -82,7 +89,7 @@ func has_type(type: Type) -> bool:
 
 func _ready() -> void:
 	if _powerup_data_path != "":
-		_powerupdata = load(_powerup_data_path)
+		_powerupdata = load(_powerup_data_path).duplicate()
 		powerup_name = _powerupdata.name
 		_types = _powerupdata.types
 

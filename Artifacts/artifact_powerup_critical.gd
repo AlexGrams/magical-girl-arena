@@ -8,4 +8,5 @@ func _ready() -> void:
 
 ## Enable crits on a Powerup.
 func activate(artifact_owner: PlayerCharacterBody2D) -> void:
+	artifact_owner.powerups[artifactdata.powerup_index_to_make_crit].add_type(Powerup.Type.Critical)
 	artifact_owner.powerups[artifactdata.powerup_index_to_make_crit].set_crit_chance(0.25)
