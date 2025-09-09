@@ -11,6 +11,7 @@ size = Vector2(18, 22)
 [node name="BulletBossScream" type="Node2D" node_paths=PackedStringArray("_point_light", "collider")]
 scale = Vector2(2, 2)
 script = ExtResource("1_lkea8")
+_tell_time = 3.0
 _point_light = NodePath("Scream_Light")
 speed = 1.25
 lifetime = 5.0
