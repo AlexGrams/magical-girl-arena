@@ -137,7 +137,7 @@ func _get_damage_from_curve() -> float:
 	if current_level > len(damage_levels):
 		push_error("Not enough damage levels to get the damage of this powerup")
 		return 0
-	elif current_level == len(damage_levels):
+	elif current_level == len(damage_levels) and is_signature:
 		return signature_damage
 	else:
 		return damage_levels[current_level - 1]
