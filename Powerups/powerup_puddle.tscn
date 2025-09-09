@@ -6,5 +6,5 @@
 script = ExtResource("1_jptwq")
 _puddles = 1
 _bullet_scene = "res://Powerups/bullet_puddle.tscn"
-damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
+damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_puddle.tres"
