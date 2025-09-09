@@ -54,6 +54,10 @@ var _types: Array[Type] = []
 signal powerup_level_up(new_level: int, new_damage: float)
 
 
+func get_types() -> Array[Type]:
+	return _types
+
+
 func set_is_owned_by_player(value: bool) -> void:
 	_is_owned_by_player = value
 

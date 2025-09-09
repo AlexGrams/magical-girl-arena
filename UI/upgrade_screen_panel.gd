@@ -85,7 +85,7 @@ func _ready() -> void:
 		
 		var powerup_data: PowerupData = ResourceLoader.load(POWERUP_DATA_PATH + powerup_data_file_name)
 		if powerup_data != null:
-			_all_powerup_data.append(powerup_data)
+			_all_powerup_data.append(powerup_data.duplicate())
 	
 	# Set up the powerup name to PowerupData map
 	for powerupdata: PowerupData in _all_powerup_data:
@@ -156,9 +156,11 @@ func _generate_and_show_random_upgrade_choices() -> void:
 	if len(_player_character.powerups) >= _player_character.MAX_POWERUPS:
 		# If the player is maxed out on the number of unique powerups they can have, then 
 		# choose some amount (3 in this case) to upgrade randomly.
-		
 		for powerup: Powerup in _player_character.powerups:
 			if powerup.current_level < powerup.max_level:
+				# A Powerup's type could change during the game, so update it here.
+				_powerup_name_to_powerupdata[powerup.powerup_name].types = powerup.get_types()
+				
 				upgrade_choices.append(_powerup_name_to_powerupdata[powerup.powerup_name])
 				if powerup.current_level == 4 and powerup.is_signature:
 					_upgrade_levels[powerup.powerup_name] = 5
@@ -175,6 +177,7 @@ func _generate_and_show_random_upgrade_choices() -> void:
 			for powerup in _player_character.powerups:
 				if data.name == powerup.powerup_name:
 					found_powerup = true
+					_powerup_name_to_powerupdata[powerup.powerup_name].types = powerup.get_types()
 					if powerup.current_level == 4 and powerup.is_signature:
 						_upgrade_levels[powerup.powerup_name] = 5
 					else:
