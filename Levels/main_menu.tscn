@@ -355,9 +355,6 @@ texture = SubResource("ViewportTexture_k0lfe")
 flip_h = true
 
 [node name="GDCubismUserModel" parent="Main/CharacterAnimatedSprite" index="0"]
-Blink = 0.0
-Torso_UpDown = 0.5
-Torso_Sway = 0.5
 size = Vector2i(1000, 1500)
 
 [node name="CharacterLabel" type="Label" parent="Main"]
@@ -1185,6 +1182,9 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
+[connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
+[connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
+[connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
 [connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
 [connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
 [connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]
