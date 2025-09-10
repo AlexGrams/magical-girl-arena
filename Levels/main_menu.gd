@@ -62,6 +62,12 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var can_buy_rerolls_icon: Control 
 ## Contains buttons for selecting a character
 @export var character_select_button_holder: Control
+## Selected when the lobby's visibility is set to public.
+@export var lobby_visibility_public_button: Button
+## Selected when the lobby's visibility is set to friends only.
+@export var lobby_visibility_friends_button: Button
+## Selected when the lobby's visibility is set to private.
+@export var lobby_visibility_private_button: Button
 ## The button to begin the actual game. Disabled for clients that are not the host.
 @export var start_game_label: Label
 
@@ -226,6 +232,12 @@ func _on_host_button_button_down() -> void:
 	lobby_visibility_holder.visible = multiplayer.is_server()
 	map_select_left_button.visible = multiplayer.is_server()
 	map_select_right_button.visible = multiplayer.is_server()
+	
+	# Reset lobby visibility selection to show "friends only" whenever we open up a new lobby.
+	# Friends only is the default visibility selection.
+	lobby_visibility_public_button.set_pressed_no_signal(false)
+	lobby_visibility_friends_button.set_pressed_no_signal(true) 
+	lobby_visibility_private_button.set_pressed_no_signal(false)
 	
 	_selected_map_index = 0
 	map_name_label.change_text( Constants.MAP_DATA[_selected_map_index].name)
