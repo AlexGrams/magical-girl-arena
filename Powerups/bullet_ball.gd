@@ -54,7 +54,6 @@ func _ready() -> void:
 	if not is_multiplayer_authority():
 		set_process(false)
 		set_physics_process(false)
-		collider.area_entered.disconnect(_on_bullet_hitbox_entered)
 	_explosion_hitbox_collision_layer = _explosion_bullet_hitbox.collision_layer
 	_explosion_bullet_hitbox.collision_layer = 0
 	ResourceLoader.load_threaded_request(_explosion_vfx_scene_path, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
@@ -155,21 +154,25 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 	
 	var other: Node2D = area.get_parent()
 	if other is Enemy:
-		if other.health - collider.damage <= 0:
-			# The Ball probably just got a kill, so increase its size.
-			_kills += 1
-			collider.damage += 1.0
-			if _total_growth < _max_size:
-				_grow.rpc()
+		if is_multiplayer_authority():
+			if other.health - collider.damage <= 0:
+				# The Ball probably just got a kill, so increase its size.
+				_kills += 1
+				collider.damage += 1.0
+				if _total_growth < _max_size:
+					_grow.rpc()
+				else:
+					pass
+					# TODO: Disabling Ball explosion.
+					#_explode.rpc()
+			
+			if randf() < _crit_chance:
+				other.take_damage(collider.damage * _crit_multiplier, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, true)
 			else:
-				pass
-				# TODO: Disabling Ball explosion.
-				#_explode.rpc()
+				other.take_damage(collider.damage)
 		
-		if randf() < _crit_chance:
-			other.take_damage(collider.damage * _crit_multiplier, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, true)
-		else:
-			other.take_damage(collider.damage)
+		if collider.owner_id == multiplayer.get_unique_id():
+			Analytics.add_powerup_damage(collider.damage, collider.powerup_index)
 
 
 ## Make the ball bigger.
