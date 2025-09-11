@@ -39,9 +39,14 @@ var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
 
 
-func set_damage(damage: float, is_crit: bool = false):
+func set_damage(damage: float, _is_crit: bool = false):
 	collider.damage = damage
-	collider.is_crit = is_crit
+
+
+@rpc("any_peer", "call_local")
+func _set_critical(new_crit_chance: float, new_crit_multiplier: float):
+	_crit_chance = new_crit_chance
+	_crit_multiplier = new_crit_multiplier
 
 
 # Called when the node enters the scene tree for the first time.
@@ -107,9 +112,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		
 		# Update crit values
 		ball_powerup.crit_changed.connect(
-			func(crit_chance: float, crit_multiplier: float):
-				_crit_chance = crit_chance
-				_crit_multiplier = crit_multiplier
+			func(new_crit_chance: float, new_crit_multiplier: float):
+				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
 
 
@@ -161,7 +165,11 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 				pass
 				# TODO: Disabling Ball explosion.
 				#_explode.rpc()
-		other.take_damage(collider.damage)
+		
+		if randf() < _crit_chance:
+			other.take_damage(collider.damage * _crit_multiplier, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, true)
+		else:
+			other.take_damage(collider.damage)
 
 
 ## Make the ball bigger.
