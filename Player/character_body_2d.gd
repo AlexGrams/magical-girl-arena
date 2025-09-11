@@ -23,6 +23,8 @@ const HEALTH_REGEN_INTERVAL: float = 5.0
 ## The movement direction being inputted for this character.
 @export var input_direction: Vector2 = Vector2.ZERO
 
+## Time in seconds that the player is invulnerable after reviving.
+@export var _revive_invulnerability_time: float = 0.5
 @export var _camera: Camera2D = null
 @export var _player_collision_area: Area2D = null
 @export var _pickup_area: Area2D = null
@@ -593,6 +595,12 @@ func revive():
 	if is_multiplayer_authority():
 		make_camera_current()
 		$"..".get_hud_canvas_layer().hide_spectator_mode()
+		
+		# Player gains temporary invulnerability after reviving.
+		set_is_invulnerable(true)
+		get_tree().create_timer(_revive_invulnerability_time, false).timeout.connect(func():
+			set_is_invulnerable(false)
+		)
 	
 	enable_powerups()
 	revived.emit()
