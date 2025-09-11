@@ -26,6 +26,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:linear_velocity")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="BulletBall" type="RigidBody2D" node_paths=PackedStringArray("_rigidbody", "_sprite_holder", "_kick_area", "_explosion_bullet_hitbox", "_physics_collision_shape", "collider", "sprite")]
 collision_layer = 0
