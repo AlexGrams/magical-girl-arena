@@ -7,12 +7,16 @@ extends Bullet
 ## Collision area that deals damage
 @export var area: Area2D
 
+var _base_damage: float = 0.0
+var _crit_chance: float = 0.0
+var _crit_multiplier: float = 1.0
 var _owning_player: Node2D = null
 var _half_lifetime: float = 0.0
 var _signature_behavior: bool = true
 
 
 func set_damage(damage: float, is_crit: bool = false):
+	_base_damage = damage
 	area.damage = damage
 	area.is_crit = is_crit
 
@@ -62,12 +66,23 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
+func _physics_process(_delta: float) -> void:
+	# Randomly determine if the bullet will crit each frame. 
+	if _is_owned_by_player and _crit_chance > 0.0:
+		collider.damage = _base_damage
+		collider.is_crit = randf() <= _crit_chance
+		if collider.is_crit:
+			collider.damage *= _crit_multiplier
+
+
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
-	if (data.size() > 2
-		or (data.size() == 2						# Owned by player
+	if (data.size() > 4
+		or (data.size() == 4						# Owned by player
 			and (typeof(data[0]) != TYPE_INT		# Owning player ID
-				 or typeof(data[1]) != TYPE_BOOL	# Is signature behavior active
+				or typeof(data[1]) != TYPE_BOOL		# Is signature behavior active
+				or typeof(data[2]) != TYPE_FLOAT	# Crit chance
+				or typeof(data[3]) != TYPE_FLOAT	# Crit multiplier
 			)
 		)
 		or (data.size() == 1						# Owned by enemy
@@ -81,6 +96,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		# Player bullet
 		_owning_player = GameState.player_characters.get(data[0])
 		_signature_behavior = data[1]
+		_crit_chance = data[2]
+		_crit_multiplier = data[3]
 	else:
 		# Enemy bullet
 		_owning_player = get_node_or_null(data[0])
