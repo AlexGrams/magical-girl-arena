@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://cckpww61jlguj"]
+[gd_scene load_steps=80 format=3 uid="uid://cckpww61jlguj"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_s3iet"]
 [ext_resource type="PackedScene" uid="uid://3wfdmknchrwr" path="res://Levels/LevelPlaceables/flower.tscn" id="2_70ojb"]
@@ -31,7 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://c3anntj04ajri" path="res://Levels/LevelPlaceables/lake.tscn" id="27_lmbp7"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_pbc18"]
 [ext_resource type="PackedScene" uid="uid://divvdkhiu21h6" path="res://UI/canvas_layer.tscn" id="29_w0dwr"]
-[ext_resource type="PackedScene" uid="uid://chlwxentn6pyk" path="res://Levels/LevelPlaceables/loot_box_spawner.tscn" id="48_2eh24"]
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="33_4ssp8"]
+[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="34_mnwhr"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="67_a1168"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
@@ -486,6 +487,9 @@ _data = {
 "grow_darkness": SubResource("Animation_8sgrb"),
 "shrink_darkness": SubResource("Animation_oqn7p")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
+size = Vector2(20.6292, 21.3042)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "bullet_spawner", "point_light")]
 script = ExtResource("1_s3iet")
@@ -6191,13 +6195,17 @@ scale = Vector2(46.8, 0.945)
 position = Vector2(1090, 1283)
 scale = Vector2(5, 5)
 
-[node name="LootBoxSpawner" parent="." instance=ExtResource("48_2eh24")]
+[node name="LootBoxSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_area")]
 position = Vector2(1062, 1816)
 scale = Vector2(240, 240)
+script = ExtResource("33_4ssp8")
 spawn_interval = 20.0
+loot_box_scene = ExtResource("34_mnwhr")
+spawn_area = NodePath("Area2D/SpawnArea")
 
-[node name="SpawnArea" parent="LootBoxSpawner/Area2D" index="0"]
-position = Vector2(0.0458333, 0.175)
+[node name="Area2D" type="Area2D" parent="LootBoxSpawner"]
+
+[node name="SpawnArea" type="CollisionShape2D" parent="LootBoxSpawner/Area2D"]
+position = Vector2(-0.0187502, -0.114583)
+shape = SubResource("RectangleShape2D_y6uu2")
 debug_color = Color(0, 0.435294, 0.403922, 0)
-
-[editable path="LootBoxSpawner"]
