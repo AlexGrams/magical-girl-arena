@@ -18,6 +18,12 @@ var _crit_chance: float = 0.0
 var _crit_multiplier: float = 2.0
 
 
+@rpc("any_peer", "call_local")
+func _set_critical(new_crit_chance: float, new_crit_multiplier: float):
+	_crit_chance = new_crit_chance
+	_crit_multiplier = new_crit_multiplier
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# This is intentionally blank. It overrides Bullet's _ready() function.
@@ -163,9 +169,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		
 		# Update crit values
 		laser_powerup.crit_changed.connect(
-			func(crit_chance: float, crit_multiplier: float):
-				_crit_chance = crit_chance
-				_crit_multiplier = crit_multiplier
+			func(new_crit_chance: float, new_crit_multiplier: float):
+				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
 	
 	_max_range = data[1]
