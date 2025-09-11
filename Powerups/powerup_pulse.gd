@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 			status_pulse = StatusPulse.new()
 			status_pulse.set_properties(
 				_id, 
+				_powerup_index,
 				_get_damage_from_curve(), 
 				current_level >= 3,
 				crit_chance,

@@ -106,6 +106,7 @@ func _on_spread_area_2d_entered(area: Area2D) -> void:
 			status_pulse = StatusPulse.new()
 			status_pulse.set_properties(
 				_original_character_id, 
+				collider.powerup_index,
 				collider.damage, 
 				_is_level_three,
 				_crit_chance,

@@ -8,6 +8,8 @@ const _PULSE_BULLET_SCENE: String = "res://Powerups/bullet_pulse.tscn"
 
 ## The multiplayer ID of the player who started this Pulse status effect chain.
 var _owner_id: int = 0
+## Index of this powerup on its owner.
+var _powerup_index: int = -1
 ## Damage of the resulting Pulse bullet.
 var _damage: float = 0.0
 var _crit_chance: float = 0.0
@@ -22,8 +24,17 @@ func get_status_name() -> String:
 	return "Pulse"
 
 
-func set_properties(id: int, damage: float, is_level_three: bool, crit_chance: float, crit_multiplier: float) -> void:
+func set_properties(
+		id: int, 
+		powerup_index: int,
+		damage: float, 
+		is_level_three: bool, 
+		crit_chance: float, 
+		crit_multiplier: float
+	) -> void:
+	
 	_owner_id = id
+	_powerup_index = powerup_index
 	_damage = damage 
 	_is_level_three = is_level_three
 	_crit_chance = crit_chance
@@ -58,8 +69,8 @@ func deactivate() -> void:
 			total_damage, 
 			crit,
 			true,
-			-1,
-			-1,
+			_owner_id,
+			_powerup_index,
 			[
 				get_parent().get_path(), 
 				_owner_id, 
