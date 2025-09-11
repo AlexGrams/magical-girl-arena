@@ -24,11 +24,15 @@ func get_status_name() -> String:
 
 func set_properties(id: int, damage: float, is_level_three: bool, crit_chance: float, crit_multiplier: float) -> void:
 	_owner_id = id
-	duration = GameState.time - int(GameState.time)
 	_damage = damage 
 	_is_level_three = is_level_three
 	_crit_chance = crit_chance
 	_crit_multiplier = crit_multiplier
+	
+	duration = GameState.time - int(GameState.time)
+	# Special duration calculation if time is negative, after the boss has spawned.
+	if duration < 0.0:
+		duration = 1.0 + duration
 
 
 func _ready() -> void:
