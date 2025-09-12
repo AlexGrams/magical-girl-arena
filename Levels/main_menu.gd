@@ -426,14 +426,22 @@ func _on_map_select_left_button_pressed() -> void:
 	_selected_map_index += 1
 	if _selected_map_index >= len(Constants.MAP_DATA):
 		_selected_map_index = 0
-	_update_map.rpc(_selected_map_index)
+	var map_unlocked: bool = (
+		Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name == "" 
+		or GameState.get(Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name)
+	)
+	_update_map.rpc(_selected_map_index, map_unlocked)
 
 
 func _on_map_select_right_button_pressed() -> void:
 	_selected_map_index -= 1
 	if _selected_map_index < 0:
 		_selected_map_index = len(Constants.MAP_DATA) - 1
-	_update_map.rpc(_selected_map_index)
+	var map_unlocked: bool = (
+		Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name == "" 
+		or GameState.get(Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name)
+	)
+	_update_map.rpc(_selected_map_index, map_unlocked)
 
 
 func _on_leave_button_down() -> void:
@@ -442,27 +450,30 @@ func _on_leave_button_down() -> void:
 
 ## Change the displayed map on the Lobby screen.
 @rpc("authority", "call_local")
-func _update_map(map_index: int) -> void:
+func _update_map(map_index: int, map_unlocked: bool) -> void:
 	map_name_label.change_text(Constants.MAP_DATA[map_index].name)
 	map_preview_texture_rect.texture = Constants.MAP_DATA[map_index].preview_image_texture
 	
 	# Disable selecting map if locked.
-	if (
-			Constants.MAP_DATA[map_index].required_map_save_variable_name == "" 
-			or GameState.get(Constants.MAP_DATA[map_index].required_map_save_variable_name)
-	):
-		start_game_label.self_modulate = Color.WHITE
+	if (map_unlocked):
+		if multiplayer.is_server():
+			start_game_label.self_modulate = Color.WHITE
 		start_game_label.get_child(0).set_interactable(true)
 		map_locked_label.visible = false
 	else:
-		start_game_label.self_modulate = Color.DIM_GRAY
+		if multiplayer.is_server():
+			start_game_label.self_modulate = Color.DIM_GRAY
 		start_game_label.get_child(0).set_interactable(false)
 		map_locked_label.visible = true
 
 
 ## RPCs a certain client to update their displayed map.
 func _update_map_for_client(id: int) -> void:
-	_update_map.rpc_id(id, _selected_map_index)
+	var map_unlocked: bool = (
+		Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name == "" 
+		or GameState.get(Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name)
+	)
+	_update_map.rpc_id(id, _selected_map_index, map_unlocked)
 
 
 ## Leave a game lobby. Goes back to the lobby list. If called remotely, should only be done by
