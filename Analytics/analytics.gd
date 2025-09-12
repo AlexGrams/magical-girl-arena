@@ -102,7 +102,8 @@ func add_upgrade_chosen(upgrade_name: String) -> void:
 ## RPC for this should be done sparingly since there could be many instances of damage being done per frame.
 @rpc("any_peer", "call_local")
 func add_powerup_damage(damage: float, index: int) -> void:
-	_powerup_damages[index] += damage
+	if index >= 0:
+		_powerup_damages[index] += damage
 
 
 func add_ult_count() -> void:
