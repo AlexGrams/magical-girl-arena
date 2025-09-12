@@ -91,3 +91,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			knockback, 
 			lifetime - death_timer
 		)
+		
+		# Analytics
+		if collider.owner_id == multiplayer.get_unique_id():
+			Analytics.add_powerup_damage(collider.damage, collider.powerup_index)
