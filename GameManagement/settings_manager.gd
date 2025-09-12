@@ -45,6 +45,10 @@ func apply_bullet_opacity(opacity: float) -> void:
 	GameState.other_players_bullet_opacity = opacity
 
 
+func apply_max_fps(max_fps: int) -> void:
+	Engine.max_fps = max_fps
+
+
 ## Shows an outline of the local player's hitbox.
 func apply_hitbox_visible(hitbox_visible: bool) -> void:
 	GameState.hitbox_visible = hitbox_visible

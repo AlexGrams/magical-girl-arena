@@ -7,6 +7,7 @@ const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 const DEFAULT_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 1.0
 const DEFAULT_BULLET_OPACITY := 1.0
+const DEFAULT_MAX_FPS: int = 0
 const DEFAULT_CURSOR_SIZE := 0
 const DEFAULT_HITBOX_VISIBLE := false
 
@@ -21,6 +22,7 @@ func save_settings(
 		volume: float, 
 		music_volume: float,
 		bullet_opacity: float,
+		max_fps: int,
 		cursor_size: int,
 		hitbox_visible: bool
 	) -> void:
@@ -30,6 +32,7 @@ func save_settings(
 	config.set_value("sound", "volume", volume)
 	config.set_value("music", "volume", music_volume)
 	config.set_value("gameplay", "bullet_opacity", bullet_opacity)
+	config.set_value("display", "max_fps", max_fps)
 	config.set_value("display", "cursor_size", cursor_size)
 	config.set_value("gameplay", "hitbox_visible", hitbox_visible)
 
@@ -68,6 +71,7 @@ func load_settings() -> void:
 			DEFAULT_VOLUME, 
 			DEFAULT_MUSIC_VOLUME,
 			DEFAULT_BULLET_OPACITY,
+			DEFAULT_MAX_FPS,
 			DEFAULT_CURSOR_SIZE,
 			DEFAULT_HITBOX_VISIBLE
 		)
@@ -85,6 +89,7 @@ func load_settings() -> void:
 		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
 	SettingsManager.apply_music_volume(settings.get_value("music", "volume"))
 	SettingsManager.apply_bullet_opacity(settings.get_value("gameplay", "bullet_opacity", DEFAULT_BULLET_OPACITY))
+	SettingsManager.apply_max_fps(settings.get_value("display", "max_fps", DEFAULT_MAX_FPS))
 	SettingsManager.apply_cursor_size(settings.get_value("display", "cursor_size", DEFAULT_CURSOR_SIZE))
 	SettingsManager.apply_hitbox_visible(settings.get_value("gameplay", "hitbox_visible", DEFAULT_HITBOX_VISIBLE))
 	

@@ -17,6 +17,10 @@ const max_volume_slider_value: float = 1.25
 @export var _bullet_opacity_slider: Slider = null
 ## Spinbox for setting how transparent other player' bullets are.
 @export var _bullet_opacity_spinbox: SpinBox = null
+## Slider for max FPS.
+@export var _max_fps_slider: Slider = null
+## Spinbox for max FPS.
+@export var _max_fps_spinbox: SpinBox = null
 ## Dropdown for setting cursor size.
 @export var _cursor_size_option: OptionButton = null
 @export var _hitbox_visible_checkbox: CheckBox = null
@@ -34,6 +38,8 @@ func _ready() -> void:
 	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
 	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
 	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
+	_max_fps_slider.value = settings.get_value("display", "max_fps")
+	_max_fps_spinbox.value = _max_fps_slider.value
 	_cursor_size_option.selected = settings.get_value("display", "cursor_size", 0)
 	_hitbox_visible_checkbox.button_pressed = settings.get_value("gameplay", "hitbox_visible", false)
 
@@ -86,6 +92,16 @@ func _on_bullet_opacity_spin_box_value_changed(spinbox_value: float) -> void:
 		_bullet_opacity_slider.value = slider_opacity
 
 
+func _on_max_fps_slider_drag_ended(_value_changed: bool) -> void:
+	_max_fps_spinbox.value = _max_fps_slider.value
+
+
+func _on_max_fps_spin_box_value_changed(spinbox_value: float) -> void:
+	SettingsManager.apply_max_fps(round(spinbox_value))
+	if spinbox_value != _max_fps_slider.value:
+		_max_fps_slider.value = spinbox_value
+
+
 ## Player hitbox visibility setting was changed.
 func _on_show_hitbox_check_box_toggled(toggled_on: bool) -> void:
 	SettingsManager.apply_hitbox_visible(toggled_on) 
@@ -98,6 +114,7 @@ func _save_settings_changes() -> void:
 		_sfx_volume_slider.value * max_volume_slider_value, 
 		_music_volume_slider.value * max_volume_slider_value,
 		_bullet_opacity_slider.value,
+		_max_fps_slider.value,
 		_cursor_size_option.selected,
 		_hitbox_visible_checkbox.button_pressed
 	)

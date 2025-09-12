@@ -387,7 +387,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_cursor_size_option", "_hitbox_visible_checkbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_hitbox_visible_checkbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -396,29 +396,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
-_screen_mode_option = NodePath("VBoxContainer/ScreenModeContainer/OptionButton")
-_music_volume_slider = NodePath("VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider")
-_music_spinbox = NodePath("VBoxContainer/MusicVolumeContainer/Music_SpinBox")
-_sfx_volume_slider = NodePath("VBoxContainer/SFXVolumeContainer/VolumeHSlider")
-_sfx_spinbox = NodePath("VBoxContainer/SFXVolumeContainer/SpinBox")
-_bullet_opacity_slider = NodePath("VBoxContainer/BulletOpacityContainer/OpacityHSlider")
-_bullet_opacity_spinbox = NodePath("VBoxContainer/BulletOpacityContainer/SpinBox")
-_cursor_size_option = NodePath("VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
-_hitbox_visible_checkbox = NodePath("VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox")
+_screen_mode_option = NodePath("VScrollBar/VBoxContainer/ScreenModeContainer/OptionButton")
+_music_volume_slider = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider")
+_music_spinbox = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox")
+_sfx_volume_slider = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider")
+_sfx_spinbox = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox")
+_bullet_opacity_slider = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider")
+_bullet_opacity_spinbox = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox")
+_max_fps_slider = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
+_max_fps_spinbox = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox")
+_cursor_size_option = NodePath("VScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
+_hitbox_visible_checkbox = NodePath("VScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+[node name="VScrollBar" type="ScrollContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -320.0
-offset_top = 229.0
-offset_right = 321.0
-offset_bottom = 441.0
+offset_left = -675.0
+offset_top = 175.0
+offset_right = 766.0
+offset_bottom = 875.0
 grow_horizontal = 2
+theme = ExtResource("7_mn14l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/VScrollBar"]
+layout_mode = 2
 alignment = 1
 
-[node name="Resolution" type="Label" parent="Settings/VBoxContainer"]
+[node name="Resolution" type="Label" parent="Settings/VScrollBar/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("4_wqh84")
@@ -426,22 +432,22 @@ theme_override_font_sizes/font_size = 90
 text = "Resolution"
 metadata/_edit_group_ = true
 
-[node name="ScreenModeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="ScreenModeContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="ScreenMode" type="Label" parent="Settings/VBoxContainer/ScreenModeContainer"]
+[node name="ScreenMode" type="Label" parent="Settings/VScrollBar/VBoxContainer/ScreenModeContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "Screen Mode"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/ScreenModeContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/ScreenModeContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="OptionButton" type="OptionButton" parent="Settings/VBoxContainer/ScreenModeContainer"]
+[node name="OptionButton" type="OptionButton" parent="Settings/VScrollBar/VBoxContainer/ScreenModeContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("4_wqh84")
@@ -452,23 +458,23 @@ popup/item_1/text = "Windowed"
 popup/item_1/id = 1
 script = ExtResource("13_r3p63")
 
-[node name="MusicVolumeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 2
 
-[node name="Volume" type="Label" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Volume" type="Label" parent="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "Music Volume"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Music_VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Music_VolumeHSlider" type="HSlider" parent="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(0, 61.685)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -486,12 +492,12 @@ value = 0.8
 tick_count = 11
 ticks_on_borders = true
 
-[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Spacer2" type="Control" parent="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Music_SpinBox" type="SpinBox" parent="Settings/VBoxContainer/MusicVolumeContainer"]
+[node name="Music_SpinBox" type="SpinBox" parent="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -501,22 +507,22 @@ value = 80.0
 rounded = true
 alignment = 1
 
-[node name="SFXVolumeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="Volume" type="Label" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+[node name="Volume" type="Label" parent="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "SFX Volume"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer"]
 custom_minimum_size = Vector2(159, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="VolumeHSlider" type="HSlider" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+[node name="VolumeHSlider" type="HSlider" parent="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer"]
 custom_minimum_size = Vector2(0, 61.685)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -534,12 +540,12 @@ value = 0.8
 tick_count = 11
 ticks_on_borders = true
 
-[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+[node name="Spacer2" type="Control" parent="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/SFXVolumeContainer"]
+[node name="SpinBox" type="SpinBox" parent="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -549,22 +555,22 @@ value = 80.0
 rounded = true
 alignment = 1
 
-[node name="BulletOpacityContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="BulletOpacityContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="Opacity" type="Label" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+[node name="Opacity" type="Label" parent="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 56
 text = "Ally Powerup Opacity"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="OpacityHSlider" type="HSlider" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+[node name="OpacityHSlider" type="HSlider" parent="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer"]
 custom_minimum_size = Vector2(0, 61.685)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -582,12 +588,12 @@ value = 1.0
 tick_count = 11
 ticks_on_borders = true
 
-[node name="Spacer2" type="Control" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+[node name="Spacer2" type="Control" parent="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SpinBox" type="SpinBox" parent="Settings/VBoxContainer/BulletOpacityContainer"]
+[node name="SpinBox" type="SpinBox" parent="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -597,22 +603,69 @@ value = 100.0
 rounded = true
 alignment = 1
 
-[node name="CursorSizeContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="MaxFPSContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 127)
 layout_mode = 2
 
-[node name="CursorSize" type="Label" parent="Settings/VBoxContainer/CursorSizeContainer"]
+[node name="DescriptionLabel" type="Label" parent="Settings/VScrollBar/VBoxContainer/MaxFPSContainer"]
+layout_mode = 2
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 90
+text = "Max FPS"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(323, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaxFPSHSlider" type="HSlider" parent="Settings/VScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("14_ddmg2")
+theme_override_icons/grabber_highlight = ExtResource("14_ddmg2")
+theme_override_icons/grabber_disabled = ExtResource("14_ddmg2")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 300.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="Settings/VScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaxFPSSpinBox" type="SpinBox" parent="Settings/VScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("4_wqh84")
+max_value = 300.0
+rounded = true
+alignment = 1
+
+[node name="CursorSizeContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="CursorSize" type="Label" parent="Settings/VScrollBar/VBoxContainer/CursorSizeContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "Cursor Size"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/CursorSizeContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/CursorSizeContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CursorSizeOptionButton" type="OptionButton" parent="Settings/VBoxContainer/CursorSizeContainer"]
+[node name="CursorSizeOptionButton" type="OptionButton" parent="Settings/VScrollBar/VBoxContainer/CursorSizeContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("4_wqh84")
@@ -623,22 +676,22 @@ popup/item_1/text = "Large"
 popup/item_1/id = 1
 script = ExtResource("13_r3p63")
 
-[node name="ShowHitboxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+[node name="ShowHitboxContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="Settings/VBoxContainer/ShowHitboxContainer"]
+[node name="NameLabel" type="Label" parent="Settings/VScrollBar/VBoxContainer/ShowHitboxContainer"]
 layout_mode = 2
 theme = ExtResource("14_kechk")
 theme_override_font_sizes/font_size = 90
 text = "Show Hitbox"
 metadata/_edit_group_ = true
 
-[node name="Spacer" type="Control" parent="Settings/VBoxContainer/ShowHitboxContainer"]
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/ShowHitboxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ShowHitboxCheckBox" type="CheckBox" parent="Settings/VBoxContainer/ShowHitboxContainer"]
+[node name="ShowHitboxCheckBox" type="CheckBox" parent="Settings/VScrollBar/VBoxContainer/ShowHitboxContainer"]
 layout_mode = 2
 theme_override_constants/icon_max_width = 0
 theme_override_icons/checked = ExtResource("15_40lvl")
@@ -1162,15 +1215,17 @@ vertical_alignment = 1
 [connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
-[connection signal="item_selected" from="Settings/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
-[connection signal="drag_ended" from="Settings/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider" to="Settings" method="_on_music_volume_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
-[connection signal="drag_ended" from="Settings/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
-[connection signal="drag_ended" from="Settings/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
-[connection signal="value_changed" from="Settings/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]
-[connection signal="item_selected" from="Settings/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton" to="Settings" method="_on_cursor_size_item_selected"]
-[connection signal="toggled" from="Settings/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox" to="Settings" method="_on_show_hitbox_check_box_toggled"]
+[connection signal="item_selected" from="Settings/VScrollBar/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
+[connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider" to="Settings" method="_on_music_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider" to="Settings" method="_on_max_fps_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox" to="Settings" method="_on_max_fps_spin_box_value_changed"]
+[connection signal="item_selected" from="Settings/VScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton" to="Settings" method="_on_cursor_size_item_selected"]
+[connection signal="toggled" from="Settings/VScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox" to="Settings" method="_on_show_hitbox_check_box_toggled"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="." method="_on_settings_back_button_down"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]
