@@ -37,6 +37,8 @@ var _explosion_scene: PackedScene = null
 var _owning_player: PlayerCharacterBody2D = null
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
+## The PowerupBall of the owning player if it exists on this client.
+var _ball_powerup: PowerupBall = null
 
 
 func set_damage(damage: float, _is_crit: bool = false):
@@ -78,14 +80,19 @@ func _physics_process(_delta: float) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 3
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning player
+		or typeof(data[1]) != TYPE_INT			# Kills Ball has gotten so far
+		or typeof(data[2]) != TYPE_FLOAT		# Growth so far
 	):
 		push_error("Malformed data array")
 		return
 	
 	_owning_player = get_node(data[0])
+	_kills = data[1]
 	_is_owned_by_player = is_owned_by_player
+	if data[2] > 0:
+		_set_growth(data[2])
 	
 	_explosion_bullet_hitbox.damage = _explosion_damage
 	
@@ -98,19 +105,20 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		)
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var ball_powerup: PowerupBall = _owning_player.get_node_or_null("PowerupBall")
-	if ball_powerup != null:
+	_ball_powerup = _owning_player.get_node_or_null("PowerupBall")
+	if _ball_powerup != null:
 		# Apply level 3 upgrade upon respawning the Ball.
-		if ball_powerup.current_level >= 3:
-			_size_increment *= 0.5
+		if _ball_powerup.current_level >= 3:
+			_size_increment *= 1.5
+			_size_increment_vector *= 1.5
 		
-		ball_powerup.powerup_level_up.connect(
+		_ball_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				_level_up.rpc(new_level, new_damage)
 		)
 		
 		# Update crit values
-		ball_powerup.crit_changed.connect(
+		_ball_powerup.crit_changed.connect(
 			func(new_crit_chance: float, new_crit_multiplier: float):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
@@ -123,7 +131,8 @@ func _level_up(new_level: int, new_damage: float):
 	
 	# Level 3: Increase growth rate.
 	if new_level == 3:
-		_size_increment *= 0.5
+		_size_increment *= 1.5
+		_size_increment_vector *= 1.5
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
@@ -165,6 +174,7 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 					pass
 					# TODO: Disabling Ball explosion.
 					#_explode.rpc()
+				_record_ball_stats.rpc_id(collider.owner_id, _kills, _total_growth)
 			
 			if randf() < _crit_chance:
 				other.take_damage(collider.damage * _crit_multiplier, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, true)
@@ -177,12 +187,22 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 
 ## Make the ball bigger.
 @rpc("authority", "call_local")
-func _grow() -> void:
-	_total_growth += _size_increment
-	_sprite_holder.scale += _size_increment_vector
-	collider.scale += _size_increment_vector
-	_kick_area.scale += _size_increment_vector
-	_physics_collision_shape.scale += _size_increment_vector
+func _grow(times: int = 1) -> void:
+	_total_growth += _size_increment * times
+	_sprite_holder.scale += _size_increment_vector * times
+	collider.scale += _size_increment_vector * times
+	_kick_area.scale += _size_increment_vector * times
+	_physics_collision_shape.scale += _size_increment_vector * times
+
+
+@rpc("authority", "call_local")
+func _set_growth(total_growth: float) -> void:
+	total_growth += 1.0
+	_total_growth = total_growth
+	_sprite_holder.scale = Vector2.ONE * total_growth
+	collider.scale = Vector2.ONE * total_growth
+	_kick_area.scale = Vector2.ONE * total_growth
+	_physics_collision_shape.scale = Vector2.ONE * total_growth
 
 
 ## Return the ball to its original size and instantiate explosion particle effects.
@@ -202,3 +222,10 @@ func _explode() -> void:
 	_kick_area.scale = Vector2.ONE
 	_physics_collision_shape.scale = Vector2.ONE
 	_kills = 0
+
+
+## Tell the Ball owner's PowerupBall that this Ball just got a kill. Only call on Ball owner.
+@rpc("authority", "call_local")
+func _record_ball_stats(kills: int, total_growth: float) -> void:
+	if _ball_powerup != null:
+		_ball_powerup.record_stats(kills, total_growth)

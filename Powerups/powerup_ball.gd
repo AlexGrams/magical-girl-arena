@@ -6,6 +6,8 @@ extends Powerup
 
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
+var _kills: int = 0
+var _total_growth: float = 0.0
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
 
@@ -37,7 +39,9 @@ func activate_powerup():
 			multiplayer.get_unique_id(),
 			_powerup_index,
 			[
-				get_parent().get_path()
+				get_parent().get_path(),
+				_kills,
+				_total_growth
 			]
 		]
 	)
@@ -59,3 +63,9 @@ func boost() -> void:
 
 func unboost() -> void:
 	pass
+
+
+## Called when instantiated ball grows. Keeps track of how big the ball should be when respawned.
+func record_stats(kills: int, total_growth: float) -> void:
+	_kills = kills
+	_total_growth = total_growth
