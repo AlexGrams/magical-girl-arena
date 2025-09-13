@@ -38,7 +38,7 @@ func _ready() -> void:
 	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
 	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
 	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
-	_max_fps_slider.value = settings.get_value("display", "max_fps")
+	_max_fps_slider.value = settings.get_value("display", "max_fps", SaveManager.DEFAULT_MAX_FPS)
 	_max_fps_spinbox.value = _max_fps_slider.value
 	_cursor_size_option.selected = settings.get_value("display", "cursor_size", 0)
 	_hitbox_visible_checkbox.button_pressed = settings.get_value("gameplay", "hitbox_visible", false)
@@ -114,7 +114,7 @@ func _save_settings_changes() -> void:
 		_sfx_volume_slider.value * max_volume_slider_value, 
 		_music_volume_slider.value * max_volume_slider_value,
 		_bullet_opacity_slider.value,
-		_max_fps_slider.value,
+		int(_max_fps_slider.value),
 		_cursor_size_option.selected,
 		_hitbox_visible_checkbox.button_pressed
 	)
