@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cke1a48ync1ky" path="res://Sprites/Map/Desert/Map_Pieces/Diamond_TriangleAbyss.png" id="4_emnor"]
 [ext_resource type="Texture2D" uid="uid://1upw8sxwduf0" path="res://Sprites/Desert_Texture.png" id="4_f0wuy"]
 [ext_resource type="Texture2D" uid="uid://d1ajwa60jk81l" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Cracks.png" id="4_hcd15"]
-[ext_resource type="PackedScene" uid="uid://bd0kkk3qfxux6" path="res://Sprites/Map/Desert/decor_default_octagon.tscn" id="6_c7ba6"]
+[ext_resource type="PackedScene" path="res://Sprites/Map/Desert/decor_default_octagon.tscn" id="6_c7ba6"]
 
 [node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("tri_n", "tri_ne", "tri_e", "tri_se", "tri_s", "tri_sw", "tri_w", "tri_nw", "clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
 z_index = -1
@@ -115,8 +115,8 @@ texture = ExtResource("4_emnor")
 flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
+collision_layer = 64
+collision_mask = 12
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-1886, -784, -765, -1894, 765, -1894, 1886, -784, 1886, 784, 784, 1886, -784, 1886, -1886, 784)

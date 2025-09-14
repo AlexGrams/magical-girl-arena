@@ -17,6 +17,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		uncollected = false
 		other.take_damage.rpc(-abs(HEALTH_TO_ADD))
 		destroy.rpc_id(1) 
+	elif other is DesertMapPiece:
+		hide()
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	var other: Node2D = area.get_parent()
+	if other is DesertMapPiece:
+		show()
 
 
 ## Does nothing to prevent this orb type from gravitating. Should not be called.

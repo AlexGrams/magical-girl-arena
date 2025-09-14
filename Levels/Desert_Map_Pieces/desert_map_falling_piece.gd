@@ -28,6 +28,8 @@ var _original_base_scale:Vector2
 var _has_fallen:bool = false
 ## True if this piece will not come back after it has fallen.
 var _permanent:bool = false
+## Collision layer that the piece should have when it has fallen.
+var _area_collision_layer:int = 0
 
 ## Emitted once this piece has risen back to its starting position.
 signal returned(piece: DesertMapPiece)
@@ -42,6 +44,8 @@ func _ready() -> void:
 	_original_base_scale = base.scale
 	_reset_cracks()
 	_collider.disabled = true
+	_area_collision_layer = _area.collision_layer
+	_area.collision_layer = 0
 
 ## Call to begin the process for cracking, falling, and returning this map piece.
 @rpc("authority", "call_local")
@@ -67,26 +71,31 @@ func initiate_falling(permanent: bool = false) -> void:
 ## Animate and remove this piece from the map.
 func _fall() -> void:
 	_collider.disabled = false
+	_area.collision_layer = _area_collision_layer
 	
 	# If the local player is touching this piece, instakill them and teleport them to the 
 	# center of the map.
 	for area: Area2D in _area.get_overlapping_areas():
 		var other: Node = area.get_parent()
-		if other != null and other == GameState.get_local_player():
-			# Kill player, have them visually fall, then teleport
-			other.kill()
-			other.set_is_invulnerable(true)
-			var tween = create_tween()
-			tween.set_ease(Tween.EASE_OUT)
-			tween.set_trans(Tween.TRANS_CUBIC)
-			var original_scale = other.scale
-			tween.tween_property(other, "scale", Vector2.ZERO, 0.5)
-			tween.tween_callback(func(): 
-				await get_tree().create_timer(0.5, false).timeout
-				other.teleport(MAP_CENTER)
-				other.set_is_invulnerable(false)
-			)
-			tween.tween_property(other, "scale", original_scale, 0.5)
+		if other != null:
+			if other == GameState.get_local_player():
+				# Kill player, have them visually fall, then teleport
+				other.kill()
+				other.set_is_invulnerable(true)
+				var tween = create_tween()
+				tween.set_ease(Tween.EASE_OUT)
+				tween.set_trans(Tween.TRANS_CUBIC)
+				var original_scale = other.scale
+				tween.tween_property(other, "scale", Vector2.ZERO, 0.5)
+				tween.tween_callback(func(): 
+					await get_tree().create_timer(0.5, false).timeout
+					other.teleport(MAP_CENTER)
+					other.set_is_invulnerable(false)
+				)
+				tween.tween_property(other, "scale", original_scale, 0.5)
+			elif other is HealthOrb:
+				# Hide health orbs that were over the piece when it fell.
+				other.hide()
 	
 	# Animation
 	var tween = create_tween()
@@ -120,6 +129,7 @@ func rise() -> void:
 	for child in triangles.get_children():
 		child.scale = Vector2.ONE
 	_collider.disabled = true
+	_area.collision_layer = 0
 	returned.emit(self)
 
 # Hide cracks again
