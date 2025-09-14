@@ -9,6 +9,7 @@ var _telemetry_payload: Dictionary = {}
 ## Store damage values in an array that is unpacked into a dictionary when sending data.
 ## Makes it easier to update since we're not using branching logic.
 var _powerup_damages: Array[float] = []
+var _local_player: PlayerCharacterBody2D = null
 
 
 func _ready():
@@ -32,10 +33,6 @@ func _ready():
 	
 	_setup_telemetry_payload()
 	
-	# Let's think about how we want to record data while the game is running.
-	# We know that we want to send telemetry when the game is over.
-	# Let's connect something to the "end game" signal, then use that to send
-	# the data when the game finishes.
 	# Since there might be some legal stuff that makes it so that we have to give players
 	# the option to not send data, we should have each client keep track of their own data.
 	# That makes it easier to keep track of things like powerups chosen since these things aren't 
@@ -95,8 +92,15 @@ func add_level_up_time(time: int) -> void:
 	_telemetry_payload["level_up_times"].append(time)
 
 
-func add_upgrade_chosen(upgrade_name: String) -> void:
-	_telemetry_payload["upgrades_chosen"].append(upgrade_name)
+func add_upgrade_chosen(itemdata: ItemData) -> void:
+	if itemdata is PowerupData:
+		if _local_player == null:
+			_local_player = GameState.get_local_player()
+		for i in range(len(_local_player.powerups)):
+			if _local_player.powerups[i].powerup_name == itemdata.name:
+				_telemetry_payload["upgrades_chosen"].append((itemdata.name + " " + str(_powerup_damages[i])))
+	else:
+		_telemetry_payload["upgrades_chosen"].append(itemdata.name)
 
 
 ## RPC for this should be done sparingly since there could be many instances of damage being done per frame.

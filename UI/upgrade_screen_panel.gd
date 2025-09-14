@@ -448,7 +448,7 @@ func _on_upgrade_chosen(itemdata: ItemData):
 		_add_chosen_unique_artifact.rpc_id(1, itemdata.name)
 	
 	# Analytics: Record selection
-	Analytics.add_upgrade_chosen(itemdata.name)
+	Analytics.add_upgrade_chosen(itemdata)
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
@@ -471,12 +471,10 @@ func _add_chosen_unique_artifact(unique_artifact_name: String) -> void:
 
 
 ## Notify relevant systems that a stat upgrade was chosen, then hide the upgrades menu.
+## TODO Deprecated. Remove?
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	stat_upgrade_chosen.emit(stat_type)
 	GameState.player_selected_upgrade.rpc_id(1)
-	
-	# Analytics: record selection
-	Analytics.add_upgrade_chosen(Constants.StatUpgrades.keys()[stat_type])
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
