@@ -342,12 +342,12 @@ func add_character_to_point_to(notifier: VisibleOnScreenNotifier2D) -> void:
 
 
 ## Add a powerup icon and level indicator to the UI
-func add_powerup(powerup_data: PowerupData) -> void:
+func add_powerup(powerup_data: PowerupData, powerup: Powerup) -> void:
 	for i in range(len(_powerup_level_text)):
 		if _powerup_level_text[i].text == "":
 			# We consider a Powerup icon with no level to be an unset icon.
 			_powerup_textures[i].texture = powerup_data.sprite
-			_powerup_level_text[i].text = "1"
+			_powerup_level_text[i].text = str(powerup.current_level)
 			_powerup_display_index[powerup_data.name] = i
 			
 			break

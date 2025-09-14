@@ -21,7 +21,8 @@ var _owning_character: PlayerCharacterBody2D = null
 
 func _ready() -> void:
 	super()
-	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
+	_bullet_spawner = GameState.playground.bullet_spawner
+	current_level = 5
 
 
 func _process(delta: float) -> void:

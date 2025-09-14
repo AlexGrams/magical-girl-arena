@@ -419,7 +419,7 @@ func add_powerup(powerup_data: PowerupData, is_signature: bool = false):
 	powerups.append(powerup)
 	
 	# Show the icon for this powerup on the HUD
-	GameState.playground.hud_canvas_layer.add_powerup(powerup_data)
+	GameState.playground.hud_canvas_layer.add_powerup(powerup_data, powerup)
 	
 	if not is_down:
 		powerup.activate_powerup()
