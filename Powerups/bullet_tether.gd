@@ -1,3 +1,4 @@
+class_name BulletTether
 extends Bullet
 ## A persistent bullet which changes its transform to make it appear like the player is shooting
 ## a laser from their body that hits the nearest target.
@@ -15,6 +16,7 @@ var _max_range: float = 0.0
 var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
 var _starting_position: Node2D = null
+var _target: Node2D = null
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 2.0
 ## Indicates if the tether is visually on or not
@@ -58,8 +60,15 @@ func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
-	var target_position: Vector2 = _get_nearest_player_position()
+	var target_position: Vector2
 	var end_point: Vector2
+	
+	if _target == null:
+		# Normal functionality: Target nearest ally.
+		target_position = _get_nearest_player_position()
+	else:
+		# Level 3: Target a specific ally.
+		target_position = _target.global_position
 	if _owning_character.position.distance_squared_to(target_position) <= _max_range_squared:
 		# The Tether is active and connects to the nearest player.
 		if not _visual_is_active:
@@ -110,20 +119,27 @@ func _physics_process(_delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 6
+		data.size() != 5
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning Node2D
 		or typeof(data[1]) != TYPE_FLOAT		# Range
-		or typeof(data[2]) != TYPE_NODE_PATH	# Starting position
-		or typeof(data[3]) != TYPE_BOOL			# If piercing is active
-		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
-		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
+		or typeof(data[2]) != TYPE_NODE_PATH	# Target node
+		or typeof(data[3]) != TYPE_FLOAT		# Crit chance
+		or typeof(data[4]) != TYPE_FLOAT		# Crit multiplier
 	):
+		push_error("Malformed bullet setup")
 		return
 	
-	_starting_position = get_node(data[2])
-	_crit_chance = data[4]
-	_crit_multiplier = data[5]
+	_starting_position = get_node(data[0])
+	_max_range = data[1]
+	# Target path is same as owner path if the tether doesn't have a specific target.
+	if data[2] != data[0]:
+		_target = get_node(data[2])
+	_crit_chance = data[3]
+	_crit_multiplier = data[4]
 	_is_owned_by_player = is_owned_by_player
+	
+	_max_range_squared = _max_range ** 2
+	
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])
 	
@@ -149,6 +165,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	var tether_powerup: PowerupTether = _owning_character.get_node_or_null("PowerupTether")
 	if tether_powerup != null:
+		tether_powerup.add_bullet(self)
 		tether_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
@@ -157,9 +174,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			func(new_crit_chance, new_crit_multiplier):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
-	
-	_max_range = data[1]
-	_max_range_squared = _max_range ** 2
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
@@ -174,3 +188,9 @@ func level_up(_new_level: int, new_damage: float):
 ## Set how visible this bullet is using the local client's bullet opacity setting.
 func _update_bullet_opacity() -> void:
 	pass
+
+
+## Destroy bullet. Only call on server.
+@rpc("any_peer", "call_local")
+func destroy() -> void:
+	queue_free()

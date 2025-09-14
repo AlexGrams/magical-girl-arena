@@ -4,7 +4,6 @@
 
 [node name="PowerupTether" type="Node2D"]
 script = ExtResource("1_pwy1i")
-max_range = 2000.0
 damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 signature_damage = 5.0
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_tether.tres"
