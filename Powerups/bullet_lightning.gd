@@ -55,11 +55,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		push_error("Malformed data array")
 		return
 	
-	# Level 3 upgrade
 	_is_level_three = data[1]
-	if data[1]:
-		scale.y = scale.y * 2
-	
 	_crit_chance = data[2]
 	_crit_multiplier = data[3]
 	
@@ -72,8 +68,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_lightning.scale.x = rotation_direction.length() / length_of_lightning
 
 
-## Collision only processed on server instance.
+## Make a smaller lightning arc if the Powerup is level 3. Collision only processed on server.
 func _on_area_2d_entered(area: Area2D) -> void:
+	if not _is_level_three:
+		return
+	
 	var enemy = area.get_parent()
 	var crit: bool = randf() < _crit_chance
 	var total_damage: float = collider.damage* (1.0 if not crit else _crit_multiplier)
