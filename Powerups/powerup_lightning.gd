@@ -28,7 +28,11 @@ func _process(delta: float) -> void:
 	if _fire_timer > _fire_interval:
 		var crit: bool = randf() <= crit_chance
 		var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
-		for player: PlayerCharacterBody2D in GameState.player_characters.values():
+		
+		# Shoot at a random character that isn't the Powerup owner.
+		var targets: Array = GameState.player_characters.values()
+		targets.shuffle()
+		for player: PlayerCharacterBody2D in targets:
 			if player != _owner:
 				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 					1, 
@@ -49,6 +53,7 @@ func _process(delta: float) -> void:
 						]
 					]
 				)
+				break
 		
 		# TODO: Play sound effect
 		# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
