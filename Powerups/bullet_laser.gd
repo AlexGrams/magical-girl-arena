@@ -11,6 +11,8 @@ extends Bullet
 
 var _max_range: float = 0.0
 var _owning_character: Node2D = null
+## Only non-null on powerup owner's client.
+var _powerup_laser: PowerupLaser = null
 var _pointer_location: Vector2
 var _piercing_active: bool = false
 var _starting_position: Node2D = null
@@ -79,20 +81,25 @@ func _physics_process(_delta: float) -> void:
 			$HitmarkerSprite.position = end_point
 			$HitmarkerSprite.show()
 			
-			if is_multiplayer_authority():
-				var hit_node: Node2D = result["collider"].get_parent()
-				if hit_node is Enemy or hit_node is LootBox:
+			var hit_node: Node2D = result["collider"].get_parent()
+			if hit_node is Enemy or hit_node is LootBox:
+				if is_multiplayer_authority():
 					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
-					Analytics.add_powerup_damage.rpc_id(_area.owner_id, total_damage, _area.powerup_index)
-		elif is_multiplayer_authority():
+				if multiplayer.get_unique_id() == _area.owner_id:
+					_powerup_laser.energy_did_damage()
+					Analytics.add_powerup_damage(total_damage, _area.powerup_index)
+		else:
 			# Signature functionality: Harm all enemies the laser is touching
 			var damage_done: float = 0
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
 				if hit_node is Enemy or hit_node is LootBox:
-					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+					if is_multiplayer_authority():
+						hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
 					damage_done += total_damage
-			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
+			if multiplayer.get_unique_id() == _area.owner_id and damage_done > 0:
+				_powerup_laser.energy_did_damage()
+				Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
 	else:
 		# Play passive humming
 		$AudioStreamPlayer2D.pitch_scale = 0.9
@@ -146,29 +153,29 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var laser_powerup: PowerupLaser = _owning_character.get_node_or_null("PowerupLaser")
-	if laser_powerup != null:
-		laser_powerup.powerup_level_up.connect(
+	_powerup_laser = _owning_character.get_node_or_null("PowerupLaser")
+	if _powerup_laser != null:
+		_powerup_laser.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
 		
 		# Each frame, need to send the local player's mouse position to the server.
 		# This signal is disconnected when the player goes down so that we aren't RPCing from a freed node.
-		laser_powerup.update_pointer_location.connect(_call_set_pointer_direction)
+		_powerup_laser.update_pointer_location.connect(_call_set_pointer_direction)
 		_owning_character.died.connect(
 			func():
-				laser_powerup.update_pointer_location.disconnect(_call_set_pointer_direction)
+				_powerup_laser.update_pointer_location.disconnect(_call_set_pointer_direction)
 		)
 		
 		# Turn on signature functionality.
-		laser_powerup.activate_piercing.connect(
+		_powerup_laser.activate_piercing.connect(
 			func():
 				_set_piercing.rpc(true)
 		)
 		
 		# Update crit values
-		laser_powerup.crit_changed.connect(
+		_powerup_laser.crit_changed.connect(
 			func(new_crit_chance: float, new_crit_multiplier: float):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)

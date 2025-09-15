@@ -50,6 +50,10 @@ var _is_owned_by_player := true
 var _powerup_index: int = -1
 ## Collection of tags used to describe this Powerup.
 var _types: Array[Type] = []
+## Set true if powerup has Energy type and is boosted by the Energy charm.
+var _energy_is_boosted: bool = false
+## True each frame that this Energy Powerup is boosted by a charm and does damage.
+var _energy_did_damage: bool = false
 
 # Emitted after increasing this Powerup's level
 signal powerup_level_up(new_level: int, new_damage: float)
@@ -141,7 +145,12 @@ func boost_haste() -> void:
 
 ## A boost for Powerup with the "Energy" type.
 func boost_energy() -> void:
-	push_error("Energy boost not implemented for " + powerup_name)
+	_energy_is_boosted = true
+
+
+## Call when this is an Energy powerup and it has done damage.
+func energy_did_damage() -> void:
+	_energy_did_damage = _energy_is_boosted
 
 
 # Set the multiplayer authority for this powerup

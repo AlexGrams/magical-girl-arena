@@ -5,6 +5,12 @@ extends Powerup
 @export var bullet_scene := "res://Powerups/bullet_laser.tscn"
 @export var max_range: float = 500
 
+## Time in seconds that ultimate cooldown is reduced each frame that this Energy powerup does damage.
+@export var _energy_charm_ult_time_reduction: float = 0.1
+
+## Owning player's ultimate ability.
+var _owner_ultimate: Ability = null
+
 signal update_pointer_location(new_pointer_location: Vector2)
 ## Signals to the laser bullet to activate signature functionality if this powerup is signature and max level.
 signal activate_piercing()
@@ -25,11 +31,18 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	
+	_owner_ultimate = get_parent().abilities[0]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	update_pointer_location.emit(get_global_mouse_position())
+	
+	# Energy charm
+	if _energy_did_damage:
+		_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+	_energy_did_damage = false
 
 
 func activate_powerup():
@@ -106,7 +119,3 @@ func _activate_signature() -> void:
 				]
 			]
 		)
-
-
-func boost_energy() -> void:
-	pass
