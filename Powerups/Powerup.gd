@@ -14,7 +14,8 @@ enum Type {
 	ProjectileFireRate,
 	Haste,
 	AreaSize,
-	Critical
+	Critical,
+	Energy
 }
 
 ## The highest level that this powerup can be upgraded to.
