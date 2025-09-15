@@ -1,3 +1,4 @@
+class_name PowerupMines
 extends Powerup
 ## Creates stationary mines around the player that explode after a delay
 
@@ -8,16 +9,22 @@ extends Powerup
 @export var _mines: int = 10
 ## Farthest distance that a mine is placed from the player.
 @export var _max_range: float = 300.0
+## Time in seconds that ultimate cooldown is reduced each frame that this Energy powerup does damage.
+@export var _energy_charm_ult_time_reduction: float = 5.0
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
 
+
 @onready var _shoot_timer: float = shoot_interval
 var _bullet_spawner: BulletSpawner = null
+## Owning player's ultimate ability.
+var _owner_ultimate: Ability = null
 
 
 func _ready() -> void:
 	super()
-	_bullet_spawner = get_tree().root.get_node("Playground/BulletSpawner")
+	_bullet_spawner = GameState.playground.bullet_spawner
+	_owner_ultimate = get_parent().abilities[0]
 
 
 func _process(delta: float) -> void:
@@ -48,6 +55,13 @@ func _process(delta: float) -> void:
 				)
 		
 		_shoot_timer = 0
+
+
+func _physics_process(_delta: float) -> void:
+	# Energy charm
+	if _energy_did_damage:
+		_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+	_energy_did_damage = false
 
 
 func activate_powerup():
@@ -81,7 +95,3 @@ func unboost() -> void:
 
 func boost_haste() -> void:
 	shoot_interval *= 0.75
-
-
-func boost_energy() -> void:
-	pass
