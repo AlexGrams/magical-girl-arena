@@ -31,8 +31,6 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
-	
-	_owner_ultimate = get_parent().abilities[0]
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +47,7 @@ func activate_powerup():
 	is_on = true
 	
 	if _is_owned_by_player:
+		_owner_ultimate = get_parent().abilities[0]
 		# Main laser
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1,
