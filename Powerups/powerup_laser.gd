@@ -106,3 +106,7 @@ func _activate_signature() -> void:
 				]
 			]
 		)
+
+
+func boost_energy() -> void:
+	pass

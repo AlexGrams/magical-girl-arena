@@ -99,3 +99,7 @@ func _activate_level_three() -> void:
 					]
 				]
 			)
+
+
+func boost_energy() -> void:
+	pass

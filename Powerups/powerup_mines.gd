@@ -81,3 +81,7 @@ func unboost() -> void:
 
 func boost_haste() -> void:
 	shoot_interval *= 0.75
+
+
+func boost_energy() -> void:
+	pass

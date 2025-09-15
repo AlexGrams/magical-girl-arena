@@ -139,6 +139,11 @@ func boost_haste() -> void:
 	push_error("Haste boost not implemented for " + powerup_name)
 
 
+## A boost for Powerup with the "Energy" type.
+func boost_energy() -> void:
+	push_error("Energy boost not implemented for " + powerup_name)
+
+
 # Set the multiplayer authority for this powerup
 func set_authority(id: int) -> void:
 	set_multiplayer_authority(id)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://0ml7rsmqdmu2"]
+
+[ext_resource type="Script" path="res://Artifacts/artifact_energy.gd" id="1_cl6fm"]
+
+[node name="ArtifactEnergy" type="Node"]
+script = ExtResource("1_cl6fm")

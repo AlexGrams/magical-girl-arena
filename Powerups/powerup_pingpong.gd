@@ -73,3 +73,7 @@ func boost_haste() -> void:
 	for bullet: BulletPingPong in _bullets:
 		if bullet != null:
 			bullet.boost.rpc()
+
+
+func boost_energy() -> void:
+	pass
