@@ -1,3 +1,4 @@
+class_name PowerupShotgun
 extends Powerup
 ## Shoots many small bullets in a cone towards the nearest enemy.
 
@@ -9,12 +10,16 @@ extends Powerup
 ## Angle in degrees for which bullets are evenly spread towards the target.
 ## Bullets are angled at most _fire_angle/2 degrees away from the target.
 @export var _fire_angle: float = 45.0
+## Time in seconds that ultimate cooldown is reduced each frame that this Energy powerup does damage.
+@export var _energy_charm_ult_time_reduction: float = 0.25
 
 @onready var shoot_timer: float = shoot_interval
 # Toggles between left and right directions
 var direction_toggle: bool = false
 ## Angle in radians of far apart each bullet is spread.
 var _fire_angle_rad_delta: float = 0
+## Owning player's ultimate ability.
+var _owner_ultimate: Ability = null
 
 var signature_active: bool = false
 var signature_direction_toggle: int = 0
@@ -32,6 +37,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not is_on:
 		return
+	
+	# Energy charm
+	if _energy_did_damage:
+		_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+	_energy_did_damage = false
 	
 	shoot_timer += delta
 	if shoot_timer > shoot_interval:
@@ -86,6 +96,8 @@ func _process(delta: float) -> void:
 
 func activate_powerup():
 	is_on = true
+	if _is_owned_by_player:
+		_owner_ultimate = get_parent().abilities[0]
 	picked_up_powerup.emit()
 
 
@@ -119,7 +131,3 @@ func unboost() -> void:
 
 func boost_fire_rate() -> void:
 	shoot_interval *= 0.75
-
-
-func boost_energy() -> void:
-	pass

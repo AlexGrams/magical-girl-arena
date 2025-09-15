@@ -683,17 +683,17 @@ func ready_player_character(character: Constants.Character) -> void:
 		# Stat upgrade buttons
 		$"../CanvasLayer/UpgradeScreenPanel".stat_upgrade_chosen.connect(_on_stat_upgrade_chosen)
 		
-		# Give the player the basic shoot powerup.
-		# Only the character that this player controls is given the ability. 
-		var base_powerup_data: PowerupData = load(character_data.base_powerup_data) 
-		add_powerup(base_powerup_data, true)
-		
 		# Set up ultimate ability
 		var ult: Ability = load(character_data.ultimate_ability).instantiate()
 		ult.set_authority(multiplayer.get_unique_id())
 		add_child(ult)
 		abilities.append(ult)
 		$"..".get_hud_canvas_layer().set_up_ultimate_ui(character_data, ult)
+		
+		# Give the player the basic shoot powerup.
+		# Only the character that this player controls is given the ability. 
+		var base_powerup_data: PowerupData = load(character_data.base_powerup_data) 
+		add_powerup(base_powerup_data, true)
 		
 		# Every time our health updates, signal on the other clients what the new healh values are.
 		took_damage.connect(func(new_health, new_health_max, new_temp_health):

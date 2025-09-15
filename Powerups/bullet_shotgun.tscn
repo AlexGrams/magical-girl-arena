@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dimpsrfkfu4no"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_106pl"]
+[ext_resource type="Script" path="res://Powerups/bullet_shotgun.gd" id="1_ritrf"]
 [ext_resource type="Texture2D" uid="uid://dsv6ihphft6se" path="res://Sprites/Powerups/DoveArrow.png" id="2_t3uhj"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_om2mk"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_vcjug"]
@@ -25,8 +25,8 @@ color_ramp = SubResource("GradientTexture1D_okexn")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(38, 38)
 
-[node name="Bullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
-script = ExtResource("1_106pl")
+[node name="BulletShotgun" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_ritrf")
 speed = 1000.0
 lifetime = 1.0
 collider = NodePath("Area2D")
