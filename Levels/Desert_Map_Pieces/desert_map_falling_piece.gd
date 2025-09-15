@@ -98,12 +98,12 @@ func _fall() -> void:
 				other.hide()
 	
 	# Animation
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_EXPO)
-	tween.set_parallel()
-	tween.tween_property(base, "scale", Vector2.ZERO, fall_time)
-	tween.tween_property(base, "modulate", Color.html("241a13"), fall_time)
+	var tween_fall = create_tween()
+	tween_fall.set_ease(Tween.EASE_OUT)
+	tween_fall.set_trans(Tween.TRANS_EXPO)
+	tween_fall.set_parallel()
+	tween_fall.tween_property(base, "scale", Vector2.ZERO, fall_time)
+	tween_fall.tween_property(base, "modulate", Color.html("241a13"), fall_time)
 	for child in triangles.get_children():
 		child.scale = Vector2.ZERO
 	await get_tree().create_timer(time_to_crack + fall_time + 5, false).timeout
