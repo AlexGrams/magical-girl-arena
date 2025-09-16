@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://hnba74hq3rcf" path="res://Audio/SFX/Powerups/Goth_Scythe.mp3" id="4_2ftce"]
 [ext_resource type="AudioStream" uid="uid://bdb7w4mdyqvj3" path="res://Audio/SFX/Ultimates/Sweet_Ultimate.mp3" id="5_s3017"]
 [ext_resource type="AudioStream" uid="uid://dck2jpcdmgnk" path="res://Audio/SFX/Powerups/Card_Sound.mp3" id="6_axp6t"]
-[ext_resource type="AudioStream" uid="uid://d104a52tavg06" path="res://Audio/SFX/Enemy_Hit.wav" id="8_51y8p"]
+[ext_resource type="AudioStream" uid="uid://dkv1g3vytf5wi" path="res://Audio/SFX/Enemy_Hit.mp3" id="8_t3aof"]
 [ext_resource type="AudioStream" uid="uid://ljtf8ydvbjyq" path="res://Audio/SFX/On_Button_Hover_3.mp3" id="9_02tjj"]
 [ext_resource type="AudioStream" uid="uid://day7n86wpjy8f" path="res://Audio/SFX/On_Button_Pressed_2.mp3" id="10_pkguu"]
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://rj0n6862dnpu" path="res://Audio/SFX/Powerups/HeartbeatBurst_Launch.mp3" id="15_4qlyl"]
 [ext_resource type="AudioStream" uid="uid://bac3awulce4s0" path="res://Audio/SFX/Powerups/Mines_Dropped.mp3" id="15_qf7td"]
 [ext_resource type="AudioStream" uid="uid://bxme3x4sdsn0k" path="res://Audio/SFX/Powerups/Mines_Seeds.mp3" id="16_e4sk4"]
-[ext_resource type="AudioStream" uid="uid://c1bdhpf7vcfd0" path="res://Audio/SFX/Powerups/Mines_Explosion2.mp3" id="17_a0fgx"]
+[ext_resource type="AudioStream" uid="uid://c1bdhpf7vcfd0" path="res://Audio/SFX/Powerups/Mines_Explosion2.mp3" id="17_auey8"]
 [ext_resource type="AudioStream" uid="uid://ndr2pql55it1" path="res://Audio/SFX/Powerups/sfx-accent-eye-glitter-tinkle-1-6342.mp3" id="18_5002c"]
 [ext_resource type="AudioStream" uid="uid://bwni84fd4wqs7" path="res://Audio/SFX/Powerups/Marble2.mp3" id="19_k2pvy"]
 [ext_resource type="AudioStream" uid="uid://d1jiqf7s63cn3" path="res://Audio/SFX/Shop_Purchase.mp3" id="20_bbxmu"]
@@ -85,9 +85,9 @@ pitch_randomness = 0.0
 script = ExtResource("2_kdvej")
 limit = 1
 type = 10
-sound_effect = ExtResource("8_51y8p")
+sound_effect = ExtResource("8_t3aof")
 volume = -10
-pitch_scale = 1.0
+pitch_scale = 0.87
 pitch_randomness = 0.0
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
@@ -175,7 +175,7 @@ pitch_randomness = 0.0
 script = ExtResource("2_kdvej")
 limit = 20
 type = 31
-sound_effect = ExtResource("17_a0fgx")
+sound_effect = ExtResource("17_auey8")
 volume = -20
 pitch_scale = 1.0
 pitch_randomness = 0.0
