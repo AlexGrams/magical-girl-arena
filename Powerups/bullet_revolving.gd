@@ -14,5 +14,5 @@ func setup_bullet(is_owned_by_player: bool, _data: Array) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	super(area)
-	if _is_owned_by_player and area.get_parent() is Enemy:
+	if multiplayer.get_unique_id() == collider.owner_id and area.get_parent() is Enemy:
 		_powerup_revolving.energy_did_damage()
