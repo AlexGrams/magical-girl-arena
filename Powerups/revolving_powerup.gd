@@ -1,3 +1,4 @@
+class_name PowerupRevolving
 extends Powerup
 
 ## Time in seconds between shots.
@@ -7,6 +8,9 @@ extends Powerup
 ## Time in seconds betweene shots if owned by an enemy.
 @export var enemy_shoot_interval: float = 0.75
 @export var bullet_scene := "res://Powerups/revolving_bullet.tscn"
+
+## Time in seconds that ultimate cooldown is reduced each frame that this Energy powerup does damage.
+@export var _energy_charm_ult_time_reduction: float = 0.25
 
 # TODO: Might not be used anymore
 var sprite = preload("res://Orange.png")
@@ -18,6 +22,8 @@ var bullet_damage: float
 var _rotation: float = 30.0
 ## Angle in degrees between one bullet and next when this powerup is at max level.
 var _max_level_rotation: float = 10.0
+## Owning player's ultimate ability.
+var _owner_ultimate: Ability = null
 
 signal picked_up_powerup(sprite)
 
@@ -33,6 +39,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_on:
+		# Energy charm
+		if _energy_did_damage:
+			_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+		_energy_did_damage = false
+		
 		shoot_timer += delta
 		# Use a different shoot interval depending on if a player or enemy owns this powerup.
 		if (
@@ -79,6 +90,8 @@ func _process(delta: float) -> void:
 
 func activate_powerup():
 	is_on = true
+	if _is_owned_by_player:
+		_owner_ultimate = get_parent().abilities[0]
 	picked_up_powerup.emit(sprite)
 
 
@@ -122,7 +135,3 @@ func unboost() -> void:
 
 func boost_fire_rate() -> void:
 	shoot_interval *= 0.75
-
-
-func boost_energy() -> void:
-	pass

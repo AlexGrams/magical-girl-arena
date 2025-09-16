@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://45kf633odpmi"]
 
-[ext_resource type="Script" path="res://Powerups/bullet.gd" id="1_42fto"]
+[ext_resource type="Script" path="res://Powerups/bullet_revolving.gd" id="1_lr6c2"]
 [ext_resource type="Texture2D" uid="uid://buaarsvaugyyu" path="res://Sprites/Powerups/SweetTarotCard.png" id="2_4jef1"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hj53b"]
 [ext_resource type="Script" path="res://Powerups/TarotCardSprite.gd" id="3_t7mcq"]
@@ -28,7 +28,7 @@ color_ramp = SubResource("GradientTexture1D_qvbcj")
 
 [node name="RevolvingBullet" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
 scale = Vector2(2, 2)
-script = ExtResource("1_42fto")
+script = ExtResource("1_lr6c2")
 speed = 800.0
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
