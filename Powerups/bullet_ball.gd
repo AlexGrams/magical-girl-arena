@@ -22,7 +22,7 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _explosion_bullet_hitbox: BulletHitbox = null
 @export var _physics_collision_shape: CollisionShape2D
 
-@onready var _size_increment_vector: Vector2 = Vector2.ONE * _size_increment
+var _size_increment_vector: Vector2 = Vector2.ONE
 ## The original collision layer of the BulletHitbox for explosion damage.
 var _explosion_hitbox_collision_layer: int = 0
 ## Number of Enemies that the Ball has killed, meaning it did the final amount of damage to them.
@@ -88,11 +88,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		push_error("Malformed data array")
 		return
 	
+	_size_increment_vector = Vector2.ONE * _size_increment
 	_owning_player = get_node(data[0])
 	_kills = data[1]
-	_is_owned_by_player = is_owned_by_player
 	if data[2] > 0:
 		_set_growth(data[2])
+	_is_owned_by_player = is_owned_by_player
 	
 	_explosion_bullet_hitbox.damage = _explosion_damage
 	
@@ -122,6 +123,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			func(new_crit_chance: float, new_crit_multiplier: float):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
+		
+		_ball_powerup.set_ball(self)
 
 
 ## This bullet's owner has leveled up its corresponding powerup.
@@ -133,6 +136,13 @@ func _level_up(new_level: int, new_damage: float):
 	if new_level == 3:
 		_size_increment *= 1.5
 		_size_increment_vector *= 1.5
+
+
+## Increases the ball's current size and its max size. 
+@rpc("any_peer", "call_local")
+func boost_area_size() -> void:
+	_max_size += _size_increment * 10
+	_grow(10)
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.

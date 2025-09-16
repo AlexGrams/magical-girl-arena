@@ -6,6 +6,7 @@ extends Powerup
 
 ## Path to the Bullet-derived bullet scene.
 @export var _bullet_scene := ""
+var _ball: BulletBall = null
 var _kills: int = 0
 var _total_growth: float = 0.0
 
@@ -15,6 +16,12 @@ signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
 func set_crit_chance(new_crit: float) -> void:
 	super(new_crit)
 	crit_changed.emit(crit_chance, crit_multiplier)
+
+
+func set_ball(ball: BulletBall) -> void:
+	_ball = ball
+	if _area_size_boosted:
+		_ball.boost_area_size.rpc()
 
 
 func _ready() -> void:
@@ -63,6 +70,12 @@ func boost() -> void:
 
 func unboost() -> void:
 	pass
+
+
+func boost_area_size() -> void:
+	super()
+	if _ball != null:
+		_ball.boost_area_size.rpc()
 
 
 ## Called when instantiated ball grows. Keeps track of how big the ball should be when respawned.
