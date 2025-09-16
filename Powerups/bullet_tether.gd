@@ -15,6 +15,8 @@ var _max_range: float = 0.0
 ## Squared max range for distance calculations
 var _max_range_squared: float = 0.0
 var _owning_character: Node2D = null
+## Only not null on same client as powerup owner.
+var _powerup_tether: PowerupTether = null
 var _starting_position: Node2D = null
 var _target: Node2D = null
 var _crit_chance: float = 0.0
@@ -76,17 +78,19 @@ func _physics_process(_delta: float) -> void:
 			_visual_is_active = true
 			
 		end_point = _starting_position.global_position + (target_position - _starting_position.global_position).normalized() * _max_range
-	
-		if is_multiplayer_authority():
-			# Harm all enemies the Tether is touching.
-			var damage_done: float = 0
-			var crit: bool = randf() < _crit_chance
-			var total_damage: float = _area.damage * (1.0 if not crit else _crit_multiplier)
-			for hit_area: Area2D in _area.get_overlapping_areas():
-				var hit_node = hit_area.get_parent()
-				if hit_node is Enemy or hit_node is LootBox:
+		
+		# Harm all enemies the Tether is touching.
+		var damage_done: float = 0
+		var crit: bool = randf() < _crit_chance
+		var total_damage: float = _area.damage * (1.0 if not crit else _crit_multiplier)
+		for hit_area: Area2D in _area.get_overlapping_areas():
+			var hit_node = hit_area.get_parent()
+			if hit_node is Enemy or hit_node is LootBox:
+				if is_multiplayer_authority():
 					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
-					damage_done += total_damage
+				damage_done += total_damage
+		if damage_done > 0.0 and multiplayer.get_unique_id() == collider.owner_id:
+			_powerup_tether.energy_did_damage()
 			Analytics.add_powerup_damage.rpc_id(_area.owner_id, damage_done, _area.powerup_index)
 		
 		$AudioStreamPlayer2D.pitch_scale = 0.8
@@ -163,14 +167,14 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		return
 	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
-	var tether_powerup: PowerupTether = _owning_character.get_node_or_null("PowerupTether")
-	if tether_powerup != null:
-		tether_powerup.add_bullet(self)
-		tether_powerup.powerup_level_up.connect(
+	_powerup_tether = _owning_character.get_node_or_null("PowerupTether")
+	if _powerup_tether != null:
+		_powerup_tether.add_bullet(self)
+		_powerup_tether.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
-		tether_powerup.crit_changed.connect(
+		_powerup_tether.crit_changed.connect(
 			func(new_crit_chance, new_crit_multiplier):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
