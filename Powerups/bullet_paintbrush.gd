@@ -55,9 +55,10 @@ func start_death_timer() -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
-		or (typeof(data[0])) != TYPE_NODE_PATH	# Target node path
-		or (typeof(data[1])) != TYPE_BOOL		# Has level 3 upgrade or not
+		data.size() != 3
+		or typeof(data[0]) != TYPE_NODE_PATH	# Target node path
+		or typeof(data[1]) != TYPE_BOOL			# Has level 3 upgrade or not
+		or typeof(data[2]) != TYPE_BOOL			# Is boosted by Area Size charm
 	):
 		push_error("Malformed bullet data.")
 		return
@@ -65,6 +66,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# Level 3 upgrade
 	if data[1]:
 		scale.y = scale.y * 2
+	if data[2]:
+		scale.y *= 1.5
 
 	_ending_point = get_node(data[0]).global_position
 	var final_direction: Vector2 = _ending_point - global_position

@@ -49,7 +49,11 @@ func _process(delta: float) -> void:
 					_is_owned_by_player,
 					multiplayer.get_unique_id(),
 					_powerup_index,
-					[target.get_path(), _has_level_3_upgrade]
+					[
+						target.get_path(), 
+						_has_level_3_upgrade,
+						_area_size_boosted
+					]
 				]
 			)
 		
