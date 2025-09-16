@@ -61,6 +61,9 @@ func activate_powerup():
 					[multiplayer.get_unique_id()]
 				]
 			)
+		
+		if _area_size_boosted:
+			boost_area_size()
 	else:
 		push_error("Not implemented")
 
@@ -125,3 +128,10 @@ func boost_haste() -> void:
 	for bullet: BulletOrbit in _bullets:
 		if bullet != null:
 			bullet.boost.rpc()
+
+
+func boost_area_size() -> void:
+	super()
+	for bullet: BulletOrbit in _bullets:
+		if bullet != null:
+			bullet.boost_area_size.rpc()

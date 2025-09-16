@@ -3,6 +3,9 @@ extends Bullet
 
 @export var radius = 2
 
+## The part of the bullet that has a sprite and does damage.
+@export var _bullet_node: Node2D = null
+
 var owning_player: Node2D = null
 
 var _base_damage: float = 0.0
@@ -132,3 +135,8 @@ func boost() -> void:
 @rpc("any_peer", "call_local")
 func unboost() -> void:
 	speed /= 1.25
+
+
+@rpc("any_peer", "call_local")
+func boost_area_size() -> void:
+	_bullet_node.scale *= 2.0
