@@ -1,3 +1,4 @@
+class_name PowerupPet
 extends Powerup
 ## Might be unique in that this powerup doesn't create a Bullet.
 
@@ -24,6 +25,8 @@ func activate_powerup():
 			_powerup_index,
 			current_level
 		)
+		if _area_size_boosted:
+			boost_area_size()
 	else:
 		# TODO: Support for when owned by an enemy.
 		pass
@@ -41,14 +44,20 @@ func level_up():
 
 func boost() -> void:
 	if pet != null:
-		pet.boost()
+		pet.boost.rpc()
 
 
 func unboost() -> void:
 	if pet != null:
-		pet.unboost()
+		pet.unboost.rpc()
 
 
 func boost_haste() -> void:
 	if pet != null:
-		pet.boost()
+		pet.boost.rpc()
+
+
+func boost_area_size() -> void:
+	super()
+	if pet != null:
+		pet.boost_area_size.rpc()

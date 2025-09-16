@@ -64,8 +64,9 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 
 	
 	# Level up functionality
-	var pet_powerup = _owner_node.get_node_or_null("PowerupPet")
+	var pet_powerup: PowerupPet = _owner_node.get_node_or_null("PowerupPet")
 	if pet_powerup != null and pet_powerup is Powerup:
+		pet_powerup.pet = self
 		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
 		)
@@ -169,12 +170,20 @@ func level_up(new_level: int, new_damage: float):
 		_attack_time = 0.75
 
 
+@rpc("any_peer", "call_local")
 func boost() -> void:
 	_attack_speed_boost *= 2.0
 
 
+@rpc("any_peer", "call_local")
 func unboost() -> void:
 	_attack_speed_boost /= 2.0
+
+
+@rpc("any_peer", "call_local")
+func boost_area_size() -> void:
+	print("Waht")
+	scale *= 2.0
 
 
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
