@@ -50,6 +50,8 @@ var _is_owned_by_player := true
 var _powerup_index: int = -1
 ## Collection of tags used to describe this Powerup.
 var _types: Array[Type] = []
+## True if powerup has Area Size type and is boosted by Area Size charm.
+var _area_size_boosted: bool = false
 ## Set true if powerup has Energy type and is boosted by the Energy charm.
 var _energy_is_boosted: bool = false
 ## True each frame that this Energy Powerup is boosted by a charm and does damage.
@@ -141,6 +143,11 @@ func boost_fire_rate() -> void:
 ## A boost for Powerups with the "Haste" type.
 func boost_haste() -> void:
 	push_error("Haste boost not implemented for " + powerup_name)
+
+
+## A boost for Powerups with the "Area Size" type.
+func boost_area_size() -> void:
+	_area_size_boosted = true
 
 
 ## A boost for Powerup with the "Energy" type.
