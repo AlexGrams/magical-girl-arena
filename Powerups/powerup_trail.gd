@@ -41,7 +41,10 @@ func _process(delta: float) -> void:
 				_is_owned_by_player,
 				multiplayer.get_unique_id(),
 				_powerup_index,
-				[_trail_lifetime]
+				[
+					_trail_lifetime,
+					_area_size_boosted
+				]
 			]
 		)
 		
@@ -72,3 +75,7 @@ func boost() -> void:
 
 func unboost() -> void:
 	shoot_interval *= 2.0
+
+
+func boost_area_size() -> void:
+	super()

@@ -31,13 +31,16 @@ func set_damage(damage: float, _is_crit: bool = false):
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 1
+		data.size() != 2
 		or typeof(data[0]) != TYPE_FLOAT	# Lifetime
+		or typeof(data[1]) != TYPE_BOOL		# Is boosted by Area Size charm
 	):
 		push_error("Malformed bullet setup data Array for bullet_trail.gd.")
 		return
 	
 	lifetime = data[0]
+	if data[1]:
+		scale *= 1.5
 	
 	# Make the bullet hurt players
 	if not is_owned_by_player:
