@@ -44,7 +44,11 @@ func _process(delta: float) -> void:
 						_is_owned_by_player,
 						multiplayer.get_unique_id(),
 						_powerup_index,
-						[_puddle_lifetime, current_level >= 3]
+						[
+							_puddle_lifetime, 
+							current_level >= 3,
+							_area_size_boosted
+						]
 					]
 				)
 		

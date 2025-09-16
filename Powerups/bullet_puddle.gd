@@ -65,15 +65,18 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 2
+		data.size() != 3
 		or typeof(data[0]) != TYPE_FLOAT	# Lifetime
 		or typeof(data[1]) != TYPE_BOOL		# Is level 3+ or not
+		or typeof(data[2]) != TYPE_BOOL		# Is boosted by Area Size charm
 	):
 		push_error("Malformed bullet setup data Array for bullet_puddle.gd.")
 		return
 	
 	lifetime = data[0]
 	_has_level_3_upgrade = data[1]
+	if data[2]:
+		scale *= 2.0
 	
 	# Make the bullet hurt players
 	if not is_owned_by_player:
