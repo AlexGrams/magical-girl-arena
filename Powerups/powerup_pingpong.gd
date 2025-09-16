@@ -1,10 +1,14 @@
 class_name PowerupPingPong
 extends Powerup
 
+## Time in seconds that ultimate cooldown is reduced each frame that this Energy powerup does damage.
+@export var _energy_charm_ult_time_reduction: float = 0.5
 
 var bullet_scene := "res://Powerups/bullet_pingpong.tscn"
 
 var _bullets: Array[BulletPingPong] = []
+## Owning player's ultimate ability.
+var _owner_ultimate: Ability = null
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float) 
 
@@ -27,8 +31,16 @@ func _ready():
 	super()
 
 
+func _physics_process(_delta: float) -> void:
+	# Energy charm
+	if _energy_did_damage:
+		_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+	_energy_did_damage = false
+
+
 func activate_powerup():
 	if _is_owned_by_player:
+		_owner_ultimate = get_parent().abilities[0]
 		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 			1, 
 			[
@@ -73,7 +85,3 @@ func boost_haste() -> void:
 	for bullet: BulletPingPong in _bullets:
 		if bullet != null:
 			bullet.boost.rpc()
-
-
-func boost_energy() -> void:
-	pass

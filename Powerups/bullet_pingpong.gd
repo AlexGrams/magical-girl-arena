@@ -28,6 +28,7 @@ const touching_distance_threshold: float = 30.0
 ## The bullet object is replicated on all clients.
 ## This owner is the client's replicated version of the character that owns this bullet.
 var _pingpong_owner: Node2D = null
+var _powerup_ping_pong: PowerupPingPong = null
 ## Which node the pingpong is currently moving towards.
 var _target: Node2D = null
 ## List of nodes that the pingpong can bounce between.
@@ -121,19 +122,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var powerup_ping_pong: PowerupPingPong = _pingpong_owner.get_node_or_null("PowerupPingPong")
+		_powerup_ping_pong = _pingpong_owner.get_node_or_null("PowerupPingPong")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
-		if powerup_ping_pong != null:
-			powerup_ping_pong.add_bullet(self)
+		if _powerup_ping_pong != null:
+			_powerup_ping_pong.add_bullet(self)
 			
 			# Level up
-			powerup_ping_pong.powerup_level_up.connect(func(new_level: int, new_damage: float):
+			_powerup_ping_pong.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
 			)
 			
 			# Crit update
-			_set_critical.rpc_id(1, powerup_ping_pong.crit_chance, powerup_ping_pong.crit_multiplier)
-			powerup_ping_pong.crit_changed.connect(
+			_set_critical.rpc_id(1, _powerup_ping_pong.crit_chance, _powerup_ping_pong.crit_multiplier)
+			_powerup_ping_pong.crit_changed.connect(
 				func(new_crit_chance: float, new_crit_multiplier: float):
 					_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 			)
@@ -150,6 +151,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			_pingpong_owner.died.connect(func(_enemy: Enemy):
 				queue_free()
 			)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	super(area)
+	if multiplayer.get_unique_id() == collider.owner_id and area.get_parent() is Enemy:
+		_powerup_ping_pong.energy_did_damage()
 
 
 func set_damage(damage: float, _is_crit: bool = false):
