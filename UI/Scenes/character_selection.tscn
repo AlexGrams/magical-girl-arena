@@ -111,6 +111,11 @@ layout_mode = 2
 character = 5
 image = ExtResource("7_4g5j1")
 
+[node name="CharacterSelectButton6" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
+layout_mode = 2
+character = 6
+image = ExtResource("4_745yc")
+
 [node name="CharacterInformationContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 700.0

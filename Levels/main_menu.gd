@@ -183,7 +183,7 @@ func _on_shop_button_down() -> void:
 func _set_main_menu_character() -> void:
 	var random_char = -1
 	# TODO: Remove OR statement after we add animations for the new characters.
-	while random_char == -1 or random_char > 5:
+	while random_char == -1 or random_char > 6:
 		random_char = Constants.Character.values().pick_random()
 	main_menu_character_sprite.set_character(random_char)
 	main_menu_character_sprite.set_read_input(false)

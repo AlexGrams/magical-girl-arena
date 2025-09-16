@@ -14,8 +14,8 @@ enum Character {
 	DOVE,
 	MARIGOLD,
 	AMBER,
-	AZURE_JAY,
 	MOTHER_NATURE,
+	AZURE_JAY,
 	LUNA,
 	SAND_WITCH
 }
@@ -76,8 +76,8 @@ var CHARACTER_DATA: Dictionary = {
 	Character.DOVE: load("res://Player/CharacterResourceFiles/character_data_dove.tres"),
 	Character.MARIGOLD: load("res://Player/CharacterResourceFiles/character_data_marigold.tres"),
 	Character.AMBER: load("res://Player/CharacterResourceFiles/character_data_amber.tres"),
+	Character.MOTHER_NATURE: load("res://Player/CharacterResourceFiles/character_data_mothernature.tres"),
 	#Character.AZURE_JAY: load("res://Player/CharacterResourceFiles/character_data_jay.tres"),
-	#Character.MOTHER_NATURE: load("res://Player/CharacterResourceFiles/character_data_mothernature.tres"),
 	#Character.LUNA: load("res://Player/CharacterResourceFiles/character_data_luna.tres"),
 	#Character.SAND_WITCH: load("res://Player/CharacterResourceFiles/character_data_sandwitch.tres")
 }

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_sukoj")
-name = "MotherNature"
+name = "Vale"
 display_name = "Mother Nature"
 description = "XX"
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres"
@@ -19,5 +19,5 @@ model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.m
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.3
 offset_height = -25.0
-ultimate_ability = ""
+ultimate_ability = "res://Abilities/ability_ult_mothernature.tscn"
 icon_uid = "uid://bw7bs1ov0n768"
