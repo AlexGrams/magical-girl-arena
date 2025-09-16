@@ -45,21 +45,21 @@ func _process(delta: float) -> void:
 		# Move in an arc
 		if death_timer < _half_lifetime:
 			rotate(speed * delta)
-			$BulletOffset/ScytheSprite.flip_h = false
+			$BulletOffset/ScytheSprite.flip_h = true
 		else:
 			rotate(-speed * delta)
-			$BulletOffset/ScytheSprite.flip_h = true
+			$BulletOffset/ScytheSprite.flip_h = false
 	else:
 		# Max level behavior: Move in an arc three times
 		if death_timer > lifetime * 0.666:
 			rotate(speed * delta)
-			$BulletOffset/ScytheSprite.flip_h = false
+			$BulletOffset/ScytheSprite.flip_h = true
 		elif death_timer > lifetime * 0.333:
 			rotate(-speed * delta)
-			$BulletOffset/ScytheSprite.flip_h = true
+			$BulletOffset/ScytheSprite.flip_h = false
 		else:
 			rotate(speed * delta)
-			$BulletOffset/ScytheSprite.flip_h = false
+			$BulletOffset/ScytheSprite.flip_h = true
 	
 	death_timer += delta
 	if death_timer >= lifetime and is_multiplayer_authority():
