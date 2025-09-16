@@ -55,7 +55,8 @@ func _process(delta: float) -> void:
 							multiplayer.get_unique_id(), 
 							is_signature and current_level == max_level,
 							crit_chance,
-							crit_multiplier
+							crit_multiplier,
+							_area_size_boosted
 						]
 					]
 				)
@@ -75,7 +76,8 @@ func _process(delta: float) -> void:
 								multiplayer.get_unique_id(), 
 								is_signature and current_level == max_level,
 								crit_chance,
-								crit_multiplier
+								crit_multiplier,
+								_area_size_boosted
 							]
 						]
 					)

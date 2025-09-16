@@ -77,12 +77,13 @@ func _physics_process(_delta: float) -> void:
 
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
-	if (data.size() > 4
-		or (data.size() == 4						# Owned by player
+	if (data.size() > 5
+		or (data.size() == 5						# Owned by player
 			and (typeof(data[0]) != TYPE_INT		# Owning player ID
 				or typeof(data[1]) != TYPE_BOOL		# Is signature behavior active
 				or typeof(data[2]) != TYPE_FLOAT	# Crit chance
 				or typeof(data[3]) != TYPE_FLOAT	# Crit multiplier
+				or typeof(data[4]) != TYPE_BOOL		# Is boosted by Area Size charm
 			)
 		)
 		or (data.size() == 1						# Owned by enemy
@@ -98,6 +99,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		_signature_behavior = data[1]
 		_crit_chance = data[2]
 		_crit_multiplier = data[3]
+		if data[4]:
+			scale *= 1.5
 	else:
 		# Enemy bullet
 		_owning_player = get_node_or_null(data[0])
