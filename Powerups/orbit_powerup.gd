@@ -21,8 +21,10 @@ func set_crit_multiplier(new_multiplier: float) -> void:
 
 
 ## Add a reference to an instantated bullet.
-func add_bullet(bullet: Bullet) -> void:
+func add_bullet(bullet: BulletOrbit) -> void:
 	_bullets.append(bullet)
+	if _area_size_boosted:
+		bullet.boost_area_size.rpc()
 
 
 func _ready() -> void:

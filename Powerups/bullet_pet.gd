@@ -66,7 +66,7 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	# Level up functionality
 	var pet_powerup: PowerupPet = _owner_node.get_node_or_null("PowerupPet")
 	if pet_powerup != null and pet_powerup is Powerup:
-		pet_powerup.pet = self
+		pet_powerup.set_pet(self)
 		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
 		)
@@ -182,7 +182,6 @@ func unboost() -> void:
 
 @rpc("any_peer", "call_local")
 func boost_area_size() -> void:
-	print("Waht")
 	scale *= 2.0
 
 

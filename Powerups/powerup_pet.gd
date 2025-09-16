@@ -9,6 +9,12 @@ var pet_scene := "uid://npslgflisq38"
 var pet: BulletPet
 
 
+func set_pet(new_pet: BulletPet) -> void:
+	pet = new_pet
+	if _area_size_boosted:
+		pet.boost_area_size.rpc()
+
+
 func _ready():
 	super()
 
