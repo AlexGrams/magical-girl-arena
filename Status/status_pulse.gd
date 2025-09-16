@@ -16,6 +16,8 @@ var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
 ## True if owning player has powerup level 3 or higher.
 var _is_level_three: bool = false
+## Does the Powerup owner have the Area Size charm?
+var _area_size_boost: bool = false
 ## How many stacks of this status there are.
 var _stacks: int = 1
 
@@ -30,7 +32,8 @@ func set_properties(
 		damage: float, 
 		is_level_three: bool, 
 		crit_chance: float, 
-		crit_multiplier: float
+		crit_multiplier: float,
+		area_size_boost: bool
 	) -> void:
 	
 	_owner_id = id
@@ -39,6 +42,7 @@ func set_properties(
 	_is_level_three = is_level_three
 	_crit_chance = crit_chance
 	_crit_multiplier = crit_multiplier
+	_area_size_boost = area_size_boost
 	
 	duration = GameState.time - int(GameState.time)
 	# Special duration calculation if time is negative, after the boss has spawned.
@@ -77,7 +81,8 @@ func deactivate() -> void:
 				_stacks, 
 				_is_level_three,
 				_crit_chance,
-				_crit_multiplier
+				_crit_multiplier,
+				_area_size_boost
 			]
 		]
 	)

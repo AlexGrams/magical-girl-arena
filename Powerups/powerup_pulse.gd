@@ -33,7 +33,8 @@ func _process(delta: float) -> void:
 				_get_damage_from_curve(), 
 				current_level >= 3,
 				crit_chance,
-				crit_multiplier
+				crit_multiplier,
+				_area_size_boosted
 			)
 			_owner.add_status(status_pulse)
 		elif current_level >= 3:

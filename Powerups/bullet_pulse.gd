@@ -21,6 +21,7 @@ var _is_level_three: bool = false
 var _has_knockback: bool = false
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
+var _area_size_boost: bool = false
 
 
 func _ready() -> void:
@@ -43,13 +44,14 @@ func _process(delta: float) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 6
+		data.size() != 7
 		or typeof(data[0]) != TYPE_NODE_PATH	# Parent node path 
 		or typeof(data[1]) != TYPE_INT			# Original player ID
 		or typeof(data[2]) != TYPE_INT			# Power level
 		or typeof(data[3]) != TYPE_BOOL			# Is level three
 		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
 		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
+		or typeof(data[6]) != TYPE_BOOL			# Is boosted by Area Size charm
 	):
 		push_error("Malformed data array")
 		return
@@ -72,6 +74,9 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_level_three = data[3]
 	_crit_chance = data[4]
 	_crit_multiplier = data[5]
+	if data[6]:
+		_area_size_boost = true
+		_final_scale *= 1.5
 	_is_owned_by_player = is_owned_by_player
 	
 	# TODO: Stacking scaling
@@ -110,7 +115,8 @@ func _on_spread_area_2d_entered(area: Area2D) -> void:
 				collider.damage, 
 				_is_level_three,
 				_crit_chance,
-				_crit_multiplier
+				_crit_multiplier,
+				_area_size_boost
 			)
 			other.add_status(status_pulse)
 		elif _is_level_three:
