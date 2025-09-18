@@ -15,6 +15,7 @@ extends CharacterBody2D
 ## Parent of this Enemy's collider
 @export var collider_area: Area2D = null
 @export var sprite: Node2D = null
+@export var sound_effect_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT
 
 @onready var exp_scene = preload("res://Pickups/exp_orb.tscn")
 @onready var gold_scene = preload("res://Pickups/gold.tscn")
@@ -247,7 +248,7 @@ func set_target(target_path: NodePath) -> void:
 ## Changes the amount of damage being done to this Enemy each physics frame. Useful for sources of 
 ## periodic damage such as AOE damage volumes and debuffs.
 func add_continuous_damage(damage: float) -> void:
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
+	AudioManager.play_enemy_hit(damage)
 	_continuous_damage = max(_continuous_damage + damage, 0)
 
 
@@ -265,7 +266,7 @@ func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void
 ## Wrapper function for RPC modification without making changes everywhere.
 func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, is_crit: bool = false) -> void:
 	# TODO: Maybe fix all the references to this function.
-	AudioManager.create_audio_at_location(global_position, damage_type)
+	AudioManager.play_enemy_hit(damage, is_crit, damage_type)
 	_take_damage.rpc_id(1, damage, is_crit)
 
 
@@ -302,7 +303,7 @@ func _update_boss_health_bar(new_percent: float, is_boss: bool) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
 		if is_multiplayer_authority():
-			take_damage(area.damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, area.is_crit)
+			take_damage(area.damage, area.sound_effect, area.is_crit)
 		
 		# Analytics: Record damage done by touching a bullet for this client only.
 		if area.owner_id == multiplayer.get_unique_id():

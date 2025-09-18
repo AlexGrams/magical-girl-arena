@@ -23,6 +23,11 @@ var _music_volume_multiplier: float = 1.0
 ## Saved child from when you instantiate the battle_music_player.
 var _battle_music_player_node:AudioStreamPlayer = null
 
+## Num of times the enemy hit sound is allowed to play at the same time. Shared between "Enemy hit" and "Enemy hit critical"
+@export var _enemy_hit_limit: int = 20
+## How many enemy hit sounds are currently playing.
+var _enemy_hit_limit_counter: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for sfx in sound_effect_settings:
@@ -64,8 +69,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 	else:
 		push_warning("SFX type not found: ", sfx_type)
 
-
-func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_paused: bool = false):
+func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_paused: bool = false) -> AudioStreamPlayer:
 	if sfx_type in sound_effect_dict:
 		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]
 		if !sfx.has_reached_limit():
@@ -73,6 +77,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			var new_audio := AudioStreamPlayer.new()
 			add_child(new_audio)
 			
+			new_audio.bus = sfx.bus
 			new_audio.stream = sfx.sound_effect
 			new_audio.volume_db = linear_to_db(db_to_linear(sfx.volume) * _volume_multiplier)
 			new_audio.pitch_scale = sfx.pitch_scale
@@ -84,6 +89,8 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 				new_audio.process_mode = Node.PROCESS_MODE_ALWAYS
 			
 			new_audio.play()
+			return new_audio
+	return null
 
 func update_music_volume():
 	main_menu_music_player.volume_db = linear_to_db(db_to_linear(-20) * _music_volume_multiplier)
@@ -137,3 +144,19 @@ func pause_music():
 	if _battle_music_player_node != null:
 		_battle_music_player_node.stream_paused = true
 	main_menu_music_player.stream_paused = true
+
+func play_enemy_hit(damage:float, is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT):
+	if _enemy_hit_limit_counter < _enemy_hit_limit:
+		var new_audio = create_audio(sfx_type)
+		if new_audio != null:
+			_enemy_hit_limit_counter += 1
+			# Prioritize volume
+			var pitch_scale = new_audio.pitch_scale
+			if is_crit:
+				pitch_scale = new_audio.pitch_scale + 0.06
+				
+			new_audio.pitch_scale = pitch_scale
+			new_audio.finished.connect(
+				func():
+					_enemy_hit_limit_counter -= 1
+			)
