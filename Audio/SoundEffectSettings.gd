@@ -1,3 +1,4 @@
+@tool
 extends Resource
 class_name SoundEffectSettings
 
@@ -45,24 +46,51 @@ enum SOUND_EFFECT_TYPE{
 	ITEM_PURCHASED,
 	CONSTELLATION_SUMMON_RUMBLE,
 	CORVUS_SUMMON,
+	ON_ENEMY_HIT_REVOLVING,
+	ON_ENEMY_HIT_SCYTHE,
+	ON_ENEMY_HIT_ORBIT,
 	# Default
 	NONE
 }
 
 @export_range(0, 20) var limit : int = 20
-@export var type : SOUND_EFFECT_TYPE
+@export var type : SOUND_EFFECT_TYPE :
+	set(new_type):
+		if new_type != type:
+			type = new_type
+			set_name(SOUND_EFFECT_TYPE.keys()[type])
+			emit_changed()
 @export var sound_effect : AudioStream
 @export_range(-40, 20) var volume = 0
 @export var pitch_scale = 1.0
 @export var pitch_randomness = 0.0
+## How much time in MILISECONDS must pass before this sound can be played again
+@export var cooldown : int = 0
+## Name of audio bus to be placed in
+@export var bus: String
 
-var audio_count = 0
-
+var audio_count:int = 0
+var last_time_played:int = -1
+	
 func update_audio_count(amount: int):
 	audio_count = max(0, audio_count + amount)
+
+## Returns TRUE if sfx has NOT reached its limit AND is NOT on cooldown
+func can_be_played() -> bool:
+	return !has_reached_limit() and !is_on_cooldown()
 	
 func has_reached_limit() -> bool:
 	return audio_count >= limit
+
+## TRUE if it's on cooldown and SHOULD NOT be played. FALSE if it's not on cooldown and can be played.
+func is_on_cooldown() -> bool:
+	var current_time = Time.get_ticks_msec()
+	
+	# If sfx has never been played, set it to current time
+	if last_time_played == -1:
+		last_time_played = current_time
+	 
+	return (current_time - last_time_played) < cooldown
 
 func on_audio_finished():
 	update_audio_count(-1)
