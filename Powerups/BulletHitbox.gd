@@ -3,6 +3,8 @@ extends Area2D
 
 ## How much damage this bullet does.
 @export var damage: float
+## Sound to play
+@export var sound_effect: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT
 
 ## True if this bullet does critical damage.
 var is_crit: bool = false

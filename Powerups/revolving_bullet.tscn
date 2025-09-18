@@ -44,6 +44,7 @@ degree_offset = 90.0
 collision_mask = 2
 script = ExtResource("3_hj53b")
 damage = 100.0
+sound_effect = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
