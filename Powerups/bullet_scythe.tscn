@@ -12,6 +12,7 @@ size = Vector2(38, 79.25)
 [node name="BulletScythe" type="Node2D" node_paths=PackedStringArray("area", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_73noj")
+arc_length = 150.0
 area = NodePath("BulletOffset/ScytheSprite/Area2D")
 lifetime = 0.75
 collider = NodePath("BulletOffset/ScytheSprite/Area2D")
@@ -37,6 +38,7 @@ scale = Vector2(2.22222, 2.51256)
 collision_mask = 2
 script = ExtResource("3_eudj7")
 damage = 25.0
+sound_effect = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOffset/ScytheSprite/Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
