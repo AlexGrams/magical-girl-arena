@@ -63,3 +63,5 @@ func _set_display(upgrade_name: String, texture: Texture2D, description: String)
 					$Box/Traits_Container/Area_Size.show()
 				Powerup.Type.Critical:
 					$Box/Traits_Container/Critical.show()
+				Powerup.Type.Energy:
+					$Box/Traits_Container/Energy.show()
