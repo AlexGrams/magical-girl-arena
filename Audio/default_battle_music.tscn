@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://dytisf2b6ldff"]
 
 [ext_resource type="Script" path="res://default_battle_music.gd" id="1_h38ph"]
-[ext_resource type="AudioStream" uid="uid://bor7ul26cgtfg" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Title Screen.wav" id="2_u6cjt"]
-[ext_resource type="AudioStream" uid="uid://dg58jrm210qvl" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="3_iot2q"]
-[ext_resource type="AudioStream" uid="uid://bnbd7l085qu0k" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 2.wav" id="4_tqxk4"]
+[ext_resource type="AudioStream" uid="uid://dis3nbhy1ql7y" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Title Screen.mp3" id="2_a2oc5"]
+[ext_resource type="AudioStream" uid="uid://ctq0cero2otuu" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 1.mp3" id="3_232jn"]
+[ext_resource type="AudioStream" uid="uid://ccs53ssysgso3" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 2.mp3" id="4_tinb3"]
 
 [node name="DefaultBattleMusic" type="AudioStreamPlayer"]
 script = ExtResource("1_h38ph")
-map_1_loop_1 = ExtResource("2_u6cjt")
-map_1_loop_2 = ExtResource("3_iot2q")
-map_1_loop_3 = ExtResource("4_tqxk4")
+map_1_loop_1 = ExtResource("2_a2oc5")
+map_1_loop_2 = ExtResource("3_232jn")
+map_1_loop_3 = ExtResource("4_tinb3")

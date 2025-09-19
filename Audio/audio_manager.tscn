@@ -26,9 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://dytisf2b6ldff" path="res://Audio/default_battle_music.tscn" id="22_mr100"]
 [ext_resource type="AudioStream" uid="uid://6hytmfq8camv" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_TarotCards.mp3" id="23_k6ncv"]
 [ext_resource type="AudioStream" uid="uid://cicpchthwefg8" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Scythe.mp3" id="24_b70sy"]
-[ext_resource type="AudioStream" uid="uid://b8fy0p5oa10s" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.wav" id="24_lbmdr"]
 [ext_resource type="AudioStream" uid="uid://yovmkejq2sfs" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit2.mp3" id="25_xulhf"]
 [ext_resource type="AudioStream" uid="uid://dmeah32wh35q8" path="res://Audio/Music/newthingget.ogg" id="26_86adp"]
+[ext_resource type="AudioStream" uid="uid://263itcev3h81" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.mp3" id="28_d65r3"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -362,7 +362,7 @@ sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6k
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")
-map_1_loop_4 = ExtResource("24_lbmdr")
+map_1_loop_4 = ExtResource("28_d65r3")
 map_1_victory = ExtResource("26_86adp")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -370,7 +370,6 @@ panning_strength = 0.0
 
 [node name="MainMenuMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_wp1x8")
-volume_db = -20.0
 autoplay = true
 bus = &"Music"
 parameters/looping = true
