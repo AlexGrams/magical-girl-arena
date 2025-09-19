@@ -70,7 +70,7 @@ func _on_button_pressed() -> void:
 		upgrade_stat_chosen.emit(_stat)
 
 func _on_button_hover() -> void:
-	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER, true)
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER)
 	$AnimationPlayer.play("hover")
 	
 

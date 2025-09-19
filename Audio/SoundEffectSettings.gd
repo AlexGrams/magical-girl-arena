@@ -68,6 +68,8 @@ enum SOUND_EFFECT_TYPE{
 @export var cooldown : int = 0
 ## Name of audio bus to be placed in
 @export var bus: String
+## Whether or not sfx plays during game pauses (like during upgrade screen)
+@export var play_while_paused:bool = false
 
 var audio_count:int = 0
 var last_time_played:int = -1

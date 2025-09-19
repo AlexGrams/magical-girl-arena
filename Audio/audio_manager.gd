@@ -62,7 +62,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 	else:
 		push_warning("SFX type not found: ", sfx_type)
 
-func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_paused: bool = false) -> AudioStreamPlayer:
+func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStreamPlayer:
 	if sfx_type in sound_effect_dict:
 		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]
 		if !sfx.has_reached_limit():
@@ -78,7 +78,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			new_audio.finished.connect(sfx.on_audio_finished)
 			new_audio.finished.connect(new_audio.queue_free)
 			
-			if play_while_paused:
+			if sfx.play_while_paused:
 				new_audio.process_mode = Node.PROCESS_MODE_ALWAYS
 			
 			new_audio.play()
