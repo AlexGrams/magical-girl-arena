@@ -32,12 +32,12 @@ func apply_cursor_size(index: int) -> void:
 
 ## Changes the current SFX volume multiplier setting.
 func apply_volume(volume: float):
-	AudioManager.set_volume_multiplier(volume)
+	AudioManager.update_bus_volume(volume, "SFX")
 
 
 ## Changes the current MUSIC volume multiplier setting.
 func apply_music_volume(volume: float):
-	AudioManager.set_music_volume_multiplier(volume)
+	AudioManager.update_bus_volume(volume, "Music")
 
 
 ## Changes the current BULLET OPACITY for other players' bullets.

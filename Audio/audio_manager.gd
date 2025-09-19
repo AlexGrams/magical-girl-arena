@@ -14,12 +14,9 @@ extends Node2D
 @export var map_1_loop_4: AudioStream # Plays during boss
 @export var map_1_victory: AudioStream # Plays during victory
 
+## Dictionary of all SFX from sound_effect_settings. Key = SoundEffectSettings.SOUND_EFFECT_TYPE
 var sound_effect_dict : Dictionary
 
-## Value by which to scale the volume of sounds played in the game.
-var _volume_multiplier: float = 1.0
-## Value by which to scale the volume of MUSIC played in the game.
-var _music_volume_multiplier: float = 1.0
 ## Saved child from when you instantiate the battle_music_player.
 var _battle_music_player_node:AudioStreamPlayer = null
 
@@ -33,13 +30,9 @@ func _ready() -> void:
 	for sfx in sound_effect_settings:
 		sound_effect_dict[sfx.type] = sfx
 
-
-func set_volume_multiplier(value: float) -> void:
-	_volume_multiplier = value
-
-func set_music_volume_multiplier(value: float) -> void:
-	_music_volume_multiplier = value
-	update_music_volume()
+## Used to update bus volumes from volume sliders in settings screen
+func update_bus_volume(linear_volume: float, bus_name: String) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), linear_to_db(linear_volume))
 
 ## Plays a sound. RPC calls to this should be used sparingly, as there are often ways to 
 ## replicate sounds without having to do a separate RPC just for the audio.
@@ -56,7 +49,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			
 			new_2D_audio.position = location
 			new_2D_audio.stream = sfx.sound_effect
-			new_2D_audio.volume_db = linear_to_db(db_to_linear(sfx.volume) * _volume_multiplier)
+			new_2D_audio.volume_db = sfx.volume
 			if change_length:
 				new_2D_audio.pitch_scale = (new_2D_audio.stream.get_length() / desired_length)
 			else:
@@ -79,7 +72,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			
 			new_audio.bus = sfx.bus
 			new_audio.stream = sfx.sound_effect
-			new_audio.volume_db = linear_to_db(db_to_linear(sfx.volume) * _volume_multiplier)
+			new_audio.volume_db = sfx.volume
 			new_audio.pitch_scale = sfx.pitch_scale
 			new_audio.pitch_scale += randf_range(-sfx.pitch_randomness, sfx.pitch_randomness)
 			new_audio.finished.connect(sfx.on_audio_finished)
@@ -92,14 +85,11 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, play_while_pa
 			return new_audio
 	return null
 
-func update_music_volume():
-	main_menu_music_player.volume_db = linear_to_db(db_to_linear(-20) * _music_volume_multiplier)
-
 func play_main_menu_music():
 	# Remove battle music if playing
 	if _battle_music_player_node != null:
 		_battle_music_player_node.queue_free()
-	update_music_volume()
+
 	main_menu_music_player.stream = default_main_menu_music
 	main_menu_music_player.play()
 
@@ -113,7 +103,8 @@ func play_map_one_music():
 	main_menu_music_player.stop()
 	# Add new battle music player, which will play tracks 1-3
 	var music_player = battle_music_player.instantiate()
-	music_player.volume_db = linear_to_db(db_to_linear(-30) * _music_volume_multiplier)
+	music_player.bus = "Music"
+
 	add_child(music_player)
 	_battle_music_player_node = music_player
 
@@ -125,9 +116,9 @@ func play_victory_music():
 	
 	# Add new music player for victory music
 	var new_audio := AudioStreamPlayer.new()
+	new_audio.bus = "Music"
 	add_child(new_audio)
 	new_audio.stream = map_1_victory
-	new_audio.volume_db = linear_to_db(db_to_linear(-10) * _volume_multiplier)
 	new_audio.finished.connect(new_audio.queue_free)
 
 ## Plays boss music, meant to be played after constellation is summoned
@@ -135,7 +126,6 @@ func play_boss_music():
 	# Remove battle music if playing
 	if _battle_music_player_node != null:
 		_battle_music_player_node.queue_free()
-	update_music_volume()
 	main_menu_music_player.stream = map_1_loop_4
 	main_menu_music_player.play()
 
