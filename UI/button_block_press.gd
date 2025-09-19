@@ -33,7 +33,7 @@ func set_new_text(new_text: String) -> void:
 		label.text = new_text
 
 func _on_button_hover() -> void:
-	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER, true)
+	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER)
 	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
