@@ -67,7 +67,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
 resource_name = "ON_EXP_PICKUP"
@@ -80,7 +80,7 @@ pitch_scale = 0.75
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_3mwiv"]
 resource_name = "ON_GOLD_PICKUP"
@@ -93,7 +93,7 @@ pitch_scale = 0.9
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_cifeh"]
 resource_name = "ON_GOTH_ULTIMATE"
@@ -106,7 +106,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_wty40"]
 resource_name = "ON_SWEET_ULTIMATE"
@@ -119,7 +119,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_h7jin"]
 resource_name = "ON_ENEMY_HIT"
@@ -132,20 +132,20 @@ pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_45j3q"]
 resource_name = "ON_ENEMY_HIT_SCYTHE"
 script = ExtResource("2_kdvej")
-limit = 20
+limit = 10
 type = 36
 sound_effect = ExtResource("24_b70sy")
 volume = -16
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 34
-bus = "SFX"
-play_while_paused = null
+bus = "Enemy_Hits"
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_gabmc"]
 resource_name = "ON_ENEMY_HIT_REVOLVING"
@@ -158,7 +158,7 @@ pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 0
 bus = "SFX"
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_ypbjq"]
 resource_name = "ON_ENEMY_HIT_ORBIT"
@@ -171,7 +171,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = "SFX"
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_dl7d3"]
 resource_name = "CONSTELLATION_SUMMON_RUMBLE"
@@ -184,7 +184,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_imnlt"]
 resource_name = "CORVUS_SUMMON"
@@ -197,7 +197,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_wxos4"]
 resource_name = "SCYTHE"
@@ -210,7 +210,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_nuda6"]
 resource_name = "REVOLVING"
@@ -223,7 +223,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_3e8qr"]
 resource_name = "RAINDROP_POP"
@@ -236,7 +236,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.1
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_iveav"]
 resource_name = "RAINDROP_GROW"
@@ -249,7 +249,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_4htrs"]
 resource_name = "CUPID_ARROW"
@@ -262,7 +262,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_m2vr8"]
 resource_name = "HEARTBEATBURST_EXPLOSION"
@@ -275,7 +275,7 @@ pitch_scale = 3.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_vi4yv"]
 resource_name = "HEARTBEATBURST_LAUNCH"
@@ -288,7 +288,7 @@ pitch_scale = 2.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_kl3kh"]
 resource_name = "MINES_DROPPED"
@@ -301,7 +301,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_1gugo"]
 resource_name = "MINES_SEEDS"
@@ -314,7 +314,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_46xon"]
 resource_name = "MINES_EXPLODED"
@@ -327,7 +327,7 @@ pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_2l7jb"]
 resource_name = "TRAIL"
@@ -340,7 +340,7 @@ pitch_scale = 1.5
 pitch_randomness = 0.5
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_l4nsa"]
 resource_name = "SHOOTING"
@@ -353,7 +353,7 @@ pitch_scale = 2.0
 pitch_randomness = 0.5
 cooldown = 0
 bus = ""
-play_while_paused = null
+play_while_paused = false
 
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
