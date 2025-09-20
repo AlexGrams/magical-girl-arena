@@ -65,7 +65,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStreamPlayer:
 	if sfx_type in sound_effect_dict:
 		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]
-		if !sfx.has_reached_limit():
+		if sfx.can_be_played():
 			sfx.update_audio_count(1)
 			var new_audio := AudioStreamPlayer.new()
 			add_child(new_audio)

@@ -76,6 +76,7 @@ var last_time_played:int = -1
 	
 func update_audio_count(amount: int):
 	audio_count = max(0, audio_count + amount)
+	last_time_played = Time.get_ticks_msec()
 
 ## Returns TRUE if sfx has NOT reached its limit AND is NOT on cooldown
 func can_be_played() -> bool:
