@@ -88,11 +88,6 @@ func has_reached_limit() -> bool:
 ## TRUE if it's on cooldown and SHOULD NOT be played. FALSE if it's not on cooldown and can be played.
 func is_on_cooldown() -> bool:
 	var current_time = Time.get_ticks_msec()
-	
-	# If sfx has never been played, set it to current time
-	if last_time_played == -1:
-		last_time_played = current_time
-	 
 	return (current_time - last_time_played) < cooldown
 
 func on_audio_finished():
