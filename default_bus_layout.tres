@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://dk4hf5px2c5j5"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dk4hf5px2c5j5"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_vxgu8"]
 resource_name = "Compressor"
@@ -6,6 +6,10 @@ resource_name = "Compressor"
 [sub_resource type="AudioEffectHardLimiter" id="AudioEffectHardLimiter_q7c4x"]
 resource_name = "HardLimiter"
 ceiling_db = -2.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ht6nb"]
+resource_name = "Compressor"
+threshold = -2.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_vxgu8")
@@ -36,3 +40,5 @@ bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
 bus/4/send = &"SFX"
+bus/4/effect/0/effect = SubResource("AudioEffectCompressor_ht6nb")
+bus/4/effect/0/enabled = true

@@ -128,6 +128,7 @@ texture = ExtResource("3_buwjc")
 collision_mask = 2
 script = ExtResource("3_mdhh8")
 damage = 25.0
+sound_effect = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 top_level = true

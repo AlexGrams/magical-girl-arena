@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=57 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ljtf8ydvbjyq" path="res://Audio/SFX/On_Button_Hover_3.mp3" id="9_02tjj"]
 [ext_resource type="AudioStream" uid="uid://day7n86wpjy8f" path="res://Audio/SFX/On_Button_Pressed_2.mp3" id="10_pkguu"]
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
+[ext_resource type="AudioStream" uid="uid://qf1x5isywayr" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit.mp3" id="12_1trqf"]
 [ext_resource type="AudioStream" uid="uid://bdb3xnwjieyd" path="res://Audio/SFX/Powerups/Bubble_Grow_3.mp3" id="12_5j5vb"]
 [ext_resource type="AudioStream" uid="uid://dewenafki2fix" path="res://Audio/SFX/Powerups/Cupid_Arrow_Shot.mp3" id="13_nsayd"]
 [ext_resource type="AudioStream" uid="uid://rj0n6862dnpu" path="res://Audio/SFX/Powerups/HeartbeatBurst_Launch.mp3" id="15_4qlyl"]
@@ -26,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://dytisf2b6ldff" path="res://Audio/default_battle_music.tscn" id="22_mr100"]
 [ext_resource type="AudioStream" uid="uid://6hytmfq8camv" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_TarotCards.mp3" id="23_k6ncv"]
 [ext_resource type="AudioStream" uid="uid://cicpchthwefg8" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Scythe.mp3" id="24_b70sy"]
-[ext_resource type="AudioStream" uid="uid://yovmkejq2sfs" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit2.mp3" id="25_xulhf"]
 [ext_resource type="AudioStream" uid="uid://dmeah32wh35q8" path="res://Audio/Music/newthingget.ogg" id="26_86adp"]
+[ext_resource type="AudioStream" uid="uid://b2pflpmof064v" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Mines.mp3" id="26_vcbg0"]
 [ext_resource type="AudioStream" uid="uid://263itcev3h81" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.mp3" id="28_d65r3"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
@@ -127,17 +128,17 @@ script = ExtResource("2_kdvej")
 limit = 1
 type = 10
 sound_effect = ExtResource("8_t3aof")
-volume = -13
+volume = -16
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "Enemy_Hits"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_45j3q"]
 resource_name = "ON_ENEMY_HIT_SCYTHE"
 script = ExtResource("2_kdvej")
-limit = 10
+limit = 5
 type = 36
 sound_effect = ExtResource("24_b70sy")
 volume = -16
@@ -150,27 +151,40 @@ play_while_paused = false
 [sub_resource type="Resource" id="Resource_gabmc"]
 resource_name = "ON_ENEMY_HIT_REVOLVING"
 script = ExtResource("2_kdvej")
-limit = 20
+limit = 5
 type = 35
 sound_effect = ExtResource("23_k6ncv")
-volume = -19
+volume = -16
 pitch_scale = 0.87
 pitch_randomness = 0.0
-cooldown = 0
-bus = "SFX"
+cooldown = 30
+bus = "Enemy_Hits"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_ypbjq"]
 resource_name = "ON_ENEMY_HIT_ORBIT"
 script = ExtResource("2_kdvej")
-limit = 20
+limit = 5
 type = 37
-sound_effect = ExtResource("25_xulhf")
+sound_effect = ExtResource("12_1trqf")
 volume = -16
 pitch_scale = 1.0
 pitch_randomness = 0.0
-cooldown = 0
-bus = "SFX"
+cooldown = 21
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_ajhh3"]
+resource_name = "ON_ENEMY_HIT_MINES"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 38
+sound_effect = ExtResource("26_vcbg0")
+volume = -16
+pitch_scale = 0.87
+pitch_randomness = 0.0
+cooldown = 100
+bus = "Enemy_Hits"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_dl7d3"]
@@ -358,7 +372,7 @@ play_while_paused = false
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")
