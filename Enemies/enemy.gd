@@ -266,7 +266,7 @@ func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void
 ## Wrapper function for RPC modification without making changes everywhere.
 func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, is_crit: bool = false) -> void:
 	# TODO: Maybe fix all the references to this function.
-	AudioManager.play_enemy_hit(is_crit, damage_type)
+	AudioManager.play_enemy_hit(is_crit, damage_type, global_position)
 	_take_damage.rpc_id(1, damage, is_crit)
 
 

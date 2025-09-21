@@ -42,7 +42,7 @@ func update_bus_volume(linear_volume: float, bus_name: String) -> void:
 func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE, change_length:bool = false, desired_length:float = -1):
 	if sfx_type in sound_effect_dict:
 		var sfx:SoundEffectSettings = sound_effect_dict[sfx_type]
-		if !sfx.has_reached_limit():
+		if sfx.can_be_played():
 			sfx.update_audio_count(1)
 			var new_2D_audio = AudioStreamPlayer2D.new()
 			add_child(new_2D_audio)
@@ -59,8 +59,10 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			
 			new_2D_audio.play()
+			return new_2D_audio
 	else:
 		push_warning("SFX type not found: ", sfx_type)
+	return null
 
 func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStreamPlayer:
 	if sfx_type in sound_effect_dict:
@@ -135,17 +137,27 @@ func pause_music():
 		_battle_music_player_node.stream_paused = true
 	main_menu_music_player.stream_paused = true
 
-func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT):
+func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, location:Vector2 = Vector2.INF):
 	if _enemy_hit_limit_counter < _enemy_hit_limit:
-		var new_audio = create_audio(sfx_type)
+		var new_audio = null
+		
+		if location != Vector2.INF:
+		## TODO: Add a setting to use the same enemy hit sound for all powerups.
+		## Otherwise, create new audio with sfx_type
+			# if USE_SAME_ENEMY_HIT_SFX is true:
+			# 	new_audio = create_audio_at_location(location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
+			# else:
+		## TODO: Enemy hit sounds should only play for YOUR powerups, not allies
+			new_audio = create_audio_at_location(location, sfx_type)
+		
 		if new_audio != null:
 			_enemy_hit_limit_counter += 1
-			# Prioritize volume
+			
 			var pitch_scale = new_audio.pitch_scale
 			if is_crit:
 				pitch_scale = new_audio.pitch_scale + 0.06
-				
 			new_audio.pitch_scale = pitch_scale
+			
 			new_audio.finished.connect(
 				func():
 					_enemy_hit_limit_counter -= 1
