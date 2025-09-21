@@ -135,7 +135,7 @@ func pause_music():
 		_battle_music_player_node.stream_paused = true
 	main_menu_music_player.stream_paused = true
 
-func play_enemy_hit(damage:float, is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT):
+func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT):
 	if _enemy_hit_limit_counter < _enemy_hit_limit:
 		var new_audio = create_audio(sfx_type)
 		if new_audio != null:
