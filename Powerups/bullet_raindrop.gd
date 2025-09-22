@@ -3,6 +3,8 @@ extends Bullet
 
 ## The highest speed at which hit enemies can be brought towards the bullet's center.
 @export var _max_suck_in_speed: float = 400.0
+## Area that does damage when the bubble touches an Enemy before popping.
+@export var _overlap_area: BulletHitbox = null
 ## Particles to spawn when damage activates.
 @export var _vfx_path: String = ""
 
@@ -20,6 +22,8 @@ var _is_collision_active = false
 func set_damage(damage: float, _is_crit: bool = false):
 	collider.damage = damage
 	collider.is_crit = true
+	_overlap_area.damage = damage
+	_overlap_area.is_crit = false
 
 
 func _ready() -> void:
@@ -43,12 +47,13 @@ func _physics_process(_delta: float) -> void:
 		if not _is_collision_active:
 			_is_collision_active = true
 			collider.collision_layer = _collision_layer
+			_overlap_area.collision_layer = 0
 			
 			# Play bubble SFX
 			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_POP)
 			
 			# Make particles
-			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
+			var playground: Node2D = GameState.playground
 			if playground != null:
 				var vfx: GPUParticles2D = load(_vfx_path).instantiate()
 				vfx.global_position = global_position
@@ -75,13 +80,17 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_max_sqaured_suck_in_speed = (_max_suck_in_speed * data[0]) ** 2
 
 
+## Also sets analytics for the separate collider for touch overlaps only.
+func setup_analytics(owner_id: int, powerup_index: int) -> void:
+	super(owner_id, powerup_index)
+	_overlap_area.owner_id = owner_id
+	_overlap_area.powerup_index = powerup_index
+
+
 ## Suck in Enemies that it touches by knocking them towards the bubble's final position.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var node: Node2D = area.get_parent()
 	if node != null and node is Enemy:
-		# Enemies take damage on entering the bullet.
-		node.take_damage(collider.damage)
-		
 		# Limit the speed at which enemies are pulled in. 
 		var knockback: Vector2 = (_final_position - node.global_position) / (lifetime - death_timer)
 		if knockback.length_squared() >= _max_sqaured_suck_in_speed:

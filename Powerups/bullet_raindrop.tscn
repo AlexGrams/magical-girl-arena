@@ -7,26 +7,35 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7cxdy"]
 radius = 195.0
 
-[node name="BulletRaindrop" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletRaindrop" type="Node2D" node_paths=PackedStringArray("_overlap_area", "collider", "sprite")]
 script = ExtResource("1_gj4rb")
 _max_suck_in_speed = 150.0
+_overlap_area = NodePath("Sprite2D/OverlapArea2D")
 _vfx_path = "res://Sprites/Map/bubble_explosion.tscn"
 speed = 600.0
 lifetime = 1.5
 destroy_on_hit = false
-collider = NodePath("Area2D")
+collider = NodePath("PopArea2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
 texture = ExtResource("2_ekbfb")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="OverlapArea2D" type="Area2D" parent="Sprite2D"]
 collision_mask = 2
 script = ExtResource("3_cq8i6")
 damage = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="OverlapCollisionShape2D" type="CollisionShape2D" parent="Sprite2D/OverlapArea2D"]
 shape = SubResource("CircleShape2D_7cxdy")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
+[node name="PopArea2D" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("3_cq8i6")
+damage = 25.0
+
+[node name="PopCollisionShape2D" type="CollisionShape2D" parent="PopArea2D"]
+shape = SubResource("CircleShape2D_7cxdy")
+
+[connection signal="area_entered" from="PopArea2D" to="." method="_on_area_2d_entered"]
