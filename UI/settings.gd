@@ -13,6 +13,8 @@ const max_volume_slider_value: float = 1.25
 @export var _sfx_volume_slider: Slider = null
 ## Spinbox for setting the sfx volume
 @export var _sfx_spinbox: SpinBox = null
+## For setting if all the damage SFX on enemies is the same.
+@export var _same_hit_sfx_checkbox: CheckBox = null
 ## Slider for setting how transparent other players' bullets are.
 @export var _bullet_opacity_slider: Slider = null
 ## Spinbox for setting how transparent other player' bullets are.
@@ -36,6 +38,7 @@ func _ready() -> void:
 	_sfx_spinbox.value = _slider_to_spinbox_value(_sfx_volume_slider.value)
 	_music_volume_slider.value = settings.get_value("music", "volume") / max_volume_slider_value
 	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
+	_same_hit_sfx_checkbox.button_pressed = settings.get_value("sound", "same_hit_sfx", SaveManager.DEFAULT_SAME_HIT_SFX)
 	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
 	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
 	_max_fps_slider.value = settings.get_value("display", "max_fps", SaveManager.DEFAULT_MAX_FPS)
@@ -57,6 +60,7 @@ func _on_cursor_size_item_selected(index: int) -> void:
 func _on_volume_slider_drag_ended(_value_changed: bool) -> void:
 	_sfx_spinbox.value = _slider_to_spinbox_value(_sfx_volume_slider.value)
 
+
 ## Spinbox for SFX
 # Spinbox range is 0 - 100
 func _on_spin_box_value_changed(spinbox_value: float) -> void:
@@ -65,10 +69,12 @@ func _on_spin_box_value_changed(spinbox_value: float) -> void:
 	if slider_volume != _sfx_volume_slider.value:
 		_sfx_volume_slider.value = slider_volume
 
+
 ## Volume Slider for MUSIC
 # Volume slider range is 0 - 1
 func _on_music_volume_slider_drag_ended(_value_changed: bool) -> void:
 	_music_spinbox.value = _slider_to_spinbox_value(_music_volume_slider.value)
+
 
 ## Spinbox for MUSIC
 # Spinbox range is 0 - 100
@@ -77,6 +83,11 @@ func _on_music_spin_box_value_changed(spinbox_value: float) -> void:
 	SettingsManager.apply_music_volume(slider_volume * max_volume_slider_value)
 	if slider_volume != _music_volume_slider.value:
 		_music_volume_slider.value = slider_volume
+
+
+## Checkbox for Same Hit SFX
+func _on_same_hit_sfx_checkbox_toggled(toggled_on: bool) -> void:
+	SettingsManager.apply_same_hit_sfx(toggled_on) 
 
 
 ## Slider for BULLET OPACITY 
@@ -113,6 +124,7 @@ func _save_settings_changes() -> void:
 		_screen_modes[_screen_mode_option.selected], 
 		_sfx_volume_slider.value * max_volume_slider_value, 
 		_music_volume_slider.value * max_volume_slider_value,
+		_same_hit_sfx_checkbox.button_pressed,
 		_bullet_opacity_slider.value,
 		int(_max_fps_slider.value),
 		_cursor_size_option.selected,

@@ -6,6 +6,7 @@ const SETTINGS_PATH := "user://settings.json"
 const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 const DEFAULT_VOLUME := 1.0
 const DEFAULT_MUSIC_VOLUME := 1.0
+const DEFAULT_SAME_HIT_SFX := false
 const DEFAULT_BULLET_OPACITY := 1.0
 const DEFAULT_MAX_FPS: int = 0
 const DEFAULT_CURSOR_SIZE := 0
@@ -21,6 +22,7 @@ func save_settings(
 		display_mode: DisplayServer.WindowMode, 
 		volume: float, 
 		music_volume: float,
+		same_hit_sfx: bool,
 		bullet_opacity: float,
 		max_fps: int,
 		cursor_size: int,
@@ -31,6 +33,7 @@ func save_settings(
 	config.set_value("display", "display_mode", display_mode)
 	config.set_value("sound", "volume", volume)
 	config.set_value("music", "volume", music_volume)
+	config.set_value("sound", "same_hit_sfx", same_hit_sfx)
 	config.set_value("gameplay", "bullet_opacity", bullet_opacity)
 	config.set_value("display", "max_fps", max_fps)
 	config.set_value("display", "cursor_size", cursor_size)
@@ -70,6 +73,7 @@ func load_settings() -> void:
 			DEFAULT_DISPLAY_MODE, 
 			DEFAULT_VOLUME, 
 			DEFAULT_MUSIC_VOLUME,
+			DEFAULT_SAME_HIT_SFX,
 			DEFAULT_BULLET_OPACITY,
 			DEFAULT_MAX_FPS,
 			DEFAULT_CURSOR_SIZE,
@@ -87,7 +91,8 @@ func load_settings() -> void:
 	## TODO: QUICK FIX FOR TESTING FOR RIGHT NOW.
 	if settings.get_value("music", "volume") == null:
 		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
-	SettingsManager.apply_music_volume(settings.get_value("music", "volume"))
+	SettingsManager.apply_music_volume(settings.get_value("music", "volume", DEFAULT_MUSIC_VOLUME))
+	SettingsManager.apply_same_hit_sfx(settings.get_value("sound", "same_hit_sfx", DEFAULT_SAME_HIT_SFX))
 	SettingsManager.apply_bullet_opacity(settings.get_value("gameplay", "bullet_opacity", DEFAULT_BULLET_OPACITY))
 	SettingsManager.apply_max_fps(settings.get_value("display", "max_fps", DEFAULT_MAX_FPS))
 	SettingsManager.apply_cursor_size(settings.get_value("display", "cursor_size", DEFAULT_CURSOR_SIZE))

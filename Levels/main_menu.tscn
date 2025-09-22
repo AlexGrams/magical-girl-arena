@@ -387,7 +387,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_hitbox_visible_checkbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_hitbox_visible_checkbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -401,6 +401,7 @@ _music_volume_slider = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/M
 _music_spinbox = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox")
 _sfx_volume_slider = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider")
 _sfx_spinbox = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox")
+_same_hit_sfx_checkbox = NodePath("VScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox")
 _bullet_opacity_slider = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider")
 _bullet_opacity_spinbox = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox")
 _max_fps_slider = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
@@ -554,6 +555,27 @@ theme = ExtResource("4_wqh84")
 value = 80.0
 rounded = true
 alignment = 1
+
+[node name="SameHitSFXContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Settings/VScrollBar/VBoxContainer/SameHitSFXContainer"]
+layout_mode = 2
+theme = ExtResource("14_kechk")
+theme_override_font_sizes/font_size = 38
+text = "All bullets make the same sound"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="Settings/VScrollBar/VBoxContainer/SameHitSFXContainer"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SameHitSFXCheckbox" type="CheckBox" parent="Settings/VScrollBar/VBoxContainer/SameHitSFXContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 0
+theme_override_icons/checked = ExtResource("15_40lvl")
+theme_override_icons/unchecked = ExtResource("16_3yib8")
 
 [node name="BulletOpacityContainer" type="HBoxContainer" parent="Settings/VScrollBar/VBoxContainer"]
 layout_mode = 2
@@ -1220,6 +1242,7 @@ vertical_alignment = 1
 [connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="toggled" from="Settings/VScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox" to="Settings" method="_on_same_hit_sfx_checkbox_toggled"]
 [connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/VScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider" to="Settings" method="_on_max_fps_slider_drag_ended"]
