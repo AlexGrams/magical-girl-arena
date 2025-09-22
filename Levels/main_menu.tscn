@@ -387,7 +387,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_display_screen", "_audio_screen", "_gameplay_screen", "_screen_mode_option", "_limit_fps_checkbox", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_main_volume_slider", "_main_volume_spinbox", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_ally_powerups_volume_slider", "_ally_powerups_volume_spinbox", "_enemy_hit_volume_slider", "_enemy_hit_volume_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_hitbox_visible_checkbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_display_screen", "_audio_screen", "_gameplay_screen", "_screen_mode_option", "_limit_fps_checkbox", "_max_fps_container", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_main_volume_slider", "_main_volume_spinbox", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_ally_powerups_volume_slider", "_ally_powerups_volume_spinbox", "_enemy_hit_volume_slider", "_enemy_hit_volume_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_hitbox_visible_checkbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -401,6 +401,7 @@ _audio_screen = NodePath("ParentVBoxContainer/AudioVScrollBar")
 _gameplay_screen = NodePath("ParentVBoxContainer/GameplayVScrollBar")
 _screen_mode_option = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer/OptionButton")
 _limit_fps_checkbox = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer/LimitFPSCheckbox")
+_max_fps_container = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer")
 _max_fps_slider = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
 _max_fps_spinbox = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox")
 _cursor_size_option = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
@@ -545,7 +546,9 @@ theme_override_icons/grabber_disabled = ExtResource("14_ddmg2")
 theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+min_value = 30.0
 max_value = 300.0
+value = 60.0
 tick_count = 11
 ticks_on_borders = true
 
@@ -1466,13 +1469,20 @@ vertical_alignment = 1
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/AudioButton" to="Settings" method="switch_to_screen" binds= [1]]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/GameplayButton" to="Settings" method="switch_to_screen" binds= [2]]
 [connection signal="item_selected" from="Settings/ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer/OptionButton" to="Settings" method="_on_screen_mode_item_selected"]
+[connection signal="toggled" from="Settings/ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer/LimitFPSCheckbox" to="Settings" method="_on_limit_fps_checkbox_toggled"]
 [connection signal="drag_ended" from="Settings/ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider" to="Settings" method="_on_max_fps_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox" to="Settings" method="_on_max_fps_spin_box_value_changed"]
 [connection signal="item_selected" from="Settings/ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton" to="Settings" method="_on_cursor_size_item_selected"]
+[connection signal="drag_ended" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeHSlider" to="Settings" method="_on_main_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeSpinBox" to="Settings" method="_on_main_volume_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider" to="Settings" method="_on_music_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="Settings" method="_on_music_spin_box_value_changed"]
 [connection signal="drag_ended" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="Settings" method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox" to="Settings" method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsVolumeHSlider" to="Settings" method="_on_ally_powerups_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsSpinBox" to="Settings" method="_on_ally_powerups_spin_box_value_changed"]
+[connection signal="drag_ended" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitVolumeHSlider" to="Settings" method="_on_enemy_hit_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitSpinBox" to="Settings" method="_on_enemy_hit_spin_box_value_changed"]
 [connection signal="toggled" from="Settings/ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox" to="Settings" method="_on_same_hit_sfx_checkbox_toggled"]
 [connection signal="drag_ended" from="Settings/ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="Settings" method="_on_bullet_opacity_slider_drag_ended"]
 [connection signal="value_changed" from="Settings/ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox" to="Settings" method="_on_bullet_opacity_spin_box_value_changed"]

@@ -19,7 +19,7 @@ func apply_display_mode(display_mode: DisplayServer.WindowMode):
 	DisplayServer.window_set_mode(display_mode)
 
 
-func apply_limit_fps(value: bool) -> void:
+func apply_limit_fps(_value: bool) -> void:
 	pass
 
 
@@ -41,11 +41,7 @@ func apply_cursor_size(index: int) -> void:
 
 #region Audio
 func apply_main_volume(volume: float) -> void:
-	pass
-
-## Changes the current SFX volume multiplier setting.
-func apply_volume(volume: float):
-	AudioManager.update_bus_volume(volume, "SFX")
+	AudioManager.update_bus_volume(volume, "Master")
 
 
 ## Changes the current MUSIC volume multiplier setting.
@@ -53,12 +49,17 @@ func apply_music_volume(volume: float):
 	AudioManager.update_bus_volume(volume, "Music")
 
 
+## Changes the current SFX volume multiplier setting.
+func apply_volume(volume: float):
+	AudioManager.update_bus_volume(volume, "SFX")
+
+
 func apply_ally_powerup_volume(volume: float) -> void:
-	pass
+	AudioManager.update_bus_volume(volume, "Ally_Powerups")
 
 
 func apply_enemy_hit_volume(volume: float) -> void:
-	pass
+	AudioManager.update_bus_volume(volume, "Enemy_Hits")
 
 
 ## Changes if all Enemy damage SFX is the same sound.
