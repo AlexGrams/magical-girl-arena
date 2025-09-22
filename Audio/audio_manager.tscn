@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=63 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://c7s6v8rpf0nho" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Boomerang.mp3" id="27_tiw6w"]
 [ext_resource type="AudioStream" uid="uid://bnpsl64l5iohf" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Fan.mp3" id="28_0b7n1"]
 [ext_resource type="AudioStream" uid="uid://263itcev3h81" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.mp3" id="28_d65r3"]
+[ext_resource type="AudioStream" uid="uid://bl8c3fgnk1tve" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Grenade.mp3" id="29_w7hyl"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -130,7 +131,7 @@ script = ExtResource("2_kdvej")
 limit = 1
 type = 10
 sound_effect = ExtResource("8_t3aof")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 0
@@ -143,7 +144,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 36
 sound_effect = ExtResource("24_b70sy")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 34
@@ -156,7 +157,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 35
 sound_effect = ExtResource("23_k6ncv")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 30
@@ -169,7 +170,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 37
 sound_effect = ExtResource("12_1trqf")
-volume = -16
+volume = -8
 pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 21
@@ -182,7 +183,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 38
 sound_effect = ExtResource("26_vcbg0")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 100
@@ -195,7 +196,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 39
 sound_effect = ExtResource("27_tiw6w")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 18
@@ -208,7 +209,7 @@ script = ExtResource("2_kdvej")
 limit = 5
 type = 40
 sound_effect = ExtResource("28_0b7n1")
-volume = -16
+volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
 cooldown = 33
@@ -397,10 +398,23 @@ cooldown = 0
 bus = ""
 play_while_paused = false
 
+[sub_resource type="Resource" id="Resource_dl647"]
+resource_name = "ON_ENEMY_HIT_GRENADE"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 41
+sound_effect = ExtResource("29_w7hyl")
+volume = -8
+pitch_scale = 0.87
+pitch_randomness = 0.0
+cooldown = 21
+bus = "Enemy_Hits"
+play_while_paused = false
+
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_dl647")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")
