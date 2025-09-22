@@ -47,6 +47,7 @@ shape = SubResource("CapsuleShape2D_md63j")
 [node name="SplashArea2D" type="Area2D" parent="."]
 collision_mask = 10
 script = ExtResource("3_0nkov")
+sound_effect = 46
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplashArea2D"]
 shape = SubResource("CircleShape2D_rok3p")

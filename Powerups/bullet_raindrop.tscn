@@ -26,6 +26,7 @@ texture = ExtResource("2_ekbfb")
 collision_mask = 2
 script = ExtResource("3_cq8i6")
 damage = 25.0
+sound_effect = 42
 
 [node name="OverlapCollisionShape2D" type="CollisionShape2D" parent="Sprite2D/OverlapArea2D"]
 shape = SubResource("CircleShape2D_7cxdy")
@@ -34,6 +35,7 @@ shape = SubResource("CircleShape2D_7cxdy")
 collision_mask = 2
 script = ExtResource("3_cq8i6")
 damage = 25.0
+sound_effect = 42
 
 [node name="PopCollisionShape2D" type="CollisionShape2D" parent="PopArea2D"]
 shape = SubResource("CircleShape2D_7cxdy")

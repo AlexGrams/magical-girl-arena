@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=79 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -11,7 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://ljtf8ydvbjyq" path="res://Audio/SFX/On_Button_Hover_3.mp3" id="9_02tjj"]
 [ext_resource type="AudioStream" uid="uid://day7n86wpjy8f" path="res://Audio/SFX/On_Button_Pressed_2.mp3" id="10_pkguu"]
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
-[ext_resource type="AudioStream" uid="uid://qf1x5isywayr" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit.mp3" id="12_1trqf"]
 [ext_resource type="AudioStream" uid="uid://bdb3xnwjieyd" path="res://Audio/SFX/Powerups/Bubble_Grow_3.mp3" id="12_5j5vb"]
 [ext_resource type="AudioStream" uid="uid://dewenafki2fix" path="res://Audio/SFX/Powerups/Cupid_Arrow_Shot.mp3" id="13_nsayd"]
 [ext_resource type="AudioStream" uid="uid://rj0n6862dnpu" path="res://Audio/SFX/Powerups/HeartbeatBurst_Launch.mp3" id="15_4qlyl"]
@@ -33,6 +32,8 @@
 [ext_resource type="AudioStream" uid="uid://bnpsl64l5iohf" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Fan.mp3" id="28_0b7n1"]
 [ext_resource type="AudioStream" uid="uid://263itcev3h81" path="res://Audio/Music/Juhani Junkala [Retro Game Music Pack] Level 3.mp3" id="28_d65r3"]
 [ext_resource type="AudioStream" uid="uid://bl8c3fgnk1tve" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Grenade.mp3" id="29_w7hyl"]
+[ext_resource type="AudioStream" uid="uid://byccvjoto86es" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Bubble.mp3" id="30_dygoq"]
+[ext_resource type="AudioStream" uid="uid://c74in6ucfxr0w" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit.mp3" id="31_b1lao"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -169,7 +170,7 @@ resource_name = "ON_ENEMY_HIT_ORBIT"
 script = ExtResource("2_kdvej")
 limit = 5
 type = 37
-sound_effect = ExtResource("12_1trqf")
+sound_effect = ExtResource("31_b1lao")
 volume = -8
 pitch_scale = 1.0
 pitch_randomness = 0.0
@@ -212,7 +213,46 @@ sound_effect = ExtResource("28_0b7n1")
 volume = -8
 pitch_scale = 0.87
 pitch_randomness = 0.0
-cooldown = 33
+cooldown = 5
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_dl647"]
+resource_name = "ON_ENEMY_HIT_GRENADE"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 41
+sound_effect = ExtResource("29_w7hyl")
+volume = -8
+pitch_scale = 0.87
+pitch_randomness = 0.0
+cooldown = 21
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_ramby"]
+resource_name = "ON_ENEMY_HIT_RAINDROP"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 42
+sound_effect = ExtResource("30_dygoq")
+volume = -8
+pitch_scale = 0.87
+pitch_randomness = 0.0
+cooldown = 19
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_qol4q"]
+resource_name = "ON_ENEMY_HIT_BOUNCE"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 43
+sound_effect = ExtResource("31_b1lao")
+volume = -8
+pitch_scale = 0.87
+pitch_randomness = 0.0
+cooldown = 21
 bus = "Enemy_Hits"
 play_while_paused = false
 
@@ -398,23 +438,179 @@ cooldown = 0
 bus = ""
 play_while_paused = false
 
-[sub_resource type="Resource" id="Resource_dl647"]
-resource_name = "ON_ENEMY_HIT_GRENADE"
+[sub_resource type="Resource" id="Resource_337xk"]
+resource_name = "ON_ENEMY_HIT_LASER"
 script = ExtResource("2_kdvej")
-limit = 5
-type = 41
-sound_effect = ExtResource("29_w7hyl")
-volume = -8
+limit = 1
+type = 44
+sound_effect = ExtResource("8_t3aof")
+volume = 0
 pitch_scale = 0.87
 pitch_randomness = 0.0
+cooldown = 12
+bus = ""
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_nmm2e"]
+resource_name = "ON_ENEMY_HIT_PET"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 45
+sound_effect = ExtResource("28_0b7n1")
+volume = -8
+pitch_scale = 1.1
+pitch_randomness = 0.0
+cooldown = 33
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_mh6rv"]
+resource_name = "ON_ENEMY_HIT_PUDDLE"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 46
+sound_effect = ExtResource("30_dygoq")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 19
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_tuh2c"]
+resource_name = "ON_ENEMY_HIT_SHOOTING"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 47
+sound_effect = ExtResource("24_b70sy")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 20
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_qn11f"]
+resource_name = "ON_ENEMY_HIT_SHOTGUN"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 48
+sound_effect = ExtResource("27_tiw6w")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 18
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_sah4n"]
+resource_name = "ON_ENEMY_HIT_TRAIL"
+script = ExtResource("2_kdvej")
+limit = 1
+type = 49
+sound_effect = ExtResource("31_b1lao")
+volume = -8
+pitch_scale = 1.1
+pitch_randomness = 0.0
+cooldown = 0
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_hhf4v"]
+resource_name = "ON_ENEMY_HIT_TURRET"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 50
+sound_effect = ExtResource("26_vcbg0")
+volume = -12
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 26
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_ahci4"]
+resource_name = "ON_ENEMY_HIT_BALL"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 51
+sound_effect = ExtResource("29_w7hyl")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
 cooldown = 21
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_qmg7o"]
+resource_name = "ON_ENEMY_HIT_LIGHTNING"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 52
+sound_effect = ExtResource("26_vcbg0")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 26
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_5cmo3"]
+resource_name = "ON_ENEMY_HIT_PAINTBRUSH"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 53
+sound_effect = ExtResource("23_k6ncv")
+volume = -8
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 30
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_f3u72"]
+resource_name = "ON_ENEMY_HIT_PINGPONG"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 54
+sound_effect = ExtResource("23_k6ncv")
+volume = -8
+pitch_scale = 0.93
+pitch_randomness = 0.0
+cooldown = 30
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_aar38"]
+resource_name = "ON_ENEMY_HIT_PULSE"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 55
+sound_effect = ExtResource("31_b1lao")
+volume = -8
+pitch_scale = 0.93
+pitch_randomness = 0.0
+cooldown = 21
+bus = "Enemy_Hits"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_oine2"]
+resource_name = "ON_ENEMY_HIT_TETHER"
+script = ExtResource("2_kdvej")
+limit = 1
+type = 56
+sound_effect = ExtResource("28_0b7n1")
+volume = -8
+pitch_scale = 0.93
+pitch_randomness = 0.0
+cooldown = 0
 bus = "Enemy_Hits"
 play_while_paused = false
 
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_dl647")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")

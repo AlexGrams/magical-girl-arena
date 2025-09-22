@@ -30,6 +30,7 @@ texture = ExtResource("2_71exp")
 collision_mask = 2
 script = ExtResource("3_x76w1")
 damage = 25.0
+sound_effect = 52
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightningNode2D/Area2D"]
 shape = SubResource("RectangleShape2D_b2iod")

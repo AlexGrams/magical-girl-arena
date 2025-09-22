@@ -102,6 +102,7 @@ autoplay = "spinning"
 collision_mask = 2
 script = ExtResource("4_xoslf")
 damage = 25.0
+sound_effect = 55
 
 [node name="DamageCollisionShape2D" type="CollisionShape2D" parent="DamageArea2D"]
 top_level = true

@@ -193,6 +193,7 @@ texture = ExtResource("2_5ks7x")
 collision_mask = 2
 script = ExtResource("3_d6neb")
 damage = 25.0
+sound_effect = 44
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/Area2D"]
 shape = SubResource("RectangleShape2D_unwy0")
