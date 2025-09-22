@@ -43,15 +43,9 @@ func _physics_process(delta: float) -> void:
 		global_position += direction * speed * delta
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if _is_owned_by_player:
-		# Explode here. Trust that there is no networking stuff that causes this to become desyncd.
-		_explode()
-	elif is_multiplayer_authority():
-		# Enemy's bullets should deal damage if they hit a player's bullet.
-		# NOTE: Enemy bullets are deleted when the character that they hit calls an RPC to delete them.
-		if area is BulletHitbox:
-			take_damage(area.damage)
+func _on_area_2d_area_entered(_area: Area2D) -> void:
+	# Explode here. Trust that there is no networking stuff that causes this to become desyncd.
+	_explode()
 
 
 ## Deal damage in an area around where the bullet is currently.
@@ -85,6 +79,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	# Make the bullet hurt players
 	if not is_owned_by_player:
+		push_error("bullet_grenade not implemented for enemies.")
 		_is_owned_by_player = false
 		_health = max_health
 		_modify_collider_to_harm_players()

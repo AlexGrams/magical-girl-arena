@@ -69,19 +69,13 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
+func _on_area_2d_area_entered(_area: Area2D) -> void:
 	if not is_multiplayer_authority():
 		return
 	
-	if _is_owned_by_player:
-		# Player's bullets should be destroyed when they hit something if applicable.
-		if destroy_on_hit:
-			queue_free()
-	else:
-		# Enemy's bullets should deal damage if they hit a player's bullet.
-		# NOTE: Enemy bullets are deleted when the character that they hit calls an RPC to delete them.
-		if area is BulletHitbox:
-			take_damage(area.damage)
+	# Player's bullets should be destroyed when they hit something if applicable.
+	if destroy_on_hit:
+		queue_free()
 
 
 ## Slow enemies that touch the slow area.
@@ -128,6 +122,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	
 	# Make the bullet hurt players
 	if not is_owned_by_player:
+		push_error("bullet_ult_dove not implemented for enemies.")
 		_is_owned_by_player = false
 		_health = max_health
 		_modify_collider_to_harm_players()

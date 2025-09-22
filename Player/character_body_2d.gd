@@ -640,7 +640,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	
 	if area.get_collision_layer_value(2): #If Enemy
 		pass
-		#take_damage.rpc(10)
 	elif area.get_collision_layer_value(6): #If Enemy Bullet:
 		take_damage.rpc(area.damage)
 		if area.get_parent() != null and area.get_parent().has_method("request_delete"):
