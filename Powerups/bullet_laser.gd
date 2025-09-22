@@ -83,8 +83,7 @@ func _physics_process(_delta: float) -> void:
 			
 			var hit_node: Node2D = result["collider"].get_parent()
 			if hit_node is Enemy or hit_node is LootBox:
-				if is_multiplayer_authority():
-					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+				hit_node.take_damage(total_damage, collider)
 				if multiplayer.get_unique_id() == _area.owner_id:
 					_powerup_laser.energy_did_damage()
 					Analytics.add_powerup_damage(total_damage, _area.powerup_index)
@@ -94,8 +93,7 @@ func _physics_process(_delta: float) -> void:
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
 				if hit_node is Enemy or hit_node is LootBox:
-					if is_multiplayer_authority():
-						hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+					hit_node.take_damage(total_damage, collider)
 					damage_done += total_damage
 			if multiplayer.get_unique_id() == _area.owner_id and damage_done > 0:
 				_powerup_laser.energy_did_damage()

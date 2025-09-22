@@ -187,9 +187,11 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 				_record_ball_stats.rpc_id(collider.owner_id, _kills, _total_growth)
 			
 			if randf() < _crit_chance:
-				other.take_damage(collider.damage * _crit_multiplier, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, true)
+				collider.is_crit = true
+				other.take_damage(collider.damage * _crit_multiplier, collider)
 			else:
-				other.take_damage(collider.damage)
+				collider.is_crit = false
+				other.take_damage(collider.damage, collider)
 		
 		if collider.owner_id == multiplayer.get_unique_id():
 			Analytics.add_powerup_damage(collider.damage, collider.powerup_index)

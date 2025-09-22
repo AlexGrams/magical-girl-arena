@@ -86,8 +86,7 @@ func _physics_process(_delta: float) -> void:
 		for hit_area: Area2D in _area.get_overlapping_areas():
 			var hit_node = hit_area.get_parent()
 			if hit_node is Enemy or hit_node is LootBox:
-				if is_multiplayer_authority():
-					hit_node.take_damage(total_damage, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, crit)
+				hit_node.take_damage(total_damage, collider)
 				damage_done += total_damage
 		if damage_done > 0.0 and multiplayer.get_unique_id() == collider.owner_id:
 			_powerup_tether.energy_did_damage()

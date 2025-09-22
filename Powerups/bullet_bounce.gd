@@ -148,8 +148,7 @@ func _on_hitbox_area_2d_entered(area: Area2D) -> void:
 	
 	# Do not damage the Enemy that the bullet previously hit.
 	if other != _last_hit and (other is Enemy or other is LootBox):
-		if is_multiplayer_authority():
-			other.take_damage(collider.damage)
+		other.take_damage(collider.damage, collider)
 		if collider.owner_id == multiplayer.get_unique_id():
 			Analytics.add_powerup_damage(collider.damage, collider.powerup_index)
 		

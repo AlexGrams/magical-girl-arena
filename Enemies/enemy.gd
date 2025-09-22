@@ -22,6 +22,7 @@ extends CharacterBody2D
 
 # Max health is set based off of the current time when this enemy spawns.
 var max_health: int = 0
+## Current health. Only the server keeps track of Enemy health.
 var health: int = 0
 # The character that this Enemy is trying to attack.
 var target: Node2D = null
@@ -264,10 +265,15 @@ func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void
 
 
 ## Wrapper function for RPC modification without making changes everywhere.
-func take_damage(damage: float, damage_type: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, is_crit: bool = false) -> void:
-	# TODO: Maybe fix all the references to this function.
-	AudioManager.play_enemy_hit(is_crit, damage_type, global_position)
-	_take_damage.rpc_id(1, damage, is_crit)
+func take_damage(damage: float, hitbox: BulletHitbox = null) -> void:
+	# Play hit sound only on the client that caused the damage.
+	if hitbox != null and hitbox.owner_id == multiplayer.get_unique_id():
+		AudioManager.play_enemy_hit(hitbox.is_crit, hitbox.sound_effect, global_position)
+	
+	# Do damage only on the server.
+	if is_multiplayer_authority():
+		var is_crit: bool = hitbox != null and hitbox.is_crit
+		_take_damage(damage, is_crit)
 
 
 ## Deals damage to this Enemy. Call via RPC to have effects replicated on all clients.
@@ -302,8 +308,7 @@ func _update_boss_health_bar(new_percent: float, is_boss: bool) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is BulletHitbox:
-		if is_multiplayer_authority():
-			take_damage(area.damage, area.sound_effect, area.is_crit)
+		take_damage(area.damage, area)
 		
 		# Analytics: Record damage done by touching a bullet for this client only.
 		if area.owner_id == multiplayer.get_unique_id():
