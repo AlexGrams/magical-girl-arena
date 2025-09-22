@@ -3,8 +3,21 @@ extends Control
 ## The volume multiplayer that a value of "1.0" on the volume slider represents.
 const max_volume_slider_value: float = 1.25
 
+@export_group("Display")
 ## OptionButton for display mode.
 @export var _screen_mode_option: OptionButton = null
+## Checkbox for allowing for setting a limit to the max FPS.
+@export var _limit_fps_checkbox: CheckBox = null
+## Slider for max FPS.
+@export var _max_fps_slider: Slider = null
+## Spinbox for max FPS.
+@export var _max_fps_spinbox: SpinBox = null
+## Dropdown for setting cursor size.
+@export var _cursor_size_option: OptionButton = null
+
+@export_group("Audio")
+@export var _main_volume_slider: Slider = null
+@export var _main_volume_spinbox: SpinBox = null
 ## Slider for setting the main menu and battle music volume.
 @export var _music_volume_slider: Slider = null
 ## Spinbox for setting the main menu and battle music volume volume
@@ -13,18 +26,19 @@ const max_volume_slider_value: float = 1.25
 @export var _sfx_volume_slider: Slider = null
 ## Spinbox for setting the sfx volume
 @export var _sfx_spinbox: SpinBox = null
+@export var _ally_powerups_volume_slider: Slider = null
+@export var _ally_powerups_volume_spinbox: SpinBox = null
+@export var _enemy_hit_volume_slider: Slider = null
+@export var _enemy_hit_volume_spinbox: SpinBox = null
 ## For setting if all the damage SFX on enemies is the same.
 @export var _same_hit_sfx_checkbox: CheckBox = null
+
+@export_group("Gameplay")
 ## Slider for setting how transparent other players' bullets are.
 @export var _bullet_opacity_slider: Slider = null
 ## Spinbox for setting how transparent other player' bullets are.
 @export var _bullet_opacity_spinbox: SpinBox = null
-## Slider for max FPS.
-@export var _max_fps_slider: Slider = null
-## Spinbox for max FPS.
-@export var _max_fps_spinbox: SpinBox = null
-## Dropdown for setting cursor size.
-@export var _cursor_size_option: OptionButton = null
+## Show an outline of the player hitbox.
 @export var _hitbox_visible_checkbox: CheckBox = null
 
 var _screen_modes := [DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED]

@@ -387,7 +387,7 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
-[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_hitbox_visible_checkbox")]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_screen_mode_option", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_hitbox_visible_checkbox")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -397,6 +397,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_r21tk")
 _screen_mode_option = NodePath("VScrollBar/VBoxContainer/ScreenModeContainer/OptionButton")
+_max_fps_slider = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
+_max_fps_spinbox = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox")
+_cursor_size_option = NodePath("VScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
 _music_volume_slider = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider")
 _music_spinbox = NodePath("VScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox")
 _sfx_volume_slider = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider")
@@ -404,9 +407,6 @@ _sfx_spinbox = NodePath("VScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox")
 _same_hit_sfx_checkbox = NodePath("VScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox")
 _bullet_opacity_slider = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider")
 _bullet_opacity_spinbox = NodePath("VScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox")
-_max_fps_slider = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
-_max_fps_spinbox = NodePath("VScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox")
-_cursor_size_option = NodePath("VScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
 _hitbox_visible_checkbox = NodePath("VScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox")
 
 [node name="VScrollBar" type="ScrollContainer" parent="Settings"]
