@@ -3,6 +3,11 @@ extends Control
 ## The volume multiplayer that a value of "1.0" on the volume slider represents.
 const max_volume_slider_value: float = 1.25
 
+@export_group("Screens")
+@export var _display_screen: Control = null
+@export var _audio_screen: Control = null
+@export var _gameplay_screen: Control = null 
+
 @export_group("Display")
 ## OptionButton for display mode.
 @export var _screen_mode_option: OptionButton = null
@@ -41,11 +46,18 @@ const max_volume_slider_value: float = 1.25
 ## Show an outline of the player hitbox.
 @export var _hitbox_visible_checkbox: CheckBox = null
 
+## All different screens that can be shown on the settings menu.
+var _setting_screens: Array[Control] = []
 var _screen_modes := [DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN, DisplayServer.WINDOW_MODE_WINDOWED]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_setting_screens.append(_display_screen)
+	_setting_screens.append(_audio_screen)
+	_setting_screens.append(_gameplay_screen)
+	switch_to_screen(0)
+	
 	var settings: ConfigFile = SettingsManager.get_settings()
 	_screen_mode_option.selected = _screen_modes.find(settings.get_value("display", "display_mode"))
 	_sfx_volume_slider.value = settings.get_value("sound", "volume") / max_volume_slider_value
@@ -59,6 +71,15 @@ func _ready() -> void:
 	_max_fps_spinbox.value = _max_fps_slider.value
 	_cursor_size_option.selected = settings.get_value("display", "cursor_size", 0)
 	_hitbox_visible_checkbox.button_pressed = settings.get_value("gameplay", "hitbox_visible", false)
+
+
+## Show a screen for a category of settings.
+func switch_to_screen(screen_index: int) -> void:
+	for i in range(len(_setting_screens)):
+		if i == screen_index:
+			_setting_screens[i].show()
+		else:
+			_setting_screens[i].hide()
 
 
 func _on_screen_mode_item_selected(index: int) -> void:
