@@ -157,12 +157,18 @@ func _on_show_hitbox_check_box_toggled(toggled_on: bool) -> void:
 func _save_settings_changes() -> void:
 	SaveManager.save_settings(
 		_screen_modes[_screen_mode_option.selected], 
-		_sfx_volume_slider.value * max_volume_slider_value, 
-		_music_volume_slider.value * max_volume_slider_value,
-		_same_hit_sfx_checkbox.button_pressed,
-		_bullet_opacity_slider.value,
+		_limit_fps_checkbox.button_pressed,
 		int(_max_fps_slider.value),
 		_cursor_size_option.selected,
+		
+		_main_volume_slider.value * max_volume_slider_value,
+		_sfx_volume_slider.value * max_volume_slider_value, 
+		_music_volume_slider.value * max_volume_slider_value,
+		_ally_powerups_volume_slider.value * max_volume_slider_value,
+		_enemy_hit_volume_slider.value * max_volume_slider_value,
+		_same_hit_sfx_checkbox.button_pressed,
+		
+		_bullet_opacity_slider.value,
 		_hitbox_visible_checkbox.button_pressed
 	)
 

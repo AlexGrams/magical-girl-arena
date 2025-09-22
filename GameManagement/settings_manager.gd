@@ -13,10 +13,18 @@ func get_settings() -> ConfigFile:
 func set_settings(settings: ConfigFile) -> void:
 	_settings = settings
 
-
+#region Display
 ## Changes the current display mode.
 func apply_display_mode(display_mode: DisplayServer.WindowMode):
 	DisplayServer.window_set_mode(display_mode)
+
+
+func apply_limit_fps(value: bool) -> void:
+	pass
+
+
+func apply_max_fps(max_fps: int) -> void:
+	Engine.max_fps = max_fps
 
 
 func apply_cursor_size(index: int) -> void:
@@ -28,7 +36,12 @@ func apply_cursor_size(index: int) -> void:
 			Input.set_custom_mouse_cursor(load("res://Sprites/UI/ArrowLarge.png"))
 		_:
 			push_error("No mouse cursor for this setting!")
+#endregion Display
 
+
+#region Audio
+func apply_main_volume(volume: float) -> void:
+	pass
 
 ## Changes the current SFX volume multiplier setting.
 func apply_volume(volume: float):
@@ -40,20 +53,27 @@ func apply_music_volume(volume: float):
 	AudioManager.update_bus_volume(volume, "Music")
 
 
+func apply_ally_powerup_volume(volume: float) -> void:
+	pass
+
+
+func apply_enemy_hit_volume(volume: float) -> void:
+	pass
+
+
 ## Changes if all Enemy damage SFX is the same sound.
 func apply_same_hit_sfx(value: bool) -> void:
 	AudioManager.set_use_same_enemy_hit_sfx(value)
+#endregion Audio
 
 
+#region Gameplay
 ## Changes the current BULLET OPACITY for other players' bullets.
 func apply_bullet_opacity(opacity: float) -> void:
 	GameState.other_players_bullet_opacity = opacity
 
 
-func apply_max_fps(max_fps: int) -> void:
-	Engine.max_fps = max_fps
-
-
 ## Shows an outline of the local player's hitbox.
 func apply_hitbox_visible(hitbox_visible: bool) -> void:
 	GameState.hitbox_visible = hitbox_visible
+#endregion Gameplay

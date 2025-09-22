@@ -3,13 +3,20 @@ extends Node
 
 const SAVE_GAME_PATH := "user://savedata.json"
 const SETTINGS_PATH := "user://settings.json"
+## Display
 const DEFAULT_DISPLAY_MODE := DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
-const DEFAULT_VOLUME := 1.0
-const DEFAULT_MUSIC_VOLUME := 1.0
-const DEFAULT_SAME_HIT_SFX := false
-const DEFAULT_BULLET_OPACITY := 1.0
+const DEFAULT_LIMIT_FPS := false
 const DEFAULT_MAX_FPS: int = 0
 const DEFAULT_CURSOR_SIZE := 0
+## Audio
+const DEFAULT_MAIN_VOLUME := 1.0
+const DEFAULT_MUSIC_VOLUME := 1.0
+const DEFAULT_SFX_VOLUME := 1.0
+const DEFAULT_ALLY_POWERUP_VOLUME := 1.0
+const DEFAULT_ENEMY_HIT_VOLUME := 1.0
+const DEFAULT_SAME_HIT_SFX := false
+## Gameplay
+const DEFAULT_BULLET_OPACITY := 1.0
 const DEFAULT_HITBOX_VISIBLE := false
 
 
@@ -20,23 +27,35 @@ func _ready() -> void:
 ## Write the configured game settings to disk.
 func save_settings(
 		display_mode: DisplayServer.WindowMode, 
-		volume: float, 
-		music_volume: float,
-		same_hit_sfx: bool,
-		bullet_opacity: float,
+		limit_fps: bool,
 		max_fps: int,
 		cursor_size: int,
+		
+		main_volume : float,
+		music_volume: float,
+		sfx_volume: float, 
+		ally_powerup_volume: float,
+		enemy_hit_volume: float,
+		same_hit_sfx: bool,
+		
+		bullet_opacity: float,
 		hitbox_visible: bool
 	) -> void:
 	var config = ConfigFile.new()
 
 	config.set_value("display", "display_mode", display_mode)
-	config.set_value("sound", "volume", volume)
-	config.set_value("music", "volume", music_volume)
-	config.set_value("sound", "same_hit_sfx", same_hit_sfx)
-	config.set_value("gameplay", "bullet_opacity", bullet_opacity)
+	config.set_value("display", "limit_fps", limit_fps)
 	config.set_value("display", "max_fps", max_fps)
 	config.set_value("display", "cursor_size", cursor_size)
+	
+	config.set_value("audio", "main", main_volume)
+	config.set_value("music", "volume", music_volume)
+	config.set_value("sound", "volume", sfx_volume)
+	config.set_value("audio", "ally_powerup", ally_powerup_volume)
+	config.set_value("audio", "enemy_hit", enemy_hit_volume)
+	config.set_value("sound", "same_hit_sfx", same_hit_sfx)
+	
+	config.set_value("gameplay", "bullet_opacity", bullet_opacity)
 	config.set_value("gameplay", "hitbox_visible", hitbox_visible)
 
 	config.save(SETTINGS_PATH)
@@ -71,12 +90,18 @@ func load_settings() -> void:
 	if not FileAccess.file_exists(SETTINGS_PATH):
 		save_settings(
 			DEFAULT_DISPLAY_MODE, 
-			DEFAULT_VOLUME, 
-			DEFAULT_MUSIC_VOLUME,
-			DEFAULT_SAME_HIT_SFX,
-			DEFAULT_BULLET_OPACITY,
+			DEFAULT_LIMIT_FPS,
 			DEFAULT_MAX_FPS,
 			DEFAULT_CURSOR_SIZE,
+			
+			DEFAULT_MAIN_VOLUME,
+			DEFAULT_MUSIC_VOLUME,
+			DEFAULT_SFX_VOLUME, 
+			DEFAULT_ALLY_POWERUP_VOLUME,
+			DEFAULT_ENEMY_HIT_VOLUME,
+			DEFAULT_SAME_HIT_SFX,
+			
+			DEFAULT_BULLET_OPACITY,
 			DEFAULT_HITBOX_VISIBLE
 		)
 
@@ -87,15 +112,18 @@ func load_settings() -> void:
 
 	# Apply settings
 	SettingsManager.apply_display_mode(settings.get_value("display", "display_mode"))
-	SettingsManager.apply_volume(settings.get_value("sound", "volume"))
-	## TODO: QUICK FIX FOR TESTING FOR RIGHT NOW.
-	if settings.get_value("music", "volume") == null:
-		settings.set_value("music", "volume", DEFAULT_MUSIC_VOLUME)
-	SettingsManager.apply_music_volume(settings.get_value("music", "volume", DEFAULT_MUSIC_VOLUME))
-	SettingsManager.apply_same_hit_sfx(settings.get_value("sound", "same_hit_sfx", DEFAULT_SAME_HIT_SFX))
-	SettingsManager.apply_bullet_opacity(settings.get_value("gameplay", "bullet_opacity", DEFAULT_BULLET_OPACITY))
+	SettingsManager.apply_limit_fps(settings.get_value("display", "limit_fps", DEFAULT_LIMIT_FPS))
 	SettingsManager.apply_max_fps(settings.get_value("display", "max_fps", DEFAULT_MAX_FPS))
 	SettingsManager.apply_cursor_size(settings.get_value("display", "cursor_size", DEFAULT_CURSOR_SIZE))
+	
+	SettingsManager.apply_main_volume(settings.get_value("audio", "main", DEFAULT_MAIN_VOLUME))
+	SettingsManager.apply_music_volume(settings.get_value("music", "volume", DEFAULT_MUSIC_VOLUME))
+	SettingsManager.apply_volume(settings.get_value("sound", "volume"))
+	SettingsManager.apply_ally_powerup_volume(settings.get_value("audio", "ally_powerup", DEFAULT_ALLY_POWERUP_VOLUME))
+	SettingsManager.apply_enemy_hit_volume(settings.get_value("audio", "enemy_hit", DEFAULT_ENEMY_HIT_VOLUME))
+	SettingsManager.apply_same_hit_sfx(settings.get_value("sound", "same_hit_sfx", DEFAULT_SAME_HIT_SFX))
+	
+	SettingsManager.apply_bullet_opacity(settings.get_value("gameplay", "bullet_opacity", DEFAULT_BULLET_OPACITY))
 	SettingsManager.apply_hitbox_visible(settings.get_value("gameplay", "hitbox_visible", DEFAULT_HITBOX_VISIBLE))
 	
 	SettingsManager.set_settings(settings)
