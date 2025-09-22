@@ -40,6 +40,11 @@ func apply_music_volume(volume: float):
 	AudioManager.update_bus_volume(volume, "Music")
 
 
+## Changes if all Enemy damage SFX is the same sound.
+func apply_same_hit_sfx(value: bool) -> void:
+	AudioManager.set_use_same_enemy_hit_sfx(value)
+
+
 ## Changes the current BULLET OPACITY for other players' bullets.
 func apply_bullet_opacity(opacity: float) -> void:
 	GameState.other_players_bullet_opacity = opacity

@@ -19,11 +19,16 @@ var sound_effect_dict : Dictionary
 
 ## Saved child from when you instantiate the battle_music_player.
 var _battle_music_player_node:AudioStreamPlayer = null
+## If true, all enemy hit SFX will be the same sound instead of being different depending on the bullet.
+var _use_same_enemy_hit_sfx: bool = false
 
 ## Num of times the enemy hit sound is allowed to play at the same time. Shared between "Enemy hit" and "Enemy hit critical"
 @export var _enemy_hit_limit: int = 20
 ## How many enemy hit sounds are currently playing.
 var _enemy_hit_limit_counter: int = 0
+
+func set_use_same_enemy_hit_sfx(value: bool) -> void:
+	_use_same_enemy_hit_sfx = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -142,13 +147,11 @@ func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFF
 		var new_audio = null
 		
 		if location != Vector2.INF:
-		## TODO: Add a setting to use the same enemy hit sound for all powerups.
-		## Otherwise, create new audio with sfx_type
-			# if USE_SAME_ENEMY_HIT_SFX is true:
-			# 	new_audio = create_audio_at_location(location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
-			# else:
-		## TODO: Enemy hit sounds should only play for YOUR powerups, not allies
-			new_audio = create_audio_at_location(location, sfx_type)
+		# Otherwise, create new audio with sfx_type
+			if _use_same_enemy_hit_sfx:
+				new_audio = create_audio_at_location(location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
+			else:
+				new_audio = create_audio_at_location(location, sfx_type)
 		
 		if new_audio != null:
 			_enemy_hit_limit_counter += 1
