@@ -290,7 +290,8 @@ func _take_damage(damage: float, is_crit: bool = false) -> void:
 	health -= snapped(damage, 1)
 	
 	_playground.create_damage_indicator.rpc(global_position, damage, is_crit)
-	$AnimationPlayer.play("take_damage")
+	if sprite.has_method("take_damage"):
+		sprite.take_damage()
 	
 	if health <= 0:
 		die()

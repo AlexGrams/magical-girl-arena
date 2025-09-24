@@ -37,7 +37,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.233333, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PulsarSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [0.0, -0.785398, 0.0, 0.785398, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lewke"]
@@ -74,5 +86,6 @@ shape = SubResource("CircleShape2D_jdfpn")
 libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
+speed_scale = 2.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
