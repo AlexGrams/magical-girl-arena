@@ -77,6 +77,7 @@ speed = 0.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("TrailSprite")
+sound_effect = 49
 
 [node name="TrailSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("flower1", "flower2", "flower3")]
 z_index = -1
