@@ -91,4 +91,4 @@ func _on_invite_friend_button_down() -> void:
 
 ## Remove this player from the lobby.
 func _on_kick_button_down() -> void:
-	get_tree().root.get_node("MainMenu").leave_lobby.rpc_id(player_id)
+	get_tree().root.get_node("MainMenu").leave_lobby.rpc_id(player_id, "You were kicked from the lobby.")

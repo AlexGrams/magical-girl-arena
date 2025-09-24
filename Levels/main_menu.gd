@@ -111,6 +111,7 @@ func _ready() -> void:
 			# Does the same thing as leaving the lobby by clicking the "Leave" button.
 			_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 			request_lobby_list()
+			show_error_message("The host left the game.")
 	)
 	
 	# Exit the Lobby screen automatially if we attempt to join an invalid lobby.
@@ -489,13 +490,15 @@ func _update_map_for_client(id: int) -> void:
 ## Leave a game lobby. Goes back to the lobby list. If called remotely, should only be done by
 ## the lobby host.
 @rpc("any_peer", "call_local", "reliable")
-func leave_lobby() -> void:
+func leave_lobby(error_display_message: String = "") -> void:
 	if multiplayer.is_server():
 		multiplayer.peer_connected.disconnect(_update_map_for_client)
 	
 	GameState.disconnect_local_player()
 	_switch_screen_animation(lobby, lobby_list, _lobby_list_original_pos)
 	request_lobby_list()
+	if error_display_message != "":
+		show_error_message(error_display_message)
 
 
 ## Updates the lobby view to show connected players, their characters, the local player's
