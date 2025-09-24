@@ -399,10 +399,10 @@ label = NodePath("..")
 
 [node name="LobbySettings" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 1623.0
-offset_top = 25.0
-offset_right = 1674.0
-offset_bottom = 174.0
+offset_left = 1633.0
+offset_top = 109.0
+offset_right = 1684.0
+offset_bottom = 258.0
 
 [node name="PublicLobby_Button" type="CheckButton" parent="LobbySettings"]
 layout_mode = 2
@@ -609,6 +609,32 @@ stretch_mode = 5
 script = ExtResource("13_6itpg")
 label = NodePath(".")
 
+[node name="Settings_Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -354.0
+offset_top = 22.0
+offset_right = -23.0
+offset_bottom = 80.0
+grow_horizontal = 0
+pivot_offset = Vector2(331, 29)
+theme = ExtResource("12_0mnfm")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+horizontal_alignment = 2
+metadata/_edit_group_ = true
+
+[node name="SettingsButton" type="Button" parent="Settings_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 331.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+alignment = 2
+script = ExtResource("13_6itpg")
+label = NodePath("..")
+
 [connection signal="mouse_entered" from="StartGame_Label/StartGameButton" to="StartGame_Label/StartGameButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="StartGame_Label/StartGameButton" to="StartGame_Label/StartGameButton" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="LeaveLobby_Label/LeaveButton" to="LeaveLobby_Label/LeaveButton" method="_on_mouse_entered"]
@@ -621,3 +647,5 @@ label = NodePath(".")
 [connection signal="mouse_exited" from="LeftArrow_MapSelect" to="LeftArrow_MapSelect" method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="RightArrow_MapSelect" to="RightArrow_MapSelect" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="RightArrow_MapSelect" to="RightArrow_MapSelect" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Settings_Label/SettingsButton" to="Settings_Label/SettingsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Settings_Label/SettingsButton" to="Settings_Label/SettingsButton" method="_on_mouse_exited"]
