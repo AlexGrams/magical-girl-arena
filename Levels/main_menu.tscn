@@ -163,7 +163,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "error_message", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "error_message_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,6 +177,7 @@ shop = NodePath("Shop")
 lobby_list = NodePath("LobbyList")
 lobby = NodePath("Lobby")
 char_select = NodePath("CharacterSelection")
+error_message = NodePath("ErrorMessage")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
 main_menu_button_container = NodePath("Main/VBoxContainer")
@@ -208,6 +209,7 @@ information_powerup_description = NodePath("CharacterSelection/CharacterInformat
 information_ult_label = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/UltimateTitle_VboxContainer/UltimateName")
 information_ult_texture = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/Ultimate_Header_Container/Ultimate_Icon/Ultimate_Image")
 information_ult_description = NodePath("CharacterSelection/CharacterInformationContainer2/UltimateInformation/UltimateDescription")
+error_message_label = NodePath("ErrorMessage/ErrorText")
 
 [node name="Background" type="Control" parent="."]
 layout_mode = 1
@@ -1447,6 +1449,72 @@ text = "Connecting..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ErrorMessage" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="ErrorMessage"]
+self_modulate = Color(0.2484, 0.2484, 0.2484, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErrorText" type="Label" parent="ErrorMessage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.0
+offset_top = -353.0
+offset_right = 788.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_kechk")
+theme_override_fonts/font = ExtResource("31_gcfgr")
+theme_override_font_sizes/font_size = 64
+text = "Error text message"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CloseLabel" type="Label" parent="ErrorMessage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.5
+offset_top = -280.0
+offset_right = 130.5
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_wqh84")
+text = "Close"
+
+[node name="Closebutton" type="Button" parent="ErrorMessage/CloseLabel" node_paths=PackedStringArray("label")]
+layout_mode = 2
+offset_right = 261.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_wqh84")
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_entered"]
@@ -1519,6 +1587,9 @@ vertical_alignment = 1
 [connection signal="button_down" from="Shop/HideShop_Label/ShopBackButton" to="." method="hide_shop"]
 [connection signal="mouse_entered" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Shop/HideShop_Label/ShopBackButton" to="Shop/HideShop_Label/ShopBackButton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ErrorMessage/CloseLabel/Closebutton" to="ErrorMessage/CloseLabel/Closebutton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ErrorMessage/CloseLabel/Closebutton" to="ErrorMessage/CloseLabel/Closebutton" method="_on_mouse_exited"]
+[connection signal="pressed" from="ErrorMessage/CloseLabel/Closebutton" to="." method="_on_close_button_pressed"]
 
 [editable path="Main/CharacterAnimatedSprite"]
 [editable path="Lobby"]
