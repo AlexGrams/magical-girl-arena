@@ -611,6 +611,24 @@ autowrap_mode = 2
 visible = false
 layout_mode = 1
 
+[node name="LobbySettings" parent="Lobby" index="5"]
+offset_left = 1633.0
+offset_top = 109.0
+offset_right = 1684.0
+offset_bottom = 258.0
+
+[node name="PublicLobby_Button" parent="Lobby/LobbySettings" index="0"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
+[node name="FriendsOnly_Button" parent="Lobby/LobbySettings" index="1"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
+[node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
 [node name="Settings_Label" type="Label" parent="Lobby"]
 layout_mode = 1
 anchors_preset = 1
@@ -633,28 +651,9 @@ layout_mode = 1
 offset_right = 331.0
 offset_bottom = 58.0
 theme_override_font_sizes/font_size = 50
-text = "Settings"
 alignment = 2
 script = ExtResource("5_76cyy")
 label = NodePath("..")
-
-[node name="LobbySettings" parent="Lobby" index="6"]
-offset_left = 1633.0
-offset_top = 109.0
-offset_right = 1684.0
-offset_bottom = 258.0
-
-[node name="PublicLobby_Button" parent="Lobby/LobbySettings" index="0"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
-
-[node name="FriendsOnly_Button" parent="Lobby/LobbySettings" index="1"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
-
-[node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
 
 [node name="CharacterSelection" parent="." instance=ExtResource("20_tc85m")]
 visible = false
@@ -1610,9 +1609,6 @@ label = NodePath("..")
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
-[connection signal="button_down" from="Lobby/Settings_Label/SettingsButton" to="." method="show_settings"]
-[connection signal="mouse_entered" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
 [connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
 [connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
@@ -1620,6 +1616,9 @@ label = NodePath("..")
 [connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
 [connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]
 [connection signal="pressed" from="Lobby/RightArrow_MapSelect" to="." method="_on_map_select_right_button_pressed"]
+[connection signal="button_down" from="Lobby/Settings_Label/SettingsButton" to="." method="show_settings"]
+[connection signal="mouse_entered" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="CharacterSelection/Leave_Label/LeaveButton" to="." method="_hide_char_select"]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/DisplayButton" to="Settings" method="switch_to_screen" binds= [0]]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/AudioButton" to="Settings" method="switch_to_screen" binds= [1]]
