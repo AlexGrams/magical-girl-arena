@@ -364,12 +364,16 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 	# Async wait until the lobby information is returned.
 	await Steam.lobby_data_update
 	
-	# Don't join a lobby that nobody is in or that is in progress.
-	if (
-			Steam.getNumLobbyMembers(lobby_id) <= 0 
-			or str_to_var(Steam.getLobbyData(lobby_id, "isGameInProgress"))
-	):
+	# Don't join a lobby that nobody is in.
+	if Steam.getNumLobbyMembers(lobby_id) <= 0:
 		connecting_screen.hide()
+		show_error_message("Unable to connect to lobby: Lobby no longer exists.")
+		request_lobby_list()
+		return
+	# Don't join a lobby that isn't joinable right now.
+	if str_to_var(Steam.getLobbyData(lobby_id, "isGameInProgress")):
+		connecting_screen.hide()
+		show_error_message("Unable to connect to lobby: Lobby isn't joinable right now.")
 		request_lobby_list()
 		return
 	
