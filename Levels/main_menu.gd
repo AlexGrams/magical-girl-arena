@@ -19,6 +19,8 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var lobby: Control
 ## The screen for character selection
 @export var char_select: Control
+## Displays an error message if something goes wrong.
+@export var error_message: Control
 
 @export_group("Main Menu")
 ## Character that is visible on the main menu and their nametag.
@@ -81,6 +83,10 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 @export var information_ult_label: Label
 @export var information_ult_texture: TextureRect
 @export var information_ult_description: Label
+
+@export_group("Error Message")
+## Change to display error message text.
+@export var error_message_label: Label
 
 ## Current time until automatically refreshing the Lobby List.
 var _lobby_list_refresh_timer: float = 0.0
@@ -609,6 +615,18 @@ func hide_shop() -> void:
 	shop.position = Vector2(-(shop.size.x), shop.position.y)
 	
 #endregion
+
+
+#region error_screen
+func show_error_message(text: String) -> void:
+	error_message_label.text = text
+	error_message.show()
+
+
+func _on_close_button_pressed() -> void:
+	error_message.hide()
+#endregion error_screen
+
 
 func _switch_screen_animation(from_screen: Control, to_screen: Control, to_screen_original_pos: Vector2):
 	# Sort of a hack to prevent the connecting screen from blocking input erroneously.
