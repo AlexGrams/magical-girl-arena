@@ -50,31 +50,6 @@ scale_curve = SubResource("CurveTexture_jt00i")
 [sub_resource type="ViewportTexture" id="ViewportTexture_k0lfe"]
 viewport_path = NodePath("GDCubismUserModel")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te6sa"]
-bg_color = Color(0.36, 0.2952, 0.2952, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 0.811765, 0.439216, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 5.0
-expand_margin_top = 25.0
-expand_margin_bottom = 25.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10hit"]
-bg_color = Color(0.917647, 0.317647, 0.317647, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_top = 20.0
-expand_margin_right = 5.0
-expand_margin_bottom = 20.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1mf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wfokd"]
@@ -150,6 +125,31 @@ Panel/styles/panel = SubResource("StyleBoxFlat_i5e32")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
 bg_color = Color(0, 0, 0, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te6sa"]
+bg_color = Color(0.36, 0.2952, 0.2952, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10hit"]
+bg_color = Color(0.917647, 0.317647, 0.317647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 20.0
+expand_margin_right = 5.0
+expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3i082"]
 bg_color = Color(0.890196, 0.278431, 0.278431, 1)
@@ -389,8 +389,280 @@ grow_vertical = 1
 text = "Version ???"
 horizontal_alignment = 2
 
+[node name="LobbyList" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreateLobby_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 261.0
+offset_right = 823.0
+offset_bottom = 388.0
+pivot_offset = Vector2(0, 63)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Create Lobby"
+metadata/_edit_group_ = true
+
+[node name="HostButton" type="Button" parent="LobbyList/CreateLobby_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 90
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="Refresh_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 392.0
+offset_right = 823.0
+offset_bottom = 519.0
+pivot_offset = Vector2(0, 63)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 90
+text = "Refresh List"
+metadata/_edit_group_ = true
+
+[node name="RefreshButton" type="Button" parent="LobbyList/Refresh_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 597.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 90
+alignment = 0
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="LobbyList"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Return to Main Menu"
+metadata/_edit_group_ = true
+
+[node name="LobbyListBackButton" type="Button" parent="LobbyList/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="LobbiesListPanelContainer" type="PanelContainer" parent="LobbyList"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1190.0
+offset_top = -971.0
+offset_right = -47.0
+offset_bottom = -158.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7_mn14l")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
+
+[node name="LobbiesScrollContainer" type="ScrollContainer" parent="LobbyList/LobbiesListPanelContainer"]
+layout_mode = 2
+theme = ExtResource("7_mn14l")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
+follow_focus = true
+
+[node name="LobbiesList" type="VBoxContainer" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer"]
+custom_minimum_size = Vector2(980, 0)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_constants/separation = -15
+alignment = 2
+metadata/_edit_group_ = true
+
+[node name="LobbyButton" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton2" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton3" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton4" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton5" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton6" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton7" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton8" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="LobbyButton9" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
+layout_mode = 2
+
+[node name="SearchingPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wfokd")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -148.5
+offset_right = 148.5
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(148, 148)
+value = 25.0
+fill_mode = 4
+texture_under = ExtResource("17_qad3k")
+texture_progress = ExtResource("17_1i823")
+
+[node name="OutlineLabel" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel" instance=ExtResource("18_5ybm4")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -18.0
+offset_right = 95.0
+offset_bottom = 18.0
+text = "Searching for lobbies..."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_i8f35")
+}
+autoplay = "loading"
+
+[node name="NoConnectionPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_8c3cl")
+
+[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoConnectionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.5
+offset_top = -57.5
+offset_right = 406.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No internet connection! 
+Check your device's network connection and that you're signed into Steam, then restart the game."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NoLobbiesPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_8c3cl")
+
+[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoLobbiesPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.5
+offset_top = -57.5
+offset_right = 406.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No lobbies found!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Lobby" parent="." instance=ExtResource("29_i1nmj")]
+visible = false
+layout_mode = 1
+
+[node name="Settings_Label" type="Label" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -354.0
+offset_top = 22.0
+offset_right = -23.0
+offset_bottom = 80.0
+grow_horizontal = 0
+pivot_offset = Vector2(331, 29)
+theme = ExtResource("4_wqh84")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+horizontal_alignment = 2
+metadata/_edit_group_ = true
+
+[node name="SettingsButton" type="Button" parent="Lobby/Settings_Label" node_paths=PackedStringArray("label")]
+layout_mode = 1
+offset_right = 331.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+alignment = 2
+script = ExtResource("5_76cyy")
+label = NodePath("..")
+
+[node name="LobbySettings" parent="Lobby" index="6"]
+offset_left = 1633.0
+offset_top = 109.0
+offset_right = 1684.0
+offset_bottom = 258.0
+
+[node name="PublicLobby_Button" parent="Lobby/LobbySettings" index="0"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
+[node name="FriendsOnly_Button" parent="Lobby/LobbySettings" index="1"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
+[node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
+action_mode = 0
+button_group = SubResource("ButtonGroup_1b1tj")
+
+[node name="CharacterSelection" parent="." instance=ExtResource("20_tc85m")]
+visible = false
+layout_mode = 1
+
 [node name="Settings" type="Control" parent="." node_paths=PackedStringArray("_display_screen", "_audio_screen", "_gameplay_screen", "_screen_mode_option", "_limit_fps_checkbox", "_max_fps_container", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_main_volume_slider", "_main_volume_spinbox", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_ally_powerups_volume_slider", "_ally_powerups_volume_spinbox", "_enemy_hit_volume_slider", "_enemy_hit_volume_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_hitbox_visible_checkbox")]
 visible = false
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -421,6 +693,16 @@ _same_hit_sfx_checkbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxConta
 _bullet_opacity_slider = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider")
 _bullet_opacity_spinbox = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox")
 _hitbox_visible_checkbox = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox")
+
+[node name="DimBackground" type="Panel" parent="Settings"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5h8wx")
 
 [node name="ParentVBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
@@ -969,58 +1251,8 @@ theme_override_font_sizes/font_size = 50
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
-[node name="LobbyList" type="Control" parent="."]
+[node name="HideSettings_Label" type="Label" parent="Settings"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CreateLobby_Label" type="Label" parent="LobbyList"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 261.0
-offset_right = 823.0
-offset_bottom = 388.0
-pivot_offset = Vector2(0, 63)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 90
-text = "Create Lobby"
-metadata/_edit_group_ = true
-
-[node name="HostButton" type="Button" parent="LobbyList/CreateLobby_Label" node_paths=PackedStringArray("label")]
-layout_mode = 0
-offset_right = 641.0
-offset_bottom = 104.0
-theme_override_font_sizes/font_size = 90
-alignment = 0
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="Refresh_Label" type="Label" parent="LobbyList"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 392.0
-offset_right = 823.0
-offset_bottom = 519.0
-pivot_offset = Vector2(0, 63)
-theme = ExtResource("4_wqh84")
-theme_override_font_sizes/font_size = 90
-text = "Refresh List"
-metadata/_edit_group_ = true
-
-[node name="RefreshButton" type="Button" parent="LobbyList/Refresh_Label" node_paths=PackedStringArray("label")]
-layout_mode = 0
-offset_right = 597.0
-offset_bottom = 104.0
-theme_override_font_sizes/font_size = 90
-alignment = 0
-script = ExtResource("5_76cyy")
-label = NodePath("..")
-
-[node name="ReturntoMainMenu_Label" type="Label" parent="LobbyList"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 968.0
@@ -1029,183 +1261,16 @@ offset_bottom = 1026.0
 pivot_offset = Vector2(0, 29)
 theme = ExtResource("4_wqh84")
 theme_override_font_sizes/font_size = 50
-text = "Return to Main Menu"
+text = "Save and Exit"
 metadata/_edit_group_ = true
 
-[node name="LobbyListBackButton" type="Button" parent="LobbyList/ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+[node name="BackButton" type="Button" parent="Settings/HideSettings_Label" node_paths=PackedStringArray("label")]
 layout_mode = 0
 offset_right = 553.0
 offset_bottom = 58.0
 theme_override_font_sizes/font_size = 50
 script = ExtResource("5_76cyy")
 label = NodePath("..")
-
-[node name="LobbiesListPanelContainer" type="PanelContainer" parent="LobbyList"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1190.0
-offset_top = -971.0
-offset_right = -47.0
-offset_bottom = -158.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("7_mn14l")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
-
-[node name="LobbiesScrollContainer" type="ScrollContainer" parent="LobbyList/LobbiesListPanelContainer"]
-layout_mode = 2
-theme = ExtResource("7_mn14l")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oa1mf")
-follow_focus = true
-
-[node name="LobbiesList" type="VBoxContainer" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer"]
-custom_minimum_size = Vector2(980, 0)
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme_override_constants/separation = -15
-alignment = 2
-metadata/_edit_group_ = true
-
-[node name="LobbyButton" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton2" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton3" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton4" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton5" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton6" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton7" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton8" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="LobbyButton9" parent="LobbyList/LobbiesListPanelContainer/LobbiesScrollContainer/LobbiesList" instance=ExtResource("7_rqpyu")]
-layout_mode = 2
-
-[node name="SearchingPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
-visible = false
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_wfokd")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.5
-offset_top = -148.5
-offset_right = 148.5
-offset_bottom = 148.5
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(148, 148)
-value = 25.0
-fill_mode = 4
-texture_under = ExtResource("17_qad3k")
-texture_progress = ExtResource("17_1i823")
-
-[node name="OutlineLabel" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel" instance=ExtResource("18_5ybm4")]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -95.0
-offset_top = -18.0
-offset_right = 95.0
-offset_bottom = 18.0
-text = "Searching for lobbies..."
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LobbyList/LobbiesListPanelContainer/SearchingPanel"]
-libraries = {
-"": SubResource("AnimationLibrary_i8f35")
-}
-autoplay = "loading"
-
-[node name="NoConnectionPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
-visible = false
-layout_mode = 2
-theme = SubResource("Theme_8c3cl")
-
-[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoConnectionPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -406.5
-offset_top = -57.5
-offset_right = 406.5
-offset_bottom = 57.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "No internet connection! 
-Check your device's network connection and that you're signed into Steam, then restart the game."
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="NoLobbiesPanel" type="Panel" parent="LobbyList/LobbiesListPanelContainer"]
-visible = false
-layout_mode = 2
-theme = SubResource("Theme_8c3cl")
-
-[node name="Label" type="Label" parent="LobbyList/LobbiesListPanelContainer/NoLobbiesPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -406.5
-offset_top = -57.5
-offset_right = 406.5
-offset_bottom = 57.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "No lobbies found!"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Lobby" parent="." instance=ExtResource("29_i1nmj")]
-visible = false
-layout_mode = 1
-
-[node name="PublicLobby_Button" parent="Lobby/LobbySettings" index="0"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
-
-[node name="FriendsOnly_Button" parent="Lobby/LobbySettings" index="1"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
-
-[node name="InviteOnly_Button" parent="Lobby/LobbySettings" index="2"]
-action_mode = 0
-button_group = SubResource("ButtonGroup_1b1tj")
-
-[node name="CharacterSelection" parent="." instance=ExtResource("20_tc85m")]
-visible = false
-layout_mode = 1
 
 [node name="Shop" type="Control" parent="." node_paths=PackedStringArray("coins_label", "reroll_item", "perm_reroll_item", "powerup_reroll_item", "artifact_reroll_item", "hide_button")]
 visible = false
@@ -1533,6 +1598,29 @@ label = NodePath("..")
 [connection signal="button_down" from="Main/VBoxContainer/Quit_Label/QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Main/VBoxContainer/Quit_Label/QuitButton" to="Main/VBoxContainer/Quit_Label/QuitButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/Refresh_Label/RefreshButton" to="." method="request_lobby_list"]
+[connection signal="mouse_entered" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
+[connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
+[connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
+[connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
+[connection signal="button_down" from="Lobby/Settings_Label/SettingsButton" to="." method="show_settings"]
+[connection signal="mouse_entered" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Lobby/Settings_Label/SettingsButton" to="Lobby/Settings_Label/SettingsButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
+[connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
+[connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
+[connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
+[connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
+[connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]
+[connection signal="pressed" from="Lobby/RightArrow_MapSelect" to="." method="_on_map_select_right_button_pressed"]
+[connection signal="button_down" from="CharacterSelection/Leave_Label/LeaveButton" to="." method="_hide_char_select"]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/DisplayButton" to="Settings" method="switch_to_screen" binds= [0]]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/AudioButton" to="Settings" method="switch_to_screen" binds= [1]]
 [connection signal="pressed" from="Settings/ParentVBoxContainer/TabsHBoxContainer/GameplayButton" to="Settings" method="switch_to_screen" binds= [2]]
@@ -1560,26 +1648,10 @@ label = NodePath("..")
 [connection signal="button_down" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings" method="_save_settings_changes"]
 [connection signal="mouse_entered" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings/ReturntoMainMenu_Label/BackButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Settings/ReturntoMainMenu_Label/BackButton" to="Settings/ReturntoMainMenu_Label/BackButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="LobbyList/CreateLobby_Label/HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="mouse_entered" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="LobbyList/CreateLobby_Label/HostButton" to="LobbyList/CreateLobby_Label/HostButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="LobbyList/Refresh_Label/RefreshButton" to="." method="request_lobby_list"]
-[connection signal="mouse_entered" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="LobbyList/Refresh_Label/RefreshButton" to="LobbyList/Refresh_Label/RefreshButton" method="_on_mouse_exited"]
-[connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="." method="_on_lobby_list_back_button_button_down"]
-[connection signal="button_down" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="Background/Logo" method="scale_to_normal"]
-[connection signal="mouse_entered" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
-[connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
-[connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
-[connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
-[connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
-[connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
-[connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
-[connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
-[connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]
-[connection signal="pressed" from="Lobby/RightArrow_MapSelect" to="." method="_on_map_select_right_button_pressed"]
-[connection signal="button_down" from="CharacterSelection/Leave_Label/LeaveButton" to="." method="_hide_char_select"]
+[connection signal="button_down" from="Settings/HideSettings_Label/BackButton" to="." method="hide_settings"]
+[connection signal="button_down" from="Settings/HideSettings_Label/BackButton" to="Settings" method="_save_settings_changes"]
+[connection signal="mouse_entered" from="Settings/HideSettings_Label/BackButton" to="Settings/HideSettings_Label/BackButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/HideSettings_Label/BackButton" to="Settings/HideSettings_Label/BackButton" method="_on_mouse_exited"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="." method="from_shop_to_main_menu"]
 [connection signal="button_down" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Background/Logo" method="scale_to_normal"]
 [connection signal="mouse_entered" from="Shop/ReturntoMainMenu_Label/ShopBackButton" to="Shop/ReturntoMainMenu_Label/ShopBackButton" method="_on_mouse_entered"]

@@ -216,6 +216,26 @@ func _on_settings_back_button_down() -> void:
 	_set_main_menu_character()
 	_switch_screen_animation(settings, main_menu , _main_menu_original_pos)
 
+# Used to show settings without leaving current screen
+func show_settings() -> void:
+	# If settings is off-screen, move it to center
+	if settings.position != _settings_original_pos:
+		settings.position = _settings_original_pos
+	settings.get_node("DimBackground").show()
+	settings.get_node("HideSettings_Label").show()
+	settings.get_node("ReturntoMainMenu_Label").hide()
+	settings.show()
+
+
+# Used to hide settings after using show_settings()
+func hide_settings() -> void:
+	settings.get_node("DimBackground").hide()
+	settings.get_node("HideSettings_Label").hide()
+	settings.get_node("ReturntoMainMenu_Label").show()
+	settings.hide()
+	# Move settings back off-screen
+	settings.position = Vector2(-(settings.size.x), settings.position.y)
+
 #endregion
 
 
