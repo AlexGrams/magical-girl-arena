@@ -228,8 +228,8 @@ func _save_settings_changes() -> void:
 		_cursor_size_option.selected,
 		
 		_main_volume_slider.value * max_volume_slider_value,
-		_sfx_volume_slider.value * max_volume_slider_value, 
 		_music_volume_slider.value * max_volume_slider_value,
+		_sfx_volume_slider.value * max_volume_slider_value, 
 		_ally_powerups_volume_slider.value * max_volume_slider_value,
 		_enemy_hit_volume_slider.value * max_volume_slider_value,
 		_same_hit_sfx_checkbox.button_pressed,
