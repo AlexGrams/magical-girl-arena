@@ -47,6 +47,8 @@ var _retarget_timer: float = 0.0
 ## Damage that will be applied to this Enemy every physics frame. Useful for continuous sources of 
 ## damage such as AOE hazards or damaging debuffs.
 var _continuous_damage: float = 0.0
+## The sound produced when taking continuous damage. Set by the latest new source of continuous damage.
+var _continuous_damage_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 ## For analytics. Key: Powerup index. Value: continuous damage from that powerup.
 var _continuous_damage_analytic_data: Dictionary = {}
 ## Direction and magnitude of knockback.
@@ -144,8 +146,9 @@ func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority() and _continuous_damage > 0.0:
 		_take_damage(_continuous_damage)
 	
-	# Analytics: Record continuous damage from the local player. 
+	# Record continuous damage from the local player and play damage sound.
 	if not _continuous_damage_analytic_data.is_empty():
+		AudioManager.play_enemy_hit(false, _continuous_damage_sfx, global_position)
 		for index: int in _continuous_damage_analytic_data:
 			Analytics.add_powerup_damage(_continuous_damage_analytic_data[index], index)
 
@@ -253,8 +256,12 @@ func add_continuous_damage(damage: float) -> void:
 	_continuous_damage = max(_continuous_damage + damage, 0)
 
 
-## For analytics. Set how much continuous damage the local client is doing to this Enemy.
-func continuous_damage_analytics(damage: float, powerup_index: int = -1) -> void:
+## Set how much continuous damage the local client is doing to this Enemy. Allows recording analytic
+## data and playing a sound for continuous damage.
+func add_local_continuous_damage(damage: float, powerup_index: int, damage_sound: SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.NONE) -> void:
+	if damage > 0:
+		_continuous_damage_sfx = damage_sound
+	
 	if _continuous_damage_analytic_data.has(powerup_index):
 		_continuous_damage_analytic_data[powerup_index] = max(_continuous_damage_analytic_data[powerup_index] + damage, 0)
 	else:
