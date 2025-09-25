@@ -81,7 +81,7 @@ func _on_area_2d_exited(area: Area2D) -> void:
 		if is_multiplayer_authority():
 			other.add_continuous_damage(-_damage)
 		if multiplayer.get_unique_id() == _owner_id:
-			other.add_local_continuous_damage(-_damage, -1)
+			other.add_local_continuous_damage(-_damage, _powerup_index)
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.

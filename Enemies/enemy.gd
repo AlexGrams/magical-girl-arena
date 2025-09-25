@@ -263,7 +263,7 @@ func add_local_continuous_damage(damage: float, powerup_index: int, damage_sound
 		_continuous_damage_sfx = damage_sound
 	
 	if _continuous_damage_analytic_data.has(powerup_index):
-		_continuous_damage_analytic_data[powerup_index] = max(_continuous_damage_analytic_data[powerup_index] + damage, 0)
+		_continuous_damage_analytic_data[powerup_index] = max(round(_continuous_damage_analytic_data[powerup_index] + damage), 0)
 	else:
 		_continuous_damage_analytic_data[powerup_index] = damage
 	
