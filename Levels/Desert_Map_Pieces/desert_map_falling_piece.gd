@@ -103,9 +103,9 @@ func _fall() -> void:
 	tween_fall.set_trans(Tween.TRANS_EXPO)
 	tween_fall.set_parallel()
 	tween_fall.tween_property(base, "scale", Vector2.ZERO, fall_time)
-	tween_fall.tween_property(base, "modulate", Color.html("241a13"), fall_time)
-	for child in triangles.get_children():
-		child.scale = Vector2.ZERO
+	#tween_fall.tween_property(base, "modulate", Color.html("241a13"), fall_time)
+	#for child in triangles.get_children():
+		#child.scale = Vector2.ZERO
 	await get_tree().create_timer(time_to_crack + fall_time + 5, false).timeout
 	
 	# Don't come back if this piece should be removed permanently.
@@ -126,8 +126,8 @@ func rise() -> void:
 	tween.tween_property(base, "modulate", Color.WHITE, rise_time)
 	await get_tree().create_timer(rise_time, false).timeout
 	
-	for child in triangles.get_children():
-		child.scale = Vector2.ONE
+	#for child in triangles.get_children():
+		#child.scale = Vector2.ONE
 	_collider.disabled = true
 	_area.collision_layer = 0
 	returned.emit(self)

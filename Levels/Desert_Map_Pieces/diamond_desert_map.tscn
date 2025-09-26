@@ -25,6 +25,7 @@ _area = NodePath("Area2D")
 _collider = NodePath("StaticBody2D/CollisionPolygon2D")
 
 [node name="Abyss" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
 z_index = -3
 texture = ExtResource("4_nw0dq")
@@ -54,6 +55,7 @@ texture = ExtResource("4_nw0dq")
 texture = ExtResource("2_0td5v")
 
 [node name="Triangles" type="Node2D" parent="Base"]
+visible = false
 z_index = -2
 
 [node name="Triangle_1" type="Sprite2D" parent="Base/Triangles"]
@@ -130,11 +132,42 @@ texture = ExtResource("6_l1mnw")
 position = Vector2(-112, -540)
 texture = ExtResource("6_l1mnw")
 
+[node name="Shadow1" type="Sprite2D" parent="Base"]
+self_modulate = Color(0.561851, 0.412507, 0.272534, 1)
+z_index = -2
+scale = Vector2(1.025, 1.025)
+texture = ExtResource("4_nw0dq")
+
+[node name="Shadow2" type="Sprite2D" parent="Base"]
+self_modulate = Color(0.483884, 0.351061, 0.226172, 1)
+z_index = -3
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("4_nw0dq")
+
+[node name="Shadow3" type="Sprite2D" parent="Base"]
+self_modulate = Color(0.424594, 0.305276, 0.192888, 1)
+z_index = -4
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_nw0dq")
+
+[node name="Shadow4" type="Sprite2D" parent="Base"]
+self_modulate = Color(0.325475, 0.229829, 0.139556, 1)
+z_index = -5
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_nw0dq")
+
+[node name="Shadow5" type="Sprite2D" parent="Base"]
+self_modulate = Color(0.218158, 0.163855, 0.125858, 1)
+z_index = -6
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("4_nw0dq")
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 64
 collision_mask = 12
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 polygon = PackedVector2Array(-1110, -280, -550, -835, 550, -835, 1110, -280, 0, 832)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -142,5 +175,6 @@ collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
 polygon = PackedVector2Array(-1110, -280, -550, -835, 550, -835, 1110, -280, 0, 832)
 disabled = true

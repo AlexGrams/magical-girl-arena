@@ -518,7 +518,7 @@ _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 boss_animation = ExtResource("17_xxu3m")
 
 [node name="Background_Abyss" type="ColorRect" parent="."]
-z_index = -3
+z_index = -10
 offset_left = -3438.0
 offset_top = -2263.0
 offset_right = 5418.0
@@ -684,6 +684,7 @@ spawn_path = NodePath("..")
 script = ExtResource("47_psi5u")
 
 [node name="Walls" type="Node2D" parent="."]
+visible = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
 collision_layer = 64
