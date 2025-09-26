@@ -26,12 +26,6 @@ triangles = NodePath("Base/Triangles")
 _area = NodePath("Area2D")
 _collider = NodePath("StaticBody2D/CollisionShape2D")
 
-[node name="Abyss" type="Sprite2D" parent="."]
-visible = false
-self_modulate = Color(0.141176, 0.101961, 0.0745098, 1)
-z_index = -3
-texture = ExtResource("2_knfhr")
-
 [node name="Base" type="Sprite2D" parent="."]
 self_modulate = Color(0.67451, 0.505882, 0.34902, 1)
 texture = ExtResource("2_knfhr")

@@ -530,42 +530,34 @@ position = Vector2(1051, 1832)
 
 [node name="Octagon_DesertMap2" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2938.53, 1832)
-hidden_type = 8
 decor_scene = ExtResource("19_y55mt")
 
 [node name="Octagon_DesertMap3" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-836.73, 1832)
-hidden_type = 6
 decor_scene = ExtResource("20_iavsd")
 
 [node name="Octagon_DesertMap4" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-841, -52)
-hidden_type = 2
 decor_scene = ExtResource("21_udcfo")
 
 [node name="Octagon_DesertMap5" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(1045, -50.62)
-hidden_type = 5
 decor_scene = ExtResource("22_wcbn1")
 
 [node name="Octagon_DesertMap6" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2922.78, -50)
-hidden_type = 1
 decor_scene = ExtResource("23_orb3d")
 
 [node name="Octagon_DesertMap7" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(2932.16, 3714.54)
-hidden_type = 3
 decor_scene = ExtResource("24_ydd72")
 
 [node name="Octagon_DesertMap8" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(1045, 3715.9)
-hidden_type = 7
 decor_scene = ExtResource("25_nvexr")
 
 [node name="Octagon_DesertMap9" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(-840, 3718)
-hidden_type = 4
 decor_scene = ExtResource("26_41vkd")
 
 [node name="Square_DesertMap" parent="." instance=ExtResource("27_loxqj")]
