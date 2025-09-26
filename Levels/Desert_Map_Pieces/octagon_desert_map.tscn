@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bwil4iuj0dlp4" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Shape.png" id="2_vft7v"]
 [ext_resource type="Texture2D" uid="uid://1upw8sxwduf0" path="res://Sprites/Desert_Texture.png" id="4_f0wuy"]
 [ext_resource type="Texture2D" uid="uid://d1ajwa60jk81l" path="res://Sprites/Map/Desert/Map_Pieces/Octagon_Cracks.png" id="4_hcd15"]
-[ext_resource type="PackedScene" path="res://Sprites/Map/Desert/decor_default_octagon.tscn" id="6_c7ba6"]
+[ext_resource type="PackedScene" uid="uid://bd0kkk3qfxux6" path="res://Sprites/Map/Desert/decor_default_octagon.tscn" id="6_c7ba6"]
 
-[node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
+[node name="Octagon_DesertMap" type="Node2D" node_paths=PackedStringArray("clip_mask", "cracks", "base", "_area", "_collider")]
 z_index = -1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_pp61m")
@@ -18,7 +18,6 @@ rise_time = 1.0
 clip_mask = NodePath("Base/Clip")
 cracks = NodePath("Base/Clip/Cracks")
 base = NodePath("Base")
-triangles = NodePath("")
 _area = NodePath("Area2D")
 _collider = NodePath("StaticBody2D/CollisionPolygon2D")
 
@@ -67,13 +66,13 @@ texture = ExtResource("2_vft7v")
 [node name="Shadow4" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.325475, 0.229829, 0.139556, 1)
 z_index = -5
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.15, 1.15)
 texture = ExtResource("2_vft7v")
 
 [node name="Shadow5" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.218158, 0.163855, 0.125858, 1)
 z_index = -6
-scale = Vector2(1.3, 1.3)
+scale = Vector2(1.205, 1.205)
 texture = ExtResource("2_vft7v")
 
 [node name="Area2D" type="Area2D" parent="."]
