@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://yj2fdnxjt1d2"]
+[gd_scene load_steps=90 format=3 uid="uid://yj2fdnxjt1d2"]
 
 [ext_resource type="Script" path="res://Levels/playground_desert.gd" id="1_nupuk"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_rbx1x"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://cwxh1lqgmuu3q" path="res://Enemies/enemy_corrupted_sweet.tscn" id="15_pci6o"]
 [ext_resource type="PackedScene" uid="uid://bc56c13oalmc8" path="res://Enemies/enemy_boss_andromeda.tscn" id="16_w5lva"]
 [ext_resource type="PackedScene" uid="uid://dcm01xbycjlb2" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
+[ext_resource type="Shader" path="res://Levels/blur.gdshader" id="18_ui23y"]
+[ext_resource type="Texture2D" uid="uid://cfurca8rrmmq6" path="res://Sprites/Map/Desert/DesertBackgroundTile.png" id="18_x52mc"]
 [ext_resource type="PackedScene" uid="uid://nyg4qhq25jmb" path="res://Sprites/Map/Desert/decor_grass_octagon.tscn" id="19_y55mt"]
 [ext_resource type="PackedScene" uid="uid://dfwiw6uvxq585" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.tscn" id="19_yf7s2"]
 [ext_resource type="PackedScene" uid="uid://c3yrusmd38vta" path="res://Sprites/Map/Desert/decor_purple_octagon.tscn" id="20_iavsd"]
@@ -436,6 +438,63 @@ spawn_interval_offset = 0.0
 min_spawn_count = 1
 max_spawn_count = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5ewy"]
+shader = ExtResource("18_ui23y")
+shader_parameter/lod = 1.42
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wthbt"]
+blend_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ovk3v"]
+noise_type = 2
+seed = 8519
+frequency = 0.005
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w3q80"]
+width = 1000
+height = 500
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_ovk3v")
+
+[sub_resource type="Animation" id="Animation_t4uky"]
+resource_name = "cloud_scroll"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-3506, -2263), Vector2(-4506, -2263)]
+}
+
+[sub_resource type="Animation" id="Animation_8a6k6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3506, -2263)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hd4jn"]
+_data = {
+"RESET": SubResource("Animation_8a6k6"),
+"cloud_scroll": SubResource("Animation_t4uky")
+}
+
 [sub_resource type="Animation" id="Animation_rq3xx"]
 length = 0.001
 tracks/0/type = "value"
@@ -517,13 +576,61 @@ _damage_indicator_scene = "res://UI/damage_indicator.tscn"
 _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 boss_animation = ExtResource("17_xxu3m")
 
-[node name="Background_Abyss" type="ColorRect" parent="."]
+[node name="Background_Texture" type="TextureRect" parent="."]
+z_index = -10
+offset_left = -3438.0
+offset_top = -2263.0
+offset_right = 2483.0
+offset_bottom = 3264.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("18_x52mc")
+stretch_mode = 1
+
+[node name="Color_Overlay" type="ColorRect" parent="."]
 z_index = -10
 offset_left = -3438.0
 offset_top = -2263.0
 offset_right = 5418.0
 offset_bottom = 6065.0
-color = Color(0.141176, 0.101961, 0.0745098, 1)
+color = Color(0.56, 0.809333, 1, 0.113725)
+
+[node name="Blur" type="ColorRect" parent="."]
+z_index = -10
+material = SubResource("ShaderMaterial_w5ewy")
+offset_left = -3438.0
+offset_top = -2263.0
+offset_right = 976.0
+offset_bottom = 1879.0
+scale = Vector2(2, 2)
+
+[node name="Moving_Clouds" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.0784314)
+z_index = -10
+material = SubResource("CanvasItemMaterial_wthbt")
+offset_left = -3506.0
+offset_top = -2263.0
+offset_right = 6494.0
+offset_bottom = 6237.0
+texture = SubResource("NoiseTexture2D_w3q80")
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Moving_Clouds"]
+libraries = {
+"": SubResource("AnimationLibrary_hd4jn")
+}
+autoplay = "cloud_scroll"
+speed_scale = 0.1
+
+[node name="Cloud_Texture_Still" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.0392157)
+z_index = -10
+material = SubResource("CanvasItemMaterial_wthbt")
+offset_left = -3506.0
+offset_top = -2263.0
+offset_right = 6494.0
+offset_bottom = 6237.0
+texture = SubResource("NoiseTexture2D_w3q80")
+stretch_mode = 1
 
 [node name="Octagon_DesertMap" parent="." instance=ExtResource("26_50c1r")]
 position = Vector2(1051, 1832)
