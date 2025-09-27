@@ -41,7 +41,7 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 ## The scroll box showing lobbies available to join.
 @export var lobbies_list_container: VBoxContainer
 ## The image of the game logo on the main menu.
-@export var main_menu_logo: TextureRect
+@export var main_menu_logo: MainMenuLogoTextureRect
 ## The screen telling the player that they're connecting to a game
 @export var connecting_screen: Control
 ## Parent of the UI elements displaying lobby visibility option.
@@ -608,6 +608,7 @@ func update_can_buy_rerolls_icon_visibility() -> void:
 
 ## Switches from the lobby screen to the main menu
 func quit_to_main_menu() -> void:
+	main_menu_logo.scale_to_normal()
 	_switch_screen_animation(lobby, main_menu, _main_menu_original_pos)
 
 #endregion

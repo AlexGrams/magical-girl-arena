@@ -115,7 +115,10 @@ func get_has_online_connection() -> bool:
 
 # Returns this client's instanced player character.
 func get_local_player() -> PlayerCharacterBody2D:
-	if multiplayer.get_unique_id() not in player_characters:
+	if (
+			multiplayer.get_unique_id() not in player_characters
+			or not is_instance_valid(player_characters[multiplayer.get_unique_id()])
+	):
 		return null
 	
 	return player_characters[multiplayer.get_unique_id()]
@@ -196,6 +199,13 @@ func _ready() -> void:
 			# Record the local client's own information.
 			register_player(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
 	)
+		
+	# TODO: See if we can get this to be called on clients or something.
+	multiplayer.peer_disconnected.connect(
+		func(_id : int):
+			if len(multiplayer.get_peers()) == 0:
+				_no_clients_connected_or_timeout.emit()
+	)
 	
 	# Set up Steam-specific functionality
 	if USING_GODOT_STEAM or OS.has_feature("release"):
@@ -208,13 +218,6 @@ func _ready() -> void:
 			push_warning("Release app ID was not changed from the testing value of 480! Change it in game_state or make this a debug build.")
 		
 		local_player_steam_id = Steam.getSteamID()
-		
-		# TODO: See if we can use this or get it to work, don't know.
-		multiplayer.peer_disconnected.connect(
-			func(_id : int):
-				if len(multiplayer.get_peers()) == 0:
-					_no_clients_connected_or_timeout.emit()
-		)
 		
 		multiplayer.connection_failed.connect(
 			func():
@@ -297,6 +300,21 @@ func _process(delta: float) -> void:
 		var ping_location: PackedByteArray = Steam.getLocalPingLocation()["location"]
 		_local_ping_location = Steam.convertPingLocationToString(ping_location)
 		Steam.setLobbyData(lobby_id, "Location", str(ping_location))
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if multiplayer.is_server():
+			get_tree().set_auto_accept_quit(false)
+			quit_game.rpc(multiplayer.get_unique_id())
+			
+			# Hack to wait a few frames to make sure the RPC goes out before closing
+			# the game.
+			await get_tree().process_frame
+			await get_tree().process_frame
+			
+			get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+			get_tree().quit()
 
 
 # Set this client up as a game server through Steam.
@@ -559,8 +577,6 @@ func quit_game(quitting_player: int):
 	end_game()
 	get_tree().paused = false
 	main_menu.show()
-	# Set main menu logo back to full
-	main_menu.get_node("Background/Logo").scale_to_normal()
 	
 	if multiplayer.get_unique_id() == quitting_player:
 		main_menu.quit_to_main_menu()
