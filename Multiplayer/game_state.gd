@@ -550,7 +550,6 @@ func unregister_player(id: int):
 	
 	if game_running:
 		connected_players = max(connected_players - 1, 0)
-		print(connected_players)
 	
 	player_list_changed.emit()
 
@@ -629,7 +628,7 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").setup()
 		
 		if multiplayer.is_server():
-			players_selecting_upgrades = player_characters.size()
+			players_selecting_upgrades = connected_players
 	
 	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
@@ -659,7 +658,7 @@ func corrupted_enemy_defeated() -> void:
 	playground.hud_canvas_layer.upgrade_any_screen.setup()
 	
 	if multiplayer.is_server():
-		players_selecting_upgrades = player_characters.size()
+		players_selecting_upgrades = connected_players
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 

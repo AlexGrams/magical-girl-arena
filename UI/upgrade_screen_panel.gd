@@ -497,17 +497,6 @@ func _update_players_selecting_upgrades() -> void:
 	
 	_player_id_to_ready_indicator[multiplayer.get_remote_sender_id()].set_is_ready(true)
 	
-	#var i = 0
-	## Ready players
-	#while i < players_done_selecting_upgrades:
-		#_ready_indicators[i].show()
-		#_ready_indicators[i].set_is_ready(true)
-		#i += 1
-	## Not ready players
-	#while i < GameState.connected_players:
-		#_ready_indicators[i].show()
-		#_ready_indicators[i].set_is_ready(false)
-		#i += 1
 	for i in range(GameState.connected_players):
 		_ready_indicators[i].show()
 	# Hide remaining indicators
