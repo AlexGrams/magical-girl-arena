@@ -60,7 +60,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme = ExtResource("13_giirl")
 theme_override_font_sizes/font_size = 32
-text = "Press F1 to view your current powerups and charms"
+text = "Press Tab to view your current powerups and charms"
 horizontal_alignment = 1
 vertical_alignment = 1
 
