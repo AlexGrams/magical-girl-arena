@@ -200,9 +200,11 @@ func _ready() -> void:
 			register_player(multiplayer.get_unique_id(), player_name, local_player_steam_id, Constants.Character.GOTH)
 	)
 		
-	# TODO: See if we can get this to be called on clients or something.
+	# Called on all players when a client other than the server disconnects.
+	# Some other special logic has been set up to handle when the server disconnects.
 	multiplayer.peer_disconnected.connect(
-		func(_id : int):
+		func(id : int):
+			unregister_player(id)
 			if len(multiplayer.get_peers()) == 0:
 				_no_clients_connected_or_timeout.emit()
 	)
@@ -538,7 +540,7 @@ func register_player(id: int, new_player_name: String, new_steam_id: int, charac
 	player_list_changed.emit()
 
 
-# Remove a player from our map of registered players.
+## Remove a player from our map of registered players.
 @rpc("any_peer", "call_local", "reliable")
 func unregister_player(id: int):
 	players.erase(id)
