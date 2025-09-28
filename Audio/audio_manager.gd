@@ -3,6 +3,10 @@ extends Node2D
 # AudioManager is used for repetitive sound effects, such as picking up experience or damaging enemies
 # Script created based on this video: https://www.youtube.com/watch?v=Egf2jgET3nQ
 
+## The max distance from the local player that a hit SFX will be produced. Hits farther
+## than this distance don't cause a sound.
+const MAX_SQUARED_ENEMY_HIT_DISTANCE: float = 1000 ** 2
+
 @export var sound_effect_settings : Array[SoundEffectSettings]
 @export var default_main_menu_music: AudioStream
 
@@ -21,6 +25,8 @@ var sound_effect_dict : Dictionary
 var _battle_music_player_node:AudioStreamPlayer = null
 ## If true, all enemy hit SFX will be the same sound instead of being different depending on the bullet.
 var _use_same_enemy_hit_sfx: bool = false
+## The client's instantiated player character.
+var _local_player: Node2D = null
 
 ## Num of times the enemy hit sound is allowed to play at the same time. Shared between "Enemy hit" and "Enemy hit critical"
 @export var _enemy_hit_limit: int = 20
@@ -144,9 +150,17 @@ func pause_music():
 
 func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFFECT_TYPE = SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT, location:Vector2 = Vector2.INF):
 	if _enemy_hit_limit_counter < _enemy_hit_limit:
+		if _local_player == null:
+			_local_player = GameState.get_local_player()
+			if _local_player == null:
+				return
+		
 		var new_audio = null
 		
-		if location != Vector2.INF:
+		if (
+				location != Vector2.INF
+				and location.distance_squared_to(_local_player.global_position) < MAX_SQUARED_ENEMY_HIT_DISTANCE
+		):
 		# Otherwise, create new audio with sfx_type
 			if _use_same_enemy_hit_sfx:
 				new_audio = create_audio_at_location(location, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_ENEMY_HIT)
