@@ -445,6 +445,7 @@ func end_game():
 func reset_game_variables():
 	_players_loaded_in = 0
 	player_characters.clear()
+	connected_players = 0
 	players_down = 0
 	_gold_this_game = 0
 	level = 1
@@ -462,11 +463,8 @@ func add_player_character(player_id: int, player_character: CharacterBody2D) -> 
 	
 	player_characters[player_id] = player_character
 	
-	# Update our count of player character nodes when they are added and removed from the scene.
+	# Update our count of player character nodes when they are added to the scene.
 	connected_players += 1
-	player_character.tree_exiting.connect(func():
-		connected_players -= 1
-	)
 	
 	player_characters_added.emit(player_id, player_character)
 
@@ -549,6 +547,10 @@ func unregister_player(id: int):
 		if steam_ids[steam_id] == id:
 			steam_ids.erase(steam_id)
 			break
+	
+	if game_running:
+		connected_players = max(connected_players - 1, 0)
+		print(connected_players)
 	
 	player_list_changed.emit()
 
