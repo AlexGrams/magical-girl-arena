@@ -5,6 +5,7 @@ extends VBoxContainer
 const character_animated_sprite: Resource = preload("res://UI/character_animated_sprite.tscn")
 
 @export var _username: Label = null
+@export var _host_icon: TextureRect = null
 @export var _character_sprite_location: Control = null
 @export var _portal_open: TextureRect = null
 @export var _portal_closed: TextureRect = null
@@ -43,6 +44,11 @@ func set_properties(
 	_portal_closed.hide()
 	_portal_open.show()
 	
+	if new_player_id == 1:
+		_host_icon.show()
+	else:
+		_host_icon.hide()
+	
 	if sprite == null:
 		sprite = character_animated_sprite.instantiate()
 		get_tree().root.add_child.call_deferred(sprite, true)
@@ -75,6 +81,7 @@ func clear_properties() -> void:
 func _on_hidden() -> void:
 	if sprite != null and not sprite.is_queued_for_deletion():
 		sprite.queue_free()
+
 
 func update_username_text(new_text:String) -> void:
 	# Updates the outline and shadow of the text as well.
