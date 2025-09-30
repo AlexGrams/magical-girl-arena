@@ -485,9 +485,9 @@ func _on_lobby_visibility_option_selected(index: int) -> void:
 
 
 func _on_map_select_left_button_pressed() -> void:
-	_selected_map_index += 1
-	if _selected_map_index >= len(Constants.MAP_DATA):
-		_selected_map_index = 0
+	_selected_map_index -= 1
+	if _selected_map_index < 0:
+		_selected_map_index = len(Constants.MAP_DATA) - 1
 	var map_unlocked: bool = (
 		Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name == "" 
 		or GameState.get(Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name)
@@ -496,9 +496,9 @@ func _on_map_select_left_button_pressed() -> void:
 
 
 func _on_map_select_right_button_pressed() -> void:
-	_selected_map_index -= 1
-	if _selected_map_index < 0:
-		_selected_map_index = len(Constants.MAP_DATA) - 1
+	_selected_map_index += 1
+	if _selected_map_index >= len(Constants.MAP_DATA):
+		_selected_map_index = 0
 	var map_unlocked: bool = (
 		Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name == "" 
 		or GameState.get(Constants.MAP_DATA[_selected_map_index].required_map_save_variable_name)
