@@ -56,7 +56,8 @@ enum DialoguePlayCondition {
 	MINIBOSS_DOVE,
 	MINIBOSS_DEFEATED,
 	BOSS,
-	WIN
+	WIN,
+	MAP_ALIEN
 }
 
 
@@ -64,7 +65,8 @@ enum DialoguePlayCondition {
 ## they are displayed to the player.
 const MAP_DATA: Array[MapData] = [
 	preload("res://Levels/MapData/map_data_valley.tres"),
-	preload("res://Levels/MapData/map_data_desert.tres")
+	preload("res://Levels/MapData/map_data_desert.tres"),
+	preload("res://Levels/MapData/map_data_alien.tres")
 ]
 
 
