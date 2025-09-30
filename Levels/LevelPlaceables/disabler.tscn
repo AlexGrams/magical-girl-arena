@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnybu7xqdbqi0"]
+
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/disabler.gd" id="1_fmsqj"]
+[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_jg7rb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhrhp"]
+radius = 400.0
+
+[node name="Disabler" type="Node2D"]
+script = ExtResource("1_fmsqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jg7rb")
+
+[node name="DisableArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="DisableCollisionShape2D" type="CollisionShape2D" parent="DisableArea2D"]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_lhrhp")
+
+[connection signal="area_entered" from="DisableArea2D" to="." method="_on_disable_area_2d_area_entered"]
+[connection signal="area_exited" from="DisableArea2D" to="." method="_on_disable_area_2d_area_exited"]
