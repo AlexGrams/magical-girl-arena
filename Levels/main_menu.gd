@@ -5,6 +5,10 @@ extends Control
 const lobby_button_scene: Resource = preload("res://UI/lobby_button.tscn")
 ## Time in seconds that it takes for the Lobby List to automatically refresh.
 const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
+## Time in seconds between connection stability tests.
+const LOBBY_CONNECTION_STABILITY_INTERVAL: float = 3.0
+## How many pings are sent to the server to test connection stability.
+const LOBBY_CONNECTION_STABILITY_PINGS: int = 10
 
 @export_group("Screens")
 ## The first screen shown when the game is started.
@@ -90,6 +94,10 @@ const LOBBY_LIST_AUTO_REFRESH_INTERVAL: float = 10.0
 
 ## Current time until automatically refreshing the Lobby List.
 var _lobby_list_refresh_timer: float = 0.0
+## Time in seconds until next connection stability test.
+var _lobby_connection_stability_timer: float = 0.0
+## Number of connection stability pings that have been returned from the server.
+var _lobby_received_pings: int = -1
 var _player_containers: Array[LobbyPlayerCharacterContainer] = []
 var _character_select_buttons: Array[CharacterSelectButton] = []
 ## Index of the currently selected map.
@@ -163,6 +171,25 @@ func _process(delta: float) -> void:
 		_lobby_list_refresh_timer -= delta
 		if _lobby_list_refresh_timer <= 0.0:
 			request_lobby_list()
+	
+	# Lobby connection stability test: Send pings to the server, then count how
+	# many are returned. Produce a warning if not enough are returned.
+	if lobby.visible and multiplayer.get_unique_id() != 1:
+		_lobby_connection_stability_timer -= delta
+		if _lobby_connection_stability_timer <= 0.0:
+			_lobby_connection_stability_timer = LOBBY_CONNECTION_STABILITY_INTERVAL
+			
+			if multiplayer.get_peers().has(1):
+				if _lobby_received_pings < LOBBY_CONNECTION_STABILITY_PINGS and _lobby_received_pings > -1:
+					print("Connection isn't that good ", _lobby_received_pings)
+				else:
+					print("All good")
+				
+				# The test works by pinging the server a bunch of times and seeing if 
+				# any don't return by the next connection test interval.
+				_lobby_received_pings = 0
+				for _i in range(LOBBY_CONNECTION_STABILITY_PINGS):
+					_connection_stability_server.rpc_id(1)
 
 
 #region main
@@ -543,6 +570,7 @@ func refresh_lobby() -> void:
 		_player_containers[i].clear_properties()
 		i += 1
 	
+	_lobby_received_pings = LOBBY_CONNECTION_STABILITY_PINGS
 	update_character_description()
 	update_can_buy_rerolls_icon_visibility()
 
@@ -611,6 +639,17 @@ func quit_to_main_menu() -> void:
 	main_menu_logo.scale_to_normal()
 	_switch_screen_animation(lobby, main_menu, _main_menu_original_pos)
 
+
+## Returns a ping for the connection stability test. Only call on the server. 
+@rpc("any_peer", "call_remote")
+func _connection_stability_server():
+	_connection_stability_client.rpc_id(multiplayer.get_remote_sender_id())
+
+
+## Increments number of returned pings. Only call by the server to a client.
+@rpc("any_peer", "call_remote")
+func _connection_stability_client():
+	_lobby_received_pings += 1
 #endregion
 
 #region shop
