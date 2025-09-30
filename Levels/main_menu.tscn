@@ -163,7 +163,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "error_message", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "error_message_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "error_message", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "connection_stability_warning_control", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "error_message_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,6 +194,7 @@ map_select_right_button = NodePath("Lobby/RightArrow_MapSelect")
 map_name_label = NodePath("Lobby/OutlineLabel")
 map_preview_texture_rect = NodePath("Lobby/MapPreview/MapPreview_Clip/MapPreview_Image")
 map_locked_label = NodePath("Lobby/MapPreview/MapPreview_Clip/LockedOutlineLabel")
+connection_stability_warning_control = NodePath("Lobby/UnstableConnectionLabel")
 players_holder = NodePath("Lobby/PlayersHolder")
 can_buy_rerolls_icon = NodePath("Lobby/ShopButton/CanBuyRerollsIcon")
 character_select_button_holder = NodePath("CharacterSelection/CharacterSelectContainer")

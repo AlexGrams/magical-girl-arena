@@ -62,6 +62,8 @@ const LOBBY_CONNECTION_STABILITY_PINGS: int = 10
 @export var map_preview_texture_rect: TextureRect
 ## Shows when the selected map is locked.
 @export var map_locked_label: Label
+## Displays when there could be a connection stability problem.
+@export var connection_stability_warning_control: Control
 ## Contains the UI elements for displaying the players in the lobby.
 @export var players_holder: Control
 ## Appears if the player can buy rerolls.
@@ -180,16 +182,18 @@ func _process(delta: float) -> void:
 			_lobby_connection_stability_timer = LOBBY_CONNECTION_STABILITY_INTERVAL
 			
 			if multiplayer.get_peers().has(1):
-				if _lobby_received_pings < LOBBY_CONNECTION_STABILITY_PINGS and _lobby_received_pings > -1:
-					print("Connection isn't that good ", _lobby_received_pings)
+				if _lobby_received_pings < LOBBY_CONNECTION_STABILITY_PINGS:
+					connection_stability_warning_control.show()
 				else:
-					print("All good")
+					connection_stability_warning_control.hide()
 				
 				# The test works by pinging the server a bunch of times and seeing if 
 				# any don't return by the next connection test interval.
 				_lobby_received_pings = 0
 				for _i in range(LOBBY_CONNECTION_STABILITY_PINGS):
 					_connection_stability_server.rpc_id(1)
+			else:
+				connection_stability_warning_control.hide()
 
 
 #region main
