@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=81 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://bl8c3fgnk1tve" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Grenade.mp3" id="29_w7hyl"]
 [ext_resource type="AudioStream" uid="uid://byccvjoto86es" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Bubble.mp3" id="30_dygoq"]
 [ext_resource type="AudioStream" uid="uid://c74in6ucfxr0w" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Orbit.mp3" id="31_b1lao"]
+[ext_resource type="AudioStream" uid="uid://7xus0dd7spj5" path="res://Audio/SFX/Powerups/Bounce_Shoot2.mp3" id="31_j71r3"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -269,175 +270,6 @@ cooldown = 0
 bus = ""
 play_while_paused = false
 
-[sub_resource type="Resource" id="Resource_imnlt"]
-resource_name = "CORVUS_SUMMON"
-script = ExtResource("2_kdvej")
-limit = 1
-type = 34
-sound_effect = ExtResource("22_huwx2")
-volume = 0
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_wxos4"]
-resource_name = "SCYTHE"
-script = ExtResource("2_kdvej")
-limit = 4
-type = 4
-sound_effect = ExtResource("4_2ftce")
-volume = 0
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_nuda6"]
-resource_name = "REVOLVING"
-script = ExtResource("2_kdvej")
-limit = 12
-type = 3
-sound_effect = ExtResource("6_axp6t")
-volume = -20
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_3e8qr"]
-resource_name = "RAINDROP_POP"
-script = ExtResource("2_kdvej")
-limit = 3
-type = 24
-sound_effect = ExtResource("11_2hian")
-volume = 0
-pitch_scale = 1.0
-pitch_randomness = 0.1
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_iveav"]
-resource_name = "RAINDROP_GROW"
-script = ExtResource("2_kdvej")
-limit = 3
-type = 25
-sound_effect = ExtResource("12_5j5vb")
-volume = -5
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_4htrs"]
-resource_name = "CUPID_ARROW"
-script = ExtResource("2_kdvej")
-limit = 5
-type = 26
-sound_effect = ExtResource("13_nsayd")
-volume = 0
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_m2vr8"]
-resource_name = "HEARTBEATBURST_EXPLOSION"
-script = ExtResource("2_kdvej")
-limit = 10
-type = 27
-sound_effect = ExtResource("15_4qlyl")
-volume = -20
-pitch_scale = 3.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_vi4yv"]
-resource_name = "HEARTBEATBURST_LAUNCH"
-script = ExtResource("2_kdvej")
-limit = 3
-type = 28
-sound_effect = ExtResource("15_4qlyl")
-volume = -40
-pitch_scale = 2.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_kl3kh"]
-resource_name = "MINES_DROPPED"
-script = ExtResource("2_kdvej")
-limit = 5
-type = 29
-sound_effect = ExtResource("15_qf7td")
-volume = 2
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_1gugo"]
-resource_name = "MINES_SEEDS"
-script = ExtResource("2_kdvej")
-limit = 20
-type = 30
-sound_effect = ExtResource("16_e4sk4")
-volume = -20
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_46xon"]
-resource_name = "MINES_EXPLODED"
-script = ExtResource("2_kdvej")
-limit = 20
-type = 31
-sound_effect = ExtResource("17_auey8")
-volume = -20
-pitch_scale = 1.0
-pitch_randomness = 0.0
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_2l7jb"]
-resource_name = "TRAIL"
-script = ExtResource("2_kdvej")
-limit = 20
-type = 6
-sound_effect = ExtResource("18_5002c")
-volume = -15
-pitch_scale = 1.5
-pitch_randomness = 0.5
-cooldown = 0
-bus = ""
-play_while_paused = false
-
-[sub_resource type="Resource" id="Resource_l4nsa"]
-resource_name = "SHOOTING"
-script = ExtResource("2_kdvej")
-limit = 20
-type = 5
-sound_effect = ExtResource("19_k2pvy")
-volume = -10
-pitch_scale = 2.0
-pitch_randomness = 0.5
-cooldown = 0
-bus = ""
-play_while_paused = false
-
 [sub_resource type="Resource" id="Resource_337xk"]
 resource_name = "ON_ENEMY_HIT_LASER"
 script = ExtResource("2_kdvej")
@@ -607,10 +439,192 @@ cooldown = 0
 bus = "Enemy_Hits"
 play_while_paused = false
 
+[sub_resource type="Resource" id="Resource_wxos4"]
+resource_name = "SCYTHE"
+script = ExtResource("2_kdvej")
+limit = 4
+type = 4
+sound_effect = ExtResource("4_2ftce")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_l4nsa"]
+resource_name = "SHOOTING"
+script = ExtResource("2_kdvej")
+limit = 20
+type = 5
+sound_effect = ExtResource("19_k2pvy")
+volume = -10
+pitch_scale = 2.0
+pitch_randomness = 0.5
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_2l7jb"]
+resource_name = "TRAIL"
+script = ExtResource("2_kdvej")
+limit = 20
+type = 6
+sound_effect = ExtResource("18_5002c")
+volume = -15
+pitch_scale = 1.5
+pitch_randomness = 0.5
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_kl3kh"]
+resource_name = "MINES_DROPPED"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 29
+sound_effect = ExtResource("15_qf7td")
+volume = 2
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_1gugo"]
+resource_name = "MINES_SEEDS"
+script = ExtResource("2_kdvej")
+limit = 20
+type = 30
+sound_effect = ExtResource("16_e4sk4")
+volume = -20
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_46xon"]
+resource_name = "MINES_EXPLODED"
+script = ExtResource("2_kdvej")
+limit = 20
+type = 31
+sound_effect = ExtResource("17_auey8")
+volume = -20
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_m2vr8"]
+resource_name = "HEARTBEATBURST_EXPLOSION"
+script = ExtResource("2_kdvej")
+limit = 10
+type = 27
+sound_effect = ExtResource("15_4qlyl")
+volume = -20
+pitch_scale = 3.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_vi4yv"]
+resource_name = "HEARTBEATBURST_LAUNCH"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 28
+sound_effect = ExtResource("15_4qlyl")
+volume = -40
+pitch_scale = 2.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_4htrs"]
+resource_name = "CUPID_ARROW"
+script = ExtResource("2_kdvej")
+limit = 5
+type = 26
+sound_effect = ExtResource("13_nsayd")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_iveav"]
+resource_name = "RAINDROP_GROW"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 25
+sound_effect = ExtResource("12_5j5vb")
+volume = -5
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_3e8qr"]
+resource_name = "RAINDROP_POP"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 24
+sound_effect = ExtResource("11_2hian")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.1
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_nuda6"]
+resource_name = "REVOLVING"
+script = ExtResource("2_kdvej")
+limit = 12
+type = 3
+sound_effect = ExtResource("6_axp6t")
+volume = -20
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_imnlt"]
+resource_name = "CORVUS_SUMMON"
+script = ExtResource("2_kdvej")
+limit = 1
+type = 34
+sound_effect = ExtResource("22_huwx2")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = ""
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_aaqnr"]
+resource_name = "BOUNCE"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 57
+sound_effect = ExtResource("31_j71r3")
+volume = 0
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 1
+bus = "SFX"
+play_while_paused = false
+
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_wxos4"), SubResource("Resource_nuda6"), SubResource("Resource_3e8qr"), SubResource("Resource_iveav"), SubResource("Resource_4htrs"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_2l7jb"), SubResource("Resource_l4nsa"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_dl7d3"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2"), SubResource("Resource_wxos4"), SubResource("Resource_l4nsa"), SubResource("Resource_2l7jb"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_4htrs"), SubResource("Resource_iveav"), SubResource("Resource_3e8qr"), SubResource("Resource_nuda6"), SubResource("Resource_imnlt"), SubResource("Resource_aaqnr")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")

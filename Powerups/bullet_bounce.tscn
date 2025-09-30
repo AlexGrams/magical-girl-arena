@@ -19,6 +19,7 @@ lifetime = 0.0
 destroy_on_hit = false
 collider = NodePath("HitboxArea2D")
 sprite = NodePath("Sprite2D")
+sound_effect = 57
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)

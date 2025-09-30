@@ -25,7 +25,8 @@ var _last_hit: Node = null
 
 
 func _ready() -> void:
-	sprite.scale = Vector2(0.15 * _bounces, 0.6) 
+	sprite.scale = Vector2(0.15 * _bounces, 0.6)
+	AudioManager.create_audio_at_location(global_position, sound_effect) 
 
 
 func _process(delta: float) -> void:
