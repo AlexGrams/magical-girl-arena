@@ -89,10 +89,13 @@ func _process(delta: float) -> void:
 
 
 func activate_powerup():
-	is_on = true
-	if _is_owned_by_player:
-		_owner_ultimate = get_parent().abilities[0]
-	picked_up_powerup.emit(sprite)
+	super()
+	
+	if _deactivation_sources <= 0:
+		is_on = true
+		if _is_owned_by_player:
+			_owner_ultimate = get_parent().abilities[0]
+		picked_up_powerup.emit(sprite)
 
 
 func activate_powerup_for_enemy():
@@ -101,6 +104,7 @@ func activate_powerup_for_enemy():
 
 
 func deactivate_powerup():
+	super()
 	is_on = false
 
 

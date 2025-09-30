@@ -39,29 +39,32 @@ func _physics_process(_delta: float) -> void:
 
 
 func activate_powerup():
-	if _is_owned_by_player:
-		_owner_ultimate = get_parent().abilities[0]
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1, 
-			[
-				bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[$"..".get_path()]
-			]
-		)
-	else:
-		push_error("Enemy PingPong not implemented")
+	super()
+	
+	if _deactivation_sources <= 0:
+		if _is_owned_by_player:
+			_owner_ultimate = get_parent().abilities[0]
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1, 
+				[
+					bullet_scene, 
+					global_position, 
+					Vector2.UP, 
+					_get_damage_from_curve(), 
+					false,
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[$"..".get_path()]
+				]
+			)
+		else:
+			push_error("Enemy PingPong not implemented")
 
 
-# Does nothing. The bullet destroys itself based off of the player's "died" signal.
 func deactivate_powerup():
-	pass
+	super()
+	# TODO: Fix?
 
 
 func level_up():

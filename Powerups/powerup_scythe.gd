@@ -112,7 +112,10 @@ func _process(delta: float) -> void:
 
 
 func activate_powerup():
-	is_on = true
+	super()
+	
+	if _deactivation_sources <= 0:
+		is_on = true
 
 
 func activate_powerup_for_enemy():
@@ -121,6 +124,7 @@ func activate_powerup_for_enemy():
 
 
 func deactivate_powerup():
+	super()
 	is_on = false
 	shoot_timer = 0.0
 

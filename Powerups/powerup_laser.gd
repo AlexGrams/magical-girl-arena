@@ -44,40 +44,44 @@ func _process(_delta: float) -> void:
 
 
 func activate_powerup():
-	is_on = true
+	super()
 	
-	if _is_owned_by_player:
-		_owner_ultimate = get_parent().abilities[0]
-		# Main laser
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-			1,
-			[
-				bullet_scene, 
-				Vector2.ZERO, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[
-					get_parent().get_path(), 
-					max_range, 
-					get_parent().get_path(), 
-					current_level >= 3,
-					crit_chance,
-					crit_multiplier
-				]
-			]
-		)
+	if _deactivation_sources <= 0:
+		is_on = true
 		
-		if current_level == 5 and is_signature:
-			_activate_signature()
-	else:
-		pass
+		if _is_owned_by_player:
+			_owner_ultimate = get_parent().abilities[0]
+			# Main laser
+			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				1,
+				[
+					bullet_scene, 
+					Vector2.ZERO, 
+					Vector2.ZERO, 
+					_get_damage_from_curve(), 
+					false,
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[
+						get_parent().get_path(), 
+						max_range, 
+						get_parent().get_path(), 
+						current_level >= 3,
+						crit_chance,
+						crit_multiplier
+					]
+				]
+			)
+			
+			if current_level == 5 and is_signature:
+				_activate_signature()
+		else:
+			pass
 
 
 func deactivate_powerup():
+	super()
 	is_on = false
 	
 	if current_level == 5 and is_signature:

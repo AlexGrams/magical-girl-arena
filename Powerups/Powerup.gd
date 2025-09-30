@@ -46,6 +46,9 @@ var crit_multiplier: float = 2.0
 var _powerupdata: PowerupData = null
 # True when this powerup harms enemies, false when it harms players.
 var _is_owned_by_player := true
+## How many different things are causing this powerup to be deactivated. Each source
+## should separately choose to reactivate this powerup.
+var _deactivation_sources: int = 0
 ## The index of this powerup in the player's array of powerups, if this is owned by a player.
 var _powerup_index: int = -1
 ## Collection of tags used to describe this Powerup.
@@ -112,7 +115,7 @@ func level_up():
 
 
 func activate_powerup():
-	push_error("Powerup.activate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
+	_deactivation_sources = max(_deactivation_sources - 1, 0)
 
 
 # For when adding this powerup to an Enemy when it is usually added to a Player.
@@ -122,7 +125,7 @@ func activate_powerup_for_enemy():
 
 
 func deactivate_powerup():
-	push_error("Powerup.deactivate_powerup(): THIS SHOULD NOT BE ACTIVATING.")
+	_deactivation_sources += 1
 
 
 ## Temporarily increase the functionality of this Powerup.

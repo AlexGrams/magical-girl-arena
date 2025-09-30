@@ -57,27 +57,31 @@ func _process(delta: float) -> void:
 
 
 func activate_powerup():
-	is_on = true
-	_owning_character = get_parent()
+	super()
 	
-	# Spawn fan visual
-	_bullet_spawner.request_spawn_bullet.rpc_id(
-		1,
-		[
-			_fan_visual_scene, 
-			global_position, 
-			Vector2.ZERO, 
-			0.0, 
-			false,
-			_is_owned_by_player,
-			multiplayer.get_unique_id(),
-			_powerup_index,
-			[_owning_character.get_path()]
-		]
-	)
+	if _deactivation_sources <= 0:
+		is_on = true
+		_owning_character = get_parent()
+		
+		# Spawn fan visual
+		_bullet_spawner.request_spawn_bullet.rpc_id(
+			1,
+			[
+				_fan_visual_scene, 
+				global_position, 
+				Vector2.ZERO, 
+				0.0, 
+				false,
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[_owning_character.get_path()]
+			]
+		)
 
 
 func deactivate_powerup():
+	super()
 	is_on = false
 	_fire_timer = 0.0
 
