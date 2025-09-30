@@ -71,6 +71,7 @@ enum SOUND_EFFECT_TYPE{
 	ON_ENEMY_HIT_TETHER,
 	# More Powerups
 	BOUNCE,
+	FAN,
 	# Default
 	NONE
 }

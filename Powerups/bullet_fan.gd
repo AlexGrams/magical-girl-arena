@@ -10,6 +10,7 @@ var _knockback_speed: float = 500.0
 @export var bullet_width: float = 1
 
 func _ready() -> void:
+	AudioManager.create_audio_at_location(global_position, sound_effect)
 	rotation = direction.angle() + deg_to_rad(90)
 	var tween = create_tween()
 	var final_scale = Vector2(bullet_width, scale.y)

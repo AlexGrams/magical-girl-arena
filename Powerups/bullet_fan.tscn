@@ -16,6 +16,7 @@ lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+sound_effect = 58
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
