@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=84 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://lffmfcmxjfim" path="res://Audio/SFX/Powerups/Bubble_Pop.mp3" id="11_2hian"]
 [ext_resource type="AudioStream" uid="uid://bdb3xnwjieyd" path="res://Audio/SFX/Powerups/Bubble_Grow_3.mp3" id="12_5j5vb"]
 [ext_resource type="AudioStream" uid="uid://dewenafki2fix" path="res://Audio/SFX/Powerups/Cupid_Arrow_Shot.mp3" id="13_nsayd"]
-[ext_resource type="AudioStream" uid="uid://rj0n6862dnpu" path="res://Audio/SFX/Powerups/HeartbeatBurst_Launch.mp3" id="15_4qlyl"]
 [ext_resource type="AudioStream" uid="uid://bac3awulce4s0" path="res://Audio/SFX/Powerups/Mines_Dropped.mp3" id="15_qf7td"]
 [ext_resource type="AudioStream" uid="uid://bxme3x4sdsn0k" path="res://Audio/SFX/Powerups/Mines_Seeds.mp3" id="16_e4sk4"]
 [ext_resource type="AudioStream" uid="uid://c1bdhpf7vcfd0" path="res://Audio/SFX/Powerups/Mines_Explosion2.mp3" id="17_auey8"]
@@ -26,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://dytisf2b6ldff" path="res://Audio/default_battle_music.tscn" id="22_mr100"]
 [ext_resource type="AudioStream" uid="uid://6hytmfq8camv" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_TarotCards.mp3" id="23_k6ncv"]
 [ext_resource type="AudioStream" uid="uid://cicpchthwefg8" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Scythe.mp3" id="24_b70sy"]
+[ext_resource type="AudioStream" uid="uid://ogxd8esopmwk" path="res://Audio/SFX/Powerups/Shine.mp3" id="25_5e1pw"]
+[ext_resource type="AudioStream" uid="uid://dobokrfaja4ai" path="res://Audio/SFX/Powerups/Shine_Short.mp3" id="25_ikxll"]
 [ext_resource type="AudioStream" uid="uid://dmeah32wh35q8" path="res://Audio/Music/newthingget.ogg" id="26_86adp"]
 [ext_resource type="AudioStream" uid="uid://b2pflpmof064v" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Mines.mp3" id="26_vcbg0"]
 [ext_resource type="AudioStream" uid="uid://c7s6v8rpf0nho" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Boomerang.mp3" id="27_tiw6w"]
@@ -523,9 +524,9 @@ resource_name = "HEARTBEATBURST_EXPLOSION"
 script = ExtResource("2_kdvej")
 limit = 10
 type = 27
-sound_effect = ExtResource("15_4qlyl")
+sound_effect = ExtResource("25_ikxll")
 volume = -20
-pitch_scale = 3.0
+pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = "SFX"
@@ -536,9 +537,9 @@ resource_name = "HEARTBEATBURST_LAUNCH"
 script = ExtResource("2_kdvej")
 limit = 3
 type = 28
-sound_effect = ExtResource("15_4qlyl")
-volume = -40
-pitch_scale = 2.0
+sound_effect = ExtResource("25_5e1pw")
+volume = -20
+pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
 bus = "SFX"
