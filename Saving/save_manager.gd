@@ -59,6 +59,7 @@ func save_settings(
 	config.set_value("gameplay", "hitbox_visible", hitbox_visible)
 
 	config.save(SETTINGS_PATH)
+	SettingsManager.set_settings(config)
 
 
 # Saves data to disk. Should be modified when new data to save is added.

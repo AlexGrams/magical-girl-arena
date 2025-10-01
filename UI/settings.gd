@@ -256,6 +256,7 @@ func _save_settings_changes() -> void:
 		_hitbox_visible_checkbox.button_pressed
 	)
 
+
 ## Helper functions
 func _spinbox_to_slider_value(spinbox_value: float) -> float:
 	return spinbox_value / 100
