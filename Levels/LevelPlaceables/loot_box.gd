@@ -1,10 +1,9 @@
 class_name LootBox
-extends Node2D
+extends DestructibleNode2D
 ## A neutral destructable object in the world. When the player breaks it, 
 ## has a chance of spawning items such as gold or health for the player.
 ## Enemies cannot interact with a LootBox.
 
-@export var max_health: float = 100.0
 ## Relative likelihood of dropping a health pickup when destroyed.
 @export var drop_weight_health: float = 1.00
 ## Relative likelihood of dropping gold when destroyed.
@@ -16,7 +15,6 @@ extends Node2D
 ## Leaf explosion scene.
 @export var leaf_explosion_scene: Resource = null
 
-var _health: float = 0.0
 var _threshold_health: float = 1.0
 var _threshold_gold: float = 1.0
 var _tree: SceneTree = null
@@ -24,7 +22,7 @@ var _tree: SceneTree = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_health = max_health
+	super()
 	
 	# Random loot generation
 	var total := drop_weight_health + drop_weight_gold
@@ -42,18 +40,8 @@ func _ready() -> void:
 	)
 
 
-## Move LootBox to a location. Call using RPC for replication.
-@rpc("authority", "call_local")
-func teleport(pos: Vector2) -> void:
-	global_position = pos
-
-
 func _on_area_2d_entered(area: Area2D) -> void:
-	if not is_multiplayer_authority():
-		return
-	
-	if area is BulletHitbox:
-		take_damage(area.damage)
+	super(area)
 
 
 ## Break this object and create a pickup. Only call on server.
@@ -77,17 +65,4 @@ func _destroy() -> void:
 		)
 		get_tree().root.get_node("Playground").call_deferred("add_child", gold, true)
 	
-	queue_free()
-
-
-func take_damage(damage: float, _hitbox: BulletHitbox = null) -> void:
-	if not is_multiplayer_authority():
-		return
-	
-	if _health <= 0.0:
-		return
-	
-	_health -= damage
-	if _health <= 0.0:
-		_destroy()
-	
+	super()
