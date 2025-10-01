@@ -47,20 +47,22 @@ func activate_powerup():
 	
 	if _is_owned_by_player:
 		_owner_ultimate = get_parent().abilities[0]
-		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
-			1, 
-			[
-				bullet_scene, 
-				global_position, 
-				Vector2.UP, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[$"..".get_path()]
-			]
-		)
+		var spawn_pingpong: Callable = func():
+			GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+				1, 
+				[
+					bullet_scene, 
+					global_position, 
+					Vector2.UP, 
+					_get_damage_from_curve(), 
+					false,
+					_is_owned_by_player,
+					multiplayer.get_unique_id(),
+					_powerup_index,
+					[$"..".get_path()]
+				]
+			)
+		spawn_pingpong.call_deferred()
 	else:
 		push_error("Enemy PingPong not implemented")
 
