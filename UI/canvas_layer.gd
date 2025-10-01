@@ -2,7 +2,11 @@ class_name HUDCanvasLayer
 extends CanvasLayer
 
 
+## For the Upgrade Any Powerup screen.
+@export var upgrade_any_screen: UpgradeAnyScreenPanel = null
+
 @export var _game_over_screen: GameOverScreen = null
+@export var _settings_screen: Settings = null
 # Parent of PlayerReadyIndicators representing how many players are ready to Retry.
 @export var _retry_votes_container: Control = null
 @export var _timer_text: Label = null
@@ -30,8 +34,6 @@ extends CanvasLayer
 @export var _grayscale_filter: ColorRect = null
 ## Shows information about owned Powerups and Charms.
 @export var _powerup_information: PowerupInformationPanel = null
-## For the Upgrade Any Powerup screen.
-@export var upgrade_any_screen: UpgradeAnyScreenPanel = null
 @export var _pointer_scene: String = ""
 @export var _pointer_icon_scene: String = ""
 
@@ -61,6 +63,10 @@ var _retry_indicator_index = {}
 func _ready() -> void:
 	_boss_health_bar.hide()
 	_grayscale_filter.hide()
+	
+	# Settings screen
+	_settings_screen.setup_settings_overlay()
+	_settings_screen.hide_button.button_down.connect(_settings_screen.hide)
 	
 	# Pointer setup
 	for id: int in GameState.player_characters:
@@ -182,6 +188,11 @@ func _process(_delta: float) -> void:
 			_pointers[used_pointers].hide()
 			_pointer_icons[used_pointers].hide()
 			used_pointers += 1
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("settings"):
+		_settings_screen.show()
 
 
 ## Add a node for which the UI will display a pointer to when it goes offscreen.

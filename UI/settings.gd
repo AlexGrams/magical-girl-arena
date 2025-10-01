@@ -4,11 +4,17 @@ extends Control
 ## The volume multiplayer that a value of "1.0" on the volume slider represents.
 const max_volume_slider_value: float = 1.25
 
-@export_group("Screens")
+@export_group("UI Components")
 ## Button to press to save settings and return to the previous screen.
 @export var return_button: Button = null
 ## Button to save settings and hide this screen.
 @export var hide_button: Button = null
+
+@export var _background: Control
+@export var _return_button_label: Label
+@export var _hide_button_label: Label
+
+@export_group("Screens")
 @export var _display_screen: Control = null
 @export var _audio_screen: Control = null
 @export var _gameplay_screen: Control = null 
@@ -99,6 +105,13 @@ func switch_to_screen(screen_index: int) -> void:
 			_setting_screens[i].show()
 		else:
 			_setting_screens[i].hide()
+
+
+## Change what Controls are being shown for the Settings menu to be displayed as an overlay for another UI. 
+func setup_settings_overlay() -> void:
+	_background.show()
+	_return_button_label.hide()
+	_hide_button_label.show()
 
 
 #region Display
