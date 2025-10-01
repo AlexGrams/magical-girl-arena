@@ -38,28 +38,30 @@ func _ready():
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		if _is_owned_by_player:
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				1, [_controller_bullet_scene, 
-					global_position, 
-					Vector2.UP, 
-					_get_damage_from_curve(), 
-					false,
-					_is_owned_by_player,
-					multiplayer.get_unique_id(),
-					_powerup_index,
-					[
-						$"..".get_path(), 
-						_upgraded_fire_interval, 
-						_boomerang_bullet_scene
-					]
+	if _deactivation_sources > 0:
+		return
+	
+	if _is_owned_by_player:
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1, [_controller_bullet_scene, 
+				global_position, 
+				Vector2.UP, 
+				_get_damage_from_curve(), 
+				false,
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[
+					$"..".get_path(), 
+					_upgraded_fire_interval, 
+					_boomerang_bullet_scene
 				]
-			)
-		else:
-			push_error("Boomerang not implemented for enemies!")
-		
-		picked_up_powerup.emit(sprite)
+			]
+		)
+	else:
+		push_error("Boomerang not implemented for enemies!")
+	
+	picked_up_powerup.emit(sprite)
 
 
 # Does nothing. The bullet destroys itself based off of the player's "died" signal.

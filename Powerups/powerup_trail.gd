@@ -88,9 +88,11 @@ func _process(delta: float) -> void:
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		is_on = true
-		picked_up_powerup.emit()
+	if _deactivation_sources > 0:
+		return
+	
+	is_on = true
+	picked_up_powerup.emit()
 
 
 func deactivate_powerup():

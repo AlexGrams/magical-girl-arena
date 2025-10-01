@@ -6214,3 +6214,6 @@ debug_color = Color(0, 0.435294, 0.403922, 0)
 
 [node name="Disabler" parent="." instance=ExtResource("35_cocpq")]
 position = Vector2(1394, 1586)
+
+[node name="Disabler2" parent="." instance=ExtResource("35_cocpq")]
+position = Vector2(1964, 1586)

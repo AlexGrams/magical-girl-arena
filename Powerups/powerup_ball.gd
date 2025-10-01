@@ -35,26 +35,28 @@ func _process(_delta: float) -> void:
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		is_on = true
-		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
-			1,
+	if _deactivation_sources > 0:
+		return
+	
+	is_on = true
+	GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+		1,
+		[
+			_bullet_scene, 
+			global_position, 
+			Vector2.ZERO, 
+			_get_damage_from_curve(), 
+			false,
+			_is_owned_by_player,
+			multiplayer.get_unique_id(),
+			_powerup_index,
 			[
-				_bullet_scene, 
-				global_position, 
-				Vector2.ZERO, 
-				_get_damage_from_curve(), 
-				false,
-				_is_owned_by_player,
-				multiplayer.get_unique_id(),
-				_powerup_index,
-				[
-					get_parent().get_path(),
-					_kills,
-					_total_growth
-				]
+				get_parent().get_path(),
+				_kills,
+				_total_growth
 			]
-		)
+		]
+	)
 
 
 func deactivate_powerup():

@@ -97,9 +97,11 @@ func _process(delta: float) -> void:
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		is_on = true
-		_shoot_timer = _shoot_interval
+	if _deactivation_sources > 0:
+		return
+	
+	is_on = true
+	_shoot_timer = _shoot_interval
 
 
 # For when adding this powerup to an Enemy when it is usually added to a Player.

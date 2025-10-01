@@ -48,9 +48,11 @@ func _process(delta: float) -> void:
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		is_on = true
-		_fire_timer = 1.0 - (GameState.time - int(GameState.time))
+	if _deactivation_sources > 0:
+		return
+	
+	is_on = true
+	_fire_timer = 1.0 - (GameState.time - int(GameState.time))
 
 
 func deactivate_powerup():

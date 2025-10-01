@@ -34,14 +34,32 @@ func _ready() -> void:
 func activate_powerup():
 	super()
 	
-	if _deactivation_sources <= 0:
-		if _is_owned_by_player:
+	if _deactivation_sources > 0:
+		return
+	
+	if _is_owned_by_player:
+		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			1,
+			[
+				bullet_scene, 
+				Vector2.ZERO, 
+				Vector2.RIGHT, 
+				_get_damage_from_curve(), 
+				false,
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[multiplayer.get_unique_id()]
+			]
+		)
+		
+		if current_level >= 3:
 			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
 				1,
 				[
 					bullet_scene, 
 					Vector2.ZERO, 
-					Vector2.RIGHT, 
+					Vector2.LEFT, 
 					_get_damage_from_curve(), 
 					false,
 					_is_owned_by_player,
@@ -50,27 +68,11 @@ func activate_powerup():
 					[multiplayer.get_unique_id()]
 				]
 			)
-			
-			if current_level >= 3:
-				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-					1,
-					[
-						bullet_scene, 
-						Vector2.ZERO, 
-						Vector2.LEFT, 
-						_get_damage_from_curve(), 
-						false,
-						_is_owned_by_player,
-						multiplayer.get_unique_id(),
-						_powerup_index,
-						[multiplayer.get_unique_id()]
-					]
-				)
-			
-			if _area_size_boosted:
-				boost_area_size()
-		else:
-			push_error("Not implemented")
+		
+		if _area_size_boosted:
+			boost_area_size()
+	else:
+		push_error("Not implemented")
 
 
 func deactivate_powerup():
