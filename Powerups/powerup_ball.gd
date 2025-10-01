@@ -11,6 +11,7 @@ var _kills: int = 0
 var _total_growth: float = 0.0
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
+signal deactivate()
 
 
 func set_crit_chance(new_crit: float) -> void:
@@ -39,29 +40,32 @@ func activate_powerup():
 		return
 	
 	is_on = true
-	GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
-		1,
-		[
-			_bullet_scene, 
-			global_position, 
-			Vector2.ZERO, 
-			_get_damage_from_curve(), 
-			false,
-			_is_owned_by_player,
-			multiplayer.get_unique_id(),
-			_powerup_index,
+	var spawn_ball: Callable = func():
+		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
+			1,
 			[
-				get_parent().get_path(),
-				_kills,
-				_total_growth
+				_bullet_scene, 
+				global_position, 
+				Vector2.ZERO, 
+				_get_damage_from_curve(), 
+				false,
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[
+					get_parent().get_path(),
+					_kills,
+					_total_growth
+				]
 			]
-		]
-	)
+		)
+	spawn_ball.call_deferred()
 
 
 func deactivate_powerup():
 	super()
 	is_on = false
+	deactivate.emit()
 
 
 func level_up():

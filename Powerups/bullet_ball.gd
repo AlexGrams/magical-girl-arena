@@ -100,11 +100,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# Make a pointer for the Ball when it goes offscreen
 	GameState.playground.hud_canvas_layer.add_node_to_point_to(self, sprite.texture)
 	
-	if _owning_player != null and is_multiplayer_authority():
-		_owning_player.died.connect(func():
-			queue_free()
-		)
-	
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	_ball_powerup = _owning_player.get_node_or_null("PowerupBall")
 	if _ball_powerup != null:
@@ -113,6 +108,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			_size_increment *= 1.5
 			_size_increment_vector *= 1.5
 		
+		# Level up
 		_ball_powerup.powerup_level_up.connect(
 			func(new_level, new_damage):
 				_level_up.rpc(new_level, new_damage)
@@ -124,7 +120,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
 		
+		# Deactivate
+		_ball_powerup.deactivate.connect(
+			func():
+				_destroy.rpc_id(1)
+		)
+		
 		_ball_powerup.set_ball(self)
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 ## This bullet's owner has leveled up its corresponding powerup.
