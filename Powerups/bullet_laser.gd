@@ -82,7 +82,7 @@ func _physics_process(_delta: float) -> void:
 			$HitmarkerSprite.show()
 			
 			var hit_node: Node2D = result["collider"].get_parent()
-			if hit_node is Enemy or hit_node is LootBox:
+			if hit_node is Enemy or hit_node is DestructibleNode2D:
 				hit_node.take_damage(total_damage, collider)
 				if multiplayer.get_unique_id() == _area.owner_id:
 					_powerup_laser.energy_did_damage()
@@ -92,7 +92,7 @@ func _physics_process(_delta: float) -> void:
 			var damage_done: float = 0
 			for hit_area: Area2D in _area.get_overlapping_areas():
 				var hit_node = hit_area.get_parent()
-				if hit_node is Enemy or hit_node is LootBox:
+				if hit_node is Enemy or hit_node is DestructibleNode2D:
 					hit_node.take_damage(total_damage, collider)
 					damage_done += total_damage
 			if multiplayer.get_unique_id() == _area.owner_id and damage_done > 0:

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnybu7xqdbqi0"]
+[gd_scene load_steps=7 format=3 uid="uid://dnybu7xqdbqi0"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/disabler.gd" id="1_fmsqj"]
 [ext_resource type="Texture2D" uid="uid://4cllps2xw4x8" path="res://Sprites/Powerups/Corvus_Circle.png" id="2_driq7"]
 [ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_jg7rb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b45ch"]
+radius = 62.0081
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1x31f"]
 radius = 50.01
@@ -21,11 +24,18 @@ texture = ExtResource("2_driq7")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jg7rb")
 
-[node name="Area2D" type="StaticBody2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_b45ch")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="StaticBodyCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_1x31f")
 
 [node name="DisableArea2D" type="Area2D" parent="."]
@@ -36,5 +46,6 @@ collision_mask = 8
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_lhrhp")
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
 [connection signal="area_entered" from="DisableArea2D" to="." method="_on_disable_area_2d_area_entered"]
 [connection signal="area_exited" from="DisableArea2D" to="." method="_on_disable_area_2d_area_exited"]
