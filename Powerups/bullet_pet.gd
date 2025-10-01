@@ -20,8 +20,6 @@ extends CharacterBody2D
 @export var _taunt_area: Area2D = null
 ## Setting sprite to angry when taunting
 @export var _sprite: Node2D
-# Audio for angry buzzing SFX. NOT looping buzz.
-@export var _audio_player: AudioStreamPlayer2D
 ## Audio to play when taunting
 @export var _taunt_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 ## Audio to play when changing targets
