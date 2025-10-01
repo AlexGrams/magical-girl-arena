@@ -67,6 +67,11 @@ func _ready() -> void:
 	# Settings screen
 	_settings_screen.setup_settings_overlay()
 	_settings_screen.hide_button.button_down.connect(_settings_screen.hide)
+	# Unpause the game when closing the Settings screen if in singleplayer.
+	_settings_screen.hide_button.button_down.connect(func():
+		if GameState.connected_players == 1:
+			GameState.pause_game(false)
+	)
 	
 	# Pointer setup
 	for id: int in GameState.player_characters:
@@ -192,6 +197,8 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("settings"):
+		if GameState.connected_players == 1:
+			GameState.pause_game(true)
 		_settings_screen.show()
 
 
