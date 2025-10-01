@@ -15,7 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://dewenafki2fix" path="res://Audio/SFX/Powerups/Cupid_Arrow_Shot.mp3" id="13_nsayd"]
 [ext_resource type="AudioStream" uid="uid://bac3awulce4s0" path="res://Audio/SFX/Powerups/Mines_Dropped.mp3" id="15_qf7td"]
 [ext_resource type="AudioStream" uid="uid://bxme3x4sdsn0k" path="res://Audio/SFX/Powerups/Mines_Seeds.mp3" id="16_e4sk4"]
-[ext_resource type="AudioStream" uid="uid://c1bdhpf7vcfd0" path="res://Audio/SFX/Powerups/Mines_Explosion2.mp3" id="17_auey8"]
 [ext_resource type="AudioStream" uid="uid://ndr2pql55it1" path="res://Audio/SFX/Powerups/sfx-accent-eye-glitter-tinkle-1-6342.mp3" id="18_5002c"]
 [ext_resource type="AudioStream" uid="uid://bwni84fd4wqs7" path="res://Audio/SFX/Powerups/Marble2.mp3" id="19_k2pvy"]
 [ext_resource type="AudioStream" uid="uid://d1jiqf7s63cn3" path="res://Audio/SFX/Shop_Purchase.mp3" id="20_bbxmu"]
@@ -25,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dytisf2b6ldff" path="res://Audio/default_battle_music.tscn" id="22_mr100"]
 [ext_resource type="AudioStream" uid="uid://6hytmfq8camv" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_TarotCards.mp3" id="23_k6ncv"]
 [ext_resource type="AudioStream" uid="uid://cicpchthwefg8" path="res://Audio/SFX/Enemy_Hits/Enemy_Hit_Scythe.mp3" id="24_b70sy"]
+[ext_resource type="AudioStream" uid="uid://br1t41w3v6nuc" path="res://Audio/SFX/Powerups/Mines_Explosion.mp3" id="24_gbq43"]
 [ext_resource type="AudioStream" uid="uid://ogxd8esopmwk" path="res://Audio/SFX/Powerups/Shine.mp3" id="25_5e1pw"]
 [ext_resource type="AudioStream" uid="uid://dobokrfaja4ai" path="res://Audio/SFX/Powerups/Shine_Short.mp3" id="25_ikxll"]
 [ext_resource type="AudioStream" uid="uid://dmeah32wh35q8" path="res://Audio/Music/newthingget.ogg" id="26_86adp"]
@@ -483,39 +483,39 @@ play_while_paused = false
 [sub_resource type="Resource" id="Resource_kl3kh"]
 resource_name = "MINES_DROPPED"
 script = ExtResource("2_kdvej")
-limit = 5
+limit = 4
 type = 29
 sound_effect = ExtResource("15_qf7td")
 volume = 2
 pitch_scale = 1.0
 pitch_randomness = 0.0
-cooldown = 0
+cooldown = 4
 bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_1gugo"]
 resource_name = "MINES_SEEDS"
 script = ExtResource("2_kdvej")
-limit = 20
+limit = 4
 type = 30
 sound_effect = ExtResource("16_e4sk4")
-volume = -20
+volume = -6
 pitch_scale = 1.0
 pitch_randomness = 0.0
-cooldown = 0
+cooldown = 20
 bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_46xon"]
 resource_name = "MINES_EXPLODED"
 script = ExtResource("2_kdvej")
-limit = 20
+limit = 4
 type = 31
-sound_effect = ExtResource("17_auey8")
-volume = -20
+sound_effect = ExtResource("24_gbq43")
+volume = -15
 pitch_scale = 1.0
 pitch_randomness = 0.0
-cooldown = 0
+cooldown = 40
 bus = "SFX"
 play_while_paused = false
 
