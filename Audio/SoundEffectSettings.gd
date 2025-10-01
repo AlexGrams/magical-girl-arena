@@ -72,6 +72,8 @@ enum SOUND_EFFECT_TYPE{
 	# More Powerups
 	BOUNCE,
 	FAN,
+	PET_ATTACK,
+	PET_TAUNT,
 	# Default
 	NONE
 }

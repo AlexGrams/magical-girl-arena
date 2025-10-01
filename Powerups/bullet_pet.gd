@@ -22,6 +22,10 @@ extends CharacterBody2D
 @export var _sprite: Node2D
 # Audio for angry buzzing SFX. NOT looping buzz.
 @export var _audio_player: AudioStreamPlayer2D
+## Audio to play when taunting
+@export var _taunt_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+## Audio to play when changing targets
+@export var _target_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 ## Owning powerup level
 var _current_level: int = 1
@@ -111,7 +115,7 @@ func _physics_process(delta: float) -> void:
 				# Turn sprite angry
 				_sprite.set_angry()
 				# Play angry sound once
-				_audio_player.play()
+				AudioManager.create_audio_at_location(global_position, _taunt_sfx)
 				
 				# Activate taunt collision area
 				_taunt_area.collision_mask = _taunt_collision_mask
@@ -146,6 +150,7 @@ func _get_target() -> void:
 	
 	if _target != null:
 		_is_targeting_enemy = true
+		AudioManager.create_audio_at_location(global_position, _target_sfx)
 	else:
 		# If we couldn't find an Enemy to target, then just go to the owning player.
 		_is_targeting_enemy = false
