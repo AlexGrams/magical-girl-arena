@@ -130,12 +130,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		_owning_character = get_node(data[0])
-	
-		# This bullet destroys itself when the player dies.
-		if is_multiplayer_authority():
-			_owning_character.died.connect(func():
-				queue_free()
-			)
 	else:
 		_modify_collider_to_harm_players()
 		_owning_character = get_node_or_null(data[0])
@@ -153,6 +147,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# The Powerup child is not replicated, so only the client which owns this character has it.
 	_powerup_laser = _owning_character.get_node_or_null("PowerupLaser")
 	if _powerup_laser != null:
+		# Level up
 		_powerup_laser.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
@@ -177,8 +172,21 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			func(new_crit_chance: float, new_crit_multiplier: float):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
+		
+		# Deactivate
+		_powerup_laser.deactivate.connect(
+			func():
+				_destroy.rpc_id(1)
+		)
 	
 	_max_range = data[1]
+
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
