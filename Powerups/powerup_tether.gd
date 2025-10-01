@@ -14,6 +14,7 @@ var _owner_ultimate: Ability = null
 var _bullets: Array[BulletTether] = []
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float)
+signal deactivate()
 
 
 func set_crit_chance(new_crit: float) -> void:
@@ -54,28 +55,30 @@ func activate_powerup():
 		if _is_owned_by_player:
 			_owner_ultimate = get_parent().abilities[0]
 		if current_level < 3:
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
-				1,
-				[
-					bullet_scene, 
-					Vector2.ZERO, 
-					Vector2.ZERO, 
-					_get_damage_from_curve(), 
-					false,
-					_is_owned_by_player,
-					multiplayer.get_unique_id(),
-					_powerup_index,
+			var spawn_tether: Callable = func():
+				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+					1,
 					[
-						get_parent().get_path(), 
-						max_range, 
-						get_parent().get_path(),
-						crit_chance,
-						crit_multiplier
+						bullet_scene, 
+						Vector2.ZERO, 
+						Vector2.ZERO, 
+						_get_damage_from_curve(), 
+						false,
+						_is_owned_by_player,
+						multiplayer.get_unique_id(),
+						_powerup_index,
+						[
+							get_parent().get_path(), 
+							max_range, 
+							get_parent().get_path(),
+							crit_chance,
+							crit_multiplier
+						]
 					]
-				]
-			)
+				)
+			spawn_tether.call_deferred()
 		else:
-			_activate_level_three()
+			_activate_level_three.call_deferred()
 	else:
 		pass
 
@@ -83,6 +86,7 @@ func activate_powerup():
 func deactivate_powerup():
 	super()
 	is_on = false
+	deactivate.emit()
 
 
 func level_up():

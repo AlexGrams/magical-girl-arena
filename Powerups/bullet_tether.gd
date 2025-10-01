@@ -169,14 +169,29 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_powerup_tether = _owning_character.get_node_or_null("PowerupTether")
 	if _powerup_tether != null:
 		_powerup_tether.add_bullet(self)
+		# Level up
 		_powerup_tether.powerup_level_up.connect(
 			func(new_level, new_damage):
 				level_up.rpc(new_level, new_damage)
 		)
+		
+		# Crit
 		_powerup_tether.crit_changed.connect(
 			func(new_crit_chance, new_crit_multiplier):
 				_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 		)
+		
+		# Disabled
+		_powerup_tether.deactivate.connect(
+			func():
+				_destroy.rpc_id(1)
+		)
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup
