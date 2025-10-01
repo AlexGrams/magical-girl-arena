@@ -71,11 +71,18 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	var pet_powerup: PowerupPet = _owner_node.get_node_or_null("PowerupPet")
 	if pet_powerup != null and pet_powerup is Powerup:
 		pet_powerup.set_pet(self)
+		
+		# Level up
 		pet_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 			level_up.rpc(new_level, new_damage)
 		)
 		# It is possible that this bullet was leveled up before it was set up.
 		level_up.rpc(pet_powerup.current_level, _bullet_hitbox.damage)
+		
+		# Disabled
+		pet_powerup.disabled.connect(func():
+			_destroy.rpc_id(1)
+		)
 	
 	# When the owner goes down, destroy this bullet
 	if is_multiplayer_authority():
@@ -155,6 +162,12 @@ func _get_target() -> void:
 		# If we couldn't find an Enemy to target, then just go to the owning player.
 		_is_targeting_enemy = false
 		_target = _owner_node
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 @rpc("any_peer", "call_local")

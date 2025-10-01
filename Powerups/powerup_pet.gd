@@ -8,6 +8,8 @@ var pet_scene := "uid://npslgflisq38"
 ## The single pet bullet instance used by this Powerup. Only destroyed when the player goes down.
 var pet: BulletPet
 
+signal disabled()
+
 
 func set_pet(new_pet: BulletPet) -> void:
 	pet = new_pet
@@ -26,25 +28,27 @@ func activate_powerup():
 		return
 	
 	if _is_owned_by_player:
-		get_parent().spawn_pet_and_set_up.rpc_id(
-			1, 
-			pet_scene, 
-			get_parent().get_path(), 
-			global_position, 
-			_get_damage_from_curve(),
-			multiplayer.get_unique_id(),
-			_powerup_index,
-			current_level
-		)
-		if _area_size_boosted:
-			boost_area_size()
+		var spawn_pet: Callable = func():
+			get_parent().spawn_pet_and_set_up.rpc_id(
+				1, 
+				pet_scene, 
+				get_parent().get_path(), 
+				global_position, 
+				_get_damage_from_curve(),
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				current_level
+			)
+			if _area_size_boosted:
+				boost_area_size()
+		spawn_pet.call_deferred()
 	else:
 		push_error("Pet not implemented for enemy!")
 
 
 func deactivate_powerup():
 	super()
-	# TODO: Fix?
+	disabled.emit()
 
 
 func level_up():
