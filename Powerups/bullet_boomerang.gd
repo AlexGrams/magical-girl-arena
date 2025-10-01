@@ -123,11 +123,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 				func(new_crit_chance: float, new_crit_multiplier: float):
 					_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 			)
-	
-		# When the owner goes down, destroy this bullet
-		_boomerang_owner.died.connect(func():
-			queue_free()
-		)
+			
+			# Disable
+			boomerang_powerup.disabled.connect(func():
+				_destroy.rpc_id(1)
+			)
 	else:
 		_modify_collider_to_harm_players()
 		
@@ -136,6 +136,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			_boomerang_owner.died.connect(func(_enemy: Enemy):
 				queue_free()
 			)
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 # This bullet's owner has leveled up this bullet's corresponding powerup

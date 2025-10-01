@@ -80,17 +80,24 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		var boomerang_powerup := boomerang_owner.get_node_or_null("PowerupBoomerang")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
+			# Level up
 			boomerang_powerup.set_boomerang_controller(self)
 			boomerang_powerup.powerup_level_up.connect(func(new_level: int, new_damage: float):
 				level_up.rpc(new_level, new_damage)
 			)
-	
-		# When the owner goes down, destroy this bullet
-		boomerang_owner.died.connect(func():
-			queue_free()
-		)
+			
+			# Disable
+			boomerang_powerup.disabled.connect(func():
+				_destroy.rpc_id(1)
+			)
 	else:
 		push_error("Boomerang not implemented for enemies.")
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 func set_damage(damage: float, _is_crit: bool = false):
