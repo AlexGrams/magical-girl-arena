@@ -38,11 +38,19 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	_is_owned_by_player = is_owned_by_player
 	_owner = get_tree().root.get_node(data[0])
 	
-	# This bullet destroys itself when the player dies.
-	if is_multiplayer_authority():
-		_owner.died.connect(func():
-			queue_free()
+	var _powerup_fan: PowerupFan = _owner.get_node_or_null("PowerupFan")
+	if _powerup_fan != null:
+		# Disable
+		_powerup_fan.deactivate.connect(
+			func():
+				_destroy.rpc_id(1)
 		)
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 func take_damage(_damage: float) -> void:

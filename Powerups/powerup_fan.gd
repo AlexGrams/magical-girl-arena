@@ -1,3 +1,4 @@
+class_name PowerupFan
 extends Powerup
 
 ## Magnitude of knockback per player character speed.
@@ -17,6 +18,8 @@ extends Powerup
 var _direction: Vector2 = Vector2.RIGHT
 var _bullet_spawner: BulletSpawner = null
 var _owning_character: PlayerCharacterBody2D = null
+
+signal deactivate()
 
 
 func _ready() -> void:
@@ -66,26 +69,29 @@ func activate_powerup():
 	_owning_character = get_parent()
 	
 	# Spawn fan visual
-	_bullet_spawner.request_spawn_bullet.rpc_id(
-		1,
-		[
-			_fan_visual_scene, 
-			global_position, 
-			Vector2.ZERO, 
-			0.0, 
-			false,
-			_is_owned_by_player,
-			multiplayer.get_unique_id(),
-			_powerup_index,
-			[_owning_character.get_path()]
-		]
-	)
+	var spawn_fan: Callable = func():
+		_bullet_spawner.request_spawn_bullet.rpc_id(
+			1,
+			[
+				_fan_visual_scene, 
+				global_position, 
+				Vector2.ZERO, 
+				0.0, 
+				false,
+				_is_owned_by_player,
+				multiplayer.get_unique_id(),
+				_powerup_index,
+				[_owning_character.get_path()]
+			]
+		)
+	spawn_fan.call_deferred()
 
 
 func deactivate_powerup():
 	super()
 	is_on = false
 	_fire_timer = 0.0
+	deactivate.emit()
 
 
 func level_up():
