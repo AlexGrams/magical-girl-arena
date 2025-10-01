@@ -31,8 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://c3anntj04ajri" path="res://Levels/LevelPlaceables/lake.tscn" id="27_lmbp7"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_pbc18"]
 [ext_resource type="PackedScene" uid="uid://divvdkhiu21h6" path="res://UI/canvas_layer.tscn" id="29_w0dwr"]
-[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="33_4ssp8"]
-[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="34_mnwhr"]
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/separated_area_spawner.gd" id="33_4ssp8"]
+[ext_resource type="PackedScene" uid="uid://bvadmsttyp5fc" path="res://Levels/LevelPlaceables/loot_box.tscn" id="34_ayf2i"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="67_a1168"]
 
 [sub_resource type="Resource" id="Resource_02unt"]
@@ -6200,7 +6200,7 @@ position = Vector2(1062, 1816)
 scale = Vector2(240, 240)
 script = ExtResource("33_4ssp8")
 spawn_interval = 20.0
-loot_box_scene = ExtResource("34_mnwhr")
+spawn_object_scene = ExtResource("34_ayf2i")
 spawn_area = NodePath("Area2D/SpawnArea")
 
 [node name="Area2D" type="Area2D" parent="LootBoxSpawner"]

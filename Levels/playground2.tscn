@@ -34,9 +34,9 @@
 [ext_resource type="PackedScene" uid="uid://ik0b55wb1tvq" path="res://Levels/Desert_Map_Pieces/square_desert_map.tscn" id="27_loxqj"]
 [ext_resource type="PackedScene" uid="uid://b4rurp8wei1rp" path="res://Levels/LevelPlaceables/enemy_spawner.tscn" id="28_juc7p"]
 [ext_resource type="PackedScene" uid="uid://divvdkhiu21h6" path="res://UI/canvas_layer.tscn" id="29_hhkov"]
-[ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_spawner.gd" id="32_2n8q1"]
+[ext_resource type="Script" path="res://Levels/LevelPlaceables/separated_area_spawner.gd" id="32_2n8q1"]
+[ext_resource type="PackedScene" uid="uid://cxfh0tkiqm2gs" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="37_vx5k7"]
 [ext_resource type="Script" path="res://Multiplayer/bullet_spawner.gd" id="47_psi5u"]
-[ext_resource type="PackedScene" uid="uid://cxfh0tkiqm2gs" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.tscn" id="50_wxip1"]
 
 [sub_resource type="Resource" id="Resource_hea4i"]
 script = ExtResource("2_rbx1x")
@@ -802,7 +802,7 @@ position = Vector2(-1628, 1793)
 scale = Vector2(240, 240)
 script = ExtResource("32_2n8q1")
 spawn_interval = 16.0
-loot_box_scene = ExtResource("50_wxip1")
+spawn_object_scene = ExtResource("37_vx5k7")
 spawn_area = NodePath("Area2D/SpawnArea")
 
 [node name="Area2D" type="Area2D" parent="LootBoxSpawner"]
@@ -817,7 +817,7 @@ position = Vector2(3926, 1793)
 scale = Vector2(240, 240)
 script = ExtResource("32_2n8q1")
 spawn_interval = 16.0
-loot_box_scene = ExtResource("50_wxip1")
+spawn_object_scene = ExtResource("37_vx5k7")
 spawn_area = NodePath("Area2D/SpawnArea")
 
 [node name="Area2D" type="Area2D" parent="LootBoxSpawner2"]
