@@ -1,9 +1,14 @@
+class_name Settings
 extends Control
 
 ## The volume multiplayer that a value of "1.0" on the volume slider represents.
 const max_volume_slider_value: float = 1.25
 
 @export_group("Screens")
+## Button to press to save settings and return to the previous screen.
+@export var return_button: Button = null
+## Button to save settings and hide this screen.
+@export var hide_button: Button = null
 @export var _display_screen: Control = null
 @export var _audio_screen: Control = null
 @export var _gameplay_screen: Control = null 

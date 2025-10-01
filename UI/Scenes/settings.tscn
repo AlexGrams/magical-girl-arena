@@ -1,0 +1,682 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6oiqdu6iltk6"]
+
+[ext_resource type="Script" path="res://UI/settings.gd" id="1_buc7k"]
+[ext_resource type="Theme" uid="uid://dsl2fiy1yknb4" path="res://Sprites/UI/lobby_button.tres" id="2_s4t7y"]
+[ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="3_tdv83"]
+[ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="4_dtr8j"]
+[ext_resource type="Script" path="res://Levels/option_button.gd" id="5_3gjoj"]
+[ext_resource type="Texture2D" uid="uid://cq3fw4fw8gv43" path="res://Sprites/UI/Checkbox_Checked.png" id="6_ydc8i"]
+[ext_resource type="Texture2D" uid="uid://cx48v0id4pw6e" path="res://Sprites/UI/Checkbox_Unchecked.png" id="7_ggsb6"]
+[ext_resource type="Texture2D" uid="uid://cxov8kqfns1px" path="res://Sprites/HeartPickup.png" id="8_pofhf"]
+[ext_resource type="Script" path="res://UI/button_hover.gd" id="9_y5jon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h8wx"]
+bg_color = Color(0, 0, 0, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te6sa"]
+bg_color = Color(0.36, 0.2952, 0.2952, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.811765, 0.439216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10hit"]
+bg_color = Color(0.917647, 0.317647, 0.317647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_top = 20.0
+expand_margin_right = 5.0
+expand_margin_bottom = 20.0
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("return_button", "hide_button", "_display_screen", "_audio_screen", "_gameplay_screen", "_screen_mode_option", "_limit_fps_checkbox", "_max_fps_container", "_max_fps_slider", "_max_fps_spinbox", "_cursor_size_option", "_main_volume_slider", "_main_volume_spinbox", "_music_volume_slider", "_music_spinbox", "_sfx_volume_slider", "_sfx_spinbox", "_ally_powerups_volume_slider", "_ally_powerups_volume_spinbox", "_enemy_hit_volume_slider", "_enemy_hit_volume_spinbox", "_same_hit_sfx_checkbox", "_bullet_opacity_slider", "_bullet_opacity_spinbox", "_hitbox_visible_checkbox")]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_buc7k")
+return_button = NodePath("ReturntoMainMenu_Label/ReturnButton")
+hide_button = NodePath("HideSettings_Label/HideButton")
+_display_screen = NodePath("ParentVBoxContainer/DisplayVScrollBar")
+_audio_screen = NodePath("ParentVBoxContainer/AudioVScrollBar")
+_gameplay_screen = NodePath("ParentVBoxContainer/GameplayVScrollBar")
+_screen_mode_option = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer/OptionButton")
+_limit_fps_checkbox = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer/LimitFPSCheckbox")
+_max_fps_container = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer")
+_max_fps_slider = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider")
+_max_fps_spinbox = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox")
+_cursor_size_option = NodePath("ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton")
+_main_volume_slider = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeHSlider")
+_main_volume_spinbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeSpinBox")
+_music_volume_slider = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider")
+_music_spinbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox")
+_sfx_volume_slider = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider")
+_sfx_spinbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox")
+_ally_powerups_volume_slider = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsVolumeHSlider")
+_ally_powerups_volume_spinbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsSpinBox")
+_enemy_hit_volume_slider = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitVolumeHSlider")
+_enemy_hit_volume_spinbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitSpinBox")
+_same_hit_sfx_checkbox = NodePath("ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox")
+_bullet_opacity_slider = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider")
+_bullet_opacity_spinbox = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox")
+_hitbox_visible_checkbox = NodePath("ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox")
+
+[node name="DimBackground" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5h8wx")
+
+[node name="ParentVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -675.0
+offset_top = 175.0
+offset_right = 766.0
+offset_bottom = 875.0
+grow_horizontal = 2
+theme = ExtResource("2_s4t7y")
+
+[node name="TabsHBoxContainer" type="HBoxContainer" parent="ParentVBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="DisplayButton" type="Button" parent="ParentVBoxContainer/TabsHBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_tdv83")
+text = "Display
+"
+
+[node name="AudioButton" type="Button" parent="ParentVBoxContainer/TabsHBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_tdv83")
+text = "Audio
+"
+
+[node name="GameplayButton" type="Button" parent="ParentVBoxContainer/TabsHBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_tdv83")
+text = "Gameplay"
+
+[node name="DisplayVScrollBar" type="ScrollContainer" parent="ParentVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_s4t7y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ParentVBoxContainer/DisplayVScrollBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resolution" type="Label" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_tdv83")
+theme_override_font_sizes/font_size = 90
+text = "Resolution"
+metadata/_edit_group_ = true
+
+[node name="ScreenModeContainer" type="HBoxContainer" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScreenMode" type="Label" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Screen Mode"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="OptionButton" type="OptionButton" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_tdv83")
+selected = 0
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+script = ExtResource("5_3gjoj")
+
+[node name="LimitFPSContainer" type="HBoxContainer" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Limit FPS"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer"]
+custom_minimum_size = Vector2(270, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LimitFPSCheckbox" type="CheckBox" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 0
+theme_override_icons/checked = ExtResource("6_ydc8i")
+theme_override_icons/unchecked = ExtResource("7_ggsb6")
+
+[node name="MaxFPSContainer" type="HBoxContainer" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Max FPS"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(323, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaxFPSHSlider" type="HSlider" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+min_value = 30.0
+max_value = 300.0
+value = 60.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaxFPSSpinBox" type="SpinBox" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+max_value = 300.0
+rounded = true
+alignment = 1
+
+[node name="CursorSizeContainer" type="HBoxContainer" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="CursorSize" type="Label" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Cursor Size"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CursorSizeOptionButton" type="OptionButton" parent="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_tdv83")
+selected = 0
+item_count = 2
+popup/item_0/text = "Small"
+popup/item_1/text = "Large"
+popup/item_1/id = 1
+script = ExtResource("5_3gjoj")
+
+[node name="AudioVScrollBar" type="ScrollContainer" parent="ParentVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_s4t7y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MainVolumeContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Main"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer"]
+custom_minimum_size = Vector2(490, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MainVolumeHSlider" type="HSlider" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MainVolumeSpinBox" type="SpinBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Music Volume"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music_VolumeHSlider" type="HSlider" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music_SpinBox" type="SpinBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "SFX Volume"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(159, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VolumeHSlider" type="HSlider" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SpinBox" type="SpinBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="AllyPowerupsVolumeContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Ally Powerups"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AllyPowerupsVolumeHSlider" type="HSlider" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AllyPowerupsSpinBox" type="SpinBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="EnemyHitVolumeContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Enemy Hit SFX"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EnemyHitVolumeHSlider" type="HSlider" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 0.8
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EnemyHitSpinBox" type="SpinBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 80.0
+rounded = true
+alignment = 1
+
+[node name="SameHitSFXContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 38
+text = "All bullets make the same sound"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SameHitSFXCheckbox" type="CheckBox" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 0
+theme_override_icons/checked = ExtResource("6_ydc8i")
+theme_override_icons/unchecked = ExtResource("7_ggsb6")
+
+[node name="GameplayVScrollBar" type="ScrollContainer" parent="ParentVBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_s4t7y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ParentVBoxContainer/GameplayVScrollBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="BulletOpacityContainer" type="HBoxContainer" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="Opacity" type="Label" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 56
+text = "Ally Powerup Opacity"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="OpacityHSlider" type="HSlider" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(0, 61.685)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("8_pofhf")
+theme_override_icons/grabber_highlight = ExtResource("8_pofhf")
+theme_override_icons/grabber_disabled = ExtResource("8_pofhf")
+theme_override_styles/slider = SubResource("StyleBoxFlat_te6sa")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_10hit")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_10hit")
+max_value = 1.0
+step = 0.01
+value = 1.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Spacer2" type="Control" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SpinBox" type="SpinBox" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme = ExtResource("3_tdv83")
+value = 100.0
+rounded = true
+alignment = 1
+
+[node name="ShowHitboxContainer" type="HBoxContainer" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer"]
+layout_mode = 2
+theme = ExtResource("4_dtr8j")
+theme_override_font_sizes/font_size = 90
+text = "Show Hitbox"
+metadata/_edit_group_ = true
+
+[node name="Spacer" type="Control" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ShowHitboxCheckBox" type="CheckBox" parent="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 0
+theme_override_icons/checked = ExtResource("6_ydc8i")
+theme_override_icons/unchecked = ExtResource("7_ggsb6")
+
+[node name="ReturntoMainMenu_Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("3_tdv83")
+theme_override_font_sizes/font_size = 50
+text = "Save and Exit"
+metadata/_edit_group_ = true
+
+[node name="ReturnButton" type="Button" parent="ReturntoMainMenu_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("9_y5jon")
+label = NodePath("..")
+
+[node name="HideSettings_Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = 968.0
+offset_right = 593.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(0, 29)
+theme = ExtResource("3_tdv83")
+theme_override_font_sizes/font_size = 50
+text = "Save and Exit"
+metadata/_edit_group_ = true
+
+[node name="HideButton" type="Button" parent="HideSettings_Label" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_right = 553.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("9_y5jon")
+label = NodePath("..")
+
+[connection signal="pressed" from="ParentVBoxContainer/TabsHBoxContainer/DisplayButton" to="." method="switch_to_screen" binds= [0]]
+[connection signal="pressed" from="ParentVBoxContainer/TabsHBoxContainer/AudioButton" to="." method="switch_to_screen" binds= [1]]
+[connection signal="pressed" from="ParentVBoxContainer/TabsHBoxContainer/GameplayButton" to="." method="switch_to_screen" binds= [2]]
+[connection signal="item_selected" from="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/ScreenModeContainer/OptionButton" to="." method="_on_screen_mode_item_selected"]
+[connection signal="toggled" from="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/LimitFPSContainer/LimitFPSCheckbox" to="." method="_on_limit_fps_checkbox_toggled"]
+[connection signal="drag_ended" from="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSHSlider" to="." method="_on_max_fps_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/MaxFPSContainer/MaxFPSSpinBox" to="." method="_on_max_fps_spin_box_value_changed"]
+[connection signal="item_selected" from="ParentVBoxContainer/DisplayVScrollBar/VBoxContainer/CursorSizeContainer/CursorSizeOptionButton" to="." method="_on_cursor_size_item_selected"]
+[connection signal="drag_ended" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeHSlider" to="." method="_on_main_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MainVolumeContainer/MainVolumeSpinBox" to="." method="_on_main_volume_spin_box_value_changed"]
+[connection signal="drag_ended" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_VolumeHSlider" to="." method="_on_music_volume_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/MusicVolumeContainer/Music_SpinBox" to="." method="_on_music_spin_box_value_changed"]
+[connection signal="drag_ended" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/VolumeHSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SFXVolumeContainer/SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="drag_ended" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsVolumeHSlider" to="." method="_on_ally_powerups_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/AllyPowerupsVolumeContainer/AllyPowerupsSpinBox" to="." method="_on_ally_powerups_spin_box_value_changed"]
+[connection signal="drag_ended" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitVolumeHSlider" to="." method="_on_enemy_hit_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/EnemyHitVolumeContainer/EnemyHitSpinBox" to="." method="_on_enemy_hit_spin_box_value_changed"]
+[connection signal="toggled" from="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer/SameHitSFXCheckbox" to="." method="_on_same_hit_sfx_checkbox_toggled"]
+[connection signal="drag_ended" from="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/OpacityHSlider" to="." method="_on_bullet_opacity_slider_drag_ended"]
+[connection signal="value_changed" from="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/BulletOpacityContainer/SpinBox" to="." method="_on_bullet_opacity_spin_box_value_changed"]
+[connection signal="toggled" from="ParentVBoxContainer/GameplayVScrollBar/VBoxContainer/ShowHitboxContainer/ShowHitboxCheckBox" to="." method="_on_show_hitbox_check_box_toggled"]
+[connection signal="button_down" from="ReturntoMainMenu_Label/ReturnButton" to="." method="_save_settings_changes"]
+[connection signal="mouse_entered" from="ReturntoMainMenu_Label/ReturnButton" to="ReturntoMainMenu_Label/ReturnButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ReturntoMainMenu_Label/ReturnButton" to="ReturntoMainMenu_Label/ReturnButton" method="_on_mouse_exited"]
+[connection signal="button_down" from="HideSettings_Label/HideButton" to="." method="_save_settings_changes"]
+[connection signal="mouse_entered" from="HideSettings_Label/HideButton" to="HideSettings_Label/HideButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HideSettings_Label/HideButton" to="HideSettings_Label/HideButton" method="_on_mouse_exited"]

@@ -14,7 +14,7 @@ const LOBBY_CONNECTION_STABILITY_PINGS: int = 10
 ## The first screen shown when the game is started.
 @export var main_menu: Control
 ## The screen for changing the game's settings.
-@export var settings: Control
+@export var settings: Settings
 ## The screen for the shop
 @export var shop: Shop
 ## The screen to host or join a lobby.
@@ -151,6 +151,11 @@ func _ready() -> void:
 	for label in main_menu_button_container.get_children():
 		label.pivot_offset = Vector2(0, label.size.y / 2)
 	
+	# Connect signals related to the Settings menu buttons
+	settings.return_button.button_down.connect(_on_settings_back_button_down)
+	settings.return_button.button_down.connect(main_menu_logo.scale_to_normal)
+	settings.hide_button.button_down.connect(hide_settings)
+	
 	# When the shop is closed from the Lobby screen, refresh the icon saying if the player can
 	# buy rerolls.
 	shop.hide_button.button_down.connect(update_can_buy_rerolls_icon_visibility)
@@ -160,7 +165,6 @@ func _ready() -> void:
 	_lobby_list_original_pos = lobby_list.position
 	_lobby_original_pos = lobby.position
 	_shop_original_pos = shop.position
-	
 	
 	_set_main_menu_character()
 	version_label.change_text("Version " + ProjectSettings.get_setting("application/config/version"))
