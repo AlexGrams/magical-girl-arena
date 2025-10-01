@@ -214,6 +214,7 @@ func _on_lobby_button_button_down() -> void:
 
 ## Switch to the settings screen.
 func _on_settings_button_down() -> void:
+	settings.load_settings()
 	_switch_screen_animation(main_menu, settings, _settings_original_pos)
 	
 ## Switch to the shop screen.
@@ -259,6 +260,7 @@ func show_settings() -> void:
 	settings.get_node("DimBackground").show()
 	settings.get_node("HideSettings_Label").show()
 	settings.get_node("ReturntoMainMenu_Label").hide()
+	settings.load_settings()
 	settings.show()
 
 

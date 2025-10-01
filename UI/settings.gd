@@ -70,7 +70,27 @@ func _ready() -> void:
 	_setting_screens.append(_audio_screen)
 	_setting_screens.append(_gameplay_screen)
 	switch_to_screen(0)
-	
+	load_settings()
+
+
+## Show a screen for a category of settings.
+func switch_to_screen(screen_index: int) -> void:
+	for i in range(len(_setting_screens)):
+		if i == screen_index:
+			_setting_screens[i].show()
+		else:
+			_setting_screens[i].hide()
+
+
+## Change what Controls are being shown for the Settings menu to be displayed as an overlay for another UI. 
+func setup_settings_overlay() -> void:
+	_background.show()
+	_return_button_label.hide()
+	_hide_button_label.show()
+
+
+## Sets all the controls on this screen to reflect the current internal settings values.
+func load_settings() -> void:
 	var settings: ConfigFile = SettingsManager.get_settings()
 	
 	_screen_mode_option.selected = _screen_modes.find(settings.get_value("display", "display_mode"))
@@ -96,22 +116,6 @@ func _ready() -> void:
 	_bullet_opacity_slider.value = settings.get_value("gameplay", "bullet_opacity", SaveManager.DEFAULT_BULLET_OPACITY)
 	_bullet_opacity_spinbox.value = _bullet_opacity_slider.value * 100.0
 	_hitbox_visible_checkbox.button_pressed = settings.get_value("gameplay", "hitbox_visible", false)
-
-
-## Show a screen for a category of settings.
-func switch_to_screen(screen_index: int) -> void:
-	for i in range(len(_setting_screens)):
-		if i == screen_index:
-			_setting_screens[i].show()
-		else:
-			_setting_screens[i].hide()
-
-
-## Change what Controls are being shown for the Settings menu to be displayed as an overlay for another UI. 
-func setup_settings_overlay() -> void:
-	_background.show()
-	_return_button_label.hide()
-	_hide_button_label.show()
 
 
 #region Display
