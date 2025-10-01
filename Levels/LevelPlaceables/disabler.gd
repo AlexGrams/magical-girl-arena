@@ -8,11 +8,7 @@ var _allow_type: Powerup.Type = Powerup.Type.NULL
 
 
 func _ready() -> void:
-	_allow_type = randi_range(1, Powerup.Type.size() - 1)
-
-
-func _process(delta: float) -> void:
-	pass
+	_allow_type = randi_range(1, Powerup.Type.size() - 1) as Powerup.Type
 
 
 ## Disable all powerups that aren't of a certain type on the local player.
