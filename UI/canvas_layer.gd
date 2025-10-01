@@ -35,9 +35,6 @@ extends CanvasLayer
 @export var _pointer_scene: String = ""
 @export var _pointer_icon_scene: String = ""
 
-# TODO: Testing
-var fraction: float = 0.0
-
 ## Images indicating each powerup
 var _powerup_textures: Array[TextureRect] = []
 ## Text displaying each powerup level

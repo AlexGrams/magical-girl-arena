@@ -39,8 +39,7 @@ func activate_powerup():
 		if _area_size_boosted:
 			boost_area_size()
 	else:
-		# TODO: Support for when owned by an enemy.
-		pass
+		push_error("Pet not implemented for enemy!")
 
 
 func deactivate_powerup():

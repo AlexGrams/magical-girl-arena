@@ -90,8 +90,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			queue_free()
 		)
 	else:
-		# TODO: Not implemented
-		pass
+		push_error("Boomerang not implemented for enemies.")
 
 
 func set_damage(damage: float, _is_crit: bool = false):
