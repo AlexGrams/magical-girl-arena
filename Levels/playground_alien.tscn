@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://dfxl3qe0k5htk"]
+[gd_scene load_steps=82 format=3 uid="uid://dfxl3qe0k5htk"]
 
 [ext_resource type="Script" path="res://Levels/playground.gd" id="1_qhfi2"]
 [ext_resource type="Script" path="res://Levels/enemy_spawn_event_data.gd" id="2_va3kk"]
@@ -491,6 +491,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6uu2"]
 size = Vector2(20.6292, 21.3042)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r24kv"]
+size = Vector2(4834, 4844)
 
 [node name="Playground" type="Node2D" node_paths=PackedStringArray("regular_enemy_spawners", "corrupted_enemy_spawner", "hud_canvas_layer", "bullet_spawner", "point_light")]
 script = ExtResource("1_qhfi2")
@@ -6217,3 +6220,16 @@ position = Vector2(1394, 1586)
 
 [node name="Disabler2" parent="." instance=ExtResource("35_cocpq")]
 position = Vector2(1964, 1586)
+
+[node name="DisablerSpawner" type="Node2D" parent="." node_paths=PackedStringArray("spawn_area")]
+position = Vector2(1042, 1776)
+script = ExtResource("33_xin57")
+spawn_interval = 20.0
+spawn_object_scene = ExtResource("35_cocpq")
+_collision_check_radius = 350.0
+spawn_area = NodePath("Area2D/DisablerSpawnCollisionShape2D")
+
+[node name="Area2D" type="Area2D" parent="DisablerSpawner"]
+
+[node name="DisablerSpawnCollisionShape2D" type="CollisionShape2D" parent="DisablerSpawner/Area2D"]
+shape = SubResource("RectangleShape2D_r24kv")

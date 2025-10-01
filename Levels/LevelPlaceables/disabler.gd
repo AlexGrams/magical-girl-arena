@@ -11,6 +11,12 @@ func _ready() -> void:
 	_allow_type = randi_range(1, Powerup.Type.size() - 1) as Powerup.Type
 
 
+## Replicated move to a location.
+@rpc("authority", "call_local")
+func teleport(pos: Vector2) -> void:
+	global_position = pos
+
+
 ## Disable all powerups that aren't of a certain type on the local player.
 func _on_disable_area_2d_area_entered(area: Area2D) -> void:
 	var other = area.get_parent()

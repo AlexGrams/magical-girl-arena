@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnybu7xqdbqi0"]
+[gd_scene load_steps=6 format=3 uid="uid://dnybu7xqdbqi0"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/disabler.gd" id="1_fmsqj"]
 [ext_resource type="Texture2D" uid="uid://4cllps2xw4x8" path="res://Sprites/Powerups/Corvus_Circle.png" id="2_driq7"]
 [ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="2_jg7rb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1x31f"]
+radius = 50.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lhrhp"]
 radius = 400.0
@@ -17,6 +20,13 @@ texture = ExtResource("2_driq7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jg7rb")
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_1x31f")
 
 [node name="DisableArea2D" type="Area2D" parent="."]
 collision_layer = 0
