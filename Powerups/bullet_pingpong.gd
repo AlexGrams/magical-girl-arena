@@ -138,11 +138,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 				func(new_crit_chance: float, new_crit_multiplier: float):
 					_set_critical.rpc_id(1, new_crit_chance, new_crit_multiplier)
 			)
-	
-		# When the owner goes down, destroy this bullet
-		_pingpong_owner.died.connect(func():
-			queue_free()
-		)
+			
+			# Disabled
+			_powerup_ping_pong.disabled.connect(func():
+				_destroy.rpc_id(1)
+			)
 	else:
 		_modify_collider_to_harm_players()
 		
@@ -151,6 +151,12 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 			_pingpong_owner.died.connect(func(_enemy: Enemy):
 				queue_free()
 			)
+
+
+## Only call on server.
+@rpc("any_peer", "call_local", "reliable")
+func _destroy() -> void:
+	queue_free()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

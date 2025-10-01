@@ -11,6 +11,7 @@ var _bullets: Array[BulletPingPong] = []
 var _owner_ultimate: Ability = null
 
 signal crit_changed(new_crit_chance: float, new_crit_multiplier: float) 
+signal disabled()
 
 
 func set_crit_chance(new_crit: float) -> void:
@@ -46,7 +47,7 @@ func activate_powerup():
 	
 	if _is_owned_by_player:
 		_owner_ultimate = get_parent().abilities[0]
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 			1, 
 			[
 				bullet_scene, 
@@ -66,7 +67,7 @@ func activate_powerup():
 
 func deactivate_powerup():
 	super()
-	# TODO: Fix?
+	disabled.emit()
 
 
 func level_up():
