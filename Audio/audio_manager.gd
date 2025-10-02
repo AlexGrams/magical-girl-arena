@@ -64,8 +64,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			if change_length:
 				new_2D_audio.pitch_scale = (new_2D_audio.stream.get_length() / desired_length)
 			else:
-				new_2D_audio.pitch_scale = sfx.pitch_scale
-				new_2D_audio.pitch_scale += randf_range(-sfx.pitch_randomness, sfx.pitch_randomness)
+				new_2D_audio.pitch_scale = sfx.pitches.pick_random()
 			new_2D_audio.finished.connect(sfx.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			
@@ -86,8 +85,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStrea
 			new_audio.bus = sfx.bus
 			new_audio.stream = sfx.sound_effect
 			new_audio.volume_db = sfx.volume
-			new_audio.pitch_scale = sfx.pitch_scale
-			new_audio.pitch_scale += randf_range(-sfx.pitch_randomness, sfx.pitch_randomness)
+			new_audio.pitch_scale = sfx.pitches.pick_random()
 			new_audio.finished.connect(sfx.on_audio_finished)
 			new_audio.finished.connect(new_audio.queue_free)
 			
