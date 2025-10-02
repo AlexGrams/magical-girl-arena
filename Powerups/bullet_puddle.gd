@@ -8,6 +8,10 @@ extends BulletContinuous
 @export var _puddle_sprite: Sprite2D = null
 ## Splash explosion effect for when stepping on the puddle
 @export var _splash_particles_scene: String = ""
+## Sound that plays when puddle is created
+@export var _puddle_spawn_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+## Sound that plays when puddle explodes (is splashed in)
+@export var _puddle_splash_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 var _splash_area_collision_layer: int = 0
 var _splash_area_collision_mask: int = 0
@@ -30,6 +34,9 @@ func _ready() -> void:
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(_puddle_sprite, "scale", full_scale, 0.5)
 	super()
+	
+	# Play sound effect
+	AudioManager.create_audio_at_location(global_position, _puddle_spawn_sfx)
 	
 	_splash_area_collision_layer = _splash_area.collision_layer
 	_splash_area_collision_mask = _splash_area.collision_mask
@@ -99,6 +106,9 @@ func _on_splash_area_2d_entered(area: Area2D) -> void:
 		var splash_explosion = ResourceLoader.load_threaded_get(_splash_particles_scene).instantiate()
 		splash_explosion.global_position = global_position
 		get_tree().root.add_child(splash_explosion)
+		
+		# Play sound effect
+		AudioManager.create_audio_at_location(global_position, _puddle_splash_sfx)
 
 
 ## Applies StatusPuddle to allies that overlap if they don't have the status already. Status is only
