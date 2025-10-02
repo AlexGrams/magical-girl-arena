@@ -89,8 +89,8 @@ enum SOUND_EFFECT_TYPE{
 			emit_changed()
 @export var sound_effect : AudioStream
 @export_range(-40, 20) var volume = 0
-## Valid pitches. The pitch to be heard will be randomly chosen from this array.
-@export var pitches: Array[float] = [1.0]
+## Semitones will be added to the original pitch. They are randomly chosen. (Semitone of 0 = original pitch)
+@export var semitones: Array[int] = [0]
 @export var pitch_scale = 1.0
 @export var pitch_randomness = 0.0
 ## How much time in MILISECONDS must pass before this sound can be played again

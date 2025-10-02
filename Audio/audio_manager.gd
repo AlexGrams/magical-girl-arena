@@ -32,6 +32,8 @@ var _local_player: Node2D = null
 @export var _enemy_hit_limit: int = 20
 ## How many enemy hit sounds are currently playing.
 var _enemy_hit_limit_counter: int = 0
+## Used to convert from semitones to pitch scale
+const LOG_SEMITONE:float = log(2) / 12.0
 
 func set_use_same_enemy_hit_sfx(value: bool) -> void:
 	_use_same_enemy_hit_sfx = value
@@ -64,7 +66,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			if change_length:
 				new_2D_audio.pitch_scale = (new_2D_audio.stream.get_length() / desired_length)
 			else:
-				new_2D_audio.pitch_scale = sfx.pitches.pick_random()
+				new_2D_audio.pitch_scale = _semitones_to_pitch_scale(sfx.semitones.pick_random())
 			new_2D_audio.finished.connect(sfx.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			
@@ -85,7 +87,7 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStrea
 			new_audio.bus = sfx.bus
 			new_audio.stream = sfx.sound_effect
 			new_audio.volume_db = sfx.volume
-			new_audio.pitch_scale = sfx.pitches.pick_random()
+			new_audio.pitch_scale = _semitones_to_pitch_scale(sfx.semitones.pick_random())
 			new_audio.finished.connect(sfx.on_audio_finished)
 			new_audio.finished.connect(new_audio.queue_free)
 			
@@ -177,3 +179,6 @@ func play_enemy_hit(is_crit:bool = false, sfx_type:SoundEffectSettings.SOUND_EFF
 				func():
 					_enemy_hit_limit_counter -= 1
 			)
+	
+func _semitones_to_pitch_scale(semitones:float) -> float:
+	return 1.0 + (semitones * LOG_SEMITONE)
