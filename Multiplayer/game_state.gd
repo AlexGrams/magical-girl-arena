@@ -541,6 +541,8 @@ func register_player(id: int, new_player_name: String, new_steam_id: int, charac
 ## Remove a player from our map of registered players.
 @rpc("any_peer", "call_local", "reliable")
 func unregister_player(id: int):
+	var removed_player_name: String = players[id]["name"].substr(0, 25)
+	
 	players.erase(id)
 	# Hack to remove from steam_ids as well
 	for steam_id in steam_ids:
@@ -550,6 +552,12 @@ func unregister_player(id: int):
 	
 	if game_running:
 		connected_players = max(connected_players - 1, 0)
+		# Show text saying that a player left
+		playground.hud_canvas_layer.get_dialogue_box().show_single_line(
+			removed_player_name + " has left the game.",
+			Constants.Character.NONE,
+			load("res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png")
+		)
 	
 	player_list_changed.emit()
 

@@ -116,6 +116,15 @@ func _run_dialogue(dialogue_data_path: String) -> void:
 	_dialogue_timer = 0.0
 
 
+## Display an isolated dialogue line that isn't associated with any DialogueData
+func show_single_line(dialogue: String, speaker: Constants.Character, portrait: Texture2D = null) -> void:
+	var line: DialogueLine = DialogueLine.new()
+	line.dialogue = dialogue
+	line.speaker = speaker
+	line.optional_portrait = portrait
+	_show_line(line)
+
+
 ## Display a new line of dialogue.
 func _show_line(line: DialogueLine) -> void:
 	var dialogue_line_container: DialogueLineContainer = _dialogue_line_container.instantiate()

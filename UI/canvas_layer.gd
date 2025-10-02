@@ -59,6 +59,15 @@ var _retry_indicators: Array[PlayerReadyIndicator]
 var _retry_indicator_index = {}
 
 
+## Returns the Container for dislaying Powerup icons.
+func get_powerup_container() -> Container:
+	return _powerup_container
+
+
+func get_dialogue_box() -> DialogueBox:
+	return _dialogue_box
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_boss_health_bar.hide()
@@ -294,11 +303,6 @@ func _return_to_lobby():
 	# Allow others to join this lobby since we're going back to the character select screen.
 	if multiplayer.get_unique_id() == 1:
 		GameState.set_is_game_in_progress(false)
-
-
-## Returns the Container for dislaying Powerup icons.
-func get_powerup_container() -> Container:
-	return _powerup_container
 
 
 # Sets up the UI for the local player's ultimate ability. The icon updates depending on the ult cooldown.
