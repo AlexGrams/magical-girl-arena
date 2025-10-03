@@ -21,6 +21,8 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _kick_area: Area2D = null
 @export var _explosion_bullet_hitbox: BulletHitbox = null
 @export var _physics_collision_shape: CollisionShape2D
+## Sound effect to play when kicked
+@export var _kick_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 var _size_increment_vector: Vector2 = Vector2.ONE
 ## The original collision layer of the BulletHitbox for explosion damage.
@@ -161,6 +163,9 @@ func _update_bullet_opacity() -> void:
 func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other is PlayerCharacterBody2D:
+		# Play kick SFX
+		AudioManager.create_audio_at_location(global_position, _kick_sfx)
+		
 		# Kick the ball by applying force and torque. Torque is only for visuals.
 		var kick_direction: Vector2 = (global_position - other.global_position).normalized()
 		_rigidbody.apply_force(kick_direction * _kick_impulse)

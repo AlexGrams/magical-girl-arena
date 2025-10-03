@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=98 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -43,6 +43,7 @@
 [ext_resource type="AudioStream" uid="uid://n41i0xfxtad4" path="res://Audio/SFX/Powerups/Puddle_Splash.mp3" id="37_qnso6"]
 [ext_resource type="AudioStream" uid="uid://o5chv7j5guvx" path="res://Audio/SFX/Powerups/Turret_Shoot.mp3" id="38_b8m8y"]
 [ext_resource type="AudioStream" uid="uid://bytjo17328g8r" path="res://Audio/SFX/Powerups/Turret_Spawn.mp3" id="39_irerq"]
+[ext_resource type="AudioStream" uid="uid://24ue4jdwn5q2" path="res://Audio/SFX/Powerups/Ball_Kick.mp3" id="40_185b5"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -772,10 +773,24 @@ cooldown = 20
 bus = "SFX"
 play_while_paused = false
 
+[sub_resource type="Resource" id="Resource_cjg2e"]
+resource_name = "BALL_KICK"
+script = ExtResource("2_kdvej")
+limit = 20
+type = 65
+sound_effect = ExtResource("40_185b5")
+volume = -6
+semitones = Array[int]([0])
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 5
+bus = "SFX"
+play_while_paused = false
+
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_dl7d3"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2"), SubResource("Resource_wxos4"), SubResource("Resource_l4nsa"), SubResource("Resource_2l7jb"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_4htrs"), SubResource("Resource_iveav"), SubResource("Resource_3e8qr"), SubResource("Resource_nuda6"), SubResource("Resource_imnlt"), SubResource("Resource_aaqnr"), SubResource("Resource_wdk8x"), SubResource("Resource_gdnbp"), SubResource("Resource_e2dd7"), SubResource("Resource_usr5c"), SubResource("Resource_55saw"), SubResource("Resource_prrm4"), SubResource("Resource_se2be")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_dl7d3"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2"), SubResource("Resource_wxos4"), SubResource("Resource_l4nsa"), SubResource("Resource_2l7jb"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_4htrs"), SubResource("Resource_iveav"), SubResource("Resource_3e8qr"), SubResource("Resource_nuda6"), SubResource("Resource_imnlt"), SubResource("Resource_aaqnr"), SubResource("Resource_wdk8x"), SubResource("Resource_gdnbp"), SubResource("Resource_e2dd7"), SubResource("Resource_usr5c"), SubResource("Resource_55saw"), SubResource("Resource_prrm4"), SubResource("Resource_se2be"), SubResource("Resource_cjg2e")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")

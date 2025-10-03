@@ -44,6 +44,7 @@ _sprite_holder = NodePath("SpriteHolderNode2D")
 _kick_area = NodePath("PlayerKickArea2D")
 _explosion_bullet_hitbox = NodePath("ExplosionBulletHitbox")
 _physics_collision_shape = NodePath("PhysicsCollisionShape2D")
+_kick_sfx = 65
 speed = 0.0
 lifetime = 0.0
 destroy_on_hit = false
