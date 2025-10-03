@@ -8,6 +8,10 @@ extends Bullet
 @export var _range_area: Area2D = null
 ## Turret sprite
 @export var _turret_sprite: Sprite2D = null
+## Sound effect when the turret spawns in
+@export var _spawn_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+## Sound effect when the turret shoots
+@export var _shoot_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 ## Time in seconds between when this Turret shoots.
 var _fire_interval: float = 0.0
@@ -34,6 +38,8 @@ func _ready() -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(_turret_sprite, "scale", full_scale, 0.5)
+	## Spawn sound effect
+	AudioManager.create_audio_at_location(global_position, _spawn_sfx)
 
 
 ## Only server processes Turret.
@@ -122,6 +128,8 @@ func _shoot() -> void:
 				[_boost_timer > 0.0]
 			]
 		)
+		## Play shooting SFX
+		AudioManager.create_audio_at_location(global_position, _shoot_sfx)
 
 
 ## Returns location of the nearest target.
