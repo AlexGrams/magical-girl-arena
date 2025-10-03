@@ -88,6 +88,8 @@ enum SOUND_EFFECT_TYPE{
 	PULSE_CHORD2,
 	PULSE_CHORD3,
 	PULSE_CHORD4,
+	# More Constellation stuff
+	CORVUS_FEATHER_ATTACK,
 	# Default
 	NONE
 }

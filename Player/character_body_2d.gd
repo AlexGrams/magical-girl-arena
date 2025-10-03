@@ -53,7 +53,7 @@ var shoot_interval = 1
 var level = 1
 var experience = 0
 
-var health_max: int = 100
+var health_max: int = 99999
 var health: int = health_max
 # True when the player is incapacitated.
 var is_down := false
