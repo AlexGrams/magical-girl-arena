@@ -23,6 +23,8 @@ const touching_distance_threshold: float = 30.0
 ## A value of 1 means that for each second long than the minimum time the bullet travels, one second
 ## is added to the temp HP duration.
 @export var _shield_duration_per_second_traveled_over_threshold: float = 1.0
+## Sound effect that players whenever target is switched
+@export var _pass_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 @onready var _squared_touching_distance_threshold: float = touching_distance_threshold ** 2
 ## The bullet object is replicated on all clients.
@@ -87,6 +89,9 @@ func _process(delta: float) -> void:
 		_target_index = (_target_index + 1) % len(_all_targets)
 		_target = _all_targets[_target_index]
 		_travel_time = 0.0
+		
+		# Play hit SFX
+		AudioManager.create_audio_at_location(global_position, _pass_sfx)
 	
 	# Scale damage based off of time since last bounce.
 	if is_multiplayer_authority():

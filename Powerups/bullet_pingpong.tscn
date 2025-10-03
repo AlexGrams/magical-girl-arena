@@ -31,10 +31,12 @@ scale = Vector2(2, 2)
 script = ExtResource("1_f7tjj")
 max_range = 900.0
 _min_travel_time_for_shield = 0.5
+_pass_sfx = 68
 speed = 1200.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+sound_effect = 69
 
 [node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("PingPongBullet")]
 rotation = 6.28319
