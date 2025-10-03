@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 				break
 		
 		# TODO: Play sound effect
-		# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)
+		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.LIGHTNING)
 		_fire_timer = 0.0
 
 

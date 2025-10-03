@@ -15,6 +15,7 @@ speed = 0.0
 destroy_on_hit = false
 collider = NodePath("LightningNode2D/Area2D")
 sprite = NodePath("LightningNode2D/Sprite2D")
+sound_effect = 66
 
 [node name="LightningNode2D" type="Node2D" parent="."]
 
