@@ -31,6 +31,8 @@ func _ready() -> void:
 	tween.set_parallel()
 	tween.tween_property(self, "scale", Vector2(_final_scale, _final_scale), lifetime)
 	tween.tween_property(sprite, "modulate", Color.html(sprite_color + "00"), lifetime)
+	
+	AudioManager.create_audio_at_location(global_position, sound_effect)
 
 
 func _process(delta: float) -> void:

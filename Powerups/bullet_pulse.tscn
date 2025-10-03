@@ -83,6 +83,7 @@ lifetime = 0.25
 destroy_on_hit = false
 collider = NodePath("DamageArea2D")
 sprite = NodePath("Staff_Ring")
+sound_effect = 71
 
 [node name="Staff_Ring" type="Sprite2D" parent="."]
 z_index = -1
