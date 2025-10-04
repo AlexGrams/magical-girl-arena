@@ -19,6 +19,8 @@ var _original_character_id: int = 0
 var _is_level_three: bool = false
 ## Does this powerup apply knockback? Only applies for Pulses centered at the Powerup owner.
 var _has_knockback: bool = false
+## List of player IDs that are responsible for creating this Pulse bullet.
+var _pulse_chain_owners: Array[int] = []
 var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
 var _area_size_boost: bool = false
@@ -44,7 +46,7 @@ func _process(delta: float) -> void:
 ## Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 7
+		data.size() != 8
 		or typeof(data[0]) != TYPE_NODE_PATH	# Parent node path 
 		or typeof(data[1]) != TYPE_INT			# Original player ID
 		or typeof(data[2]) != TYPE_INT			# Power level
@@ -52,6 +54,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		or typeof(data[4]) != TYPE_FLOAT		# Crit chance
 		or typeof(data[5]) != TYPE_FLOAT		# Crit multiplier
 		or typeof(data[6]) != TYPE_BOOL			# Is boosted by Area Size charm
+		or typeof(data[7]) != TYPE_ARRAY		# All players who started the "chain" this Pulse is in.
 	):
 		push_error("Malformed data array")
 		return
@@ -77,6 +80,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if data[6]:
 		_area_size_boost = true
 		_final_scale *= 1.5
+	_pulse_chain_owners.assign(data[7])
 	_is_owned_by_player = is_owned_by_player
 	
 	# TODO: Stacking scaling
@@ -88,7 +92,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if GameState.player_characters[_original_character_id] == _owner:
 		_has_knockback = true
 	
-	if _original_character_id == multiplayer.get_unique_id():
+	# Tell relevant Pulse powerups that another bullet in their chain has been spawned.
+	if multiplayer.get_unique_id() in _pulse_chain_owners:
 		var powerup_pulse: PowerupPulse = GameState.get_local_player().get_node_or_null("PowerupPulse")
 		if powerup_pulse != null:
 			powerup_pulse.add_pulse_this_beat()
@@ -121,11 +126,14 @@ func _on_spread_area_2d_entered(area: Area2D) -> void:
 				_is_level_three,
 				_crit_chance,
 				_crit_multiplier,
-				_area_size_boost
+				_area_size_boost,
+				_pulse_chain_owners
 			)
 			other.add_status(status_pulse)
-		elif _is_level_three:
-			status_pulse.stack()
+		else:
+			status_pulse.add_chain_owners(_pulse_chain_owners)
+			if _is_level_three:
+				status_pulse.stack()
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.

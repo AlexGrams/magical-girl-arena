@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 		var status_pulse: Status = _owner.get_status("Pulse")
 		if status_pulse == null:
 			status_pulse = StatusPulse.new()
+			var pulse_chain_owners: Array[int] = [_id]
 			status_pulse.set_properties(
 				_id, 
 				_powerup_index,
@@ -35,11 +36,14 @@ func _process(delta: float) -> void:
 				current_level >= 3,
 				crit_chance,
 				crit_multiplier,
-				_area_size_boosted
+				_area_size_boosted,
+				pulse_chain_owners
 			)
 			_owner.add_status(status_pulse)
-		elif current_level >= 3:
-			status_pulse.stack()
+		else:
+			status_pulse.add_chain_owners([_id])
+			if current_level >= 3:
+				status_pulse.stack()
 		
 		# TODO: Play sound effect
 		# AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.CUPID_ARROW)

@@ -16,6 +16,8 @@ var _crit_chance: float = 0.0
 var _crit_multiplier: float = 1.0
 ## True if owning player has powerup level 3 or higher.
 var _is_level_three: bool = false
+## Set of player IDs that are responsible for this Pulse status. Keys are elements of the set.
+var _pulse_chain_owners: Dictionary = {}
 ## Does the Powerup owner have the Area Size charm?
 var _area_size_boost: bool = false
 ## How many stacks of this status there are.
@@ -33,7 +35,8 @@ func set_properties(
 		is_level_three: bool, 
 		crit_chance: float, 
 		crit_multiplier: float,
-		area_size_boost: bool
+		area_size_boost: bool,
+		pulse_chain_owners: Array[int]
 	) -> void:
 	
 	_owner_id = id
@@ -43,6 +46,8 @@ func set_properties(
 	_crit_chance = crit_chance
 	_crit_multiplier = crit_multiplier
 	_area_size_boost = area_size_boost
+	for chain_owner_id: int in pulse_chain_owners:
+		_pulse_chain_owners[chain_owner_id] = true
 	
 	duration = GameState.time - int(GameState.time)
 	# Special duration calculation if time is negative, after the boss has spawned.
@@ -82,10 +87,17 @@ func deactivate() -> void:
 				_is_level_three,
 				_crit_chance,
 				_crit_multiplier,
-				_area_size_boost
+				_area_size_boost,
+				_pulse_chain_owners.keys()
 			]
 		]
 	)
+
+
+## Add a new player ID as being responsible for creating this StatusPulse.
+func add_chain_owners(new_owners: Array[int]) -> void:
+	for id: int in new_owners:
+		_pulse_chain_owners[id] = true
 
 
 ## Stack this status effect, where each unique hit causes the Pulse created after this status wears off
