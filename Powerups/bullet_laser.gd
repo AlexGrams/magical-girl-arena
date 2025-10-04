@@ -57,6 +57,8 @@ func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
+	global_position = _starting_position.global_position
+	
 	var space_state = get_world_2d().direct_space_state
 	var end_point: Vector2 = _starting_position.global_position + (_pointer_location - _starting_position.global_position).normalized() * _max_range
 	var query := PhysicsRayQueryParameters2D.create(
