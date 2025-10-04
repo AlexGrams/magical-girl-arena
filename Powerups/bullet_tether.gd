@@ -62,6 +62,8 @@ func _physics_process(_delta: float) -> void:
 	if _owning_character == null:
 		return
 	
+	global_position = _starting_position.global_position
+	
 	var target_position: Vector2
 	var end_point: Vector2
 	
