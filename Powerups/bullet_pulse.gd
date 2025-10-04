@@ -31,8 +31,6 @@ func _ready() -> void:
 	tween.set_parallel()
 	tween.tween_property(self, "scale", Vector2(_final_scale, _final_scale), lifetime)
 	tween.tween_property(sprite, "modulate", Color.html(sprite_color + "00"), lifetime)
-	
-	AudioManager.create_audio_at_location(global_position, sound_effect)
 
 
 func _process(delta: float) -> void:
@@ -89,6 +87,11 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	# Only apply knockback on Pulses originating from the owning player.
 	if GameState.player_characters[_original_character_id] == _owner:
 		_has_knockback = true
+	
+	if _original_character_id == multiplayer.get_unique_id():
+		var powerup_pulse: PowerupPulse = GameState.get_local_player().get_node_or_null("PowerupPulse")
+		if powerup_pulse != null:
+			powerup_pulse.add_pulse_this_beat()
 
 
 ## Damaging area for Enemies. Apply knockback to damaged Enemies.

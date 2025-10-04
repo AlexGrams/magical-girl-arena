@@ -9,6 +9,7 @@ var _fire_timer: float = 0.0
 var _owner: PlayerCharacterBody2D = null
 ## Powerup owner's multiplayer ID.
 var _id: int = 0
+var _pulse_counts: int = 0
 
 
 func _ready() -> void:
@@ -63,3 +64,25 @@ func deactivate_powerup():
 
 func level_up():
 	current_level += 1
+
+
+## Add a count of how many pulses were created this frame which originate from this Powerup owner.
+## After waiting to account for network delay, play a different sound depending on how many pulses 
+## were created that were caused by this Powerup. 
+func add_pulse_this_beat() -> void:
+	_pulse_counts += 1
+	if _pulse_counts == 1:
+		await get_tree().create_timer(0.1, false).timeout
+		
+		var pulse_sfx := SoundEffectSettings.SOUND_EFFECT_TYPE.NONE
+		match _pulse_counts:
+			1:
+				pulse_sfx = SoundEffectSettings.SOUND_EFFECT_TYPE.PULSE_CHORD1 
+			2:
+				pulse_sfx = SoundEffectSettings.SOUND_EFFECT_TYPE.PULSE_CHORD2
+			3:
+				pulse_sfx = SoundEffectSettings.SOUND_EFFECT_TYPE.PULSE_CHORD3 
+			4:
+				pulse_sfx = SoundEffectSettings.SOUND_EFFECT_TYPE.PULSE_CHORD4 
+		AudioManager.create_audio_at_location(global_position, pulse_sfx)
+		_pulse_counts = 0

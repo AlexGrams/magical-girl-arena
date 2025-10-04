@@ -64,7 +64,7 @@ func deactivate() -> void:
 	
 	var crit: bool = randf() < _crit_chance
 	var total_damage: float = _damage * (1.0 if not crit else _crit_multiplier)
-	get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+	GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 		1, 
 		[
 			_PULSE_BULLET_SCENE, 
