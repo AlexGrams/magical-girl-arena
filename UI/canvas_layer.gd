@@ -30,6 +30,8 @@ extends CanvasLayer
 @export var _boss_health_text: Label = null
 ## Control for displaying and playing dialogue.
 @export var _dialogue_box: DialogueBox = null
+## Loading screen.
+@export var _loading: Control = null
 ## When visible, turns the screen gray.
 @export var _grayscale_filter: ColorRect = null
 ## Shows information about owned Powerups and Charms.
@@ -419,3 +421,11 @@ func update_information_panel(data: ItemData) -> void:
 ## Start a dialogue through the DialogueBox. Only call on server.
 func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	_dialogue_box.start_dialogue(conditions)
+
+
+func show_loading_screen() -> void:
+	_loading.show()
+
+
+func hide_loading_screen() -> void:
+	_loading.hide()

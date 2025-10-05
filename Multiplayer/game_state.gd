@@ -104,6 +104,8 @@ signal lobby_closed()
 signal player_characters_added(id: int, player_character: PlayerCharacterBody2D)
 # Emitted when all players are down
 signal game_over(has_won_game: bool)
+## Emitted when the game is unpaused by calling pause_game(false)
+signal unpaused()
 
 # Emitted after the last client disconnects from the host, or enough time passes.
 signal _no_clients_connected_or_timeout()
@@ -357,12 +359,13 @@ func join_lobby(new_lobby_id : int, new_player_name : String):
 	Steam.joinLobby(new_lobby_id)
 
 
-# Entry point for setting up the shooting portion of the game. 
-# Switches the scene and loads the players.
+## Entry point for setting up the shooting portion of the game. 
+## Switches the scene and loads the players. Map is replicated to clients using a MultiplayerSpawner.
 func start_game(selected_playground: String = ""):
 	assert(multiplayer.is_server())
 	
 	set_is_game_in_progress(true)
+	pause_game(true)
 	
 	if selected_playground != "":
 		_current_playground = selected_playground
@@ -402,12 +405,14 @@ func start_game(selected_playground: String = ""):
 	set_game_running.rpc(true)
 
 
-## Call after any connected player has finished loading the game locally.
+## Unpause and begin the game once everyone has loaded in. Call after any connected player 
+## has finished loading.
 @rpc("any_peer", "call_local")
 func client_game_loaded() -> void:
 	_players_loaded_in += 1
 	if _players_loaded_in >= len(players):
 		pause_game(false)
+		get_tree().get_root().get_node(main_menu_node_path).hide()
 
 
 # Called when the game ends, either by the players winning or losing
@@ -604,7 +609,7 @@ func quit_game(quitting_player: int):
 		set_is_game_in_progress(false)
 
 
-# Load the main game scene and hide the menu.
+## Load the main game scene.
 @rpc("authority", "call_local", "reliable")
 func load_game(selected_playground: String):
 	if not multiplayer.is_server():
@@ -612,7 +617,6 @@ func load_game(selected_playground: String):
 	
 	var new_playground = load(selected_playground).instantiate()
 	get_tree().get_root().add_child(new_playground, true)
-	get_tree().get_root().get_node(main_menu_node_path).hide()
 
 
 # Add exp to this player. Offer Powerups when leveling up.
@@ -699,5 +703,10 @@ func _on_player_died():
 func _on_player_revived():
 	players_down -= 1
 
+
+## The proper way to pause and unpause the game because it emits the "unpaused" signal.
 func pause_game(is_paused = true):
 	get_tree().paused = is_paused 
+	
+	if not is_paused:
+		unpaused.emit()

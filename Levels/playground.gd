@@ -78,7 +78,10 @@ func get_map_dialogue_condition() -> Constants.DialoguePlayCondition:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameState.pause_game(true)
+	# Show the loading screen while waiting for the other players to load in.
+	hud_canvas_layer.show_loading_screen()
+	GameState.unpaused.connect(hud_canvas_layer.hide_loading_screen, CONNECT_ONE_SHOT)
+	
 	GameState.set_playground(self)
 	GameState.client_game_loaded.rpc()
 	
@@ -121,9 +124,8 @@ func _ready() -> void:
 			return a.start_time_seconds > b.start_time_seconds
 		)
 		
-		# Play starting dialogue. Wait some time to ensure that everyone has loaded in.
-		# TODO: Remove once we have loading screens working.
-		await get_tree().create_timer(2.0).timeout
+		# Play starting dialogue.
+		await GameState.unpaused
 		hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.START, _map_dialogue_condition])
 
 

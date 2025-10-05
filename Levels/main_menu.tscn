@@ -134,7 +134,8 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "error_message", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "connection_stability_warning_control", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "error_message_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu", "settings", "shop", "lobby_list", "lobby", "char_select", "error_message", "loading", "main_menu_character_sprite", "main_menu_character_label", "main_menu_button_container", "version_label", "lobbies_list_searching_overlay", "lobbies_list_no_connection_overlay", "lobbies_list_no_lobbies_overlay", "lobbies_list_container", "main_menu_logo", "connecting_screen", "lobby_visibility_holder", "map_select_left_button", "map_select_right_button", "map_name_label", "map_preview_texture_rect", "map_locked_label", "connection_stability_warning_control", "players_holder", "can_buy_rerolls_icon", "character_select_button_holder", "lobby_visibility_public_button", "lobby_visibility_friends_button", "lobby_visibility_private_button", "start_game_label", "information_name", "information_description", "information_powerup_label", "information_powerup_texture", "information_powerup_description", "information_ult_label", "information_ult_texture", "information_ult_description", "error_message_label")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,6 +150,7 @@ lobby_list = NodePath("LobbyList")
 lobby = NodePath("Lobby")
 char_select = NodePath("CharacterSelection")
 error_message = NodePath("ErrorMessage")
+loading = NodePath("Loading")
 main_menu_character_sprite = NodePath("Main/CharacterAnimatedSprite")
 main_menu_character_label = NodePath("Main/CharacterLabel")
 main_menu_button_container = NodePath("Main/VBoxContainer")
@@ -910,6 +912,46 @@ alignment = 0
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
+[node name="Loading" type="Control" parent="."]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Loading"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErrorText" type="Label" parent="Loading"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.0
+offset_top = -353.0
+offset_right = 788.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_kechk")
+theme_override_fonts/font = ExtResource("31_gcfgr")
+theme_override_font_sizes/font_size = 64
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
 [connection signal="mouse_entered" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Main/VBoxContainer/Play_Label/LobbyButton" method="_on_mouse_entered"]
@@ -940,9 +982,9 @@ label = NodePath("..")
 [connection signal="mouse_exited" from="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" to="LobbyList/ReturntoMainMenu_Label/LobbyListBackButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Lobby/StartGame_Label/StartGameButton" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="Lobby/LeaveLobby_Label/LeaveButton" to="." method="leave_lobby"]
-[connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected" binds= [0]]
-[connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [1]]
-[connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected" binds= [2]]
+[connection signal="button_down" from="Lobby/LobbySettings/PublicLobby_Button" to="." method="_on_lobby_visibility_option_selected"]
+[connection signal="button_down" from="Lobby/LobbySettings/FriendsOnly_Button" to="." method="_on_lobby_visibility_option_selected"]
+[connection signal="button_down" from="Lobby/LobbySettings/InviteOnly_Button" to="." method="_on_lobby_visibility_option_selected"]
 [connection signal="button_down" from="Lobby/ShopButton/StartGameButton" to="." method="show_shop"]
 [connection signal="button_down" from="Lobby/ChangeCharButton/StartGameButton" to="." method="_show_char_select"]
 [connection signal="pressed" from="Lobby/LeftArrow_MapSelect" to="." method="_on_map_select_left_button_pressed"]

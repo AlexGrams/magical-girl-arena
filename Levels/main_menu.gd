@@ -25,6 +25,8 @@ const LOBBY_CONNECTION_STABILITY_PINGS: int = 10
 @export var char_select: Control
 ## Displays an error message if something goes wrong.
 @export var error_message: Control
+## Displays when transitioning from the Lobby screen to the actual game.
+@export var loading: Control
 
 @export_group("Main Menu")
 ## Character that is visible on the main menu and their nametag.
@@ -458,18 +460,29 @@ func _on_lobby_button_pressed(lobby_id: int) -> void:
 # The button that only the lobby host can press to begin the shooting part of the game.
 func _on_start_game_button_down() -> void:
 	_hide_main_menu.rpc()
+	await get_tree().process_frame
+	await get_tree().process_frame
 	GameState.start_game(Constants.MAP_DATA[_selected_map_index].scene_path)
+
 
 func _show_char_select() -> void:
 	char_select.show()
 
+
 func _hide_char_select() -> void:
 	char_select.hide()
 
+
+## Show the Loading screen while the main game loads.
 @rpc("any_peer", "call_local")
 func _hide_main_menu() -> void:
 	shop.hide()
-	self.hide()
+	lobby.hide()
+	loading.show()
+	GameState.unpaused.connect(func():
+		lobby.show()
+		loading.hide()
+	, CONNECT_ONE_SHOT)
 
 
 ## Change which other players can join this lobby.
