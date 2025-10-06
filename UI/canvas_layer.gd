@@ -2,6 +2,8 @@ class_name HUDCanvasLayer
 extends CanvasLayer
 
 
+## For choosing one thing to upgrade.
+@export var upgrade_screen: UpgradeScreenPanel = null
 ## For the Upgrade Any Powerup screen.
 @export var upgrade_any_screen: UpgradeAnyScreenPanel = null
 

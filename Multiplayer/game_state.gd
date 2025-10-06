@@ -81,7 +81,6 @@ var exp_for_next_level: float = 0.0
 var exp_per_level_curve: Curve = null
 # Current level
 var level: int = 1
-var players_selecting_upgrades: int = -1
 var game_running := false
 ## The time remaining in the game. Becoems a negative value once the timer reaches 0 and the boss spawns.
 var time: float = MAX_TIME
@@ -96,6 +95,8 @@ var _has_online_connection: bool = false
 var _local_ping_location: String = ""
 ## Path to the selected Playground-derived .tscn resource.
 var _current_playground: String = ""
+## Set of player IDs who have selected upgrades.
+var _players_selected_upgrades: Dictionary = {}
 
 signal player_list_changed()
 # Called when the host leaves the lobby.
@@ -557,12 +558,27 @@ func unregister_player(id: int):
 	
 	if game_running:
 		connected_players = max(connected_players - 1, 0)
+		
 		# Show text saying that a player left
 		playground.hud_canvas_layer.get_dialogue_box().show_single_line(
 			removed_player_name + " has left the game.",
 			Constants.Character.NONE,
 			load("res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png")
 		)
+		
+		# Resume the game if players are on the upgrading screen and the last person who needed
+		# to select an upgrade was the player that left. Otherwise, keep track that a person who
+		# did select an upgrade has left the game.
+		if (
+			multiplayer.is_server()
+			and _players_selected_upgrades.size() > 0 
+		):
+			if _players_selected_upgrades.erase(id):
+				playground.hud_canvas_layer.upgrade_screen.remove_player_done_selecting_upgrades.rpc()
+			elif _players_selected_upgrades.size() >= connected_players:
+				playground.hud_canvas_layer.upgrade_screen.update_players_selecting_upgrades.rpc()
+				_players_selected_upgrades.clear()
+				resume_game.rpc()
 	
 	player_list_changed.emit()
 
@@ -638,9 +654,6 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 		# Show and set up the upgrade screen
 		get_tree().paused = true
 		get_tree().get_root().get_node("Playground/CanvasLayer/UpgradeScreenPanel").setup()
-		
-		if multiplayer.is_server():
-			players_selecting_upgrades = connected_players
 	
 	for player in player_characters.values():
 		player.emit_gained_experience(experience, level)
@@ -668,20 +681,18 @@ func corrupted_enemy_defeated() -> void:
 	# Show and set up the upgrade screen
 	get_tree().paused = true
 	playground.hud_canvas_layer.upgrade_any_screen.setup()
-	
-	if multiplayer.is_server():
-		players_selecting_upgrades = connected_players
 
 
 # Resumes game when all players have finished selecting upgrades. Only call on server. 
 @rpc("any_peer", "call_local", "reliable")
-func player_selected_upgrade() -> void:
+func player_selected_upgrade(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 	
-	players_selecting_upgrades -= 1
+	_players_selected_upgrades[id] = true
 	
-	if players_selecting_upgrades <= 0:
+	if _players_selected_upgrades.size() >= connected_players:
+		_players_selected_upgrades.clear()
 		resume_game.rpc()
 
 

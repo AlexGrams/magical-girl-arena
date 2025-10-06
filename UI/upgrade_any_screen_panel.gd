@@ -100,7 +100,7 @@ func _on_upgrade_chosen():
 	if _cheat_mode:
 		return
 	
-	GameState.player_selected_upgrade.rpc_id(1)
+	GameState.player_selected_upgrade.rpc_id(1, multiplayer.get_unique_id())
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	_upgrades_holder.hide()

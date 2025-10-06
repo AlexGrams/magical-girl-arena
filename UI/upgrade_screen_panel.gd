@@ -1,4 +1,6 @@
+class_name UpgradeScreenPanel
 extends Panel
+## Screen that shows the player what powerups they can upgrade.
 
 
 ## How many upgrade choices are not multiplayer-specific.
@@ -106,6 +108,11 @@ func _ready() -> void:
 	for artifactdata: ArtifactData in _all_artifact_data:
 		_artifact_name_to_artifactdata[artifactdata.name] = artifactdata
 		_item_name_to_itemdata[artifactdata.name] = artifactdata
+	
+	multiplayer.peer_disconnected.connect(
+		func(id : int):
+			pass
+	)
 
 
 # Show the upgrade screen and set up the options provided to the player.
@@ -440,7 +447,7 @@ func _update_artifact_reroll_button() -> void:
 func _on_upgrade_chosen(itemdata: ItemData):
 	# This signal is connected to the player's function for adding or upgrading the powerup.
 	upgrade_chosen.emit(itemdata)
-	GameState.player_selected_upgrade.rpc_id(1)
+	GameState.player_selected_upgrade.rpc_id(1, multiplayer.get_unique_id())
 	
 	# If the upgrade was a unique artifact, prevent other players from getting that artifact on 
 	# subsequent levelups.
@@ -456,7 +463,7 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	powerup_reroll_button.hide()
 	artifact_reroll_button.hide()
 	
-	_update_players_selecting_upgrades.rpc()
+	update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
 
@@ -474,7 +481,7 @@ func _add_chosen_unique_artifact(unique_artifact_name: String) -> void:
 ## TODO Deprecated. Remove?
 func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	stat_upgrade_chosen.emit(stat_type)
-	GameState.player_selected_upgrade.rpc_id(1)
+	GameState.player_selected_upgrade.rpc_id(1, multiplayer.get_unique_id())
 	
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	upgrade_panels_holder.hide()
@@ -482,13 +489,13 @@ func _on_stat_upgrade_chosen(stat_type: Constants.StatUpgrades) -> void:
 	powerup_reroll_button.hide()
 	artifact_reroll_button.hide()
 	
-	_update_players_selecting_upgrades.rpc()
+	update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
 
 ## Update the PlayerReadyIndicators showing how many players are still selecting their upgrades.
 @rpc("any_peer", "call_local", "reliable")
-func _update_players_selecting_upgrades() -> void:
+func update_players_selecting_upgrades() -> void:
 	players_done_selecting_upgrades += 1
 	
 	if players_done_selecting_upgrades >= GameState.connected_players:
@@ -502,3 +509,10 @@ func _update_players_selecting_upgrades() -> void:
 	# Hide remaining indicators
 	for i in range(GameState.connected_players, GameState.MAX_PLAYERS):
 		_ready_indicators[i].hide()
+
+
+## Decrement the number of players that have selected upgrades. Called when a player that has selected
+## an upgrade has left the game.
+@rpc("any_peer", "call_local", "reliable")
+func remove_player_done_selecting_upgrades() -> void:
+	players_done_selecting_upgrades -= 1

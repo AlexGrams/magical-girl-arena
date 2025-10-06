@@ -148,8 +148,9 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlept"]
 bg_color = Color(0.901961, 0.25098, 0.25098, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("upgrade_any_screen", "_game_over_screen", "_settings_screen", "_retry_votes_container", "_timer_text", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_ultimate_anim_player", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_loading", "_grayscale_filter", "_powerup_information")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("upgrade_screen", "upgrade_any_screen", "_game_over_screen", "_settings_screen", "_retry_votes_container", "_timer_text", "_spectator_container", "_spectator_icon_parent", "_powerup_container", "_ultimate_texture", "_ultimate_progress_bar", "_ultimate_anim_player", "_stat_level_container", "_boss_health_bar", "_boss_health_text", "_dialogue_box", "_loading", "_grayscale_filter", "_powerup_information")]
 script = ExtResource("1_miafi")
+upgrade_screen = NodePath("UpgradeScreenPanel")
 upgrade_any_screen = NodePath("UpgradeAnyScreenPanel")
 _game_over_screen = NodePath("GameOverScreen")
 _settings_screen = NodePath("Settings")
