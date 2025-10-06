@@ -77,6 +77,7 @@ func save_game() -> void:
 		"perm_rerolls": GameState.perm_rerolls,
 		"powerup_rerolls": GameState.powerup_rerolls,
 		"artifact_rerolls": GameState.artifact_rerolls,
+		"character_unlocked_vale": GameState.vale_unlocked,
 		"map_complete_garden": GameState.map_complete_garden,
 		"map_complete_desert": GameState.map_complete_desert
 	}
@@ -158,6 +159,8 @@ func load_game() -> void:
 		GameState.powerup_rerolls = save_data["powerup_rerolls"]
 	if save_data.has("artifact_rerolls"):
 		GameState.artifact_rerolls = save_data["artifact_rerolls"]
+	if save_data.has("character_unlocked_vale"):
+		GameState.vale_unlocked = save_data["character_unlocked_vale"]
 	if save_data.has("map_complete_garden"):
 		GameState.map_complete_garden = save_data["map_complete_garden"]
 	if save_data.has("map_complete_desert"):

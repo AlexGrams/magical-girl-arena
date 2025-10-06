@@ -1,3 +1,4 @@
+class_name ShopItem
 extends Control
 
 @export var item_data:ShopItemData

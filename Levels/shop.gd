@@ -8,13 +8,13 @@ extends Control
 
 ## Buttons for items available for purchase
 @export_group("Rerolls")
-@export var reroll_item:Control
-@export var perm_reroll_item:Control
-@export var powerup_reroll_item:Control = null
-@export var artifact_reroll_item:Control = null
+@export var reroll_item:ShopItem
+@export var perm_reroll_item:ShopItem
+@export var powerup_reroll_item:ShopItem = null
+@export var artifact_reroll_item:ShopItem = null
 
 @export_group("Characters")
-@export var vale_item: Control = null
+@export var vale_item:ShopItem = null
 
 ### TO ADD A NEW ITEM:
 ## Connect button in _ready()
@@ -31,6 +31,7 @@ func _ready() -> void:
 	perm_reroll_item.button.button_down.connect(buy_perm_reroll)
 	powerup_reroll_item.button.button_down.connect(buy_powerup_reroll)
 	artifact_reroll_item.button.button_down.connect(buy_artifact_reroll)
+	vale_item.button.button_down.connect(buy_character_vale)
 
 
 # Updates the coin display text over time
@@ -88,6 +89,17 @@ func buy_artifact_reroll() -> void:
 	artifact_reroll_item.update_quantity(GameState.artifact_rerolls)
 	
 	SaveManager.save_game()
+
+
+func buy_character_vale() -> void:
+	if GameState.vale_unlocked or !has_enough_gold(vale_item):
+		return
+	
+	spend_gold(vale_item)
+	GameState.vale_unlocked = true
+	vale_item.update_quantity(1)
+	
+	SaveManager.save_game()
 #endregion
 
 #region Helper Functions
@@ -99,6 +111,9 @@ func update_all_quantities() -> void:
 	perm_reroll_item.update_quantity(GameState.perm_rerolls)
 	powerup_reroll_item.update_quantity(GameState.powerup_rerolls)
 	artifact_reroll_item.update_quantity(GameState.artifact_rerolls)
+	
+	vale_item.update_quantity(1 if GameState.vale_unlocked else 0)
+	
 	set_gold_display(GameState.get_gold())
 
 

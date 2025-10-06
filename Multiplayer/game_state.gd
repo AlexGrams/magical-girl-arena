@@ -35,6 +35,8 @@ var rerolls: int = 0
 var powerup_rerolls: int = 0
 ## Number of artifact-only rerolls the player currently has.
 var artifact_rerolls: int = 0
+## Is character Vale unlocked.
+var vale_unlocked: bool = false
 ## Has this player beaten the Garden map?
 var map_complete_garden: bool = false
 ## Completed map 2
