@@ -1,3 +1,4 @@
+class_name CharacterSelectControl
 extends Control
 
 @export var sprite_pos:Control
@@ -27,3 +28,8 @@ func _ready() -> void:
 
 func _on_character_select_button_pressed(button):
 	sprite.set_character(button.character)
+
+
+func update_character_buttons_selectable() -> void:
+	for button: CharacterSelectButton in character_select_container.get_children():
+		button.update_button_clickable()

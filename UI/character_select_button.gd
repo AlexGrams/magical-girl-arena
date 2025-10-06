@@ -30,7 +30,25 @@ func set_to_unselected():
 	$CharacterContainer/Border.self_modulate = unselected_border_color
 	$CharacterContainer.self_modulate = unselected_color
 
+func set_to_disabled():
+	$CharacterContainer/Border.self_modulate = Color.DIM_GRAY
+	$CharacterContainer.self_modulate = Color.DIM_GRAY
+
+## Check and set if this character can be selected.
+func update_button_clickable() -> void:
+	disabled = (
+		Constants.CHARACTER_DATA[character].character_unlocked_variable_name != ""
+		and not GameState.get(Constants.CHARACTER_DATA[character].character_unlocked_variable_name)
+	)
+	if not disabled:
+		set_to_unselected()
+	else:
+		set_to_disabled()
+
 func _on_mouse_entered() -> void:
+	if disabled:
+		return
+	
 	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.UI_BUTTON_HOVER)
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
@@ -38,6 +56,9 @@ func _on_mouse_entered() -> void:
 	tween.tween_property($CharacterContainer, "scale", original_scale * 1.10, 0.1)
 
 func _on_mouse_exited() -> void:
+	if disabled:
+		return
+	
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)

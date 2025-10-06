@@ -22,7 +22,7 @@ const LOBBY_CONNECTION_STABILITY_PINGS: int = 10
 ## The screen showing players in the current lobby.
 @export var lobby: Control
 ## The screen for character selection
-@export var char_select: Control
+@export var char_select: CharacterSelectControl
 ## Displays an error message if something goes wrong.
 @export var error_message: Control
 ## Displays when transitioning from the Lobby screen to the actual game.
@@ -466,6 +466,7 @@ func _on_start_game_button_down() -> void:
 
 
 func _show_char_select() -> void:
+	char_select.update_character_buttons_selectable()
 	char_select.show()
 
 
