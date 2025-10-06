@@ -574,9 +574,15 @@ func unregister_player(id: int):
 			and _players_selected_upgrades.size() > 0 
 		):
 			if _players_selected_upgrades.erase(id):
-				playground.hud_canvas_layer.upgrade_screen.remove_player_done_selecting_upgrades.rpc()
+				if playground.hud_canvas_layer.upgrade_screen.visible:
+					playground.hud_canvas_layer.upgrade_screen.remove_player_done_selecting_upgrades.rpc()
+				else:
+					playground.hud_canvas_layer.upgrade_any_screen.remove_player_done_selecting_upgrades.rpc()
 			elif _players_selected_upgrades.size() >= connected_players:
-				playground.hud_canvas_layer.upgrade_screen.update_players_selecting_upgrades.rpc()
+				if playground.hud_canvas_layer.upgrade_screen.visible:
+					playground.hud_canvas_layer.upgrade_screen.update_players_selecting_upgrades.rpc()
+				else:
+					playground.hud_canvas_layer.upgrade_any_screen.update_players_selecting_upgrades.rpc()
 				_players_selected_upgrades.clear()
 				resume_game.rpc()
 	

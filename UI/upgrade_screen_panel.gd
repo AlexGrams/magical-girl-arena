@@ -108,11 +108,6 @@ func _ready() -> void:
 	for artifactdata: ArtifactData in _all_artifact_data:
 		_artifact_name_to_artifactdata[artifactdata.name] = artifactdata
 		_item_name_to_itemdata[artifactdata.name] = artifactdata
-	
-	multiplayer.peer_disconnected.connect(
-		func(id : int):
-			pass
-	)
 
 
 # Show the upgrade screen and set up the options provided to the player.

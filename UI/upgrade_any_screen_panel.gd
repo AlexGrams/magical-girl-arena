@@ -105,13 +105,13 @@ func _on_upgrade_chosen():
 	# Set up and show the screen saying how many players are still choosing their upgrades.
 	_upgrades_holder.hide()
 	
-	_update_players_selecting_upgrades.rpc()
+	update_players_selecting_upgrades.rpc()
 	_players_selecting_upgrades_window.show()
 
 
 ## Update the PlayerReadyIndicators showing how many players are still selecting their upgrades.
 @rpc("any_peer", "call_local", "reliable")
-func _update_players_selecting_upgrades() -> void:
+func update_players_selecting_upgrades() -> void:
 	_players_done_selecting_upgrades += 1
 	
 	if _players_done_selecting_upgrades >= GameState.connected_players:
@@ -124,3 +124,10 @@ func _update_players_selecting_upgrades() -> void:
 	# Hide remaining indicators
 	for i in range(GameState.connected_players, GameState.MAX_PLAYERS):
 		_ready_indicators[i].hide()
+
+
+## Decrement the number of players that have selected upgrades. Called when a player that has selected
+## an upgrade has left the game.
+@rpc("any_peer", "call_local", "reliable")
+func remove_player_done_selecting_upgrades() -> void:
+	_players_done_selecting_upgrades -= 1
