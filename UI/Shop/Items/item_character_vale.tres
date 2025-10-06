@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://cq4gondpum82v"]
+
+[ext_resource type="Script" path="res://UI/Shop/shop_item_data.gd" id="1_4dr32"]
+[ext_resource type="Texture2D" uid="uid://bw7bs1ov0n768" path="res://Sprites/UI/CharacterIcons/ValeIcon.png" id="1_e5s77"]
+
+[resource]
+script = ExtResource("1_4dr32")
+item_name = "Vale"
+item_desc = ""
+icon = ExtResource("1_e5s77")
+disabled_icon = ExtResource("1_e5s77")
+price = 1000
+max_quantity = 1
+_sold_message = 0

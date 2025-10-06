@@ -3,14 +3,18 @@ extends Control
 
 ## Displays number of player's coins
 @export var coins_label:Label
+## Appears when the Shop is brought up from the Lobby screen.
+@export var hide_button: Button = null
 
 ## Buttons for items available for purchase
+@export_group("Rerolls")
 @export var reroll_item:Control
 @export var perm_reroll_item:Control
 @export var powerup_reroll_item:Control = null
 @export var artifact_reroll_item:Control = null
-## Appears when the Shop is brought up from the Lobby screen.
-@export var hide_button: Button = null
+
+@export_group("Characters")
+@export var vale_item: Control = null
 
 ### TO ADD A NEW ITEM:
 ## Connect button in _ready()
