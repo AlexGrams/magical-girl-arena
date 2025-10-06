@@ -1,0 +1,42 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Hair_Warp",
+			"GroupId": "",
+			"Name": "Hair_Warp"
+		},
+		{
+			"Id": "Roots",
+			"GroupId": "",
+			"Name": "Roots"
+		},
+		{
+			"Id": "Left_Sleeve_Rot",
+			"GroupId": "",
+			"Name": "Left_Sleeve_Rot"
+		},
+		{
+			"Id": "Right_Sleeve_Rot",
+			"GroupId": "",
+			"Name": "Right_Sleeve_Rot"
+		},
+		{
+			"Id": "Blink",
+			"GroupId": "",
+			"Name": "Blink"
+		},
+		{
+			"Id": "Dress_Warp",
+			"GroupId": "",
+			"Name": "Dress_Warp"
+		},
+		{
+			"Id": "Breathe",
+			"GroupId": "",
+			"Name": "Breathe"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": []
+}

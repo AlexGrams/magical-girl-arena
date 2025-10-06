@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://5k17n100mrgw"]
+[gd_scene load_steps=27 format=3 uid="uid://5k17n100mrgw"]
 
 [ext_resource type="Script" path="res://Player/PlayerSprite.gd" id="1_yo24w"]
 
@@ -2568,6 +2568,66 @@ tracks/60/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("GDCubismUserModel:Hair_Warp")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("GDCubismUserModel:Roots")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("GDCubismUserModel:Left_Sleeve_Rot")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("GDCubismUserModel:Dress_Warp")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("GDCubismUserModel:Right_Sleeve_Rot")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
 
 [sub_resource type="Animation" id="Animation_1ikwu"]
 resource_name = "Sweet_Death"
@@ -3399,6 +3459,339 @@ tracks/10/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_wi4e6"]
+resource_name = "MotherNature_Idle"
+length = 15.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Hair_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 7, 11, 14.9667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [15.0, 18.0, 12.0, 18.0, 15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Roots")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 6, 10, 14.9667),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [15.0, 30.0, 0.0, 30.0, 15.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Left_Sleeve_Rot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 7.5, 15.0333),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [15.0, 14.0, 15.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Blink")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 14.9667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Dress_Warp")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 14.9667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Breathe")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3, 4, 6, 7, 10, 11, 14, 14.9333),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 0.5),
+"update": 0,
+"values": [0.0, 15.0, 15.0, 0.0, 0.0, 15.0, 15.0, 0.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GDCubismUserModel:Right_Sleeve_Rot")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 7.5, 15),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [15.0, 16.0, 15.0]
+}
+
+[sub_resource type="Animation" id="Animation_rle6h"]
+resource_name = "MotherNature_Walking"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Hair_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, -2, 0.5),
+"update": 0,
+"values": [8.0, 4.0, 8.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Roots")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [30.0, 15.0, 30.0, 15.0, 30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Left_Sleeve_Rot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(0.5, -2, 0.5, -2, 0.5),
+"update": 0,
+"values": [9.0, 8.0, 9.0, 8.0, 9.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Dress_Warp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 30.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Right_Sleeve_Rot")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(0.5, -2, 0.5, -2, 0.5),
+"update": 0,
+"values": [7.0, 6.0, 7.0, 6.0, 7.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Breathe")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [30.0, 15.0, 30.0]
+}
+
+[sub_resource type="Animation" id="Animation_06bcc"]
+resource_name = "MotherNature_Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Blink")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.633333, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 1, 0.5),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 100)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Hair_Warp")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [15.0, 6.905, 6.905, 18.334]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Roots")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [15.0, 0.0, 0.0, 30.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Left_Sleeve_Rot")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [15.0, 5.238, 5.238, 15.952]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GDCubismUserModel:Right_Sleeve_Rot")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [15.0, 27.381, 27.381, 12.619]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GDCubismUserModel:Dress_Warp")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 30.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GDCubismUserModel:Breathe")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [0.0, 30.0, 30.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_o4vir"]
+resource_name = "MotherNature_Walking_2"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GDCubismUserModel:Hair_Warp")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [12.895, 21.316, 12.895]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GDCubismUserModel:Roots")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [30.0, 0.0, 30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GDCubismUserModel:Left_Sleeve_Rot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [11.841, 17.63, 11.841]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GDCubismUserModel:Dress_Warp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [0.0, 30.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GDCubismUserModel:Right_Sleeve_Rot")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [18.158, 11.842, 18.158]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g5ukv"]
 _data = {
 "Amber_Death": SubResource("Animation_tsxkt"),
@@ -3410,6 +3803,10 @@ _data = {
 "Goth_Death": SubResource("Animation_hhfcr"),
 "Goth_Idle": SubResource("Animation_417q2"),
 "Goth_Walking": SubResource("Animation_a68ms"),
+"MotherNature_Death": SubResource("Animation_06bcc"),
+"MotherNature_Idle": SubResource("Animation_wi4e6"),
+"MotherNature_Walking": SubResource("Animation_rle6h"),
+"MotherNature_Walking_2": SubResource("Animation_o4vir"),
 "RESET": SubResource("Animation_63lcr"),
 "Sweet_Death": SubResource("Animation_1ikwu"),
 "Sweet_Idle": SubResource("Animation_12l15"),
@@ -3425,7 +3822,7 @@ script = ExtResource("1_yo24w")
 gdcubism_user_model = NodePath("GDCubismUserModel")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
-assets = "res://addons/gd_cubism/example/res/live2d/Amber/runtime/Amber.model3.json"
+assets = "res://addons/gd_cubism/example/res/live2d/MotherNature/runtime/MotherNature.model3.json"
 load_expressions = false
 load_motions = false
 parameter_mode = 1
@@ -3434,25 +3831,13 @@ anim_loop = false
 anim_loop_fade_in = true
 anim_expression = "exp_01"
 anim_motion = "Idle_0"
-Breathe = 0.0
+Hair_Warp = 15.0
+Roots = 15.0
+Left_Sleeve_Rot = 15.0
+Right_Sleeve_Rot = 15.0
 Blink = 0.0
-Frown = 0.0
-Earring_Left = 0.5
-Earring_Right = 0.5
-Head_Rot = 0.5
-Arm_Left_Rot = 0.5
-Arm_Right = 0.5
-Torso_Ro = 0.5
-Torso_UpDown = 0.5
-Torso_Sway = 0.5
-Pant_L_Top_Rot = 0.5
-Pant_R_Top_Rot = 0.5
-Pant_L_Bot_Rot = 0.0
-Pant_R_Bot_Rot = 0.0
-Hair_War = 0.5
-Belt_Warp = 0.0
-Pants_Base_Warp = 0.0
-Pants_Base_Warp_Horizontal = 0.0
+Dress_Warp = 0.0
+Breathe = 0.0
 disable_3d = true
 transparent_bg = true
 gui_disable_input = true
