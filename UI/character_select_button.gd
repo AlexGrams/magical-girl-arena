@@ -36,10 +36,7 @@ func set_to_disabled():
 
 ## Check and set if this character can be selected.
 func update_button_clickable() -> void:
-	disabled = (
-		Constants.CHARACTER_DATA[character].character_unlocked_variable_name != ""
-		and not GameState.get(Constants.CHARACTER_DATA[character].character_unlocked_variable_name)
-	)
+	disabled = not Constants.CHARACTER_DATA[character].get_is_unlocked()
 	if not disabled:
 		set_to_unselected()
 	else:

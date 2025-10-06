@@ -33,3 +33,11 @@ extends Resource
 @export var icon_uid: String
 ## The name of the boolean variable in GameState that is true if this character is playable, if any.
 @export var character_unlocked_variable_name: String
+
+
+## Returns true if this character is unlocked.
+func get_is_unlocked() -> bool:
+	return (
+		character_unlocked_variable_name == "" 
+		or GameState.get(character_unlocked_variable_name)
+	)
