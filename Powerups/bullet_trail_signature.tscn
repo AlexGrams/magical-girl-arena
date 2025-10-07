@@ -1,70 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhfk2of0unc7x"]
+[gd_scene load_steps=6 format=3 uid="uid://dhfk2of0unc7x"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_trail_signature.gd" id="1_cf637"]
-[ext_resource type="Script" path="res://Powerups/trail_sprite.gd" id="2_uex7y"]
-[ext_resource type="Texture2D" uid="uid://cqv8hq3o5id2s" path="res://Sprites/Powerups/Trail_BlueFlower.png" id="3_ie2dw"]
-[ext_resource type="Texture2D" uid="uid://7eg17co3thlh" path="res://Sprites/Powerups/Trail_PinkFlower.png" id="4_ncv3f"]
-[ext_resource type="Texture2D" uid="uid://c2ny46h74qsb2" path="res://Sprites/Powerups/Trail_WhiteFlower.png" id="5_kvf2j"]
+[ext_resource type="Texture2D" uid="uid://cku2sjqp835o1" path="res://Sprites/Abilities/MotherNature_Ultimate.png" id="2_1mseu"]
 
-[sub_resource type="Animation" id="Animation_akx0t"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_4gi2i"]
+resource_name = "grow"
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Flower1:scale")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.25, 0.2501),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
 "update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_x24uj"]
-resource_name = "grow_flowers"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flower1:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
+"values": [Vector2(0, 0), Vector2(0.15, 0.15), Vector2(0.13, 0.13), Vector2(1.2, 1.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flower2:scale")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(-2, -2),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Flower3:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
+"values": [0.0, 3.14159]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u2x01"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4p4oc"]
 _data = {
-"RESET": SubResource("Animation_akx0t"),
-"grow_flowers": SubResource("Animation_x24uj")
+"grow": SubResource("Animation_4gi2i")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
@@ -73,44 +42,23 @@ size = Vector2(66.5, 67)
 [node name="BulletTrail" type="Node2D" node_paths=PackedStringArray("_flower_sprites", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_cf637")
-_flower_sprites = [NodePath("TrailSprite/Flower1"), NodePath("TrailSprite/Flower2"), NodePath("TrailSprite/Flower3")]
+_flower_sprites = [NodePath(""), NodePath(""), NodePath("")]
 speed = 0.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
-sprite = NodePath("TrailSprite")
+sprite = NodePath("")
 
-[node name="TrailSprite" type="Sprite2D" parent="." node_paths=PackedStringArray("flower1", "flower2", "flower3")]
+[node name="Flower1" type="Sprite2D" parent="."]
 z_index = -1
-scale = Vector2(0.15, 0.15)
-script = ExtResource("2_uex7y")
-trail1 = ExtResource("3_ie2dw")
-trail2 = ExtResource("4_ncv3f")
-trail3 = ExtResource("5_kvf2j")
-flower1 = NodePath("Flower1")
-flower2 = NodePath("Flower2")
-flower3 = NodePath("Flower3")
+rotation = 3.14159
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("2_1mseu")
 
-[node name="Flower1" type="Sprite2D" parent="TrailSprite"]
-self_modulate = Color(1, 0, 1, 1)
-position = Vector2(-116.667, -123.333)
-texture = ExtResource("4_ncv3f")
-
-[node name="Flower2" type="Sprite2D" parent="TrailSprite"]
-self_modulate = Color(1, 0, 1, 1)
-position = Vector2(-26.6667, 123.333)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_kvf2j")
-
-[node name="Flower3" type="Sprite2D" parent="TrailSprite"]
-self_modulate = Color(1, 0, 1, 1)
-position = Vector2(116.667, -60)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("3_ie2dw")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TrailSprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Flower1"]
 libraries = {
-"": SubResource("AnimationLibrary_u2x01")
+"": SubResource("AnimationLibrary_4p4oc")
 }
+autoplay = "grow"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 10
