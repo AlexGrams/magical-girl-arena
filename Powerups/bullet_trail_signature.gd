@@ -12,9 +12,18 @@ func _on_area_2d_entered(area: Area2D) -> void:
 	super(area)
 	
 	var other: Node2D = area.get_parent()
-	if other is PlayerCharacterBody2D and other.health < other.health_max:
+	if (
+			_heal_active 
+			and other is PlayerCharacterBody2D 
+			and other.health < other.health_max
+	):
 		if other == GameState.get_local_player():
 			other.take_damage(-_heal_amount)
+			_destroy.rpc_id(1)
 		_heal_active = false
-		for flower: Sprite2D in _flower_sprites:
-			flower.self_modulate = Color.WHITE
+
+
+## Only call on server.
+@rpc("any_peer", "call_local")
+func _destroy() -> void:
+	queue_free()
