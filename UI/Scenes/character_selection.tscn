@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfbm3j6d0el6h"]
+[gd_scene load_steps=17 format=3 uid="uid://bfbm3j6d0el6h"]
 
 [ext_resource type="PackedScene" uid="uid://cjrntg5ql7pse" path="res://UI/character_select_button.tscn" id="1_coej5"]
 [ext_resource type="Script" path="res://UI/Scenes/character_selection.gd" id="1_wf478"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://douk8d6fdvxg5" path="res://Sprites/UI/CharacterIcons/DoveIcon.png" id="5_73sse"]
 [ext_resource type="Texture2D" uid="uid://ddgyhot3acfxx" path="res://Sprites/UI/CharacterIcons/AmberIcon.png" id="7_4g5j1"]
 [ext_resource type="PackedScene" uid="uid://0yp250nwjpaf" path="res://UI/outline_label.tscn" id="7_ae74i"]
+[ext_resource type="Texture2D" uid="uid://lkuh3r6fnxi3" path="res://Sprites/UI/CharacterIcons/MotherNatureIcon.png" id="8_3fuhb"]
 [ext_resource type="Theme" uid="uid://cm00w471agtef" path="res://Sprites/UI/description_white_with_shadow_text.tres" id="8_qif5p"]
 [ext_resource type="Texture2D" uid="uid://b58kg30w3qryj" path="res://Sprites/UI/CharacterInfoIcon.png" id="9_qhbeq"]
 [ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="10_n8ys2"]
@@ -114,7 +115,7 @@ image = ExtResource("7_4g5j1")
 [node name="CharacterSelectButton6" parent="CharacterSelectContainer" instance=ExtResource("1_coej5")]
 layout_mode = 2
 character = 6
-image = ExtResource("4_745yc")
+image = ExtResource("8_3fuhb")
 
 [node name="CharacterInformationContainer" type="VBoxContainer" parent="."]
 layout_mode = 0

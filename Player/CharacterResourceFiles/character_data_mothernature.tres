@@ -2,23 +2,23 @@
 
 [ext_resource type="Texture2D" uid="uid://bwvj736th2f3v" path="res://Sprites/Powerups/Trail_Icon.png" id="1_qsn6e"]
 [ext_resource type="Script" path="res://Player/character_data.gd" id="2_sukoj"]
-[ext_resource type="Texture2D" uid="uid://dvs8x3qvanj73" path="res://Plum.png" id="3_mgbqf"]
+[ext_resource type="Texture2D" uid="uid://cku2sjqp835o1" path="res://Sprites/Abilities/MotherNature_Ultimate.png" id="3_lk2ma"]
 
 [resource]
 script = ExtResource("2_sukoj")
 name = "MotherNature"
 display_name = "Mother Nature"
-description = "XX"
+description = "Earth's oldest magical girl. She takes on many shapes, varying with the environment.  None have ever witnessed her true form. She is capable of both impossible miracles and devastating carnage."
 base_powerup_data = "res://Powerups/PowerupDataResourceFiles/powerupdata_trail.tres"
 base_powerup_name = "Nature's Path"
 base_powerup_texture = ExtResource("1_qsn6e")
 ult_name = "First Bloom"
-ult_description = "Create a giant flower that continuously damages enemies and heals players within its radius."
-ult_texture = ExtResource("3_mgbqf")
+ult_description = "Create a giant flower that damages enemies and heals allies."
+ult_texture = ExtResource("3_lk2ma")
 model_file_path = "res://addons/gd_cubism/example/res/live2d/MotherNature/runtime/MotherNature.model3.json"
 corrupted_model_file_path = "res://addons/gd_cubism/example/res/live2d/Vale/runtime/Vale.model3.json"
 model_scale_multiplier = 0.35
 offset_height = -50.0
 ultimate_ability = "res://Abilities/ability_ult_mothernature.tscn"
-icon_uid = "uid://bw7bs1ov0n768"
+icon_uid = "uid://lkuh3r6fnxi3"
 character_unlocked_variable_name = "map_complete_garden"
