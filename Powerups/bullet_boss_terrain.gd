@@ -15,6 +15,12 @@ const Y_VALUES:Array[float] = [-150, -75, 0, 75, 150]
 @export var _terrain_sprite: Sprite2D
 ## GPUParticles2D for Dust cloud VFX
 @export var _dust_cloud_particles: Resource
+## SFX for rumbling cracks
+@export var _rumbling_SFX: AudioStream
+## SFX for terrain bursting
+@export var _terrain_SFX: AudioStream
+## SFX audio player
+@export var _audio_player: AudioStreamPlayer2D
 
 var _tell_timer: float = 0.0
 var _damage_timer: float = 0.0
@@ -25,6 +31,9 @@ var _terrain_has_appeared: bool = false
 
 
 func _ready() -> void:
+	# Play rumbling audio
+	_audio_player.stream = _rumbling_SFX
+	_audio_player.play()
 	# Show rumbling cracks
 	_rumbling_sprite.show()
 	var tween = create_tween()
@@ -75,6 +84,10 @@ func show_terrain():
 	_terrain_has_appeared = true
 	_rumbling_sprite.hide()
 	_terrain_sprite.show()
+	
+	# Audio plays
+	_audio_player.stream = _terrain_SFX
+	_audio_player.play()
 	
 	# Terrain pops up
 	var tween = create_tween()

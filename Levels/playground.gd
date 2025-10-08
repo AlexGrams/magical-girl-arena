@@ -45,6 +45,8 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 @export var _lightning_arc_scene: String = ""
 ## Animation to play when the boss spawns
 @export var boss_animation: PackedScene = preload("res://Sprites/Enemy/Corvus_Summoning_Animation.tscn")
+## Sound effect to play when boss spawns
+@export var boss_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 ## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
 var drop_weight_exp: float = 15.0
@@ -235,7 +237,7 @@ func _spawn_boss() -> void:
 	var cutscene_boss_animation = _spawn_boss_animation()
 	# Wait for animation length
 	await get_tree().create_timer(1.7).timeout
-	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.CORVUS_SUMMON)
+	AudioManager.create_audio(boss_sfx)
 	
 	# Make scene dark
 	_grow_darkness() 

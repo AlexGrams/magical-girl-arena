@@ -8,6 +8,8 @@ extends Bullet
 ## Visual for the scream. 
 ## Light source allows it to be blocked by terrain with LightOccluder2Ds
 @export var _point_light: Node2D
+## Sound effect to play during warning light
+@export var _warning_SFX: SoundEffectSettings.SOUND_EFFECT_TYPE
 
 var _tell_timer: float = 0.0
 
@@ -19,9 +21,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _tell_timer > 0.0:
 		# Stage 1: Warn that the attack is coming.
+		# Play SFX that matches warning length
+		AudioManager.create_audio_at_location(global_position, _warning_SFX, true, _tell_timer)
 		_tell_timer -= delta
 		if _tell_timer <= 0.0:
-			# Stage 2: Deal damage.
+			# Stage 2: Deal damage. Play SFX.
+			AudioManager.create_audio_at_location(global_position, sound_effect)
 			_point_light.play_scream()
 			await get_tree().create_timer(0.2).timeout
 			# Attempt to damage the local player.

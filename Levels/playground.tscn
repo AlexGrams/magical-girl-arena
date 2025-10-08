@@ -509,6 +509,7 @@ point_light = NodePath("PointLight2D")
 _map_data_path = "res://Levels/MapData/map_data_valley.tres"
 _damage_indicator_scene = "res://UI/damage_indicator.tscn"
 _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
+boss_sfx = 34
 
 [node name="Background" type="TextureRect" parent="."]
 light_mask = 3

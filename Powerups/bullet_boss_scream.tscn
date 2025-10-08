@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3hdqr2f4blt8"]
+[gd_scene load_steps=5 format=3 uid="uid://d3hdqr2f4blt8"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_scream.gd" id="1_lkea8"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_wn3ge"]
-[ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_2bqbk"]
 [ext_resource type="PackedScene" uid="uid://dpig7mwe0fs7k" path="res://Enemies/scream_light.tscn" id="4_22hlj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
@@ -13,10 +12,12 @@ scale = Vector2(2, 2)
 script = ExtResource("1_lkea8")
 _tell_time = 3.0
 _point_light = NodePath("Scream_Light")
+_warning_SFX = 77
 speed = 1.25
 lifetime = 5.0
 destroy_on_hit = false
 collider = NodePath("Area2D")
+sound_effect = 76
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -26,12 +27,6 @@ damage = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_tg1bm")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_2bqbk")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
 
 [node name="Scream_Light" parent="." instance=ExtResource("4_22hlj")]
 scale = Vector2(4, 4)

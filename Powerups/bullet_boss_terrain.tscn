@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dgo3b8qjagkkw"]
+[gd_scene load_steps=13 format=3 uid="uid://dgo3b8qjagkkw"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_terrain.gd" id="1_kvdab"]
 [ext_resource type="Texture2D" uid="uid://4d2ehixrugtb" path="res://Sprites/Map/Desert/Chain_Arc.png" id="2_e37qn"]
 [ext_resource type="PackedScene" uid="uid://bgcwlfs70p8mt" path="res://Sprites/dust_cloud_particles.tscn" id="2_l8x80"]
+[ext_resource type="AudioStream" uid="uid://smdto3jn1vlx" path="res://Audio/SFX/Constellations/Andromeda_Rumbling.mp3" id="3_gx4g0"]
 [ext_resource type="Texture2D" uid="uid://c4afb5uhqi5et" path="res://Sprites/Map/Desert/Rumbling_Cracks.png" id="3_vpxfr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_x0orq"]
-[ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_x57p0"]
+[ext_resource type="AudioStream" uid="uid://onfsawsjxi03" path="res://Audio/SFX/Constellations/Andromeda_Terrain.mp3" id="4_ch8dh"]
 
 [sub_resource type="Animation" id="Animation_i4xto"]
 length = 0.001
@@ -50,13 +51,16 @@ size = Vector2(68, 307)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e54xu"]
 polygon = PackedVector2Array(-34, -154.5, 34, -154.5, 34.5, 152.5, -34, 153.5)
 
-[node name="BulletBossTerrain" type="Node2D" node_paths=PackedStringArray("_static_body", "_rumbling_sprite", "_terrain_sprite", "collider", "sprite")]
+[node name="BulletBossTerrain" type="Node2D" node_paths=PackedStringArray("_static_body", "_rumbling_sprite", "_terrain_sprite", "_audio_player", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_kvdab")
 _static_body = NodePath("StaticBody2D")
 _rumbling_sprite = NodePath("RumblingSprite")
 _terrain_sprite = NodePath("ChainArcSprite")
 _dust_cloud_particles = ExtResource("2_l8x80")
+_rumbling_SFX = ExtResource("3_gx4g0")
+_terrain_SFX = ExtResource("4_ch8dh")
+_audio_player = NodePath("AudioStreamPlayer2D")
 speed = 1.25
 lifetime = 5.0
 destroy_on_hit = false
@@ -104,10 +108,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_x57p0")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
+bus = &"SFX"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_e54xu")

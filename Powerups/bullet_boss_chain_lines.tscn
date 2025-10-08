@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Powerups/bullet_boss_chain_lines.gd" id="1_q50an"]
 [ext_resource type="Texture2D" uid="uid://b7jjqxs24jnyf" path="res://Sprites/Map/Desert/Chain_Straight.png" id="2_akbep"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_hogav"]
-[ext_resource type="AudioStream" uid="uid://dph5gf6vm7pvv" path="res://Audio/SFX/Powerups/Orbit_Sparkle_Loop.mp3" id="4_3ti3k"]
+[ext_resource type="AudioStream" uid="uid://dh5phrqqywfi6" path="res://Audio/SFX/Constellations/Andromeda_Chains.mp3" id="4_6t7xl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg1bm"]
 size = Vector2(3081.5, 38.5)
@@ -11,9 +11,10 @@ size = Vector2(3081.5, 38.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60hle"]
 size = Vector2(3079, 35.5)
 
-[node name="BulletBossChainLines" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+[node name="BulletBossChainLines" type="Node2D" node_paths=PackedStringArray("_audio_player", "collider", "sprite")]
 scale = Vector2(2, 2)
 script = ExtResource("1_q50an")
+_audio_player = NodePath("AudioStreamPlayer2D")
 speed = 1.25
 lifetime = 4.0
 destroy_on_hit = false
@@ -35,9 +36,9 @@ position = Vector2(0.25, 0.75)
 shape = SubResource("RectangleShape2D_tg1bm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_3ti3k")
-volume_db = -20.0
+stream = ExtResource("4_6t7xl")
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -6,6 +6,8 @@ const OFF_MAP_DISPLACEMENT: float = 5000.0
 
 ## How long it takes the chain to move into its position on the map.
 @export var _travel_time: float = 1.0
+## Audio play that plays the chain sound effect
+@export var _audio_player: AudioStreamPlayer2D
 
 var _travel_timer: float = 0.0
 ## Displacement per second of the chain while it is moving.
@@ -19,6 +21,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if lifetime > 0.0:
 		if _travel_timer > 0.0:
+			# Play chain sound again
+			if !_audio_player.playing:
+				_audio_player.play()
 			# Stage 1: Move into the map
 			global_position += _velocity * delta
 			_travel_timer -= delta
@@ -27,7 +32,13 @@ func _process(delta: float) -> void:
 			lifetime -= delta
 			if lifetime <= 0.0:
 				_travel_timer = _travel_time
+			# Make sure chain sound doesn't play
+			if _audio_player.playing:
+				_audio_player.stop()
 	else:
+		# Play chain sound again
+		if !_audio_player.playing:
+			_audio_player.play()
 		# Stage 3: Move off the map
 		global_position += _velocity * delta
 		_travel_timer -= delta
