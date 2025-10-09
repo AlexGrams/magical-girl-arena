@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://nyg4qhq25jmb"]
+[gd_scene load_steps=4 format=3 uid="uid://blclg3yk48m7s"]
 
 [ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="1_p51q4"]
 [ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="2_eiqex"]
@@ -9,661 +9,822 @@
 [node name="Tufts_1" type="Node2D" parent="."]
 
 [node name="Sprite2D14" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1374, 702)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-192, 1002)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(916, 708)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D17" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(798, 1170)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(342, 328)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D19" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1540, 90)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1302, -690)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(246, -952)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D22" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(664, -1636)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-948, -1218)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-948, -1218)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-748, -1838)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D26" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1638, -926)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D27" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1760, 798)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-328, 1818)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(940, 1598)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-276, 254)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1370, -168)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D32" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-350, -628)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(300, -424)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1792, 264)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-496, 184)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D36" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-664, 24)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D37" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-616, 228)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D38" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-672, 136)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D39" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(988, -16)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D40" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1268, 128)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D41" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1456, -100)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D42" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1384, 268)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D43" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1524, 400)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D44" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1444, 664)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D45" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(748, 740)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D46" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(232, 756)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D47" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-76, 380)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D48" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-224, 348)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D49" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1188, 184)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D50" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1592, 228)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D51" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1620, -120)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D52" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(116, 1004)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D53" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-412, 1060)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D54" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-460, 1324)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D55" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-56, 1264)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D56" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-268, 1532)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D57" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(280, 1660)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D58" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(660, 1460)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D59" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(344, 1204)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D60" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1184, 1188)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D61" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1296, 872)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D62" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(864, 972)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D63" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1724, 276)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D64" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1568, -568)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D65" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1428, -1004)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D66" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(948, -832)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D67" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1032, -1164)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D68" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(792, -1436)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D69" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(292, -1204)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D70" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(172, -1608)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D71" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-24, -1212)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D72" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-516, -1616)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D73" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-680, -1380)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D74" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-884, -1572)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D75" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1296, -988)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D76" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-734, -1048)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D77" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1046, -824)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D78" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-330, -896)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D79" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-422, -1160)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D80" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-818, -728)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D81" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-690, -480)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D82" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1178, -480)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D83" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1486, 28)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D84" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1830, -472)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D85" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1486, -640)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D86" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-104, -342)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D87" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1268, 1320)
 texture = ExtResource("1_p51q4")
 
 [node name="Sprite2D88" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1180, 1400)
 texture = ExtResource("1_p51q4")
 
 [node name="Tufts_2" type="Node2D" parent="."]
 
 [node name="Sprite2D30" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1646, 886)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1810, -526)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D32" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(926, 258)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(234, 1426)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-928, 1262)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-350, 620)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D36" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1220, -1332)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D37" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-66, -1838)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D38" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1310, -1274)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D39" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(812, -1088)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D40" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-336, -1324)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D41" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-94, -1460)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D42" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1322, 924)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D43" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1030, 76)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D44" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-916, -580)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D45" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-530, -58)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D46" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(280, -312)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D47" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(112, 342)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D48" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(398, 876)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D49" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-606, 1626)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D50" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-774, 1788)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D51" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-916, 1512)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D52" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-660, 1222)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D53" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1440, 1094)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D54" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1810, -130)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D55" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1312, -776)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D56" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1730, -688)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D57" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-956, -1044)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D58" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1414, -1124)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D59" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-654, -1232)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D60" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-304, -1756)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D61" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(422, -1366)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D62" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(408, -1756)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D63" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1048, -1412)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D64" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(450, -1090)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D65" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(706, -868)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D66" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-162, -962)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D67" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1150, -922)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D68" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1682, -754)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D69" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1190, -572)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D70" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1756, -356)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D71" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1286, 8)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D72" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1546, 236)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D73" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1466, 862)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D74" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1332, 1144)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D75" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1076, 1440)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D76" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(626, 1784)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D77" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-94, 1790)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D78" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(80, 1796)
 texture = ExtResource("2_eiqex")
 
 [node name="Sprite2D79" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(604, 1104)
 texture = ExtResource("2_eiqex")
 
 [node name="Grass" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -671,157 +832,193 @@ texture = ExtResource("3_evhq5")
 position = Vector2(672, 316)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass3"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -829,157 +1026,193 @@ texture = ExtResource("3_evhq5")
 position = Vector2(-932, 384)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass2"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -987,157 +1220,193 @@ texture = ExtResource("3_evhq5")
 position = Vector2(142, 698)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass4"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -1145,157 +1414,193 @@ texture = ExtResource("3_evhq5")
 position = Vector2(-1110, 1048)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass5"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -1303,157 +1608,193 @@ texture = ExtResource("3_evhq5")
 position = Vector2(660, 1102)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass6"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")
 
@@ -1461,156 +1802,192 @@ texture = ExtResource("3_evhq5")
 position = Vector2(-682, 1438)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(642, -748)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(452, -734)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(206, -756)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D7" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-150, -744)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(12, -720)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-353.5, -725.5)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D3" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(262, -724)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(452, -694)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D5" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(670, -670)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(334, -648)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(102, -696)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-36, -656)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D13" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(134, -600)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(482, -592)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-226, -608)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-528, -684)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D17" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-618, -610)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-420, -554)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D19" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-214, -534)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-18, -514)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(236, -548)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D22" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(112, -458)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(348, -520)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(522, -518)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(408, -492)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D26" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(594, -472)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D27" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-462, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-276, -466)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-382, -444)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-220, -442)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(-86, -426)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D32" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(480, -434)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(774, -616)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(906, -590)
 texture = ExtResource("3_evhq5")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(786, -540)
 texture = ExtResource("3_evhq5")
 flip_h = true
 
 [node name="Sprite2D36" type="Sprite2D" parent="Grass7"]
+light_mask = 3
 position = Vector2(1022, -482)
 texture = ExtResource("3_evhq5")

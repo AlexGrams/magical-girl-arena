@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7nixhj7p80g7"]
+[gd_scene load_steps=6 format=3 uid="uid://dt36hr2i6od1i"]
 
 [ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="1_5jbo6"]
 [ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="2_uvidj"]
@@ -7,805 +7,1009 @@
 [ext_resource type="Texture2D" uid="uid://u4wfp1y4rhvt" path="res://Sprites/Map/Desert/Desert_Pebble.png" id="5_3d0oe"]
 
 [node name="Decor" type="Node2D"]
+light_mask = 3
 
 [node name="Tufts_1" type="Node2D" parent="."]
+light_mask = 3
 
 [node name="Sprite2D14" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1114, 660)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-192, 1002)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(916, 708)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D17" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(798, 1170)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(342, 328)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D19" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1540, 90)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(1302, -690)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(246, -952)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D22" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(664, -1636)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-948, -1218)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-948, -1218)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-748, -1838)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D26" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1638, -926)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D27" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1760, 798)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-328, 1818)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(940, 1598)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-276, 254)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1370, -168)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D32" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-350, -628)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(300, -424)
 texture = ExtResource("1_5jbo6")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Tufts_1"]
+light_mask = 3
 position = Vector2(-1792, 264)
 texture = ExtResource("1_5jbo6")
 
 [node name="Tufts_2" type="Node2D" parent="."]
+light_mask = 3
 
 [node name="Sprite2D30" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1646, 886)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1810, -526)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D32" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(926, 258)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(234, 1426)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-928, 1262)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-350, 620)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D36" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1220, -1332)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D37" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-66, -1838)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D38" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(1310, -1274)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D39" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(812, -1088)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D40" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-336, -1324)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D41" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-94, -1460)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D42" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1392, 906)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D43" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-1030, 76)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D44" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-916, -580)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D45" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-530, -58)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D46" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(580, -292)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D47" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(112, 342)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D48" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(240, 908)
 texture = ExtResource("2_uvidj")
 
 [node name="Sprite2D49" type="Sprite2D" parent="Tufts_2"]
+light_mask = 3
 position = Vector2(-606, 1626)
 texture = ExtResource("2_uvidj")
 
 [node name="Pebbles_2" type="Node2D" parent="."]
+light_mask = 3
 
 [node name="Rock" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(1000, -440)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock2" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(652, 78)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock3" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(262, -650)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock4" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-780, -862)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock5" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-484, -1566)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock6" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-1526, -592)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock7" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-1442, 146)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock8" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-832, -338)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock9" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-874, 434)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock10" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-1164, 1130)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock11" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-528, 952)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock12" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-342, 1392)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock13" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-876, 1494)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock14" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(302, 1664)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock15" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(514, 1114)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock16" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(0, 582)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock17" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(1118, 1082)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock18" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(1602, 464)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock19" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(1186, 74)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock20" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(1584, -756)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock21" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(788, -832)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock22" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(814, -1426)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock23" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(68, -1264)
 texture = ExtResource("3_k6hku")
 
 [node name="Rock24" type="Sprite2D" parent="Pebbles_2"]
+light_mask = 3
 position = Vector2(-458, -400)
 texture = ExtResource("3_k6hku")
 
 [node name="Pebbles_3" type="Node2D" parent="."]
+light_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(518, -636)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-236, -898)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-626, -602)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1168, -898)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1168, -424)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1718, -330)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1634, -16)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1650, 670)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1210, 1382)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(392, 1856)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1282, 1262)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1740, 626)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D13" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1444, -238)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1444, -950)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(494, -1170)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(130, -1704)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D17" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(410, -1720)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-538, -1676)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D19" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-902, -1464)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-580, -1100)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-164, -202)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D22" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-588, 392)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1478, 460)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-894, 900)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(614, 528)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D26" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(222, 592)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D27" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-226, 424)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-186, 760)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-578, 408)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-922, 632)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D31" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1426, 600)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D32" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1146, -256)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D33" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1802, -152)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D34" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1050, -1000)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D35" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1522, -808)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D36" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-754, -1232)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D37" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-538, -864)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D38" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-290, -1184)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D39" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-114, -640)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D40" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(46, -400)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D41" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-154, -496)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D42" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(62, -928)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D43" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-146, -1152)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D44" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(262, -1160)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D45" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(614, -1376)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D46" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1086, -1256)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D47" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1020, -730)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D48" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1196, -314)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D49" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(428, -114)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D50" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(604, 318)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D51" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(380, 678)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D52" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(948, 470)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D53" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1316, 422)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D54" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1276, 158)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D55" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1788, 334)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D56" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1436, 700)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D57" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1372, 980)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D58" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(848, 936)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D59" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1000, 1360)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D60" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(496, 1328)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D61" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(144, 1168)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D62" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(56, 1480)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D63" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(96, 1824)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D64" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-400, 1588)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D65" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-400, 1588)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D66" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-656, 1836)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D67" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-920, 1620)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D68" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-592, 1444)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D69" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-728, 1044)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D70" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-352, 1188)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D71" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-344, 868)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D72" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-560, 436)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D73" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1136, 844)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D74" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1400, 1148)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D75" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1328, 700)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D76" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-840, 188)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D77" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1272, 228)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D78" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1656, 268)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D79" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(348, 84)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D80" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-256, 72)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D81" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(516, 172)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D82" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(260, 180)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D83" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(548, 28)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D84" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-144, -100)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D85" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-388, -144)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D86" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-656, -244)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D87" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-252, -352)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D88" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(124, -272)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D89" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(716, -136)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D90" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(812, -300)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D91" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(864, 64)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D92" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(764, 520)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D93" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(1244, -140)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D94" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-384, -812)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D95" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(376, -808)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D96" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(96, -756)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D97" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-756, -456)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D98" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1012, -776)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D99" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1424, -420)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D100" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1424, -420)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D101" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1236, 68)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D102" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1032, -156)
 texture = ExtResource("4_brvbd")
 
 [node name="Sprite2D103" type="Sprite2D" parent="Pebbles_3"]
+light_mask = 3
 position = Vector2(-1020, 384)
 texture = ExtResource("4_brvbd")
 
 [node name="Pebbles" type="Node2D" parent="."]
+light_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(950, -128)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(798, -518)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(1112, -958)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(544, -924)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(434, -1466)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(154, -1516)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-286, -1694)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-692, -1380)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1354, -1040)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1226, -684)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1218, 350)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(188, -124)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D13" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(78, 148)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-524, 140)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-676, 700)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D16" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-600, 1268)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D17" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-116, 1640)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D18" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(554, 818)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D19" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(1266, 674)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D20" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(622, 1522)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D21" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-90, 1284)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D22" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(1478, -454)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D23" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-828, -82)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D24" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1524, 1114)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D25" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(994, 1504)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D26" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(1732, -114)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D27" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(978, -1504)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D28" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(562, -1826)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D29" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1124, -1564)
 texture = ExtResource("5_3d0oe")
 
 [node name="Sprite2D30" type="Sprite2D" parent="Pebbles"]
+light_mask = 3
 position = Vector2(-1938, -632)
 texture = ExtResource("5_3d0oe")

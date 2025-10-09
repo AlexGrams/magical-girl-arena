@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_terrain.gd" id="1_kvdab"]
 [ext_resource type="Texture2D" uid="uid://4d2ehixrugtb" path="res://Sprites/Map/Desert/Chain_Arc.png" id="2_e37qn"]
-[ext_resource type="PackedScene" uid="uid://bgcwlfs70p8mt" path="res://Sprites/dust_cloud_particles.tscn" id="2_l8x80"]
+[ext_resource type="PackedScene" path="res://Sprites/dust_cloud_particles.tscn" id="2_l8x80"]
 [ext_resource type="AudioStream" uid="uid://smdto3jn1vlx" path="res://Audio/SFX/Constellations/Andromeda_Rumbling.mp3" id="3_gx4g0"]
 [ext_resource type="Texture2D" uid="uid://c4afb5uhqi5et" path="res://Sprites/Map/Desert/Rumbling_Cracks.png" id="3_vpxfr"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_x0orq"]

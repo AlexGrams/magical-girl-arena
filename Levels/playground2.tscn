@@ -19,15 +19,15 @@
 [ext_resource type="PackedScene" uid="uid://dcm01xbycjlb2" path="res://Sprites/Enemy/Andromeda_Summoning_Animation.tscn" id="17_xxu3m"]
 [ext_resource type="Shader" path="res://Levels/blur.gdshader" id="18_ui23y"]
 [ext_resource type="Texture2D" uid="uid://cfurca8rrmmq6" path="res://Sprites/Map/Desert/DesertBackgroundTile.png" id="18_x52mc"]
-[ext_resource type="PackedScene" uid="uid://nyg4qhq25jmb" path="res://Sprites/Map/Desert/decor_grass_octagon.tscn" id="19_y55mt"]
+[ext_resource type="PackedScene" uid="uid://blclg3yk48m7s" path="res://Sprites/Map/Desert/decor_grass_octagon.tscn" id="19_y55mt"]
 [ext_resource type="PackedScene" uid="uid://dfwiw6uvxq585" path="res://Levels/Desert_Map_Pieces/diamond_desert_map.tscn" id="19_yf7s2"]
-[ext_resource type="PackedScene" uid="uid://c3yrusmd38vta" path="res://Sprites/Map/Desert/decor_purple_octagon.tscn" id="20_iavsd"]
-[ext_resource type="PackedScene" uid="uid://bvc6aocjemuvh" path="res://Sprites/Map/Desert/decor_purple_long_octagon.tscn" id="21_udcfo"]
-[ext_resource type="PackedScene" uid="uid://dvrgfe2qfa8o1" path="res://Sprites/Map/Desert/decor_dunes_octagon.tscn" id="22_wcbn1"]
-[ext_resource type="PackedScene" uid="uid://b7nixhj7p80g7" path="res://Sprites/Map/Desert/decor_rocks_octagon.tscn" id="23_orb3d"]
-[ext_resource type="PackedScene" uid="uid://h64f3l3set4v" path="res://Sprites/Map/Desert/decor_pits_octagon.tscn" id="24_ydd72"]
-[ext_resource type="PackedScene" uid="uid://jalpugfeb1qn" path="res://Sprites/Map/Desert/decor_cracks_octagon.tscn" id="25_nvexr"]
-[ext_resource type="PackedScene" uid="uid://oa0151ye0kc5" path="res://Sprites/Map/Desert/decor_pits_light_octagon.tscn" id="26_41vkd"]
+[ext_resource type="PackedScene" uid="uid://dqvpnluy6lqxo" path="res://Sprites/Map/Desert/decor_purple_octagon.tscn" id="20_iavsd"]
+[ext_resource type="PackedScene" uid="uid://dkrh33eeqmhn0" path="res://Sprites/Map/Desert/decor_purple_long_octagon.tscn" id="21_udcfo"]
+[ext_resource type="PackedScene" uid="uid://wk0jrslcgmnl" path="res://Sprites/Map/Desert/decor_dunes_octagon.tscn" id="22_wcbn1"]
+[ext_resource type="PackedScene" uid="uid://dt36hr2i6od1i" path="res://Sprites/Map/Desert/decor_rocks_octagon.tscn" id="23_orb3d"]
+[ext_resource type="PackedScene" uid="uid://lfsg56vyl1hv" path="res://Sprites/Map/Desert/decor_pits_octagon.tscn" id="24_ydd72"]
+[ext_resource type="PackedScene" uid="uid://b5qecwshbjal8" path="res://Sprites/Map/Desert/decor_cracks_octagon.tscn" id="25_nvexr"]
+[ext_resource type="PackedScene" uid="uid://bgfsjrx5qi57o" path="res://Sprites/Map/Desert/decor_pits_light_octagon.tscn" id="26_41vkd"]
 [ext_resource type="PackedScene" uid="uid://dhpv3m2wsop5y" path="res://Levels/Desert_Map_Pieces/octagon_desert_map.tscn" id="26_50c1r"]
 [ext_resource type="Texture2D" uid="uid://dk70wlehpoow2" path="res://Sprites/WhiteRing.png" id="26_fi80v"]
 [ext_resource type="Script" path="res://Levels/Playground_light.gd" id="27_13cnm"]
@@ -578,6 +578,7 @@ boss_animation = ExtResource("17_xxu3m")
 boss_sfx = 78
 
 [node name="Background_Texture" type="TextureRect" parent="."]
+light_mask = 3
 z_index = -10
 offset_left = -3438.0
 offset_top = -2263.0
@@ -669,51 +670,63 @@ position = Vector2(-840, 3718)
 decor_scene = ExtResource("26_41vkd")
 
 [node name="Square_DesertMap" parent="." instance=ExtResource("27_loxqj")]
+light_mask = 3
 position = Vector2(108, 889)
 
 [node name="Square_DesertMap2" parent="." instance=ExtResource("27_loxqj")]
+light_mask = 3
 position = Vector2(1994.95, 887.9)
 
 [node name="Square_DesertMap3" parent="." instance=ExtResource("27_loxqj")]
+light_mask = 3
 position = Vector2(1988, 2771)
 
 [node name="Square_DesertMap4" parent="." instance=ExtResource("27_loxqj")]
+light_mask = 3
 position = Vector2(107, 2776)
 
 [node name="Diamond_DesertMap" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(103.19, -857)
 
 [node name="Diamond_DesertMap2" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(1985.06, -856.24)
 
 [node name="Diamond_DesertMap3" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(3733.77, 880.615)
 rotation = 1.5708
 
 [node name="Diamond_DesertMap4" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(3742.27, 2778.63)
 rotation = 1.5708
 
 [node name="Diamond_DesertMap5" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(1990, 4520.63)
 rotation = 3.14159
 
 [node name="Diamond_DesertMap6" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(103.325, 4524.98)
 rotation = 3.14159
 
 [node name="Diamond_DesertMap7" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(-1644.8, 2771.28)
 rotation = -1.5708
 
 [node name="Diamond_DesertMap8" parent="." instance=ExtResource("19_yf7s2")]
+light_mask = 3
 position = Vector2(-1644, 888.35)
 rotation = -1.5708
 
 [node name="PointLight2D" type="PointLight2D" parent="." node_paths=PackedStringArray("boss_enemy_spawner")]
 process_mode = 3
 visible = false
-position = Vector2(1009, 1709)
+position = Vector2(1009, 1714)
 scale = Vector2(45, 45)
 color = Color(0.0196078, 0.00784314, 0.0509804, 1)
 energy = 16.0

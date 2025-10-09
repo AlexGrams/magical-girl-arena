@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bdh4ywy02xv62" path="res://Sprites/Map/Desert/Desert_Grass_Tuft2.png" id="5_3dv8x"]
 [ext_resource type="Texture2D" uid="uid://cob7ey60accgw" path="res://Sprites/Map/Desert/Desert_Grass_Tuft1.png" id="6_l1mnw"]
 
-[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("decor", "clip_mask", "cracks", "base", "triangles", "_area", "_collider")]
+[node name="Diamond_DesertMap" type="Node2D" node_paths=PackedStringArray("decor", "clip_mask", "cracks", "base", "_area", "_collider")]
 z_index = -1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_4ypuc")
@@ -19,7 +19,6 @@ rise_time = 1.0
 clip_mask = NodePath("Base/Clip")
 cracks = NodePath("Base/Clip/Cracks")
 base = NodePath("Base")
-triangles = NodePath("")
 _area = NodePath("Area2D")
 _collider = NodePath("StaticBody2D/CollisionPolygon2D")
 
@@ -32,6 +31,7 @@ clip_children = 1
 texture = ExtResource("4_nw0dq")
 
 [node name="TextureRect" type="TextureRect" parent="Base/Texture_Clip"]
+light_mask = 3
 offset_left = -2000.0
 offset_top = -2000.0
 offset_right = 2000.0
@@ -50,91 +50,111 @@ texture = ExtResource("2_0td5v")
 [node name="Decor" type="Node2D" parent="Base"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-986, -328)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(324, -788)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(980, -300)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(338, 156)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-248, -422)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-376, 238)
 texture = ExtResource("5_3dv8x")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-376, 238)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(114, 654)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D9" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-788, -22)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D10" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(810, -86)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D11" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-96, -60)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D15" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(24, 264)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D12" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(508, -358)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D13" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-538, -476)
 texture = ExtResource("6_l1mnw")
 
 [node name="Sprite2D14" type="Sprite2D" parent="Base/Decor"]
+light_mask = 3
 position = Vector2(-112, -540)
 texture = ExtResource("6_l1mnw")
 
 [node name="Shadow1" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.561851, 0.412507, 0.272534, 1)
+light_mask = 3
 z_index = -2
 scale = Vector2(1.025, 1.025)
 texture = ExtResource("4_nw0dq")
 
 [node name="Shadow2" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.483884, 0.351061, 0.226172, 1)
+light_mask = 3
 z_index = -3
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("4_nw0dq")
 
 [node name="Shadow3" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.424594, 0.305276, 0.192888, 1)
+light_mask = 3
 z_index = -4
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("4_nw0dq")
 
 [node name="Shadow4" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.325475, 0.229829, 0.139556, 1)
+light_mask = 3
 z_index = -5
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_nw0dq")
 
 [node name="Shadow5" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.218158, 0.163855, 0.125858, 1)
+light_mask = 3
 z_index = -6
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("4_nw0dq")
