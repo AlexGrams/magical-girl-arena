@@ -418,9 +418,9 @@ func client_game_loaded() -> void:
 		get_tree().get_root().get_node(main_menu_node_path).hide()
 
 
-# Called when the game ends, either by the players winning or losing
+## Called when the game ends, either by the players winning or losing
 @rpc("authority", "call_local", "reliable")
-func _game_over(has_won_game: bool = false):
+func finish_game(has_won_game: bool = false):
 	get_tree().paused = true
 	
 	_gold += _gold_this_game
@@ -715,7 +715,7 @@ func resume_game() -> void:
 func _on_player_died():
 	players_down += 1
 	if players_down >= connected_players:
-		_game_over()
+		finish_game()
 
 
 @rpc("any_peer", "call_local")

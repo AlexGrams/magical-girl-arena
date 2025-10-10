@@ -223,7 +223,6 @@ func spawn_corrupted_enemy_loot(loot_position: Vector2, exp_amount: int, gold_am
 func _spawn_boss() -> void:
 	var boss_to_spawn: PackedScene = boss_choices.pick_random()
 	
-	
 	_has_boss_spawned = true
 	GameState.pause_game()
 	AudioManager.pause_music()
@@ -260,6 +259,7 @@ func _spawn_boss() -> void:
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		# Functionality after you defeat the boss.
 		boss.died.connect(func(_boss: Node2D): 
+			_defeat_boss.rpc()
 			_shrink_darkness.rpc()
 			_update_map_complete_variable.rpc()
 			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.WIN, _map_dialogue_condition])
@@ -273,6 +273,12 @@ func _spawn_boss_animation() -> Node2D:
 	animated_boss.global_position = corrupted_enemy_spawner.global_position
 	add_child(animated_boss)
 	return animated_boss
+
+
+## Play animation and finish the game when the boss is defeated.
+@rpc("authority", "call_local", "reliable")
+func _defeat_boss() -> void:
+	GameState.finish_game(true)
 
 
 ## Darken the lighting when the boss spawns.
