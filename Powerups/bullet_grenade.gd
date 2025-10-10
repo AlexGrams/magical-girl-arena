@@ -12,7 +12,6 @@ var _is_level_3:bool = false
 
 
 func _ready() -> void:
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.HEARTBEATBURST_LAUNCH)
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 	
@@ -76,6 +75,8 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if _is_level_3:
 		var collision_shape = collider.get_child(0)
 		collision_shape.shape.radius = collision_shape.shape.radius * 2
+	
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.HEARTBEATBURST_LAUNCH)
 	
 	# Make the bullet hurt players
 	if not is_owned_by_player:

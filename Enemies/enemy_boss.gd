@@ -23,12 +23,6 @@ func _ready() -> void:
 	_hud_canvas_layer = GameState.playground.hud_canvas_layer
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
 	_hud_canvas_layer.add_node_to_point_to(self, _icon)
-	
-	# Win the game when the boss dies
-	died.connect(func(_enemy):
-		if multiplayer.is_server():
-			GameState._game_over.rpc(true)
-	)
 
 
 func _physics_process(delta: float) -> void:
