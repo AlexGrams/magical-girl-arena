@@ -28,7 +28,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("OrangeSpikes:rotation")
+tracks/0/path = NodePath("SpritePieces/OrangeSpikes:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,7 +40,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RedSpikes:rotation")
+tracks/1/path = NodePath("SpritePieces/RedSpikes:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -52,7 +52,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Mouth:scale")
+tracks/2/path = NodePath("SpritePieces/Mouth:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -64,7 +64,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Eye_L:scale")
+tracks/3/path = NodePath("SpritePieces/Eye_L:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -76,7 +76,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Eye_R:scale")
+tracks/4/path = NodePath("SpritePieces/Eye_R:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -88,7 +88,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Aura:scale")
+tracks/5/path = NodePath("SpritePieces/Aura:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -105,7 +105,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("OrangeSpikes:rotation")
+tracks/0/path = NodePath("SpritePieces/OrangeSpikes:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -117,7 +117,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RedSpikes:rotation")
+tracks/1/path = NodePath("SpritePieces/RedSpikes:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -129,7 +129,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Mouth:scale")
+tracks/2/path = NodePath("SpritePieces/Mouth:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -141,7 +141,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Eye_L:scale")
+tracks/3/path = NodePath("SpritePieces/Eye_L:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -153,7 +153,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Eye_R:scale")
+tracks/4/path = NodePath("SpritePieces/Eye_R:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -170,7 +170,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("OrangeSpikes:rotation")
+tracks/0/path = NodePath("SpritePieces/OrangeSpikes:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -182,7 +182,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RedSpikes:rotation")
+tracks/1/path = NodePath("SpritePieces/RedSpikes:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -194,7 +194,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Mouth:scale")
+tracks/2/path = NodePath("SpritePieces/Mouth:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -206,7 +206,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Eye_L:scale")
+tracks/3/path = NodePath("SpritePieces/Eye_L:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -218,7 +218,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Eye_R:scale")
+tracks/4/path = NodePath("SpritePieces/Eye_R:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -230,7 +230,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Aura:scale")
+tracks/5/path = NodePath("SpritePieces/Aura:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -259,31 +259,31 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.375, 0.5),
-"transitions": PackedFloat32Array(0.5, 0.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
 "transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5),
 "update": 0,
 "values": [0.0, -0.785398, 0.0, 0.785398, 0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpritePieces/Mouth:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.1), Vector2(1, 1)]
+}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Mouth:scale")
+tracks/3/path = NodePath("SpritePieces/Eye_L:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -295,7 +295,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Eye_L:scale")
+tracks/4/path = NodePath("SpritePieces/Eye_R:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -307,14 +307,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Eye_R:scale")
+tracks/5/path = NodePath("SpritePieces:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.375, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.1), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pi0mf"]
@@ -327,32 +327,34 @@ _data = {
 
 [node name="SupergiantSprite" type="Node2D" node_paths=PackedStringArray("sprite_components")]
 script = ExtResource("1_fywsx")
-sprite_components = [NodePath("OrangeSpikes"), NodePath("RedSpikes"), NodePath("Head"), NodePath("Mouth"), NodePath("Eye_L"), NodePath("Eye_R"), NodePath("Aura")]
+sprite_components = [NodePath("SpritePieces/OrangeSpikes"), NodePath("SpritePieces/RedSpikes"), NodePath("SpritePieces/Head"), NodePath("SpritePieces/Mouth"), NodePath("SpritePieces/Eye_L"), NodePath("SpritePieces/Eye_R"), NodePath("SpritePieces/Aura")]
 standard_sprites = Array[CompressedTexture2D]([ExtResource("21_ous0l"), ExtResource("22_sc3dn"), ExtResource("23_617it"), ExtResource("24_66jpj"), ExtResource("25_7rfea"), ExtResource("26_remv1"), ExtResource("20_3dhou")])
 special_sprites = Array[CompressedTexture2D]([ExtResource("9_d82pg"), ExtResource("10_jrf8p"), ExtResource("11_fon3n"), ExtResource("12_763rl"), ExtResource("13_elggy"), ExtResource("14_t4nqd"), ExtResource("15_ekr11")])
 goth_sprites = Array[CompressedTexture2D]([ExtResource("16_euyl1"), ExtResource("17_uhyy8"), ExtResource("18_ejfsu"), ExtResource("19_ukw70"), ExtResource("20_cqwog"), ExtResource("21_hshub"), ExtResource("22_ey4i7")])
 
-[node name="Aura" type="Sprite2D" parent="."]
+[node name="SpritePieces" type="Node2D" parent="."]
+
+[node name="Aura" type="Sprite2D" parent="SpritePieces"]
 texture = ExtResource("20_3dhou")
 
-[node name="OrangeSpikes" type="Sprite2D" parent="."]
+[node name="OrangeSpikes" type="Sprite2D" parent="SpritePieces"]
 texture = ExtResource("21_ous0l")
 
-[node name="RedSpikes" type="Sprite2D" parent="."]
+[node name="RedSpikes" type="Sprite2D" parent="SpritePieces"]
 texture = ExtResource("22_sc3dn")
 
-[node name="Head" type="Sprite2D" parent="."]
+[node name="Head" type="Sprite2D" parent="SpritePieces"]
 texture = ExtResource("23_617it")
 
-[node name="Mouth" type="Sprite2D" parent="."]
+[node name="Mouth" type="Sprite2D" parent="SpritePieces"]
 position = Vector2(0, 44)
 texture = ExtResource("24_66jpj")
 
-[node name="Eye_L" type="Sprite2D" parent="."]
+[node name="Eye_L" type="Sprite2D" parent="SpritePieces"]
 position = Vector2(-42, -18)
 texture = ExtResource("25_7rfea")
 
-[node name="Eye_R" type="Sprite2D" parent="."]
+[node name="Eye_R" type="Sprite2D" parent="SpritePieces"]
 position = Vector2(42, -18)
 texture = ExtResource("26_remv1")
 
