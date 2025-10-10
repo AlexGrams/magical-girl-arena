@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dju3v7744yb5v"]
+[gd_scene load_steps=6 format=3 uid="uid://dju3v7744yb5v"]
+
+[ext_resource type="Script" path="res://UI/corvus_animated_sprite.gd" id="1_5uje3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hhwuh"]
 viewport_path = NodePath("GDCubismUserModel")
@@ -187,6 +189,20 @@ tracks/14/keys = {
 "update": 0,
 "values": [15.0, 15.0, 15.0, 15.0]
 }
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath(".")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_flap_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lurv2"]
 length = 0.001
@@ -295,6 +311,7 @@ _data = {
 
 [node name="ConstellationAnimatedSprite" type="Sprite2D"]
 texture = SubResource("ViewportTexture_hhwuh")
+script = ExtResource("1_5uje3")
 
 [node name="GDCubismUserModel" type="GDCubismUserModel" parent="."]
 assets = "res://addons/gd_cubism/example/res/live2d/Constellation_Corvus/runtime/Corvus.model3.json"

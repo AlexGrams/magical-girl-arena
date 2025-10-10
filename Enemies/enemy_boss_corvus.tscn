@@ -43,6 +43,7 @@ sprite = NodePath("ConstellationAnimatedSprite")
 
 [node name="ConstellationAnimatedSprite" parent="." instance=ExtResource("2_hxoe2")]
 texture = SubResource("ViewportTexture_dw6tt")
+is_playing = true
 
 [node name="PhysicsCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ifklo")
