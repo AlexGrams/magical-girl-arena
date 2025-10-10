@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx43gaa0rr7q1"]
+[gd_scene load_steps=9 format=3 uid="uid://dx43gaa0rr7q1"]
 
 [ext_resource type="Script" path="res://Enemies/enemy_ranged.gd" id="1_yjg42"]
 [ext_resource type="PackedScene" uid="uid://s3dd1qt4daat" path="res://Sprites/Enemy/PulsarEnemy/pulsar_sprite.tscn" id="3_40ect"]
+[ext_resource type="PackedScene" uid="uid://c3ml3sp2us4fj" path="res://Audio/Enemy_Passive_AudioPlayer.tscn" id="3_twi80"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ni4om"]
 radius = 20.0
@@ -87,5 +88,8 @@ libraries = {
 "": SubResource("AnimationLibrary_lewke")
 }
 speed_scale = 2.0
+
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource("3_twi80")]
+pitch_scale = 1.7
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

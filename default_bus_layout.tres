@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dk4hf5px2c5j5"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://dk4hf5px2c5j5"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_vxgu8"]
 resource_name = "Compressor"
@@ -10,6 +10,10 @@ ceiling_db = -2.0
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ht6nb"]
 resource_name = "Compressor"
 threshold = -2.0
+
+[sub_resource type="AudioEffectHardLimiter" id="AudioEffectHardLimiter_ihity"]
+resource_name = "HardLimiter"
+ceiling_db = -24.0
 
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_vxgu8")
@@ -42,3 +46,11 @@ bus/4/volume_db = 0.0
 bus/4/send = &"SFX"
 bus/4/effect/0/effect = SubResource("AudioEffectCompressor_ht6nb")
 bus/4/effect/0/enabled = true
+bus/5/name = &"Enemy_Passive"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = -5.04224
+bus/5/send = &"SFX"
+bus/5/effect/0/effect = SubResource("AudioEffectHardLimiter_ihity")
+bus/5/effect/0/enabled = true
