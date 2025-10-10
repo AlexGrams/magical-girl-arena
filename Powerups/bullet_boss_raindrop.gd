@@ -26,7 +26,12 @@ func _ready() -> void:
 	collider.collision_layer = 0
 	if _is_owned_by_player:
 		AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_GROW, true, lifetime)
-
+	else:
+		var audio_player = preload("res://Audio/Corvus_Raindrop_AudioPlayer.tscn").instantiate()
+		# 0.605 is how long the "pop" part of the SFX lasts
+		audio_player.global_position = global_position
+		audio_player.pitch_scale = (audio_player.stream.get_length() / (lifetime + 0.605))
+		get_tree().root.add_child(audio_player)
 
 func _process(_delta: float) -> void:
 	pass
