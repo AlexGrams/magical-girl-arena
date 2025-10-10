@@ -36,7 +36,7 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 ## The bullet spawner on this Playground
 @export var bullet_spawner: BulletSpawner = null
 ## Light to create darkness when boss spawns
-@export var point_light: PointLight2D = null
+@export var point_light: BossPointLight2D = null
 
 ## Path to this map's MapData resource file.
 @export var _map_data_path: String = ""
@@ -229,8 +229,7 @@ func _spawn_boss() -> void:
 	AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.CONSTELLATION_SUMMON_RUMBLE)
 	
 	# Move camera and wait for it to be in position
-	_move_camera(corrupted_enemy_spawner.global_position)
-	await get_tree().create_timer(1).timeout
+	await _move_camera(corrupted_enemy_spawner.global_position)
 	
 	# Play boss summoning animation and wait for it to finish
 	var cutscene_boss_animation = _spawn_boss_animation()
@@ -245,8 +244,9 @@ func _spawn_boss() -> void:
 	await get_tree().create_timer(1).timeout
 	
 	#Reset camera, wait for it to be in position, then unpause the game
-	_reset_camera()
-	await get_tree().create_timer(2).timeout
+	await _reset_camera()
+	await get_tree().create_timer(1.0).timeout
+	
 	GameState.pause_game(false)
 	
 	# Spawn in real boss and remove animation
@@ -258,16 +258,15 @@ func _spawn_boss() -> void:
 	):
 		var boss: EnemyBoss = corrupted_enemy_spawner.spawn(boss_to_spawn)
 		# Functionality after you defeat the boss.
-		boss.died.connect(func(_boss: Node2D): 
-			_defeat_boss.rpc()
-			_shrink_darkness.rpc()
+		boss.died.connect(func(boss_node: Node2D): 
+			_defeat_boss.rpc(boss_node.global_position)
 			_update_map_complete_variable.rpc()
 			hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.WIN, _map_dialogue_condition])
 		)
 	AudioManager.play_boss_music()
 
 
-## Show animation for when Corvus boss is summoned
+## Show animation for when the boss is summoned
 func _spawn_boss_animation() -> Node2D:
 	var animated_boss = boss_animation.instantiate()
 	animated_boss.global_position = corrupted_enemy_spawner.global_position
@@ -275,9 +274,29 @@ func _spawn_boss_animation() -> Node2D:
 	return animated_boss
 
 
+## Show animation for when the boss is defeated.
+func _defeat_boss_animation(defeated_boss_position: Vector2) -> Node2D:
+	var animated_boss = boss_animation.instantiate()
+	var animation_player: AnimationPlayer = animated_boss.get_node("AnimationPlayer")
+	
+	animated_boss.global_position = defeated_boss_position
+	add_child(animated_boss)
+	animation_player.play_backwards("grow")
+	
+	return animated_boss
+
+
 ## Play animation and finish the game when the boss is defeated.
 @rpc("authority", "call_local", "reliable")
-func _defeat_boss() -> void:
+func _defeat_boss(boss_position: Vector2) -> void:
+	GameState.pause_game(true)
+	_defeat_boss_animation(boss_position)
+	await _move_camera(boss_position)
+	
+	_shrink_darkness()
+	AudioManager.create_audio(boss_sfx)
+	await get_tree().create_timer(3.0).timeout
+	
 	GameState.finish_game(true)
 
 
@@ -302,15 +321,21 @@ func _shrink_darkness() -> void:
 
 
 ## Used to move the player's camera on a location
-func _move_camera(to_pos:Vector2) -> void:
+func _move_camera(to_pos:Vector2) -> Signal:
 	if point_light != null:
-		point_light.move_camera(to_pos)
+		return point_light.move_camera(to_pos)
+	
+	# Return a timeout signal anyways so that whatever calls this doesn't get stuck.
+	return get_tree().create_timer(1.0, false).timeout
 
 
 ## Used to reset the player's camera after using _move_camera()
-func _reset_camera() -> void:
+func _reset_camera() -> Signal:
 	if point_light != null:
-		point_light.reset_camera()
+		return point_light.reset_camera()
+	
+	# Return a timeout signal anyways so that whatever calls this doesn't get stuck.
+	return get_tree().create_timer(1.0, false).timeout
 
 
 ## Set the variable indicating that this player has beaten this map to "true".

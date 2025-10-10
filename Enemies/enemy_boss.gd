@@ -23,11 +23,6 @@ func _ready() -> void:
 	_hud_canvas_layer = GameState.playground.hud_canvas_layer
 	_hud_canvas_layer.show_boss_health_bar(float(health) / max_health)
 	_hud_canvas_layer.add_node_to_point_to(self, _icon)
-	
-	#await get_tree().create_timer(1.0, false).timeout
-	#
-	#if is_multiplayer_authority():
-		#take_damage(health)
 
 
 func _physics_process(delta: float) -> void:
