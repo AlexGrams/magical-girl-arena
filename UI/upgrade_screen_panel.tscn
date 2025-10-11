@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://w6mllopse3wt"]
+[gd_scene load_steps=16 format=3 uid="uid://w6mllopse3wt"]
 
 [ext_resource type="PackedScene" uid="uid://14cc171vx3nh" path="res://UI/individual_upgrade_panel.tscn" id="1_0s0gu"]
 [ext_resource type="Script" path="res://UI/upgrade_screen_panel.gd" id="1_cnujf"]
@@ -14,6 +14,92 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qovy7"]
 bg_color = Color(0, 0, 0, 0.0627451)
+
+[sub_resource type="Animation" id="Animation_bq1it"]
+resource_name = "zoom_in"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerupUpgradesContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RerollsHBoxContainer:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cover:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_r0pjc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cover:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqv71"]
+_data = {
+"RESET": SubResource("Animation_r0pjc"),
+"zoom_in": SubResource("Animation_bq1it")
+}
 
 [node name="UpgradeScreenPanel" type="Panel" node_paths=PackedStringArray("upgrade_panels_holder", "reroll_button", "powerup_reroll_button", "artifact_reroll_button", "players_selecting_upgrades_window", "player_ready_indicator_holder")]
 process_mode = 2
@@ -46,6 +132,7 @@ anchor_right = 1.0
 offset_top = 63.0
 offset_bottom = 269.0
 grow_horizontal = 2
+pivot_offset = Vector2(960, 103)
 alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
@@ -74,6 +161,8 @@ offset_top = -268.0
 offset_bottom = 196.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 232)
 size_flags_horizontal = 3
 theme_override_constants/separation = 100
 alignment = 1
@@ -100,6 +189,8 @@ offset_top = -284.0
 offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(960, 54)
 theme_override_constants/separation = 50
 alignment = 1
 
@@ -307,6 +398,17 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_vertical = 4
+
+[node name="Cover" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_qqv71")
+}
 
 [connection signal="pressed" from="RerollsHBoxContainer/Powerup_Reroll_Button" to="." method="_on_powerup_reroll_button_down"]
 [connection signal="pressed" from="RerollsHBoxContainer/Reroll_Button" to="." method="_on_reroll_button_down"]

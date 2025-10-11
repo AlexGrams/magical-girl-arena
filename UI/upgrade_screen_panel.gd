@@ -130,6 +130,7 @@ func setup():
 	_generate_and_show_random_upgrade_choices()
 	
 	show()
+	$AnimationPlayer.play("zoom_in")
 
 
 ## Makes a random list of powerups to obtain or upgrade, and update the stats upgrade panel.

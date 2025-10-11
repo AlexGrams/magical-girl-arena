@@ -97,6 +97,7 @@ enum SOUND_EFFECT_TYPE{
 	# Map/Other stuff
 	BUSH_DESTROYED,
 	BUSH_ATTACKED,
+	LEVEL_UP,
 	# Default
 	NONE
 }
