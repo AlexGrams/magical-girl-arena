@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvadmsttyp5fc"]
+[gd_scene load_steps=11 format=3 uid="uid://bvadmsttyp5fc"]
 
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box.gd" id="1_spve4"]
 [ext_resource type="PackedScene" uid="uid://btvqnd35r2gbw" path="res://Pickups/health_orb.tscn" id="2_65y1k"]
@@ -12,13 +12,77 @@ size = Vector2(105, 108)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owpg8"]
 size = Vector2(127, 129)
 
-[node name="LootBox" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_p1jy5"]
+resource_name = "take_damage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, 0), Vector2(-10, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qclpd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36kcf"]
+_data = {
+"RESET": SubResource("Animation_qclpd"),
+"take_damage": SubResource("Animation_p1jy5")
+}
+
+[node name="LootBox" type="CharacterBody2D" node_paths=PackedStringArray("anim_player")]
 collision_layer = 2
 script = ExtResource("1_spve4")
 drop_weight_health = 100.0
 health_scene = ExtResource("2_65y1k")
 gold_scene = ExtResource("3_xby8p")
 leaf_explosion_scene = ExtResource("4_2mny4")
+destroyed_sfx = 80
+damaged_sfx = 81
+anim_player = NodePath("AnimationPlayer")
 max_health = 75.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -35,5 +99,11 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_owpg8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_36kcf")
+}
+speed_scale = 2.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]

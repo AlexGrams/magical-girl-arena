@@ -14,6 +14,12 @@ extends DestructibleNode2D
 @export var gold_scene: Resource = null
 ## Leaf explosion scene.
 @export var leaf_explosion_scene: Resource = null
+## SFX to play when destroyed
+@export var destroyed_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+## SFX to play when bush takes damage
+@export var damaged_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+## Player that plays animations when getting hit
+@export var anim_player: AnimationPlayer
 
 var _threshold_health: float = 1.0
 var _threshold_gold: float = 1.0
@@ -41,11 +47,15 @@ func _ready() -> void:
 
 
 func _on_area_2d_entered(area: Area2D) -> void:
+	if anim_player != null and anim_player.has_animation("take_damage"):
+		anim_player.play("take_damage")
+	AudioManager.create_audio_at_location(global_position, damaged_sfx)
 	super(area)
 
 
 ## Break this object and create a pickup. Only call on server.
 func _destroy() -> void:
+	AudioManager.create_audio_at_location(global_position, destroyed_sfx)
 	# Spawn random loot
 	var random_value := randf()
 	if random_value <= _threshold_health:
