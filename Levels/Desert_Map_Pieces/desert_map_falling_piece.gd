@@ -58,6 +58,7 @@ func initiate_falling(permanent: bool = false) -> void:
 	_has_fallen = true
 	# How long between cracks
 	var crack_interval:float = time_to_crack/float(total_crack_num)
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.DESERT_CRACKING, true, time_to_crack + crack_interval)
 	for i in total_crack_num:
 		var scale_size:float = float(i + 1) / total_crack_num
 		clip_mask.scale = Vector2(scale_size, scale_size)
@@ -70,6 +71,7 @@ func initiate_falling(permanent: bool = false) -> void:
 
 ## Animate and remove this piece from the map.
 func _fall() -> void:
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.DESERT_FALLING, true, fall_time)
 	_collider.disabled = false
 	_area.collision_layer = _area_collision_layer
 	
@@ -115,6 +117,8 @@ func _fall() -> void:
 ## Animate and return this piece to the map.
 @rpc("authority", "call_local")
 func rise() -> void:
+	# Adding 1 second so you can hear the dust sound settle in
+	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.DESERT_RISING, true, rise_time + 1)
 	_reset_cracks()
 	_has_fallen = false
 	
@@ -126,8 +130,6 @@ func rise() -> void:
 	tween.tween_property(base, "modulate", Color.WHITE, rise_time)
 	await get_tree().create_timer(rise_time, false).timeout
 	
-	#for child in triangles.get_children():
-		#child.scale = Vector2.ONE
 	_collider.disabled = true
 	_area.collision_layer = 0
 	returned.emit(self)
