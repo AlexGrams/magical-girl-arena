@@ -111,11 +111,13 @@ script = ExtResource("1_e28bt")
 _character_body_2d = NodePath(".")
 _animation_player = NodePath("Sprite2D/AnimationPlayer")
 _area = NodePath("Area2D")
-max_health = 75.0
 drop_weight_health = 100.0
 health_scene = ExtResource("2_gn8dj")
 gold_scene = ExtResource("3_1o7gm")
 leaf_explosion_scene = ExtResource("4_di2iy")
+destroyed_sfx = 80
+damaged_sfx = 81
+max_health = 75.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
