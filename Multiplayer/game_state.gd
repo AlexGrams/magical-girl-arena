@@ -655,6 +655,7 @@ func collect_exp(amount: int = 10, sound_location: Vector2 = Vector2.ZERO) -> vo
 		experience -= exp_for_next_level
 		_update_exp_for_next_level()
 		GameState.get_local_player().level_up(level)
+		AudioManager.create_audio(SoundEffectSettings.SOUND_EFFECT_TYPE.LEVEL_UP)
 		
 		# Analytics: record the time that we leveled up.
 		Analytics.add_level_up_time(int(time))
