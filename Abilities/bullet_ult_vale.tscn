@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ci3oql3ckphvh"]
 
 [ext_resource type="Script" path="res://Powerups/bullet_boss_raindrop.gd" id="1_o0b5k"]
-[ext_resource type="Texture2D" uid="uid://b62upe4o73ci2" path="res://Sprites/Powerups/Bubble.png" id="2_ekbfb"]
+[ext_resource type="Texture2D" uid="uid://b7y1k25k4siwc" path="res://Sprites/Abilities/Vale_Ultimate.png" id="2_44axe"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_cq8i6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7cxdy"]
@@ -11,7 +11,7 @@ radius = 506.025
 script = ExtResource("1_o0b5k")
 vfx_uid = "uid://b1rugluq8875v"
 sprite_child = NodePath("Sprite2D")
-_max_shadow_scale = Vector2(2.63824, 2.63824)
+_max_shadow_scale = Vector2(2.5, 2.5)
 speed = 0.0
 lifetime = 0.5
 destroy_on_hit = false
@@ -19,9 +19,10 @@ collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.643137)
 z_index = -1
-scale = Vector2(2.63824, 2.63824)
-texture = ExtResource("2_ekbfb")
+scale = Vector2(2.49662, 2.49662)
+texture = ExtResource("2_44axe")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
