@@ -61,6 +61,7 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			add_child(new_2D_audio)
 			
 			new_2D_audio.position = location
+			new_2D_audio.bus = sfx.bus
 			new_2D_audio.stream = sfx.sound_effect
 			new_2D_audio.volume_db = sfx.volume
 			if change_length:
