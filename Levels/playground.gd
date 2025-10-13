@@ -127,7 +127,8 @@ func _ready() -> void:
 		)
 		
 		# Play starting dialogue.
-		await GameState.unpaused
+		if get_tree().paused:
+			await GameState.unpaused
 		hud_canvas_layer.start_dialogue([Constants.DialoguePlayCondition.START, _map_dialogue_condition])
 
 
