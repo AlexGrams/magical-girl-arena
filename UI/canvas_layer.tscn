@@ -23,7 +23,7 @@
 [ext_resource type="Shader" path="res://UI/canvas_layer_gray.gdshader" id="20_frtdc"]
 [ext_resource type="PackedScene" uid="uid://d2b1awtmh6bsu" path="res://UI/powerup_information_panel.tscn" id="22_abwgo"]
 [ext_resource type="PackedScene" uid="uid://b6oiqdu6iltk6" path="res://UI/Scenes/settings.tscn" id="23_klj3p"]
-[ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="24_riqfp"]
+[ext_resource type="PackedScene" uid="uid://cr8ijqtnr6tyn" path="res://UI/loading.tscn" id="24_pv5ef"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_42vy1"]
 shader = ExtResource("20_frtdc")
@@ -924,45 +924,8 @@ visible = false
 
 [node name="Settings" parent="." instance=ExtResource("23_klj3p")]
 
-[node name="Loading" type="Control" parent="."]
+[node name="Loading" parent="." instance=ExtResource("24_pv5ef")]
 visible = false
-z_index = 2
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="Loading"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ErrorText" type="Label" parent="Loading"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -788.0
-offset_top = -353.0
-offset_right = 788.0
-offset_bottom = 242.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_6av2q")
-theme_override_fonts/font = ExtResource("24_riqfp")
-theme_override_font_sizes/font_size = 64
-text = "Loading..."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [connection signal="mouse_entered" from="GameOverScreen/ButtonContainer/RetryButton" to="GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="GameOverScreen/ButtonContainer/RetryButton" to="GameOverScreen/ButtonContainer/RetryButton" method="_on_mouse_exited"]

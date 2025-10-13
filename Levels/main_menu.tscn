@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://blnfqloy73bna"]
+[gd_scene load_steps=43 format=3 uid="uid://blnfqloy73bna"]
 
 [ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_f3ir0"]
 [ext_resource type="Texture2D" uid="uid://i2ki8bxrohb8" path="res://Sprites/UI/TitleScreen_NoStars.png" id="2_4w2ge"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b6oiqdu6iltk6" path="res://UI/Scenes/settings.tscn" id="18_6hm1f"]
 [ext_resource type="PackedScene" uid="uid://bfbm3j6d0el6h" path="res://UI/Scenes/character_selection.tscn" id="20_tc85m"]
 [ext_resource type="Resource" uid="uid://cq4gondpum82v" path="res://UI/Shop/Items/item_character_vale.tres" id="24_kqr3a"]
+[ext_resource type="PackedScene" uid="uid://cr8ijqtnr6tyn" path="res://UI/loading.tscn" id="28_456vq"]
 [ext_resource type="PackedScene" uid="uid://c57w5wc6nd8u0" path="res://UI/Scenes/lobby.tscn" id="29_i1nmj"]
 [ext_resource type="FontFile" uid="uid://iy72qtwbye3u" path="res://Sprites/UI/TitanOne-Regular.ttf" id="31_gcfgr"]
 [ext_resource type="Resource" uid="uid://cibbn8bcqvx6e" path="res://UI/Shop/Items/item_perm_reroll.tres" id="31_qx1iw"]
@@ -943,45 +944,9 @@ alignment = 0
 script = ExtResource("5_76cyy")
 label = NodePath("..")
 
-[node name="Loading" type="Control" parent="."]
+[node name="Loading" parent="." instance=ExtResource("28_456vq")]
 visible = false
-z_index = 2
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="Loading"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ErrorText" type="Label" parent="Loading"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -788.0
-offset_top = -353.0
-offset_right = 788.0
-offset_bottom = 242.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("14_kechk")
-theme_override_fonts/font = ExtResource("31_gcfgr")
-theme_override_font_sizes/font_size = 64
-text = "Loading..."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="." method="_on_lobby_button_button_down"]
 [connection signal="button_down" from="Main/VBoxContainer/Play_Label/LobbyButton" to="Background/Logo" method="scale_to_half"]
