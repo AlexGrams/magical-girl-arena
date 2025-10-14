@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ci3oql3ckphvh"]
 
-[ext_resource type="Script" path="res://Powerups/bullet_boss_raindrop.gd" id="1_o0b5k"]
+[ext_resource type="Script" path="res://Abilities/bullet_ult_vale.gd" id="1_8x46s"]
 [ext_resource type="Texture2D" uid="uid://b7y1k25k4siwc" path="res://Sprites/Abilities/Vale_Ultimate.png" id="2_44axe"]
 [ext_resource type="Script" path="res://Powerups/BulletHitbox.gd" id="3_cq8i6"]
 [ext_resource type="Texture2D" uid="uid://bf58tt4i4xb62" path="res://Sprites/Powerups/ValeUltimate.png" id="3_ft47f"]
@@ -164,12 +164,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_7cxdy"]
 radius = 506.025
 
-[node name="BulletUltVale" type="Node2D" node_paths=PackedStringArray("sprite_child", "collider", "sprite")]
-script = ExtResource("1_o0b5k")
-vfx_uid = "uid://d2g0mtg2k756d"
-sprite_child = NodePath("Sprite2D")
-_max_shadow_scale = Vector2(2.5, 2.5)
-_is_vale_ultimate = true
+[node name="BulletUltVale" type="Node2D" node_paths=PackedStringArray("collider", "sprite")]
+script = ExtResource("1_8x46s")
+vfx_scene_path = "res://Sprites/vale_ultimate_particles.tscn"
 speed = 0.0
 lifetime = 0.5
 destroy_on_hit = false
