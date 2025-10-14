@@ -14,6 +14,9 @@ var _is_collision_active = false
 func _ready() -> void:
 	set_process(false)
 	
+	# Asynchronously load VFX to prevent a lag spike
+	ResourceLoader.load_threaded_request(vfx_scene_path, "PackedScene", false, ResourceLoader.CACHE_MODE_REUSE)
+	
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 	$Sprite2D/AnimationPlayer.speed_scale = 1 / lifetime
@@ -36,7 +39,7 @@ func _physics_process(delta: float) -> void:
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
 			if playground != null:
-				var vfx: GPUParticles2D = load(vfx_scene_path).instantiate()
+				var vfx: GPUParticles2D = ResourceLoader.load_threaded_get(vfx_scene_path).instantiate()
 				vfx.global_position = global_position
 				playground.add_child(vfx)
 		elif is_multiplayer_authority():
