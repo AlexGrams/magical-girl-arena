@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=146 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -63,7 +63,6 @@
 [ext_resource type="AudioStream" uid="uid://dm6byb2wi1ccu" path="res://Audio/SFX/Desert_Rising.mp3" id="57_c4inc"]
 [ext_resource type="AudioStream" uid="uid://3oyhn0ar6y7m" path="res://Audio/SFX/Walking/Valley_Walking_1.mp3" id="58_o26je"]
 [ext_resource type="AudioStream" uid="uid://cjskfau75yb7i" path="res://Audio/SFX/Walking/Valley_Walking_2.mp3" id="59_lgcpj"]
-[ext_resource type="AudioStream" uid="uid://c034cqmb8hemb" path="res://Audio/SFX/Walking/Valley_Walking_3.mp3" id="60_0ha0m"]
 [ext_resource type="AudioStream" uid="uid://bl0n6e8fhgvas" path="res://Audio/SFX/Walking/Valley_Walking_4.mp3" id="61_an3p3"]
 [ext_resource type="AudioStream" uid="uid://58r1qasm6fww" path="res://Audio/SFX/Walking/Desert_Walking_1.mp3" id="62_86b5w"]
 [ext_resource type="AudioStream" uid="uid://dqa7qxr6jelll" path="res://Audio/SFX/Walking/Desert_Walking_2.mp3" id="63_dp7sv"]
@@ -1067,11 +1066,10 @@ bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_guabf"]
-streams_count = 4
+streams_count = 3
 stream_0/stream = ExtResource("58_o26je")
 stream_1/stream = ExtResource("59_lgcpj")
-stream_2/stream = ExtResource("60_0ha0m")
-stream_3/stream = ExtResource("61_an3p3")
+stream_2/stream = ExtResource("61_an3p3")
 
 [sub_resource type="Resource" id="Resource_m0hgf"]
 resource_name = "VALLEY_WALKING"
@@ -1102,7 +1100,7 @@ script = ExtResource("2_kdvej")
 limit = 1
 type = 87
 sound_effect = SubResource("AudioStreamRandomizer_7dsc0")
-volume = -12
+volume = -15
 semitones = Array[int]([0])
 pitch_scale = 1.0
 pitch_randomness = 0.0
