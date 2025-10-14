@@ -48,6 +48,9 @@ const _LIGHTNING_ARC_POOL_SIZE: int = 150
 ## Sound effect to play when boss spawns
 @export var boss_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
 
+## Sound effect to play for walking noises
+@export var walking_sfx: SoundEffectSettings.SOUND_EFFECT_TYPE
+
 ## The relative liklihoods of dropping EXP, gold, or nothing when an Enemy dies.
 var drop_weight_exp: float = 15.0
 var drop_weight_gold: float = 4.0

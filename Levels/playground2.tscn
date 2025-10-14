@@ -576,6 +576,7 @@ _damage_indicator_scene = "res://UI/damage_indicator.tscn"
 _lightning_arc_scene = "res://Powerups/bullet_lightning_arc.tscn"
 boss_animation = ExtResource("17_xxu3m")
 boss_sfx = 78
+walking_sfx = 87
 
 [node name="Background_Texture" type="TextureRect" parent="."]
 light_mask = 3
