@@ -5,7 +5,7 @@ extends Powerup
 ## Time in seconds between activation of bullets directly on the players.
 @export var _shoot_interval: float = 2.0
 ## UID of the scene for the powerup bullets
-@export var _bullet_scene_uid := ""
+@export var _bullet_scene_path := ""
 ## Area for finding groups of Enemies near the player.
 @export var _nearby_collision_area: Area2D = null
 
@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 			_bullet_spawner.request_spawn_bullet.rpc_id(
 				1, 
 				[
-					_bullet_scene_uid, 
+					_bullet_scene_path, 
 					global_position, 
 					direction, 
 					total_damage, 
@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 					_bullet_spawner.request_spawn_bullet.rpc_id(
 						1, 
 						[
-							_bullet_scene_uid, 
+							_bullet_scene_path, 
 							global_position, 
 							direction, 
 							total_damage, 

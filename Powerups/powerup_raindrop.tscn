@@ -7,7 +7,7 @@ radius = 1000.0
 
 [node name="PowerupRaindrop" type="Node2D" node_paths=PackedStringArray("_nearby_collision_area")]
 script = ExtResource("1_f4ceg")
-_bullet_scene_uid = "uid://ci3oql3ckphvh"
+_bullet_scene_path = "res://Powerups/bullet_raindrop.tscn"
 _nearby_collision_area = NodePath("NearbyArea2D")
 damage_levels = Array[float]([50.0, 70.0, 90.0, 110.0, 130.0])
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_raindrop.tres"
