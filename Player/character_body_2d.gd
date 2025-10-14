@@ -53,7 +53,7 @@ var shoot_interval = 1
 var level = 1
 var experience = 0
 
-var health_max: int = 100
+var health_max: int = 99999
 var health: int = health_max
 # True when the player is incapacitated.
 var is_down := false
@@ -350,6 +350,9 @@ func _physics_process(_delta):
 	if is_multiplayer_authority():
 		if not is_down:
 			get_input()
+			#print(velocity)
+			if velocity.length() > 0:
+				AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.VALLEY_WALKING)
 			move_and_slide()
 		else:
 			get_spectator_input()
