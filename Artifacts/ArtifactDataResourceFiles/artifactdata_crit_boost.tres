@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_1r3kk")
-_description = "Increases the critical chance and critical damage of Critical powerups."
+_description = "Powerups with \"Critical\" now have higher critical chance and critical damage"
 is_unique = false
 scene = ExtResource("1_jduc8")
 name = "Critical Boost"

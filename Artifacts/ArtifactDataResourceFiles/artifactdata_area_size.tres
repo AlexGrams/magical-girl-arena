@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_cwlpy")
-_description = "Boost Area Size powerups."
+_description = "Powerups with \"Area Size\" are now larger"
 is_unique = false
 scene = ExtResource("1_b4gvy")
 name = "Area Size"

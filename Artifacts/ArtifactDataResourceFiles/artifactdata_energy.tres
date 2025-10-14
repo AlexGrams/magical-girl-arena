@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_k2tiv")
-_description = "Boost Powerup with Energy type."
+_description = "Powerups with \"Energy\" now reduce ultimate cooldown"
 is_unique = false
 scene = ExtResource("1_hq0cr")
 name = "Energy"

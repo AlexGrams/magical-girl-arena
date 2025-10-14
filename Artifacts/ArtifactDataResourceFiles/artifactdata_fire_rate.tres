@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_o8b25")
-_description = "Increase the fire rate of projectiles (Bounce, Bubble Pop, Cupid Arrows, Heartbeat Burst, Marble Slingshot, Tarot Cards, Turret)"
+_description = "Powerups with \"Fire Rate\" are now faster"
 is_unique = false
 scene = ExtResource("1_03rml")
 name = "Fire Rate"
