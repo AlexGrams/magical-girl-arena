@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/LevelPlaceables/loot_box_tumbleweed.gd" id="1_e28bt"]
 [ext_resource type="PackedScene" uid="uid://btvqnd35r2gbw" path="res://Pickups/health_orb.tscn" id="2_gn8dj"]
 [ext_resource type="PackedScene" uid="uid://cqcar2b10ptof" path="res://Pickups/gold.tscn" id="3_1o7gm"]
-[ext_resource type="PackedScene" uid="uid://jyy16gs6xyi8" path="res://Sprites/Map/leaf_explosion.tscn" id="4_di2iy"]
+[ext_resource type="PackedScene" uid="uid://bh3bedxs5gxis" path="res://Sprites/Map/tumbleweed_explosion.tscn" id="4_auw2f"]
 [ext_resource type="Texture2D" uid="uid://cixvknshjx78t" path="res://Sprites/Map/Tumbleweed.png" id="5_2q1mk"]
 
 [sub_resource type="Animation" id="Animation_7ctxa"]
@@ -114,7 +114,7 @@ _area = NodePath("Area2D")
 drop_weight_health = 100.0
 health_scene = ExtResource("2_gn8dj")
 gold_scene = ExtResource("3_1o7gm")
-leaf_explosion_scene = ExtResource("4_di2iy")
+leaf_explosion_scene = ExtResource("4_auw2f")
 destroyed_sfx = 80
 damaged_sfx = 81
 max_health = 75.0
