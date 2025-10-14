@@ -282,7 +282,7 @@ func _defeat_boss_animation(defeated_boss_position: Vector2) -> Node2D:
 	
 	animated_boss.global_position = defeated_boss_position
 	add_child(animated_boss)
-	animation_player.play_backwards("grow")
+	animation_player.play("defeat")
 	
 	return animated_boss
 
