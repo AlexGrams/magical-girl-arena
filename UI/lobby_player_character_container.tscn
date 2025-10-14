@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/lobby_player_character_container.gd" id="1_j20e6"]
 [ext_resource type="Theme" uid="uid://cckqeojf813vy" path="res://Sprites/UI/description_text.tres" id="2_fkd01"]
-[ext_resource type="Texture2D" uid="uid://c2gqsoc4b0vb3" path="res://Apple.png" id="3_u0ccd"]
+[ext_resource type="Texture2D" uid="uid://bflmnj4gr2gok" path="res://Sprites/UI/CrownIcon.png" id="3_1gcnr"]
 [ext_resource type="Texture2D" uid="uid://bovqghaxd3wsw" path="res://Sprites/UI/Portal_Open.png" id="3_ykegb"]
 [ext_resource type="Theme" uid="uid://dtmg4b3y6iqwk" path="res://Sprites/UI/menu_button.tres" id="4_1wacc"]
 [ext_resource type="Texture2D" uid="uid://b8jnl5vgqvcwr" path="res://Sprites/UI/Portal_Closed.png" id="4_rqb5g"]
@@ -96,7 +96,7 @@ layout_mode = 2
 [node name="HostTextureRect" type="TextureRect" parent="UsernameContainer"]
 visible = false
 layout_mode = 2
-texture = ExtResource("3_u0ccd")
+texture = ExtResource("3_1gcnr")
 expand_mode = 2
 
 [node name="Spacer" type="Control" parent="."]
