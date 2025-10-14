@@ -10,6 +10,8 @@ extends Bullet
 @export var sprite_child: Sprite2D
 ## How big the shadow of this attack is at its maximum value.
 @export var _max_shadow_scale: Vector2 = Vector2.ONE
+## Kinda dumb way to do this, but leaving it for now sorry.
+@export var _is_vale_ultimate: bool = false
 ## Which Enemy this bullet is targeting if it was spawned by a player's powerup.
 var _target: Node2D = null
 ## Collision layer this bullet will use to damage targets.
@@ -20,8 +22,10 @@ var _is_collision_active = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#_max_shadow_scale = sprite.scale
-	sprite.scale = Vector2.ZERO
+	if _is_vale_ultimate:
+		$Sprite2D/AnimationPlayer.speed_scale = 1 / lifetime
+	else:
+		sprite.scale = Vector2.ZERO
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 	if _is_owned_by_player:
@@ -62,7 +66,8 @@ func _physics_process(delta: float) -> void:
 		elif is_multiplayer_authority():
 			queue_free()
 	else:
-		sprite.scale = (death_timer / lifetime) * _max_shadow_scale
+		if not _is_vale_ultimate:
+			sprite.scale = (death_timer / lifetime) * _max_shadow_scale
 		if not _is_owned_by_player:
 			sprite_child.scale = Vector2(1.0, 1.0) / sprite.scale
 
