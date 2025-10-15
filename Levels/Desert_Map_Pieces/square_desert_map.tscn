@@ -184,30 +184,35 @@ texture = ExtResource("6_tpf8s")
 
 [node name="Shadow1" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.561851, 0.412507, 0.272534, 1)
+light_mask = 3
 z_index = -2
 scale = Vector2(1.025, 1.025)
 texture = ExtResource("2_knfhr")
 
 [node name="Shadow2" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.483884, 0.351061, 0.226172, 1)
+light_mask = 3
 z_index = -3
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("2_knfhr")
 
 [node name="Shadow3" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.424594, 0.305276, 0.192888, 1)
+light_mask = 3
 z_index = -4
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_knfhr")
 
 [node name="Shadow4" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.325475, 0.229829, 0.139556, 1)
+light_mask = 3
 z_index = -5
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_knfhr")
 
 [node name="Shadow5" type="Sprite2D" parent="Base"]
 self_modulate = Color(0.218158, 0.163855, 0.125858, 1)
+light_mask = 3
 z_index = -6
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_knfhr")

@@ -299,10 +299,10 @@ func _return_to_lobby():
 	var main_menu: MainMenu = get_tree().get_root().get_node(GameState.main_menu_node_path)
 	AudioManager.play_main_menu_music()
 	
-	get_tree().paused = false
 	GameState.end_game()
 	main_menu.show()
 	main_menu.refresh_lobby()
+	GameState.pause_game(false)
 	
 	# Allow others to join this lobby since we're going back to the character select screen.
 	if multiplayer.get_unique_id() == 1:
