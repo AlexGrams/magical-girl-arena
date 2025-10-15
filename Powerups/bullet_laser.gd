@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 		if not _piercing_active:
 			# Non-signature functionality: Only harm the first enemy hit.
 			end_point = result["position"]
-			$HitmarkerSprite.position = end_point
+			$HitmarkerSprite.global_position = end_point
 			$HitmarkerSprite.show()
 			
 			var hit_node: Node2D = result["collider"].get_parent()
