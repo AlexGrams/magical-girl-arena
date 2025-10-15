@@ -69,6 +69,7 @@ _data = {
 }
 
 [node name="Loading" type="Control"]
+process_mode = 3
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
