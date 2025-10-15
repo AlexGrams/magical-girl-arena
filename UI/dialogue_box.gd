@@ -22,8 +22,6 @@ var _dialogue: Array[DialogueData] = []
 ## Maps instantiated DialogueData to String path to the DialogueData's .tres file.
 var _dialogue_paths: Dictionary = {}
 var _dialogue_line_container: PackedScene = preload("res://UI/dialogue_line_container.tscn")
-## Dictionary used as set where keys are player characters that are in the game.
-var _player_character_set: Dictionary = {}
 ## Dialogue that we're currently playing, if any.
 var _running_dialogue: DialogueData = null
 ## Line of dialogue that we're going to display next.
@@ -71,9 +69,9 @@ func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	var highest_trigger: int = 0
 	
 	# Get all the characters that are in the game if we don't have it already.
-	if _player_character_set.is_empty():
-		for data: Dictionary in GameState.players.values():
-			_player_character_set[data["character"]] = true
+	var _player_character_set: Dictionary = {}
+	for data: Dictionary in GameState.players.values():
+		_player_character_set[data["character"]] = true
 	
 	for dialogue: DialogueData in _dialogue:
 		var can_add: bool = true
