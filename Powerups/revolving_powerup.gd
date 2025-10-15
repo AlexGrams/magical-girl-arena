@@ -47,8 +47,11 @@ func _process(delta: float) -> void:
 		shoot_timer += delta
 		# Use a different shoot interval depending on if a player or enemy owns this powerup.
 		if (
-			(_is_owned_by_player and shoot_timer > shoot_interval)
-			or (not _is_owned_by_player and shoot_timer > enemy_shoot_interval)
+			(
+				(_is_owned_by_player and shoot_timer > shoot_interval)
+				or (not _is_owned_by_player and shoot_timer > enemy_shoot_interval)
+			) 
+			and GameState.playground.bullet_spawner != null
 		):
 			var crit: bool = randf() <= crit_chance
 			var total_damage: float = _get_damage_from_curve() * (1.0 if not crit else crit_multiplier)
