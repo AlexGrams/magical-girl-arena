@@ -51,6 +51,7 @@ func _physics_process(delta: float) -> void:
 		elif is_multiplayer_authority():
 			queue_free()
 	else:
+		sprite.scale = (death_timer / lifetime) * _max_shadow_scale
 		sprite_child.scale = Vector2(1.0, 1.0) / sprite.scale
 
 
@@ -61,6 +62,6 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		push_error("Malformed Bullet setup")
 		return
 	
-	is_owned_by_player = _is_owned_by_player
+	_is_owned_by_player = is_owned_by_player
 	if is_owned_by_player:
 		push_error("bullet_boss_raindrop not implemented for players")
