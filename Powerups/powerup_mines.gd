@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	# Energy charm
 	if _energy_did_damage:
-		_owner_ultimate.current_cooldown_time -= _energy_charm_ult_time_reduction
+		_owner_ultimate.reduce_current_cooldown(_energy_charm_ult_time_reduction)
 	_energy_did_damage = false
 
 

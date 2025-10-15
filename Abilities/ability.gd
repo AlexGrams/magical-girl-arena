@@ -35,6 +35,12 @@ func set_crit_chance(value: float) -> void:
 	_crit_chance = value
 
 
+## Modifies the amount of cooldown time remaining.
+func reduce_current_cooldown(amount: float) -> void:
+	current_cooldown_time = clamp(current_cooldown_time - amount, 0.0, cooldown)
+	cooldown_time_updated.emit(current_cooldown_time / cooldown)
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Start with the ability ready to use.
@@ -45,8 +51,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if current_cooldown_time > 0.0:
-		current_cooldown_time = clamp(current_cooldown_time - delta, 0.0, cooldown)
-		cooldown_time_updated.emit(current_cooldown_time / cooldown)
+		reduce_current_cooldown(delta)
 
 
 # Start this Ability's functionality.
