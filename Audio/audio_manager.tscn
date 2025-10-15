@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://cxcjlf0keb0sh"]
+[gd_scene load_steps=150 format=3 uid="uid://cxcjlf0keb0sh"]
 
 [ext_resource type="Script" path="res://Audio/audio_manager.gd" id="1_75te4"]
 [ext_resource type="Script" path="res://Audio/SoundEffectSettings.gd" id="2_kdvej"]
@@ -70,6 +70,8 @@
 [ext_resource type="AudioStream" uid="uid://dveaidljaqlnj" path="res://Audio/SFX/Walking/Desert_Walking_4.mp3" id="65_vknxn"]
 [ext_resource type="AudioStream" uid="uid://c8twmikyb8v5u" path="res://Audio/SFX/Walking/Desert_Walking_5.mp3" id="66_dqwel"]
 [ext_resource type="AudioStream" uid="uid://bsrf8mipr5kx3" path="res://Audio/SFX/Walking/Desert_Walking_6.mp3" id="67_f4eed"]
+[ext_resource type="AudioStream" uid="uid://mcidithbgkii" path="res://Audio/SFX/Ultimates/Vale Ultimate.mp3" id="67_pgycc"]
+[ext_resource type="AudioStream" uid="uid://dqaohldle862r" path="res://Audio/SFX/Ultimates/Vale_Ultimate_Pop.mp3" id="68_m6in1"]
 
 [sub_resource type="Resource" id="Resource_o6ktl"]
 resource_name = "UI_BUTTON_HOVER"
@@ -1108,10 +1110,38 @@ cooldown = 0
 bus = "SFX"
 play_while_paused = false
 
+[sub_resource type="Resource" id="Resource_ts7nj"]
+resource_name = "VALE_ULTIMATE"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 88
+sound_effect = ExtResource("67_pgycc")
+volume = -6
+semitones = Array[int]([0])
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
+[sub_resource type="Resource" id="Resource_ra86h"]
+resource_name = "VALE_ULTIMATE_POP"
+script = ExtResource("2_kdvej")
+limit = 3
+type = 89
+sound_effect = ExtResource("68_m6in1")
+volume = -6
+semitones = Array[int]([0])
+pitch_scale = 1.0
+pitch_randomness = 0.0
+cooldown = 0
+bus = "SFX"
+play_while_paused = false
+
 [node name="AudioManager" type="Node2D" node_paths=PackedStringArray("main_menu_music_player")]
 process_mode = 3
 script = ExtResource("1_75te4")
-sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2"), SubResource("Resource_wxos4"), SubResource("Resource_l4nsa"), SubResource("Resource_2l7jb"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_4htrs"), SubResource("Resource_iveav"), SubResource("Resource_3e8qr"), SubResource("Resource_nuda6"), SubResource("Resource_aaqnr"), SubResource("Resource_wdk8x"), SubResource("Resource_gdnbp"), SubResource("Resource_e2dd7"), SubResource("Resource_usr5c"), SubResource("Resource_55saw"), SubResource("Resource_prrm4"), SubResource("Resource_se2be"), SubResource("Resource_cjg2e"), SubResource("Resource_q8p7m"), SubResource("Resource_5l8ll"), SubResource("Resource_j3h2l"), SubResource("Resource_gtkpn"), SubResource("Resource_q5wib"), SubResource("Resource_toj1e"), SubResource("Resource_l66r1"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_mmmof"), SubResource("Resource_kv8eb"), SubResource("Resource_ou1td"), SubResource("Resource_iua7q"), SubResource("Resource_1kuu2"), SubResource("Resource_ush2s"), SubResource("Resource_ytys7"), SubResource("Resource_o017l"), SubResource("Resource_5ee6p"), SubResource("Resource_fwsmp"), SubResource("Resource_tpigb"), SubResource("Resource_m0hgf"), SubResource("Resource_0l22k")])
+sound_effect_settings = Array[ExtResource("2_kdvej")]([SubResource("Resource_o6ktl"), SubResource("Resource_e80ne"), SubResource("Resource_sbdwg"), SubResource("Resource_0ckqn"), SubResource("Resource_3mwiv"), SubResource("Resource_cifeh"), SubResource("Resource_wty40"), SubResource("Resource_h7jin"), SubResource("Resource_45j3q"), SubResource("Resource_gabmc"), SubResource("Resource_ypbjq"), SubResource("Resource_ajhh3"), SubResource("Resource_ydaxe"), SubResource("Resource_0ajtq"), SubResource("Resource_dl647"), SubResource("Resource_ramby"), SubResource("Resource_qol4q"), SubResource("Resource_337xk"), SubResource("Resource_nmm2e"), SubResource("Resource_mh6rv"), SubResource("Resource_tuh2c"), SubResource("Resource_qn11f"), SubResource("Resource_sah4n"), SubResource("Resource_hhf4v"), SubResource("Resource_ahci4"), SubResource("Resource_qmg7o"), SubResource("Resource_5cmo3"), SubResource("Resource_f3u72"), SubResource("Resource_aar38"), SubResource("Resource_oine2"), SubResource("Resource_wxos4"), SubResource("Resource_l4nsa"), SubResource("Resource_2l7jb"), SubResource("Resource_kl3kh"), SubResource("Resource_1gugo"), SubResource("Resource_46xon"), SubResource("Resource_m2vr8"), SubResource("Resource_vi4yv"), SubResource("Resource_4htrs"), SubResource("Resource_iveav"), SubResource("Resource_3e8qr"), SubResource("Resource_nuda6"), SubResource("Resource_aaqnr"), SubResource("Resource_wdk8x"), SubResource("Resource_gdnbp"), SubResource("Resource_e2dd7"), SubResource("Resource_usr5c"), SubResource("Resource_55saw"), SubResource("Resource_prrm4"), SubResource("Resource_se2be"), SubResource("Resource_cjg2e"), SubResource("Resource_q8p7m"), SubResource("Resource_5l8ll"), SubResource("Resource_j3h2l"), SubResource("Resource_gtkpn"), SubResource("Resource_q5wib"), SubResource("Resource_toj1e"), SubResource("Resource_l66r1"), SubResource("Resource_dl7d3"), SubResource("Resource_imnlt"), SubResource("Resource_mmmof"), SubResource("Resource_kv8eb"), SubResource("Resource_ou1td"), SubResource("Resource_iua7q"), SubResource("Resource_1kuu2"), SubResource("Resource_ush2s"), SubResource("Resource_ytys7"), SubResource("Resource_o017l"), SubResource("Resource_5ee6p"), SubResource("Resource_fwsmp"), SubResource("Resource_tpigb"), SubResource("Resource_m0hgf"), SubResource("Resource_0l22k"), SubResource("Resource_ts7nj"), SubResource("Resource_ra86h")])
 default_main_menu_music = ExtResource("21_wp1x8")
 battle_music_player = ExtResource("22_mr100")
 main_menu_music_player = NodePath("MainMenuMusicPlayer")

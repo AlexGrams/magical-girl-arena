@@ -172,6 +172,7 @@ lifetime = 0.5
 destroy_on_hit = false
 collider = NodePath("Area2D")
 sprite = NodePath("Sprite2D")
+sound_effect = 88
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0, 0, 0.643137)

@@ -20,7 +20,7 @@ func _ready() -> void:
 	_collision_layer = collider.collision_layer
 	collider.collision_layer = 0
 	$Sprite2D/AnimationPlayer.speed_scale = 1 / lifetime
-	AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_GROW, true, lifetime)
+	AudioManager.create_audio_at_location(global_position, sound_effect)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 			collider.collision_layer = _collision_layer
 			
 			# Play bubble SFX
-			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.RAINDROP_POP)
+			AudioManager.create_audio_at_location(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.VALE_ULTIMATE_POP)
 			
 			# Make particles
 			var playground: Node2D = get_tree().root.get_node_or_null("Playground")
