@@ -6,6 +6,7 @@
 self_modulate = Color(1, 1, 0, 1)
 script = ExtResource("1_rqq4f")
 shoot_interval = 3.0
+_energy_charm_ult_time_reduction = 1.0
 _bullet_scene = "res://Powerups/bullet_mines.tscn"
 damage_levels = Array[float]([20.0, 30.0, 40.0, 50.0, 60.0])
 signature_damage = 100.0

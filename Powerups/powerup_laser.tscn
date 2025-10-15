@@ -5,6 +5,7 @@
 [node name="PowerupLaser" type="Node2D"]
 script = ExtResource("1_oytnp")
 max_range = 750.0
+_energy_charm_ult_time_reduction = 0.025
 damage_levels = Array[float]([1.0, 2.0, 3.0, 4.0, 5.0])
 signature_damage = 5.0
 _powerup_data_path = "res://Powerups/PowerupDataResourceFiles/powerupdata_laser.tres"
