@@ -71,6 +71,11 @@ func create_audio_at_location(location, sfx_type: SoundEffectSettings.SOUND_EFFE
 			new_2D_audio.finished.connect(sfx.on_audio_finished)
 			new_2D_audio.finished.connect(new_2D_audio.queue_free)
 			
+			if sfx.play_while_paused:
+				new_2D_audio.process_mode = Node.PROCESS_MODE_ALWAYS
+			else:
+				new_2D_audio.process_mode = Node.PROCESS_MODE_PAUSABLE
+			
 			new_2D_audio.play()
 			return new_2D_audio
 	else:
@@ -94,6 +99,8 @@ func create_audio(sfx_type: SoundEffectSettings.SOUND_EFFECT_TYPE) -> AudioStrea
 			
 			if sfx.play_while_paused:
 				new_audio.process_mode = Node.PROCESS_MODE_ALWAYS
+			else:
+				new_audio.process_mode = Node.PROCESS_MODE_PAUSABLE
 			
 			new_audio.play()
 			return new_audio
