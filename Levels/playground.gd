@@ -293,6 +293,7 @@ func _defeat_boss_animation(defeated_boss_position: Vector2) -> Node2D:
 ## Play animation and finish the game when the boss is defeated.
 @rpc("authority", "call_local", "reliable")
 func _defeat_boss(boss_position: Vector2) -> void:
+	AudioManager.pause_music()
 	GameState.pause_game(true)
 	_defeat_boss_animation(boss_position)
 	await _move_camera(boss_position)
@@ -300,6 +301,7 @@ func _defeat_boss(boss_position: Vector2) -> void:
 	_shrink_darkness()
 	AudioManager.create_audio(boss_sfx)
 	await get_tree().create_timer(3.0).timeout
+	AudioManager.play_victory_music()
 	
 	GameState.finish_game(true)
 

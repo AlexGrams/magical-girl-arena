@@ -130,9 +130,12 @@ func play_victory_music():
 	
 	# Add new music player for victory music
 	var new_audio := AudioStreamPlayer.new()
+	new_audio.process_mode = Node.PROCESS_MODE_ALWAYS
 	new_audio.bus = "Music"
 	add_child(new_audio)
 	new_audio.stream = map_1_victory
+	new_audio.volume_db = -12
+	new_audio.play()
 	new_audio.finished.connect(new_audio.queue_free)
 
 ## Plays boss music, meant to be played after constellation is summoned
