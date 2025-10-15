@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 func activate() -> void:
 	super()
 	
-	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
+	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.DOVE_ULTIMATE)
 	
 	# Shoot missiles all around in a sort of random way.
 	var slice_rotator = Vector2.UP
