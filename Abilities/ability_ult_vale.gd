@@ -39,9 +39,10 @@ func _process(delta: float) -> void:
 
 func activate() -> void:
 	super()
-	Input.set_custom_mouse_cursor(_target_cursor)
 	_current_active_time = active_time
 	_bombs_remaining = num_bombs
+	Input.set_custom_mouse_cursor(_target_cursor)
+	GameState.get_local_player().died.connect(_reset_cursor)
 
 
 func _input(event: InputEvent) -> void:
@@ -71,9 +72,15 @@ func _input(event: InputEvent) -> void:
 			_bombs_remaining -= 1
 			if _bombs_remaining <= 0:
 				_current_active_time = 0.0
-				SettingsManager.apply_cursor_size(SettingsManager.get_settings().get_value("display", "cursor_size", 0))
+				_reset_cursor()
+				GameState.get_local_player().died.disconnect(_reset_cursor)
 
 
 ## Change the damage of this Ability based on its owner's level.
 func update_damage(_level: int) -> void:
 	_damage = _damage_curve.sample(float(_level) / GameState.MAX_LEVEL)
+
+
+## Set the player's cursor back to normal.
+func _reset_cursor() -> void:
+	SettingsManager.apply_cursor_size(SettingsManager.get_settings().get_value("display", "cursor_size", 0))
