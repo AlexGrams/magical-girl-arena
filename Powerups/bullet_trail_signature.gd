@@ -26,3 +26,8 @@ func _on_area_2d_entered(area: Area2D) -> void:
 @rpc("any_peer", "call_local")
 func _destroy() -> void:
 	queue_free()
+
+
+## Set how visible this bullet is using the local client's bullet opacity setting.
+func _update_bullet_opacity() -> void:
+	sprite.self_modulate.a = GameState.other_players_bullet_opacity
