@@ -277,6 +277,10 @@ func take_damage(damage: float, hitbox: BulletHitbox = null) -> void:
 	if hitbox != null and hitbox.owner_id == multiplayer.get_unique_id():
 		AudioManager.play_enemy_hit(hitbox.is_crit, hitbox.sound_effect, global_position)
 	
+	# Take damage animation
+	if sprite != null and sprite.has_method("take_damage"):
+		sprite.take_damage()
+	
 	# Do damage only on the server.
 	if is_multiplayer_authority():
 		var is_crit: bool = hitbox != null and hitbox.is_crit
@@ -294,12 +298,9 @@ func _take_damage(damage: float, is_crit: bool = false) -> void:
 	if _is_invulnerable:
 		return
 	
-	health -= snapped(damage, 1)
-	
 	_playground.create_damage_indicator.rpc(global_position, damage, is_crit)
-	if sprite != null and sprite.has_method("take_damage"):
-		sprite.take_damage()
 	
+	health -= snapped(damage, 1)
 	if health <= 0:
 		die()
 
