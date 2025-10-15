@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 func activate() -> void:
 	super()
 	
-	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.ON_SWEET_ULTIMATE)
+	AudioManager.create_audio_at_location.rpc(global_position, SoundEffectSettings.SOUND_EFFECT_TYPE.MOTHERNATURE_ULTIMATE)
 	GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 		1, 
 		[
