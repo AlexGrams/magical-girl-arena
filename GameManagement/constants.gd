@@ -66,7 +66,7 @@ enum DialoguePlayCondition {
 const MAP_DATA: Array[MapData] = [
 	preload("res://Levels/MapData/map_data_valley.tres"),
 	preload("res://Levels/MapData/map_data_desert.tres"),
-	preload("res://Levels/MapData/map_data_alien.tres")
+	#preload("res://Levels/MapData/map_data_alien.tres")
 ]
 
 
