@@ -11,5 +11,5 @@ upgrade_description = "Create turrets that shoot enemies within range."
 upgrade_description_list = Array[String](["Create turrets that shoot enemies within range.", "Increase damage.", "The newest turret is enhanced, increasing in size and fire rate", "Increase damage.", "Increase damage.", "Increase damage."])
 types = Array[int]([1])
 scene = ExtResource("1_ytsoh")
-name = "Turret"
+name = "Topaz Turret"
 sprite = ExtResource("3_s24m2")

@@ -11,5 +11,5 @@ upgrade_description = "Shoot a bolt of lightning to your allies which bounces be
 upgrade_description_list = Array[String](["Shoot a bolt of lightning to a random ally. Can critically hit.", "Increase damage", "Enemies who are hit will spread lightning arcs. ", "Increase damage", "Increase damage", "Increase damage"])
 types = Array[int]([2, 4])
 scene = ExtResource("1_vu6m4")
-name = "Lightning"
+name = "Lightning Bolt"
 sprite = ExtResource("3_fr0sg")

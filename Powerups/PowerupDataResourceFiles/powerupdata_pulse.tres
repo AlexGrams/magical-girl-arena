@@ -11,5 +11,5 @@ upgrade_description = "Create a shockwave that damages and pushes back enemies."
 upgrade_description_list = Array[String](["Create a shockwave that damages and spreads to allies.", "Increase damage", "Increases area size", "Increase damage", "Increase damage", "Increase damage"])
 types = Array[int]([3])
 scene = ExtResource("1_qe2r1")
-name = "Pulse"
+name = "Infinite Echo"
 sprite = ExtResource("3_orugp")

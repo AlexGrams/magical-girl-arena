@@ -11,5 +11,5 @@ upgrade_description = "Create damaging puddles. When stepped on, puddles splash 
 upgrade_description_list = Array[String](["Create damaging puddles. When stepped on, puddles splash and deal burst damage", "Increase damage", "Splashing in puddles will give a brief speed boost", "Increase damage", "Increase damage", "Increase damage"])
 types = Array[int]([2, 3])
 scene = ExtResource("1_r6heo")
-name = "Puddle"
+name = "Sparkling Splash"
 sprite = ExtResource("3_oox5r")
