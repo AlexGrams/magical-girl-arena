@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://dk4hf5px2c5j5"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://dk4hf5px2c5j5"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_vxgu8"]
 resource_name = "Compressor"
@@ -6,6 +6,10 @@ resource_name = "Compressor"
 [sub_resource type="AudioEffectHardLimiter" id="AudioEffectHardLimiter_q7c4x"]
 resource_name = "HardLimiter"
 ceiling_db = -2.0
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_ok5lr"]
+resource_name = "Amplify"
+volume_db = 12.0
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ht6nb"]
 resource_name = "Compressor"
@@ -32,6 +36,8 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectAmplify_ok5lr")
+bus/2/effect/0/enabled = true
 bus/3/name = &"Ally_Powerups"
 bus/3/solo = false
 bus/3/mute = false

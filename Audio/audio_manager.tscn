@@ -87,7 +87,7 @@ semitones = Array[int]([0])
 pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "SFX"
 play_while_paused = true
 
 [sub_resource type="Resource" id="Resource_e80ne"]
@@ -101,7 +101,7 @@ semitones = Array[int]([0])
 pitch_scale = 2.0
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "SFX"
 play_while_paused = true
 
 [sub_resource type="Resource" id="Resource_sbdwg"]
@@ -115,7 +115,7 @@ semitones = Array[int]([0])
 pitch_scale = 1.0
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_0ckqn"]
@@ -129,7 +129,7 @@ semitones = Array[int]([-3])
 pitch_scale = 0.75
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_3mwiv"]
@@ -143,7 +143,7 @@ semitones = Array[int]([-1])
 pitch_scale = 0.9
 pitch_randomness = 0.0
 cooldown = 0
-bus = ""
+bus = "SFX"
 play_while_paused = false
 
 [sub_resource type="Resource" id="Resource_cifeh"]
