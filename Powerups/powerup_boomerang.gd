@@ -45,7 +45,9 @@ func activate_powerup():
 	if _is_owned_by_player:
 		var spawn_boomerang: Callable = func():
 			GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
-				1, [_controller_bullet_scene, 
+				1, 
+				[
+					_controller_bullet_scene, 
 					global_position, 
 					Vector2.UP, 
 					_get_damage_from_curve(), 
@@ -56,7 +58,9 @@ func activate_powerup():
 					[
 						$"..".get_path(), 
 						_upgraded_fire_interval, 
-						_boomerang_bullet_scene
+						_boomerang_bullet_scene,
+						current_level,
+						is_signature and current_level == max_level
 					]
 				]
 			)

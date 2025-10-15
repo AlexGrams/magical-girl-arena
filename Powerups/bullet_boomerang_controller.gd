@@ -53,19 +53,22 @@ func _process(delta: float) -> void:
 # Set up other properties for this bullet
 func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 	if (
-		data.size() != 3
+		data.size() != 5
 		or typeof(data[0]) != TYPE_NODE_PATH	# Owning character 
 		or typeof(data[1]) != TYPE_FLOAT 		# Fire rate
 		or typeof(data[2]) != TYPE_STRING		# Path to actual Boomerang bullet.
+		or typeof(data[3]) != TYPE_INT			# Current level
+		or typeof(data[4]) != TYPE_BOOL			# Signature active
 	):
 		push_error("Malformed data array")
 		return
 	
 	boomerang_owner = get_tree().root.get_node(data[0])
+	_is_owned_by_player = is_owned_by_player
 	_boomerang_owner_path = data[0]
 	_fire_interval = data[1]
 	_boomerang_bullet_scene = data[2]
-	_is_owned_by_player = is_owned_by_player
+	_powerup_level = data[3]
 	
 	# Spawn the boomerangs.
 	if is_multiplayer_authority():
@@ -73,11 +76,15 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		if _powerup_level >= 3:
 			_spawn_boomerang()
 			_spawn_boomerang()
+		
+		# Signature functionality
+		if data[4]:
+			activate_signature.call_deferred()
 	
 	# Connect signals.
 	if is_owned_by_player:
 		# When the player levels up this powerup, notify all clients about the level up.
-		var boomerang_powerup := boomerang_owner.get_node_or_null("PowerupBoomerang")
+		var boomerang_powerup: PowerupBoomerang = boomerang_owner.get_node_or_null("PowerupBoomerang")
 		# The Powerup child is not replicated, so only the client which owns this character has it.
 		if boomerang_powerup != null:
 			# Level up
