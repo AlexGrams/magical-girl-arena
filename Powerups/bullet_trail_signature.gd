@@ -3,7 +3,6 @@ extends BulletContinuous
 
 
 @export var _heal_amount: float = 5.0
-@export var _flower_sprites: Array[Sprite2D] = []
 
 var _heal_active: bool = true
 
