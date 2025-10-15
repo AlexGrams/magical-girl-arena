@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://dtxvecbcig1iu"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_gotbp"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_4epju"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_6u8r7"]
+
+[sub_resource type="Resource" id="Resource_5x1i4"]
+script = ExtResource("1_gotbp")
+speaker = 6
+dialogue = "Beautiful… But wrong…"
+
+[sub_resource type="Resource" id="Resource_x5vgc"]
+script = ExtResource("1_gotbp")
+speaker = -1
+dialogue = "It’s no surprise that you recognize the corruption here."
+optional_portrait = ExtResource("2_4epju")
+
+[sub_resource type="Resource" id="Resource_3p8pf"]
+script = ExtResource("1_gotbp")
+speaker = 6
+dialogue = "Yes… Change… requires time…"
+
+[sub_resource type="Resource" id="Resource_3e5lp"]
+script = ExtResource("1_gotbp")
+speaker = 6
+dialogue = "The flow of time… broken… not natural…"
+
+[resource]
+script = ExtResource("3_6u8r7")
+lines = Array[ExtResource("1_gotbp")]([SubResource("Resource_5x1i4"), SubResource("Resource_x5vgc"), SubResource("Resource_3p8pf"), SubResource("Resource_3e5lp")])
+play_conditions = Array[int]([3, 1])

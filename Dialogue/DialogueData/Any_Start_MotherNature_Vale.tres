@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=8 format=3 uid="uid://boou5blx1hck8"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_ho37u"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_nyieu"]
+
+[sub_resource type="Resource" id="Resource_5x1i4"]
+script = ExtResource("1_ho37u")
+speaker = 6
+dialogue = "A machine… built to fight…"
+
+[sub_resource type="Resource" id="Resource_x5vgc"]
+script = ExtResource("1_ho37u")
+speaker = 2
+dialogue = "You do not recognize me as a living being, do you?"
+
+[sub_resource type="Resource" id="Resource_3p8pf"]
+script = ExtResource("1_ho37u")
+speaker = 6
+dialogue = "The shell… speaks…"
+
+[sub_resource type="Resource" id="Resource_3e5lp"]
+script = ExtResource("1_ho37u")
+speaker = 2
+dialogue = "I see. It was to be expected."
+
+[sub_resource type="Resource" id="Resource_4bwia"]
+script = ExtResource("1_ho37u")
+speaker = 6
+dialogue = "The facade… grander than most… "
+
+[resource]
+script = ExtResource("3_nyieu")
+lines = Array[ExtResource("1_ho37u")]([SubResource("Resource_5x1i4"), SubResource("Resource_x5vgc"), SubResource("Resource_3p8pf"), SubResource("Resource_3e5lp"), SubResource("Resource_4bwia")])
+play_conditions = Array[int]([3])

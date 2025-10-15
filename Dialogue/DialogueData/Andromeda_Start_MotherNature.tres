@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3 uid="uid://klpe85nkgmqn"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue_line.gd" id="1_dniqw"]
+[ext_resource type="Texture2D" uid="uid://b81txlrcoq87n" path="res://Sprites/UI/CharacterIcons/MoonRabbit_Icon.png" id="2_0byeu"]
+[ext_resource type="Script" path="res://Dialogue/dialogue_data.gd" id="3_v7ova"]
+
+[sub_resource type="Resource" id="Resource_5x1i4"]
+script = ExtResource("1_dniqw")
+speaker = 6
+dialogue = "Shifting lands… Connections broken…"
+
+[sub_resource type="Resource" id="Resource_x5vgc"]
+script = ExtResource("1_dniqw")
+speaker = -1
+dialogue = "Yes, Andromeda has ripped apart the earth here."
+optional_portrait = ExtResource("2_0byeu")
+
+[sub_resource type="Resource" id="Resource_3p8pf"]
+script = ExtResource("1_dniqw")
+speaker = 6
+dialogue = "A work… of anger…"
+
+[sub_resource type="Resource" id="Resource_3e5lp"]
+script = ExtResource("1_dniqw")
+speaker = 6
+dialogue = "Break…break…break…"
+
+[sub_resource type="Resource" id="Resource_4bwia"]
+script = ExtResource("1_dniqw")
+speaker = 6
+dialogue = "But cannot… break free…"
+
+[resource]
+script = ExtResource("3_v7ova")
+lines = Array[ExtResource("1_dniqw")]([SubResource("Resource_5x1i4"), SubResource("Resource_x5vgc"), SubResource("Resource_3p8pf"), SubResource("Resource_3e5lp"), SubResource("Resource_4bwia")])
+play_conditions = Array[int]([3, 2])
