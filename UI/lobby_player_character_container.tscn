@@ -33,12 +33,13 @@ Button/styles/hover = SubResource("StyleBoxTexture_fqska")
 Button/styles/normal = SubResource("StyleBoxTexture_lm6ld")
 Button/styles/pressed = SubResource("StyleBoxFlat_usrbf")
 
-[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("_username", "_host_icon", "_character_sprite_location", "_portal_open", "_portal_closed", "_kick_button")]
+[node name="LobbyPlayerCharacterContainer" type="VBoxContainer" node_paths=PackedStringArray("_username_container", "_username", "_host_icon", "_character_sprite_location", "_portal_open", "_portal_closed", "_kick_button")]
 offset_left = 413.0
 offset_top = 213.0
 offset_right = 688.0
 offset_bottom = 552.0
 script = ExtResource("1_j20e6")
+_username_container = NodePath("UsernameContainer")
 _username = NodePath("UsernameContainer/Username")
 _host_icon = NodePath("UsernameContainer/HostTextureRect")
 _character_sprite_location = NodePath("CharacterSpriteLocation")

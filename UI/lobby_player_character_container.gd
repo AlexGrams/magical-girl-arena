@@ -4,6 +4,7 @@ extends VBoxContainer
 
 const character_animated_sprite: Resource = preload("res://UI/character_animated_sprite.tscn")
 
+@export var _username_container: Control = null
 @export var _username: Label = null
 @export var _host_icon: TextureRect = null
 @export var _character_sprite_location: Control = null
@@ -40,6 +41,10 @@ func set_properties(
 ) -> void:
 	
 	update_username_text(new_username)
+	if character == Constants.Character.MOTHER_NATURE:
+		_username_container.position.y = -100
+	else:
+		_username_container.position.y = 0
 	player_id = new_player_id
 	_portal_closed.hide()
 	_portal_open.show()
