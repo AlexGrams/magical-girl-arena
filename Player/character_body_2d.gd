@@ -666,6 +666,9 @@ func ready_player_character(character: Constants.Character) -> void:
 		push_error("Character data not mapped!")
 	
 	_character_animated_sprite.set_character(character)
+	# Hack to get the nametag to not overlap tall characters.
+	if character == Constants.Character.MOTHER_NATURE:
+		_nametag.position.y = -160
 	
 	# Signal for health changes
 	took_damage.connect(_update_health_bar)
