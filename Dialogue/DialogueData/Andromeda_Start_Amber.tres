@@ -46,3 +46,4 @@ dialogue = "Too many women in situations like that."
 script = ExtResource("2_bv8bc")
 lines = Array[ExtResource("1_lmgr2")]([SubResource("Resource_n44oh"), SubResource("Resource_773i5"), SubResource("Resource_21d0c"), SubResource("Resource_ky8l8"), SubResource("Resource_sr0b3"), SubResource("Resource_ilqf6"), SubResource("Resource_vmqmp")])
 play_conditions = Array[int]([3, 2])
+_extra_characters = Array[int]([])
