@@ -17,7 +17,7 @@ radius = 322.076
 [sub_resource type="CircleShape2D" id="CircleShape2D_qx8hf"]
 radius = 532.046
 
-[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area", "_sprite", "_audio_player")]
+[node name="BulletPet" type="CharacterBody2D" node_paths=PackedStringArray("_bullet_hitbox", "_attack_area", "_taunt_area", "_sprite")]
 script = ExtResource("1_anccp")
 _speed = 10.0
 _taunt_duration = 4.0
@@ -25,7 +25,6 @@ _bullet_hitbox = NodePath("BulletCollisionArea2D")
 _attack_area = NodePath("AttackArea2D")
 _taunt_area = NodePath("TauntArea2D")
 _sprite = NodePath("Bee_Sprite")
-_audio_player = NodePath("")
 _taunt_sfx = 60
 _target_sfx = 59
 

@@ -45,6 +45,8 @@ var _bullet_collision_layer: int = 0
 var _taunt_collision_mask: int = 0
 ## Changes how fast the Pet attacks when it is boosted.
 var _attack_speed_boost: float = 1.0
+## The size this bullet should be when boosted by the Area Size charm.
+var _boosted_area_size: Vector2 = Vector2(2.0, 2.0)
 
 
 ## Initialize this pet.
@@ -53,6 +55,7 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	_owner_node = get_tree().root.get_node(owner_path)
 	global_position = starting_position
 	set_multiplayer_authority(1)
+	_boosted_area_size = scale * 2.0
 	_bullet_hitbox.damage = damage
 	if _current_level < level:
 		_current_level = level
@@ -63,7 +66,6 @@ func set_up(owner_path: String, starting_position: Vector2, damage: float, owner
 	
 	if owner_id != multiplayer.get_unique_id():
 		_sprite.set_opacity()
-
 	
 	# Level up functionality
 	var pet_powerup: PowerupPet = _owner_node.get_node_or_null("PowerupPet")
@@ -198,7 +200,7 @@ func unboost() -> void:
 
 @rpc("any_peer", "call_local")
 func boost_area_size() -> void:
-	scale *= 2.0
+	scale = _boosted_area_size
 
 
 ## Apply taunt to Enemies in this area. Taunt area collisions are only handled on the server.
