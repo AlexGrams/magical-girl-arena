@@ -413,6 +413,9 @@ func _input(event: InputEvent) -> void:
 						Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 					else:
 						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				KEY_KP_8:
+					# Invulnerability
+					set_is_invulnerable(not _is_invulnerable)
 
 
 func get_rerolls() -> int:
