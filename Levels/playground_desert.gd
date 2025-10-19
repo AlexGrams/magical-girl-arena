@@ -4,6 +4,9 @@ extends Playground
 
 ## Time in seconds between a piece of the map falling.
 @export var _fall_interval: float = 5.0
+## Chance that the piece that falls is one that we know has a player on it, rather than one chosen 
+## randomly from all pieces.
+@export var _fall_targets_player_chance: float = 0.25
 @export var _pieces_outer_diamonds: Array[DesertMapPiece] = []
 @export var _pieces_squares: Array[DesertMapPiece] = []
 @export var _pieces_corners: Array[DesertMapPiece] = []
@@ -48,16 +51,12 @@ func _process(delta: float) -> void:
 		elif GameState.time > 8 * 60.0:
 			# 12:00 - 8:00: Squares and diamonds
 			if len(_pieces_phase_1) > 0:
-				var i: int = randi_range(0, len(_pieces_phase_1) - 1)
-				_pieces_phase_1[i].initiate_falling.rpc()
-				_pieces_phase_1[i].returned.connect(_append_to_pieces_phase_1)
+				var i: int = _initiate_random_piece_falling(_pieces_phase_1)
 				_pieces_phase_1.remove_at(i)
 		elif GameState.time > 3 * 60.0:
 			# 8:00 - 3:00: Any piece
 			if len(_pieces_phase_2) > 0:
-				var i: int = randi_range(0, len(_pieces_phase_2) - 1)
-				_pieces_phase_2[i].initiate_falling.rpc()
-				_pieces_phase_2[i].returned.connect(_append_to_pieces_phase_2)
+				var i: int = _initiate_random_piece_falling(_pieces_phase_2)
 				_pieces_phase_2.remove_at(i)
 		elif _phase_3_counter < 13:
 			# 3:00 - 0:00: Every piece but the center
@@ -82,6 +81,32 @@ func _process(delta: float) -> void:
 				piece.rise.rpc()
 		
 		_fall_timer = 0
+
+
+## Causes a random piece from a list to start falling. Returns the index of the Piece in the input
+## array that was selected.
+func _initiate_random_piece_falling(pieces: Array[DesertMapPiece]) -> int:
+	var i: int = -1
+	
+	if randf() <= _fall_targets_player_chance:
+		# Choose Piece that directly targets a player
+		var target_pieces_indexes: Array[int] = []
+		for p: int in range(len(pieces)):
+			if pieces[p].has_player():
+				target_pieces_indexes.append(p)
+		
+		if len(target_pieces_indexes) > 0:
+			i = target_pieces_indexes.pick_random()
+	
+	# Either we're not directly targeting a player, or there were no players on a Piece to target.
+	if i == -1:
+		i = randi_range(0, len(pieces) - 1)
+	
+	# Make the piece fall
+	pieces[i].initiate_falling.rpc()
+	pieces[i].returned.connect(_append_to_pieces_phase_1)
+	
+	return i
 
 
 func _append_to_pieces_phase_1(piece: DesertMapPiece) -> void:

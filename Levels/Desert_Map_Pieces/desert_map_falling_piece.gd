@@ -47,6 +47,12 @@ func _ready() -> void:
 	_area_collision_layer = _area.collision_layer
 	_area.collision_layer = 0
 
+
+## Returns true if there is at least one player on this piece.
+func has_player() -> bool:
+	return _area.has_overlapping_areas()
+
+
 ## Call to begin the process for cracking, falling, and returning this map piece.
 @rpc("authority", "call_local")
 func initiate_falling(permanent: bool = false) -> void:
