@@ -7,11 +7,18 @@ extends Node2D
 
 ## Current health.
 var _health: float = 0.0
+## How much continuous damage this destructable takes each physics frame.
+var _continuous_damage: float = 0.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_health = max_health
+
+
+func _physics_process(_delta: float) -> void:
+	if _continuous_damage > 0:
+		take_damage(_continuous_damage)
 
 
 ## Move LootBox to a location. Call using RPC for replication.
@@ -43,3 +50,7 @@ func take_damage(damage: float, _hitbox: BulletHitbox = null) -> void:
 	_health -= damage
 	if _health <= 0.0:
 		_destroy()
+
+
+func add_continuous_damage(damage: float) -> void:
+	_continuous_damage = max(_continuous_damage + damage, 0)

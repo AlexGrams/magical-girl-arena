@@ -104,12 +104,11 @@ size = Vector2(105, 108)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owpg8"]
 size = Vector2(127, 129)
 
-[node name="LootBoxTumbleweed" type="CharacterBody2D" node_paths=PackedStringArray("_character_body_2d", "_animation_player", "_area")]
+[node name="LootBoxTumbleweed" type="CharacterBody2D" node_paths=PackedStringArray("_character_body_2d", "_area", "anim_player")]
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_e28bt")
 _character_body_2d = NodePath(".")
-_animation_player = NodePath("Sprite2D/AnimationPlayer")
 _area = NodePath("Area2D")
 drop_weight_health = 100.0
 health_scene = ExtResource("2_gn8dj")
@@ -117,6 +116,7 @@ gold_scene = ExtResource("3_1o7gm")
 leaf_explosion_scene = ExtResource("4_auw2f")
 destroyed_sfx = 80
 damaged_sfx = 81
+anim_player = NodePath("Sprite2D/AnimationPlayer")
 max_health = 75.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

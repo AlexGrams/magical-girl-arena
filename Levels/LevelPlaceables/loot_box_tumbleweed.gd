@@ -4,14 +4,15 @@ extends LootBox
 ## Speed in units per second.
 @export var _speed: float = 200.0 
 @export var _character_body_2d: CharacterBody2D = null
-@export var _animation_player:AnimationPlayer
 @export var _area: Area2D = null
 
 ## True when the Tumbleweed is above an abyss.
 var _is_invulnerable: bool = false
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super(delta)
+	
 	_character_body_2d.move_and_slide()
 	
 	# Hardcoded values to determine when the tumbleweed goes off the map.
@@ -27,10 +28,10 @@ func teleport(pos: Vector2) -> void:
 	# Sort of a hack to move in the opposite direction across the arena.
 	if global_position.x > 0:
 		_character_body_2d.velocity = Vector2.LEFT * _speed
-		_animation_player.play("rolling_left")
+		anim_player.play("rolling_left")
 	else:
 		_character_body_2d.velocity = Vector2.RIGHT * _speed
-		_animation_player.play("rolling_right")
+		anim_player.play("rolling_right")
 
 
 func _teleport(pos: Vector2) -> void:

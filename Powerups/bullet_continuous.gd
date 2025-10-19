@@ -64,24 +64,30 @@ func setup_analytics(owner_id: int, powerup_index: int) -> void:
 ## Apply damage continually to any overlapping Enemies.
 func _on_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
-	if other != null and other is Enemy:
-		if is_multiplayer_authority():
+	if other != null:
+		if other is Enemy:
+			if is_multiplayer_authority():
+				other.add_continuous_damage(_damage)
+			
+			# Each client separately records continuous damage analytics on their local versions of each Enemy.
+			if multiplayer.get_unique_id() == _owner_id:
+				other.add_local_continuous_damage(_damage, _powerup_index, sound_effect)
+				if _owner_id != 1:
+					pass
+		elif other is DestructibleNode2D and is_multiplayer_authority():
 			other.add_continuous_damage(_damage)
-		
-		# Each client separately records continuous damage analytics on their local versions of each Enemy.
-		if multiplayer.get_unique_id() == _owner_id:
-			other.add_local_continuous_damage(_damage, _powerup_index, sound_effect)
-			if _owner_id != 1:
-				pass
 
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
-	if other != null and other is Enemy:
-		if is_multiplayer_authority():
+	if other != null:
+		if other is Enemy:
+			if is_multiplayer_authority():
+				other.add_continuous_damage(-_damage)
+			if multiplayer.get_unique_id() == _owner_id:
+				other.add_local_continuous_damage(-_damage, _powerup_index)
+		elif other is DestructibleNode2D and is_multiplayer_authority():
 			other.add_continuous_damage(-_damage)
-		if multiplayer.get_unique_id() == _owner_id:
-			other.add_local_continuous_damage(-_damage, _powerup_index)
 
 
 ## Set how visible this bullet is using the local client's bullet opacity setting.
