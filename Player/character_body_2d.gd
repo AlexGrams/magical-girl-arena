@@ -364,6 +364,24 @@ func _physics_process(_delta):
 
 
 func _input(event: InputEvent) -> void:
+	# Cheat for all characters
+	if not OS.has_feature("release"):
+		if event is InputEventKey and event.pressed:
+			match event.keycode:
+				KEY_KP_4:
+					# Hide HUD
+					if _nametag.visible:
+						_nametag.hide()
+					else:
+						_nametag.show()
+				KEY_KP_6:
+					if _health_bar.visible:
+						_health_bar.hide()
+						GameState.playground.hud_canvas_layer.hide_boss_health_bar()
+					else:
+						_health_bar.show()
+						GameState.playground.hud_canvas_layer.show_boss_health_bar(1.0)
+	
 	if not is_multiplayer_authority():
 		return
 	
@@ -389,12 +407,6 @@ func _input(event: InputEvent) -> void:
 				KEY_KP_3:
 					# Die
 					kill()
-				KEY_KP_4:
-					# Hide HUD
-					if _nametag.visible:
-						_nametag.hide()
-					else:
-						_nametag.show()
 
 
 func get_rerolls() -> int:
