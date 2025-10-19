@@ -379,15 +379,22 @@ func _input(event: InputEvent) -> void:
 	# Cheats
 	if not OS.has_feature("release"):
 		if event is InputEventKey and event.pressed:
-			# Level up
-			if event.keycode == KEY_KP_1:
-				GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
-			# Add Powerup cheat screen
-			if event.keycode == KEY_KP_2:
-				GameState.playground.hud_canvas_layer.upgrade_any_screen.toggle_cheat()
-			# Die
-			if event.keycode == KEY_KP_3:
-				kill()
+			match event.keycode:
+				KEY_KP_1:
+					# Level up
+					GameState.collect_exp.rpc(GameState.exp_for_next_level - GameState.experience)
+				KEY_KP_2:
+					# Add Powerup cheat screen
+					GameState.playground.hud_canvas_layer.upgrade_any_screen.toggle_cheat()
+				KEY_KP_3:
+					# Die
+					kill()
+				KEY_KP_4:
+					# Hide HUD
+					if _nametag.visible:
+						_nametag.hide()
+					else:
+						_nametag.show()
 
 
 func get_rerolls() -> int:

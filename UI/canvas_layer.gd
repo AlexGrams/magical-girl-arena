@@ -16,8 +16,12 @@ extends CanvasLayer
 @export var _spectator_container: Control = null
 ## Parent of the character icons for displaying which character is being spectated.
 @export var _spectator_icon_parent: Control = null
+@export var _experience_bar: ProgressBar = null
+@export var _level_label: Label = null
 ## Parent of panels displaying each powerup
 @export var _powerup_container: Container = null
+## Icon showing Ultimate status.
+@export var _ultimate_container: Control = null
 ## Displays the icon for the player's ultimate ability.
 @export var _ultimate_texture: TextureRect = null
 ## Displays the cooldown for the player's ultimate ability.
@@ -114,7 +118,7 @@ func _ready() -> void:
 	for artifact_container:Control in _stat_level_container.get_children():
 		_artifact_textures.append(artifact_container.find_child("Powerup_Image"))
 	
-	$ExperienceBar.value = 0.0
+	_experience_bar.value = 0.0
 	
 	# Game over screen visibility
 	GameState.game_over.connect(func(has_won_game):
@@ -208,6 +212,32 @@ func _process(_delta: float) -> void:
 			used_pointers += 1
 
 
+func _input(event: InputEvent) -> void:
+	# Cheats
+	if not OS.has_feature("release"):
+		if event is InputEventKey and event.pressed:
+			match event.keycode:
+				KEY_KP_4:
+					# Toggle HUD
+					if _experience_bar.visible:
+						_experience_bar.hide()
+						_level_label.hide()
+						_powerup_container.hide()
+						_stat_level_container.hide()
+						_ultimate_container.hide()
+						_dialogue_box.hide()
+						_timer_text.hide()
+					else:
+						_experience_bar.show()
+						_level_label.show()
+						_powerup_container.show()
+						_stat_level_container.show()
+						_ultimate_container.show()
+						_ultimate_progress_bar.show()
+						_dialogue_box.show()
+						_timer_text.show()
+
+
 ## Add a node for which the UI will display a pointer to when it goes offscreen.
 func add_node_to_point_to(node: Node2D, texture: Texture2D) -> void:
 	# Create pointer and pointer icons.
@@ -227,8 +257,8 @@ func add_node_to_point_to(node: Node2D, texture: Texture2D) -> void:
 
 
 func _on_character_body_2d_gained_experience(experience: float, level: int) -> void:
-	$ExperienceBar.value = experience
-	$LevelLabel.text = "Level: " + str(level)
+	_experience_bar.value = experience
+	_level_label.text = "Level: " + str(level)
 
 
 func _on_powerup_picked_up_powerup(sprite: Variant) -> void:
