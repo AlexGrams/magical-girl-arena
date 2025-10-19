@@ -4,6 +4,9 @@ extends DestructibleNode2D
 ## has a chance of spawning items such as gold or health for the player.
 ## Enemies cannot interact with a LootBox.
 
+## Time in seconds that must pass before this LootBox can make another hit sound effect.
+const SFX_INTERVAL: float = 0.25
+
 ## Relative likelihood of dropping a health pickup when destroyed.
 @export var drop_weight_health: float = 1.00
 ## Relative likelihood of dropping gold when destroyed.
@@ -23,6 +26,8 @@ extends DestructibleNode2D
 
 var _threshold_health: float = 1.0
 var _threshold_gold: float = 1.0
+## Time in milliseconds after which this LootBox will make a sound effect when it gets hit.
+var _next_hit_sfx_msec: int = 0
 var _tree: SceneTree = null
 
 
@@ -46,11 +51,17 @@ func _ready() -> void:
 	)
 
 
-func _on_area_2d_entered(area: Area2D) -> void:
-	if anim_player != null and anim_player.has_animation("take_damage"):
+func take_damage(damage: float, hitbox: BulletHitbox = null) -> void:
+	# Deal damage
+	super(damage, hitbox)
+	
+	# Play hit animation.
+	if anim_player.has_animation("take_damage"):
 		anim_player.play("take_damage")
-	AudioManager.create_audio_at_location(global_position, damaged_sfx)
-	super(area)
+	# Play hit SFX. Wait some time in between so that the sounds don't stack up too much.
+	if Time.get_ticks_msec() >= _next_hit_sfx_msec:
+		AudioManager.create_audio_at_location(global_position, damaged_sfx)
+		_next_hit_sfx_msec = Time.get_ticks_msec() + int(1000 * SFX_INTERVAL)
 
 
 ## Break this object and create a pickup. Only call on server.
