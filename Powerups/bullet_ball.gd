@@ -8,8 +8,8 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _explosion_damage: float = 50.0
 ## Impulse applied to the ball when it touches a player.
 @export var _kick_impulse: float = 10000.0
-## Torque impule applied to the ball when it is kicked.
-@export var _kick_torque: float = 900.0
+## How fast the ball spins whenever it gets kicked.
+@export var _kick_angular_velocity: float = 100.0
 ## How much the bigger the ball gets with each kill.
 @export var _size_increment: float = 1.0
 @export var _max_size: float = 10.0
@@ -73,6 +73,8 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if _total_growth < _max_size:
+		_grow.rpc()
 	if _explosion_active:
 		if _explosion_bullet_hitbox.collision_layer != _explosion_hitbox_collision_layer:
 			_explosion_bullet_hitbox.collision_layer = _explosion_hitbox_collision_layer
@@ -177,9 +179,9 @@ func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 		_rigidbody.apply_force(kick_direction * _kick_impulse)
 		
 		if kick_direction.x > 0:
-			_rigidbody.apply_torque_impulse(_kick_torque)
+			_rigidbody.angular_velocity = _kick_angular_velocity 
 		else:
-			_rigidbody.apply_torque_impulse(-_kick_torque)
+			_rigidbody.angular_velocity = -_kick_angular_velocity
 		
 		_recall_timer = 0.0
 

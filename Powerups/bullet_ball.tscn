@@ -38,6 +38,7 @@ physics_material_override = SubResource("PhysicsMaterial_2vfia")
 linear_damp = 2.0
 script = ExtResource("1_m1a7e")
 _kick_impulse = 12500.0
+_kick_angular_velocity = 10.0
 _size_increment = 0.05
 _max_size = 8.0
 _explosion_vfx_scene_path = "res://Sprites/Map/heart_explosion.tscn"
