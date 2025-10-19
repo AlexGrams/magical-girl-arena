@@ -101,7 +101,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 		# Disable
 		orbit_powerup.deactivate.connect(
 			func():
-				_destroy.rpc_id(1)
+				destroy.rpc_id(1)
 		)
 		
 		orbit_powerup.add_bullet(self)
@@ -109,7 +109,7 @@ func setup_bullet(is_owned_by_player: bool, data: Array) -> void:
 
 ## Only call on server.
 @rpc("any_peer", "call_local", "reliable")
-func _destroy() -> void:
+func destroy() -> void:
 	queue_free()
 
 

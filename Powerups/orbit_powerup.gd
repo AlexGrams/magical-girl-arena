@@ -40,7 +40,7 @@ func activate_powerup():
 	
 	if _is_owned_by_player:
 		var spawn_orbit: Callable = func():
-			get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+			GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 				1,
 				[
 					bullet_scene, 
@@ -56,7 +56,7 @@ func activate_powerup():
 			)
 			
 			if current_level >= 3:
-				get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+				GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 					1,
 					[
 						bullet_scene, 
@@ -88,10 +88,10 @@ func level_up():
 	
 	# Level 3 special: Two bullets at opposite ends
 	if current_level == 3:
-		for bullet: Bullet in _bullets:
-			bullet.queue_free()
+		for bullet: BulletOrbit in _bullets:
+			bullet.destroy.rpc_id(1)
 		_bullets.clear()
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 			1,
 			[
 				bullet_scene, 
@@ -105,7 +105,7 @@ func level_up():
 				[multiplayer.get_unique_id()]
 			]
 		)
-		get_tree().root.get_node("Playground/BulletSpawner").request_spawn_bullet.rpc_id(
+		GameState.playground.bullet_spawner.request_spawn_bullet.rpc_id(
 			1,
 			[
 				bullet_scene, 
