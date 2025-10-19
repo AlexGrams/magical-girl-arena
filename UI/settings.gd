@@ -73,6 +73,29 @@ func _ready() -> void:
 	load_settings()
 
 
+func _input(event: InputEvent) -> void:
+	if (
+			not GameState.game_running
+			or not _hide_button_label.visible
+			# Prevents opening the Settings menu while the game is paused
+			# for some other reason.
+			or (get_tree().paused and not visible)
+	):
+		return
+	
+	# Toggle the settings menu while in game.
+	if event.is_action_pressed("settings"):
+		if visible:
+			if GameState.connected_players == 1:
+				GameState.pause_game(false)
+			_save_settings_changes()
+			hide()
+		else:
+			if GameState.connected_players == 1:
+				GameState.pause_game(true)
+			show()
+
+
 ## Show a screen for a category of settings.
 func switch_to_screen(screen_index: int) -> void:
 	for i in range(len(_setting_screens)):

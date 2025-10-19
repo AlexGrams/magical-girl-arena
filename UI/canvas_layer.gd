@@ -79,9 +79,9 @@ func _ready() -> void:
 	
 	# Settings screen
 	_settings_screen.setup_settings_overlay()
-	_settings_screen.hide_button.button_down.connect(_settings_screen.hide)
 	# Unpause the game when closing the Settings screen if in singleplayer.
 	_settings_screen.hide_button.button_down.connect(func():
+		_settings_screen.hide()
 		if GameState.connected_players == 1:
 			GameState.pause_game(false)
 	)
@@ -206,13 +206,6 @@ func _process(_delta: float) -> void:
 			_pointers[used_pointers].hide()
 			_pointer_icons[used_pointers].hide()
 			used_pointers += 1
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("settings"):
-		if GameState.connected_players == 1:
-			GameState.pause_game(true)
-		_settings_screen.show()
 
 
 ## Add a node for which the UI will display a pointer to when it goes offscreen.
