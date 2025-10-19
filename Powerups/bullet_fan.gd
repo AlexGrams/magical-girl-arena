@@ -1,3 +1,4 @@
+class_name BulletFan
 extends Bullet
 ## Pushes back hit enemies
 

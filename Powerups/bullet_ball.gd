@@ -162,12 +162,16 @@ func _update_bullet_opacity() -> void:
 
 func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
-	if other is PlayerCharacterBody2D:
+	if other is PlayerCharacterBody2D or other is BulletFan:
 		# Play kick SFX
 		AudioManager.create_audio_at_location(global_position, _kick_sfx)
 		
 		# Kick the ball by applying force and torque. Torque is only for visuals.
-		var kick_direction: Vector2 = (global_position - other.global_position).normalized()
+		var kick_direction: Vector2
+		if other is PlayerCharacterBody2D:
+			kick_direction = (global_position - other.global_position).normalized()
+		elif other is BulletFan:
+			kick_direction = other.direction
 		_rigidbody.apply_force(kick_direction * _kick_impulse)
 		
 		if kick_direction.x > 0:

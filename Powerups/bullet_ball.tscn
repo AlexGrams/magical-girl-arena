@@ -70,7 +70,7 @@ shape = SubResource("CircleShape2D_wqnbr")
 
 [node name="PlayerKickArea2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 9
 
 [node name="PlayerKickCollisionShape2D" type="CollisionShape2D" parent="PlayerKickArea2D"]
 shape = SubResource("CircleShape2D_x85vt")
