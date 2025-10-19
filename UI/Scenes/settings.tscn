@@ -93,10 +93,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -675.0
+offset_left = -686.0
 offset_top = 175.0
-offset_right = 766.0
-offset_bottom = 875.0
+offset_right = 778.0
+offset_bottom = 896.0
 grow_horizontal = 2
 theme = ExtResource("2_s4t7y")
 
@@ -515,6 +515,7 @@ rounded = true
 alignment = 1
 
 [node name="SameHitSFXContainer" type="HBoxContainer" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="ParentVBoxContainer/AudioVScrollBar/VBoxContainer/SameHitSFXContainer"]
