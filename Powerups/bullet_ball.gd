@@ -13,6 +13,8 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 ## How much the bigger the ball gets with each kill.
 @export var _size_increment: float = 1.0
 @export var _max_size: float = 10.0
+## Time in seconds after which a character that has been overlapping the ball will automatically kick it again.
+@export var _overlap_kick_time: float = 2.0
 ## Time in seconds after which the ball teleports to its owning player if it hasn't been hit.
 @export var _max_recall_time: float = 20.0
 ## A lower value lowers the angle between the Ball and an Enemy for a direct hit. 
@@ -34,6 +36,8 @@ var _explosion_hitbox_collision_layer: int = 0
 var _kills: int = 0
 ## How much extra growth has been added to the Ball so far.
 var _total_growth: float = 0.0
+## Maps characters touching the ball to how long they have been touching for.
+var _colliding_players: Dictionary = {}
 var _recall_timer: float = 0.0
 ## True when the explosion hitbox has collision enabled and can deal damage.
 var _explosion_active: bool = false
@@ -70,11 +74,16 @@ func _process(delta: float) -> void:
 	_recall_timer += delta
 	if _recall_timer > _max_recall_time:
 		global_position = _owning_player.global_position
+	
+	# If a player has stayed touching the ball, kick it again.
+	for player in _colliding_players:
+		_colliding_players[player] += delta
+		if _colliding_players[player] >= _overlap_kick_time:
+			_colliding_players[player] = 0.0
+			_kick(player)
 
 
 func _physics_process(_delta: float) -> void:
-	if _total_growth < _max_size:
-		_grow.rpc()
 	if _explosion_active:
 		if _explosion_bullet_hitbox.collision_layer != _explosion_hitbox_collision_layer:
 			_explosion_bullet_hitbox.collision_layer = _explosion_hitbox_collision_layer
@@ -164,26 +173,37 @@ func _update_bullet_opacity() -> void:
 	pass
 
 
+## Apply an impulse and torque to the ball.
+func _kick(other: Node2D) -> void:
+	# Play kick SFX
+	AudioManager.create_audio_at_location(global_position, _kick_sfx)
+	
+	# Kick the ball by applying force and torque. Torque is only for visuals.
+	var kick_direction: Vector2
+	if other is PlayerCharacterBody2D:
+		kick_direction = (global_position - other.global_position).normalized()
+	elif other is BulletFan:
+		kick_direction = other.direction
+	_rigidbody.apply_force(kick_direction * _kick_impulse)
+	
+	if kick_direction.x > 0:
+		_rigidbody.angular_velocity = _kick_angular_velocity 
+	else:
+		_rigidbody.angular_velocity = -_kick_angular_velocity
+	
+	_colliding_players[other] = 0.0
+	
+	_recall_timer = 0.0
+
+
 func _on_player_kick_area_2d_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other is PlayerCharacterBody2D or other is BulletFan:
-		# Play kick SFX
-		AudioManager.create_audio_at_location(global_position, _kick_sfx)
-		
-		# Kick the ball by applying force and torque. Torque is only for visuals.
-		var kick_direction: Vector2
-		if other is PlayerCharacterBody2D:
-			kick_direction = (global_position - other.global_position).normalized()
-		elif other is BulletFan:
-			kick_direction = other.direction
-		_rigidbody.apply_force(kick_direction * _kick_impulse)
-		
-		if kick_direction.x > 0:
-			_rigidbody.angular_velocity = _kick_angular_velocity 
-		else:
-			_rigidbody.angular_velocity = -_kick_angular_velocity
-		
-		_recall_timer = 0.0
+		_kick(other)
+
+
+func _on_player_kick_area_2d_area_exited(area: Area2D) -> void:
+	_colliding_players.erase(area.get_parent())
 
 
 ## Damage hit Enemies. Only called on server.

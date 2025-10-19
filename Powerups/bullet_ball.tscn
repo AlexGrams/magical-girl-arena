@@ -41,6 +41,7 @@ _kick_impulse = 12500.0
 _kick_angular_velocity = 10.0
 _size_increment = 0.05
 _max_size = 8.0
+_overlap_kick_time = 1.0
 _explosion_vfx_scene_path = "res://Sprites/Map/heart_explosion.tscn"
 _rigidbody = NodePath(".")
 _sprite_holder = NodePath("SpriteHolderNode2D")
@@ -93,3 +94,4 @@ replication_config = SubResource("SceneReplicationConfig_mgtxu")
 
 [connection signal="area_entered" from="BulletHitbox" to="." method="_on_bullet_hitbox_entered"]
 [connection signal="area_entered" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_entered"]
+[connection signal="area_exited" from="PlayerKickArea2D" to="." method="_on_player_kick_area_2d_area_exited"]
