@@ -17,6 +17,8 @@ const MAX_ARTIFACTS: int = 3
 const TEMP_HEALTH_LINGER_TIME: float = 5.0
 ## Time in seconds between health regen ticks.
 const HEALTH_REGEN_INTERVAL: float = 5.0
+## How fast the camera moves when moving it in cheat mode.
+const CHEAT_CAMERA_PAN_SPEED: float = 40.0
 
 @export var level_shoot_intervals:Array
 @export var speed = 400
@@ -293,6 +295,11 @@ func get_input():
 	input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_direction != null:
 		velocity = input_direction * speed
+	
+	# Cheats
+	if not OS.has_feature("release"):
+		var camera_direction: Vector2 = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
+		_camera.position += camera_direction * CHEAT_CAMERA_PAN_SPEED
 
 
 ## Controls for when in spectator mode
