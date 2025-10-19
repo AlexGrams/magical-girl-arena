@@ -381,6 +381,9 @@ func _input(event: InputEvent) -> void:
 						_nametag.hide()
 					else:
 						_nametag.show()
+				KEY_KP_5:
+					# Center camera
+					_camera.position = Vector2.ZERO
 				KEY_KP_6:
 					if _health_bar.visible:
 						_health_bar.hide()
