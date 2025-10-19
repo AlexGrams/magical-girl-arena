@@ -15,6 +15,8 @@ const MOVING_THRESHOLD_SQUARED: float = 4.0
 @export var _max_size: float = 10.0
 ## Time in seconds after which the ball teleports to its owning player if it hasn't been hit.
 @export var _max_recall_time: float = 20.0
+## A lower value lowers the angle between the Ball and an Enemy for a direct hit. 
+@export_range(0, 1) var _direct_hit_threshold: float = 0.9
 @export var _explosion_vfx_scene_path: String = ""
 @export var _rigidbody: RigidBody2D = null
 @export var _sprite_holder: Node2D = null
@@ -191,24 +193,26 @@ func _on_bullet_hitbox_entered(area: Area2D) -> void:
 	var other: Node2D = area.get_parent()
 	if other is Enemy:
 		if is_multiplayer_authority():
-			if other.health - collider.damage <= 0:
+			# Handle crit and direct hit.
+			var damage: float = collider.damage
+			if (
+					randf() < _crit_chance
+					or _rigidbody.linear_velocity.normalized().dot((other.global_position - global_position).normalized()) >= _direct_hit_threshold
+			):
+				collider.is_crit = true
+				damage *= _crit_multiplier
+			else:
+				collider.is_crit = false
+			
+			if other.health - damage <= 0:
 				# The Ball probably just got a kill, so increase its size.
 				_kills += 1
 				collider.damage += 1.0
 				if _total_growth < _max_size:
 					_grow.rpc()
-				else:
-					pass
-					# TODO: Disabling Ball explosion.
-					#_explode.rpc()
 				_record_ball_stats.rpc_id(collider.owner_id, _kills, _total_growth)
 			
-			if randf() < _crit_chance:
-				collider.is_crit = true
-				other.take_damage(collider.damage * _crit_multiplier, collider)
-			else:
-				collider.is_crit = false
-				other.take_damage(collider.damage, collider)
+			other.take_damage(damage, collider)
 		
 		if collider.owner_id == multiplayer.get_unique_id():
 			Analytics.add_powerup_damage(collider.damage, collider.powerup_index)
@@ -235,6 +239,7 @@ func _set_growth(total_growth: float) -> void:
 
 
 ## Return the ball to its original size and instantiate explosion particle effects.
+## DEPRECATED: Ball no longer explodes.
 @rpc("authority", "call_local")
 func _explode() -> void:
 	_explosion_active = true
