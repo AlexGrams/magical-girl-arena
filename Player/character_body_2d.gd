@@ -407,6 +407,12 @@ func _input(event: InputEvent) -> void:
 				KEY_KP_3:
 					# Die
 					kill()
+				KEY_KP_7:
+					# Toggle mouse
+					if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+						Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+					else:
+						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func get_rerolls() -> int:
