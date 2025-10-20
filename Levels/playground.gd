@@ -90,8 +90,10 @@ func _ready() -> void:
 	GameState.set_playground(self)
 	GameState.client_game_loaded.rpc()
 	
+	var map_data: MapData = load(_map_data_path)
+	Analytics.set_map(map_data.name)
 	# Map-specific DialoguePlayCondition
-	_map_dialogue_condition = load(_map_data_path).map_dialogue_condition
+	_map_dialogue_condition = map_data.map_dialogue_condition
 	
 	# Set up DamageIndicator pool
 	var damage_indicator_resource: Resource = load(_damage_indicator_scene)

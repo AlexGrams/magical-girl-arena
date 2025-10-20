@@ -51,6 +51,7 @@ func _setup_telemetry_payload() -> void:
 		"match_id": 0,
 		"version": ProjectSettings.get_setting("application/config/version"),
 		"character": "",
+		"map": "",
 		"level_up_times": [],
 		"upgrades_chosen": [],
 		"powerup_1_damage": 0.0,
@@ -74,6 +75,10 @@ func set_match_id(id: int) -> void:
 
 func set_character(character_name: String) -> void:
 	_telemetry_payload["character"] = character_name
+
+
+func set_map(map_name: String) -> void:
+	_telemetry_payload["map"] = map_name
 
 
 func set_miniboss_hp_percent(value: int) -> void:
