@@ -5,10 +5,12 @@ extends Panel
 
 ## Folder containing all PowerupData files.
 const POWERUP_DATA_PATH: String = "res://Powerups/PowerupDataResourceFiles/"
+const CHARM_DATA_PATH: String = "res://Artifacts/ArtifactDataResourceFiles/"
 
 ## Parent of all the upgrade UI components.
 @export var _upgrades_holder: Control = null
 @export var _upgrade_any_screen_button_container: GridContainer = null
+@export var _upgrade_charms_button_container: GridContainer = null
 ## Parent of all the player ready UI components.
 @export var _players_selecting_upgrades_window: Control = null
 @export var _player_ready_indicator_holder: Control = null
@@ -39,6 +41,19 @@ func _ready() -> void:
 			upgrade_any_button.upgrade_chosen.connect(_on_upgrade_chosen)
 			_upgrade_any_screen_button_container.add_child(upgrade_any_button, true)
 	
+	# Cheats: Add all Charms to the screen
+	if not OS.has_feature("release"):
+		for artifact_data_file_name: String in DirAccess.open(CHARM_DATA_PATH).get_files():
+			if '.tres.remap' in artifact_data_file_name:
+				artifact_data_file_name = artifact_data_file_name.trim_suffix('.remap')
+			
+			var artifact_data: ArtifactData = ResourceLoader.load(CHARM_DATA_PATH + artifact_data_file_name)
+			if artifact_data != null:
+				var upgrade_any_button: UpgradeAnyPowerupButton = upgrade_any_button_resource.instantiate()
+				upgrade_any_button.set_artifact(artifact_data)
+				upgrade_any_button.upgrade_chosen.connect(_on_upgrade_chosen)
+				_upgrade_charms_button_container.add_child(upgrade_any_button, true)
+	
 	# Set up ready indicators
 	for child in _player_ready_indicator_holder.get_children():
 		_ready_indicators.append(child)
@@ -49,6 +64,7 @@ func setup() -> void:
 	_cheat_mode = false
 	_players_selecting_upgrades_window.hide()
 	_upgrades_holder.show()
+	_upgrade_charms_button_container.hide()
 	
 	# Disable buttons if the player can't upgrade or select them.
 	# Conditions are 1. Player is maxed on powerups and can't get a new one, 2. Powerup is 
@@ -88,8 +104,10 @@ func toggle_cheat() -> void:
 		_cheat_mode = true
 		_players_selecting_upgrades_window.hide()
 		_upgrades_holder.show()
+		_upgrade_charms_button_container.show()
 		show()
 	else:
+		_upgrade_charms_button_container.hide()
 		hide()
 
 
