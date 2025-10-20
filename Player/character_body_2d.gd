@@ -381,9 +381,6 @@ func _input(event: InputEvent) -> void:
 						_nametag.hide()
 					else:
 						_nametag.show()
-				KEY_KP_5:
-					# Center camera
-					_camera.position = Vector2.ZERO
 				KEY_KP_6:
 					if _health_bar.visible:
 						_health_bar.hide()
@@ -417,6 +414,10 @@ func _input(event: InputEvent) -> void:
 				KEY_KP_3:
 					# Die
 					kill()
+				KEY_KP_5:
+					# Center camera
+					_camera.position = Vector2.ZERO
+					_camera.zoom = Vector2.ONE
 				KEY_KP_7:
 					# Toggle mouse
 					if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
@@ -426,6 +427,11 @@ func _input(event: InputEvent) -> void:
 				KEY_KP_8:
 					# Invulnerability
 					set_is_invulnerable(not _is_invulnerable)
+		elif event is InputEventMouseButton and event.pressed:
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				_camera.zoom += 0.05 * Vector2.ONE
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				_camera.zoom -= 0.05 * Vector2.ONE
 
 
 func get_rerolls() -> int:
