@@ -427,11 +427,14 @@ func _input(event: InputEvent) -> void:
 				KEY_KP_8:
 					# Invulnerability
 					set_is_invulnerable(not _is_invulnerable)
-		elif event is InputEventMouseButton and event.pressed:
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				_camera.zoom += 0.05 * Vector2.ONE
-			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				_camera.zoom -= 0.05 * Vector2.ONE
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_camera.zoom += 0.05 * Vector2.ONE
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and _camera.zoom.x - 0.05 > 0.0:
+			_camera.zoom -= 0.05 * Vector2.ONE
 
 
 func get_rerolls() -> int:
