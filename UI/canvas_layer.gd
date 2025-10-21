@@ -445,6 +445,9 @@ func update_information_panel(data: ItemData) -> void:
 
 ## Adds information for an Item that another player has.
 func update_other_player_information_panel(id: int, data: ItemData) -> void:
+	# TODO: Use ItemData to update whatever screen is used to show 
+	# other players' Items. Use "id" to uniquely identify each other player,
+	# then use "data" to update their listed Powerups and Charms.
 	print(id, data.name)
 
 

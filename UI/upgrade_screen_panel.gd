@@ -459,14 +459,14 @@ func _on_upgrade_chosen(itemdata: ItemData):
 	powerup_reroll_button.hide()
 	artifact_reroll_button.hide()
 	
-	_add_other_player_selected_item.rpc(itemdata.name)
+	add_other_player_selected_item.rpc(itemdata.name)
 	update_players_selecting_upgrades.rpc()
 	players_selecting_upgrades_window.show()
 
 
 ## Tell every other client then name of the item that the calling player selected.
 @rpc("any_peer", "call_remote", "reliable")
-func _add_other_player_selected_item(item_name: String) -> void:
+func add_other_player_selected_item(item_name: String) -> void:
 	GameState.playground.hud_canvas_layer.update_other_player_information_panel(
 		multiplayer.get_remote_sender_id(),
 		_item_name_to_itemdata[item_name]

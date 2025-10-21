@@ -30,7 +30,9 @@ func _ready() -> void:
 	button_down.connect(func():
 		if _powerup != null:
 			GameState.get_local_player().upgrade_or_grant_powerup(_powerup)
+			GameState.playground.hud_canvas_layer.upgrade_screen.add_other_player_selected_item.rpc(_powerup.name)
 		if _artifact != null:
 			GameState.get_local_player().add_artifact(_artifact)
+			GameState.playground.hud_canvas_layer.upgrade_screen.add_other_player_selected_item.rpc(_artifact.name)
 		upgrade_chosen.emit()
 	)
