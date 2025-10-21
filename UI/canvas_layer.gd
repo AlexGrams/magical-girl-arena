@@ -443,6 +443,11 @@ func update_information_panel(data: ItemData) -> void:
 	_powerup_information.update_information_panel(data)
 
 
+## Adds information for an Item that another player has.
+func update_other_player_information_panel(id: int, data: ItemData) -> void:
+	print(id, data.name)
+
+
 ## Start a dialogue through the DialogueBox. Only call on server.
 func start_dialogue(conditions: Array[Constants.DialoguePlayCondition]) -> void:
 	_dialogue_box.start_dialogue(conditions)
