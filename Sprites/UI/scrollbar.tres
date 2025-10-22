@@ -1,7 +1,0 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bh217i4fwf64c"]
-
-[ext_resource type="Texture2D" uid="uid://m07gflc6dce3" path="res://Sprites/UI/Scrollbar.png" id="1_sorbs"]
-
-[resource]
-content_margin_right = 71.0
-texture = ExtResource("1_sorbs")
